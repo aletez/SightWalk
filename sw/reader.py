@@ -6,7 +6,7 @@ from . import chat, marks, plan, state
 from .config import MIN_LINES_IN_CELL, PAD_ROWS, POLL_MS, SETTLE_MS
 from .spec import header_text, parse_spec, resolve_center
 from .tint import apply_tint
-from .views import (hide_chrome, make_header, make_side_view, match_font, outline_range,
+from .views import (draw_icons, hide_chrome, make_header, make_side_view, match_font,
                     prepare_code_view, reader_layout, wait_until_loaded)
 
 
@@ -51,7 +51,6 @@ class Reader:
         for seg in self.segments:
             seg.view = prepare_code_view(self.window, originals[seg.path], seg.path in used)
             seg.header = make_header(self.window, header_text(seg), seg.view)
-            outline_range(seg.view, seg.begin, seg.end)
             used.add(seg.path)
         for path in originals:
             mine = [s for s in self.segments if s.path == path]
@@ -71,7 +70,8 @@ class Reader:
         for seg in self.segments:
             top = seg.view.text_to_layout(seg.view.text_point(seg.begin - 1, 0))[1]
             seg.code_item = plan.Item(seg.view, top, (seg.end - seg.begin + 1) * self.lh)
-            self.items += [plan.Item(seg.header, 0.0, self.lh), seg.code_item]
+            seg.header_item = plan.Item(seg.header, 0.0, self.lh)
+            self.items += [seg.header_item, seg.code_item]
 
     def start(self, index):
         plan.stack(self.items, self.overhead)
@@ -113,8 +113,8 @@ class Reader:
         self.offset = min(max(offset, 0.0), plan.max_offset(self.items, self.height, self.overhead))
         self.render()
 
-    def place(self, heights, total, views):
-        self.window.set_layout(reader_layout(heights, total))
+    def place(self, heights, total, views, overlaps=()):
+        self.window.set_layout(reader_layout(heights, total, overlaps))
         n = len(views)
         for group, view in enumerate(views):
             self.window.set_view_index(view, group, 0)
@@ -129,11 +129,14 @@ class Reader:
         min_cell = self.overhead + MIN_LINES_IN_CELL * self.lh
         cells = plan.fill_bottom(plan.merge_slivers(cells, min_cell), self.filler, self.height, min_cell)
         shown = [item for item, _, _ in cells]
-        self.place([b - t for _, t, b in cells], self.height, [item.view for item in shown])
+        headers = [seg.header_item for seg in self.segments]
+        self.place([b - t for _, t, b in cells], self.height, [item.view for item in shown],
+                   [item in headers for item in shown])
         self.park_hidden(shown)
         self.window.focus_view(shown[-1].view)
         self.window.focus_view(self.chat)
         self.draw_strip()
+        self.draw_gutter()
         sublime.set_timeout(lambda: self.scroll_views(cells), 0)
 
     def park_hidden(self, shown):
@@ -149,19 +152,30 @@ class Reader:
             item.view.set_viewport_position((0, plan.viewport_y(item, self.offset, top)), False)
         self.strip.set_viewport_position((0, self.anchor), False)
 
-    # Scroll strip
+    # Scroll strip, kept for the wheel
 
     def draw_strip(self):
-        rows = int(self.height // self.lh)
-        placed = [(marks.line_y(self.segments[m["seg"]], m["line"], self.lh), m["emoji"])
-                  for m in self.indicators]
-        text = marks.strip_text(marks.strip_rows(placed, self.offset, self.lh, rows), PAD_ROWS)
+        text = marks.strip_text(int(self.height // self.lh), PAD_ROWS)
         self.anchor = PAD_ROWS * self.strip.line_height()
         if text != self.strip_cache:
             self.strip_cache = text
             self.strip.run_command("sight_walk_replace", {"text": text})
         # Reset at once, so the poll never mistakes a redraw for a wheel movement.
         self.strip.set_viewport_position((0, self.anchor), False)
+
+    # Gutter icons
+
+    def draw_gutter(self):
+        first, last = marks.visible_lines(self.segments, self.offset, self.height, self.lh)
+        icons = marks.gutter_icons(self.indicators, first, last)
+        for index, seg in enumerate(self.segments):
+            mine = {line: icon for (i, line), icon in icons.items() if i == index and line}
+            draw_icons(seg.view, seg.icons, mine)
+            seg.icons = mine
+            # The header is a one-line view, so its line 0 is drawn on line 1.
+            header = {1: icons[(index, 0)]} if (index, 0) in icons else {}
+            draw_icons(seg.header, seg.header_icons, header)
+            seg.header_icons = header
 
     def poll(self):
         if state.READERS.get(self.window.id()) is not self or not self.strip.is_valid():

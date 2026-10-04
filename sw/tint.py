@@ -5,7 +5,7 @@ import random
 
 import sublime
 
-from .config import HEADER_TINT, OUTLINE_TINT, SETTINGS_FILE, SETTLE_MS, TINT
+from .config import HEADER_TINT, SETTINGS_FILE, SETTLE_MS, TINT
 
 HUE_START = random.random()
 HUES = {}
@@ -61,21 +61,26 @@ def tinted_schemes(view, hue, amounts):
         return None
     background = view.style().get("background", "#000000")
     stem = "%s-hue%03d" % (os.path.splitext(os.path.basename(base))[0], int(round(hue * 1000)))
-    # The outline of the shown range, drawn by add_regions, in a strong version of the hue.
-    outline = tint_color(background, hue, OUTLINE_TINT)
-    scheme.setdefault("rules", []).append({"scope": "sight_walk.range", "foreground": outline})
+    # The gutter, where the icons sit, has the header's band colour.
+    scheme.setdefault("globals", {})["gutter"] = tint_color(background, hue, amounts[1])
+    scheme.setdefault("rules", []).append({"scope": "sight_walk.icon", "foreground": "#ffffff"})
+    stem += "-g%03d" % int(round(amounts[1] * 1000))
     resources = []
     for amount, part in zip(amounts, ("", "-header")):
-        scheme.setdefault("globals", {})["background"] = tint_color(background, hue, amount)
+        scheme["globals"]["background"] = tint_color(background, hue, amount)
+        if part:
+            # The header's caret line paints its gutter in the line highlight; make that the band.
+            scheme["globals"]["line_highlight"] = scheme["globals"]["background"]
         # The amount is in the name, so a changed setting gives a new file instead of a stale one.
         name = "%s%s-%03d.sublime-color-scheme" % (stem, part, int(round(amount * 1000)))
         resources.append(write_scheme(scheme, name))
     return resources
 
 
-def when_indexed(resources, callback, tries=60):
+def when_indexed(resources, callback, tries=200):
     # Sublime finds a freshly written file only after it indexes it, and setting a scheme it
     # can't find yet opens an error dialog. So poll the index instead of guessing a delay.
+    # Up to 10 s: right after a plugin reload, indexing can take several seconds.
     if all(sublime.find_resources(os.path.basename(r)) for r in resources):
         callback()
     elif tries:

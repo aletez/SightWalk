@@ -15,6 +15,9 @@ class Segment:
         self.view = None
         self.header = None
         self.code_item = None
+        self.header_item = None
+        self.header_icons = {}
+        self.icons = {}
 
 
 def stack(items, overhead):

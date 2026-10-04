@@ -1,6 +1,6 @@
 """Talks to the running plugin without an agent, one operation per call.
 
-Usage: python3 tools/poke.py show|say|point|state|badtoken [file1 file2]
+Usage: python3 tools/poke.py show|say|point|state|close|settings|badtoken [file1 file2]
 
 Without files it shows two of the plugin's own modules, so it works from any checkout.
 """
@@ -33,6 +33,10 @@ def main():
                                      {"pane": 1, "line": 40, "emoji": "⬅️"}])
     elif op == "state":
         call(config, "state")
+    elif op == "close":
+        call(config, "close")
+    elif op == "settings":
+        call(config, "settings")
     elif op == "badtoken":
         call(dict(config, token="wrong"), "state")
     else:

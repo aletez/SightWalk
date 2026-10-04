@@ -12,14 +12,16 @@ from .config import DEFAULT_PORT, SETTINGS_FILE
 PACKAGE = __package__.split(".")[0]
 SERVER_RESOURCE = "Packages/%s/mcp_server/sight_walk_mcp.py" % PACKAGE
 INSTALL_DIR = os.path.join(os.path.expanduser("~"), ".sight_walk")
+VENV_DIR = os.path.join(INSTALL_DIR, "venv")
+VENV_PYTHON = os.path.join(VENV_DIR, "bin", "python")
 
 INSTRUCTIONS = """SightWalk: agent bridge set up.
 
 The bridge is installed in {folder}
 
-1. Install the MCP package for the Python that will run the bridge (3.10 or newer):
+1. Create a Python environment for the bridge, with Python 3.10 or newer as python3:
 
-   python3 -m pip install mcp
+   python3 -m venv "{venv}" && "{python}" -m pip install "mcp>=2"
 
 2. Register the bridge in Claude Code. This line is already on your clipboard:
 
@@ -35,9 +37,11 @@ class SightWalkSetupCommand(sublime_plugin.WindowCommand):
     def run(self):
         token, port = ensure_token()
         path = install_server(token, port)
-        command = 'claude mcp add --scope user sight-walk -- python3 "%s"' % path
+        command = 'claude mcp add --scope user sight-walk -- "%s" "%s"' % (VENV_PYTHON, path)
         sublime.set_clipboard(command)
-        show_instructions(self.window, INSTRUCTIONS.format(folder=INSTALL_DIR, command=command))
+        text = INSTRUCTIONS.format(folder=INSTALL_DIR, venv=VENV_DIR, python=VENV_PYTHON,
+                                   command=command)
+        show_instructions(self.window, text)
 
 
 def ensure_token():

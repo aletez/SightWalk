@@ -91,6 +91,20 @@ def state() -> dict:
 
 
 @mcp.tool()
+def close() -> dict:
+    """Close the reader window."""
+    return call("close")
+
+
+@mcp.tool()
+def settings(values: Optional[dict] = None) -> dict:
+    """Read the user's SightWalk settings, or change them: values like {"tint": 0.03}.
+    Editable: tint (code background) and header_tint (header band), each from 0 to 1, as a share
+    of the file's fully saturated hue. Changes apply to the next reader window: close, then show."""
+    return call("settings", values=values)
+
+
+@mcp.tool()
 def wait_for_user(timeout_s: int = 110) -> dict:
     """Wait for the user's next message. Returns text, focus and visible, or timeout."""
     return call("wait_for_user", timeout=timeout_s + 5, timeout_s=timeout_s)

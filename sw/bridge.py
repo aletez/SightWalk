@@ -10,13 +10,14 @@ import threading
 import sublime
 
 from . import state
-from .config import DEFAULT_PORT, SETTINGS_FILE
+from .config import DEFAULT_PORT, HEADER_TINT, SETTINGS_FILE, TINT
 from .reader import Reader
 from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
 SERVER = [None]
+EDITABLE = {"tint": TINT, "header_tint": HEADER_TINT}
 
 
 # Operations, run on Sublime's main thread
@@ -55,7 +56,29 @@ def op_state():
     return dict(reader.context(), panes=[seg.spec for seg in reader.segments])
 
 
-OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state}
+def op_close():
+    reader = state.current_reader()
+    if reader is None:
+        raise RuntimeError("No reader window is open.")
+    reader.window.run_command("close_window")
+    return {"ok": True}
+
+
+def op_settings(values=None):
+    settings = sublime.load_settings(SETTINGS_FILE)
+    for key, value in (values or {}).items():
+        if key not in EDITABLE:
+            raise ValueError("Not editable: %s. Editable: %s" % (key, ", ".join(EDITABLE)))
+        if not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 <= value <= 1:
+            raise ValueError("%s must be a number from 0 to 1." % key)
+        settings.set(key, value)
+    if values:
+        sublime.save_settings(SETTINGS_FILE)
+    return {key: settings.get(key, default) for key, default in EDITABLE.items()}
+
+
+OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,
+       "close": op_close, "settings": op_settings}
 
 
 def run_on_main(fn, timeout=10):

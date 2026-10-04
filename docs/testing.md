@@ -21,7 +21,7 @@ Console (View > Show Console): `reloading plugin SightWalk.sight_walk`, with no 
 Command palette: **SightWalk: Set Up Agent Bridge**. Pass:
 - An output panel with three steps appears.
 - `~/.sight_walk/` contains `sight_walk_mcp.py` and `config.json`; `config.json` is `-rw-------`.
-- The clipboard holds `claude mcp add --scope user sight-walk -- python3 "/Users/…/.sight_walk/sight_walk_mcp.py"`.
+- The clipboard holds `claude mcp add --scope user sight-walk -- "/Users/…/.sight_walk/venv/bin/python" "/Users/…/.sight_walk/sight_walk_mcp.py"`.
 - `Packages/User/SightWalk.sublime-settings` contains a `token`.
 
 Running it again keeps the token. Run it after every change in `mcp_server/`.
@@ -32,7 +32,7 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers above two panes in different faint hues, each range outlined, the strip, and the conversation with the prompt at the bottom. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers above two panes in different faint hues, the strip, and the conversation with the prompt at the bottom. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
 | `python3 tools/poke.py point` | ➡️ and ⬅️ in the strip on lines 5 and 40 (or ⬆️/⬇️ when off screen). They stay aligned after opening and closing the console. |
 | `python3 tools/poke.py state` | JSON with `panes`, `focus` and `visible`. |
@@ -49,13 +49,13 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 ## 5. Conversation pane
 
 - The prompt sits at the bottom of the pane from the start.
-- Type after `› ` and send with Ctrl+Enter: the draft becomes `U: …`, a new prompt opens.
+- Type after `› ` and send with Cmd+Enter (Ctrl+Enter on Windows and Linux): the draft becomes `U: …`, a new prompt opens.
 - Backspace at the start of the draft, typing into an `A:` line, cut from the transcript, Ctrl+Z after an answer arrived: the transcript comes back each time.
 - The transcript can be selected and copied with the keyboard.
 
 ## 6. The agent
 
-1. `python3 -c "import mcp.server.mcpserver"` runs silently (Python ≥ 3.10, `pip install -U mcp`).
+1. `~/.sight_walk/venv/bin/python -c "import mcp.server.mcpserver"` runs silently (the environment from the setup panel, step 1).
 2. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 5 tools.
 3. Prompt: "Use the sight-walk tools to walk me through what happens when the bridge receives a show request, from sw/bridge.py dispatch to plan.visible_cells, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
 4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ➡️/⬅️; "what if the file doesn't exist?" rebuilds the sequence.

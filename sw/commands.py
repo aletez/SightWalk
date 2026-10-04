@@ -50,6 +50,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
     def on_modified(self):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
+        chat.update_hint(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

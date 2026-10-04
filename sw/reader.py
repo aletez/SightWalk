@@ -6,8 +6,8 @@ from . import chat, marks, plan, state
 from .config import MIN_LINES_IN_CELL, PAD_ROWS, POLL_MS, SETTLE_MS
 from .spec import header_text, parse_spec, resolve_center
 from .tint import apply_tint
-from .views import (draw_icons, hide_chrome, make_header, make_side_view, match_font,
-                    prepare_code_view, reader_layout, wait_until_loaded)
+from .views import (draw_icons, draw_outlines, hide_chrome, make_header, make_side_view,
+                    match_font, prepare_code_view, reader_layout, wait_until_loaded)
 
 
 class Reader:
@@ -137,6 +137,7 @@ class Reader:
         self.window.focus_view(self.chat)
         self.draw_strip()
         self.draw_gutter()
+        self.draw_outlines()
         sublime.set_timeout(lambda: self.scroll_views(cells), 0)
 
     def park_hidden(self, shown):
@@ -176,6 +177,13 @@ class Reader:
             header = {1: icons[(index, 0)]} if (index, 0) in icons else {}
             draw_icons(seg.header, seg.header_icons, header)
             seg.header_icons = header
+
+    def draw_outlines(self):
+        for index, seg in enumerate(self.segments):
+            lines = set(m["line"] for m in self.indicators if m["seg"] == index)
+            if lines != seg.outlines:
+                draw_outlines(seg.view, lines)
+                seg.outlines = lines
 
     def poll(self):
         if state.READERS.get(self.window.id()) is not self or not self.strip.is_valid():

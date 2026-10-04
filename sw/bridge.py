@@ -10,14 +10,14 @@ import threading
 import sublime
 
 from . import state
-from .config import DEFAULT_PORT, HEADER_TINT, SETTINGS_FILE, TINT
+from .config import DEFAULT_PORT, SETTINGS_FILE, TINT
 from .reader import Reader
 from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
 SERVER = [None]
-EDITABLE = {"tint": TINT, "header_tint": HEADER_TINT}
+EDITABLE = {"tint": TINT}
 
 
 # Operations, run on Sublime's main thread

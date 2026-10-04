@@ -5,64 +5,60 @@ import math
 from .config import DEFAULT_MARK
 from .spec import matches
 
-PASS, TAKE = "➡️", "⬅️"
-NAMED = {"🅰️": "letter_a", "🅱️": "letter_b", "*️⃣": "letter_a"}
-NAMED.update(("%d️⃣" % n, "digit_%d" % n) for n in range(1, 10))
-
 
 def line_y(segment, line, lh):
     return segment.code_item.y + (line - segment.begin) * lh
 
 
-def resolve_target(segments, mark):
-    if "pane" in mark:
-        index, line = int(mark["pane"]), int(mark["line"])
+def resolve_target(segments, target):
+    """target: "file:line" or {"pane": index, "line": line}. Returns (pane, line)."""
+    if isinstance(target, dict):
+        index, line = int(target["pane"]), int(target["line"])
         if not 0 <= index < len(segments):
             raise ValueError("No pane %d" % index)
         return index, line
-    name, _, line = mark["target"].rpartition(":")
+    name, _, line = str(target).rpartition(":")
     line = int(line)
-    candidates = [i for i, seg in enumerate(segments) if matches(seg, name)]
-    if not candidates:
-        raise ValueError("No pane shows %s" % name)
-    inside = [i for i in candidates if segments[i].begin <= line <= segments[i].end]
-    return (inside or candidates)[0], line
+    inside = [i for i, seg in enumerate(segments)
+              if matches(seg, name) and seg.begin <= line <= seg.end]
+    if not inside:
+        raise ValueError("No pane shows %s" % target)
+    if len(inside) > 1:
+        raise ValueError('%s is in panes %s; give {"pane": index, "line": %d} instead'
+                         % (target, ", ".join(map(str, inside)), line))
+    return inside[0], line
 
 
-def icon_for(emoji):
-    if emoji in NAMED:
-        return NAMED[emoji]
-    if len(emoji) == 1 and emoji in "123456789":
-        return "digit_" + emoji
-    if len(emoji) == 1 and emoji.isascii() and emoji.isalpha():
-        return "letter_" + emoji.lower()
-    raise ValueError("Unknown mark %r" % emoji)
+def icon_for(mark):
+    mark = str(mark)
+    if len(mark) == 1 and mark in "123456789":
+        return "digit_" + mark
+    if len(mark) == 1 and mark.isascii() and mark.isalpha():
+        return "letter_" + mark.lower()
+    raise ValueError("A mark is a digit 1-9 or a letter A-Z, not %r" % mark)
+
+
+def jump(segments, mark):
+    """A jump of control: both arrows bend towards the other end, in reader order."""
+    sender = resolve_target(segments, mark["from"])
+    receiver = resolve_target(segments, mark["to"])
+    down = sender <= receiver
+    return [{"seg": sender[0], "line": sender[1], "icon": "pass_down" if down else "pass_up"},
+            {"seg": receiver[0], "line": receiver[1],
+             "icon": "take_above" if down else "take_below"}]
 
 
 def resolve_marks(segments, marks):
+    """marks: {"from": target, "to": target} for a jump, or {"at": target, "mark": "1"}."""
     resolved = []
     for mark in marks:
-        index, line = resolve_target(segments, mark)
-        emoji = mark.get("emoji", DEFAULT_MARK)
-        icon = None if emoji in (PASS, TAKE) else icon_for(emoji)
-        resolved.append({"seg": index, "line": line, "emoji": emoji, "icon": icon})
-    pair_jumps(resolved)
+        if "from" in mark or "to" in mark:
+            resolved += jump(segments, mark)
+        else:
+            index, line = resolve_target(segments, mark["at"])
+            icon = icon_for(mark.get("mark", DEFAULT_MARK))
+            resolved.append({"seg": index, "line": line, "icon": icon})
     return resolved
-
-
-def pair_jumps(resolved):
-    # The n-th sender goes with the n-th receiver. The arrows bend towards each other: down from
-    # a sender above its receiver, up from one below. A mark without a partner points down.
-    senders = [m for m in resolved if m["emoji"] == PASS]
-    receivers = [m for m in resolved if m["emoji"] == TAKE]
-    for i, mark in enumerate(senders):
-        partner = receivers[i] if i < len(receivers) else None
-        down = partner is None or (mark["seg"], mark["line"]) <= (partner["seg"], partner["line"])
-        mark["icon"] = "pass_down" if down else "pass_up"
-        if partner is not None:
-            partner["icon"] = "take_above" if down else "take_below"
-    for mark in receivers[len(senders):]:
-        mark["icon"] = "take_above"
 
 
 def visible_lines(segments, offset, height, lh):

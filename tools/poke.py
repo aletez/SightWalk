@@ -29,8 +29,9 @@ def main():
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
     elif op == "point":
-        call(config, "point", marks=[{"pane": 0, "line": 5, "emoji": "➡️"},
-                                     {"pane": 1, "line": 40, "emoji": "⬅️"}])
+        jump = {"from": {"pane": 0, "line": 5}, "to": {"pane": 1, "line": 40}}
+        call(config, "point", marks=[jump, {"at": {"pane": 0, "line": 8}, "mark": "1"},
+                                     {"at": {"pane": 0, "line": 12}, "mark": "A"}])
     elif op == "state":
         call(config, "state")
     elif op == "close":

@@ -5,7 +5,7 @@ import random
 
 import sublime
 
-from .config import HEADER_TINT, SETTINGS_FILE, SETTLE_MS, TINT
+from .config import OUTLINE_TINT, SETTINGS_FILE, SETTLE_MS, TINT
 
 HUE_START = random.random()
 HUES = {}
@@ -47,34 +47,32 @@ def write_scheme(scheme, name):
     return "Packages/User/SightWalk/" + name
 
 
-def tint_amounts():
+def band_amount():
     # Read on every show, so a new value in the settings applies to the next reader at once.
-    settings = sublime.load_settings(SETTINGS_FILE)
-    return settings.get("tint", TINT), settings.get("header_tint", HEADER_TINT)
+    return sublime.load_settings(SETTINGS_FILE).get("tint", TINT)
 
 
-def tinted_schemes(view, hue, amounts):
-    """Writes a faint tint for the code and a stronger one for the header, both in the file's hue."""
+def tinted_schemes(view, hue, amount):
+    """Writes two schemes in the file's hue: the code keeps its background and gets the band in
+    the gutter and a strong outline colour; the header is the band."""
     base = view.settings().get("color_scheme") or ""
     scheme = load_base_scheme(base)
     if scheme is None:
         return None
     background = view.style().get("background", "#000000")
-    stem = "%s-hue%03d" % (os.path.splitext(os.path.basename(base))[0], int(round(hue * 1000)))
-    # The gutter, where the icons sit, has the header's band colour.
-    scheme.setdefault("globals", {})["gutter"] = tint_color(background, hue, amounts[1])
-    scheme.setdefault("rules", []).append({"scope": "sight_walk.icon", "foreground": "#ffffff"})
-    stem += "-g%03d" % int(round(amounts[1] * 1000))
-    resources = []
-    for amount, part in zip(amounts, ("", "-header")):
-        scheme["globals"]["background"] = tint_color(background, hue, amount)
-        if part:
-            # The header's caret line paints its gutter in the line highlight; make that the band.
-            scheme["globals"]["line_highlight"] = scheme["globals"]["background"]
-        # The amount is in the name, so a changed setting gives a new file instead of a stale one.
-        name = "%s%s-%03d.sublime-color-scheme" % (stem, part, int(round(amount * 1000)))
-        resources.append(write_scheme(scheme, name))
-    return resources
+    band = tint_color(background, hue, amount)
+    # Hue and amount are in the name, so a changed setting gives a new file, not a stale one.
+    stem = "%s-hue%03d-%03d" % (os.path.splitext(os.path.basename(base))[0],
+                                int(round(hue * 1000)), int(round(amount * 1000)))
+    globals_ = scheme.setdefault("globals", {})
+    globals_["gutter"] = band
+    scheme.setdefault("rules", []).extend([
+        {"scope": "sight_walk.icon", "foreground": "#ffffff"},
+        {"scope": "sight_walk.outline", "foreground": tint_color(background, hue, OUTLINE_TINT)}])
+    code = write_scheme(scheme, stem + "-code.sublime-color-scheme")
+    # The header's caret line paints its gutter in the line highlight; make that the band too.
+    globals_["background"] = globals_["line_highlight"] = band
+    return [code, write_scheme(scheme, stem + "-header.sublime-color-scheme")]
 
 
 def when_indexed(resources, callback, tries=200):
@@ -91,10 +89,10 @@ def when_indexed(resources, callback, tries=200):
 
 def apply_tint(code_views, headers, path):
     # Written once per file and setting, so a file keeps its colours across show calls.
-    amounts = tint_amounts()
-    key = (path, amounts)
+    amount = band_amount()
+    key = (path, amount)
     if key not in SCHEMES:
-        SCHEMES[key] = tinted_schemes(code_views[0], hue_for(path), amounts)
+        SCHEMES[key] = tinted_schemes(code_views[0], hue_for(path), amount)
     if SCHEMES[key] is None:
         return
     code, header = SCHEMES[key]

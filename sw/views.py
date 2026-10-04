@@ -79,6 +79,19 @@ def draw_icons(view, old, new):
                              "sight_walk.icon", ICONS % icon, ICON_FLAGS)
 
 
+def draw_outlines(view, lines):
+    """An outline around the text of each marked line, in the file's strong hue."""
+    regions = []
+    for line in sorted(lines):
+        whole = view.line(view.text_point(line - 1, 0))
+        text = view.substr(whole)
+        start = whole.a + len(text) - len(text.lstrip())
+        end = whole.b - (len(text) - len(text.rstrip()))
+        if start < end:
+            regions.append(sublime.Region(start, end))
+    view.add_regions("sight_walk_outline", regions, "sight_walk.outline", "", sublime.DRAW_NO_FILL)
+
+
 def prepare_code_view(window, view, clone):
     if clone:
         window.focus_view(view)

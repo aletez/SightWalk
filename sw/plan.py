@@ -18,6 +18,7 @@ class Segment:
         self.header_item = None
         self.header_icons = {}
         self.icons = {}
+        self.outlines = set()
 
 
 def stack(items, overhead):

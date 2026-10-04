@@ -32,9 +32,9 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers above two panes in different faint hues, the strip, and the conversation with the prompt at the bottom. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation with a faint `⌘+Enter to send` after the prompt. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
-| `python3 tools/poke.py point` | ➡️ and ⬅️ in the strip on lines 5 and 40 (or ⬆️/⬇️ when off screen). They stay aligned after opening and closing the console. |
+| `python3 tools/poke.py point` | Gutter icons, each line outlined: ⤵ on line 5 and ↳ on line 40, a 1 on line 8, an A on line 12. A mark off screen shows an eye on the first or last visible line instead. |
 | `python3 tools/poke.py state` | JSON with `panes`, `focus` and `visible`. |
 | `python3 tools/poke.py badtoken` | `Unauthorized…` |
 
@@ -56,6 +56,6 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 ## 6. The agent
 
 1. `~/.sight_walk/venv/bin/python -c "import mcp.server.mcpserver"` runs silently (the environment from the setup panel, step 1).
-2. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 5 tools.
+2. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 7 tools.
 3. Prompt: "Use the sight-walk tools to walk me through what happens when the bridge receives a show request, from sw/bridge.py dispatch to plan.visible_cells, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
-4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ➡️/⬅️; "what if the file doesn't exist?" rebuilds the sequence.
+4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ⤵ and ↳; "what if the file doesn't exist?" rebuilds the sequence.

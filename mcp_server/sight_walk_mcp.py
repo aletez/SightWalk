@@ -9,8 +9,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 MANUAL = """
 You review code with the user in a Sublime Text reader window. The left column shows a
-vertical sequence of panes, each a line range of a file. A narrow pane next to it holds
-your indicators, and the right pane is the conversation.
+vertical sequence of panes, each a line range of a file, with a header above each. Your
+marks appear as icons in the gutter, and the right pane is the conversation.
 
 Showing code
 - A pane is written <file>:<begin>-<end>, lines 1-based and inclusive.
@@ -32,15 +32,18 @@ Conversation
 - Answer with say. Keep answers short. Then call wait_for_user again.
 
 Indicators
-- Before or together with an answer that refers to specific lines, call point.
-- Use only these marks. Each sits on its own coloured square, so it stays visible on any theme.
-  *️⃣ this line: the line your sentence is about.
-  ➡️ passes control, ⬅️ takes control: call site and the callee's first line, return and the
-     call site it goes back to, raise and its handler. Say in the conversation which jump it is.
-  1️⃣ 2️⃣ 3️⃣ ... any other ordered relation: a value produced and where it is used, a cause and
-     its symptom, steps. Say what the order means.
-  🅰️ 🅱️ two lines to compare, with no order.
-- Line numbers in point are absolute file lines.
+- Before or together with an answer that refers to specific lines, call point. Every marked
+  line is outlined, and its icon sits in the gutter.
+- A line is "file:line" (absolute file line) or {"pane": index, "line": line}.
+- Jumps of control: {"from": line, "to": line}. Call site and the callee's first line, return
+  and the call site it goes back to, raise and its handler. The arrows bend towards each other.
+  Say in the conversation which jump it is. There and back are two separate point calls.
+- Other marks: {"at": line, "mark": "A"}.
+  A, B, C ... lines without an order: A alone is the line your sentence is about; A and B are
+     two lines to compare.
+  1, 2, 3 ... any ordered relation: a value produced and where it is used, a cause and its
+     symptom, steps. Say what the order means.
+- When a mark is off screen, an eye on the first or last visible line looks towards it.
 """
 
 mcp = MCPServer("sight-walk", instructions=MANUAL)
@@ -78,9 +81,10 @@ def say(text: str) -> dict:
 
 @mcp.tool()
 def point(marks: list[dict], reveal: bool = True, clear: bool = True) -> dict:
-    """Place indicators. Each mark is {"target": "app.py:57", "emoji": "➡️"} or
-    {"pane": 2, "line": 12, "emoji": "⬅️"}. Without emoji the mark is *️⃣.
-    reveal scrolls the marks into view. clear removes earlier marks first."""
+    """Place marks. A jump of control is {"from": "app.py:57", "to": "app.py:12"}; any other mark
+    is {"at": "app.py:30", "mark": "1"} with a digit 1-9 or a letter A-Z (default "A"). A line is
+    "file:line" or {"pane": 2, "line": 12}. reveal scrolls the marks into view. clear removes
+    earlier marks first."""
     return call("point", marks=marks, reveal=reveal, clear=clear)
 
 
@@ -98,9 +102,9 @@ def close() -> dict:
 
 @mcp.tool()
 def settings(values: Optional[dict] = None) -> dict:
-    """Read the user's SightWalk settings, or change them: values like {"tint": 0.03}.
-    Editable: tint (code background) and header_tint (header band), each from 0 to 1, as a share
-    of the file's fully saturated hue. Changes apply to the next reader window: close, then show."""
+    """Read the user's SightWalk settings, or change them: values like {"tint": 0.2}.
+    Editable: tint (header band and gutter), from 0 to 1, as a share of the file's fully
+    saturated hue. Changes apply to the next reader window: close, then show."""
     return call("settings", values=values)
 
 

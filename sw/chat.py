@@ -12,6 +12,9 @@ START = "\n" + PROMPT
 PROTECTED = {}
 GUARDS = {}
 FILLERS = {}
+HINTS = {}
+HINT = ("⌘+Enter" if sublime.platform() == "osx" else "Ctrl+Enter") + " to send"
+HINT_HTML = '<span style="color: color(var(--foreground) alpha(0.35))">%s</span>' % HINT
 
 
 def protected_end(end, changes):
@@ -54,6 +57,22 @@ def start(view):
     GUARDS[buffer_id] = Guard(view)
     GUARDS[buffer_id].attach(view.buffer())
     FILLERS[buffer_id] = [sublime.PhantomSet(view, "sight_walk_fill"), 0]
+    HINTS[buffer_id] = [sublime.PhantomSet(view, "sight_walk_hint"), False]
+    update_hint(view)
+
+
+def update_hint(view):
+    """A faint hint after the prompt while the draft is empty. A phantom is not text, so it can't
+    be selected, copied or sent."""
+    hint = HINTS.get(view.buffer_id())
+    protected = PROTECTED.get(view.buffer_id())
+    if hint is None or protected is None:
+        return
+    empty = view.size() == len(protected)
+    if empty != hint[1]:
+        hint[1] = empty
+        phantom = sublime.Phantom(sublime.Region(view.size()), HINT_HTML, sublime.LAYOUT_INLINE)
+        hint[0].update([phantom] if empty else [])
 
 
 def say(view, text):

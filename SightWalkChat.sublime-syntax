@@ -1,0 +1,34 @@
+%YAML 1.2
+---
+# Colours for the conversation pane. Only for display: the plugin finds the draft by the
+# recorded length of the transcript, never by these scopes.
+name: SightWalk Conversation
+scope: text.sight-walk.chat
+hidden: true
+
+contexts:
+  main:
+    - match: '^(A:) '
+      captures:
+        1: entity.name.function.agent.sight-walk
+      push: agent
+    - match: '^(U:) '
+      captures:
+        1: string.unquoted.user.sight-walk
+      push: user
+    - match: '^› '
+      scope: keyword.operator.prompt.sight-walk
+      push: draft
+
+  agent:
+    - meta_scope: meta.message.agent.sight-walk
+    - match: '(?=^(A: |U: |› ))'
+      pop: true
+
+  user:
+    - meta_scope: meta.message.user.sight-walk comment.line.user.sight-walk
+    - match: '(?=^(A: |U: |› ))'
+      pop: true
+
+  draft:
+    - meta_scope: meta.draft.sight-walk

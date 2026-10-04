@@ -1,0 +1,7 @@
+[
+    {"keys": ["ctrl+enter"], "command": "sight_walk_send", "context": [{"key": "setting.sight_walk_chat"}]},
+    {"keys": ["alt+down"], "command": "sight_walk_scroll", "args": {"lines": 3}, "context": [{"key": "setting.sight_walk"}]},
+    {"keys": ["alt+up"], "command": "sight_walk_scroll", "args": {"lines": -3}, "context": [{"key": "setting.sight_walk"}]},
+    {"keys": ["pagedown"], "command": "sight_walk_scroll", "args": {"pages": 0.9}, "context": [{"key": "setting.sight_walk"}]},
+    {"keys": ["pageup"], "command": "sight_walk_scroll", "args": {"pages": -0.9}, "context": [{"key": "setting.sight_walk"}]}
+]

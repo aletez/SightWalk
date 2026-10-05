@@ -10,14 +10,14 @@ import threading
 import sublime
 
 from . import state
-from .config import DEFAULT_PORT, SETTINGS_FILE, TINT
+from .config import DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE, TINT
 from .reader import Reader
 from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
 SERVER = [None]
-EDITABLE = {"tint": TINT}
+EDITABLE = {"tint": TINT, "default_conversation_height": DEFAULT_CONVERSATION_HEIGHT}
 
 
 # Operations, run on Sublime's main thread
@@ -61,11 +61,11 @@ def op_show(panes, root=None, center=None):
     return {"ok": True}
 
 
-def op_say(text):
+def op_say(text, status=None):
     reader = state.current_reader()
     if reader is None:
         raise RuntimeError("No reader window is open. Call show first.")
-    reader.say(text)
+    reader.say(text, status)
     return {"ok": True}
 
 

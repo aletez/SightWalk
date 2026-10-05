@@ -32,7 +32,7 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation on the left under a header "Conversation · ⌘+Enter to send". |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation on the left under a two-line grey header "Conversation" with a faded `?` at its right; hovering the `?` lists the shortcuts. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
 | `python3 tools/poke.py point` | Gutter icons, each line outlined: ⤵ on line 5 and ↳ on line 40, a 1 on line 8, an A on line 12. A mark off screen shows an eye on the first or last visible line instead. |
 | `python3 tools/poke.py state` | JSON with `panes`, `focus` and `visible`. |
@@ -49,7 +49,7 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 ## 5. Conversation pane
 
 - The prompt sits at the bottom of the pane from the start.
-- Type after `› ` and send with Cmd+Enter (Ctrl+Enter on Windows and Linux): the draft becomes `U: …`, a new prompt opens.
+- Type after `>>> ` and send with Cmd+Enter (Ctrl+Enter on Windows and Linux): the draft becomes `U: …`, a new prompt opens.
 - Backspace at the start of the draft, typing into an `A:` line, cut from the transcript, Ctrl+Z after an answer arrived: the transcript comes back each time.
 - The transcript can be selected and copied with the keyboard.
 

@@ -7,9 +7,11 @@ MIN_LINES_IN_CELL = 1
 # Conversation, code, scroll strip.
 COLS = [0.0, 0.34, 0.96, 1.0]
 TINT = 0.25
+DEFAULT_CONVERSATION_HEIGHT = 0.6  # bottom of the conversation pane, as a share of the column
 OUTLINE_TINT = 0.7
 PAD_ROWS = 400
+INSET = 10  # px between the panes' header and gutter and the editor laid over them
 OVERLAP = 2  # px a header reaches into its code pane, to hide the border
 
-PROMPT = "› "
+PROMPT = ">>> "
 DEFAULT_MARK = "A"

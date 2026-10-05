@@ -1,14 +1,21 @@
 import sublime
 
-from .config import COLS, OVERLAP, SETTLE_MS
+from .config import COLS, INSET, OVERLAP, SETTLE_MS
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
-CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True))
+CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True),
+                 ("sight_walk_code", True))
 # Everything that decides how tall a line is. Copied from the code view, so that view settings
 # override syntax-specific ones (Plain Text may have its own font) and every line has one height.
 ICONS = "Packages/SightWalk/icons/%s.png"
 ICON_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE
+FADED = "color(var(--foreground) alpha(0.45))"
+# Faded and outlined at all times, so it reads as a control, not as text.
+BUTTON = "Edit (Enter)"
+BUTTON_HTML = ('<a href="edit" style="color: %s; text-decoration: none; border: 1px solid %s; '
+               'border-radius: 3px; padding: 0 4px">%s</a>' % (FADED, FADED, BUTTON))
+BUTTONS = {}
 FONT_KEYS = ("font_face", "font_size", "font_options", "line_padding_top", "line_padding_bottom")
 
 
@@ -25,24 +32,39 @@ def wait_until_loaded(views, callback):
         callback()
 
 
-def reader_layout(heights, total, overlaps=(), top=0):
-    """overlaps[i]: cell i reaches OVERLAP px into the next cell, which hides the border between.
-    top: height of the conversation's header; 0 leaves it out."""
-    edges, y = [0.0], 0.0
-    for h in heights:
+def to_layout(rects, total):
+    """rects: (x0, y0, x1, y1), x as a share of the width and y in px, in group order."""
+    xs = sorted(set(x for r in rects for x in (r[0], r[2])))
+    ys = sorted(set(y for r in rects for y in (r[1], r[3])))
+    col = {x: i for i, x in enumerate(xs)}
+    row = {y: i for i, y in enumerate(ys)}
+    cells = [[col[r[0]], row[r[1]], col[r[2]], row[r[3]]] for r in rects]
+    return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
+
+
+def reader_layout(heights, total, overlaps=(), top=0, split=0, cols=COLS, editor=None):
+    """Groups in order: the editor's header and view if open (first, because Sublime draws earlier
+    groups over later ones), the code cells, the strip, then (once top is known) the
+    conversation, its header and the pane below it.
+    overlaps[i]: cell i reaches OVERLAP px into the next, which hides the border between.
+    top: the conversation header's height, split: the conversation's bottom.
+    editor: (header height, left offset as a share of the width, top offset in px), laid over
+    the lower right of the code column."""
+    rects, y = [], 0.0
+    for i, h in enumerate(heights):
+        reach = OVERLAP if i < len(overlaps) and overlaps[i] and i + 1 < len(heights) else 0
+        rects.append((cols[1], y, cols[2], y + h + reach))
         y += h
-        edges.append(y)
-    bottoms = [edges[i + 1] + OVERLAP if i < len(overlaps) and overlaps[i] and i + 1 < len(heights)
-               else edges[i + 1] for i in range(len(heights))]
-    rows = sorted(set(edges + bottoms + ([top] if top else [])))
-    row = {value: index for index, value in enumerate(rows)}
-    # Groups: the code cells first, then the strip, the conversation and its header.
-    cells = [[1, row[edges[i]], 2, row[bottoms[i]]] for i in range(len(heights))]
-    n = len(rows) - 1
-    cells += [[2, 0, 3, n], [0, row[top] if top else 0, 1, n]]
-    if top:
-        cells.append([0, 0, 1, row[top]])
-    return {"cols": COLS, "rows": [r / total for r in rows], "cells": cells}
+    rects.append((cols[2], 0.0, cols[3], total))
+    if not top:
+        return to_layout(rects + [(cols[0], 0.0, cols[1], total)], total)
+    rects += [(cols[0], top, cols[1], split), (cols[0], 0.0, cols[1], top + OVERLAP),
+              (cols[0], split, cols[1], total)]
+    if editor:
+        header, dx, dy = editor
+        left, right = cols[1] + dx, cols[2]
+        rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects
+    return to_layout(rects, total)
 
 
 def make_side_view(window, name, extra):
@@ -103,4 +125,19 @@ def prepare_code_view(window, view, clone):
         view = window.active_view()
     for key, value in CODE_SETTINGS:
         view.settings().set(key, value)
+    view.set_read_only(True)  # editing happens in the editor
     return view
+
+
+def draw_edit_button(header, text, on_click):
+    """The header's text, padded so the edit button sits at its right edge."""
+    columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
+    padded = text.ljust(max(columns - len(BUTTON) - 4, len(text) + 1))
+    button = BUTTONS.setdefault(header.id(), [sublime.PhantomSet(header, "sight_walk_edit"), None])
+    if button[1] == padded:
+        return
+    button[1] = padded
+    header.run_command("sight_walk_replace", {"text": padded})
+    point = header.line(0).b
+    button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
+                                      on_click)])

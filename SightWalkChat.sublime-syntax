@@ -16,20 +16,20 @@ contexts:
       captures:
         1: string.unquoted.user.sight-walk
       push: user
-    - match: '^› '
+    - match: '^>>> '
       scope: keyword.operator.prompt.sight-walk
       push: draft
 
   agent:
     - meta_scope: meta.message.agent.sight-walk
     - include: names
-    - match: '(?=^(A: |U: |› ))'
+    - match: '(?=^(A: |U: |>>> ))'
       pop: true
 
   user:
     - meta_scope: meta.message.user.sight-walk comment.line.user.sight-walk
     - include: names
-    - match: '(?=^(A: |U: |› ))'
+    - match: '(?=^(A: |U: |>>> ))'
       pop: true
 
   draft:

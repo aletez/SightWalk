@@ -1,18 +1,27 @@
+import math
+
 import sublime
 import sublime_plugin
 
 from .config import PROMPT
+from .header import MARK_ROOM, header_text
+from .views import FADED, make_side_view, match_font
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
-# The blank first line carries the filler phantom, which can only sit below a line.
-START = "\n" + PROMPT
+START = PROMPT
 
 # Per chat buffer: the text before the draft (blank line, transcript, prompt). Only the plugin
 # changes it, and it records the new text before each of its own edits.
 PROTECTED = {}
 GUARDS = {}
-FILLERS = {}
-HEADER = "Conversation · %s to send" % ("⌘+Enter" if sublime.platform() == "osx" else "Ctrl+Enter")
+MAC = sublime.platform() == "osx"
+KEYS = (("⌘+Enter", "⌃⌘↓", "⌃⌘↑") if MAC else ("Ctrl+Enter", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
+# The help mark: faded and outlined at all times, so it reads as read-only.
+MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1px solid %s; '
+             'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))
+HELP_HTML = ("<div><b>%s</b> send<br><b>%s</b> explain next<br><b>%s</b> explain previous</div>"
+             % KEYS)
+MARKS = {}
 
 
 def protected_end(end, changes):
@@ -54,7 +63,6 @@ def start(view):
     view.run_command("sight_walk_replace", {"text": START})
     GUARDS[buffer_id] = Guard(view)
     GUARDS[buffer_id].attach(view.buffer())
-    FILLERS[buffer_id] = [sublime.PhantomSet(view, "sight_walk_fill"), 0]
 
 
 SYMBOL_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_STIPPLED_UNDERLINE
@@ -70,10 +78,43 @@ def underline_symbols(view):
     sublime.set_timeout(draw, 50)
 
 
-def say(view, text):
+def make_header(window, conversation):
+    """The conversation's header, in place of a tab: two read-only lines, the help mark on the
+    right of the first."""
+    view = make_side_view(window, "Conversation", {
+        "word_wrap": False, "gutter": True, "line_numbers": False, "scroll_past_end": False,
+        "sight_walk_header": True})
+    match_font(view, conversation)  # Plain Text has its own font
+    view.set_read_only(True)
+    MARKS[view.id()] = [sublime.PhantomSet(view, "sight_walk_mark"), None]
+    return view
+
+
+def show_header(view, status):
+    columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
+    text = header_text(status, columns)
+    mark = MARKS[view.id()]
+    if text == mark[1]:
+        return
+    mark[1] = text
+    view.run_command("sight_walk_replace", {"text": text})
+    point = view.line(0).b
+    phantom = sublime.Phantom(sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
+                              lambda _: view.show_popup(HELP_HTML, location=point))
+    mark[0].update([phantom])
+
+
+def show_help(view, point):
+    """On hovering the right end of the first line, where the mark sits."""
+    end = view.line(0).b
+    if end - MARK_ROOM <= point <= end:
+        view.show_popup(HELP_HTML, sublime.HIDE_ON_MOUSE_MOVE_AWAY, end)
+
+
+def say(view, text, prefix="A: "):
     protected = PROTECTED[view.buffer_id()]
     point = len(protected) - len(PROMPT)
-    message = "A: " + text.strip() + "\n\n"
+    message = prefix + text.strip() + "\n\n"
     PROTECTED[view.buffer_id()] = protected[:point] + message + PROMPT
     view.run_command("sight_walk_insert", {"point": point, "text": message})
 
@@ -93,17 +134,17 @@ def take_draft(view, edit):
     return draft.strip()
 
 
-def keep_at_middle(view, scroll=False):
-    """Keeps the prompt line at the middle of the pane: a filler above a short transcript, a
-    scroll past the end for a long one. Only changes scroll, so the user can read back."""
-    phantoms, fill = FILLERS[view.buffer_id()]
-    half = view.viewport_extent()[1] / 2
-    end = view.text_to_layout(view.size())[1] + view.line_height()
-    # Corrected from the measured result, so the phantom's exact rendering doesn't matter.
-    new = int(min(max(fill + half - end, 0), half))
-    if abs(new - fill) >= 2:
-        FILLERS[view.buffer_id()][1] = new
-        html = '<div style="height: %dpx"></div>' % new
-        phantoms.update([sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK)] if new else [])
-    elif scroll:
-        view.set_viewport_position((0, max(end - half, 0)), False)
+def keep_at_bottom(view):
+    """Adds or removes blank lines above the transcript until the prompt line touches the bottom.
+    Real lines, not a phantom, so a click anywhere in the pane lands in the conversation."""
+    lh = view.line_height()
+    bottom = view.text_to_layout(view.size())[1] + lh - view.viewport_position()[1]
+    protected = PROTECTED[view.buffer_id()]
+    blanks = len(protected) - len(protected.lstrip("\n"))
+    # Rounded down, so a line fits or not and the count never flips back and forth.
+    lines = max(math.floor((view.viewport_extent()[1] - bottom) / lh + 0.01), -blanks)
+    if lines == 0:
+        return
+    # Only the leading blank lines change; the protected text is recorded before the edit.
+    PROTECTED[view.buffer_id()] = "\n" * (blanks + lines) + protected[blanks:]
+    view.run_command("sight_walk_replace", {"text": "\n" * (blanks + lines), "end": blanks})

@@ -19,10 +19,14 @@ def hue_for(path):
     return HUES[path]
 
 
-def tint_color(background, hue, amount):
-    bg = background[1:7]
-    rgb = [int(bg[i:i + 2], 16) / 255 for i in (0, 2, 4)]
-    pure = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+def hex_rgb(colour):
+    return [int(colour[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+
+
+def tint_color(background, hue, amount, target="#808080"):
+    """Mixes the background with the fully saturated hue, or with target for hue None."""
+    rgb = hex_rgb(background)
+    pure = hex_rgb(target) if hue is None else colorsys.hls_to_rgb(hue, 0.5, 1.0)
     mixed = [c * (1 - amount) + p * amount for c, p in zip(rgb, pure)]
     return "#%02x%02x%02x" % tuple(int(round(c * 255)) for c in mixed)
 
@@ -60,10 +64,12 @@ def tinted_schemes(view, hue, amount):
     if scheme is None:
         return None
     background = view.style().get("background", "#000000")
-    band = tint_color(background, hue, amount)
+    # Without a hue, the band is the scheme's text colour mixed in, which always contrasts.
+    band = tint_color(background, hue, amount, view.style().get("foreground", "#808080"))
     # Hue and amount are in the name, so a changed setting gives a new file, not a stale one.
-    stem = "%s-hue%03d-%03d" % (os.path.splitext(os.path.basename(base))[0],
-                                int(round(hue * 1000)), int(round(amount * 1000)))
+    stem = "%s-%s-%03d" % (os.path.splitext(os.path.basename(base))[0],
+                           "text" if hue is None else "hue%03d" % int(round(hue * 1000)),
+                           int(round(amount * 1000)))
     globals_ = scheme.setdefault("globals", {})
     globals_["gutter"] = band
     scheme.setdefault("rules", []).extend([
@@ -104,3 +110,21 @@ def apply_tint(code_views, headers, path):
                     v.settings().set("color_scheme", resource)
 
     when_indexed([code, header], set_schemes)
+
+
+def apply_grey(header):
+    """The conversation's header: a band like the others, in the text colour, which darkens light
+    schemes and lightens dark ones."""
+    amount = band_amount()
+    key = (None, amount)
+    if key not in SCHEMES:
+        SCHEMES[key] = tinted_schemes(header, None, amount)
+    if SCHEMES[key] is None:
+        return
+    resource = SCHEMES[key][1]
+
+    def set_scheme():
+        if header.is_valid():
+            header.settings().set("color_scheme", resource)
+
+    when_indexed([resource], set_scheme)

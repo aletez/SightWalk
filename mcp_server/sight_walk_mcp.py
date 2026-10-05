@@ -27,9 +27,16 @@ Writing code that fits the reader
 Conversation
 - Call wait_for_user to receive the user's next message. It returns the text, the pane
   nearest the middle of the screen (focus) and the visible panes. On timeout, call it again.
+- The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
+  panes whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
+  line numbers, and call show again if the run you are showing has changed.
 - Resolve indexicals such as "here", "this", "it" or "this line" against focus, unless the
   message clearly points elsewhere.
 - Answer with say. Keep answers short. Then call wait_for_user again.
+- When the topic moves on, pass say a status: a few words on what the conversation is about
+  now, like a chat title that follows along. It stays in the header until you change it.
+- "Explain next." and "Explain previous." (sent by shortcuts) mean the next or previous step
+  in the run order you are showing.
 - Mark every name of code you mention, so it takes the colour it has in the code:
   `run_on_main` for functions and methods, **Reader** for classes and types, ~request~ for
   variables, parameters and attributes. Write keywords and constants plainly. Stress with
@@ -84,9 +91,10 @@ def show(panes: list[str], root: Optional[str] = None) -> dict:
 
 
 @mcp.tool()
-def say(text: str) -> dict:
-    """Append your message to the conversation pane."""
-    return call("say", text=text)
+def say(text: str, status: Optional[str] = None) -> dict:
+    """Append your message to the conversation pane. status: a few words on what the
+    conversation is about right now, shown in its header until changed."""
+    return call("say", text=text, status=status)
 
 
 @mcp.tool()
@@ -113,8 +121,9 @@ def close() -> dict:
 @mcp.tool()
 def settings(values: Optional[dict] = None) -> dict:
     """Read the user's SightWalk settings, or change them: values like {"tint": 0.2}.
-    Editable: tint (header band and gutter), from 0 to 1, as a share of the file's fully
-    saturated hue. Changes apply to the next reader window: close, then show."""
+    Editable, each from 0 to 1: tint (header band and gutter, as a share of the file's fully
+    saturated hue; applies to the next reader window: close, then show) and conversation_height
+    (bottom of the conversation pane as a share of the window; applies on the next scroll)."""
     return call("settings", values=values)
 
 

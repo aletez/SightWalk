@@ -38,3 +38,10 @@ def close_all():
             reader.window.run_command("close_window")
     READERS.clear()
     ACTIVE[0] = None
+
+
+def render_all():
+    # A changed setting (such as the conversation's height) shows at once.
+    for reader in list(READERS.values()):
+        if reader.ready and reader.window.is_valid():
+            reader.render()

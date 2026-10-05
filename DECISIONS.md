@@ -11,6 +11,8 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- Reader windows close themselves before a plugin reload (`plugin_unloaded` → `state.close_all`), so reloads leave no orphans (checked by Claude: the window list loses the reader on reload).
+- Conversation header above the conversation (seen in a screenshot by Claude).
 - Conversation on the left (columns: conversation 34%, code, strip 4% at the right edge); the prompt line kept at the middle of the conversation pane: a filler above a short transcript, a scroll past the end after each change for a long one (seen in a screenshot by Claude with a short transcript).
 - Conversation syntax colours `functions` (as calls), **classes** (defined and built-in apart) and ~variables~, all with a stippled underline (seen in a screenshot by Claude). Agent manual tells the agent to mark names; needs setup and a new session.
 - `show` without `center`; the reader opens at the top.
@@ -18,7 +20,6 @@ Changed, not yet verified in Sublime:
 - Outlines around the text of marked lines (scope `sight_walk.outline`, the file's hue at 0.7).
 - No code tint: code panes keep the scheme's background; the gutter keeps the band.
 - New point format (jumps as from/to, marks 1-9 and A-Z) and agent manual. Needs "SightWalk: Set Up Agent Bridge" and a new Claude Code session.
-- Prompt hint: a faint `⌘+Enter to send` phantom after an empty prompt (Ctrl+Enter elsewhere).
 - Header cells overlap their code pane by `OVERLAP` = 2 px, which hides the border below the header (1 px still showed it; pixel-checked by Claude). Header gutter takes the band colour (the header scheme's line highlight is the band).
 - Headers have a gutter without line numbers; the eye can sit on a header when it is the first or last line on screen.
 - Gutter icons (tools/draw_icons.py → icons/), eyes for off-screen marks, strip without marks. Seen in a screenshot by Claude.
@@ -46,6 +47,7 @@ Open:
 ## Decisions
 
 Conversation pane
+- J: No phantoms in typing areas. The conversation has a one-line read-only header, playing the role of a tab (tabs are off): "Conversation · ⌘+Enter to send" (Ctrl+Enter elsewhere), in the conversation's font, separated by the pane border. Replaces the hint phantom after the prompt.
 - J: The conversation lives to the left of the code, so the code and its gutter with line numbers sit next to it.
 - J: Names of code in the conversation take the colours they have in the code, through the conversation syntax and a light markup the agent writes. `name`: functions and methods, scoped as calls (variable.function). **Name**: classes and types, scoped as defined classes (entity.name.class), except Python's built-in classes, which the syntax recognises by name and scopes as Python does (support.class). ~name~: variables, parameters and attributes, scoped as Python scopes them (meta.generic-name), plain in Mariana. Every marked name also gets a stippled underline in the text colour, so it reads as code in any scheme. Keywords and constants stay plain; bold is no longer for stress. The delimiters stay visible, faint like comments. No Markdown inheritance. Scopes taken from Jakub's reading of the code's own scopes. More categories may come with use. Chosen over regions alone (they cannot colour text) and a generated per-reader syntax.
 - J: The markup is defined once, in the syntax. Every marked name carries `meta.symbol.sight-walk`, and the plugin finds the names to underline by that scope (`find_by_selector`), never by its own pattern; a new category in the syntax is underlined without plugin changes. Jakub asked for this before seeing the code, which Claude had already written the same way.

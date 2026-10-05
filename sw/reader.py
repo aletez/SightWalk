@@ -28,6 +28,12 @@ class Reader:
         self.chat = make_side_view(window, "Conversation", {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": True})
         chat.start(self.chat)
+        # The conversation's header plays the role of a tab, since tabs are off.
+        self.chat_header = make_side_view(window, chat.HEADER, {"word_wrap": False})
+        # Plain Text has its own font; the header takes the conversation's.
+        match_font(self.chat_header, self.chat)
+        self.chat_header.run_command("sight_walk_replace", {"text": chat.HEADER})
+        self.chat_header.set_read_only(True)
 
     # Loading
 
@@ -106,12 +112,15 @@ class Reader:
         self.render()
 
     def place(self, heights, total, views, overlaps=()):
-        self.window.set_layout(reader_layout(heights, total, overlaps))
+        # Until calibrated, the header waits behind the conversation in the same group.
+        top = self.lh + self.overhead if self.overhead is not None else 0
+        self.window.set_layout(reader_layout(heights, total, overlaps, top))
         n = len(views)
         for group, view in enumerate(views):
             self.window.set_view_index(view, group, 0)
         self.window.set_view_index(self.strip, n, 0)
         self.window.set_view_index(self.chat, n + 1, 0)
+        self.window.set_view_index(self.chat_header, n + 2 if top else n + 1, 0 if top else 1)
         for view in views:
             self.window.focus_view(view)
         hide_chrome(self.window)

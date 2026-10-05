@@ -22,7 +22,7 @@ Read `DECISIONS.md` before changing behaviour: it holds the design decisions, th
 - Work in small steps: one change, test (unit tests for pure modules, `tools/poke.py` against the running plugin), Jakub checks in Sublime, commit. Clear commit messages, no model names in them.
 - Functions stay short (about 25 lines or fewer): the plugin is vetted with itself, one function per pane.
 - The plugin runs in Sublime's Python 3.8 host (`.python-version`). The MCP server needs Python ≥ 3.10 and `mcp` ≥ 2 (`from mcp.server.mcpserver import MCPServer`).
-- After changing `sw/`: Sublime needs a reload (restart, or save `sight_walk.py`), and old reader windows must be closed. After changing `mcp_server/`: run "SightWalk: Set Up Agent Bridge" and start a new Claude Code session.
+- After changing `sw/`: Sublime needs a reload (restart, or save `sight_walk.py`). Reader windows close themselves on reload; the agent calls `show` again afterwards. After changing `mcp_server/`: run "SightWalk: Set Up Agent Bridge" and start a new Claude Code session.
 - If anything ever has to be pasted by Jakub, give whole files, never partial edits.
 
 ## Style

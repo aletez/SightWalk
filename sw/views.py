@@ -25,20 +25,23 @@ def wait_until_loaded(views, callback):
         callback()
 
 
-def reader_layout(heights, total, overlaps=()):
-    """overlaps[i]: cell i reaches OVERLAP px into the next cell, which hides the border between."""
+def reader_layout(heights, total, overlaps=(), top=0):
+    """overlaps[i]: cell i reaches OVERLAP px into the next cell, which hides the border between.
+    top: height of the conversation's header; 0 leaves it out."""
     edges, y = [0.0], 0.0
     for h in heights:
         y += h
         edges.append(y)
     bottoms = [edges[i + 1] + OVERLAP if i < len(overlaps) and overlaps[i] and i + 1 < len(heights)
                else edges[i + 1] for i in range(len(heights))]
-    rows = sorted(set(edges + bottoms))
+    rows = sorted(set(edges + bottoms + ([top] if top else [])))
     row = {value: index for index, value in enumerate(rows)}
-    # Groups: the code cells first, then the strip, then the conversation.
+    # Groups: the code cells first, then the strip, the conversation and its header.
     cells = [[1, row[edges[i]], 2, row[bottoms[i]]] for i in range(len(heights))]
     n = len(rows) - 1
-    cells += [[2, 0, 3, n], [0, 0, 1, n]]
+    cells += [[2, 0, 3, n], [0, row[top] if top else 0, 1, n]]
+    if top:
+        cells.append([0, 0, 1, row[top]])
     return {"cols": COLS, "rows": [r / total for r in rows], "cells": cells}
 
 

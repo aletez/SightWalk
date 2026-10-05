@@ -29,3 +29,12 @@ def require_ready():
     if not reader.ready:
         raise RuntimeError("The reader is still loading. Retry in a moment.")
     return reader
+
+
+def close_all():
+    # Called before a reload: the new modules would not know these windows, so they'd be orphans.
+    for reader in list(READERS.values()):
+        if reader.window.is_valid():
+            reader.window.run_command("close_window")
+    READERS.clear()
+    ACTIVE[0] = None

@@ -32,7 +32,7 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation with a faint `⌘+Enter to send` after the prompt. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation on the left under a header "Conversation · ⌘+Enter to send". |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
 | `python3 tools/poke.py point` | Gutter icons, each line outlined: ⤵ on line 5 and ↳ on line 40, a 1 on line 8, an A on line 12. A mark off screen shows an eye on the first or last visible line instead. |
 | `python3 tools/poke.py state` | JSON with `panes`, `focus` and `visible`. |

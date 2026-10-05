@@ -4,7 +4,7 @@ import sys
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import bridge  # noqa: E402
+from .sw import bridge, state  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkChatListener,
     SightWalkInsertCommand,
@@ -21,4 +21,5 @@ def plugin_loaded():
 
 
 def plugin_unloaded():
+    state.close_all()
     bridge.stop()

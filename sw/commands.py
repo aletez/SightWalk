@@ -48,9 +48,10 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         return settings.get("sight_walk_chat", False)
 
     def on_modified(self):
-        # Typing and inserted replies keep the prompt line at the bottom of the pane.
-        self.view.show(self.view.size())
+        # Typing and inserted replies bring the prompt line back to the middle of the pane.
+        chat.keep_at_middle(self.view, scroll=True)
         chat.update_hint(self.view)
+        chat.underline_symbols(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

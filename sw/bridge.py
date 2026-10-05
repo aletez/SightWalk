@@ -22,10 +22,33 @@ EDITABLE = {"tint": TINT}
 
 # Operations, run on Sublime's main thread
 
-def op_show(panes, center=None, root=None):
-    missing = [spec for spec in panes if not os.path.isfile(parse_spec(spec, root)[0])]
-    if missing:
-        raise ValueError("Files not found: " + ", ".join(missing))
+def line_count(path):
+    with open(path, "rb") as f:
+        return sum(1 for _ in f)
+
+
+def check_panes(panes, root):
+    """Every problem with the panes in one message, so the agent can fix them all at once."""
+    problems = []
+    for spec in panes:
+        path, _, end = parse_spec(spec, root)
+        if not os.path.isfile(path):
+            problems.append("%s: no file at %s" % (spec, path))
+        elif end > line_count(path):
+            problems.append("%s: the file has %d lines" % (spec, line_count(path)))
+    if problems and not root and any("no file" in p for p in problems):
+        problems.append("relative paths need root, or give absolute paths")
+    if problems:
+        raise ValueError("; ".join(problems) + ".")
+
+
+def op_show(panes, root=None, center=None):
+    # Older MCP servers still send center=None; a real value means an outdated agent manual.
+    if center is not None:
+        raise ValueError("show has no center any more: the reader opens at the top. Leave it out.")
+    if not panes:
+        raise ValueError('Give at least one pane, like "app.py:12-30".')
+    check_panes(panes, root)
     reader = state.current_reader()
     if reader is None:
         sublime.run_command("new_window")
@@ -34,7 +57,7 @@ def op_show(panes, center=None, root=None):
         reader = Reader(window)
         state.register(reader)
         reader.poll()
-    reader.load(panes, center, root)
+    reader.load(panes, root)
     return {"ok": True}
 
 
@@ -59,7 +82,7 @@ def op_state():
 def op_close():
     reader = state.current_reader()
     if reader is None:
-        raise RuntimeError("No reader window is open.")
+        raise RuntimeError("No reader window is open, so there is nothing to close.")
     reader.window.run_command("close_window")
     return {"ok": True}
 
@@ -93,7 +116,8 @@ def run_on_main(fn, timeout=10):
 
     sublime.set_timeout(run, 0)
     if not done.wait(timeout):
-        raise RuntimeError("Sublime did not respond in time.")
+        raise RuntimeError("Sublime did not respond within %d s. It may be busy indexing or "
+                           "showing a dialog: retry once, then ask the user to look." % timeout)
     if "error" in box:
         raise box["error"]
     return box["value"]
@@ -125,7 +149,8 @@ def dispatch(request):
         return wait_for_user(**request)
     if op in OPS:
         return run_on_main(lambda: OPS[op](**request))
-    return {"error": "Unknown op %r" % op}
+    return {"error": "Unknown op %r. Known: wait_for_user, %s. If the agent's tools are newer than "
+                     "the plugin, update the plugin and restart Sublime." % (op, ", ".join(OPS))}
 
 
 class Handler(socketserver.StreamRequestHandler):
@@ -133,8 +158,11 @@ class Handler(socketserver.StreamRequestHandler):
         for raw in self.rfile:
             try:
                 result = dispatch(json.loads(raw.decode("utf-8")))
-            except Exception as e:
+            except (ValueError, RuntimeError) as e:
                 result = {"error": str(e)}
+            except Exception as e:
+                # Unexpected: name the kind, so it can be told apart from a wrong argument.
+                result = {"error": "%s in SightWalk: %s" % (type(e).__name__, e)}
             self.wfile.write((json.dumps(result, ensure_ascii=False) + "\n").encode("utf-8"))
             self.wfile.flush()
 

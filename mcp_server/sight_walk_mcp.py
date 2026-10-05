@@ -1,7 +1,7 @@
 import json
 import os
 import socket
-from typing import Optional, Union
+from typing import Optional
 
 from mcp.server.mcpserver import MCPServer
 
@@ -30,6 +30,10 @@ Conversation
 - Resolve indexicals such as "here", "this", "it" or "this line" against focus, unless the
   message clearly points elsewhere.
 - Answer with say. Keep answers short. Then call wait_for_user again.
+- Mark every name of code you mention, so it takes the colour it has in the code:
+  `run_on_main` for functions and methods, **Reader** for classes and types, ~request~ for
+  variables, parameters and attributes. Write keywords and constants plainly. Stress with
+  wording, not with bold: ** is for class names.
 
 Indicators
 - Before or together with an answer that refers to specific lines, call point. Every marked
@@ -60,17 +64,23 @@ CONFIG = load_config()
 
 def call(op, timeout=15, **args):
     request = dict(args, op=op, token=CONFIG["token"])
-    with socket.create_connection(("127.0.0.1", CONFIG["port"]), timeout=timeout) as conn:
-        conn.sendall((json.dumps(request) + "\n").encode("utf-8"))
-        line = conn.makefile(encoding="utf-8").readline()
-    return json.loads(line)
+    try:
+        with socket.create_connection(("127.0.0.1", CONFIG["port"]), timeout=timeout) as conn:
+            conn.sendall((json.dumps(request) + "\n").encode("utf-8"))
+            line = conn.makefile(encoding="utf-8").readline()
+        return json.loads(line)
+    except (OSError, ValueError) as e:
+        # Errors are the agent's only feedback, so each says what to do next.
+        return {"error": "Sublime did not answer on port %d (%s). Right after a plugin reload, "
+                         "retry in a second; otherwise ask the user whether Sublime is running "
+                         "with SightWalk." % (CONFIG["port"], type(e).__name__)}
 
 
 @mcp.tool()
-def show(panes: list[str], center: Optional[Union[int, str]] = None, root: Optional[str] = None) -> dict:
-    """Open or replace the reader. panes: specs like "src/app.py:12-30" in program-run order.
-    center: index of a pane or a file name to centre on. root: base folder for relative paths."""
-    return call("show", panes=panes, center=center, root=root)
+def show(panes: list[str], root: Optional[str] = None) -> dict:
+    """Open or replace the reader, scrolled to the top. panes: specs like "src/app.py:12-30" in
+    program-run order. root: base folder for relative paths."""
+    return call("show", panes=panes, root=root)
 
 
 @mcp.tool()

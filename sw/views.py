@@ -35,9 +35,10 @@ def reader_layout(heights, total, overlaps=()):
                else edges[i + 1] for i in range(len(heights))]
     rows = sorted(set(edges + bottoms))
     row = {value: index for index, value in enumerate(rows)}
-    cells = [[0, row[edges[i]], 1, row[bottoms[i]]] for i in range(len(heights))]
+    # Groups: the code cells first, then the strip, then the conversation.
+    cells = [[1, row[edges[i]], 2, row[bottoms[i]]] for i in range(len(heights))]
     n = len(rows) - 1
-    cells += [[1, 0, 2, n], [2, 0, 3, n]]
+    cells += [[2, 0, 3, n], [0, 0, 1, n]]
     return {"cols": COLS, "rows": [r / total for r in rows], "cells": cells}
 
 

@@ -25,7 +25,7 @@ def main():
     op = sys.argv[1]
     first, second = [os.path.normpath(f) for f in (sys.argv[2:4] or DEFAULT_FILES)]
     if op == "show":
-        call(config, "show", panes=[first + ":1-30", second + ":31-60"], center=0)
+        call(config, "show", panes=[first + ":1-30", second + ":31-60"])
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
     elif op == "point":

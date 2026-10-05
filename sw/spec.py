@@ -1,11 +1,18 @@
 import os
 
+BAD_SPEC = 'Bad pane %r: write "file:begin-end" with 1 <= begin <= end, like "app.py:12-30".'
+
 
 def parse_spec(spec, root=None):
-    path, _, lines = spec.rpartition(":")
+    path, _, lines = str(spec).rpartition(":")
     begin, _, end = lines.partition("-")
-    begin = int(begin)
-    end = int(end) if end else begin
+    try:
+        begin = int(begin)
+        end = int(end) if end else begin
+    except ValueError:
+        raise ValueError(BAD_SPEC % spec) from None
+    if not path or not 1 <= begin <= end:
+        raise ValueError(BAD_SPEC % spec)
     path = os.path.expanduser(path)
     if root and not os.path.isabs(path):
         path = os.path.join(os.path.expanduser(root), path)
@@ -44,13 +51,3 @@ def matches(seg, name):
     return (seg.spec == name
             or seg.path == name
             or seg.path.endswith(os.sep + name))
-
-
-def resolve_center(segments, center):
-    if isinstance(center, int):
-        return center if 0 <= center < len(segments) else None
-    if isinstance(center, str):
-        for i, seg in enumerate(segments):
-            if matches(seg, center):
-                return i
-    return None

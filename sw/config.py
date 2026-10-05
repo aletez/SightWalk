@@ -4,7 +4,8 @@ DEFAULT_PORT = 47321
 SETTLE_MS = 50
 POLL_MS = 30
 MIN_LINES_IN_CELL = 1
-COLS = [0.0, 0.62, 0.66, 1.0]
+# Conversation, code, scroll strip.
+COLS = [0.0, 0.34, 0.96, 1.0]
 TINT = 0.25
 OUTLINE_TINT = 0.7
 PAD_ROWS = 400

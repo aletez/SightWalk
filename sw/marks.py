@@ -6,27 +6,42 @@ from .config import DEFAULT_MARK
 from .spec import matches
 
 
+BAD_LINE = 'Write a line as "file:line" or {"pane": index, "line": line}, not %r.'
+
+
 def line_y(segment, line, lh):
     return segment.code_item.y + (line - segment.begin) * lh
 
 
 def resolve_target(segments, target):
     """target: "file:line" or {"pane": index, "line": line}. Returns (pane, line)."""
+    try:
+        if isinstance(target, dict):
+            index, line = int(target["pane"]), int(target["line"])
+        else:
+            name, _, line = str(target).rpartition(":")
+            line = int(line)
+    except (KeyError, TypeError, ValueError):
+        raise ValueError(BAD_LINE % (target,)) from None
     if isinstance(target, dict):
-        index, line = int(target["pane"]), int(target["line"])
-        if not 0 <= index < len(segments):
-            raise ValueError("No pane %d" % index)
-        return index, line
-    name, _, line = str(target).rpartition(":")
-    line = int(line)
+        return pane_target(segments, index, line)
     inside = [i for i, seg in enumerate(segments)
               if matches(seg, name) and seg.begin <= line <= seg.end]
     if not inside:
-        raise ValueError("No pane shows %s" % target)
+        raise ValueError("No pane shows %s; a mark must be inside a pane's range." % target)
     if len(inside) > 1:
         raise ValueError('%s is in panes %s; give {"pane": index, "line": %d} instead'
                          % (target, ", ".join(map(str, inside)), line))
     return inside[0], line
+
+
+def pane_target(segments, index, line):
+    if not 0 <= index < len(segments):
+        raise ValueError("No pane %d; the panes are 0 to %d." % (index, len(segments) - 1))
+    seg = segments[index]
+    if not seg.begin <= line <= seg.end:
+        raise ValueError("Line %d is outside pane %d (%s)." % (line, index, seg.spec))
+    return index, line
 
 
 def icon_for(mark):
@@ -53,8 +68,13 @@ def resolve_marks(segments, marks):
     resolved = []
     for mark in marks:
         if "from" in mark or "to" in mark:
+            if not ("from" in mark and "to" in mark):
+                raise ValueError('A jump needs both ends: {"from": line, "to": line}.')
             resolved += jump(segments, mark)
         else:
+            if "at" not in mark:
+                raise ValueError('A mark is {"at": line, "mark": "1"} or {"from": line, '
+                                 '"to": line}, not %r.' % (mark,))
             index, line = resolve_target(segments, mark["at"])
             icon = icon_for(mark.get("mark", DEFAULT_MARK))
             resolved.append({"seg": index, "line": line, "icon": icon})

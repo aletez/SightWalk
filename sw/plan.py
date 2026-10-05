@@ -79,11 +79,6 @@ def viewport_y(item, offset, top):
     return item.top_layout + offset + top - item.y
 
 
-def block_center(header, code, overhead):
-    bottom = code.y + code.content + overhead
-    return (header.y + bottom) / 2
-
-
 def focus_segment(segments, offset, height, overhead):
     mid = offset + height / 2
 

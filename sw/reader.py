@@ -4,7 +4,7 @@ import sublime
 
 from . import chat, marks, plan, state
 from .config import MIN_LINES_IN_CELL, PAD_ROWS, POLL_MS, SETTLE_MS
-from .spec import header_text, parse_spec, resolve_center
+from .spec import header_text, parse_spec
 from .tint import apply_tint
 from .views import (draw_icons, draw_outlines, hide_chrome, make_header, make_side_view,
                     match_font, prepare_code_view, reader_layout, wait_until_loaded)
@@ -26,19 +26,19 @@ class Reader:
         self.filler = plan.Item(make_side_view(window, "", {}), 0.0, 0.0)
         self.filler.view.set_read_only(True)
         self.chat = make_side_view(window, "Conversation", {
-            "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": False})
+            "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": True})
         chat.start(self.chat)
 
     # Loading
 
-    def load(self, specs, center=None, root=None):
+    def load(self, specs, root=None):
         self.ready = False
         self.close_panes()
         self.segments = [plan.Segment(spec, *parse_spec(spec, root)) for spec in specs]
         self.indicators = []
         paths = list(dict.fromkeys(seg.path for seg in self.segments))
         originals = {path: self.window.open_file(path) for path in paths}
-        wait_until_loaded(list(originals.values()), lambda: self.build(originals, center))
+        wait_until_loaded(list(originals.values()), lambda: self.build(originals))
 
     def close_panes(self):
         for seg in self.segments:
@@ -46,7 +46,7 @@ class Reader:
                 if view is not None and view.is_valid():
                     view.close()
 
-    def build(self, originals, center):
+    def build(self, originals):
         used = set()
         for seg in self.segments:
             seg.view = prepare_code_view(self.window, originals[seg.path], seg.path in used)
@@ -56,11 +56,10 @@ class Reader:
             mine = [s for s in self.segments if s.path == path]
             apply_tint([s.view for s in mine], [s.header for s in mine], path)
         self.make_items()
-        index = resolve_center(self.segments, center)
         if self.height is None:
-            self.calibrate(lambda: self.start(index))
+            self.calibrate(self.start)
         else:
-            self.start(index)
+            self.start()
 
     def make_items(self):
         first = self.segments[0].view
@@ -73,13 +72,10 @@ class Reader:
             seg.header_item = plan.Item(seg.header, 0.0, self.lh)
             self.items += [seg.header_item, seg.code_item]
 
-    def start(self, index):
+    def start(self):
         plan.stack(self.items, self.overhead)
         self.ready = True
-        if index is None:
-            self.scroll_to(0)
-        else:
-            self.center_on(index)
+        self.scroll_to(0)
 
     def calibrate(self, callback):
         view, other = self.segments[0].view, self.segments[0].header
@@ -102,10 +98,6 @@ class Reader:
         sublime.set_timeout(measure_full, SETTLE_MS)
 
     # Scrolling and layout
-
-    def center_on(self, index):
-        header, code = self.items[2 * index], self.segments[index].code_item
-        self.scroll_to(plan.block_center(header, code, self.overhead) - self.height / 2)
 
     def scroll_to(self, offset):
         if not self.ready:
@@ -188,7 +180,7 @@ class Reader:
     def poll(self):
         if state.READERS.get(self.window.id()) is not self or not self.strip.is_valid():
             return
-        chat.keep_at_bottom(self.chat)
+        chat.keep_at_middle(self.chat)
         if self.ready:
             self.follow_resize()
             y = self.strip.viewport_position()[1]

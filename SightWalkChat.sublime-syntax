@@ -22,13 +22,41 @@ contexts:
 
   agent:
     - meta_scope: meta.message.agent.sight-walk
+    - include: names
     - match: '(?=^(A: |U: |› ))'
       pop: true
 
   user:
     - meta_scope: meta.message.user.sight-walk comment.line.user.sight-walk
+    - include: names
     - match: '(?=^(A: |U: |› ))'
       pop: true
 
   draft:
     - meta_scope: meta.draft.sight-walk
+    - include: names
+
+  # Names of code, in the scopes they have in code, so they take the code's colours. Every
+  # name is also meta.symbol, which the plugin underlines. The delimiters stay faint.
+  names:
+    - match: '(`)([^`\n]+)(`)'
+      captures:
+        1: comment.punctuation.name.sight-walk
+        2: meta.symbol.sight-walk variable.function.sight-walk
+        3: comment.punctuation.name.sight-walk
+    # Python's built-in classes, as its syntax scopes them; other classes as defined ones.
+    - match: '(\*\*)((?:ArithmeticError|AssertionError|AttributeError|BaseException|BaseExceptionGroup|BlockingIOError|BrokenPipeError|BufferError|BytesWarning|ChildProcessError|ConnectionAbortedError|ConnectionError|ConnectionRefusedError|ConnectionResetError|DeprecationWarning|EOFError|EncodingWarning|EnvironmentError|Exception|ExceptionGroup|FileExistsError|FileNotFoundError|FloatingPointError|FutureWarning|GeneratorExit|IOError|ImportError|ImportWarning|IndentationError|IndexError|InterruptedError|IsADirectoryError|KeyError|KeyboardInterrupt|LookupError|MemoryError|ModuleNotFoundError|NameError|NotADirectoryError|NotImplementedError|OSError|OverflowError|PendingDeprecationWarning|PermissionError|ProcessLookupError|PythonFinalizationError|RecursionError|ReferenceError|ResourceWarning|RuntimeError|RuntimeWarning|StopAsyncIteration|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TimeoutError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UnicodeWarning|UserWarning|ValueError|Warning|ZeroDivisionError|bool|bytearray|bytes|classmethod|complex|dict|enumerate|filter|float|frozenset|int|list|map|memoryview|object|property|range|reversed|set|slice|staticmethod|str|super|tuple|type|zip))(\*\*)'
+      captures:
+        1: comment.punctuation.name.sight-walk
+        2: meta.symbol.sight-walk support.class.sight-walk
+        3: comment.punctuation.name.sight-walk
+    - match: '(\*\*)([^*\n]+)(\*\*)'
+      captures:
+        1: comment.punctuation.name.sight-walk
+        2: meta.symbol.sight-walk entity.name.class.sight-walk
+        3: comment.punctuation.name.sight-walk
+    - match: '(~)([^~\n]+)(~)'
+      captures:
+        1: comment.punctuation.name.sight-walk
+        2: meta.symbol.sight-walk meta.generic-name.sight-walk
+        3: comment.punctuation.name.sight-walk

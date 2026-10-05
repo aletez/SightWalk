@@ -61,6 +61,19 @@ def start(view):
     update_hint(view)
 
 
+SYMBOL_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_STIPPLED_UNDERLINE
+
+
+def underline_symbols(view):
+    """A stippled underline under every name of code, in the text colour: schemes that leave
+    variables plain (like Mariana) still show them as code. Waits for the syntax to catch up."""
+    def draw():
+        if view.is_valid():
+            regions = view.find_by_selector("meta.symbol.sight-walk")
+            view.add_regions("sight_walk_symbols", regions, "sight_walk.symbol", "", SYMBOL_FLAGS)
+    sublime.set_timeout(draw, 50)
+
+
 def update_hint(view):
     """A faint hint after the prompt while the draft is empty. A phantom is not text, so it can't
     be selected, copied or sent."""
@@ -98,15 +111,17 @@ def take_draft(view, edit):
     return draft.strip()
 
 
-def keep_at_bottom(view):
-    """Grows or shrinks the filler above the transcript until the prompt line touches the bottom."""
+def keep_at_middle(view, scroll=False):
+    """Keeps the prompt line at the middle of the pane: a filler above a short transcript, a
+    scroll past the end for a long one. Only changes scroll, so the user can read back."""
     phantoms, fill = FILLERS[view.buffer_id()]
-    room = view.viewport_extent()[1]
-    bottom = view.text_to_layout(view.size())[1] + view.line_height() - view.viewport_position()[1]
+    half = view.viewport_extent()[1] / 2
+    end = view.text_to_layout(view.size())[1] + view.line_height()
     # Corrected from the measured result, so the phantom's exact rendering doesn't matter.
-    new = int(min(max(fill + room - bottom, 0), room))
-    if abs(new - fill) < 2:
-        return
-    FILLERS[view.buffer_id()][1] = new
-    html = '<div style="height: %dpx"></div>' % new
-    phantoms.update([sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK)] if new else [])
+    new = int(min(max(fill + half - end, 0), half))
+    if abs(new - fill) >= 2:
+        FILLERS[view.buffer_id()][1] = new
+        html = '<div style="height: %dpx"></div>' % new
+        phantoms.update([sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK)] if new else [])
+    elif scroll:
+        view.set_viewport_position((0, max(end - half, 0)), False)

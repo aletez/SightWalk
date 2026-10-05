@@ -1,21 +1,19 @@
-"""A twin for a pane whose range touches the file's first or last line: such a pane cannot scroll
-that way, so the wheel over it does nothing. The pane's cell is then split into a narrow left strip
-showing the real view (its gutter, with the true line numbers) and a wide right strip showing the
-twin: the same lines with room above and below. The room is made with phantoms, not blank lines,
-so the caret cannot travel into it and give the trick away; the one blank line the top phantom
-needs is the only line the caret can reach there."""
+"""Every pane's cell is split in two: a narrow left strip showing the real view, that is its gutter
+with the true line numbers, and a wide right strip showing the twin, that is the range's text with
+room above and below. The gutter is the reader's scroll strip: the wheel over it is taken over and
+moves the whole column. The wheel over the code only scrolls the twin, which the next render puts
+back, so reading a long line or a wide pane stays possible.
+
+The room is made with phantoms, not blank lines, so the caret cannot travel into it and give the
+trick away; the one blank line the top phantom needs is the only line it can reach there."""
 
 import sublime
 
-from .config import HEADER_PAD
+from .config import ROOM_LINES
 from .views import CODE_SETTINGS, match_font
 
 ROOM_HTML = '<div style="height: %dpx"></div>'
 PHANTOMS = {}
-
-
-def needed(view, seg):
-    return seg.begin == 1 or seg.end >= view.rowcol(view.size())[0] + 1
 
 
 def make(window, seg, code_view, text):
@@ -38,7 +36,7 @@ def make(window, seg, code_view, text):
 
 def room(twin, lh):
     """Phantoms below the blank first line and below the last line: room for the wheel either way."""
-    html = ROOM_HTML % (HEADER_PAD * lh)
+    html = ROOM_HTML % (ROOM_LINES * lh)
     phantoms = sublime.PhantomSet(twin, "sight_walk_room")
     phantoms.update([sublime.Phantom(sublime.Region(twin.line(0).b), html, sublime.LAYOUT_BLOCK),
                      sublime.Phantom(sublime.Region(twin.size()), html, sublime.LAYOUT_BLOCK)])

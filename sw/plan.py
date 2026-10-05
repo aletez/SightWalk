@@ -17,6 +17,7 @@ class Segment:
         self.header = None
         self.code_item = None
         self.twin = None
+        self.corner = None  # covers the gutter beside the header of a pane at line 1
         self.header_item = None
         self.header_icons = {}
         self.icons = {}

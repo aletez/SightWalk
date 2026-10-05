@@ -47,7 +47,8 @@ class SightWalkEditCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         reader = state.reader_for(self.view.window())
-        index = next((i for i, s in enumerate(reader.segments) if s.view == self.view), None)
+        index = next((i for i, s in enumerate(reader.segments)
+                      if self.view in (s.view, s.twin)), None)
         if index is None:
             return
         seg = reader.segments[index]

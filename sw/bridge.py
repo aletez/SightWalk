@@ -57,6 +57,7 @@ def op_show(panes, root=None, center=None):
         reader = Reader(window)
         state.register(reader)
         reader.poll()
+        reader.poll_wheel()
     reader.load(panes, root)
     scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}

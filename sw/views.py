@@ -1,6 +1,6 @@
 import sublime
 
-from .config import COLS, HEADER_PAD, INSET, OVERLAP, SETTLE_MS
+from .config import COLS, INSET, OVERLAP, SETTLE_MS
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
@@ -42,33 +42,16 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(heights, total, overlaps=(), top=0, split=0, cols=COLS, editor=None, twins=()):
-    """Groups in order: the editor's header and view if open (first, because Sublime draws earlier
-    groups over later ones), the code cells, then the conversation and, once top is known, its
+def reader_layout(code_rects, total, top=0, split=0, cols=COLS, editor=None):
+    """code_rects: the code column's rectangles, in drawing order (earlier is on top). Groups in
+    order: the editor if open, the code column, the conversation and, once top is known, its
     header and the vetting pane.
-    overlaps[i]: cell i reaches OVERLAP px into the next, which hides the border between.
-    top: the conversation header's height, split: the conversation's bottom.
-    editor: (header height, left offset as a share of the width, top offset in px), laid over
-    the lower right of the code column.
-    twins[i]: (visible width of cell i's left strip, its real width) as shares. The twin takes
-    the rest and is drawn over the strip's hidden part, which hides its scroll bar (see twin.py)."""
-    rects, y = [], 0.0
-    for i, h in enumerate(heights):
-        reach = OVERLAP if i < len(overlaps) and overlaps[i] and i + 1 < len(heights) else 0
-        dx = twins[i] if i < len(twins) else 0
-        if dx:
-            visible, wide = dx
-            # The twin comes first: earlier groups are drawn over later ones.
-            rects.append((cols[1] + visible, y, cols[2], y + h + reach))
-            rects.append((cols[1], y, cols[1] + wide, y + h + reach))
-        else:
-            rects.append((cols[1], y, cols[2], y + h + reach))
-        y += h
+    top: the conversation header's height, split: the conversation's bottom."""
+    rects = list(code_rects)
     if not top:
         return to_layout(rects + [(cols[0], 0.0, cols[1], total)], total)
-    # The vetting pane spans both columns; the code cells, drawn over it, leave it an L.
     rects += [(cols[0], top, cols[1], split), (cols[0], 0.0, cols[1], top + OVERLAP),
-              (cols[0], split, cols[2], total)]
+              (cols[0], split, cols[1], total)]
     if editor:
         header, dx, dy = editor
         left, right = cols[1] + dx, cols[2]
@@ -94,16 +77,10 @@ def match_font(view, code_view):
 
 
 def write_header(view, text):
-    """A header's text on line HEADER_PAD, between blank lines: room for a long touchpad swipe
-    either way. The caret sits on the text, so focusing never scrolls. Works with overlay
-    scroll bars only (see scrollbars), else the bars cover the header's one visible line."""
-    view.run_command("sight_walk_replace", {"text": "\n" * HEADER_PAD + text + "\n" * HEADER_PAD})
+    """A header holds exactly its one line: only the gutter strips take the wheel."""
+    view.run_command("sight_walk_replace", {"text": text})
     view.sel().clear()
-    view.sel().add(sublime.Region(view.text_point(HEADER_PAD, 0)))
-
-
-def header_top(view):
-    return view.text_to_layout(view.text_point(HEADER_PAD, 0))[1]
+    view.sel().add(sublime.Region(0))
 
 
 def make_header(window, text, code_view):
@@ -170,6 +147,6 @@ def draw_edit_button(header, text, on_click):
         return
     button[1] = padded
     write_header(header, padded)
-    point = header.line(header.text_point(HEADER_PAD, 0)).b
+    point = header.line(0).b
     button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
                                       on_click)])

@@ -1,7 +1,7 @@
 # SightWalk: instructions for every session
 
 ## What this is
-A Sublime Text plugin for vetting AI-generated code. An agent connected over MCP opens a reader window and shows a sequence of panes (`file:begin-end`) that mirrors one run of the program, one whole function per pane. It marks lines in a narrow strip and talks with the user in a conversation pane, resolving "here" and "this" against the pane nearest the centre.
+A Sublime Text plugin for vetting AI-generated code. An agent connected over MCP opens a reader window and shows a sequence of panes (`file:begin-end`) that mirrors one run of the program, one whole function per pane. It marks lines with icons in the gutter and talks with the user in a conversation pane, resolving "here" and "this" against the pane nearest the centre.
 
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Say it that way; never call the code Jakub's.
 
@@ -10,7 +10,7 @@ Read `DECISIONS.md` before changing behaviour: it holds the design decisions, th
 ## Layout
 - The repository root is the Sublime package, symlinked as `Packages/SightWalk`.
 - `sight_walk.py`: entry point. Imports the commands into its namespace (that is how Sublime registers them) and drops the `sw` modules from `sys.modules` so they reload.
-- `sw/`: `config` (constants), `spec` (specs, display paths), `plan` (geometry of the virtual document), `marks` (strip indicators), `chat` (conversation pane, transcript guard, bottom filler), `views` (view and layout helpers), `tint` (per-file hues, colour schemes), `state` (open readers), `reader` (the Reader class), `commands`, `bridge` (local socket server for the MCP bridge), `setup` (setup command).
+- `sw/`: `config` (constants), `spec` (specs, display paths), `plan` (geometry of the virtual document), `marks` (gutter icons, eyes), `header` (conversation header text), `chat` (conversation pane and header, transcript guard, bottom filler), `vetting` (the L-shaped vetting pane), `twin` (second view for panes at a file's edge), `scrollbars` (overlay scroll bars while a reader has the focus), `editor` (the editor over the panes), `views` (view and layout helpers), `tint` (per-file hues, colour schemes), `state` (open readers), `reader` (the Reader class), `commands`, `bridge` (local socket server for the MCP bridge), `setup` (setup command).
 - `plan.py`, `marks.py` and `spec.py` must stay free of the Sublime API, so they can be tested with plain Python.
 - `mcp_server/sight_walk_mcp.py`: the MCP server Claude Code runs. Sublime never loads it (subfolder). The setup command copies it to `~/.sight_walk/` with `config.json` (token, port).
 - `SightWalkChat.sublime-syntax`: colours of the conversation pane, display only.
@@ -32,11 +32,15 @@ Read `DECISIONS.md` before changing behaviour: it holds the design decisions, th
 
 ## Sublime facts learned the hard way
 - Text commands, listeners, `plugin_loaded` are found by scanning the top-level plugin module's namespace; imported names count.
-- View settings override syntax-specific settings. Plain Text has Jakub's own font, so headers and the strip copy the code view's font settings (`match_font`).
+- View settings override syntax-specific settings. Plain Text has Jakub's own font, so headers and side views copy a font's settings (`match_font`).
 - A freshly written colour scheme is usable only after Sublime indexes it; poll `find_resources` (`when_indexed`), never a fixed delay.
 - Replacing text that contains the caret selects the new text.
 - On macOS, `viewport_extent` leaves out the overlay horizontal-scrollbar strip, although text is painted there.
-- An open panel or a window resize changes the layout height; the strip spans the whole column, so its extent tracks the change (`follow_resize`).
+- An open panel or a window resize changes the layout height; the conversation and the vetting pane together change one to one with it (`follow_resize`).
+- Sublime draws earlier groups over later ones; overlapping cells hide borders and let one pane lie over another.
+- Read-only belongs to the buffer, not the view: all clones of a file share it.
+- `text_to_window` of a pane's text start comes back relative to the pane, which gives its gutter width.
 - A subprocess started from a command blocks the main thread, which the bridge needs (`run_on_main`): use `sublime.set_timeout_async`.
 - `TextChangeListener.on_text_changed` reports every real edit with positions, whatever command made it; `on_modified` only says that something changed.
-- Block phantoms sit below a line, never above the first one.
+- Block phantoms sit below a line, never above the first one; a tall inline phantom draws its line's text at the top, so it makes room below, not above.
+- `viewport_extent` is 0 until Sublime has laid a view out: measure after a render, not in the same call.

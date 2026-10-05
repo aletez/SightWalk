@@ -108,7 +108,3 @@ def gutter_icons(indicators, first, last):
     if any(key > last for key, _ in keys):
         icons[last] = "eye_down"
     return icons
-
-
-def strip_text(rows, pad):
-    return "\n" * (rows + 2 * pad - 1)

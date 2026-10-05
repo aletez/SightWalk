@@ -32,7 +32,7 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the strip, and the conversation on the left under a two-line grey header "Conversation" with a faded `?` at its right; hovering the `?` lists the shortcuts. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two panes with a plain background and a gutter in the header's hue, the conversation on the left under a two-line grey header "Conversation" with a faded `?` at its right; hovering the `?` lists the shortcuts. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
 | `python3 tools/poke.py point` | Gutter icons, each line outlined: ⤵ on line 5 and ↳ on line 40, a 1 on line 8, an A on line 12. A mark off screen shows an eye on the first or last visible line instead. |
 | `python3 tools/poke.py state` | JSON with `panes`, `focus` and `visible`. |
@@ -40,9 +40,9 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 ## 4. Geometry and editing, by hand
 
-- Wheel over the strip: all panes scroll together and the strip snaps back. Alt+↓/↑ scroll 3 lines, PageDown/PageUp about a screen.
+- Wheel over a code pane or a header: all panes scroll together and the pane snaps back. Alt+↓/↑ scroll 3 lines, PageDown/PageUp about a screen.
 - Each pane is exactly as tall as its range. The last pane, when it fits with its header, scrolls up until its header is at the top, with the empty filler below. A taller last pane stops when the end of its range reaches the bottom.
-- Lines in each pane line up with their marks in the strip. Compare with the file opened normally.
+- Marks sit in the gutter on their lines. Compare with the file opened normally.
 - Opening or closing a panel, or resizing the window, keeps everything aligned.
 - A code pane is editable and saves to the real file. Undo afterwards.
 

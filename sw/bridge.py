@@ -9,7 +9,7 @@ import threading
 
 import sublime
 
-from . import state
+from . import scrollbars, state
 from .config import DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE, TINT
 from .reader import Reader
 from .spec import parse_spec
@@ -58,6 +58,7 @@ def op_show(panes, root=None, center=None):
         state.register(reader)
         reader.poll()
     reader.load(panes, root)
+    scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}
 
 

@@ -6,7 +6,7 @@ import sublime
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import bridge, state  # noqa: E402
+from .sw import bridge, scrollbars, state  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkBlockCommand,
@@ -30,6 +30,7 @@ def plugin_loaded():
 
 
 def plugin_unloaded():
+    scrollbars.reader_focused(False)
     sublime.load_settings("SightWalk.sublime-settings").clear_on_change("sight_walk_layout")
     state.close_all()
     bridge.stop()

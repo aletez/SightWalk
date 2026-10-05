@@ -2,10 +2,11 @@
 
 
 class Item:
-    def __init__(self, view, top_layout, content):
+    def __init__(self, view, top_layout, content, twin=None):
         self.view = view
         self.top_layout = top_layout
         self.content = content
+        self.twin = twin  # Item of the twin view shown beside it, see twin.py
         self.y = 0.0
 
 
@@ -15,6 +16,7 @@ class Segment:
         self.view = None
         self.header = None
         self.code_item = None
+        self.twin = None
         self.header_item = None
         self.header_icons = {}
         self.icons = {}

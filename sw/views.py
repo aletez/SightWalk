@@ -1,11 +1,11 @@
 import sublime
 
-from .config import COLS, INSET, OVERLAP, SETTLE_MS
+from .config import COLS, HEADER_PAD, INSET, OVERLAP, SETTLE_MS
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
 CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True),
-                 ("sight_walk_code", True))
+                 ("sight_walk_code", True))  # a twin overrides the last two
 # Everything that decides how tall a line is. Copied from the code view, so that view settings
 # override syntax-specific ones (Plain Text may have its own font) and every line has one height.
 ICONS = "Packages/SightWalk/icons/%s.png"
@@ -42,24 +42,33 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(heights, total, overlaps=(), top=0, split=0, cols=COLS, editor=None):
+def reader_layout(heights, total, overlaps=(), top=0, split=0, cols=COLS, editor=None, twins=()):
     """Groups in order: the editor's header and view if open (first, because Sublime draws earlier
-    groups over later ones), the code cells, the strip, then (once top is known) the
-    conversation, its header and the pane below it.
+    groups over later ones), the code cells, then the conversation and, once top is known, its
+    header and the vetting pane.
     overlaps[i]: cell i reaches OVERLAP px into the next, which hides the border between.
     top: the conversation header's height, split: the conversation's bottom.
     editor: (header height, left offset as a share of the width, top offset in px), laid over
-    the lower right of the code column."""
+    the lower right of the code column.
+    twins[i]: (visible width of cell i's left strip, its real width) as shares. The twin takes
+    the rest and is drawn over the strip's hidden part, which hides its scroll bar (see twin.py)."""
     rects, y = [], 0.0
     for i, h in enumerate(heights):
         reach = OVERLAP if i < len(overlaps) and overlaps[i] and i + 1 < len(heights) else 0
-        rects.append((cols[1], y, cols[2], y + h + reach))
+        dx = twins[i] if i < len(twins) else 0
+        if dx:
+            visible, wide = dx
+            # The twin comes first: earlier groups are drawn over later ones.
+            rects.append((cols[1] + visible, y, cols[2], y + h + reach))
+            rects.append((cols[1], y, cols[1] + wide, y + h + reach))
+        else:
+            rects.append((cols[1], y, cols[2], y + h + reach))
         y += h
-    rects.append((cols[2], 0.0, cols[3], total))
     if not top:
         return to_layout(rects + [(cols[0], 0.0, cols[1], total)], total)
+    # The vetting pane spans both columns; the code cells, drawn over it, leave it an L.
     rects += [(cols[0], top, cols[1], split), (cols[0], 0.0, cols[1], top + OVERLAP),
-              (cols[0], split, cols[1], total)]
+              (cols[0], split, cols[2], total)]
     if editor:
         header, dx, dy = editor
         left, right = cols[1] + dx, cols[2]
@@ -84,11 +93,24 @@ def match_font(view, code_view):
             view.settings().set(key, value)
 
 
+def write_header(view, text):
+    """A header's text on line HEADER_PAD, between blank lines: room for a long touchpad swipe
+    either way. The caret sits on the text, so focusing never scrolls. Works with overlay
+    scroll bars only (see scrollbars), else the bars cover the header's one visible line."""
+    view.run_command("sight_walk_replace", {"text": "\n" * HEADER_PAD + text + "\n" * HEADER_PAD})
+    view.sel().clear()
+    view.sel().add(sublime.Region(view.text_point(HEADER_PAD, 0)))
+
+
+def header_top(view):
+    return view.text_to_layout(view.text_point(HEADER_PAD, 0))[1]
+
+
 def make_header(window, text, code_view):
     # A gutter without line numbers, so an eye can sit on the header.
     view = make_side_view(window, text, {"word_wrap": False, "gutter": True, "line_numbers": False})
     match_font(view, code_view)
-    view.run_command("sight_walk_replace", {"text": text})
+    write_header(view, text)
     view.set_read_only(True)
     return view
 
@@ -129,6 +151,16 @@ def prepare_code_view(window, view, clone):
     return view
 
 
+def keep_caret_visible(view, top, height):
+    """Puts the caret on the first line of [top, top + height) in layout coordinates unless it is
+    there already, so focusing the view never scrolls it."""
+    caret = view.sel()[0].b if view.sel() else 0
+    y = view.text_to_layout(caret)[1]
+    if not top <= y < top + height:
+        view.sel().clear()
+        view.sel().add(sublime.Region(view.layout_to_text((0.0, top + 0.5))))
+
+
 def draw_edit_button(header, text, on_click):
     """The header's text, padded so the edit button sits at its right edge."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
@@ -137,7 +169,7 @@ def draw_edit_button(header, text, on_click):
     if button[1] == padded:
         return
     button[1] = padded
-    header.run_command("sight_walk_replace", {"text": padded})
-    point = header.line(0).b
+    write_header(header, padded)
+    point = header.line(header.text_point(HEADER_PAD, 0)).b
     button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
                                       on_click)])

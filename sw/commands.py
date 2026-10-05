@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-from . import chat, state
+from . import chat, scrollbars, state
 
 
 class SightWalkReplaceCommand(sublime_plugin.TextCommand):
@@ -104,5 +104,8 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):
+    def on_activated(self, view):
+        scrollbars.reader_focused(state.reader_for(view.window()) is not None)
+
     def on_pre_close_window(self, window):
         state.forget(window)

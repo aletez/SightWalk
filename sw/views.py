@@ -4,8 +4,9 @@ from .config import COLS, INSET, OVERLAP, SETTLE_MS
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
+# No fold buttons and a small margin: the gutter about half its usual width (Jakub).
 CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True),
-                 ("sight_walk_code", True))  # a twin overrides the last two
+                 ("sight_walk_code", True), ("fold_buttons", False), ("margin", 1))
 # Everything that decides how tall a line is. Copied from the code view, so that view settings
 # override syntax-specific ones (Plain Text may have its own font) and every line has one height.
 ICONS = "Packages/SightWalk/icons/%s.png"
@@ -53,8 +54,8 @@ def reader_layout(code_rects, total, top=0, split=0, cols=COLS, editor=None):
     rects += [(cols[0], top, cols[1], split), (cols[0], 0.0, cols[1], top + OVERLAP),
               (cols[0], split, cols[1], total)]
     if editor:
-        header, dx, dy = editor
-        left, right = cols[1] + dx, cols[2]
+        header, left, dy = editor
+        right = cols[-1]
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects
     return to_layout(rects, total)
 
@@ -129,13 +130,16 @@ def prepare_code_view(window, view, clone):
 
 
 def keep_caret_visible(view, top, height):
-    """Puts the caret on the first line of [top, top + height) in layout coordinates unless it is
-    there already, so focusing the view never scrolls it."""
+    """Puts the caret on a line wholly inside [top, top + height) in layout coordinates unless it
+    is on one already, so focusing the view never scrolls it. A line only partly inside is not
+    enough: focusing scrolls it fully into view, the reader reads that as the wheel, renders, and
+    the next partly visible line starts it again, a slow endless crawl."""
+    lh = view.line_height()
     caret = view.sel()[0].b if view.sel() else 0
     y = view.text_to_layout(caret)[1]
-    if not top <= y < top + height:
+    if not top <= y <= top + height - lh:
         view.sel().clear()
-        view.sel().add(sublime.Region(view.layout_to_text((0.0, top + 0.5))))
+        view.sel().add(sublime.Region(view.layout_to_text((0.0, top + height / 2))))
 
 
 def draw_edit_button(header, text, on_click):

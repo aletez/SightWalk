@@ -3,15 +3,16 @@ import time
 
 import sublime
 
-from . import chat, marks, plan, state, twin, vetting
-from .config import (COLS, DEFAULT_CONVERSATION_HEIGHT, INSET, MIN_LINES_IN_CELL,
-                     OVERLAP, POLL_MS, SCROLLBAR, SETTINGS_FILE, SETTLE_MS, SETTLE_S, TAIL_LINES,
+from . import chat, marks, plan, state, vetting
+from .config import (COLS, DEFAULT_CONVERSATION_HEIGHT, INSET, MIN_LINES_IN_CELL, OVERLAP,
+                     POLL_MS, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_DEFAULT, STRIP_LINES, STRIP_PX,
                      WHEEL_MS)
 from .spec import display_path, header_text, parse_spec
 from .editor import Editor
 from .tint import apply_grey, apply_tint
-from .views import (draw_edit_button, keep_caret_visible, write_header, draw_icons, draw_outlines, hide_chrome, make_header, make_side_view,
-                    match_font, prepare_code_view, reader_layout, wait_until_loaded)
+from .views import (draw_edit_button, draw_icons, draw_outlines, hide_chrome, make_header,
+                    make_side_view, match_font, prepare_code_view, reader_layout, wait_until_loaded,
+                    write_header)
 
 
 class Reader:
@@ -22,19 +23,20 @@ class Reader:
         # window_height: the whole layout; height: the code column, VETTING_LINES shorter.
         self.window_height = self.height = self.overhead = self.lh = None
         self.ready = False
-        self.expected = {}
-        self.settle_until = 0.0
         self.resize_base = None
-        self.strip_tops = {}
         self.inbox = queue.Queue()
         self.filler = plan.Item(make_side_view(window, "", {}), 0.0, 0.0)
         self.filler.view.set_read_only(True)
-        # Below the last pane, an invisible strip that scrolls the column: the panes can leave
-        # the screen upwards and the wheel still brings them back.
-        self.tail = make_side_view(window, "", {})
-        self.tail.run_command("sight_walk_replace", {"text": "\n" * (2 * TAIL_LINES)})
-        self.tail.set_read_only(True)
+        # Between the conversation and the code, an empty strip the width of a gutter: the only
+        # place the wheel moves the column. Its blank lines give the wheel room either way.
+        self.strip = make_side_view(window, "Scroll", {"word_wrap": False})
+        self.strip.run_command("sight_walk_replace", {"text": "\n" * (2 * STRIP_LINES)})
+        self.strip.sel().clear()
+        self.strip.sel().add(sublime.Region(self.strip.text_point(STRIP_LINES, 0)))
+        self.strip.set_read_only(True)
         self.grouped = set()
+        self.settle_until = 0.0
+        self.last_ids = []
         self.chat = make_side_view(window, "Conversation", {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": False})
         chat.start(self.chat)
@@ -65,7 +67,7 @@ class Reader:
             self.editor.view.close()
             self.editor = None
         for seg in self.segments:
-            for view in (seg.view, seg.header, seg.twin, seg.corner):
+            for view in (seg.view, seg.header):
                 if view is not None and view.is_valid():
                     view.close()
 
@@ -90,28 +92,15 @@ class Reader:
         self.items = []
         for seg in self.segments:
             top = seg.view.text_to_layout(seg.view.text_point(seg.begin - 1, 0))[1]
-            content = (seg.end - seg.begin + 1) * self.lh
-            twin_item = plan.Item(seg.twin, 0.0, content) if seg.twin is not None else None
-            seg.code_item = plan.Item(seg.view, top, content, twin_item)
+            seg.code_item = plan.Item(seg.view, top, (seg.end - seg.begin + 1) * self.lh)
             seg.header_item = plan.Item(seg.header, 0.0, self.lh)
             self.items += [seg.header_item, seg.code_item]
 
-    def make_twins(self):
-        """Once the panes are laid out, the gutter can be measured and the twins built: a twin
-        narrows its pane, so a later measurement would be wrong."""
+    def measure_gutter(self):
+        """Once the panes are laid out, a pane's gutter can be measured: the strip's width."""
         pane = self.segments[0].view
-        column = (self.cols[2] - self.cols[1]) * self.window_width()
+        column = (self.cols[2] - self.code_left()) * self.window_width()
         self.gutter = max(column - pane.viewport_extent()[0], 1)
-        for seg in self.segments:
-            text = seg.view.substr(sublime.Region(
-                seg.view.text_point(seg.begin - 1, 0),
-                seg.view.line(seg.view.text_point(seg.end - 1, 0)).b))
-            seg.twin = twin.make(self.window, seg, seg.view, text)
-            if seg.begin == 1:
-                seg.corner = make_side_view(self.window, "", {})
-                seg.corner.set_read_only(True)
-        self.make_items()
-        plan.stack(self.items, self.overhead)
         self.render()
 
     def start(self):
@@ -121,12 +110,12 @@ class Reader:
 
     def calibrate(self, callback):
         view, other = self.segments[0].view, self.segments[0].header
-        self.place([(self.cols[1], 0.0, self.cols[2], 1)], [view], 1)
+        self.place([(self.code_left(), 0.0, self.cols[2], 1)], [view], 1)
 
         def measure_full():
             full = view.viewport_extent()[1]
-            self.place([(self.cols[1], 0.0, self.cols[2], 1),
-                        (self.cols[1], 1, self.cols[2], 2)], [view, other], 2)
+            self.place([(self.code_left(), 0.0, self.cols[2], 1),
+                        (self.code_left(), 1, self.cols[2], 2)], [view, other], 2)
 
             def measure_half():
                 half = view.viewport_extent()[1]
@@ -166,177 +155,113 @@ class Reader:
         return max(self.chat.viewport_extent()[0] / max(self.cols[1] - self.cols[0], 0.01), 1)
 
     def editor_geometry(self):
-        if self.editor is None:
-            return None
         """The editor sits to the lower right of the panes, its top left corner set back past their
         header and gutter, so no colour of the frame touches the same colour in the editor."""
+        if self.editor is None:
+            return None
         width = self.window_width()
         header = self.editor.header.line_height() + self.overhead
-        left = self.gutter_share() + INSET / width
+        left = self.code_left() + self.gutter_share() + INSET / width
         return header, left, self.lh + self.overhead + INSET
 
     def gutter_share(self):
-        """The panes' gutter as a share of the window: the width of a twin's left strip. The px
-        value is measured once, at calibration, where a pane still fills the code column."""
-        return (self.gutter or 1) / self.window_width()
+        """The panes' gutter as a share of the window. The px value is measured once, after the
+        first layout."""
+        return (self.gutter or STRIP_DEFAULT) / self.window_width()
 
-    def column_rects(self, cells):
-        """The code column, in drawing order (earlier is on top): every header lies over the code
-        only, and the gutter strip reaches up beside it, so the gutters make one band and only
-        they take the wheel. Every cell overlaps the next: no border lines, no dead strip."""
-        visible = self.gutter_share()
-        wide = visible + SCROLLBAR / self.window_width()
-        left, right = self.cols[1], self.cols[2]
-        above = {id(seg.code_item): seg for seg in self.segments}
-        headers = set(id(seg.header_item) for seg in self.segments)
-        rects, views = [], []
-        for i, (item, top, bottom) in enumerate(cells):
-            end = bottom + (OVERLAP if i + 1 < len(cells) else 0)
-            if item is self.filler:  # below the last pane: an invisible strip, down to the bottom
-                rects += [(left + visible, top, right, end), (left, top, left + wide, end)]
-                views += [item.view, self.tail]
-            elif item.twin is None:  # a header
-                rects.append((left + visible if id(item) in headers else left, top, right, end))
-                views.append(item.view)
-            else:
-                self.pane_rects(cells, i, above[id(item)], (left, visible, wide, right, end),
-                                rects, views)
+    def strip_share(self):
+        # Twice the gutter's former width (52 px), a fixed width that needs no measuring.
+        return STRIP_PX / self.window_width()
+
+    def code_left(self):
+        return self.cols[1] + self.strip_share()
+
+    def column_rects(self):
+        """The strip, from top to bottom of the window, then every pane and header at its place in
+        the virtual document, above and below the screen too (a layout's rows may lie outside 0..1,
+        Jakub found). Scrolling only shifts the rows: no view changes group, size or position."""
+        left, right = self.code_left(), self.cols[2]
+        rects, views = [(self.cols[1], 0.0, left, self.window_height)], [self.strip]
+        for item in self.items:
+            top = item.y - self.offset
+            rects.append((left, top, right, top + item.content + self.overhead))
+            views.append(item.view)
+        # The filler covers the room below the last pane.
+        end = rects[-1][3]
+        rects.append((left, end, right, max(end, 0.0) + self.window_height))
+        views.append(self.filler.view)
         return rects, views
 
-    def pane_rects(self, cells, i, seg, edges, rects, views):
-        """The twin, then the strip, which reaches under it (hiding its scroll bar) and up beside
-        the header. A strip at line 1 cannot scroll above it: there an empty view in the band's
-        colour covers the corner instead."""
-        left, visible, wide, right, end = edges
-        item, top = cells[i][0], cells[i][1]
-        rects.append((left + visible, top, right, end))
-        views.append(item.twin.view)
-        header_top = cells[i - 1][1] if i and cells[i - 1][0] is seg.header_item else None
-        start = header_top if header_top is not None and seg.begin > 1 else top
-        if header_top is not None and seg.begin == 1:
-            rects.append((left, header_top, left + visible, top + OVERLAP))
-            views.append(seg.corner)
-        rects.append((left, start, left + wide, end))
-        views.append(item.view)
-        # Its cell may begin beside the header: it scrolls from there, so the numbers keep lining
-        # up with the twin's lines.
-        self.strip_tops[item.view.id()] = start
-
-    def place(self, rects, views, total):
+    def layout(self, rects, total):
         top, split = self.geometry(total)
         current = self.window.get_layout().get("cols", [])
-        if top and self.editor is None and len(current) == len(COLS):
-            self.cols = current  # columns the user dragged keep their widths
+        if top and self.editor is None and len(current) == 4:
+            self.cols = [0.0, current[1], 1.0]  # a conversation the user widened keeps its width
         self.window.set_layout(reader_layout(rects, total, top, split, self.cols,
                                              self.editor_geometry()))
+        return top
+
+    def place(self, rects, views, total):
+        top = self.layout(rects, total)
         self.assign_groups(views, bool(top))
-        for view in views:
-            self.window.focus_view(view)
         hide_chrome(self.window)
 
     def assign_groups(self, views, full):
-        # Until calibrated, the header and the pane below wait behind the conversation.
+        # Until calibrated, the header and the vetting pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
-        n = len(first) + len(views)
-        for group, view in enumerate(first + views + [self.chat]):
-            self.window.set_view_index(view, group, 0)
+        ordered = first + views + [self.chat]
+        for group, view in enumerate(ordered):
+            # Moving and focusing views is what makes a layout slow: only views not already
+            # shown in their group are moved, and focused so their group shows them.
+            if self.window.active_view_in_group(group) != view:
+                self.window.set_view_index(view, group, 0)
+                self.window.focus_view(view)
+        n = len(ordered)
         for k, view in enumerate([self.chat_header, self.below]):
-            self.window.set_view_index(view, n + 1 + k if full else n, 0 if full else k + 1)
+            self.window.set_view_index(view, n + k if full else n - 1, 0 if full else k + 1)
 
     def render(self, settle=True):
-        cells = plan.visible_cells(self.items, self.offset, self.height, self.overhead)
-        min_cell = self.overhead + MIN_LINES_IN_CELL * self.lh
-        cells = plan.fill_bottom(plan.merge_slivers(cells, min_cell), self.filler, self.height, min_cell)
-        shown = [item for item, _, _ in cells]
-        self.expected = {}  # until scroll_views sets them, no wheel movement is read
-        self.settle_until = time.time() + SETTLE_S
-        for item, top, bottom in cells:
-            keep_caret_visible(item.view, plan.viewport_y(item, self.offset, top), bottom - top)
-            if item.twin is not None:
-                item.twin.top_layout = twin.content_top(item.twin.view)
-                item.twin.y = item.y  # the twin shows the same lines at the same place
-        self.strip_tops = {}
-        for seg in self.segments:  # the corner takes the header's band colour, once it is known
-            if seg.corner is not None:
-                band = seg.header.settings().get("color_scheme")
-                if seg.corner.settings().get("color_scheme") != band:
-                    seg.corner.settings().set("color_scheme", band)
-        rects, views = self.column_rects(cells)
-        self.grouped = set(v.id() for v in views)
-        self.place(rects, views, self.window_height)
-        self.park_hidden(shown, len(views))
-        # Parked views join the last code group; its own view must stay the one shown there.
-        self.window.focus_view(views[-1])
-        self.window.focus_view(shown[-1].view)
-        self.window.focus_view(self.chat if self.editor is None else self.editor.view)
-        self.draw_gutter()
-        self.draw_outlines()
-        if settle:  # unchanged by scrolling, and each one writes text or phantoms
+        """The wheel only shifts the layout's rows (see column_rects); anything else lays every
+        view out again."""
+        rects, views = self.column_rects()
+        if settle or [v.id() for v in views] != self.last_ids:
+            self.arrange(rects, views)
+            self.last_ids = [v.id() for v in views]
+            self.settle_until = time.time() + SETTLE_S  # the strip may be off its anchor a moment
+            self.draw_outlines()
             self.fill_vetting()
             chat.show_header(self.chat_header, self.status)
             self.draw_edit_buttons()
-        # Placing the views focuses them, which can scroll one to its caret: put them back at
-        # once, and again on the next tick, when Sublime has finished laying them out.
-        self.scroll_views(cells)
-        sublime.set_timeout(lambda: self.scroll_views(cells), 0)
+            self.scroll_views()
+            sublime.set_timeout(self.scroll_views, 0)  # again, once Sublime has laid them out
+        else:
+            self.layout(rects, self.window_height)
+        self.draw_gutter()  # the eyes depend on what is on screen
 
-    def park_hidden(self, shown, groups):
-        shown_ids = set(item.view.id() for item in shown)
-        shown_ids |= set(i.twin.view.id() for i in shown if i.twin is not None)
-        parking = groups - 1 + (0 if self.editor is None else 2)  # the last code group
-        twins = [i.twin.view for i in self.items if i.twin is not None]
-        extras = [self.tail] + [s.corner for s in self.segments if s.corner is not None]
-        placed = set(v.id() for v in self.window.views_in_group(parking))
-        for view in [i.view for i in self.items] + twins + [self.filler.view] + extras:
-            # A view shown in some group is in the groups list; the rest wait behind the last.
-            if view.id() not in shown_ids and view.id() not in self.grouped:
-                size = len(self.window.views_in_group(parking))
-                self.window.set_view_index(view, parking, size)
+    def arrange(self, rects, views):
+        """Every view into its own group, focused if it was not shown there yet."""
+        self.place(rects, views, self.window_height)
+        self.window.focus_view(self.chat if self.editor is None else self.editor.view)
 
-    def scroll_views(self, cells):
-        for item, top, _ in cells:
-            for shown in (item, item.twin):
-                if shown is None:
-                    continue
-                x = shown.view.viewport_position()[0]
-                y = plan.viewport_y(shown, self.offset, top)
-                if shown is item:
-                    y = plan.viewport_y(shown, self.offset, self.strip_tops.get(shown.view.id(), top))
-                shown.view.set_viewport_position((x, y), False)
-                if shown is item.twin:
-                    continue  # the code's own scrolling is free until the next render
-                if item.twin is None:
-                    continue  # a header or the filler: only the gutter strips take the wheel
-                # Read back: a view that has just changed group is still the old size, so Sublime
-                # clamps the position. Expecting the intended y would read the clamp as the wheel.
-                self.expected[shown.view.id()] = (shown.view, shown.view.viewport_position()[1])
-            if item is self.filler:
-                self.place_tail()
+    def scroll_views(self):
+        """Each pane shows its range from the top of its cell; the cell itself moves, not the view."""
+        for item in self.items:
+            x = item.view.viewport_position()[0]
+            item.view.set_viewport_position((x, item.top_layout), False)
+        self.strip.set_viewport_position((0, self.anchor()), False)
 
-    def place_tail(self):
-        """The strip below the last pane sits in the middle of its blank lines, room either way."""
-        y = TAIL_LINES * self.tail.line_height()
-        self.tail.set_viewport_position((0, y), False)
-        self.expected[self.tail.id()] = (self.tail, self.tail.viewport_position()[1])
+    def anchor(self):
+        return STRIP_LINES * self.strip.line_height()
 
     def read_wheel(self):
-        """The wheel over a code pane, a header or the filler scrolls that view; the reader takes
-        the movement over. The view goes back first and the reader is redrawn after, or the view
-        would show its own position for as long as the redraw takes, which looks like trembling."""
-        settling = time.time() < self.settle_until
-        moved = 0.0
-        for view, y in self.expected.values():
-            if not view.is_valid():
-                continue
-            x, at = view.viewport_position()
-            if abs(at - y) > 0.5:
-                view.set_viewport_position((x, y), False)
-                # Right after a render Sublime moves views by itself (focus, caret): not the wheel.
-                # A jump of more than a screen is never the wheel either, but a view being laid out.
-                if not settling and abs(at - y) < self.window_height:
-                    moved = moved or at - y
-        if moved:
-            self.scroll_to(self.offset + moved, wheel=True)
+        """The wheel over the strip moves it off its anchor: the reader takes the movement over and
+        puts the strip back."""
+        y = self.strip.viewport_position()[1]
+        if abs(y - self.anchor()) > 0.5:
+            self.strip.set_viewport_position((0, self.anchor()), False)
+            if time.time() < self.settle_until:
+                return
+            self.scroll_to(self.offset + y - self.anchor(), wheel=True)
 
     def fill_vetting(self):
         top, split = self.geometry(self.window_height)
@@ -366,8 +291,6 @@ class Reader:
             lines = set(m["line"] for m in self.indicators if m["seg"] == index)
             if lines != seg.outlines:
                 draw_outlines(seg.view, lines)
-                if seg.twin is not None:  # its first content line is line 2
-                    draw_outlines(seg.twin, set(line - seg.begin + 2 for line in lines))
                 seg.outlines = lines
 
     def poll(self):
@@ -377,7 +300,7 @@ class Reader:
         chat.show_header(self.chat_header, self.status)  # rewraps when the column is resized
         if self.ready:
             if self.gutter is None:
-                self.make_twins()
+                self.measure_gutter()
                 return sublime.set_timeout(self.poll, POLL_MS)
             self.follow_resize()
         sublime.set_timeout(self.poll, POLL_MS)
@@ -435,7 +358,8 @@ class Reader:
     def editor_closed(self, ranges, lines):
         """After Esc. If the file is still dirty, the user chose Don't Save: the panes go back to
         the file on disk. Otherwise the reader takes the edits over and tells the agent."""
-        pane = next(s.view for s in self.segments if s.path == self.editor.path)
+        path = self.editor.path
+        pane = next(s.view for s in self.segments if s.path == path)
         self.editor = None
         if pane.is_dirty():
             pane.run_command("revert")

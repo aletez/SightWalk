@@ -47,8 +47,7 @@ class SightWalkEditCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         reader = state.reader_for(self.view.window())
-        index = next((i for i, s in enumerate(reader.segments)
-                      if self.view in (s.view, s.twin)), None)
+        index = next((i for i, s in enumerate(reader.segments) if s.view == self.view), None)
         if index is None:
             return
         seg = reader.segments[index]
@@ -63,13 +62,6 @@ class SightWalkCloseEditorCommand(sublime_plugin.TextCommand):
         reader = state.reader_for(self.view.window())
         if reader is not None and reader.editor is not None:
             reader.close_editor()
-
-
-class SightWalkBlockCommand(sublime_plugin.TextCommand):
-    """Does nothing: primary+w, held or pressed twice, would close the reader's own views."""
-
-    def run(self, edit):
-        pass
 
 
 class SightWalkHeaderListener(sublime_plugin.ViewEventListener):

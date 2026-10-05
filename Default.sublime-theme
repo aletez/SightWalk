@@ -1,0 +1,10 @@
+// Merged into Sublime's own theme of the same name. While a SightWalk reader has the focus, the
+// plugin sets "sight_walk_hide_scroll_bars" (in memory only), and these rules hide scroll bars.
+{
+    "rules": [
+        {"class": "scroll_bar_control", "settings": ["sight_walk_hide_scroll_bars"], "layer0.opacity": 0.0},
+        {"class": "scroll_track_control", "settings": ["sight_walk_hide_scroll_bars"], "layer0.opacity": 0.0},
+        {"class": "puck_control", "settings": ["sight_walk_hide_scroll_bars"], "layer0.opacity": 0.0},
+        {"class": "scroll_corner_control", "settings": ["sight_walk_hide_scroll_bars"], "layer0.opacity": 0.0}
+    ]
+}

@@ -12,10 +12,10 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The Vetting strip lives as long as its window (Jakub): closing glides it out of the window, where its view stays in a cell off screen, and asking again glides the same view back in, with the font size the user gave it. This also keeps an otherwise empty window from closing. A trip opening over the strip parks it the same way. If the user changes the window's layout while the strip is parked, its view lands in one of their cells; asking again takes it out to its own place (Jakub). A plugin reload closes the parked views and gives the windows their own layouts back.
 - The per-system keymaps no longer bind the explain keys twice (setting.sight_walk_chat and setting.sight_walk: every bench also has sight_walk; Jakub).
 - Command palette: "Preferences: SightWalk Settings" (the plugin's settings) and "Preferences: SightWalk Bench Settings" (the bench syntax's settings: font size and more), both side by side with the user's file (Jakub).
 - The bench's font (Jakub): its face from bench_font_face in the SightWalk settings, one font or one per system (default Helvetica Neue, Segoe UI, Noto Sans); its size per syntax, in SightWalkChat.sublime-settings, never set on the view (the strip no longer copies the code's font), so Sublime's own font-size commands reach it unless a syntax size is set.
-- Closing the strip in an otherwise empty window no longer closes the window (Jakub found it): an empty scratch view is left in it.
 - In a trip, toggling the guide (primary+g in Jakub's keymap) moves the focus to the bench, and from the bench back to the sight nearest the middle (Jakub).
 - A guide started in the background stops after 15 minutes without a message, checked each minute and only while it waits (Jakub). Measured: an idle wait cycle costs about $0.007 on Claude Sonnet 5.5 (15 minutes about 5 to 6 cents); a new guide listens 2.5 to 5 s after starting, up to 10.
 - Enter sends on the bench (Jakub); Shift+Enter is a new line; primary+Enter still sends.

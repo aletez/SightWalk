@@ -12,7 +12,7 @@ Sublime loads the plugin, the bridge starts listening; on unload, readers close 
 - `sw/bridge.py:227-230` start_server
 - `sight_walk.py:37-42` plugin_unloaded
 - `sw/scrollbars.py:13-25` reader_focused
-- `sw/state.py:46-55` close_all
+- `sw/state.py:48-59` close_all
 - `sw/bridge.py:248-250` stop
 - `sw/bridge.py:233-238` stop_server
 
@@ -55,7 +55,7 @@ The window and every view but the sights.
 - `sw/chat.py:70-76` start
 - `sw/chat.py:79-88` make_header
 - `sw/vetting.py:9-14` make
-- `sw/state.py:17-19` register
+- `sw/state.py:18-20` register
 
 ## 5. Loading the sights (10 views)
 
@@ -151,7 +151,7 @@ The agent's marks resolved to sights and lines, the reader scrolled to show them
 
 - `mcp_server/sight_walk_mcp.py:117-123` point
 - `sw/bridge.py:97-99` op_point
-- `sw/state.py:37-43` require_ready
+- `sw/state.py:39-45` require_ready
 - `sw/reader.py:391-399` Reader.point
 - `sw/marks.py:66-81` resolve_marks
 - `sw/marks.py:56-63` jump
@@ -194,7 +194,7 @@ A reply reaches the Vetting Bench past the transcript guard.
 The draft becomes a message, with the focus and the visible sights, and the agent receives it.
 
 - `sw/commands.py:29-37` SightWalkSendCommand.run
-- `sw/state.py:28-29` reader_for
+- `sw/state.py:30-31` reader_for
 - `sw/reader.py:521-530` Reader.context
 - `sw/plan.py:51-59` focus_sight
 - `sw/plan.py:62-65` visible_specs
@@ -238,7 +238,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/reader.py:379-387` Reader.follow_resize
 - `sw/reader.py:260-266` Reader.keep_bench_width
 - `sw/reader.py:177-184` Reader.spans
-- `sw/state.py:58-62` render_all
+- `sw/state.py:62-66` render_all
 - `sw/bridge.py:125-132` op_settings
 - `sw/bridge.py:115-122` check_setting
 - `sw/commands.py:106-107` SightWalkWindowListener.on_activated
@@ -246,45 +246,48 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/commands.py:79-81` SightWalkHeaderListener.on_hover
 - `sw/chat.py:105-109` show_help
 
-## 18. Asking the guide on a selection (12 views)
+## 18. Asking the guide on a selection (15 views)
 
 The Vetting strip opens on the selection's side, with the conversation so far.
 
-- `sw/commands.py:151-159` SightWalkToggleGuideCommand.run
+- `sw/commands.py:156-166` SightWalkToggleGuideCommand.run
+- `sw/commands.py:168-176` SightWalkToggleGuideCommand.reopen_strip
 - `sw/reader.py:495-502` Reader.toggle_focus
-- `sw/commands.py:116-122` SightWalkAskGuideCommand.run
-- `sw/commands.py:124-125` SightWalkAskGuideCommand.is_enabled
-- `sw/strip.py:78-89` GuideStrip.__init__
+- `sw/commands.py:116-127` SightWalkAskGuideCommand.run
+- `sw/commands.py:129-130` SightWalkAskGuideCommand.is_enabled
+- `sw/strip.py:75-82` GuideStrip.__init__
+- `sw/strip.py:84-91` GuideStrip.open
+- `sw/strip.py:93-102` GuideStrip.own_layout
 - `sw/strip.py:40-45` strip_side
 - `sw/strip.py:48-56` selection_x
 - `sw/strip.py:59-67` selection_spec
-- `sw/strip.py:91-98` GuideStrip.make_views
+- `sw/strip.py:104-111` GuideStrip.make_views
 - `sw/views.py:110-119` bench_font
 - `sw/views.py:122-126` match_font
-- `sw/strip.py:223-228` GuideStrip.folder
+- `sw/strip.py:238-243` GuideStrip.folder
 
 ## 19. The strip glides (11 views)
 
 Eased frames: the window's own cells shift aside while the strip comes in.
 
-- `sw/strip.py:120-132` GuideStrip.glide
+- `sw/strip.py:133-145` GuideStrip.glide
 - `sw/strip.py:29-31` ease
-- `sw/strip.py:134-139` GuideStrip.place
-- `sw/strip.py:110-118` GuideStrip.rects
+- `sw/strip.py:147-152` GuideStrip.place
+- `sw/strip.py:123-131` GuideStrip.rects
 - `sw/strip.py:34-37` cell_rects
-- `sw/strip.py:104-105` GuideStrip.views
-- `sw/strip.py:100-102` GuideStrip.opened
-- `sw/strip.py:176-182` GuideStrip.poll
-- `sw/strip.py:213-221` GuideStrip.place_info
-- `sw/strip.py:207-211` GuideStrip.filler_px
-- `sw/strip.py:107-108` GuideStrip.is_open
+- `sw/strip.py:117-118` GuideStrip.views
+- `sw/strip.py:113-115` GuideStrip.opened
+- `sw/strip.py:191-197` GuideStrip.poll
+- `sw/strip.py:228-236` GuideStrip.place_info
+- `sw/strip.py:222-226` GuideStrip.filler_px
+- `sw/strip.py:120-121` GuideStrip.is_open
 
 ## 20. How Claude comes to listen to Sublime (12 views)
 
 When no agent listens, asking the guide starts one; it calls wait_for_user through the bridge and waits on the shared inbox.
 
 - `sw/guide.py:90-94` await_answer
-- `sw/strip.py:194-196` GuideStrip.note_waiting
+- `sw/strip.py:209-211` GuideStrip.note_waiting
 - `sw/guide.py:48-58` ensure
 - `sw/guide.py:31-33` listening
 - `sw/guide.py:36-37` running
@@ -294,41 +297,41 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `mcp_server/sight_walk_mcp.py:84-95` call
 - `sw/bridge.py:184-193` dispatch
 - `sw/bridge.py:158-173` wait_for_user
-- `sw/state.py:70-72` listener
+- `sw/state.py:74-76` listener
 
 ## 21. Talking in the strip (12 views)
 
 A question goes to the inbox, the answer comes back to the strip; the strip glides out.
 
 - `sw/commands.py:43-49` SightWalkAskCommand.run
-- `sw/state.py:75-80` owner
-- `sw/state.py:65-67` current_bench
+- `sw/state.py:79-84` owner
+- `sw/state.py:69-71` current_bench
 - `sw/views.py:203-207` selected_text
-- `sw/strip.py:230-237` GuideStrip.context
-- `sw/strip.py:239-244` GuideStrip.selecting_view
-- `sw/strip.py:246-247` GuideStrip.take_edits
-- `sw/strip.py:186-192` GuideStrip.say
-- `sw/strip.py:198-205` GuideStrip.show_header
-- `sw/commands.py:131-134` SightWalkCloseStripCommand.run
-- `sw/strip.py:141-147` GuideStrip.close
+- `sw/strip.py:245-252` GuideStrip.context
+- `sw/strip.py:254-259` GuideStrip.selecting_view
+- `sw/strip.py:261-262` GuideStrip.take_edits
+- `sw/strip.py:201-207` GuideStrip.say
+- `sw/strip.py:213-220` GuideStrip.show_header
+- `sw/commands.py:136-139` SightWalkCloseStripCommand.run
+- `sw/strip.py:154-160` GuideStrip.close
 - `sw/chat.py:154-162` catch_up
 
 ## 22. Endings (12 views)
 
 A trip hides the strip, the guide is stopped, windows close.
 
-- `sw/strip.py:149-158` GuideStrip.vanish_later
-- `sw/strip.py:160-174` GuideStrip.closed
-- `sw/strip.py:70-74` keep_window_open
-- `sw/commands.py:140-141` SightWalkStopGuideCommand.run
-- `sw/commands.py:143-144` SightWalkStopGuideCommand.is_enabled
+- `sw/strip.py:162-172` GuideStrip.vanish_later
+- `sw/strip.py:174-182` GuideStrip.parked
+- `sw/strip.py:184-189` GuideStrip.discard
+- `sw/commands.py:145-146` SightWalkStopGuideCommand.run
+- `sw/commands.py:148-149` SightWalkStopGuideCommand.is_enabled
 - `sw/guide.py:84-87` stop
 - `sw/guide.py:72-81` stop_when_idle
 - `sw/commands.py:109-110` SightWalkWindowListener.on_pre_close_window
-- `sw/state.py:22-25` forget
+- `sw/state.py:23-27` forget
 - `mcp_server/sight_walk_mcp.py:132-135` close
 - `sw/bridge.py:107-112` op_close
-- `sw/state.py:32-34` current_reader
+- `sw/state.py:34-36` current_reader
 
 ## 23. Names and room (12 views)
 

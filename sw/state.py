@@ -5,7 +5,8 @@ import queue
 
 READERS = {}
 ACTIVE = [None]
-BENCH = [None]
+BENCH = [None]  # the Vetting strip that is open, if one is
+STRIPS = {}  # window id: its Vetting strip, open or parked out of the window
 INBOX = queue.Queue()  # the user's messages, from a trip or the Vetting strip
 WAITING = [0]  # agents waiting for the user right now
 LAST_WAIT = [0.0]  # when an agent last stopped waiting
@@ -20,6 +21,7 @@ def register(reader):
 
 
 def forget(window):
+    STRIPS.pop(window.id(), None)
     reader = READERS.pop(window.id(), None)
     if reader is not None and ACTIVE[0] is reader:
         ACTIVE[0] = None
@@ -50,8 +52,10 @@ def close_all():
             reader.window.run_command("close_window")
     READERS.clear()
     ACTIVE[0] = None
-    if current_bench() is not None:
-        BENCH[0].closed()  # at once: no frames run after an unload
+    for strip in STRIPS.values():  # at once: no frames run after an unload
+        if strip.window.is_valid():
+            strip.discard()
+    STRIPS.clear()
     BENCH[0] = None
 
 

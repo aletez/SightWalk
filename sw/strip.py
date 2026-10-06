@@ -67,26 +67,39 @@ def selection_spec(view):
     return "%s:%d-%d" % (view.file_name(), begin, max(begin, end))
 
 
-def keep_window_open(window):
-    """An empty view, so closing the strip does not leave the window empty, which Sublime may
-    close (close_windows_when_empty)."""
-    view = window.new_file()
-    view.set_scratch(True)
-
-
 class GuideStrip:
+    """One per window, for as long as the window lives: closing it only glides it out of the
+    window, where its view stays, so its font size and the like stay as the user set them (Jakub).
+    The window is never left empty by it either."""
+
     def __init__(self, view):
         self.window = view.window()
-        self.side = strip_side(view)
-        self.saved = self.window.get_layout()
         self.status = self.note = ""
         self.info_at = None  # where the filler phantom stands: (end of text, height, status bar)
         self.text = GUIDE
-        self.closing = False
-        self.origin = view
+        self.closing = True
         self.make_views(view)
+        self.open(view)
+
+    def open(self, view):
+        self.origin, self.side = view, strip_side(view)
+        self.saved = self.own_layout()
+        self.closing = False
+        chat.catch_up(self.chat)
+        self.show_header()
         self.glide(0.0, 1.0, self.opened)
         self.poll()
+
+    def own_layout(self):
+        """The window's layout without the strip's parked cell, out of the window. If the user
+        changed the layout meanwhile, the strip's view is in a cell of theirs, which stays: opening
+        takes the view out of it to its own place again (Jakub)."""
+        layout = self.window.get_layout()
+        group = self.window.get_view_index(self.chat)[0]
+        cells = cell_rects(layout)
+        if group < 0 or group >= len(cells) or 0.0 < cells[group][2] and cells[group][0] < 1.0:
+            return layout
+        return to_layout([r for g, r in enumerate(cells) if g != group], 1.0)
 
     def make_views(self, code_view):
         self.chat = make_side_view(self.window, GUIDE, {
@@ -139,39 +152,41 @@ class GuideStrip:
                 self.window.set_view_index(view, n + k, 0)
 
     def close(self):
-        """Glides out, then gives the window its layout back. The trip's bench, if one is open,
-        catches up with the conversation."""
+        """Glides out of the window and stays there. The trip's bench, if one is open, catches up
+        with the conversation."""
         if self.closing:
             return
         self.closing = True
-        self.glide(1.0, 0.0, self.closed)
+        self.glide(1.0, 0.0, self.parked)
 
     def vanish_later(self, ms, front):
-        """Without gliding, once a trip window lies over the strip (Jakub). Closing views raises
-        their window, so the trip's window (front) is brought back to the front."""
+        """Without gliding, once a trip window lies over the strip (Jakub). The trip's window
+        (front) is brought back to the front, in case the strip's window rose."""
         self.closing = True
 
         def vanish():
-            self.closed(refocus=False)
+            self.place(0.0)
+            self.parked(refocus=False)
             front.bring_to_front()
 
         sublime.set_timeout(vanish, ms)
 
-    def closed(self, refocus=True):
-        if not [v for v in self.window.views() if v not in self.views()]:
-            keep_window_open(self.window)
-        for view in self.views():
-            if view.is_valid():
-                view.close()
+    def parked(self, refocus=True):
         for view in self.window.views():
             view.erase_status("sight_walk")
-        self.window.set_layout(self.saved)
         if refocus and self.origin.is_valid():
             self.window.focus_view(self.origin)
         scrollbars.reader_focused(False)
         reader = state.current_reader()
         if reader is not None:
             chat.catch_up(reader.chat)
+
+    def discard(self):
+        """Before a plugin reload: the view goes and the window gets its own layout back."""
+        layout = self.own_layout()
+        if self.chat.is_valid():
+            self.chat.close()
+        self.window.set_layout(layout)
 
     def poll(self):
         if self.is_open():

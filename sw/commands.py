@@ -117,7 +117,12 @@ class SightWalkAskGuideCommand(sublime_plugin.TextCommand):
         bench = state.current_bench()
         if bench is not None:
             bench.close()
-        state.BENCH[0] = GuideStrip(self.view)
+        strip = state.STRIPS.get(self.view.window().id())
+        if strip is not None and strip.chat.is_valid():
+            strip.open(self.view)
+        else:
+            strip = state.STRIPS[self.view.window().id()] = GuideStrip(self.view)
+        state.BENCH[0] = strip
         if guide.ensure(state.BENCH[0].folder()):
             state.BENCH[0].note_waiting(guide.COMING)
 
@@ -155,5 +160,17 @@ class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
             bench.close()
         elif reader is not None:
             reader.toggle_focus(self.view)
+        elif self.view.settings().get("sight_walk_strip", False):
+            self.reopen_strip()  # its view, pulled into a cell of the user's by a layout change
         elif not self.view.settings().get("sight_walk", False):
             self.view.run_command("sight_walk_ask_guide")
+
+    def reopen_strip(self):
+        strip = state.STRIPS.get(self.view.window().id())
+        if strip is None:
+            return
+        others = [v for v in self.view.window().views() if v != strip.chat]
+        origin = strip.origin if strip.origin.is_valid() else (others[0] if others else None)
+        if origin is not None:
+            strip.open(origin)
+            state.BENCH[0] = strip

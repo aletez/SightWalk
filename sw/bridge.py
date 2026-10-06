@@ -78,6 +78,7 @@ def op_show(sights=None, root=None, center=None, trip=None, panes=None):
         reader.status = bench.status
         bench.vanish_later(1000, reader.window)
     reader.load(sights, root, trip)
+    state.ADDRESSED[0] = True  # the agent may say what the trip is about
     scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}
 
@@ -86,6 +87,9 @@ def op_say(text, status=None):
     listener = state.listener()
     if listener is None:
         raise RuntimeError("No trip or bench is open. Call show first.")
+    if not state.ADDRESSED[0]:
+        raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
+                         "Say nothing; call wait_for_user.")
     listener.say(text, status)
     return {"ok": True}
 
@@ -156,8 +160,11 @@ def wait_for_user(timeout_s=110):
         return {"error": "No trip or Vetting strip is open. Call show first, or wait for the "
                          "user to ask on a selection."}
     state.WAITING[0] += 1
+    state.ADDRESSED[0] = False
     try:
-        return state.INBOX.get(timeout=timeout_s)
+        message = state.INBOX.get(timeout=timeout_s)
+        state.ADDRESSED[0] = True
+        return message
     except queue.Empty:
         # The agent must not fill the silence: the user sees every say (Jakub).
         return {"timeout": True, "next": "No message yet. Say nothing; call wait_for_user again."}

@@ -12,6 +12,8 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- Enter sends on the bench (Jakub); Shift+Enter is a new line; primary+Enter still sends.
+- The bridge refuses a say when nothing has come from the user since the agent last called wait_for_user (and it has not opened a trip since): the guide said "Jestem tu i czekam na Twoje pytanie" despite its instructions (Jakub). Several says in one answer are still fine.
 - The Vetting strip has no header pane (the user may show tabs, Jakub): what goes on ("Vetting Guide · the guide is thinking…") is in the status bar, every view of the window, or, when the status bar is hidden, in the last line of the phantom at the strip's bottom; never in the tab name, where it would not fit and a cut text worries (Jakub); the strip is one view the whole height, and a phantom under the prompt fills the room, its top a faint line, the floor (Jakub), at the height default_conversation_height sets, so the prompt stands where a trip's bench has it (no view below: it would get a tab; Jakub).
 - The command `sight_walk_toggle_guide` toggles the Vetting strip; primary+g for it is in the keymap as a commented-out proposal (Jakub), as it would take the place of Find Next (macOS) and Go to Line (Windows, Linux).
 - The guide no longer fills silence ("Czekam na Twoją kolejną wiadomość."): a timeout of wait_for_user tells it to say nothing and wait again; manual and prompt say so too (Jakub).

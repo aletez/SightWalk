@@ -9,6 +9,9 @@ BENCH = [None]
 INBOX = queue.Queue()  # the user's messages, from a trip or the Vetting strip
 WAITING = [0]  # agents waiting for the user right now
 LAST_WAIT = [0.0]  # when an agent last stopped waiting
+# Something to say about: a message came, or the agent opened a trip, since it last waited. A say
+# without it would only fill the silence ("I am here, waiting"), so the bridge refuses it (Jakub).
+ADDRESSED = [False]
 
 
 def register(reader):

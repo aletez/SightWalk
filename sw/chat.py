@@ -19,7 +19,8 @@ GUARDS = {}
 # The one conversation, carried from bench to bench: a trip's, the Vetting strip's (Jakub).
 TRANSCRIPT = [""]
 MAC = sublime.platform() == "osx"
-KEYS = (("⌘+Enter", "⌃⌘↓", "⌃⌘↑") if MAC else ("Ctrl+Enter", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
+KEYS = (("Enter (⇧+Enter: new line)", "⌃⌘↓", "⌃⌘↑") if MAC
+        else ("Enter (Shift+Enter: new line)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
 # The help mark: faded and outlined at all times, so it reads as read-only.
 MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1px solid %s; '
              'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))

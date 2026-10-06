@@ -12,6 +12,7 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The command `sight_walk_toggle_guide` toggles the Vetting strip; primary+g for it is in the keymap as a commented-out proposal (Jakub), as it would take the place of Find Next (macOS) and Go to Line (Windows, Linux).
 - The guide no longer fills silence ("Czekam na Twoją kolejną wiadomość."): a timeout of wait_for_user tells it to say nothing and wait again; manual and prompt say so too (Jakub).
 - A message carries selected, the text the user selected (at the moment of asking: in the strip, in the view it was asked from or another view the window shows; in a trip, in any sight; Jakub), and the guide's manual says "this" then means exactly that text, not the whole function (Jakub asked about an expression and got the function).
 - Typing or pasting into the transcript goes on in the draft instead of being lost (Jakub found the first letter vanished); edits that delete transcript text are still only undone.

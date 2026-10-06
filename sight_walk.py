@@ -22,6 +22,7 @@ from .sw.commands import (  # noqa: E402,F401
     SightWalkScrollCommand,
     SightWalkSendCommand,
     SightWalkStopGuideCommand,
+    SightWalkToggleGuideCommand,
     SightWalkWindowListener,
 )
 from .sw.setup import SightWalkSetupCommand  # noqa: E402,F401

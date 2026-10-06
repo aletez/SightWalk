@@ -9,4 +9,7 @@
     {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]},
     {"keys": ["escape"], "command": "sight_walk_close_strip", "context": [{"key": "setting.sight_walk_strip"}, {"key": "auto_complete_visible", "operand": false}, {"key": "popup_visible", "operand": false}]},
     {"keys": ["primary+w"], "command": "sight_walk_close_strip", "context": [{"key": "setting.sight_walk_strip"}]}
+    // A proposal: primary+g toggles the Vetting strip. It would take the place of Find Next
+    // (macOS) and Go to Line (Windows, Linux), so it is left for the user to turn on.
+    // {"keys": ["primary+g"], "command": "sight_walk_toggle_guide"}
 ]

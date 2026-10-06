@@ -106,7 +106,7 @@ TRIPS = [
       "commands.SightWalkHeaderListener.on_hover", "chat.show_help"]),
     ("Asking the guide on a selection",
      "The Vetting strip opens on the selection's side, with the conversation so far.",
-     ["commands.SightWalkAskGuideCommand.run", "commands.SightWalkAskGuideCommand.is_enabled",
+     ["commands.SightWalkToggleGuideCommand.run", "commands.SightWalkAskGuideCommand.run", "commands.SightWalkAskGuideCommand.is_enabled",
       "strip.GuideStrip.__init__", "strip.strip_side", "strip.selection_x",
       "strip.selection_spec", "strip.GuideStrip.make_views", "views.bench_font",
       "views.match_font", "strip.GuideStrip.folder"]),

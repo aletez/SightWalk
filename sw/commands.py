@@ -142,3 +142,14 @@ class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
 
     def is_enabled(self):
         return guide.running()
+
+
+class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
+    """primary+g: the Vetting strip glides in on the selection, or out if it is open (Jakub)."""
+
+    def run(self, edit):
+        bench = state.current_bench()
+        if bench is not None and bench.window == self.view.window():
+            bench.close()
+        elif not self.view.settings().get("sight_walk", False):
+            self.view.run_command("sight_walk_ask_guide")

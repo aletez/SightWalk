@@ -2,6 +2,9 @@
 
 
 class Item:
+    """A cell of the virtual document: the view it shows, the layout y of the view's text at the
+    cell's top, the content's height, and the cell's y in the document (set by stack)."""
+
     def __init__(self, view, top_layout, content):
         self.view = view
         self.top_layout = top_layout
@@ -9,20 +12,23 @@ class Item:
         self.y = 0.0
 
 
-class Segment:
+class Sight:
+    """A sight: one range of a file, its views, cells and drawn marks."""
+
     def __init__(self, spec, path, begin, end):
         self.spec, self.path, self.begin, self.end = spec, path, begin, end
         self.view = None
         self.header = None
-        self.code_item = None
-        self.twin = None
-        self.twin_item = None
-        self.lower = None  # line 1's pane: its gutter from line 2 on
-        self.lower_item = None
+        self.line_one = None  # the extra views of a sight at line 1 (see line_one)
         self.header_item = None
+        self.code_item = None
         self.header_icons = {}
         self.icons = {}
         self.outlines = set()
+
+    def code_views(self):
+        """Every view showing the sight's code."""
+        return [self.view] + (self.line_one.views() if self.line_one is not None else [])
 
 
 def stack(items, overhead):
@@ -33,7 +39,7 @@ def stack(items, overhead):
 
 
 def max_offset(items, height, overhead):
-    # A last pane that fits on the screen with its header can scroll up until its header is at
+    # A last sight that fits on the screen with its header can scroll up until its header is at
     # the top. A taller one scrolls only until the end of its range reaches the bottom.
     header, code = items[-2], items[-1]
     bottom = code.y + code.content + overhead
@@ -42,59 +48,19 @@ def max_offset(items, height, overhead):
     return bottom - height
 
 
-def visible_cells(items, offset, height, overhead):
-    cells = []
-    for item in items:
-        top = max(item.y, offset)
-        bottom = min(item.y + item.content + overhead, offset + height)
-        if bottom > top:
-            cells.append([item, top - offset, bottom - offset])
-        if bottom >= offset + height:
-            break
-    return cells
-
-
-def merge_slivers(cells, min_cell):
-    # A sliver too thin for a group is absorbed by its neighbour, which then shows a little context.
-    merged = []
-    for cell in cells:
-        if merged and cell[2] - cell[1] < min_cell:
-            merged[-1][2] = cell[2]
-        elif merged and merged[-1][2] - merged[-1][1] < min_cell:
-            cell[1] = merged.pop()[1]
-            merged.append(cell)
-        else:
-            merged.append(cell)
-    return merged
-
-
-def fill_bottom(cells, filler, height, min_cell):
-    # Below the last pane the column shows an empty view, so every pane keeps the height of its
-    # range. A gap too thin for a group of its own goes to the last pane while scrolling.
-    end = cells[-1][2] if cells else 0.0
-    if height - end >= min_cell:
-        cells.append([filler, end, height])
-    elif cells:
-        cells[-1][2] = height
-    return cells
-
-
-def viewport_y(item, offset, top):
-    return item.top_layout + offset + top - item.y
-
-
-def focus_segment(segments, offset, height, overhead):
+def focus_sight(sights, offset, height, overhead):
     mid = offset + height / 2
 
-    def distance(seg):
-        lo = seg.code_item.y
-        hi = lo + seg.code_item.content + overhead
+    def distance(sight):
+        lo = sight.code_item.y
+        hi = lo + sight.code_item.content + overhead
         return 0 if lo <= mid <= hi else min(abs(mid - lo), abs(mid - hi))
 
-    return min(segments, key=distance) if segments else None
+    return min(sights, key=distance) if sights else None
 
 
-def visible_specs(segments, offset, height):
+def visible_specs(sights, offset, height):
     end = offset + height
-    return [seg.spec for seg in segments
-            if seg.code_item.y < end and seg.code_item.y + seg.code_item.content > offset]
+    return [sight.spec for sight in sights
+            if sight.code_item.y < end and sight.code_item.y + sight.code_item.content > offset]
+

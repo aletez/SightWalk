@@ -8,5 +8,19 @@
 
     // Bottom of the conversation pane, as a share of the window's height. The pane below it is
     // kept for what comes next.
-    "default_conversation_height": 0.6
+    "default_conversation_height": 0.6,
+
+    // Where the Vetting Bench (the conversation) sits: "left" or "right" of the Sights.
+    "bench_side": "left",
+
+    // The side the Vetting strip glides in from: "auto" (the side of the selection, so it stays
+    // in view), "left" or "right".
+    "strip_side": "auto",
+
+    // The conversation's font, proportional for easier reading; "" keeps your editor's font.
+    // Default: "Helvetica Neue" on macOS, "Segoe UI" on Windows.
+    // "bench_font_face": "Helvetica Neue",
+
+    // Where Claude Code is, if SightWalk cannot find it to start the guide.
+    // "claude_path": "~/.local/bin/claude"
 }

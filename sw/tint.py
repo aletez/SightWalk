@@ -1,3 +1,6 @@
+"""Per-file hues: each file gets colour schemes of its own, written into Packages/User, with the
+gutter and the header in the file's hue."""
+
 import colorsys
 import json
 import os
@@ -56,6 +59,13 @@ def band_amount():
     return sublime.load_settings(SETTINGS_FILE).get("tint", TINT)
 
 
+def scheme_stem(base, hue, amount):
+    """Hue and amount are in the name, so a changed setting gives a new file, not a stale one."""
+    hue_part = "text" if hue is None else "hue%03d" % int(round(hue * 1000))
+    name = os.path.splitext(os.path.basename(base))[0]
+    return "%s-%s-%03d" % (name, hue_part, int(round(amount * 1000)))
+
+
 def tinted_schemes(view, hue, amount):
     """Writes two schemes in the file's hue: the code keeps its background and gets the band in
     the gutter and a strong outline colour; the header is the band."""
@@ -66,10 +76,7 @@ def tinted_schemes(view, hue, amount):
     background = view.style().get("background", "#000000")
     # Without a hue, the band is the scheme's text colour mixed in, which always contrasts.
     band = tint_color(background, hue, amount, view.style().get("foreground", "#808080"))
-    # Hue and amount are in the name, so a changed setting gives a new file, not a stale one.
-    stem = "%s-%s-%03d" % (os.path.splitext(os.path.basename(base))[0],
-                           "text" if hue is None else "hue%03d" % int(round(hue * 1000)),
-                           int(round(amount * 1000)))
+    stem = scheme_stem(base, hue, amount)
     globals_ = scheme.setdefault("globals", {})
     globals_["gutter"] = band
     scheme.setdefault("rules", []).extend([
@@ -90,41 +97,38 @@ def when_indexed(resources, callback, tries=200):
     elif tries:
         sublime.set_timeout(lambda: when_indexed(resources, callback, tries - 1), SETTLE_MS)
     else:
-        print("SightWalk: colour schemes not indexed in time, panes stay untinted:", resources)
+        print("SightWalk: colour schemes not indexed in time, sights stay untinted:", resources)
+
+
+def schemes_for(key, view, hue):
+    """The code and header schemes for a file (key: path) or the conversation (key: None),
+    written once per key and band amount, so a file keeps its colours across show calls."""
+    amount = band_amount()
+    if (key, amount) not in SCHEMES:
+        SCHEMES[(key, amount)] = tinted_schemes(view, hue, amount)
+    return SCHEMES[(key, amount)]
+
+
+def set_schemes(pairs):
+    """pairs: (views, scheme resource). Set once Sublime has indexed the schemes."""
+    def apply():
+        for views, resource in pairs:
+            for view in views:
+                if view.is_valid():
+                    view.settings().set("color_scheme", resource)
+
+    when_indexed([resource for _, resource in pairs], apply)
 
 
 def apply_tint(code_views, headers, path):
-    # Written once per file and setting, so a file keeps its colours across show calls.
-    amount = band_amount()
-    key = (path, amount)
-    if key not in SCHEMES:
-        SCHEMES[key] = tinted_schemes(code_views[0], hue_for(path), amount)
-    if SCHEMES[key] is None:
-        return
-    code, header = SCHEMES[key]
-
-    def set_schemes():
-        for views, resource in ((code_views, code), (headers, header)):
-            for v in views:
-                if v.is_valid():
-                    v.settings().set("color_scheme", resource)
-
-    when_indexed([code, header], set_schemes)
+    schemes = schemes_for(path, code_views[0], hue_for(path))
+    if schemes is not None:
+        set_schemes([(code_views, schemes[0]), (headers, schemes[1])])
 
 
 def apply_grey(header):
     """The conversation's header: a band like the others, in the text colour, which darkens light
     schemes and lightens dark ones."""
-    amount = band_amount()
-    key = (None, amount)
-    if key not in SCHEMES:
-        SCHEMES[key] = tinted_schemes(header, None, amount)
-    if SCHEMES[key] is None:
-        return
-    resource = SCHEMES[key][1]
-
-    def set_scheme():
-        if header.is_valid():
-            header.settings().set("color_scheme", resource)
-
-    when_indexed([resource], set_scheme)
+    schemes = schemes_for(None, header, None)
+    if schemes is not None:
+        set_schemes([([header], schemes[1])])

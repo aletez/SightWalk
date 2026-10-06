@@ -1,7 +1,13 @@
+"""Sublime commands and listeners. sight_walk.py imports them, which is how Sublime finds them."""
+
+import os
+
 import sublime
 import sublime_plugin
 
-from . import chat, scrollbars, state
+from . import chat, guide, scrollbars, state
+from .spec import repo_root
+from .strip import COMING, GuideStrip
 
 
 class SightWalkReplaceCommand(sublime_plugin.TextCommand):
@@ -21,39 +27,40 @@ class SightWalkInsertCommand(sublime_plugin.TextCommand):
 
 
 class SightWalkSendCommand(sublime_plugin.TextCommand):
+    """primary+enter on a bench, a trip's or the small one: the draft goes to the agent."""
+
     def run(self, edit):
-        reader = state.reader_for(self.view.window())
-        if reader is None:
+        owner = state.owner(self.view)
+        if owner is None:
             return
-        context = reader.context()
+        context = owner.context()
         draft = chat.take_draft(self.view, edit)
         if draft:
-            reader.inbox.put(dict(context, text=draft, **reader.take_edits()))
+            state.INBOX.put(dict(context, text=draft, **owner.take_edits()))
 
 
 class SightWalkAskCommand(sublime_plugin.TextCommand):
     """Sends a fixed message, such as "Explain next.", without touching the draft."""
 
     def run(self, edit, text):
-        reader = state.reader_for(self.view.window())
-        if reader is None:
+        owner = state.owner(self.view)
+        if owner is None:
             return
-        reader.say(text, prefix="U: ")
-        reader.inbox.put(dict(reader.context(), text=text, **reader.take_edits()))
+        owner.say(text, prefix="U: ")
+        state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
 
 
 class SightWalkEditCommand(sublime_plugin.TextCommand):
-    """Enter in a code pane: opens the editor at the caret's line."""
+    """Enter in a sight: opens the editor at the caret's line."""
 
     def run(self, edit):
         reader = state.reader_for(self.view.window())
-        index = next((i for i, s in enumerate(reader.segments)
-                      if self.view in (s.view, s.twin, s.lower)), None)
+        index = None if reader is None else reader.sight_of(self.view)
         if index is None:
             return
-        seg = reader.segments[index]
-        line = self.view.rowcol(self.view.sel()[0].b)[0] + 1 if self.view.sel() else seg.begin
-        reader.open_editor(index, min(max(line, seg.begin), seg.end))
+        sight = reader.sights[index]
+        line = self.view.rowcol(self.view.sel()[0].b)[0] + 1 if self.view.sel() else sight.begin
+        reader.open_editor(index, min(max(line, sight.begin), sight.end))
 
 
 class SightWalkCloseEditorCommand(sublime_plugin.TextCommand):
@@ -80,7 +87,7 @@ class SightWalkScrollCommand(sublime_plugin.WindowCommand):
         reader = state.reader_for(self.window)
         if reader is None or not reader.ready:
             return
-        reader.scroll_to(reader.offset + lines * reader.lh + pages * reader.height)
+        reader.scroll_to(reader.offset + lines * reader.lh + pages * reader.room())
 
     def is_enabled(self):
         return state.reader_for(self.window) is not None
@@ -94,12 +101,52 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
     def on_modified(self):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
-        chat.underline_symbols(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):
     def on_activated(self, view):
-        scrollbars.reader_focused(state.reader_for(view.window()) is not None)
+        scrollbars.reader_focused(state.owner(view) is not None)
 
     def on_pre_close_window(self, window):
         state.forget(window)
+
+
+class SightWalkAskGuideCommand(sublime_plugin.TextCommand):
+    """On a selection in any window: the Vetting strip glides in, to ask the guide about it."""
+
+    def run(self, edit):
+        bench = state.current_bench()
+        if bench is not None:
+            bench.close()
+        state.BENCH[0] = GuideStrip(self.view)
+        if guide.ensure(self.folder()):
+            state.BENCH[0].say_status(COMING)
+
+    def folder(self):
+        """The selection's repository, else its folder, else the home folder."""
+        path = self.view.file_name()
+        if not path:
+            return os.path.expanduser("~")
+        return repo_root(path) or os.path.dirname(path)
+
+    def is_enabled(self):
+        return not self.view.settings().get("sight_walk", False) and self.view.window() is not None
+
+
+class SightWalkCloseStripCommand(sublime_plugin.TextCommand):
+    """Esc or primary+w on the Vetting strip: it glides out."""
+
+    def run(self, edit):
+        bench = state.current_bench()
+        if bench is not None:
+            bench.close()
+
+
+class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
+    """Ends the Vetting guide that SightWalk started in the background."""
+
+    def run(self):
+        guide.stop()
+
+    def is_enabled(self):
+        return guide.running()

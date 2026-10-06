@@ -6,18 +6,21 @@ import os
 import queue
 import socketserver
 import threading
+import time
 
 import sublime
 
 from . import scrollbars, state
-from .config import DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE, TINT
+from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
+                     TINT)
 from .reader import Reader
 from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
 SERVER = [None]
-EDITABLE = {"tint": TINT, "default_conversation_height": DEFAULT_CONVERSATION_HEIGHT}
+EDITABLE = {"tint": TINT, "default_conversation_height": DEFAULT_CONVERSATION_HEIGHT,
+            "bench_side": DEFAULT_BENCH_SIDE}
 
 
 # Operations, run on Sublime's main thread
@@ -27,10 +30,10 @@ def line_count(path):
         return sum(1 for _ in f)
 
 
-def check_panes(panes, root):
-    """Every problem with the panes in one message, so the agent can fix them all at once."""
+def check_sights(sights, root):
+    """Every problem with the sights in one message, so the agent can fix them all at once."""
     problems = []
-    for spec in panes:
+    for spec in sights:
         path, _, end = parse_spec(spec, root)
         if not os.path.isfile(path):
             problems.append("%s: no file at %s" % (spec, path))
@@ -42,32 +45,48 @@ def check_panes(panes, root):
         raise ValueError("; ".join(problems) + ".")
 
 
-def op_show(panes, root=None, center=None):
+def new_reader():
+    """A new window for a reader, its two polling loops started."""
+    sublime.run_command("new_window")
+    window = sublime.active_window()
+    hide_chrome(window)
+    reader = Reader(window)
+    state.register(reader)
+    reader.poll()
+    reader.poll_wheel()
+    return reader
+
+
+def check_show(sights, center, panes):
+    """Arguments an outdated agent manual would send, and a missing sequence."""
+    if panes is not None:
+        raise ValueError("show takes sights now, not panes. Ask the user to run 'SightWalk: Set Up "
+                         "Agent Bridge' and start a new session.")
     # Older MCP servers still send center=None; a real value means an outdated agent manual.
     if center is not None:
-        raise ValueError("show has no center any more: the reader opens at the top. Leave it out.")
-    if not panes:
-        raise ValueError('Give at least one pane, like "app.py:12-30".')
-    check_panes(panes, root)
-    reader = state.current_reader()
-    if reader is None:
-        sublime.run_command("new_window")
-        window = sublime.active_window()
-        hide_chrome(window)
-        reader = Reader(window)
-        state.register(reader)
-        reader.poll()
-        reader.poll_wheel()
-    reader.load(panes, root)
+        raise ValueError("show has no center any more: the trip opens at the top. Leave it out.")
+    if not sights:
+        raise ValueError('Give at least one sight, like "app.py:12-30".')
+
+
+def op_show(sights=None, root=None, center=None, trip=None, panes=None):
+    check_show(sights, center, panes)
+    check_sights(sights, root)
+    bench = state.current_bench()
+    reader = state.current_reader() or new_reader()
+    if bench is not None:  # the trip takes the conversation over; its window hides the strip
+        reader.status = bench.status
+        bench.vanish_later(1000, reader.window)
+    reader.load(sights, root, trip)
     scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}
 
 
 def op_say(text, status=None):
-    reader = state.current_reader()
-    if reader is None:
-        raise RuntimeError("No reader window is open. Call show first.")
-    reader.say(text, status)
+    listener = state.listener()
+    if listener is None:
+        raise RuntimeError("No trip or bench is open. Call show first.")
+    listener.say(text, status)
     return {"ok": True}
 
 
@@ -78,7 +97,7 @@ def op_point(marks, reveal=True, clear=True):
 
 def op_state():
     reader = state.require_ready()
-    return dict(reader.context(), panes=[seg.spec for seg in reader.segments])
+    return dict(reader.context(), sights=[sight.spec for sight in reader.sights])
 
 
 def op_close():
@@ -89,13 +108,20 @@ def op_close():
     return {"ok": True}
 
 
+def check_setting(key, value):
+    if key not in EDITABLE:
+        raise ValueError("Not editable: %s. Editable: %s" % (key, ", ".join(EDITABLE)))
+    if key == "bench_side":
+        if value not in ("left", "right"):
+            raise ValueError('bench_side must be "left" or "right".')
+    elif not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 <= value <= 1:
+        raise ValueError("%s must be a number from 0 to 1." % key)
+
+
 def op_settings(values=None):
     settings = sublime.load_settings(SETTINGS_FILE)
     for key, value in (values or {}).items():
-        if key not in EDITABLE:
-            raise ValueError("Not editable: %s. Editable: %s" % (key, ", ".join(EDITABLE)))
-        if not isinstance(value, (int, float)) or isinstance(value, bool) or not 0 <= value <= 1:
-            raise ValueError("%s must be a number from 0 to 1." % key)
+        check_setting(key, value)
         settings.set(key, value)
     if values:
         sublime.save_settings(SETTINGS_FILE)
@@ -126,13 +152,17 @@ def run_on_main(fn, timeout=10):
 
 
 def wait_for_user(timeout_s=110):
-    reader = state.current_reader()
-    if reader is None:
-        return {"error": "No reader window is open. Call show first."}
+    if state.listener() is None:
+        return {"error": "No trip or Vetting strip is open. Call show first, or wait for the "
+                         "user to ask on a selection."}
+    state.WAITING[0] += 1
     try:
-        return reader.inbox.get(timeout=timeout_s)
+        return state.INBOX.get(timeout=timeout_s)
     except queue.Empty:
         return {"timeout": True}
+    finally:
+        state.WAITING[0] -= 1
+        state.LAST_WAIT[0] = time.time()
 
 
 # Request handling, on server threads

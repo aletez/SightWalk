@@ -18,6 +18,7 @@ FONT = sys.argv[1] if len(sys.argv) > 1 else "InterVariable.ttf"
 OUT = "icons"
 BIG = 64  # pixels per unit while drawing
 SIZES = {"": 16, "@2x": 32, "@3x": 48}
+MARGIN = 2  # units of 16 left clear on the right of each icon
 
 GREEN, LIME = "#23894E", "#E4F7B5"
 AMBER, PLUM = "#C77A0E", "#3A1838"
@@ -104,9 +105,19 @@ def all_icons():
     return icons
 
 
+def with_margin(image):
+    """The icon a little smaller, at the left, with a clear strip on its right: Sublime draws a
+    gutter icon right against the line number (Jakub)."""
+    side = 16 * BIG
+    small = int(side * (16 - MARGIN) / 16)
+    out = Image.new("RGBA", (side, side), (0, 0, 0, 0))
+    out.paste(image.resize((small, small), Image.LANCZOS), (0, (side - small) // 2))
+    return out
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    icons = all_icons()
+    icons = {name: with_margin(image) for name, image in all_icons().items()}
     for name, image in icons.items():
         for suffix, size in SIZES.items():
             image.resize((size, size), Image.LANCZOS).save(os.path.join(OUT, name + suffix + ".png"))

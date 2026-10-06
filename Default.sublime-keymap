@@ -6,5 +6,7 @@
     {"keys": ["pageup"], "command": "sight_walk_scroll", "args": {"pages": -0.9}, "context": [{"key": "setting.sight_walk"}]},
     {"keys": ["enter"], "command": "sight_walk_edit", "context": [{"key": "setting.sight_walk_code"}]},
     {"keys": ["escape"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}, {"key": "auto_complete_visible", "operand": false}, {"key": "has_next_field", "operand": false}, {"key": "num_selections", "operand": 1}, {"key": "popup_visible", "operand": false}, {"key": "panel_visible", "operand": false}]},
-    {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]}
+    {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]},
+    {"keys": ["escape"], "command": "sight_walk_close_strip", "context": [{"key": "setting.sight_walk_strip"}, {"key": "auto_complete_visible", "operand": false}, {"key": "popup_visible", "operand": false}]},
+    {"keys": ["primary+w"], "command": "sight_walk_close_strip", "context": [{"key": "setting.sight_walk_strip"}]}
 ]

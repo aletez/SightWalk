@@ -1,14 +1,17 @@
+"""Making views and drawing on them, and the window's layout."""
+
 import sublime
 
-from .config import COLS, GAP_PX, INSET, OVERLAP, ROOM_LINES, SETTLE_MS
+from .config import BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
-# No fold buttons and a small margin: the gutter about half its usual width (Jakub).
+# No fold buttons, so the gutter is narrower (Jakub).
 CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True),
                  ("sight_walk_code", True), ("fold_buttons", False))
 # Everything that decides how tall a line is. Copied from the code view, so that view settings
 # override syntax-specific ones (Plain Text may have its own font) and every line has one height.
+FONT_KEYS = ("font_face", "font_size", "font_options", "line_padding_top", "line_padding_bottom")
 ICONS = "Packages/SightWalk/icons/%s.png"
 ICON_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE
 FADED = "color(var(--foreground) alpha(0.45))"
@@ -16,9 +19,13 @@ FADED = "color(var(--foreground) alpha(0.45))"
 BUTTON = "Edit (Enter)"
 BUTTON_HTML = ('<a href="edit" style="color: %s; text-decoration: none; border: 1px solid %s; '
                'border-radius: 3px; padding: 0 4px">%s</a>' % (FADED, FADED, BUTTON))
+# A zero-width space: Sublime leaves out an empty phantom.
+GAP_HTML = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
 BUTTONS = {}
-FONT_KEYS = ("font_face", "font_size", "font_options", "line_padding_top", "line_padding_bottom")
+GAPS = {}
 
+
+# The window
 
 def hide_chrome(window):
     window.set_tabs_visible(False)
@@ -43,22 +50,25 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(code_rects, total, top=0, split=0, cols=COLS, editor=None):
-    """code_rects: the code column's rectangles, in drawing order (earlier is on top). Groups in
-    order: the editor if open, the code column, the conversation and, once top is known, its
-    header and the vetting pane.
-    top: the conversation header's height, split: the conversation's bottom."""
+def reader_layout(code_rects, total, top, split, bench, editor=None):
+    """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
+    the editor if open, the Sights, the conversation and, once top is known, its header and the
+    pane below it.
+    top: the conversation header's bottom, split: the conversation's bottom (px).
+    bench: the Vetting Bench's (left, right) as shares of the width.
+    editor: (header height, left, right, top) or None."""
     rects = list(code_rects)
+    x0, x1 = bench
     if not top:
-        return to_layout(rects + [(cols[0], 0.0, cols[1], total)], total)
-    rects += [(cols[0], top, cols[1], split), (cols[0], 0.0, cols[1], top + OVERLAP),
-              (cols[0], split, cols[1], total)]
+        return to_layout(rects + [(x0, 0.0, x1, total)], total)
+    rects += [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP), (x0, split, x1, total)]
     if editor:
-        header, left, dy = editor
-        right = cols[-1]
+        header, left, right, dy = editor
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects
     return to_layout(rects, total)
 
+
+# Making views
 
 def make_side_view(window, name, extra):
     view = window.new_file()
@@ -70,11 +80,57 @@ def make_side_view(window, name, extra):
     return view
 
 
+def make_blank_view(window, name):
+    """Blank lines either way of the caret's line, the anchor: an invisible view that takes the
+    wheel both ways."""
+    view = make_side_view(window, name, {"word_wrap": False})
+    view.run_command("sight_walk_replace", {"text": "\n" * (2 * BLANK_LINES)})
+    view.sel().clear()
+    view.sel().add(sublime.Region(view.text_point(BLANK_LINES, 0)))
+    view.set_read_only(True)
+    return view
+
+
+def anchor(view):
+    """The layout y a blank view stands at."""
+    return BLANK_LINES * view.line_height()
+
+
+def prepare_code_view(window, view, clone):
+    if clone:
+        window.focus_view(view)
+        window.run_command("clone_file")
+        view = window.active_view()
+    for key, value in CODE_SETTINGS:
+        view.settings().set(key, value)
+    view.set_read_only(True)  # editing happens in the editor
+    return view
+
+
+def bench_font(view):
+    """A proportional font for the conversation: narration reads more easily in it (Jakub)."""
+    default = BENCH_FONTS.get(sublime.platform(), "")
+    face = sublime.load_settings(SETTINGS_FILE).get("bench_font_face", default)
+    if face:
+        view.settings().set("font_face", face)
+
+
 def match_font(view, code_view):
     for key in FONT_KEYS:
         value = code_view.settings().get(key)
         if value is not None:
             view.settings().set(key, value)
+
+
+# Headers
+
+def make_header(window, text, code_view):
+    # A gutter without line numbers, so an eye can sit on the header.
+    view = make_side_view(window, text, {"word_wrap": False, "gutter": True, "line_numbers": False})
+    match_font(view, code_view)
+    write_header(view, text)
+    view.set_read_only(True)
+    return view
 
 
 def write_header(view, text):
@@ -89,17 +145,24 @@ def header_top(view):
     return view.text_to_layout(view.text_point(ROOM_LINES, 0))[1]
 
 
-def make_header(window, text, code_view):
-    # A gutter without line numbers, so an eye can sit on the header.
-    view = make_side_view(window, text, {"word_wrap": False, "gutter": True, "line_numbers": False})
-    match_font(view, code_view)
-    write_header(view, text)
-    view.set_read_only(True)
-    return view
+def draw_edit_button(header, text, on_click):
+    """The header's text, padded so the edit button sits at its right edge."""
+    columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
+    padded = text.ljust(max(columns - len(BUTTON) - 4, len(text) + 1))
+    button = BUTTONS.setdefault(header.id(), [sublime.PhantomSet(header, "sight_walk_edit"), None])
+    if button[1] == padded:
+        return
+    button[1] = padded
+    write_header(header, padded)
+    point = header.line(header.text_point(ROOM_LINES, 0)).b
+    button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
+                                      on_click)])
 
+
+# Drawing on code views
 
 def draw_icons(view, old, new):
-    """Gutter icons for one pane: {line: icon name}. Only changed lines are redrawn."""
+    """Gutter icons for one sight: {line: icon name}. Only changed lines are redrawn."""
     for line, icon in old.items():
         if new.get(line) != icon:
             view.erase_regions("sight_walk_icon_%d" % line)
@@ -123,52 +186,11 @@ def draw_outlines(view, lines):
     view.add_regions("sight_walk_outline", regions, "sight_walk.outline", "", sublime.DRAW_NO_FILL)
 
 
-def prepare_code_view(window, view, clone):
-    if clone:
-        window.focus_view(view)
-        window.run_command("clone_file")
-        view = window.active_view()
-    for key, value in CODE_SETTINGS:
-        view.settings().set(key, value)
-    view.set_read_only(True)  # editing happens in the editor
-    return view
-
-
-def keep_caret_visible(view, top, height):
-    """Puts the caret on a line wholly inside [top, top + height) in layout coordinates unless it
-    is on one already, so focusing the view never scrolls it. A line only partly inside is not
-    enough: focusing scrolls it fully into view, the reader reads that as the wheel, renders, and
-    the next partly visible line starts it again, a slow endless crawl."""
-    lh = view.line_height()
-    caret = view.sel()[0].b if view.sel() else 0
-    y = view.text_to_layout(caret)[1]
-    if not top <= y <= top + height - lh:
-        view.sel().clear()
-        view.sel().add(sublime.Region(view.layout_to_text((0.0, top + height / 2))))
-
-
-def draw_edit_button(header, text, on_click):
-    """The header's text, padded so the edit button sits at its right edge."""
-    columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
-    padded = text.ljust(max(columns - len(BUTTON) - 4, len(text) + 1))
-    button = BUTTONS.setdefault(header.id(), [sublime.PhantomSet(header, "sight_walk_edit"), None])
-    if button[1] == padded:
-        return
-    button[1] = padded
-    write_header(header, padded)
-    point = header.line(header.text_point(ROOM_LINES, 0)).b
-    button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
-                                      on_click)])
-
-
-GAPS = {}
-
-
 def draw_gap(view, first, last):
     """An inline phantom at the start of lines first..last (1-based): room between the gutter and
     the code, which the margin setting cannot give, as Sublime paints the margin in the gutter's
-    colour (Jakub). Phantoms belong to the view, so the editor over the panes has none."""
-    gap = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
+    colour (Jakub). Phantoms belong to the view, so the editor over the sights has none."""
     points = [view.text_point(line - 1, 0) for line in range(first, last + 1)]
     phantoms = GAPS.setdefault(view.id(), sublime.PhantomSet(view, "sight_walk_gap"))
-    phantoms.update([sublime.Phantom(sublime.Region(p), gap, sublime.LAYOUT_INLINE) for p in points])
+    phantoms.update([sublime.Phantom(sublime.Region(p), GAP_HTML, sublime.LAYOUT_INLINE)
+                     for p in points])

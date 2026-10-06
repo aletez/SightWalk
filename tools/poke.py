@@ -25,13 +25,13 @@ def main():
     op = sys.argv[1]
     first, second = [os.path.normpath(f) for f in (sys.argv[2:4] or DEFAULT_FILES)]
     if op == "show":
-        call(config, "show", panes=[first + ":1-30", second + ":31-60"])
+        call(config, "show", sights=[first + ":1-30", second + ":31-60"])
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
     elif op == "point":
-        jump = {"from": {"pane": 0, "line": 5}, "to": {"pane": 1, "line": 40}}
-        call(config, "point", marks=[jump, {"at": {"pane": 0, "line": 8}, "mark": "1"},
-                                     {"at": {"pane": 0, "line": 12}, "mark": "A"}])
+        jump = {"from": {"sight": 0, "line": 5}, "to": {"sight": 1, "line": 40}}
+        call(config, "point", marks=[jump, {"at": {"sight": 0, "line": 8}, "mark": "1"},
+                                     {"at": {"sight": 0, "line": 12}, "mark": "A"}])
     elif op == "state":
         call(config, "state")
     elif op == "close":

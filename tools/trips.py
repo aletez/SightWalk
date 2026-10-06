@@ -1,0 +1,193 @@
+"""Writes docs/trips.md: SightWalk's own code split into trips, each view a whole function at its
+current lines. Run from the repository root after the code changes:
+
+    python3 tools/trips.py           # writes docs/trips.md
+    python3 tools/trips.py 1         # prints trip 1's views as one JSON list, for show
+"""
+
+import ast
+import glob
+import json
+import sys
+
+FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py", "mcp_server/sight_walk_mcp.py"]
+
+TRIPS = [
+    ("Plugin start and stop",
+     "Sublime loads the plugin, the bridge starts listening; on unload, readers close and the "
+     "bridge stops.",
+     ["sight_walk.plugin_loaded", "bridge.start", "bridge.load_config", "bridge.start_server",
+      "sight_walk.plugin_unloaded", "scrollbars.reader_focused", "state.close_all", "bridge.stop",
+      "bridge.stop_server"]),
+    ("Setting up the agent bridge",
+     "The setup command writes the token and the MCP server; the server reads them and calls "
+     "Sublime.",
+     ["setup.SightWalkSetupCommand.run", "setup.ensure_token", "setup.install_server",
+      "setup.show_instructions", "commands.SightWalkReplaceCommand.run",
+      "sight_walk_mcp.load_config", "sight_walk_mcp.show", "sight_walk_mcp.call"]),
+    ("A request arrives",
+     "From the socket to the show operation, with every check on the way.",
+     ["bridge.Handler.handle", "bridge.dispatch", "bridge.authorized", "bridge.run_on_main",
+      "bridge.op_show", "bridge.check_show", "bridge.check_sights", "spec.parse_spec", "bridge.line_count"]),
+    ("A new reader window",
+     "The window and every view but the sights.",
+     ["bridge.new_reader", "reader.Reader.__init__", "reader.Reader.make_side_views",
+      "views.make_blank_view", "views.make_side_view", "chat.start", "chat.make_header",
+      "vetting.make", "state.register"]),
+    ("Loading the sights",
+     "Files opened, each sight's views made; a sight at line 1 gets its two extra views.",
+     ["reader.Reader.load", "reader.Reader.close_sights", "views.wait_until_loaded",
+      "reader.Reader.build", "views.prepare_code_view", "views.make_header", "views.write_header",
+      "line_one.LineOne.__init__", "twin.make", "twin.fill"]),
+    ("Colours",
+     "Every file in its own hue, schemes written and set once Sublime has indexed them.",
+     ["reader.Reader.tint", "tint.apply_tint", "tint.schemes_for", "tint.hue_for",
+      "tint.tinted_schemes", "tint.load_base_scheme", "tint.tint_color", "tint.write_scheme",
+      "tint.set_schemes", "tint.when_indexed"]),
+    ("Measuring",
+     "The gap phantoms, the cells of the virtual document, and the window's height measured "
+     "with two layouts.",
+     ["reader.Reader.draw_gaps", "views.draw_gap", "reader.Reader.make_items", "line_one.line_top",
+      "views.header_top", "reader.Reader.calibrate", "reader.Reader.measure_full",
+      "reader.Reader.measure_half", "reader.Reader.start", "plan.stack"]),
+    ("The layout",
+     "From an offset to Sublime's layout: every sight's cells at its place, shifted.",
+     ["reader.Reader.scroll_to", "plan.max_offset", "reader.Reader.render",
+      "reader.Reader.column_rects", "reader.Reader.column", "reader.Reader.sight_cells",
+      "line_one.LineOne.rects", "reader.Reader.layout", "views.reader_layout", "views.to_layout"]),
+    ("Arranging the views",
+     "After a new layout: every view into its group, then back at its place.",
+     ["reader.Reader.arrange", "reader.Reader.place", "reader.Reader.assign_groups",
+      "views.hide_chrome", "reader.Reader.scroll_views", "reader.Reader.places",
+      "line_one.LineOne.places", "views.anchor", "views.draw_edit_button"]),
+    ("Polling and the wheel",
+     "The two loops: the gutter measured once, the reader opening at the top; the wheel read "
+     "and taken over.",
+     ["reader.Reader.poll", "chat.keep_at_bottom", "reader.Reader.measure_gutter",
+      "line_one.LineOne.misalignment", "reader.Reader.poll_wheel", "reader.Reader.alive",
+      "reader.Reader.read_wheel", "reader.Reader.places", "reader.Reader.scroll_to"]),
+    ("Pointing",
+     "The agent's marks resolved to sights and lines, the reader scrolled to show them.",
+     ["sight_walk_mcp.point", "bridge.op_point", "state.require_ready", "reader.Reader.point",
+      "marks.resolve_marks", "marks.jump", "marks.resolve_target", "marks.sight_target",
+      "marks.icon_for", "marks.line_y"]),
+    ("Drawing the marks",
+     "Icons on screen, eyes for marks off it, outlines on marked lines.",
+     ["reader.Reader.draw_gutter", "marks.visible_lines", "marks.gutter_icons", "views.draw_icons",
+      "line_one.LineOne.draw_icons", "reader.Reader.draw_outlines", "views.draw_outlines",
+      "line_one.LineOne.draw_outlines"]),
+    ("The agent says something",
+     "A reply reaches the Vetting Bench past the transcript guard.",
+     ["sight_walk_mcp.say", "bridge.op_say", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
+      "header.title_lines", "chat.say", "commands.SightWalkInsertCommand.run",
+      "chat.Guard.on_text_changed", "chat.protected_end", "commands.SightWalkChatListener.on_modified"]),
+    ("The user sends a message",
+     "The draft becomes a message, with the focus and the visible sights, and the agent "
+     "receives it.",
+     ["commands.SightWalkSendCommand.run", "state.reader_for", "reader.Reader.context",
+      "plan.focus_sight", "plan.visible_specs", "chat.take_draft", "reader.Reader.take_edits",
+      "bridge.wait_for_user", "sight_walk_mcp.wait_for_user"]),
+    ("Opening the editor",
+     "Enter or the header's button: the editor laid over the sights, ranges and marks held.",
+     ["commands.SightWalkEditCommand.run", "reader.Reader.sight_of", "plan.Sight.code_views",
+      "reader.Reader.open_editor", "editor.Editor.__init__", "editor.clone_for_editing",
+      "editor.Editor.track", "editor.Editor.hold", "reader.Reader.editor_geometry"]),
+    ("Closing the editor",
+     "Esc: Sublime asks about changes, the reader reads back the moved ranges and marks.",
+     ["commands.SightWalkCloseEditorCommand.run", "reader.Reader.close_editor",
+      "editor.Editor.close", "editor.Editor.read_back", "editor.Editor.rows",
+      "reader.Reader.editor_closed", "reader.Reader.move_range", "line_one.LineOne.refill",
+      "twin.fill"]),
+    ("Window events",
+     "Everything that reacts to the user's window: resizing, settings, focus, keys, closing.",
+     ["reader.Reader.follow_resize", "reader.Reader.keep_bench_width", "reader.Reader.spans",
+      "state.render_all", "bridge.op_settings", "bridge.check_setting",
+      "commands.SightWalkWindowListener.on_activated", "commands.SightWalkScrollCommand.run",
+      "commands.SightWalkHeaderListener.on_hover", "chat.show_help"]),
+    ("Asking the guide on a selection",
+     "The Vetting strip opens on the selection's side, with the conversation so far.",
+     ["commands.SightWalkAskGuideCommand.run", "commands.SightWalkAskGuideCommand.is_enabled",
+      "strip.GuideStrip.__init__", "strip.strip_side", "strip.selection_x",
+      "strip.selection_spec", "strip.GuideStrip.make_views", "views.bench_font",
+      "views.match_font", "commands.SightWalkAskGuideCommand.folder"]),
+    ("The strip glides",
+     "Eased frames: the window's own cells shift aside while the strip comes in.",
+     ["strip.GuideStrip.glide", "strip.ease", "strip.GuideStrip.place", "strip.GuideStrip.rects",
+      "strip.cell_rects", "strip.GuideStrip.header_share", "strip.GuideStrip.views",
+      "strip.GuideStrip.opened", "strip.GuideStrip.poll", "strip.GuideStrip.is_open"]),
+    ("How Claude comes to listen to Sublime",
+     "When no agent listens, asking the guide starts one; it calls wait_for_user through the "
+     "bridge and waits on the shared inbox.",
+     ["guide.ensure", "guide.listening", "guide.running", "guide.find_claude", "guide.start",
+      "sight_walk_mcp.wait_for_user", "sight_walk_mcp.call", "bridge.dispatch",
+      "bridge.wait_for_user", "state.listener"]),
+    ("Talking in the strip",
+     "A question goes to the inbox, the answer comes back to the strip; the strip glides out.",
+     ["commands.SightWalkAskCommand.run", "state.owner", "state.current_bench",
+      "strip.GuideStrip.context", "strip.GuideStrip.take_edits", "strip.GuideStrip.say",
+      "strip.GuideStrip.say_status", "commands.SightWalkCloseStripCommand.run",
+      "strip.GuideStrip.close", "chat.catch_up"]),
+    ("Endings",
+     "A trip hides the strip, the guide is stopped, windows close.",
+     ["strip.GuideStrip.vanish_later", "strip.GuideStrip.closed",
+      "commands.SightWalkStopGuideCommand.run", "commands.SightWalkStopGuideCommand.is_enabled",
+      "guide.stop", "commands.SightWalkWindowListener.on_pre_close_window", "state.forget",
+      "sight_walk_mcp.close", "bridge.op_close", "state.current_reader"]),
+    ("Names and room",
+     "How files and sights are named, and how much room the Sights and the bench get.",
+     ["spec.sight_title", "spec.display_path", "spec.repo_root", "spec.matches",
+      "reader.Reader.share", "reader.Reader.conversation_rows", "reader.Reader.head",
+      "reader.Reader.room", "reader.Reader.draw_edit_buttons", "bridge.op_state"]),
+    ("Building blocks",
+     "The small classes and hooks the trips above stand on.",
+     ["plan.Item.__init__", "plan.Sight.__init__", "line_one.LineOne.first_line",
+      "line_one.LineOne.views", "line_one.LineOne.draw_gaps", "line_one.LineOne.close",
+      "twin.content_top", "chat.Guard.__init__", "commands.SightWalkHeaderListener.is_applicable",
+      "commands.SightWalkChatListener.is_applicable"]),
+    ("Settings and the rest of the colours",
+     "The agent's view of the settings, and colour helpers.",
+     ["sight_walk_mcp.settings", "sight_walk_mcp.state", "commands.SightWalkScrollCommand.is_enabled",
+      "tint.band_amount", "tint.scheme_stem", "tint.hex_rgb", "tint.apply_grey"]),
+]
+
+
+def functions():
+    """{"module.Class.function": "file:begin-end"} for every function in FILES."""
+    specs = {}
+    for path in FILES:
+        module = path.rsplit("/", 1)[-1][:-3]
+        for node in ast.parse(open(path, encoding="utf-8").read()).body:
+            members = [(node.name + ".", m) for m in node.body] if isinstance(node, ast.ClassDef) \
+                else [("", node)]
+            for prefix, fn in members:
+                if isinstance(fn, ast.FunctionDef):
+                    begin = fn.decorator_list[0].lineno if fn.decorator_list else fn.lineno
+                    specs[module + "." + prefix + fn.name] = "%s:%d-%d" % (path, begin, fn.end_lineno)
+    return specs
+
+
+def markdown(specs):
+    out = ["# Trips through SightWalk's own code", "",
+           "Each trip follows one stretch of a run, in run order, one view per function. "
+           "Written by `tools/trips.py`; run it again after the code changes.", ""]
+    for number, (title, about, names) in enumerate(TRIPS, 1):
+        out += ["## %d. %s (%d views)" % (number, title, len(names)), "", about, ""]
+        out += ["- `%s` %s" % (specs[name], name.split(".", 1)[1]) for name in names] + [""]
+    return "\n".join(out)
+
+
+def main():
+    specs = functions()
+    if len(sys.argv) > 1:
+        print(json.dumps([specs[name] for name in TRIPS[int(sys.argv[1]) - 1][2]]))
+        return
+    with open("docs/trips.md", "w", encoding="utf-8") as f:
+        f.write(markdown(specs))
+    # The whole code must be walked: say what no trip covers (Jakub).
+    covered = set(name for _, _, names in TRIPS for name in names)
+    for name in sorted(set(specs) - covered):
+        print("not in any trip:", name, specs[name], file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

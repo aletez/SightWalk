@@ -12,6 +12,16 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The whole code is covered by trips (Jakub): 25 trips, 7 to 11 sights each, all 229 functions; `tools/trips.py` warns about any function no trip covers. The overlay-bench geometry (`plan.bench_rect`) is gone with the overlay.
+- The bench in a trip is 35% of the width (was 45%; Jakub). A proportional font for the conversation (`bench_font_face`, default Helvetica Neue on macOS, Segoe UI on Windows); headers keep the font of code. Asking the guide on a selection starts a Claude Code session in the background (`claude -p`, allowed only the sight-walk tools and reading) when no agent is listening; its output goes to ~/.sight_walk/guide.log; "SightWalk: Stop the Vetting Guide" ends it.
+- pane → sight everywhere (Jakub): code (`plan.Sight`, `reader.sights`), the agent's interface (`show(sights=…)`, marks `{"sight": i, …}`, `state` returns `sights`) and the manual; an old server sending `panes` gets told to rerun setup. The bench's header names whom you talk to: "Vetting Guide". The Vetting strip sits at the heights of a trip's bench (header, conversation to 0.6, an empty view below); a trip opening over it takes its status and hides it: the strip vanishes a second later under the trip's window, which is then brought back to the front. Needs setup and a new guide session.
+- Vetting strip (`sw/strip.py`, eased glide of 180 ms in 12 ms frames): opened by Claude through `subl --command` on both sides, with the conversation carried over and scroll bars hidden; the glide itself only Jakub can judge. One shared inbox for the agent (`state.INBOX`); `say` goes to the strip while it is open. Needs setup and a new guide session for the manual.
+- Header over the Sights ("Sights · trip name", from `show(trip=...)`), level with the bench's; sights scroll under it (checked by Claude on screen). Needs setup and a new guide session for the `trip` argument.
+- Marks on the Vetting Bench (Jakub): variables between single asterisks (*name*) instead of tildes; short strings of code between single quotes ('key'), in the string colour. Both count only with no white space inside; quotes not after a letter, so apostrophes stay prose. A string with spaces cannot be marked. Needs setup and a new guide session for the manual.
+- Icons drawn with a clear strip on their right (`MARGIN` = 2 of 16 units), so they no longer touch the line number (Jakub). No stippled underline under names on the Vetting Bench any more: it darkened the text (Jakub).
+- Setting `bench_side` ("left" or "right"): the Vetting Bench on either side of the Sights, applied at once; the agent can change it through `settings`. A dragged bench width is kept (read from the bench's own cell, which also fixes keeping it since the strip went). `tools/trips.py` writes `docs/trips.md` and prints a trip's views for `show`.
+- No scroll strip; the code column starts at the conversation's edge.
+- Code audit (2026-10-06, Claude): the line-1 pane's logic in one class (`line_one.LineOne`) instead of checks spread over the reader; the vetting pane without the L machinery; dead code removed (old cell merging, caret keeping, `lift`, unused settings and constants); one window height instead of two equal ones; `places` shared by the wheel and by putting views back; editor regions held and read back through two helpers; tint's two scheme paths merged; names that clashed (`header_text` in two modules) made distinct; unit tests for the pure modules. Checked by Claude on screen: show, point (icons on line 1 and line 3 of a line-1 pane, a jump), say with status, the wheel both ways, the editor opening from the header button. Not checked: Esc closing the editor, saving from it.
 - The wheel over a pane scrolls the reader again (the pane is put back on its first line); the strip stays as a fallback for panes at line 1 and headers. Edge fixes (line 1, last line, headers) to return later if this holds (Jakub). Checked by Claude: down and up over the code.
 - Cells at their virtual places, rows beyond the screen; hidden scroll bars; borders; narrower gutter; 104 px strip (checked by Claude on screen; smoothness on a trackpad is Jakub's to judge). The gutter is narrower but not quite half (fold buttons off, margin 1).
 - One scroll strip between conversation and code; no twins (checked by Claude: wheel over the strip moves the column, over a pane only that pane).
@@ -56,7 +66,23 @@ Open:
 - Shipping default for `tint` (Jakub is tuning).
 - Possible VS Code port; open question: one scroll for the whole layout or per-pane scrolling.
 
+## Plans (Jakub)
+
+- README: the English README links to a Polish one, written in the Polish metaphor (panorama, widok, wycieczka, marszruta, mapa, ławka).
+- Far future, only after SightWalk has been used in recruitment: a Polish-language version of the tool.
+- If this approach to vetting catches on: promote writing code for it. Tell the coding assistant to write with trips in mind: each trip from one branch point to the next (not necessarily at most six sights), so that at the end of a trip the user can decide on the values of the new variables.
+- Assistant personalities, two or three to choose from in later versions: a senior who explains hard code well; a junior who presents their code to a senior and states their doubts clearly.
+
 ## Decisions
+
+Names (Jakub, 2026-10-06)
+- J: The reader window has no name of its own: metonymically it is the **trip** (Polish: **wycieczka**), "open a trip". (Lookout / taras was chosen and dropped the same day.) The assistant is the **Vetting guide** (Polish: **przewodnik**); "VetAss" was dropped as too crude.
+- J: A header over the Sights like the bench's: "Sights · <trip name>", the name given by the guide in `show(trip=...)`.
+- J: The guide outside a trip is the **Vetting strip**, headed "Vetting Guide": on a selection in any window (context menu or the command palette, "Ask the Vetting Guide"), the window's own layout glides a quarter of its width aside, partly out of the window, and the strip glides in on the side of the selection (setting `strip_side`: auto, left, right). Quick, eased to a stop, not mechanical. No buttons: Esc or primary+w glides it out and the layout back. Opening a trip closes it. One conversation goes on across the strip and the trips' benches. (A small bench laid on top of the code was planned first and dropped: an unmovable box looks like old DOS software; a new window cannot be placed or kept on top.)
+- J: The Vetting Bench may sit left or right of the Sights (setting `bench_side`, default left).
+- English: the code column is **Sights**, a pane a **sight**, a **trip** is whatever one `show` opens as a window, however long; being on a list of trips does not make one (Jakub). Prepared trips keep from one branch point to the next. A vetting trip may take long: it serves review. The run order is the **Itinerary**, the UML diagram **Map**, the conversation **Vetting Bench**.
+- Polish, a metaphor of its own (a "zabytek" sounds dead, and very negative in technology): **panorama**, **widok**, **wycieczka**, **marszruta** (users may learn a fine old word), **mapa**, **ławka**.
+- The scroll strip is gone: its room goes to the code column, and the wheel has room everywhere else.
 
 Code street
 - J: Room between gutter and code comes from an inline phantom at each line's start, not from `margin` (Sublime paints the margin in the gutter's colour) and not from a cover cell (it would break line highlighting and selection).
@@ -104,7 +130,7 @@ Headers and colour
 - J: Header band clearly stronger than the code tint; a strong header makes different files' code tints harder to tell apart (simultaneous contrast), so the two are tuned together, in settings.
 
 Name
-- J: SightWalk: sightseeing with a guide, and a sidewalk (the conversation) running alongside the street of code. Chosen over RunWalk, RuntimeWalk, TraceWalk ("trace" suggests errors) and CodeSightWalk (the prefix hides the sidewalk). No software project or Package Control package uses the name (checked 2026-10-04); a 2024 accessibility campaign in Lima is called "SightWalks".
+- J: SightWalk, kept on 2026-10-06 after RunWalk was weighed again: it fits better than before, as the code column is now Sights. Spoken, it is close to "sidewalk"; written, it is clear. Originally: sightseeing with a guide, and a sidewalk (the conversation) running alongside the street of code. Chosen over RunWalk, RuntimeWalk, TraceWalk ("trace" suggests errors) and CodeSightWalk (the prefix hides the sidewalk). No software project or Package Control package uses the name (checked 2026-10-04); a 2024 accessibility campaign in Lima is called "SightWalks".
 
 Bridge and tools
 - J: Errors are the agent's only feedback, so each one says what was wrong and how to do it right, ready to use (the corrected form or the next step: retry, ask the user, rerun setup). Problems found together are reported together, so one retry fixes them all. Unexpected exceptions name their kind.

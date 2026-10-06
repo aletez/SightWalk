@@ -1,6 +1,9 @@
+"""Sight specs ("file:begin-end") and how files are named to the user and the agent. No Sublime
+API."""
+
 import os
 
-BAD_SPEC = 'Bad pane %r: write "file:begin-end" with 1 <= begin <= end, like "app.py:12-30".'
+BAD_SPEC = 'Bad sight %r: write "file:begin-end" with 1 <= begin <= end, like "app.py:12-30".'
 
 
 def parse_spec(spec, root=None):
@@ -40,14 +43,15 @@ def display_path(path):
     return "~" + path[len(home):] if path.startswith(home + os.sep) else path
 
 
-def header_text(seg):
-    lines = str(seg.begin) if seg.begin == seg.end else "%d-%d" % (seg.begin, seg.end)
-    return "%s:%s" % (display_path(seg.path), lines)
+def sight_title(sight):
+    """A sight's header: its file and lines."""
+    lines = str(sight.begin) if sight.begin == sight.end else "%d-%d" % (sight.begin, sight.end)
+    return "%s:%s" % (display_path(sight.path), lines)
 
 
-def matches(seg, name):
+def matches(sight, name):
     # A suffix counts only at a path separator, so "der.py" does not match "reader.py".
     name = os.path.normpath(name)
-    return (seg.spec == name
-            or seg.path == name
-            or seg.path.endswith(os.sep + name))
+    return (sight.spec == name
+            or sight.path == name
+            or sight.path.endswith(os.sep + name))

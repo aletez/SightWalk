@@ -2,7 +2,7 @@
 ---
 # Colours for the conversation pane. Only for display: the plugin finds the draft by the
 # recorded length of the transcript, never by these scopes.
-name: SightWalk Conversation
+name: SightWalk Vetting Bench
 scope: text.sight-walk.chat
 hidden: true
 
@@ -36,8 +36,8 @@ contexts:
     - meta_scope: meta.draft.sight-walk
     - include: names
 
-  # Names of code, in the scopes they have in code, so they take the code's colours. Every
-  # name is also meta.symbol, which the plugin underlines. The delimiters stay faint.
+  # Names of code, in the scopes they have in code, so they take the code's colours. The
+  # delimiters stay faint.
   names:
     - match: '(`)([^`\n]+)(`)'
       captures:
@@ -55,8 +55,14 @@ contexts:
         1: comment.punctuation.name.sight-walk
         2: meta.symbol.sight-walk entity.name.class.sight-walk
         3: comment.punctuation.name.sight-walk
-    - match: '(~)([^~\n]+)(~)'
+    # Variables between single asterisks, with no white space inside (Jakub).
+    - match: '(?<!\*)(\*)([^*\s]+)(\*)(?!\*)'
       captures:
         1: comment.punctuation.name.sight-walk
         2: meta.symbol.sight-walk meta.generic-name.sight-walk
         3: comment.punctuation.name.sight-walk
+    # Short strings of code, such as a key or a value, keep their single quotes and take the
+    # string colour, as in code. Only with no white space inside, and not after a letter, so
+    # apostrophes and ordinary quoting stay prose (Jakub).
+    - match: '(?<![\w''])''[^''\s]+''(?![\w''])'
+      scope: string.quoted.single.sight-walk

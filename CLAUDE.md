@@ -3,6 +3,8 @@
 ## What this is
 A Sublime Text plugin for vetting AI-generated code. An agent connected over MCP opens a reader window and shows a sequence of panes (`file:begin-end`) that mirrors one run of the program, one whole function per pane. It marks lines with icons in the gutter and talks with the user in a conversation pane, resolving "here" and "this" against the pane nearest the centre.
 
+Names (see DECISIONS.md): the code column is **Sights** and a pane a **sight**; whatever one `show` opens is a **trip**, however long (the window too is called the trip; `docs/trips.md` only lists prepared ones); the run order is the **Itinerary**; the UML diagram is the **Map**; the conversation is the **Vetting Bench**; the reader window is, metonymically, the **trip**; the assistant is the **Vetting guide**. In code too a sight is a sight (`plan.Sight`, `reader.sights`); the agent's `show` takes `sights` and a mark `{"sight": index, "line": line}`. The Polish names are a metaphor of their own: panorama, widok, wycieczka, marszruta, mapa, ławka, przewodnik (and wycieczka for the window too).
+
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Say it that way; never call the code Jakub's.
 
 Read `DECISIONS.md` before changing behaviour: it holds the design decisions, the reasons, and the current status.
@@ -10,11 +12,11 @@ Read `DECISIONS.md` before changing behaviour: it holds the design decisions, th
 ## Layout
 - The repository root is the Sublime package, symlinked as `Packages/SightWalk`.
 - `sight_walk.py`: entry point. Imports the commands into its namespace (that is how Sublime registers them) and drops the `sw` modules from `sys.modules` so they reload.
-- `sw/`: `config` (constants), `spec` (specs, display paths), `plan` (geometry of the virtual document), `marks` (gutter icons, eyes), `header` (conversation header text), `chat` (conversation pane and header, transcript guard, bottom filler), `vetting` (the L-shaped vetting pane), `scrollbars` (overlay scroll bars while a reader has the focus), `editor` (the editor over the panes), `views` (view and layout helpers), `tint` (per-file hues, colour schemes), `state` (open readers), `reader` (the Reader class), `commands`, `bridge` (local socket server for the MCP bridge), `setup` (setup command).
-- `plan.py`, `marks.py` and `spec.py` must stay free of the Sublime API, so they can be tested with plain Python.
+- `sw/`: `config` (constants), `spec` (specs, display paths, pane titles), `plan` (geometry of the virtual document), `marks` (gutter icons, eyes), `header` (conversation header text), `chat` (conversation pane and header, transcript guard), `vetting` (the vetting pane under the conversation), `scrollbars` (overlay scroll bars while a reader has the focus), `editor` (the editor over the panes), `views` (making views, drawing on them, the window layout), `line_one` (the three views of a pane at line 1), `twin` (a text copy with room for the wheel), `strip` (the Vetting strip, the guide outside a trip), `guide` (starting a Claude Code guide in the background), `tint` (per-file hues, colour schemes), `state` (open readers), `reader` (the Reader class), `commands`, `bridge` (local socket server for the MCP bridge), `setup` (setup command).
+- `plan.py`, `marks.py`, `spec.py` and `header.py` must stay free of the Sublime API, so they can be tested with plain Python: `python3 -m unittest discover tests`.
 - `mcp_server/sight_walk_mcp.py`: the MCP server Claude Code runs. Sublime never loads it (subfolder). The setup command copies it to `~/.sight_walk/` with `config.json` (token, port).
 - `SightWalkChat.sublime-syntax`: colours of the conversation pane, display only.
-- `tools/poke.py`: drives the plugin without an agent. `docs/testing.md`: the test procedure.
+- `tools/poke.py`: drives the plugin without an agent. `tests/`: unit tests of the pure modules. `docs/trips.md`: the plugin's own code split into trips, every function in one at least, written by `tools/trips.py` (run it after changing the code; it names what no trip covers). `docs/testing.md`: the test procedure.
 
 ## Working agreements
 - Jakub designs, Claude implements. For new UI behaviour, restate the rule in your own words before building, and ask when it is ambiguous. Propose alternatives with reasons; don't decide UI behaviour alone.

@@ -145,11 +145,15 @@ class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
 
 
 class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
-    """primary+g: the Vetting strip glides in on the selection, or out if it is open (Jakub)."""
+    """primary+g: the Vetting strip glides in on the selection, or out if it is open; in a trip,
+    the focus goes to the bench, and from the bench back to the sight in focus (Jakub)."""
 
     def run(self, edit):
         bench = state.current_bench()
+        reader = state.reader_for(self.view.window())
         if bench is not None and bench.window == self.view.window():
             bench.close()
+        elif reader is not None:
+            reader.toggle_focus(self.view)
         elif not self.view.settings().get("sight_walk", False):
             self.view.run_command("sight_walk_ask_guide")

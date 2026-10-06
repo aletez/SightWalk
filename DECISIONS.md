@@ -12,6 +12,8 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- In a trip, toggling the guide (primary+g in Jakub's keymap) moves the focus to the bench, and from the bench back to the sight nearest the middle (Jakub).
+- A guide started in the background stops after 15 minutes without a message, checked each minute and only while it waits (Jakub). Measured: an idle wait cycle costs about $0.007 on Claude Sonnet 5.5 (15 minutes about 5 to 6 cents); a new guide listens 2.5 to 5 s after starting, up to 10.
 - Enter sends on the bench (Jakub); Shift+Enter is a new line; primary+Enter still sends.
 - The bridge refuses a say when nothing has come from the user since the agent last called wait_for_user (and it has not opened a trip since): the guide said "Jestem tu i czekam na Twoje pytanie" despite its instructions (Jakub). Several says in one answer are still fine.
 - The Vetting strip has no header pane (the user may show tabs, Jakub): what goes on ("Vetting Guide · the guide is thinking…") is in the status bar, every view of the window, or, when the status bar is hidden, in the last line of the phantom at the strip's bottom; never in the tab name, where it would not fit and a cut text worries (Jakub); the strip is one view the whole height, and a phantom under the prompt fills the room, its top a faint line, the floor (Jakub), at the height default_conversation_height sets, so the prompt stands where a trip's bench has it (no view below: it would get a tab; Jakub).

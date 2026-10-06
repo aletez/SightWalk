@@ -15,6 +15,7 @@ DEFAULT_BENCH_SIDE = "left"  # or "right" of the Sights
 BENCH_FONTS = {"osx": "Helvetica Neue", "windows": "Segoe UI"}  # the bench's font by default
 STRIP_WIDTH = 0.25  # the Vetting strip, as a share of the width
 STRIP_SIDE = "auto"  # where the Vetting strip comes in: "auto" (selection's side), "left", "right"
+GUIDE_IDLE_S = 15 * 60  # a guide started in the background stops after this long without a message
 GLIDE_MS = 180  # how long the Vetting strip takes to glide in or out
 DEFAULT_CONVERSATION_HEIGHT = 0.6  # bottom of the conversation pane, as a share of the column
 BLANK_LINES = 400  # blank lines above and below a blank view's anchor (the filler)

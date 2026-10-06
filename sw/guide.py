@@ -10,7 +10,7 @@ import time
 import sublime
 
 from . import state
-from .config import SETTINGS_FILE
+from .config import GUIDE_IDLE_S, SETTINGS_FILE
 
 LOG = os.path.join(os.path.expanduser("~"), ".sight_walk", "guide.log")
 # Where Claude Code is usually installed; Sublime does not see the shell's PATH.
@@ -25,6 +25,7 @@ COMING = "the guide is coming…"
 THINKING = "the guide is thinking…"
 TOOLS = ["mcp__sight-walk", "Read", "Grep", "Glob"]
 PROCESS = [None]
+LAST_ASKED = [0.0]  # when the user last sent the guide something
 
 
 def listening():
@@ -64,6 +65,20 @@ def start(claude, folder):
         PROCESS[0] = subprocess.Popen([claude, "-p", PROMPT, "--allowedTools"] + TOOLS,
                                       cwd=folder, env=env, stdin=subprocess.DEVNULL,
                                       stdout=log, stderr=log)
+    LAST_ASKED[0] = time.time()
+    sublime.set_timeout(stop_when_idle, 60000)
+
+
+def stop_when_idle():
+    """A waiting guide costs a little every two minutes and its context grows, so after
+    GUIDE_IDLE_S without a message it is stopped; the next question starts a new one (Jakub).
+    Only while it waits: never in the middle of an answer."""
+    if not running():
+        return
+    if state.WAITING[0] > 0 and time.time() - LAST_ASKED[0] > GUIDE_IDLE_S:
+        stop()
+        return
+    sublime.set_timeout(stop_when_idle, 60000)
 
 
 def stop():
@@ -75,4 +90,5 @@ def stop():
 def await_answer(owner):
     """After the user's message: the bench's header says an answer is on its way, and a guide
     starts if none listens, so the user never waits without knowing (Jakub)."""
+    LAST_ASKED[0] = time.time()
     owner.note_waiting(COMING if ensure(owner.folder()) else THINKING)

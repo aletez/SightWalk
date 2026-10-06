@@ -492,6 +492,15 @@ class Reader:
         chat.show_header(self.chat_header, BENCH, self.note or self.status)
         chat.show_header(self.sights_header, SIGHTS, self.trip, help_mark=False)
 
+    def toggle_focus(self, view):
+        """To the bench, or from it back to the sight nearest the middle of the screen."""
+        if view != self.chat:
+            self.window.focus_view(self.chat)
+            return
+        focus = plan.focus_sight(self.sights, self.offset, self.room(), self.overhead)
+        if focus is not None:
+            self.window.focus_view(focus.line_one.rest if focus.line_one else focus.view)
+
     def note_waiting(self, note):
         self.note = note
         self.show_headers()

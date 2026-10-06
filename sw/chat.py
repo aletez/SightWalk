@@ -58,6 +58,12 @@ class Guard(sublime_plugin.TextChangeListener):
             return
         end = protected_end(len(protected), spans)
         self.view.run_command("sight_walk_replace", {"text": protected, "end": end})
+        # Typing into the transcript goes on in the draft: the letters are not lost (Jakub).
+        typed = "".join(c.str for c in changes if c.a.pt < len(protected) and c.a.pt == c.b.pt)
+        if typed.strip():
+            self.view.run_command("sight_walk_insert", {"point": self.view.size(), "text": typed})
+            self.view.sel().clear()
+            self.view.sel().add(sublime.Region(self.view.size()))
 
 
 def start(view):

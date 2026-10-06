@@ -14,9 +14,12 @@ STRIP_LINES = 400  # blank lines above and below the scroll strip's anchor
 STRIP_DEFAULT = 26  # px of a gutter until one is measured
 SETTLE_S = 0.1  # s after a new layout in which the strip is put back, not read
 STRIP_PX = 104  # the scroll strip's width: twice a usual gutter
+ROOM_LINES = 20  # lines of room above and below a twin's text and a header's
 VETTING_LINES = 5  # lines of the vetting pane under the code
 INSET = 10  # px between the panes' header and gutter and the editor laid over them
-OVERLAP = 0  # px a cell reaches into the next; 0 keeps the borders between panes (Jakub)
+GAP_PX = 16  # room between the gutter and the code, a phantom at each line's start (Jakub)
+GUTTER_REACH = 10  # lines line 1's view of a pane at line 1 spans: two-digit numbers
+OVERLAP = 2  # px of border between panes, half taken by each neighbour (Jakub)
 
 PROMPT = ">>> "
 DEFAULT_MARK = "A"

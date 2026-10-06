@@ -15,6 +15,10 @@ class Segment:
         self.view = None
         self.header = None
         self.code_item = None
+        self.twin = None
+        self.twin_item = None
+        self.lower = None  # line 1's pane: its gutter from line 2 on
+        self.lower_item = None
         self.header_item = None
         self.header_icons = {}
         self.icons = {}

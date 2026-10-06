@@ -1,12 +1,12 @@
 import sublime
 
-from .config import COLS, INSET, OVERLAP, SETTLE_MS
+from .config import COLS, GAP_PX, INSET, OVERLAP, ROOM_LINES, SETTLE_MS
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
 # No fold buttons and a small margin: the gutter about half its usual width (Jakub).
 CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk", True),
-                 ("sight_walk_code", True), ("fold_buttons", False), ("margin", 1))
+                 ("sight_walk_code", True), ("fold_buttons", False))
 # Everything that decides how tall a line is. Copied from the code view, so that view settings
 # override syntax-specific ones (Plain Text may have its own font) and every line has one height.
 ICONS = "Packages/SightWalk/icons/%s.png"
@@ -78,10 +78,15 @@ def match_font(view, code_view):
 
 
 def write_header(view, text):
-    """A header holds exactly its one line: only the gutter strips take the wheel."""
-    view.run_command("sight_walk_replace", {"text": text})
+    """A header's text on line ROOM_LINES, between blank lines: room for the wheel either way
+    (scroll bars are hidden, see scrollbars). The caret sits on the text, so focus never scrolls."""
+    view.run_command("sight_walk_replace", {"text": "\n" * ROOM_LINES + text + "\n" * ROOM_LINES})
     view.sel().clear()
-    view.sel().add(sublime.Region(0))
+    view.sel().add(sublime.Region(view.text_point(ROOM_LINES, 0)))
+
+
+def header_top(view):
+    return view.text_to_layout(view.text_point(ROOM_LINES, 0))[1]
 
 
 def make_header(window, text, code_view):
@@ -151,6 +156,19 @@ def draw_edit_button(header, text, on_click):
         return
     button[1] = padded
     write_header(header, padded)
-    point = header.line(0).b
+    point = header.line(header.text_point(ROOM_LINES, 0)).b
     button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
                                       on_click)])
+
+
+GAPS = {}
+
+
+def draw_gap(view, first, last):
+    """An inline phantom at the start of lines first..last (1-based): room between the gutter and
+    the code, which the margin setting cannot give, as Sublime paints the margin in the gutter's
+    colour (Jakub). Phantoms belong to the view, so the editor over the panes has none."""
+    gap = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
+    points = [view.text_point(line - 1, 0) for line in range(first, last + 1)]
+    phantoms = GAPS.setdefault(view.id(), sublime.PhantomSet(view, "sight_walk_gap"))
+    phantoms.update([sublime.Phantom(sublime.Region(p), gap, sublime.LAYOUT_INLINE) for p in points])

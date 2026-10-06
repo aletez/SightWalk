@@ -5,12 +5,14 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- Code street (Jakub, 2026-10-06): panes overlap by `OVERLAP` = 2 px, each neighbour taking half the border; the wheel works over every pane, header, the strip and the invisible filler below the last pane; a pane at line 1 is three cells (line 1's gutter in the real view reaching down to line 10, line 1's code in a twin with no margin, the rest in a second view); a gap phantom of `GAP_PX` = 16 px at each line's start between gutter and code. Known and accepted: the caret cannot reach line 1 of a pane at line 1, and trying looks bad.
 - Plugin loads; the setup command writes the token once and keeps it.
 - `show` and `say` through the bridge.
 - Headers and strip use the code view's font; headers are not selected on creation.
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The wheel over a pane scrolls the reader again (the pane is put back on its first line); the strip stays as a fallback for panes at line 1 and headers. Edge fixes (line 1, last line, headers) to return later if this holds (Jakub). Checked by Claude: down and up over the code.
 - Cells at their virtual places, rows beyond the screen; hidden scroll bars; borders; narrower gutter; 104 px strip (checked by Claude on screen; smoothness on a trackpad is Jakub's to judge). The gutter is narrower but not quite half (fold buttons off, margin 1).
 - One scroll strip between conversation and code; no twins (checked by Claude: wheel over the strip moves the column, over a pane only that pane).
 - Smoother wheel: while the wheel keeps the same views in the same groups, a render only resizes the cells (no group moves, no focus). Carets go onto lines wholly inside a cell, which stops an endless slow crawl (focus scrolled a partly visible caret line into view, which read as the wheel). 
@@ -55,6 +57,13 @@ Open:
 - Possible VS Code port; open question: one scroll for the whole layout or per-pane scrolling.
 
 ## Decisions
+
+Code street
+- J: Room between gutter and code comes from an inline phantom at each line's start, not from `margin` (Sublime paints the margin in the gutter's colour) and not from a cover cell (it would break line highlighting and selection).
+- J: A pane at line 1 is cut across the whole width, not just the gutter: line 1's gutter (real view), line 1's code (twin, room above hidden by the header, so a long touchpad swipe does not stop on it), and the rest of the pane in a second view of the file, which has line 1 above it to move into. Line 1's view reaches down to line 10 so its gutter is as wide as the two-digit gutter below.
+- J: Borders between panes are hidden by overlap, half taken by each neighbour, so neither covers the other's text.
+- J: Below the last pane an invisible filler takes the wheel, like the strip.
+- J: Faster putting-back at the reader's ends made the trembling worse; dropped.
 
 Conversation pane
 - J: No phantoms in typing areas. The conversation has a two-line read-only header in place of a tab (tabs are off), looking like the other headers: band and gutter, no border below (the header overlaps the conversation by `OVERLAP`). Its band is the scheme's text colour mixed into the background at `tint`, which always contrasts. Text: "Conversation · <status>", the status being a few words from the agent on what the conversation is about now (`say(text, status=...)`), kept until changed and wrapped or cut to two lines. At the right edge of the first line a help mark `?`, a phantom, faded and outlined at all times so it reads as read-only; hovering it shows the shortcuts.
@@ -108,6 +117,7 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-06, the line-1 pane: cutting the whole pane after line 1 (not only the gutter), keeping line 1's code a twin for long touchpad swipes, and reaching line 1's view down to line 10 for the gutter's width.
 - 2026-10-06, layout rows beyond the screen: cells may lie above 0 and below 1 and slide in smoothly. Every pane got a permanent cell at its virtual place; scrolling became one cheap `set_layout`, after Claude's per-pane scrolling had hit 60-110 ms per step.
 - 2026-10-06, giving up twins and pane-by-pane wheel reading for one scroll strip: too many views scrolled at once cannot be smooth on every machine.
 - 2026-10-05, tabs from headers: the original "editable tab" idea behind the headers: tabs where a pane needs them and none where it doesn't. Applied to the pane below the conversation: a header made of a few small horizontal panes, as tabs over a space for the ledger, route map and legend.

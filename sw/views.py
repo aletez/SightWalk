@@ -108,9 +108,13 @@ def prepare_code_view(window, view, clone):
 
 
 def bench_font(view):
-    """A proportional font for the conversation: narration reads more easily in it (Jakub)."""
-    default = BENCH_FONTS.get(sublime.platform(), "")
-    face = sublime.load_settings(SETTINGS_FILE).get("bench_font_face", default)
+    """A proportional font for the conversation: narration reads more easily in it (Jakub).
+    bench_font_face is a font, or one per system ({"osx": …, "windows": …, "linux": …}); "" keeps
+    the editor's font. The size is the bench syntax's (SightWalkChat.sublime-settings), so it is
+    not set here."""
+    face = sublime.load_settings(SETTINGS_FILE).get("bench_font_face", BENCH_FONTS)
+    if isinstance(face, dict):
+        face = face.get(sublime.platform(), "")
     if face:
         view.settings().set("font_face", face)
 

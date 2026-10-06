@@ -132,7 +132,7 @@ TRIPS = [
       "strip.GuideStrip.close", "chat.catch_up"]),
     ("Endings",
      "A trip hides the strip, the guide is stopped, windows close.",
-     ["strip.GuideStrip.vanish_later", "strip.GuideStrip.closed",
+     ["strip.GuideStrip.vanish_later", "strip.GuideStrip.closed", "strip.keep_window_open",
       "commands.SightWalkStopGuideCommand.run", "commands.SightWalkStopGuideCommand.is_enabled",
       "guide.stop", "guide.stop_when_idle", "commands.SightWalkWindowListener.on_pre_close_window", "state.forget",
       "sight_walk_mcp.close", "bridge.op_close", "state.current_reader"]),

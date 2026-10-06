@@ -12,7 +12,7 @@ SETTLE_S = 0.1  # after a new layout, moved views are put back, not read as the 
 # Layout
 BENCH_WIDTH = 0.35  # the Vetting Bench, as a share of the width; the Sights take the rest
 DEFAULT_BENCH_SIDE = "left"  # or "right" of the Sights
-BENCH_FONTS = {"osx": "Helvetica Neue", "windows": "Segoe UI"}  # the bench's font by default
+BENCH_FONTS = {"osx": "Helvetica Neue", "windows": "Segoe UI", "linux": "Noto Sans"}  # the bench
 STRIP_WIDTH = 0.25  # the Vetting strip, as a share of the width
 STRIP_SIDE = "auto"  # where the Vetting strip comes in: "auto" (selection's side), "left", "right"
 GUIDE_IDLE_S = 15 * 60  # a guide started in the background stops after this long without a message

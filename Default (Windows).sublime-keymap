@@ -1,59 +1,6 @@
-// Anywhere in the reader, the swap-line keys ask for the next or previous step.
+// Anywhere in a trip or the Vetting strip (setting.sight_walk is on every SightWalk view), the
+// swap-line keys ask for the next or previous step.
 [
-    {
-        "keys": [
-            "ctrl+shift+down"
-        ],
-        "command": "sight_walk_ask",
-        "args": {
-            "text": "Explain next."
-        },
-        "context": [
-            {
-                "key": "setting.sight_walk_chat"
-            }
-        ]
-    },
-    {
-        "keys": [
-            "ctrl+shift+up"
-        ],
-        "command": "sight_walk_ask",
-        "args": {
-            "text": "Explain previous."
-        },
-        "context": [
-            {
-                "key": "setting.sight_walk_chat"
-            }
-        ]
-    },
-    {
-        "keys": [
-            "ctrl+shift+down"
-        ],
-        "command": "sight_walk_ask",
-        "args": {
-            "text": "Explain next."
-        },
-        "context": [
-            {
-                "key": "setting.sight_walk"
-            }
-        ]
-    },
-    {
-        "keys": [
-            "ctrl+shift+up"
-        ],
-        "command": "sight_walk_ask",
-        "args": {
-            "text": "Explain previous."
-        },
-        "context": [
-            {
-                "key": "setting.sight_walk"
-            }
-        ]
-    }
+    {"keys": ["ctrl+shift+down"], "command": "sight_walk_ask", "args": {"text": "Explain next."}, "context": [{"key": "setting.sight_walk"}]},
+    {"keys": ["ctrl+shift+up"], "command": "sight_walk_ask", "args": {"text": "Explain previous."}, "context": [{"key": "setting.sight_walk"}]}
 ]

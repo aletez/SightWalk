@@ -1,0 +1,6 @@
+// Settings for the bench (the conversation), as for any syntax: its font size, line padding and
+// so on. Override them in Packages/User/SightWalkChat.sublime-settings (named after the syntax
+// file). The bench's font face is in the SightWalk settings (bench_font_face).
+{
+    // "font_size": 13,
+}

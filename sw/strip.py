@@ -15,7 +15,7 @@ from .config import (DEFAULT_CONVERSATION_HEIGHT, GLIDE_MS, SETTINGS_FILE, STRIP
                      STRIP_WIDTH)
 from .header import BENCH as GUIDE
 from .spec import repo_root
-from .views import bench_font, make_side_view, match_font, selected_text, to_layout
+from .views import bench_font, make_side_view, selected_text, to_layout
 
 FRAME_MS = 12
 # The filler's top is a line, the floor under the prompt, so the prompt does not seem to hang in
@@ -67,6 +67,13 @@ def selection_spec(view):
     return "%s:%d-%d" % (view.file_name(), begin, max(begin, end))
 
 
+def keep_window_open(window):
+    """An empty view, so closing the strip does not leave the window empty, which Sublime may
+    close (close_windows_when_empty)."""
+    view = window.new_file()
+    view.set_scratch(True)
+
+
 class GuideStrip:
     def __init__(self, view):
         self.window = view.window()
@@ -85,7 +92,6 @@ class GuideStrip:
         self.chat = make_side_view(self.window, GUIDE, {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True,
             "sight_walk_strip": True, "scroll_past_end": False})
-        match_font(self.chat, code_view)
         chat.start(self.chat)
         bench_font(self.chat)
         self.info = sublime.PhantomSet(self.chat, "sight_walk_info")
@@ -152,6 +158,8 @@ class GuideStrip:
         sublime.set_timeout(vanish, ms)
 
     def closed(self, refocus=True):
+        if not [v for v in self.window.views() if v not in self.views()]:
+            keep_window_open(self.window)
         for view in self.views():
             if view.is_valid():
                 view.close()

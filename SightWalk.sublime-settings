@@ -17,9 +17,10 @@
     // in view), "left" or "right".
     "strip_side": "auto",
 
-    // The conversation's font, proportional for easier reading; "" keeps your editor's font.
-    // Default: "Helvetica Neue" on macOS, "Segoe UI" on Windows.
-    // "bench_font_face": "Helvetica Neue",
+    // The bench's font, proportional for easier reading: one font, or one per system; "" keeps
+    // your editor's font. Its size is set per syntax: in "SightWalkChat.sublime-settings"
+    // (Preferences → Settings – Syntax Specific, with the cursor on a bench).
+    "bench_font_face": {"osx": "Helvetica Neue", "windows": "Segoe UI", "linux": "Noto Sans"},
 
     // Where Claude Code is, if SightWalk cannot find it to start the guide.
     // "claude_path": "~/.local/bin/claude"

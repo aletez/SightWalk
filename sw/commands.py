@@ -1,13 +1,10 @@
 """Sublime commands and listeners. sight_walk.py imports them, which is how Sublime finds them."""
 
-import os
-
 import sublime
 import sublime_plugin
 
 from . import chat, guide, scrollbars, state
-from .spec import repo_root
-from .strip import COMING, GuideStrip
+from .strip import GuideStrip
 
 
 class SightWalkReplaceCommand(sublime_plugin.TextCommand):
@@ -37,6 +34,7 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
         draft = chat.take_draft(self.view, edit)
         if draft:
             state.INBOX.put(dict(context, text=draft, **owner.take_edits()))
+            guide.await_answer(owner)
 
 
 class SightWalkAskCommand(sublime_plugin.TextCommand):
@@ -48,6 +46,7 @@ class SightWalkAskCommand(sublime_plugin.TextCommand):
             return
         owner.say(text, prefix="U: ")
         state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
+        guide.await_answer(owner)
 
 
 class SightWalkEditCommand(sublime_plugin.TextCommand):
@@ -119,15 +118,8 @@ class SightWalkAskGuideCommand(sublime_plugin.TextCommand):
         if bench is not None:
             bench.close()
         state.BENCH[0] = GuideStrip(self.view)
-        if guide.ensure(self.folder()):
-            state.BENCH[0].say_status(COMING)
-
-    def folder(self):
-        """The selection's repository, else its folder, else the home folder."""
-        path = self.view.file_name()
-        if not path:
-            return os.path.expanduser("~")
-        return repo_root(path) or os.path.dirname(path)
+        if guide.ensure(state.BENCH[0].folder()):
+            state.BENCH[0].note_waiting(guide.COMING)
 
     def is_enabled(self):
         return not self.view.settings().get("sight_walk", False) and self.view.window() is not None

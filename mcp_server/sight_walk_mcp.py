@@ -101,10 +101,14 @@ def show(sights: list[str], root: Optional[str] = None, trip: Optional[str] = No
 
 
 @mcp.tool()
-def say(text: str, status: Optional[str] = None) -> dict:
-    """Append your message to the conversation pane. status: a few words on what the
-    conversation is about right now, shown in its header until changed."""
-    return call("say", text=text, status=status)
+def say(text: Optional[str] = None, status: Optional[str] = None,
+        message: Optional[str] = None) -> dict:
+    """Append your message to the Vetting Bench: say(text="..."). status: a few words on what
+    the conversation is about right now, shown in its header until changed. (message is
+    accepted as another name for text.)"""
+    if not (text or message):
+        return {"error": 'say needs the message as text: say(text="...").'}
+    return call("say", text=text or message, status=status)
 
 
 @mcp.tool()

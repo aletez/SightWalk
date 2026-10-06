@@ -4,6 +4,7 @@ conversation glides in on the side of the selection, so the selection stays in v
 Esc or primary+w glides it out again; opening a trip closes it. The conversation goes on from
 bench to bench (chat.TRANSCRIPT)."""
 
+import os
 import time
 
 import sublime
@@ -13,10 +14,10 @@ from .config import (DEFAULT_CONVERSATION_HEIGHT, GLIDE_MS, SETTINGS_FILE, STRIP
                      STRIP_WIDTH)
 from .tint import apply_grey
 from .header import BENCH as GUIDE
+from .spec import repo_root
 from .views import bench_font, make_side_view, match_font, to_layout
 
 FRAME_MS = 12
-COMING = "the guide is coming…"
 
 
 def ease(t):
@@ -66,7 +67,7 @@ class GuideStrip:
         self.code = selection_spec(view)
         self.side = strip_side(view)
         self.saved = self.window.get_layout()
-        self.status = ""
+        self.status = self.note = ""
         self.closing = False
         self.origin = view
         self.head = None
@@ -86,7 +87,7 @@ class GuideStrip:
         self.header.settings().set("sight_walk_strip", True)
         apply_grey(self.header)
         bench_font(self.chat)  # after the header, which keeps the font of code
-        chat.show_header(self.header, GUIDE, self.status, help_mark=False)
+        self.show_header()
 
     def opened(self):
         self.window.focus_view(self.chat)
@@ -182,15 +183,26 @@ class GuideStrip:
     # As a listener, like a trip
 
     def say(self, text, status=None, prefix="A: "):
-        if status is None and self.status == COMING and prefix == "A: ":
-            status = ""  # the guide has come
+        if prefix == "A: ":
+            self.note = ""  # the answer has come
         if status is not None:
-            self.say_status(status)
+            self.status = status
+        self.show_header()
         chat.say(self.chat, text, prefix)
 
-    def say_status(self, status):
-        self.status = status
-        chat.show_header(self.header, GUIDE, status, help_mark=False)
+    def note_waiting(self, note):
+        self.note = note
+        self.show_header()
+
+    def show_header(self):
+        chat.show_header(self.header, GUIDE, self.note or self.status, help_mark=False)
+
+    def folder(self):
+        """Where a guide started from the strip works: the selection's repository."""
+        path = self.origin.file_name() if self.origin.is_valid() else None
+        if not path:
+            return os.path.expanduser("~")
+        return repo_root(path) or os.path.dirname(path)
 
     def context(self):
         return {"from": "strip", "code": self.code}

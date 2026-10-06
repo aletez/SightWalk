@@ -17,9 +17,11 @@ LOG = os.path.join(os.path.expanduser("~"), ".sight_walk", "guide.log")
 PLACES = ["~/.local/bin", "~/.claude/local", "/opt/homebrew/bin", "/usr/local/bin"]
 PROMPT = ("You are the Vetting guide. The user talks to you in SightWalk, in Sublime Text, never "
           "here: nothing you print reaches them. Call wait_for_user now. Answer every message "
-          "with say, in the user's language, then call wait_for_user again. When the user wants "
-          "to walk through code, call show. On a timeout, call wait_for_user again. Never end "
-          "your turn.")
+          "with say(text=...), in the user's language, then call wait_for_user again. When the "
+          "user wants to walk through code, call show. On a timeout, call wait_for_user again. "
+          "Never end your turn.")
+COMING = "the guide is coming…"
+THINKING = "the guide is thinking…"
 TOOLS = ["mcp__sight-walk", "Read", "Grep", "Glob"]
 PROCESS = [None]
 
@@ -67,3 +69,9 @@ def stop():
     if running():
         PROCESS[0].terminate()
     PROCESS[0] = None
+
+
+def await_answer(owner):
+    """After the user's message: the bench's header says an answer is on its way, and a guide
+    starts if none listens, so the user never waits without knowing (Jakub)."""
+    owner.note_waiting(COMING if ensure(owner.folder()) else THINKING)

@@ -7,6 +7,7 @@ rows may lie outside 0..1 (Jakub found). Scrolling only shifts the rows (column_
 one cheap set_layout. The wheel is read by polling: a view the wheel moved off its place is put
 back and the movement taken over (read_wheel)."""
 
+import os
 import time
 
 import sublime
@@ -18,7 +19,7 @@ from .config import (BENCH_WIDTH, DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGH
 from .editor import Editor
 from .header import BENCH, SIGHTS
 from .line_one import LineOne, line_top
-from .spec import display_path, sight_title, parse_spec
+from .spec import display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint
 from .views import (anchor, bench_font, draw_edit_button, draw_gap, draw_icons, draw_outlines, header_top,
                     hide_chrome, make_blank_view, make_header, make_side_view, prepare_code_view,
@@ -37,7 +38,7 @@ class Reader:
         self.resize_base = None
         self.settle_until = 0.0
         self.last_ids = []
-        self.status = self.trip = ""
+        self.status = self.trip = self.note = ""  # note: the guide is coming or thinking
         self.bench_width = BENCH_WIDTH
         self.editor = None
         self.make_side_views()
@@ -487,13 +488,24 @@ class Reader:
     # Conversation
 
     def show_headers(self):
-        chat.show_header(self.chat_header, BENCH, self.status)
+        chat.show_header(self.chat_header, BENCH, self.note or self.status)
         chat.show_header(self.sights_header, SIGHTS, self.trip, help_mark=False)
 
+    def note_waiting(self, note):
+        self.note = note
+        self.show_headers()
+
+    def folder(self):
+        """Where a guide started for this trip works: the first sight's repository."""
+        path = self.sights[0].path
+        return repo_root(path) or os.path.dirname(path)
+
     def say(self, text, status=None, prefix="A: "):
+        if prefix == "A: ":
+            self.note = ""  # the answer has come
         if status is not None:
             self.status = status
-            self.show_headers()
+        self.show_headers()
         chat.say(self.chat, text, prefix)
 
     def context(self):

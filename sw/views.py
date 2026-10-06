@@ -194,3 +194,10 @@ def draw_gap(view, first, last):
     phantoms = GAPS.setdefault(view.id(), sublime.PhantomSet(view, "sight_walk_gap"))
     phantoms.update([sublime.Phantom(sublime.Region(p), GAP_HTML, sublime.LAYOUT_INLINE)
                      for p in points])
+
+
+def selected_text(view):
+    """The text the user selected in the view, or None: what "this" means (Jakub)."""
+    if not view.sel() or view.sel()[0].empty():
+        return None
+    return view.substr(view.sel()[0])[:2000]

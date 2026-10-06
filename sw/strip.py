@@ -15,7 +15,7 @@ from .config import (DEFAULT_CONVERSATION_HEIGHT, GLIDE_MS, SETTINGS_FILE, STRIP
 from .tint import apply_grey
 from .header import BENCH as GUIDE
 from .spec import repo_root
-from .views import bench_font, make_side_view, match_font, to_layout
+from .views import bench_font, make_side_view, match_font, selected_text, to_layout
 
 FRAME_MS = 12
 
@@ -64,7 +64,6 @@ def selection_spec(view):
 class GuideStrip:
     def __init__(self, view):
         self.window = view.window()
-        self.code = selection_spec(view)
         self.side = strip_side(view)
         self.saved = self.window.get_layout()
         self.status = self.note = ""
@@ -205,7 +204,20 @@ class GuideStrip:
         return repo_root(path) or os.path.dirname(path)
 
     def context(self):
-        return {"from": "strip", "code": self.code}
+        """The selection at the moment of asking, in the view it was asked from or, if the user
+        selected elsewhere since, in another view the window shows (Jakub)."""
+        view = self.selecting_view()
+        context = {"from": "strip", "code": selection_spec(view) if view else None}
+        if view is not None and selected_text(view):
+            context["selected"] = selected_text(view)
+        return context
+
+    def selecting_view(self):
+        shown = [self.window.active_view_in_group(g) for g in range(len(self.saved["cells"]))]
+        views = [self.origin] + [v for v in shown if v is not None and v != self.origin]
+        views = [v for v in views if v.is_valid()]
+        chosen = next((v for v in views if selected_text(v)), None)
+        return chosen or (views[0] if views else None)
 
     def take_edits(self):
         return {}

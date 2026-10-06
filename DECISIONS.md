@@ -12,6 +12,8 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The guide no longer fills silence ("Czekam na Twoją kolejną wiadomość."): a timeout of wait_for_user tells it to say nothing and wait again; manual and prompt say so too (Jakub).
+- A message carries selected, the text the user selected (at the moment of asking: in the strip, in the view it was asked from or another view the window shows; in a trip, in any sight; Jakub), and the guide's manual says "this" then means exactly that text, not the whole function (Jakub asked about an expression and got the function).
 - Typing or pasting into the transcript goes on in the draft instead of being lost (Jakub found the first letter vanished); edits that delete transcript text are still only undone.
 - While an answer is on its way, the bench's header says so ("the guide is coming…" when a guide is being started, "the guide is thinking…" otherwise), in the strip and in a trip; sending in a trip also starts a guide if none listens. The first background guide called say with message instead of text and its answer was lost: say now accepts both, and the guide's prompt names text.
 - The whole code is covered by trips (Jakub): 25 trips, 7 to 11 sights each, all 229 functions; `tools/trips.py` warns about any function no trip covers. The overlay-bench geometry (`plan.bench_rect`) is gone with the overlay.

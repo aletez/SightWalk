@@ -23,7 +23,7 @@ from .spec import display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint
 from .views import (anchor, bench_font, draw_edit_button, draw_gap, draw_icons, draw_outlines, header_top,
                     hide_chrome, make_blank_view, make_header, make_side_view, prepare_code_view,
-                    reader_layout, wait_until_loaded, write_header)
+                    reader_layout, selected_text, wait_until_loaded, write_header)
 
 
 class Reader:
@@ -512,5 +512,9 @@ class Reader:
         if not self.ready:
             return {"focus": None, "visible": []}
         focus = plan.focus_sight(self.sights, self.offset, self.room(), self.overhead)
-        return {"focus": focus.spec if focus else None,
-                "visible": plan.visible_specs(self.sights, self.offset, self.room())}
+        context = {"focus": focus.spec if focus else None,
+                   "visible": plan.visible_specs(self.sights, self.offset, self.room())}
+        selected = [t for s in self.sights for t in map(selected_text, s.code_views()) if t]
+        if selected:
+            context["selected"] = selected[0]
+        return context

@@ -25,9 +25,9 @@ The setup command writes the token and the MCP server; the server reads them and
 - `sw/setup.py:57-67` install_server
 - `sw/setup.py:70-73` show_instructions
 - `sw/commands.py:11-18` SightWalkReplaceCommand.run
-- `mcp_server/sight_walk_mcp.py:72-75` load_config
-- `mcp_server/sight_walk_mcp.py:95-100` show
-- `mcp_server/sight_walk_mcp.py:81-92` call
+- `mcp_server/sight_walk_mcp.py:74-77` load_config
+- `mcp_server/sight_walk_mcp.py:97-102` show
+- `mcp_server/sight_walk_mcp.py:83-94` call
 
 ## 3. A request arrives (9 views)
 
@@ -52,8 +52,8 @@ The window and every view but the sights.
 - `sw/reader.py:46-59` Reader.make_side_views
 - `sw/views.py:83-91` make_blank_view
 - `sw/views.py:73-80` make_side_view
-- `sw/chat.py:63-69` start
-- `sw/chat.py:72-81` make_header
+- `sw/chat.py:69-75` start
+- `sw/chat.py:78-87` make_header
 - `sw/vetting.py:9-14` make
 - `sw/state.py:14-16` register
 
@@ -136,7 +136,7 @@ After a new layout: every view into its group, then back at its place.
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:356-367` Reader.poll
-- `sw/chat.py:130-143` keep_at_bottom
+- `sw/chat.py:136-149` keep_at_bottom
 - `sw/reader.py:152-166` Reader.measure_gutter
 - `sw/line_one.py:29-33` LineOne.misalignment
 - `sw/reader.py:369-376` Reader.poll_wheel
@@ -149,7 +149,7 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
-- `mcp_server/sight_walk_mcp.py:114-120` point
+- `mcp_server/sight_walk_mcp.py:116-122` point
 - `sw/bridge.py:93-95` op_point
 - `sw/state.py:34-40` require_ready
 - `sw/reader.py:390-398` Reader.point
@@ -177,15 +177,15 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 
 A reply reaches the Vetting Bench past the transcript guard.
 
-- `mcp_server/sight_walk_mcp.py:103-111` say
+- `mcp_server/sight_walk_mcp.py:105-113` say
 - `sw/bridge.py:85-90` op_say
 - `sw/reader.py:503-509` Reader.say
 - `sw/reader.py:490-492` Reader.show_headers
-- `sw/chat.py:84-95` show_header
+- `sw/chat.py:90-101` show_header
 - `sw/header.py:11-21` title_lines
-- `sw/chat.py:105-111` say
+- `sw/chat.py:111-117` say
 - `sw/commands.py:22-23` SightWalkInsertCommand.run
-- `sw/chat.py:49-60` Guard.on_text_changed
+- `sw/chat.py:49-66` Guard.on_text_changed
 - `sw/chat.py:31-39` protected_end
 - `sw/commands.py:100-102` SightWalkChatListener.on_modified
 
@@ -195,13 +195,13 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 
 - `sw/commands.py:29-37` SightWalkSendCommand.run
 - `sw/state.py:25-26` reader_for
-- `sw/reader.py:511-516` Reader.context
+- `sw/reader.py:511-520` Reader.context
 - `sw/plan.py:51-59` focus_sight
 - `sw/plan.py:62-65` visible_specs
-- `sw/chat.py:114-127` take_draft
+- `sw/chat.py:120-133` take_draft
 - `sw/reader.py:483-486` Reader.take_edits
 - `sw/bridge.py:154-165` wait_for_user
-- `mcp_server/sight_walk_mcp.py:145-148` wait_for_user
+- `mcp_server/sight_walk_mcp.py:147-150` wait_for_user
 
 ## 15. Opening the editor (9 views)
 
@@ -244,7 +244,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/commands.py:106-107` SightWalkWindowListener.on_activated
 - `sw/commands.py:85-89` SightWalkScrollCommand.run
 - `sw/commands.py:79-81` SightWalkHeaderListener.on_hover
-- `sw/chat.py:98-102` show_help
+- `sw/chat.py:104-108` show_help
 
 ## 18. Asking the guide on a selection (10 views)
 
@@ -252,74 +252,76 @@ The Vetting strip opens on the selection's side, with the conversation so far.
 
 - `sw/commands.py:116-122` SightWalkAskGuideCommand.run
 - `sw/commands.py:124-125` SightWalkAskGuideCommand.is_enabled
-- `sw/strip.py:65-76` GuideStrip.__init__
+- `sw/strip.py:65-75` GuideStrip.__init__
 - `sw/strip.py:34-39` strip_side
 - `sw/strip.py:42-50` selection_x
 - `sw/strip.py:53-61` selection_spec
-- `sw/strip.py:78-90` GuideStrip.make_views
+- `sw/strip.py:77-89` GuideStrip.make_views
 - `sw/views.py:110-115` bench_font
 - `sw/views.py:118-122` match_font
-- `sw/strip.py:200-205` GuideStrip.folder
+- `sw/strip.py:199-204` GuideStrip.folder
 
 ## 19. The strip glides (10 views)
 
 Eased frames: the window's own cells shift aside while the strip comes in.
 
-- `sw/strip.py:126-138` GuideStrip.glide
+- `sw/strip.py:125-137` GuideStrip.glide
 - `sw/strip.py:23-25` ease
-- `sw/strip.py:140-145` GuideStrip.place
-- `sw/strip.py:102-114` GuideStrip.rects
+- `sw/strip.py:139-144` GuideStrip.place
+- `sw/strip.py:101-113` GuideStrip.rects
 - `sw/strip.py:28-31` cell_rects
-- `sw/strip.py:116-124` GuideStrip.header_share
-- `sw/strip.py:96-97` GuideStrip.views
-- `sw/strip.py:92-94` GuideStrip.opened
-- `sw/strip.py:178-181` GuideStrip.poll
-- `sw/strip.py:99-100` GuideStrip.is_open
+- `sw/strip.py:115-123` GuideStrip.header_share
+- `sw/strip.py:95-96` GuideStrip.views
+- `sw/strip.py:91-93` GuideStrip.opened
+- `sw/strip.py:177-180` GuideStrip.poll
+- `sw/strip.py:98-99` GuideStrip.is_open
 
 ## 20. How Claude comes to listen to Sublime (12 views)
 
 When no agent listens, asking the guide starts one; it calls wait_for_user through the bridge and waits on the shared inbox.
 
-- `sw/guide.py:74-77` await_answer
-- `sw/strip.py:193-195` GuideStrip.note_waiting
-- `sw/guide.py:46-56` ensure
-- `sw/guide.py:29-31` listening
-- `sw/guide.py:34-35` running
-- `sw/guide.py:38-43` find_claude
-- `sw/guide.py:59-65` start
-- `mcp_server/sight_walk_mcp.py:145-148` wait_for_user
-- `mcp_server/sight_walk_mcp.py:81-92` call
+- `sw/guide.py:75-78` await_answer
+- `sw/strip.py:192-194` GuideStrip.note_waiting
+- `sw/guide.py:47-57` ensure
+- `sw/guide.py:30-32` listening
+- `sw/guide.py:35-36` running
+- `sw/guide.py:39-44` find_claude
+- `sw/guide.py:60-66` start
+- `mcp_server/sight_walk_mcp.py:147-150` wait_for_user
+- `mcp_server/sight_walk_mcp.py:83-94` call
 - `sw/bridge.py:176-185` dispatch
 - `sw/bridge.py:154-165` wait_for_user
 - `sw/state.py:67-69` listener
 
-## 21. Talking in the strip (10 views)
+## 21. Talking in the strip (12 views)
 
 A question goes to the inbox, the answer comes back to the strip; the strip glides out.
 
 - `sw/commands.py:43-49` SightWalkAskCommand.run
 - `sw/state.py:72-77` owner
 - `sw/state.py:62-64` current_bench
-- `sw/strip.py:207-208` GuideStrip.context
-- `sw/strip.py:210-211` GuideStrip.take_edits
-- `sw/strip.py:185-191` GuideStrip.say
-- `sw/strip.py:197-198` GuideStrip.show_header
+- `sw/views.py:199-203` selected_text
+- `sw/strip.py:206-213` GuideStrip.context
+- `sw/strip.py:215-220` GuideStrip.selecting_view
+- `sw/strip.py:222-223` GuideStrip.take_edits
+- `sw/strip.py:184-190` GuideStrip.say
+- `sw/strip.py:196-197` GuideStrip.show_header
 - `sw/commands.py:131-134` SightWalkCloseStripCommand.run
-- `sw/strip.py:147-153` GuideStrip.close
-- `sw/chat.py:146-154` catch_up
+- `sw/strip.py:146-152` GuideStrip.close
+- `sw/chat.py:152-160` catch_up
 
 ## 22. Endings (10 views)
 
 A trip hides the strip, the guide is stopped, windows close.
 
-- `sw/strip.py:155-164` GuideStrip.vanish_later
-- `sw/strip.py:166-176` GuideStrip.closed
+- `sw/strip.py:154-163` GuideStrip.vanish_later
+- `sw/strip.py:165-175` GuideStrip.closed
 - `sw/commands.py:140-141` SightWalkStopGuideCommand.run
 - `sw/commands.py:143-144` SightWalkStopGuideCommand.is_enabled
-- `sw/guide.py:68-71` stop
+- `sw/guide.py:69-72` stop
 - `sw/commands.py:109-110` SightWalkWindowListener.on_pre_close_window
 - `sw/state.py:19-22` forget
-- `mcp_server/sight_walk_mcp.py:129-132` close
+- `mcp_server/sight_walk_mcp.py:131-134` close
 - `sw/bridge.py:103-108` op_close
 - `sw/state.py:29-31` current_reader
 
@@ -359,8 +361,8 @@ The small classes and hooks the trips above stand on.
 
 The agent's view of the settings, and colour helpers.
 
-- `mcp_server/sight_walk_mcp.py:135-142` settings
-- `mcp_server/sight_walk_mcp.py:123-126` state
+- `mcp_server/sight_walk_mcp.py:137-144` settings
+- `mcp_server/sight_walk_mcp.py:125-128` state
 - `sw/commands.py:91-92` SightWalkScrollCommand.is_enabled
 - `sw/tint.py:57-59` band_amount
 - `sw/tint.py:62-66` scheme_stem

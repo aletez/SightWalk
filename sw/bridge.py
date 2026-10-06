@@ -159,7 +159,8 @@ def wait_for_user(timeout_s=110):
     try:
         return state.INBOX.get(timeout=timeout_s)
     except queue.Empty:
-        return {"timeout": True}
+        # The agent must not fill the silence: the user sees every say (Jakub).
+        return {"timeout": True, "next": "No message yet. Say nothing; call wait_for_user again."}
     finally:
         state.WAITING[0] -= 1
         state.LAST_WAIT[0] = time.time()

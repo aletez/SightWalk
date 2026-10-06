@@ -18,8 +18,9 @@ PLACES = ["~/.local/bin", "~/.claude/local", "/opt/homebrew/bin", "/usr/local/bi
 PROMPT = ("You are the Vetting guide. The user talks to you in SightWalk, in Sublime Text, never "
           "here: nothing you print reaches them. Call wait_for_user now. Answer every message "
           "with say(text=...), in the user's language, then call wait_for_user again. When the "
-          "user wants to walk through code, call show. On a timeout, call wait_for_user again. "
-          "Never end your turn.")
+          "user wants to walk through code, call show. A message with selected is about exactly "
+          "that text, not the function around it. On a timeout, call wait_for_user again at once "
+          "and say nothing: never announce that you wait. Never end your turn.")
 COMING = "the guide is coming…"
 THINKING = "the guide is thinking…"
 TOOLS = ["mcp__sight-walk", "Read", "Grep", "Glob"]

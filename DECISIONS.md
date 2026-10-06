@@ -157,6 +157,13 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-06, the strip lives as long as its window: parked out of the window instead of closed, so what the user set on it stays, and an empty window no longer closes.
+- 2026-10-06, the bridge validates say: a guide that says something with nothing to answer is refused, after instructions alone failed twice.
+- 2026-10-06, "this" is the selection at the moment of asking, not at opening, and an expression, not the function around it.
+- 2026-10-06, the guide starts from Sublime: asking with no agent listening starts one, so the user never goes to a terminal; and the indicator that an answer is coming.
+- 2026-10-06, the Vetting strip: instead of Claude's box laid over the code (which would recall DOS-era software), the window's layout glides aside and the conversation glides in on the selection's side; no header (the user may show tabs), a floor under the prompt, the status in the status bar or under the floor.
+- 2026-10-06, the names: Sights, sight, trip (whatever one show opens, however long), Itinerary, Map, Vetting Bench, Vetting Guide; a separate Polish metaphor (panorama, widok, wycieczka, marszruta, mapa, ławka, przewodnik), because "zabytek" sounds dead in technology.
+- 2026-10-06, the whole code covered by trips of similar difficulty, and the plan to write code for trips from one branch point to the next.
 - 2026-10-06, gap phantoms: room between gutter and code from an inline phantom per line, after catching that Claude's cover cell over the margin would have broken line highlighting and selection.
 - 2026-10-06, borders split in half: each neighbour takes half the border, so overlap hides it without covering text.
 - 2026-10-06, the line-1 pane: cutting the whole pane after line 1 (not only the gutter), keeping line 1's code a twin for long touchpad swipes, and reaching line 1's view down to line 10 for the gutter's width.

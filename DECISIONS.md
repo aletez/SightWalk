@@ -117,6 +117,8 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-06, gap phantoms: room between gutter and code from an inline phantom per line, after catching that Claude's cover cell over the margin would have broken line highlighting and selection.
+- 2026-10-06, borders split in half: each neighbour takes half the border, so overlap hides it without covering text.
 - 2026-10-06, the line-1 pane: cutting the whole pane after line 1 (not only the gutter), keeping line 1's code a twin for long touchpad swipes, and reaching line 1's view down to line 10 for the gutter's width.
 - 2026-10-06, layout rows beyond the screen: cells may lie above 0 and below 1 and slide in smoothly. Every pane got a permanent cell at its virtual place; scrolling became one cheap `set_layout`, after Claude's per-pane scrolling had hit 60-110 ms per step.
 - 2026-10-06, giving up twins and pane-by-pane wheel reading for one scroll strip: too many views scrolled at once cannot be smooth on every machine.

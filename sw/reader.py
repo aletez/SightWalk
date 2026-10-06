@@ -132,12 +132,14 @@ class Reader:
         self.settle_until = time.time() + 0.5  # a fresh reader's views settle slowly
         if not twins:
             self.measured = True
+            self.open_at_top()
             return
         seg = twins[0]
         real_x = seg.lower.text_to_window(seg.lower.text_point(1, 0))[0]
         twin_x = seg.twin.text_to_window(seg.twin.text_point(1, 0))[0]
         if abs(real_x - twin_x) <= 0.5 or self.gutter_tries > 8:
             self.measured = True
+            self.open_at_top()
             return
         self.gutter = max(self.gutter + real_x - twin_x, 1)
         self.gutter_tries += 1
@@ -233,7 +235,8 @@ class Reader:
                 rects.append((left, top, right, bottom))
                 views.append(item.view)
         # The filler covers the room below the last pane.
-        end = max(r[3] for r in rects[1:])
+        # It takes half the border with the last pane, like any neighbour (Jakub).
+        end = max(r[3] for r in rects[1:]) - OVERLAP
         rects.append((left, end, right, max(end, 0.0) + self.window_height))
         views.append(self.filler.view)
         return rects, views
@@ -307,10 +310,6 @@ class Reader:
 
     def scroll_views(self):
         """Each pane shows its range from the top of its cell; the cell itself moves, not the view."""
-        for seg in self.segments:  # measured again: phantoms are laid out late
-            if seg.lower is not None:
-                seg.lower_item.top_layout = self.line_top(seg.lower, 2)
-                seg.twin_item.top_layout = twin.content_top(seg.twin)
         for view, place in self.places():
             view.set_viewport_position((view.viewport_position()[0], place), False)
         if self.editor is not None:  # its header's text sits between blank lines too
@@ -321,9 +320,20 @@ class Reader:
     def twin_items(self):
         return [i for s in self.segments if s.lower is not None for i in (s.twin_item, s.lower_item)]
 
+    def open_at_top(self):
+        """Once the views are laid out and measured, the reader starts at the top, whatever a view
+        settling meanwhile was read as."""
+        self.offset = 0.0
+        self.render()
+
     def places(self):
         """Where each pane's view stands. A cell begins half a border above its text, so the view
-        shows its text that much lower (never above line 1)."""
+        shows its text that much lower (never above line 1). Measured afresh: phantoms are laid out
+        late, and a stale place would read as the wheel."""
+        for seg in self.segments:
+            if seg.lower is not None:
+                seg.lower_item.top_layout = self.line_top(seg.lower, 2)
+                seg.twin_item.top_layout = twin.content_top(seg.twin)
         return [(i.view, max(i.top_layout - OVERLAP / 2, 0.0)) for i in self.items + self.twin_items()]
 
     @staticmethod

@@ -21,9 +21,10 @@ from .header import BENCH, SIGHTS
 from .line_one import LineOne, line_top
 from .spec import display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint
-from .views import (anchor, bench_font, draw_edit_button, draw_gap, draw_icons, draw_outlines, header_top,
-                    hide_chrome, make_blank_view, make_header, make_side_view, prepare_code_view,
-                    reader_layout, selected_text, wait_until_loaded, write_header)
+from .views import (anchor, bench_font, draw_edit_button, draw_gap, draw_icons, draw_outlines,
+                    header_top, hide_chrome, make_blank_view, make_header, make_side_view,
+                    prepare_code_view, reader_layout, selected_text, wait_until_loaded,
+                    write_header)
 
 
 class Reader:

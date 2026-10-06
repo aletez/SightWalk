@@ -12,6 +12,7 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The Vetting strip has no header pane (the user may show tabs, Jakub): what goes on ("Vetting Guide · the guide is thinking…") is in the status bar, every view of the window, or, when the status bar is hidden, in the last line of the phantom at the strip's bottom; never in the tab name, where it would not fit and a cut text worries (Jakub); the strip is one view the whole height, and a phantom under the prompt fills the room, its top a faint line, the floor (Jakub), at the height default_conversation_height sets, so the prompt stands where a trip's bench has it (no view below: it would get a tab; Jakub).
 - The command `sight_walk_toggle_guide` toggles the Vetting strip; primary+g for it is in the keymap as a commented-out proposal (Jakub), as it would take the place of Find Next (macOS) and Go to Line (Windows, Linux).
 - The guide no longer fills silence ("Czekam na Twoją kolejną wiadomość."): a timeout of wait_for_user tells it to say nothing and wait again; manual and prompt say so too (Jakub).
 - A message carries selected, the text the user selected (at the moment of asking: in the strip, in the view it was asked from or another view the window shows; in a trip, in any sight; Jakub), and the guide's manual says "this" then means exactly that text, not the whole function (Jakub asked about an expression and got the function).

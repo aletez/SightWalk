@@ -113,8 +113,10 @@ TRIPS = [
     ("The strip glides",
      "Eased frames: the window's own cells shift aside while the strip comes in.",
      ["strip.GuideStrip.glide", "strip.ease", "strip.GuideStrip.place", "strip.GuideStrip.rects",
-      "strip.cell_rects", "strip.GuideStrip.header_share", "strip.GuideStrip.views",
-      "strip.GuideStrip.opened", "strip.GuideStrip.poll", "strip.GuideStrip.is_open"]),
+      "strip.cell_rects", "strip.GuideStrip.views",
+      "strip.GuideStrip.opened", "strip.GuideStrip.poll", "strip.GuideStrip.place_info",
+      "strip.GuideStrip.filler_px",
+      "strip.GuideStrip.is_open"]),
     ("How Claude comes to listen to Sublime",
      "When no agent listens, asking the guide starts one; it calls wait_for_user through the "
      "bridge and waits on the shared inbox.",
@@ -168,6 +170,9 @@ def functions():
 
 
 def markdown(specs):
+    gone = [name for _, _, names in TRIPS for name in names if name not in specs]
+    if gone:
+        sys.exit("trips name functions that are gone: " + ", ".join(gone))
     out = ["# Trips through SightWalk's own code", "",
            "Each trip follows one stretch of a run, in run order, one view per function. "
            "Written by `tools/trips.py`; run it again after the code changes.", ""]

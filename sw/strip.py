@@ -6,18 +6,24 @@ bench to bench (chat.TRANSCRIPT)."""
 
 import os
 import time
+from html import escape as html_escape
 
 import sublime
 
 from . import chat, scrollbars, state
 from .config import (DEFAULT_CONVERSATION_HEIGHT, GLIDE_MS, SETTINGS_FILE, STRIP_SIDE,
                      STRIP_WIDTH)
-from .tint import apply_grey
 from .header import BENCH as GUIDE
 from .spec import repo_root
 from .views import bench_font, make_side_view, match_font, selected_text, to_layout
 
 FRAME_MS = 12
+# The filler's top is a line, the floor under the prompt, so the prompt does not seem to hang in
+# the air (Jakub); its height comes from default_conversation_height.
+FLOOR = 'border-top: 1px solid color(var(--foreground) alpha(0.25))'
+FILLER_HTML = '<div style="height: %dpx; ' + FLOOR + '"></div>'
+STATUS_HTML = ('<div style="height: %dpx; ' + FLOOR + '"></div><div style="color: '
+               'color(var(--foreground) alpha(0.6)); font-style: italic">%s</div>')
 
 
 def ease(t):
@@ -67,9 +73,10 @@ class GuideStrip:
         self.side = strip_side(view)
         self.saved = self.window.get_layout()
         self.status = self.note = ""
+        self.info_at = None  # where the filler phantom stands: (end of text, height, status bar)
+        self.text = GUIDE
         self.closing = False
         self.origin = view
-        self.head = None
         self.make_views(view)
         self.glide(0.0, 1.0, self.opened)
         self.poll()
@@ -80,12 +87,8 @@ class GuideStrip:
             "sight_walk_strip": True, "scroll_past_end": False})
         match_font(self.chat, code_view)
         chat.start(self.chat)
-        self.below = make_side_view(self.window, "", {})
-        self.below.set_read_only(True)
-        self.header = chat.make_header(self.window, self.chat, GUIDE)
-        self.header.settings().set("sight_walk_strip", True)
-        apply_grey(self.header)
-        bench_font(self.chat)  # after the header, which keeps the font of code
+        bench_font(self.chat)
+        self.info = sublime.PhantomSet(self.chat, "sight_walk_info")
         self.show_header()
 
     def opened(self):
@@ -93,34 +96,20 @@ class GuideStrip:
         scrollbars.reader_focused(True)  # a focus the plugin sets is not reported as activated
 
     def views(self):
-        return [self.header, self.chat, self.below]
+        return [self.chat]
 
     def is_open(self):
         return not self.closing and self.chat.is_valid()
 
     def rects(self, shown):
-        """The window's own cells shifted aside by shown quarters, then the strip's header,
-        conversation and an empty view below, at the heights a trip's bench has, so a trip opening
-        over the strip finds the conversation where it was (Jakub). shown: 0 (out) to 1 (in)."""
+        """The window's own cells shifted aside by shown quarters, then the strip's conversation,
+        the whole height: no header and no view below, as the user may show tabs (see
+        place_info). shown: 0 (out) to 1 (in)."""
         width = STRIP_WIDTH * shown
         shift = width if self.side == "left" else -width
         left = width - STRIP_WIDTH if self.side == "left" else 1.0 - width
         own = [(x0 + shift, y0, x1 + shift, y1) for x0, y0, x1, y1 in cell_rects(self.saved)]
-        head, right = self.header_share(), left + STRIP_WIDTH
-        split = sublime.load_settings(SETTINGS_FILE).get("default_conversation_height",
-                                                         DEFAULT_CONVERSATION_HEIGHT)
-        split = max(split, head + 0.05)
-        return own + [(left, 0.0, right, head), (left, head, right, split), (left, split, right, 1.0)]
-
-    def header_share(self):
-        """The header's two lines as a share of the window's height, measured on the code view
-        the strip was asked from: its height in px over its cell's share."""
-        if self.head is None:
-            cells = cell_rects(self.saved)
-            _, y0, _, y1 = cells[self.window.get_view_index(self.origin)[0]]
-            height = self.origin.viewport_extent()[1] / max(y1 - y0, 0.01)
-            self.head = min((2 * self.header.line_height() + 10) / max(height, 1), 0.2)
-        return self.head
+        return own + [(left, 0.0, left + STRIP_WIDTH, 1.0)]
 
     def glide(self, start, end, then=None):
         """Moves the strip from start to end (0 out, 1 in) within GLIDE_MS, eased."""
@@ -166,6 +155,8 @@ class GuideStrip:
         for view in self.views():
             if view.is_valid():
                 view.close()
+        for view in self.window.views():
+            view.erase_status("sight_walk")
         self.window.set_layout(self.saved)
         if refocus and self.origin.is_valid():
             self.window.focus_view(self.origin)
@@ -176,7 +167,10 @@ class GuideStrip:
 
     def poll(self):
         if self.is_open():
-            chat.keep_at_bottom(self.chat)
+            filler = self.filler_px()
+            chat.keep_at_bottom(self.chat, room=filler / self.chat.line_height())
+            if (self.chat.size(), filler, self.window.is_status_bar_visible()) != self.info_at:
+                self.place_info()
             sublime.set_timeout(self.poll, 16)
 
     # As a listener, like a trip
@@ -194,7 +188,29 @@ class GuideStrip:
         self.show_header()
 
     def show_header(self):
-        chat.show_header(self.header, GUIDE, self.note or self.status, help_mark=False)
+        """What goes on, in the status bar, or at the strip's bottom if the status bar is hidden
+        (see place_info). Never in the tab: it would not fit, and a cut text worries (Jakub)."""
+        state_text = self.note or self.status
+        self.text = GUIDE + (" · " + state_text if state_text else "")
+        for view in self.window.views():  # the status bar shows the focused view's status
+            view.set_status("sight_walk", self.text)
+        self.info_at = None  # placed again on the next poll
+
+    def filler_px(self):
+        """Room under the prompt, so it stands where a trip's bench has it (Jakub)."""
+        split = sublime.load_settings(SETTINGS_FILE).get("default_conversation_height",
+                                                         DEFAULT_CONVERSATION_HEIGHT)
+        return int(self.chat.viewport_extent()[1] * (1.0 - split))
+
+    def place_info(self):
+        """Under the prompt, a phantom as the filler: a view there would get a tab of its own
+        (Jakub). With the status bar hidden, its last line says what goes on. Moved as the draft
+        grows."""
+        end, filler, bar = self.chat.size(), self.filler_px(), self.window.is_status_bar_visible()
+        html = FILLER_HTML % filler if bar else STATUS_HTML % (
+            filler - self.chat.line_height(), html_escape(self.text))
+        self.info.update([sublime.Phantom(sublime.Region(end), html, sublime.LAYOUT_BLOCK)])
+        self.info_at = (end, filler, bar)
 
     def folder(self):
         """Where a guide started from the strip works: the selection's repository."""

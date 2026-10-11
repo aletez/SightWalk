@@ -1,6 +1,5 @@
 [
     {"caption": "SightWalk: Set Up Agent Bridge", "command": "sight_walk_setup"},
-    {"caption": "SightWalk: Ask the Vetting Guide", "command": "sight_walk_ask_guide"},
     {"caption": "SightWalk: Stop the Vetting Guide", "command": "sight_walk_stop_guide"},
     {"caption": "Preferences: SightWalk Settings", "command": "edit_settings",
      "args": {"base_file": "${packages}/SightWalk/SightWalk.sublime-settings", "default": "{\n\t$0\n}\n"}},

@@ -64,7 +64,7 @@ class Reader:
     def load(self, specs, root=None, trip=None):
         self.ready = self.measured = False
         self.trip = trip or ""
-        chat.catch_up(self.chat)  # what was said on the Vetting strip meanwhile
+        chat.catch_up(self.chat)  # what was said in another trip meanwhile
         self.close_sights()
         self.gutter, self.gutter_tries = GUTTER_PX, 0
         self.sights = [plan.Sight(spec, *parse_spec(spec, root)) for spec in specs]

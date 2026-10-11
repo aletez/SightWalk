@@ -1,13 +1,11 @@
-"""The open trips (Reader, one per window), the one the agent talks to, the small bench if one is
-open, and the messages waiting for the agent."""
+"""The open trips (Reader, one per window), the one the agent talks to, and the messages waiting
+for the agent."""
 
 import queue
 
 READERS = {}
 ACTIVE = [None]
-BENCH = [None]  # the Vetting strip that is open, if one is
-STRIPS = {}  # window id: its Vetting strip, open or parked out of the window
-INBOX = queue.Queue()  # the user's messages, from a trip or the Vetting strip
+INBOX = queue.Queue()  # the user's messages, from a trip
 WAITING = [0]  # agents waiting for the user right now
 LAST_WAIT = [0.0]  # when an agent last stopped waiting
 # Something to say about: a message came, or the agent opened a trip, since it last waited. A say
@@ -21,7 +19,6 @@ def register(reader):
 
 
 def forget(window):
-    STRIPS.pop(window.id(), None)
     reader = READERS.pop(window.id(), None)
     if reader is not None and ACTIVE[0] is reader:
         ACTIVE[0] = None
@@ -52,11 +49,6 @@ def close_all():
             reader.window.run_command("close_window")
     READERS.clear()
     ACTIVE[0] = None
-    for strip in STRIPS.values():  # at once: no frames run after an unload
-        if strip.window.is_valid():
-            strip.discard()
-    STRIPS.clear()
-    BENCH[0] = None
 
 
 def render_all():
@@ -66,19 +58,6 @@ def render_all():
             reader.render()
 
 
-def current_bench():
-    bench = BENCH[0]
-    return bench if bench is not None and bench.is_open() else None
-
-
-def listener():
-    """Where the agent talks: the small bench while one is open, else the current trip."""
-    return current_bench() or current_reader()
-
-
 def owner(view):
-    """The trip or the Vetting strip whose conversation the view is, or None."""
-    bench = current_bench()
-    if bench is not None and view in bench.views():
-        return bench
+    """The trip whose window the view is in, or None."""
     return reader_for(view.window())

@@ -16,7 +16,7 @@ SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 # changes it, and it records the new text before each of its own edits.
 PROTECTED = {}
 GUARDS = {}
-# The one conversation, carried from bench to bench: a trip's, the Vetting strip's (Jakub).
+# The one conversation, carried from trip to trip (Jakub).
 TRANSCRIPT = [""]
 MAC = sublime.platform() == "osx"
 KEYS = (("Enter (⇧+Enter: new line)", "⌃⌘↓", "⌃⌘↑") if MAC

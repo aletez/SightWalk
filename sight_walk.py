@@ -11,10 +11,8 @@ for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
 from .sw import bridge, guide, scrollbars, state  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
-    SightWalkAskGuideCommand,
     SightWalkChatListener,
     SightWalkCloseEditorCommand,
-    SightWalkCloseStripCommand,
     SightWalkEditCommand,
     SightWalkHeaderListener,
     SightWalkInsertCommand,

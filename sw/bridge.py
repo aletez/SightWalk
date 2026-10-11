@@ -72,11 +72,7 @@ def check_show(sights, center, panes):
 def op_show(sights=None, root=None, center=None, trip=None, panes=None):
     check_show(sights, center, panes)
     check_sights(sights, root)
-    bench = state.current_bench()
     reader = state.current_reader() or new_reader()
-    if bench is not None:  # the trip takes the conversation over; its window hides the strip
-        reader.status = bench.status
-        bench.vanish_later(1000, reader.window)
     reader.load(sights, root, trip)
     state.ADDRESSED[0] = True  # the agent may say what the trip is about
     scrollbars.reader_focused(True)  # a new window is not reported as activated
@@ -84,9 +80,9 @@ def op_show(sights=None, root=None, center=None, trip=None, panes=None):
 
 
 def op_say(text, status=None):
-    listener = state.listener()
+    listener = state.current_reader()
     if listener is None:
-        raise RuntimeError("No trip or bench is open. Call show first.")
+        raise RuntimeError("No trip is open. Call show first.")
     if not state.ADDRESSED[0]:
         raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
                          "Say nothing; call wait_for_user.")
@@ -156,9 +152,8 @@ def run_on_main(fn, timeout=10):
 
 
 def wait_for_user(timeout_s=110):
-    if state.listener() is None:
-        return {"error": "No trip or Vetting strip is open. Call show first, or wait for the "
-                         "user to ask on a selection."}
+    if state.current_reader() is None:
+        return {"error": "No trip is open. Call show first."}
     state.WAITING[0] += 1
     state.ADDRESSED[0] = False
     try:

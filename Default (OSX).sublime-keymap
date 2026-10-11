@@ -1,4 +1,4 @@
-// Anywhere in a trip or the Vetting strip (setting.sight_walk is on every SightWalk view), the
+// Anywhere in a trip (setting.sight_walk is on every SightWalk view), the
 // swap-line keys ask for the next or previous step.
 [
     {"keys": ["ctrl+super+down"], "command": "sight_walk_ask", "args": {"text": "Explain next."}, "context": [{"key": "setting.sight_walk"}]},

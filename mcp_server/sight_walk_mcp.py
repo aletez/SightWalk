@@ -39,10 +39,6 @@ Conversation
 - Otherwise resolve indexicals such as "here", "this", "it" or "this line" against focus,
   unless the message clearly points elsewhere.
 - Answer with say. Keep answers short. Then call wait_for_user again.
-- The user can also ask you outside a trip: on a selection in any window, the Vetting strip
-  glides in. Its messages come with from "strip" and code, the selection as "file:begin-end";
-  say answers there. When the user wants to walk the code, call show: the trip opens and the
-  strip closes. The conversation goes on from one to the other.
 - When the topic moves on, pass say a status: a few words on what the conversation is about
   now, like a chat title that follows along. It stays in the header until you change it.
 - "Explain next." and "Explain previous." (sent by shortcuts) mean the next or previous step

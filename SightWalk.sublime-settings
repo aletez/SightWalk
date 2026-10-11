@@ -13,10 +13,6 @@
     // Where the Vetting Bench (the conversation) sits: "left" or "right" of the Sights.
     "bench_side": "left",
 
-    // The side the Vetting strip glides in from: "auto" (the side of the selection, so it stays
-    // in view), "left" or "right".
-    "strip_side": "auto",
-
     // The bench's font, proportional for easier reading: one font, or one per system; "" keeps
     // your editor's font. Its size is set per syntax: in "SightWalkChat.sublime-settings"
     // (Preferences → Settings – Syntax Specific, with the cursor on a bench).

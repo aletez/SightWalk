@@ -12,6 +12,9 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- "References without sentinel" (Jakub's name for the underlined uses): a button beside "Change the metaphor" toggles their underlines in every trip.
+- Questions the code already asks (Jakub's idea, made mechanical): sw/questions.py finds the guards the code uses in at least two places (is_valid and the like, is None) and, in each Python sight, the stored objects (self.window, reader.chat) a function uses without that question; they get a faint dotted underline, and hovering shows where the code asks. Unit-tested; not yet seen on screen. Expect some noise (self.view in a command is always valid).
+- "Change the metaphor" (Jakub): a button under the strip's floor and at the top of the pane under a trip's bench; it sends "Change the metaphor." The guide's manual says to retell the step in another metaphor and invite the user to tell it; and, when the user tells a step, to be a sceptical listener marking only where the code differs. Needs setup and a new guide session.
 - The Vetting strip lives as long as its window (Jakub): closing glides it out of the window, where its view stays in a cell off screen, and asking again glides the same view back in, with the font size the user gave it. This also keeps an otherwise empty window from closing. A trip opening over the strip parks it the same way. If the user changes the window's layout while the strip is parked, its view lands in one of their cells; asking again takes it out to its own place (Jakub). A plugin reload closes the parked views and gives the windows their own layouts back.
 - The per-system keymaps no longer bind the explain keys twice (setting.sight_walk_chat and setting.sight_walk: every bench also has sight_walk; Jakub).
 - Command palette: "Preferences: SightWalk Settings" (the plugin's settings) and "Preferences: SightWalk Bench Settings" (the bench syntax's settings: font size and more), both side by side with the user's file (Jakub).
@@ -65,6 +68,7 @@ Changed, not yet verified in Sublime:
 - Repo-relative header paths, `~` in specs, suffix matching at path separators.
 
 Open:
+- To do (Jakub, 2026-10-10): the guide's status ("the guide is thinking…") goes back under the floor everywhere, in the strip and in a trip's bench alike; never in a tab name and never in the status bar. Replaces the status-bar placement noted above.
 - Question (Jakub): with centring gone, is scrolling past the point where the last pane is fully visible still useful? Kept for now.
 - Later: make sure an unusual base text colour in a colour scheme does not blend with an unluckily drawn header hue (e.g. check the contrast between the band and the text and shift the hue or the amount when it is too low).
 - The pane below the conversation becomes a tabbed space: its header is a row of a few small horizontal panes acting as tabs (Jakub's "editable tab" idea, the origin of the headers), over the ledger, route map and legend. Route comes first. The tabs are real text (selectable, copyable), not renamable. A diagram tab (a UML-like picture of the code in an image pane) is Jakub's favourite candidate.
@@ -82,10 +86,21 @@ Open:
 
 ## Plans (Jakub)
 
+- Philosophy (Jakub): vettable code or no code at all.
+- Vettify / vettification (names, Jakub): making code vettable, the mechanical refactorer below.
+- A mechanical refactorer for legacy code (Jakub): it reshapes existing code into walkable functions with a guarantee that the logic did not change; only then vetting by trips. Shape (Claude): a small catalogue of transformations (extract a block into a function, split a function at a statement boundary), each applied only where its preconditions are checked on the syntax tree (single entry and exit, no return/yield/break/continue/nonlocal in the block, the variables it reads become parameters, those it writes and later reads become results), and refused anywhere else. Each result is validated by translation: inlining it back mechanically must give the original tree, normalised. The model may only propose where to cut and what to call the new functions; names are the one part the human vets, the logic is untouched by construction. Stated limits: Python's introspection (locals(), frames, tracebacks, recursion depth) is outside the guarantee.
 - README: the English README links to a Polish one, written in the Polish metaphor (panorama, widok, wycieczka, marszruta, mapa, ławka).
 - Far future, only after SightWalk has been used in recruitment: a Polish-language version of the tool.
 - If this approach to vetting catches on: promote writing code for it. Tell the coding assistant to write with trips in mind: each trip from one branch point to the next (not necessarily at most six sights), so that at the end of a trip the user can decide on the values of the new variables.
 - Assistant personalities, two or three to choose from in later versions: a senior who explains hard code well; a junior who presents their code to a senior and states their doubts clearly.
+- Vetting on the dry, ideas (2026-10-06), all without running the code:
+  - Questions the code already asks, carried elsewhere (Jakub's implicit clever question as a mechanism): every guard in the code (is_valid, is None, emptiness) is a question its author once asked; where the same kind of object is used without it, the trip says where the code asks it. Done first (see Status).
+  - Crossings: a sight on several trips shows all its arrivals, who comes and with what, from the call graph; bugs live where a function assumes one arrival's state and gets another's.
+  - The user tells the trip back, in a metaphor, as the spec; a sceptical guide only checks, sentence by sentence, where the code does something else. A "Change the metaphor" button retells a step or a trip and reminds the user they can tell it too.
+- Three further ideas (Claude, for safe and effective generation at superhuman speed):
+  - Trust seals that survive changes: a sight walked carries a seal (who, when, which trip, content hash); a change breaks only the seals it touches, and SightWalk plans the shortest itinerary that restores them. Review cost follows the change, not the codebase; the generating agent sees the seal map.
+  - Stories as specification: the user's own tellings stay with the sights; every later change is checked, dry, against all earlier stories about those places (a regression of meaning).
+  - Walkable code or none: a mechanical gate before any human looks (each function fits a sight, each changed line lies on a named trip from branch point to branch point); and the guide is never the session that wrote the code.
 
 ## Decisions
 

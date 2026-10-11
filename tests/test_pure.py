@@ -6,7 +6,7 @@
 import os
 import unittest
 
-from sw import header, marks, plan, spec
+from sw import header, marks, plan, questions, spec
 
 LH = 10.0  # line height
 OVERHEAD = 4.0  # px a cell adds to its content
@@ -70,6 +70,29 @@ class MarksTest(unittest.TestCase):
         self.assertEqual((first, last), ((0, 0), (1, 0)))  # line 0 is a sight's header
         self.assertEqual(marks.gutter_icons(indicators, first, last),
                          {(0, 1): "digit_1", (1, 0): "eye_down"})
+
+
+class QuestionsTest(unittest.TestCase):
+    GUARDS = (
+        "def a(self):\n    if self.window.is_valid():\n        self.window.run()\n"
+        "def b(reader):\n    if reader.window.is_valid():\n        pass\n")
+    USE = "def c(self):\n    self.view.close()\n    self.window.set_layout(x)\n"
+
+    def test_catalogue_keeps_habits(self):
+        known = questions.catalogue({"g.py": self.GUARDS})
+        self.assertEqual(list(known), [("window", "is_valid")])
+        self.assertEqual(len(known[("window", "is_valid")]), 2)
+
+    def test_unasked(self):
+        known = questions.catalogue({"g.py": self.GUARDS})
+        found = questions.unasked(self.USE, 1, 3, known)
+        self.assertEqual([(f[0], f[3]) for f in found], [(3, [("window", "is_valid")])])
+        self.assertEqual(questions.unasked(self.GUARDS, 1, 3, known), [])
+
+    def test_modules_are_no_subjects(self):
+        known = questions.catalogue({"g.py": "def a(p):\n    if os.path.exists(p):\n        pass\n"
+                                              "def b(p):\n    if os.path.exists(p):\n        pass\n"})
+        self.assertEqual(known, {})
 
 
 class SpecTest(unittest.TestCase):

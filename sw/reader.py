@@ -12,7 +12,7 @@ import time
 
 import sublime
 
-from . import chat, marks, plan, state, vetting
+from . import asked, chat, marks, plan, state, vetting
 from .config import (BENCH_WIDTH, DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, GUTTER_PX, INSET,
                      OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S,
                      WHEEL_MS)
@@ -96,6 +96,7 @@ class Reader:
             opened.add(sight.path)
         self.tint(originals)
         self.draw_gaps()
+        asked.draw(self.sights)
         self.make_items()
         if self.height is None:
             self.calibrate()

@@ -3,7 +3,7 @@
 import sublime
 import sublime_plugin
 
-from . import chat, guide, scrollbars, state
+from . import asked, chat, guide, scrollbars, state
 from .strip import GuideStrip
 
 
@@ -174,3 +174,22 @@ class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
         if origin is not None:
             strip.open(origin)
             state.BENCH[0] = strip
+
+
+class SightWalkSightListener(sublime_plugin.ViewEventListener):
+    """Hovering a use the code's own questions point at (see asked)."""
+
+    @classmethod
+    def is_applicable(cls, settings):
+        return settings.get("sight_walk_code", False)
+
+    def on_hover(self, point, hover_zone):
+        if hover_zone == sublime.HOVER_TEXT:
+            asked.show_popup(self.view, point)
+
+
+class SightWalkToggleSentinelsCommand(sublime_plugin.TextCommand):
+    """References without sentinel: their underlines on or off (see asked)."""
+
+    def run(self, edit):
+        asked.toggle()

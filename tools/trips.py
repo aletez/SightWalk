@@ -130,7 +130,8 @@ TRIPS = [
      "A question goes to the inbox, the answer comes back to the strip; the strip glides out.",
      ["commands.SightWalkAskCommand.run", "state.owner", "state.current_bench", "views.selected_text",
       "strip.GuideStrip.context", "strip.GuideStrip.selecting_view", "strip.GuideStrip.take_edits", "strip.GuideStrip.say",
-      "strip.GuideStrip.show_header", "commands.SightWalkCloseStripCommand.run",
+      "strip.GuideStrip.show_header", "views.bench_button",
+      "commands.SightWalkCloseStripCommand.run",
       "strip.GuideStrip.close", "chat.catch_up"]),
     ("Endings",
      "A trip hides the strip, the guide is stopped, windows close.",
@@ -154,6 +155,18 @@ TRIPS = [
      "The agent's view of the settings, and colour helpers.",
      ["sight_walk_mcp.settings", "sight_walk_mcp.state", "commands.SightWalkScrollCommand.is_enabled",
       "tint.band_amount", "tint.scheme_stem", "tint.hex_rgb", "tint.apply_grey"]),
+    ("Questions the code already asks",
+     "Guards found in the code itself, carried to the sights that use the same objects without "
+     "them.",
+     ["reader.Reader.build", "asked.draw", "asked.sources", "questions.catalogue",
+      "questions.functions", "questions.conditions", "questions.asked_in", "questions.subject",
+      "questions.unasked", "questions.uses"]),
+    ("Seeing where the code asks",
+     "The underline and the popup that says where the code asks the question.",
+     ["asked.mark", "asked.popup_html", "asked.escape",
+      "commands.SightWalkSightListener.is_applicable", "commands.SightWalkSightListener.on_hover",
+      "asked.show_popup", "asked.paint", "asked.toggle",
+      "commands.SightWalkToggleSentinelsCommand.run"]),
 ]
 
 

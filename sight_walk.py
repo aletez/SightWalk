@@ -8,7 +8,7 @@ import sublime
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import bridge, guide, scrollbars, state  # noqa: E402
+from .sw import bridge, guide, mcp_http, scrollbars, state  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkChatListener,
@@ -30,6 +30,7 @@ from .sw.setup import SightWalkSetupCommand  # noqa: E402,F401
 
 def plugin_loaded():
     bridge.start()
+    mcp_http.start()
     sublime.load_settings("SightWalk.sublime-settings").add_on_change("sight_walk_layout",
                                                                     state.render_all)
 
@@ -40,3 +41,4 @@ def plugin_unloaded():
     state.close_all()
     guide.stop()
     bridge.stop()
+    mcp_http.stop()

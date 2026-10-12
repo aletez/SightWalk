@@ -21,6 +21,9 @@ Showing code
   function as control reaches it. When the user asks about another branch (an error, a
   different input, another caller), call show again with the sequence for that branch.
 - Each sight holds exactly one whole function, from its signature to its last line.
+- Where control passes through code outside the project (a library calls the project's method
+  by name, a framework dispatches to a handler), show that library function too, with an
+  absolute path, and mark the jump with point. The user should never have to take it on faith.
 
 Writing code that fits the reader
 - Keep functions short, so that one and a half sights fit on the screen at once. With a
@@ -28,22 +31,24 @@ Writing code that fits the reader
 - When a function is longer, split it into well-named helpers before showing it.
 
 Conversation
-- Call wait_for_user to receive the user's next message. It returns the text, the sight
-  nearest the middle of the screen (focus) and the visible sights. On timeout, call it again
+- Call wait_for_user to receive the user's next message. It returns the text, the
+  visible sights and, once the user has put the caret or a selection in a sight, that sight
+  (focus) and the caret's line (here, "file:line"). On timeout, call it again
   at once and say nothing: never announce that you are waiting.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.
 - When a message comes with selected, the user selected that text: "this", "what is this"
   mean exactly it (an expression, a name, a line), not the whole function around it.
-- Otherwise resolve indexicals such as "here", "this", "it" or "this line" against focus,
-  unless the message clearly points elsewhere.
+- Otherwise resolve indexicals such as "here", "this", "it" or "this line" against here and
+  focus: the place the user touched last, unless the message clearly points elsewhere.
 - Answer with say. Keep answers short. Then call wait_for_user again.
 - When the topic moves on, pass say a status: a few words on what the conversation is about
   now, like a chat title that follows along. It stays in the header until you change it.
 - "Explain next." and "Explain previous." (sent by shortcuts) mean the next or previous step
-  in the run order you are showing.
-- "Change the metaphor." (a button) asks you to retell the step in focus, or the selected
+  in the code's logic from what you last explained ("here"), not from where the user has
+  scrolled.
+- "Change the metaphor." (a button) asks you to retell the step at here, or the selected
   text, through another everyday metaphor than any you used so far, in a few sentences. End by
   inviting the user to tell it their own way.
 - When the user tells a step or a trip in their own words, be a sceptical listener: check each
@@ -127,7 +132,8 @@ def point(marks: list[dict], reveal: bool = True, clear: bool = True) -> dict:
 
 @mcp.tool()
 def state() -> dict:
-    """Return the sights, the focus sight nearest the screen centre and the visible sights."""
+    """Return the sights, the visible sights, and the sight and line the user touched last
+    (focus, here)."""
     return call("state")
 
 
@@ -135,6 +141,14 @@ def state() -> dict:
 def close() -> dict:
     """Close the reader window."""
     return call("close")
+
+
+@mcp.tool()
+def browse(folder: str) -> dict:
+    """Open a trip with no sights: a file browser on folder (absolute path) in their place. It
+    replaces the open trip; the conversation goes on. A file the user opens there becomes the
+    trip's one sight, the whole file; your next message then has it as focus."""
+    return call("browse", folder=folder)
 
 
 @mcp.tool()
@@ -149,7 +163,7 @@ def settings(values: Optional[dict] = None) -> dict:
 
 @mcp.tool()
 def wait_for_user(timeout_s: int = 110) -> dict:
-    """Wait for the user's next message. Returns text, focus and visible, or timeout."""
+    """Wait for the user's next message. Returns text, visible, focus and here, or timeout."""
     return call("wait_for_user", timeout=timeout_s + 5, timeout_s=timeout_s)
 
 

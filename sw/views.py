@@ -21,15 +21,6 @@ FADED = "color(var(--foreground) alpha(0.45))"
 BUTTON = "Edit (Enter)"
 BUTTON_HTML = ('<a href="edit" style="color: %s; text-decoration: none; border: 1px solid %s; '
                'border-radius: 3px; padding: 0 4px">%s</a>' % (FADED, FADED, BUTTON))
-# Under the bench's floor: the guide retells the step or the trip in another metaphor, and the
-# button's mere presence reminds the user they can tell it their own way too (Jakub).
-METAPHOR = "Change the metaphor."
-METAPHOR_HTML = ('<a href="metaphor" style="color: %s; text-decoration: none; border: 1px solid '
-                 '%s; border-radius: 3px; padding: 0 4px">Change the metaphor</a>' % (FADED, FADED))
-SENTINEL_HTML = ('<a href="sentinel" style="color: %s; text-decoration: none; border: 1px solid '
-                 '%s; border-radius: 3px; padding: 0 4px">References without sentinel</a>'
-                 % (FADED, FADED))
-BENCH_BUTTONS_HTML = METAPHOR_HTML + "&nbsp;&nbsp;" + SENTINEL_HTML
 # A zero-width space: Sublime leaves out an empty phantom.
 GAP_HTML = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
 BUTTONS = {}
@@ -63,8 +54,8 @@ def to_layout(rects, total):
 
 def reader_layout(code_rects, total, top, split, bench, editor=None):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
-    the editor if open, the Sights, the conversation and, once top is known, its header and the
-    pane below it.
+    the editor if open, the Sights, the conversation and, once top is known, its header, the
+    vetting pane's header and the vetting pane.
     top: the conversation header's bottom, split: the conversation's bottom (px).
     bench: the Vetting Bench's (left, right) as shares of the width.
     editor: (header height, left, right, top) or None."""
@@ -72,7 +63,10 @@ def reader_layout(code_rects, total, top, split, bench, editor=None):
     x0, x1 = bench
     if not top:
         return to_layout(rects + [(x0, 0.0, x1, total)], total)
-    rects += [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP), (x0, split, x1, total)]
+    # The vetting pane's header is as tall as the bench's, and stays put while the pane scrolls.
+    below = split + top
+    rects += [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP), (x0, split, x1, below + OVERLAP),
+              (x0, below, x1, total)]
     if editor:
         header, left, right, dy = editor
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects
@@ -254,12 +248,3 @@ def selected_text(view):
     if not view.sel() or view.sel()[0].empty():
         return None
     return view.substr(view.sel()[0])[:2000]
-
-
-def bench_button(chat_view, href):
-    """A click on a button under the bench's floor: "metaphor" asks the guide, as if the user had
-    sent it; "sentinel" toggles the underlines of references without sentinel (see asked)."""
-    if href == "metaphor":
-        chat_view.run_command("sight_walk_ask", {"text": METAPHOR})
-    elif href == "sentinel":
-        chat_view.run_command("sight_walk_toggle_sentinels")

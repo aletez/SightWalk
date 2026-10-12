@@ -81,6 +81,8 @@ class Reader:
             apply_grey(header)
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
+        self.below_header = chat.make_header(self.window, self.chat, vetting.TABS)
+        apply_grey(self.below_header)
 
     # Loading
 
@@ -107,7 +109,8 @@ class Reader:
         h, split = BROWSER_HEADER, DEFAULT_CONVERSATION_HEIGHT
         (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
         cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split), self.chat),
-                 ((b0, split, b1, 1.0), self.below), ((s0, 0.0, s1, h), self.strip_header),
+                 ((b0, split, b1, split + h), self.below_header), ((b0, split + h, b1, 1.0), self.below),
+                 ((s0, 0.0, s1, h), self.strip_header),
                  ((s0, h, s1, 1.0), self.strip), ((c0, 0.0, c1, h), self.sights_header),
                  ((c0, h, c1, 1.0), self.browser)]  # the browser heads itself with its folder
         self.window.set_layout(to_layout([rect for rect, _ in cells], 1.0))
@@ -392,7 +395,7 @@ class Reader:
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        for k, view in enumerate([self.chat_header, self.below]):
+        for k, view in enumerate([self.chat_header, self.below_header, self.below]):
             self.window.set_view_index(view, n + k if full else n - 1, 0 if full else k + 1)
 
     def render(self, settle=True):
@@ -439,7 +442,8 @@ class Reader:
         """Where each view stands in its cell, as a layout y: the filler at its anchor, a sight's
         views at their text, half a border lower, as their cells begin that much higher (never
         above line 1)."""
-        places = [(view, anchor(view)) for view in (self.filler, self.strip, self.top_filler)]
+        places = [(view, anchor(view))
+                  for view in (self.filler, self.strip, self.top_filler, self.below)]
         for sight in self.sights:
             # A fresh copy is laid out late, so a code line's place is measured each time.
             texts = [(item.view, line_top(item.view, item.line) if item.line else item.top_layout)
@@ -450,12 +454,12 @@ class Reader:
         return places
 
     def wheel_places(self):
-        """The views whose wheel moves the whole trip: the strip, the fillers and the sights'
-        headers. A sight's code scrolls on its own (Jakub)."""
+        """The views whose wheel moves the whole trip: the strip, the fillers, the Scroll pane under
+        the bench and the sights' headers. A sight's code scrolls on its own (Jakub)."""
         heads = [i for s in self.sights for i in [s.header_item] + s.frozen_items]
         headers = [(i.view, max((line_top(i.view, i.line) if i.line else i.top_layout)
                                 - OVERLAP / 2, 0.0)) for i in heads]
-        return self.places()[:3] + headers
+        return self.places()[:4] + headers
 
     def scroll_views(self):
         """Every view at its place; the cells move, the views do not. Views already there are
@@ -618,6 +622,7 @@ class Reader:
 
     def show_headers(self):
         chat.show_header(self.chat_header, BENCH, self.note or self.status)
+        chat.show_header(self.below_header, vetting.TABS, "", help_mark=False)
         chat.show_header(self.sights_header, SIGHTS, self.trip,
                          button=("Reset positions", self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.

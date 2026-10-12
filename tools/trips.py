@@ -129,7 +129,7 @@ TRIPS = [
     ("Talking on the bench",
      "A question goes to the inbox with what is selected; the answer comes back to the bench.",
      ["commands.SightWalkAskCommand.run", "state.owner", "views.selected_text",
-      "views.bench_button", "chat.catch_up"]),
+      "chat.catch_up"]),
     ("Endings",
      "The guide is stopped, windows close.",
      ["commands.SightWalkStopGuideCommand.run", "commands.SightWalkStopGuideCommand.is_enabled",

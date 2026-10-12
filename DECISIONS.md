@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- The pane under the bench is called Tools for now (Jakub). It shows a Scroll tab (Jakub, 2026-10-12): blank, in the bench's colours, its wheel moves the whole trip like the Sights' fillers. It has a fixed header of its own, as tall as the bench's, with the tabs (for now only "Scroll"), so the title no longer jumps while the pane scrolls. Tabs Itinerary and Map come later; until then no placeholder. No ▲▼ there. (Verified by Jakub, 2026-10-12.)
 - "SightWalk: Reset Sights" (palette) and [Reset positions] at the right of the Sights' header (alpha, Jakub): show the trip's sights again as the agent gave them. Open bug behind it (Jakub): after opening the editor and coming back, a sight's range was lost. (Verified by Jakub, 2026-10-12.)
 - The scroll strip is twice a scroll bar's width (`STRIP_PX` = 32: Option + wheel works with a mouse wheel but not with a touchpad, so the strip stays the touchpad's way for now) and its header keeps the band without the name; ▲ at its top and ▼ at its floor scroll the trip by 0.15 of a screen (setting `strip_step`); the arrows are drawn larger (1.6 rem), for a mouse without a wheel (Jakub). (Verified by Jakub, 2026-10-12.)
 - Fixes after Jakub's check (2026-10-12), seen by Claude on screen: line numbers take the scheme's text colour (gutter_foreground), so they stay readable on the band in light schemes; headers are grey again: a view scheme "auto" is resolved through sublime.ui_info() before deriving; "here" follows clones too: on_selection_modified moved from a view listener (which never applies to a clone, since it gets its settings after it is made) to the window listener; clicking a clone sight and a line-1 sight both set focus and here. (Verified by Jakub, 2026-10-12.)
@@ -95,6 +96,7 @@ Changed, not yet verified in Sublime:
 - Repo-relative header paths, `~` in specs, suffix matching at path separators.
 
 Open:
+- To decide (Jakub, 2026-10-12): where and when the buttons "Change the metaphor" and "References without sentinel" should be visible. Removed for now (with `views.bench_button`); the guide still understands "Change the metaphor." typed on the bench, and `sight_walk_toggle_sentinels` still toggles the underlines.
 - Jakub's colour-scheme plugin (Packages/SyntaxColorScheme) is meant for Package Control, so it has nothing specific to SightWalk (2026-10-12). Open: a SightWalk view whose scheme another plugin replaces loses its gutter colour; SightWalk could notice and derive again, on its own side.
 - Guide's manual (Jakub, 2026-10-12): where control passes through a library (e.g. `BaseHTTPRequestHandler.handle_one_request` calling `do_POST` via getattr), the trip shows the library function too, with the jump marked. Felt in the walk-through of `sw/mcp_http.py`: "the sights method gives a lot". Written into the stdio server's manual; needs setup and a new session; carry over to the HTTP server.
 - Code style (Jakub, 2026-10-12): module state that no other module imports is a plain variable changed under `global`, not a one-element list (`SERVER = [None]`), which hides the change. Applied when the HTTP server takes over; elsewhere when a module is touched.
@@ -116,6 +118,8 @@ Open:
 - Possible VS Code port; open question: one scroll for the whole layout or per-pane scrolling.
 
 ## Plans (Jakub)
+
+- Next, after the break of 2026-10-12, to be able to start vetting the plugin with itself: (1) the trouble with line marks, perhaps double marks; (2) the HTTP MCP server replacing the stdio one; (3) the Itinerary tab. Before that, a careful clean-up of the whole code, as short as possible.
 
 - Philosophy (Jakub): vettable code or no code at all.
 - Vettify / vettification (names, Jakub): making code vettable, the mechanical refactorer below.

@@ -4,7 +4,9 @@ gutter and the header in the file's hue."""
 import colorsys
 import json
 import os
+import plistlib
 import random
+import re
 
 import sublime
 
@@ -35,15 +37,34 @@ def tint_color(background, hue, amount, target="#808080"):
 
 
 def load_base_scheme(base):
-    if not base.endswith(".sublime-color-scheme"):
-        return None
+    """The base scheme as a .sublime-color-scheme dict; a .tmTheme is converted (Jakub)."""
     found = sublime.find_resources(os.path.basename(base))
     if not found:
         return None
     try:
-        return sublime.decode_value(sublime.load_resource(found[0]))
+        if base.endswith(".tmTheme"):
+            return from_tm_theme(plistlib.loads(sublime.load_binary_resource(found[0])))
+        if base.endswith(".sublime-color-scheme"):
+            return sublime.decode_value(sublime.load_resource(found[0]))
     except Exception:
-        return None
+        pass
+    return None
+
+
+TM_RULE = {"foreground": "foreground", "background": "background", "fontStyle": "font_style"}
+
+
+def from_tm_theme(theme):
+    """A tmTheme's plist: its first, scope-less entry holds the globals, the rest are rules."""
+    entries = theme.get("settings", [])
+    plain = [e for e in entries if "scope" not in e]
+    # tmTheme names are camelCase (lineHighlight), the scheme's snake_case (line_highlight).
+    globals_ = {re.sub("([A-Z])", r"_\1", k).lower(): v
+                for e in plain for k, v in e.get("settings", {}).items()}
+    rules = [dict({"name": e.get("name", ""), "scope": e["scope"]},
+                  **{TM_RULE[k]: v for k, v in e.get("settings", {}).items() if k in TM_RULE})
+             for e in entries if "scope" in e]
+    return {"name": theme.get("name", ""), "globals": globals_, "rules": rules}
 
 
 def write_scheme(scheme, name):
@@ -66,10 +87,21 @@ def scheme_stem(base, hue, amount):
     return "%s-%s-%03d" % (name, hue_part, int(round(amount * 1000)))
 
 
+def resolved_scheme(view):
+    """The view's scheme file; "auto" (light or dark by the system) as Sublime resolved it."""
+    base = view.settings().get("color_scheme") or "auto"
+    if base == "auto":
+        try:
+            base = sublime.ui_info()["color_scheme"]["resolved_value"]
+        except Exception:
+            return ""
+    return base
+
+
 def tinted_schemes(view, hue, amount):
     """Writes two schemes in the file's hue: the code keeps its background and gets the band in
     the gutter and a strong outline colour; the header is the band."""
-    base = view.settings().get("color_scheme") or ""
+    base = resolved_scheme(view)
     scheme = load_base_scheme(base)
     if scheme is None:
         return None
@@ -79,6 +111,9 @@ def tinted_schemes(view, hue, amount):
     stem = scheme_stem(base, hue, amount)
     globals_ = scheme.setdefault("globals", {})
     globals_["gutter"] = band
+    # Line numbers in the text colour: a faint gutter_foreground vanishes on a coloured band.
+    globals_["gutter_foreground"] = globals_["gutter_foreground_highlight"] = \
+        view.style().get("foreground", "#808080")
     scheme.setdefault("rules", []).extend([
         {"scope": "sight_walk.icon", "foreground": "#ffffff"},
         {"scope": "sight_walk.outline", "foreground": tint_color(background, hue, OUTLINE_TINT)}])

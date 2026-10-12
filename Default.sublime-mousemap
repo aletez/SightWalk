@@ -1,0 +1,6 @@
+[
+    // Option (macOS) or Alt with the wheel, anywhere in a trip's window: the whole trip scrolls
+    // (Jakub). Outside a trip the command is disabled.
+    {"button": "scroll_down", "modifiers": ["alt"], "command": "sight_walk_scroll", "args": {"lines": 3}},
+    {"button": "scroll_up", "modifiers": ["alt"], "command": "sight_walk_scroll", "args": {"lines": -3}}
+]

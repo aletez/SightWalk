@@ -13,6 +13,14 @@
     // Where the Vetting Bench (the conversation) sits: "left" or "right" of the Sights.
     "bench_side": "left",
 
+    // Blocks whose opening line stays frozen under a sight's header, one low pane per line, so
+    // you see which class (or loop…) a method belongs to. Any of "class", "def", "if", "for",
+    // "with"; the next trip uses a new list.
+    "frozen_parents": ["class", "def"],
+
+    // How far ▲ and ▼ on the scroll strip move the trip, as a share of the screen.
+    "strip_step": 0.15,
+
     // The bench's font, proportional for easier reading: one font, or one per system; "" keeps
     // your editor's font. Its size is set per syntax: in "SightWalkChat.sublime-settings"
     // (Preferences → Settings – Syntax Specific, with the cursor on a bench).

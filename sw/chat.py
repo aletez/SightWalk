@@ -8,7 +8,7 @@ import sublime_plugin
 
 from .config import PROMPT
 from .header import MARK_ROOM, title_lines
-from .views import FADED, make_side_view, match_font
+from .views import BUTTON, BUTTON_HTML, FADED, make_side_view, match_font
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 
@@ -88,15 +88,23 @@ def make_header(window, conversation, name):
     return view
 
 
-def show_header(view, title, status, help_mark=True):
+def show_header(view, title, status, help_mark=True, button=None):
+    """button: (label, on_click), drawn at the right end of the first line instead of the help
+    mark, like a sight's Edit button."""
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
-    text = title_lines(title, status, columns)
+    room = len(button[0]) + 4 - MARK_ROOM if button is not None else 0
+    text = title_lines(title, status, columns - room)  # the first line ends where the mark goes
     mark = MARKS[view.id()]
     if text == mark[1]:
         return
     mark[1] = text
     view.run_command("sight_walk_replace", {"text": text})
     point = view.line(0).b
+    if button is not None:
+        html = BUTTON_HTML.replace('href="edit"', 'href="b"').replace(BUTTON, button[0])
+        mark[0].update([sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
+                                        lambda _: button[1]())])
+        return
     phantom = sublime.Phantom(sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
                               lambda _: view.show_popup(HELP_HTML, location=point))
     mark[0].update([phantom] if help_mark else [])

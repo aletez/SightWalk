@@ -3,8 +3,9 @@ Sublime API."""
 
 import textwrap
 
-BENCH = "Vetting Guide"  # the bench's header names whom you talk to, as in chat clients (Jakub)
+BENCH = "Bench"  # the bench's header names whom you talk to, as in chat clients (Jakub)
 SIGHTS = "Sights"
+STRIP = "Scroll strip"
 MARK_ROOM = 6  # columns kept free at the right of the first line for the help mark
 
 

@@ -10,7 +10,7 @@ views (Jakub):
 
 from . import twin
 from .config import GUTTER_REACH, OVERLAP
-from .views import draw_gap, draw_icons, draw_outlines, prepare_code_view
+from .views import draw_gap, draw_icons, draw_outlines, make_copy
 
 
 def line_top(view, line):
@@ -18,9 +18,9 @@ def line_top(view, line):
 
 
 class LineOne:
-    def __init__(self, window, sight, original):
+    def __init__(self, window, sight, copy):
         self.sight = sight
-        self.rest = prepare_code_view(window, original, True)
+        self.rest = make_copy(window, copy, sight.view.name())
         self.twin = twin.make(window, sight.spec, sight.view, self.first_line())
 
     def first_line(self):
@@ -55,7 +55,7 @@ class LineOne:
         return rects, [self.rest, self.sight.view, self.twin]
 
     def draw_gaps(self):
-        draw_gap(self.rest, 2, self.sight.end)
+        draw_gap(self.rest, 2, self.rest.rowcol(self.rest.size())[0] + 1)
         draw_gap(self.twin, 2, 2)
 
     def draw_icons(self, old, new):
@@ -64,10 +64,6 @@ class LineOne:
     def draw_outlines(self, lines):
         draw_outlines(self.rest, lines)
         draw_outlines(self.twin, {2} if 1 in lines else set())  # the twin's line 2 is line 1
-
-    def refill(self):
-        """After the file was saved, the twin shows its new line 1."""
-        twin.fill(self.twin, self.first_line(), self.sight.view.line_height())
 
     def close(self):
         for view in self.views():

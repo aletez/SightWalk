@@ -1,5 +1,7 @@
 """Making views and drawing on them, and the window's layout."""
 
+import os
+
 import sublime
 
 from .config import BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES
@@ -31,7 +33,7 @@ BENCH_BUTTONS_HTML = METAPHOR_HTML + "&nbsp;&nbsp;" + SENTINEL_HTML
 # A zero-width space: Sublime leaves out an empty phantom.
 GAP_HTML = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
 BUTTONS = {}
-GAPS = {}
+GAPS = {}  # buffer id: (its gap phantoms, the lines that have one)
 
 
 # The window
@@ -89,13 +91,26 @@ def make_side_view(window, name, extra):
     return view
 
 
+def make_browser(window, folder):
+    """The FileBrowser package's view of folder, for a trip with no sights yet (Jakub); a blank
+    view when that package is not installed."""
+    view = window.new_file()
+    view.set_scratch(True)
+    if not sublime.find_resources("dired.sublime-syntax"):
+        return view
+    view.set_syntax_file("Packages/FileBrowser/dired.sublime-syntax")
+    view.settings().set("dired_path", folder.rstrip(os.sep) + os.sep)
+    view.settings().set("dired_rename_mode", False)
+    view.run_command("dired_refresh", {"reset_sels": True})
+    return view
+
+
 def make_blank_view(window, name):
     """Blank lines either way of the caret's line, the anchor: an invisible view that takes the
     wheel both ways."""
-    view = make_side_view(window, name, {"word_wrap": False})
+    view = make_side_view(window, name, {"word_wrap": False, "sight_walk_blank": True})
     view.run_command("sight_walk_replace", {"text": "\n" * (2 * BLANK_LINES)})
-    view.sel().clear()
-    view.sel().add(sublime.Region(view.text_point(BLANK_LINES, 0)))
+    view.sel().clear()  # no caret: a click there puts none either (see on_selection_modified)
     view.set_read_only(True)
     return view
 
@@ -105,11 +120,25 @@ def anchor(view):
     return BLANK_LINES * view.line_height()
 
 
-def prepare_code_view(window, view, clone):
-    if clone:
-        window.focus_view(view)
-        window.run_command("clone_file")
-        view = window.active_view()
+class FileCopy:
+    """A file's text read from disk, with the syntax Sublime would give it."""
+
+    def __init__(self, path):
+        with open(path, encoding="utf-8", errors="replace") as f:
+            self.text = f.read()
+        self.lines = self.text.split("\n")
+        self.syntax = sublime.find_syntax_for_file(path, self.lines[0] if self.lines else "")
+
+
+def make_copy(window, copy, name):
+    """A sight's view: a scratch copy of the file, not the file, so no two views of a file share a
+    buffer (phantoms, read-only, clones) and nothing can change the file but the editor (Jakub)."""
+    view = window.new_file()
+    view.set_scratch(True)
+    view.set_name(name)
+    if copy.syntax is not None:
+        view.assign_syntax(copy.syntax)
+    view.run_command("sight_walk_replace", {"text": copy.text})
     for key, value in CODE_SETTINGS:
         view.settings().set(key, value)
     view.set_read_only(True)  # editing happens in the editor
@@ -202,11 +231,22 @@ def draw_outlines(view, lines):
 def draw_gap(view, first, last):
     """An inline phantom at the start of lines first..last (1-based): room between the gutter and
     the code, which the margin setting cannot give, as Sublime paints the margin in the gutter's
-    colour (Jakub). Phantoms belong to the view, so the editor over the sights has none."""
-    points = [view.text_point(line - 1, 0) for line in range(first, last + 1)]
-    phantoms = GAPS.setdefault(view.id(), sublime.PhantomSet(view, "sight_walk_gap"))
+    colour (Jakub). Sublime shows a view's phantoms in all its clones, so each file keeps one set
+    for all its views, every line in it once: two sights of a file would otherwise double the
+    room (seen by Claude on screen)."""
+    phantoms, lines = GAPS.get(view.buffer_id(), (None, set()))
+    if phantoms is None or not phantoms.view.is_valid():
+        phantoms, lines = sublime.PhantomSet(view, "sight_walk_gap"), set()
+        GAPS[view.buffer_id()] = (phantoms, lines)
+    lines.update(range(first, last + 1))
+    points = [view.text_point(line - 1, 0) for line in sorted(lines)]
     phantoms.update([sublime.Phantom(sublime.Region(p), GAP_HTML, sublime.LAYOUT_INLINE)
                      for p in points])
+
+
+def forget_gaps(view):
+    """Before a file's views close: the next trip draws its gaps afresh."""
+    GAPS.pop(view.buffer_id(), None)
 
 
 def selected_text(view):

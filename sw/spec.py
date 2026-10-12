@@ -44,8 +44,9 @@ def display_path(path):
 
 
 def sight_title(sight):
-    """A sight's header: its file and lines."""
-    lines = str(sight.begin) if sight.begin == sight.end else "%d-%d" % (sight.begin, sight.end)
+    """A sight's header: its file and lines, as given, without the blank lines shown around."""
+    begin, end = sight.begin + sight.pad[0], sight.end - sight.pad[1]
+    lines = str(begin) if begin == end else "%d-%d" % (begin, end)
     return "%s:%s" % (display_path(sight.path), lines)
 
 
@@ -55,3 +56,44 @@ def matches(sight, name):
     return (sight.spec == name
             or sight.path == name
             or sight.path.endswith(os.sep + name))
+
+
+def indent(line):
+    return len(line) - len(line.lstrip())
+
+
+def opens_block(text, keywords):
+    """The line starts one of the keywords' blocks ("async def" counts as def)."""
+    words = text.split()
+    if words[:1] == ["async"]:
+        words = words[1:]
+    head = words[0].split("(")[0].rstrip(":") if words else ""
+    return head in keywords
+
+
+def ancestors(lines, begin, keywords):
+    """1-based numbers of the lines that open the blocks around line begin, outermost first, by
+    indentation: going up, every line indented less than the last found narrows the search, and
+    those that start one of the keywords' blocks (setting frozen_parents) are kept (Jakub)."""
+    limit = indent(lines[begin - 1])
+    found = []
+    for number in range(begin - 1, 0, -1):
+        text = lines[number - 1]
+        if not text.strip() or indent(text) >= limit:
+            continue
+        limit = indent(text)
+        if opens_block(text.strip(), keywords):
+            found.append(number)
+        if limit == 0:
+            break
+    return found[::-1]
+
+
+def breathing(lines, begin, end):
+    """The range with the blank line just above and just below it, where there is one: a function
+    set apart by blank lines shows them, so it does not look cramped (Jakub)."""
+    if begin > 1 and not lines[begin - 2].strip():
+        begin -= 1
+    if end < len(lines) and not lines[end].strip():
+        end += 1
+    return begin, end

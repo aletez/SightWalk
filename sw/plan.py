@@ -5,8 +5,10 @@ class Item:
     """A cell of the virtual document: the view it shows, the layout y of the view's text at the
     cell's top, the content's height, and the cell's y in the document (set by stack)."""
 
-    def __init__(self, view, top_layout, content):
+    def __init__(self, view, top_layout, content, header=False, line=None):
         self.view = view
+        self.header = header
+        self.line = line  # the file line at the cell's top, for a code cell (measured afresh)
         self.top_layout = top_layout
         self.content = content
         self.y = 0.0
@@ -21,10 +23,17 @@ class Sight:
         self.header = None
         self.line_one = None  # the extra views of a sight at line 1 (see line_one)
         self.header_item = None
+        self.frozen = []  # (line, view): the lines that open the blocks around the range (Jakub)
+        self.frozen_items = []
+        self.pad = (0, 0)  # blank lines shown above and below the range as given (spec.breathing)
         self.code_item = None
         self.header_icons = {}
         self.icons = {}
         self.outlines = set()
+
+    def items(self):
+        """The sight's cells from top to bottom: header, frozen lines, code."""
+        return [self.header_item] + self.frozen_items + [self.code_item]
 
     def code_views(self):
         """Every view showing the sight's code."""
@@ -41,22 +50,34 @@ def stack(items, overhead):
 def max_offset(items, height, overhead):
     # A last sight that fits on the screen with its header can scroll up until its header is at
     # the top. A taller one scrolls only until the end of its range reaches the bottom.
-    header, code = items[-2], items[-1]
+    header, code = next(i for i in reversed(items) if i.header), items[-1]
     bottom = code.y + code.content + overhead
     if bottom - header.y <= height:
         return header.y
     return bottom - height
 
 
-def focus_sight(sights, offset, height, overhead):
-    mid = offset + height / 2
+def free_room(items, height, overhead):
+    """The room a trip shorter than the screen leaves free; 0 for a taller one."""
+    code = items[-1]
+    return max(height - (code.y + code.content + overhead), 0.0)
 
-    def distance(sight):
-        lo = sight.code_item.y
-        hi = lo + sight.code_item.content + overhead
-        return 0 if lo <= mid <= hi else min(abs(mid - lo), abs(mid - hi))
 
-    return min(sights, key=distance) if sights else None
+def lead(items, height, overhead, middle):
+    """Room above a short trip: its middle level with middle, the window's (Jakub), as far as it
+    fits. A trip as tall as the screen or taller starts at the top."""
+    free = free_room(items, height, overhead)
+    total = height - free
+    return min(max(middle - total / 2, 0.0), free)
+
+
+def offset_range(items, height, overhead, lead_px):
+    """How far the trip scrolls: a short one from the ceiling to the floor (Jakub), a taller one
+    from its top until its end (see max_offset)."""
+    free = free_room(items, height, overhead)
+    if free > 0:
+        return lead_px - free, lead_px
+    return 0.0, max_offset(items, height, overhead)
 
 
 def visible_specs(sights, offset, height):

@@ -1,9 +1,12 @@
 """Sublime commands and listeners. sight_walk.py imports them, which is how Sublime finds them."""
 
+import os
+
 import sublime
 import sublime_plugin
 
-from . import asked, chat, guide, scrollbars, state
+from . import asked, bridge, chat, guide, scrollbars, state
+from .spec import repo_root
 
 
 class SightWalkReplaceCommand(sublime_plugin.TextCommand):
@@ -104,9 +107,57 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
 class SightWalkWindowListener(sublime_plugin.EventListener):
     def on_activated(self, view):
         scrollbars.reader_focused(state.owner(view) is not None)
+        self.offer_to_browser(view)
+
+    def on_load(self, view):
+        self.offer_to_browser(view)
+
+    def on_window_command(self, window, command_name, args):
+        """primary+w (close) in a trip closes no single view: it asks to close the window
+        (Jakub). The editor keeps its own primary+w, bound in the keymap."""
+        if command_name in ("close", "close_file") and state.reader_for(window) is not None:
+            return ("sight_walk_close_trip", None)
+        return None
+
+    def on_selection_modified(self, view):
+        """Any change of a sight's selection, the caret's included. Here and not in a view
+        listener: a clone gets its settings after it is made, so no view listener applies to it.
+        Blank views (the strip, the fillers) take no caret (Jakub)."""
+        if view.settings().get("sight_walk_blank", False):
+            if len(view.sel()):
+                view.sel().clear()
+            return
+        reader = state.reader_for(view.window())
+        if reader is not None:
+            reader.note_selection(view)
+
+    def offer_to_browser(self, view):
+        """A file opened from a trip's file browser becomes its sight (see Reader.take_file)."""
+        reader = state.owner(view)
+        if reader is not None:
+            reader.take_file(view)
 
     def on_pre_close_window(self, window):
         state.forget(window)
+
+
+class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):
+    """Shows the trip's sights again as the agent gave them (alpha: after an edit went wrong)."""
+
+    def run(self):
+        reader = state.reader_for(self.window) or state.current_reader()
+        if reader is not None:
+            reader.reset_sights()
+
+    def is_enabled(self):
+        reader = state.reader_for(self.window) or state.current_reader()
+        return reader is not None and bool(reader.sights)
+
+
+class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        if sublime.ok_cancel_dialog("Close the Vetting Trip window?", "Close"):
+            self.window.run_command("close_window")
 
 
 class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
@@ -121,12 +172,28 @@ class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
 
 class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
     """primary+g in a trip: the focus goes to the bench, and from the bench back to the sight in
-    focus (Jakub)."""
+    focus. Elsewhere: to the open trip's bench, or, with none open, to a new trip with no sights,
+    showing the files of this file's repository (Jakub)."""
 
     def run(self, edit):
         reader = state.reader_for(self.view.window())
         if reader is not None:
             reader.toggle_focus(self.view)
+            return
+        reader = state.current_reader()
+        if reader is not None:
+            reader.window.bring_to_front()
+            reader.window.focus_view(reader.chat)
+            return
+        bridge.new_reader().open_empty(self.folder())
+        scrollbars.reader_focused(True)  # a new window is not reported as activated
+
+    def folder(self):
+        path = self.view.file_name()
+        if path:
+            return repo_root(path) or os.path.dirname(path)
+        folders = self.view.window().folders()
+        return folders[0] if folders else os.path.expanduser("~")
 
 
 class SightWalkSightListener(sublime_plugin.ViewEventListener):

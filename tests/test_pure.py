@@ -17,7 +17,7 @@ def stacked(*ranges):
     sights, items = [], []
     for begin, end in ranges:
         sight = plan.Sight("/r/a.py:%d-%d" % (begin, end), "/r/a.py", begin, end)
-        sight.header_item = plan.Item(None, 0.0, LH)
+        sight.header_item = plan.Item(None, 0.0, LH, header=True)
         sight.code_item = plan.Item(None, 0.0, (end - begin + 1) * LH)
         items += [sight.header_item, sight.code_item]
         sights.append(sight)
@@ -38,10 +38,15 @@ class PlanTest(unittest.TestCase):
         _, items = stacked((1, 3), (10, 30))
         self.assertEqual(plan.max_offset(items, 100.0, OVERHEAD), 62.0 + 210.0 + 4.0 - 100.0)
 
-    def test_focus_and_visible(self):
+    def test_lead_and_range(self):
+        _, items = stacked((1, 3), (10, 11))  # ends at 62 + 2 lines + 4 = 86
+        self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 93.0), 50.0)  # centred on 93
+        self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 10.0), 0.0)  # no higher than the top
+        self.assertEqual(plan.lead(items, 50.0, OVERHEAD, 25.0), 0.0)  # taller than the screen
+        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0), (-50.0, 50.0))
+
+    def test_visible(self):
         sights, _ = stacked((1, 3), (10, 11))
-        self.assertIs(plan.focus_sight(sights, 0.0, 20.0, OVERHEAD), sights[0])
-        self.assertIs(plan.focus_sight(sights, 50.0, 30.0, OVERHEAD), sights[1])
         self.assertEqual(plan.visible_specs(sights, 0.0, 20.0), [sights[0].spec])
 
 
@@ -115,6 +120,23 @@ class HeaderTest(unittest.TestCase):
         first, second = text.split("\n")
         self.assertEqual(len(first), 34)
         self.assertTrue(second.endswith("…"))
+
+
+
+class AncestorsTest(unittest.TestCase):
+    LINES = ["class A:", "    x = 1", "", "    def run(self):", "        if x:",
+             "            return 1", "", "", "def f():", "    pass", ""]
+
+    def test_class_and_def(self):
+        self.assertEqual(spec.ancestors(self.LINES, 4, {"class", "def"}), [1])
+        self.assertEqual(spec.ancestors(self.LINES, 6, {"class", "def"}), [1, 4])
+        self.assertEqual(spec.ancestors(self.LINES, 6, {"class", "def", "if"}), [1, 4, 5])
+        self.assertEqual(spec.ancestors(self.LINES, 9, {"class", "def"}), [])
+
+    def test_breathing(self):
+        self.assertEqual(spec.breathing(self.LINES, 4, 6), (3, 7))
+        self.assertEqual(spec.breathing(self.LINES, 9, 10), (8, 11))
+        self.assertEqual(spec.breathing(self.LINES, 1, 2), (1, 3))
 
 
 if __name__ == "__main__":

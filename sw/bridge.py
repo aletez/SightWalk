@@ -52,6 +52,7 @@ def new_reader():
     hide_chrome(window)
     reader = Reader(window)
     state.register(reader)
+    sublime.set_timeout(reader.close_hijacker, 500)  # see Reader.close_hijacker
     reader.poll()
     reader.poll_wheel()
     return reader
@@ -108,6 +109,20 @@ def op_close():
     return {"ok": True}
 
 
+def op_browse(folder):
+    """A trip with no sights, the folder's files in their place (Jakub); it replaces the open
+    trip, the conversation goes on. A file the user opens there becomes the trip's sight."""
+    folder = os.path.expanduser(folder)
+    if not os.path.isdir(folder):
+        raise ValueError("Not a folder: %s. Give an absolute path to an existing folder." % folder)
+    reader = state.current_reader()
+    if reader is not None:
+        reader.window.run_command("close_window")
+    new_reader().open_empty(folder)
+    scrollbars.reader_focused(True)
+    return {"ok": True}
+
+
 def check_setting(key, value):
     if key not in EDITABLE:
         raise ValueError("Not editable: %s. Editable: %s" % (key, ", ".join(EDITABLE)))
@@ -129,7 +144,7 @@ def op_settings(values=None):
 
 
 OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,
-       "close": op_close, "settings": op_settings}
+       "close": op_close, "settings": op_settings, "browse": op_browse}
 
 
 def run_on_main(fn, timeout=10):

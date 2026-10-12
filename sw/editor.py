@@ -1,35 +1,34 @@
-"""The editor: a full, normal view of one file laid over the code column, opened from a sight
-(Enter or the header's button) and closed with Esc or primary+w. It shares the buffer with the
-sights, so its edits move the held ranges and marks; the reader catches up when it closes."""
+"""The editor: the file itself, laid over the code column, opened from a sight (Enter or the
+header's button) and closed with Esc or primary+w. The sights are copies of the file; the editor's
+edits move held ranges and marks, and when it closes after a save, the trip is shown again from
+the file with the new ranges."""
+
+import os
 
 import sublime
 
 from .spec import display_path
-from .views import draw_icons, draw_outlines, make_header
+from .views import draw_icons, draw_outlines, make_header, wait_until_loaded
 
-EDITOR_SETTINGS = ("sight_walk", "sight_walk_code", "word_wrap", "scroll_past_end")
-
-
-def clone_for_editing(window, view):
-    window.focus_view(view)
-    window.run_command("clone_file")
-    clone = window.active_view()
-    # A clone copies the sight's settings; the editor behaves like any other view.
-    for key in EDITOR_SETTINGS:
-        clone.settings().erase(key)
-    clone.settings().set("sight_walk_editor", True)
-    clone.set_read_only(False)  # read-only belongs to the buffer: the sights open up too
-    return clone
+def open_live(window, path):
+    """The file itself, the one view a trip shows of it that is not a copy (Jakub)."""
+    view = window.open_file(path)
+    view.settings().set("sight_walk_editor", True)
+    return view
 
 
 class Editor:
     def __init__(self, reader, index, line):
         sight = reader.sights[index]
         self.reader, self.path = reader, sight.path
-        self.view = clone_for_editing(reader.window, sight.view)
-        self.header = make_header(reader.window, display_path(sight.path), self.view)
+        self.mtime = os.path.getmtime(sight.path)
+        self.view = open_live(reader.window, sight.path)
+        self.header = make_header(reader.window, display_path(sight.path), sight.view)
         for source, target in ((sight.view, self.view), (sight.header, self.header)):
             target.settings().set("color_scheme", source.settings().get("color_scheme"))
+        wait_until_loaded([self.view], lambda: self.start(line))
+
+    def start(self, line):
         self.track()
         point = self.view.text_point(line - 1, 0)
         self.view.sel().clear()
@@ -73,12 +72,13 @@ class Editor:
 
     def close(self, on_closed):
         """Closes the view the usual way, so Sublime asks about unsaved changes itself.
-        on_closed(ranges, lines) runs only if it did close (not on Cancel)."""
+        on_closed(ranges, lines, saved) runs only if it did close (not on Cancel); saved: the file
+        on disk changed since the editor opened."""
         ranges, lines = self.read_back()
 
         def done(closed):
             if closed:
                 self.header.close()
-                on_closed(ranges, lines)
+                on_closed(ranges, lines, os.path.getmtime(self.path) != self.mtime)
 
         self.view.close(done)

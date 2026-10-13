@@ -79,7 +79,7 @@ TRIPS = [
     ("The user sends a message",
      "The draft becomes a message, with the focus and the visible sights, and the agent "
      "receives it.",
-     ["commands.SightWalkSendCommand.run", "state.reader_for", "reader.Reader.context",
+     ["commands.SightWalkSendCommand.run", "commands.send", "state.reader_for", "reader.Reader.context",
       "commands.SightWalkWindowListener.on_selection_modified", "reader.Reader.note_selection", "plan.lead", "plan.free_room", "plan.offset_range", "reader.Reader.centred_lead", "reader.Reader.surround", "reader.line_count", "reader.item_top", "plan.Sight.all_views", "views.forget", "views.kept", "views.phantoms", "spec.ancestors", "spec.breathing", "spec.indent", "spec.opens_block", "plan.Sight.items", "reader.Reader.draw_strip_buttons", "reader.Reader.strip_button", "reader.Reader.reset_sights", "plan.visible_specs", "chat.take_draft", "reader.Reader.take_edits",
       "bridge.wait_for_user", "sight_walk_mcp.wait_for_user"]),
     ("Opening the editor",

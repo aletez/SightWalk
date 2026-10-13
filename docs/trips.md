@@ -183,11 +183,12 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/chat.py:31-39` protected_end
 - `sw/commands.py:102-104` SightWalkChatListener.on_modified
 
-## 14. The user sends a message (29 views)
+## 14. The user sends a message (30 views)
 
 The draft becomes a message, with the focus and the visible sights, and the agent receives it.
 
-- `sw/commands.py:31-39` SightWalkSendCommand.run
+- `sw/commands.py:37-41` SightWalkSendCommand.run
+- `sw/commands.py:28-31` send
 - `sw/state.py:29-30` reader_for
 - `sw/reader.py:640-654` Reader.context
 - `sw/commands.py:122-132` SightWalkWindowListener.on_selection_modified
@@ -314,7 +315,7 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 
 A question goes to the inbox with what is selected; the answer comes back to the bench.
 
-- `sw/commands.py:45-51` SightWalkAskCommand.run
+- `sw/commands.py:47-51` SightWalkAskCommand.run
 - `sw/views.py:257-261` selected_text
 - `sw/chat.py:163-171` catch_up
 

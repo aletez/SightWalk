@@ -25,18 +25,20 @@ class SightWalkInsertCommand(sublime_plugin.TextCommand):
         self.view.insert(edit, point, text)
 
 
+def send(owner, text):
+    """A message from the trip to the agent, with what the user sees and any edited ranges."""
+    state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
+    guide.await_answer(owner)
+
+
 class SightWalkSendCommand(sublime_plugin.TextCommand):
     """primary+enter on a trip's bench: the draft goes to the agent."""
 
     def run(self, edit):
         owner = state.reader_for(self.view.window())
-        if owner is None:
-            return
-        context = owner.context()
-        draft = chat.take_draft(self.view, edit)
+        draft = None if owner is None else chat.take_draft(self.view, edit)
         if draft:
-            state.INBOX.put(dict(context, text=draft, **owner.take_edits()))
-            guide.await_answer(owner)
+            send(owner, draft)
 
 
 class SightWalkAskCommand(sublime_plugin.TextCommand):
@@ -44,11 +46,9 @@ class SightWalkAskCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, text):
         owner = state.reader_for(self.view.window())
-        if owner is None:
-            return
-        owner.say(text, prefix="U: ")
-        state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
-        guide.await_answer(owner)
+        if owner is not None:
+            owner.say(text, prefix="U: ")
+            send(owner, text)
 
 
 class SightWalkEditCommand(sublime_plugin.TextCommand):

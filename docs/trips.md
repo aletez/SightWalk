@@ -157,12 +157,12 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:455-460` Reader.draw_outlines
 - `sw/views.py:239-249` draw_outlines
 
-## 13. The agent says something (48 views)
+## 13. The agent says something (49 views)
 
 A reply reaches the Vetting Bench past the transcript guard.
 
 - `sw/bridge.py:114-123` op_say
-- `sw/reader.py:634-640` Reader.say
+- `sw/reader.py:639-645` Reader.say
 - `sw/reader.py:522-530` Reader.show_headers
 - `sw/chat.py:90-109` show_header
 - `sw/chat.py:115-124` make_status
@@ -172,7 +172,8 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/reader.py:576-580` Reader.select_tool
 - `sw/reader.py:582-585` Reader.draw_map
 - `sw/reader.py:587-601` Reader.map_nodes
-- `sw/reader.py:603-607` Reader.owner
+- `sw/reader.py:608-612` Reader.owner
+- `sw/reader.py:603-606` Reader.calls_named
 - `sw/reader.py:41-46` defined_name
 - `sw/callmap.py:23-29` first_definition
 - `sw/callmap.py:92-99` authored_calls
@@ -199,8 +200,8 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/callmap.py:116-118` node_line
 - `sw/callmap.py:121-127` file_block
 - `sw/callmap.py:130-141` dot_source
-- `sw/reader.py:613-620` Reader.stop_answer
-- `sw/reader.py:622-625` Reader.withdraw_unread_messages
+- `sw/reader.py:618-625` Reader.stop_answer
+- `sw/reader.py:627-630` Reader.withdraw_unread_messages
 - `sw/commands.py:160-163` SightWalkStopAnswerCommand.run
 - `sw/bridge.py:96-99` check_not_stopped
 - `sw/header.py:12-22` title_lines
@@ -217,7 +218,7 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 - `sw/commands.py:37-41` SightWalkSendCommand.run
 - `sw/commands.py:28-31` send
 - `sw/state.py:32-33` reader_for
-- `sw/reader.py:642-656` Reader.context
+- `sw/reader.py:647-661` Reader.context
 - `sw/commands.py:122-132` SightWalkWindowListener.on_selection_modified
 - `sw/reader.py:544-547` Reader.note_selection
 - `sw/plan.py:66-71` lead
@@ -376,8 +377,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:60-62` Geometry.room
 - `sw/reader.py:464-467` Reader.draw_edit_buttons
 - `sw/bridge.py:132-134` op_state
-- `sw/reader.py:627-632` Reader.folder
-- `sw/reader.py:609-611` Reader.note_waiting
+- `sw/reader.py:632-637` Reader.folder
+- `sw/reader.py:614-616` Reader.note_waiting
 
 ## 24. Building blocks (5 views)
 

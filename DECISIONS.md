@@ -5,6 +5,8 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- The wheel over a sight's header or frozen lines does nothing (Jakub, 2026-10-13): those views are only put back. The whole trip scrolls by the strip, the fillers and the scroll pad. (Verified by Jakub, 2026-10-13.)
+- The scroll pad reaches 2 px over the strip and is drawn over it, so the two blank areas join without a border (Jakub, 2026-10-13; seen by Claude on screen). Found on the way: since the line-1 gutter measurement went, nothing redrew the trip once its layout was drawn, so the strip was measured too narrow; one redraw after start restores it. (Verified by Jakub, 2026-10-13.)
 - A sight at line 1 is a plain sight (Jakub, 2026-10-13): the three-view mechanism (`line_one.py`, `twin.py`, the gutter measurement) is gone; it existed so the wheel over such a sight could scroll the whole trip, which now only the strip, fillers, headers and Tools pane do. Scrolling over line 2 now scrolls line 1 too, under the header, like any sight. (Verified by Jakub, 2026-10-13.)
 - Clean-up, no behaviour meant to change (2026-10-13): the reader's geometry (spans, strip, column, header and conversation heights, editor and sight cells) moved to `sw/geometry.py`, which Reader inherits; the bench's send and the fixed questions (⌃⌘↓/↑) share one send path. (Verified by Jakub, 2026-10-13.)
 - The pane under the bench is called Tools for now (Jakub). It shows a Scroll tab (Jakub, 2026-10-12): blank, in the bench's colours, its wheel moves the whole trip like the Sights' fillers. It has a fixed header of its own, as tall as the bench's, with the tabs (for now only "Scroll"), so the title no longer jumps while the pane scrolls. Tabs Itinerary and Map come later; until then no placeholder. No ▲▼ there. (Verified by Jakub, 2026-10-12.)
@@ -38,8 +40,6 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
-- The wheel over a sight's header or frozen lines does nothing (Jakub, 2026-10-13): those views are only put back. The whole trip scrolls by the strip, the fillers and the Tools pane's Scroll area.
-- The Tools pane's Scroll area reaches 2 px over the strip and is drawn over it, so the two blank areas join without a border (Jakub, 2026-10-13; seen by Claude on screen). Found on the way: since the line-1 gutter measurement went, nothing redrew the trip once its layout was drawn, so the strip was measured too narrow; one redraw after start restores it.
 - A SightWalk view whose scheme another plugin replaced: the user asks the agent to refresh (show again); not documented (Jakub).
 - MCP over HTTP, a probe (2026-10-12, `sw/mcp_http.py`, port 47322, registered as `sight-walk-http`): the plugin itself answers as an MCP server (Streamable HTTP, JSON replies, stdlib only), so no separate process, venv or copied file. Checked by Claude with `claude -p`: tools listed and called; Claude Code cuts a tool call off after about 60 s (55 s passes, 65 s times out; MCP_TOOL_TIMEOUT lifts it); Claude Code sends the Mcp-Session-Id back on every request after initialize, so the plugin can tell sessions apart. Decided (Jakub): wait_for_user waits at most 50 s over HTTP, no configuration. Next: move every tool over and retire `mcp_server/`.
 - Pending tests for Jakub (2026-10-12): (1) the strip's removal: nothing of it left in the palette, context menu or keys; (2) the `settings` tool (`close` verified).
@@ -144,6 +144,9 @@ Open:
   - Walkable code or none: a mechanical gate before any human looks (each function fits a sight, each changed line lies on a named trip from branch point to branch point); and the guide is never the session that wrote the code.
 
 ## Decisions
+
+Tools pane
+- J (2026-10-13): the Scroll tab's blank area is called the scroll pad. It joins the scroll strip without a border only while it is shown; when another tool (Itinerary, Map…) is in the Tools pane, the pane has its usual size with a border to the strip.
 
 Names (Jakub, 2026-10-06)
 - J: The reader window has no name of its own: metonymically it is the **trip** (Polish: **wycieczka**), "open a trip". (Lookout / taras was chosen and dropped the same day.) The assistant is the **Vetting guide** (Polish: **przewodnik**); "VetAss" was dropped as too crude.

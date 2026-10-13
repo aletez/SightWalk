@@ -84,8 +84,8 @@ def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None):
     if not top:
         return to_layout(rects + [(x0, 0.0, x1, total)], total)
     # The Tools pane's header is as tall as the bench's, and stays put while the pane scrolls.
-    # The pane comes first, so it is drawn over the strip and hides the border between them: the
-    # two blank areas read as one (Jakub).
+    # The pane comes first, so the scroll pad is drawn over the strip and hides the border between
+    # them: the two blank areas read as one (Jakub). With another tool there, no reach: a border.
     below = split + top
     tools = (x0 + min(reach, 0.0), below, x1 + max(reach, 0.0), total)
     rects = [tools] + rects + [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP),

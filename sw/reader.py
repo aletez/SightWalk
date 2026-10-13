@@ -325,7 +325,7 @@ class Reader(Geometry):
         return places
 
     def wheel_places(self):
-        """The views whose wheel moves the whole trip: the strip, the fillers and the Scroll pane
+        """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
         under the bench. A sight's code scrolls on its own (Jakub)."""
         return self.places()[:4]
 

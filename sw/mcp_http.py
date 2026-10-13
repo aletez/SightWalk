@@ -25,6 +25,8 @@ def call_tool(name, args):
         return bridge.wait_for_user(min(int(args.get("timeout_s") or WAIT_S), WAIT_S))
     if name == "say" and "message" in args:  # an agent may name text so
         args = dict(args, text=args.get("text") or args.pop("message"))
+    if name in ("point", "state"):
+        bridge.wait_until_ready()
     if name not in bridge.OPS:
         names = ", ".join(t["name"] for t in TOOLS)
         raise ValueError("Unknown tool %r. Tools: %s." % (name, names))

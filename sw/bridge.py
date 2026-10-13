@@ -200,6 +200,17 @@ def run_on_main(fn, timeout=10):
     return box["value"]
 
 
+def wait_until_ready(timeout=8):
+    """Off the main thread: until the open trip has laid itself out, so marks given right after
+    show are not lost (Jakub). Gives up quietly; the operation then says why."""
+    end = time.time() + timeout
+    while time.time() < end:
+        reader = run_on_main(state.current_reader)
+        if reader is None or reader.ready:
+            return
+        time.sleep(0.05)
+
+
 def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}

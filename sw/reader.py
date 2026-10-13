@@ -85,6 +85,8 @@ class Reader(Geometry):
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
         self.below_header = chat.make_header(self.window, self.chat, vetting.TABS)
+        self.status_view = chat.make_status(self.window, self.chat)
+        bench_font(self.status_view)
         apply_grey(self.below_header)
 
     # Loading
@@ -110,8 +112,10 @@ class Reader(Geometry):
         """Before any sight is measured: the usual columns at fixed heights (Jakub)."""
         h, split = EMPTY_HEADER, DEFAULT_CONVERSATION_HEIGHT
         (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
-        cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split), self.chat),
-                 ((b0, split, b1, split + h), self.below_header), ((b0, split + h, b1, 1.0), self.below),
+        cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split - h / 2), self.chat),
+                 ((b0, split - h / 2, b1, split), self.status_view),
+                 ((b0, split, b1, split + h), self.below_header),
+                 ((b0, split + h, b1, 1.0), self.below),
                  ((s0, 0.0, s1, h), self.strip_header),
                  ((s0, h, s1, 1.0), self.strip), ((c0, 0.0, c1, h), self.sights_header),
                  ((c0, h, c1, 1.0), self.browser)]  # the browser heads itself with its folder
@@ -241,8 +245,9 @@ class Reader(Geometry):
         if top and self.editor is None:
             self.keep_bench_width()
         reach = self.share(OVERLAP) * (1 if self.bench_side() != "right" else -1)
+        status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
-                                             self.editor_geometry()))
+                                             self.editor_geometry(), status))
         return top
 
     def keep_bench_width(self):
@@ -269,7 +274,8 @@ class Reader(Geometry):
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        rest = [self.chat_header, self.below_header] + ([] if full else [self.below])
+        rest = [self.chat_header, self.below_header, self.status_view]
+        rest = rest if full else rest + [self.below]
         for k, view in enumerate(rest):
             self.window.set_view_index(view, n + k if full else n - 1, 0 if full else k + 1)
 
@@ -492,7 +498,8 @@ class Reader(Geometry):
     # Conversation
 
     def show_headers(self):
-        chat.show_header(self.chat_header, BENCH, self.note or self.status)
+        chat.show_header(self.chat_header, BENCH, "")
+        chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t))
         chat.show_header(self.below_header, vetting.TABS, "", help_mark=False)
         chat.show_header(self.sights_header, SIGHTS, self.trip,
                          button=("Reset positions", self.reset_sights))

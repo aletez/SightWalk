@@ -73,7 +73,7 @@ TRIPS = [
      ["reader.Reader.draw_gutter", "marks.visible_lines", "marks.gutter_icons", "views.draw_icons", "reader.Reader.draw_outlines", "views.draw_outlines"]),
     ("The agent says something",
      "A reply reaches the Vetting Bench past the transcript guard.",
-     ["sight_walk_mcp.say", "bridge.op_say", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
+     ["sight_walk_mcp.say", "bridge.op_say", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header", "chat.make_status", "chat.show_status",
       "header.title_lines", "chat.say", "commands.SightWalkInsertCommand.run",
       "chat.Guard.on_text_changed", "chat.protected_end", "commands.SightWalkChatListener.on_modified"]),
     ("The user sends a message",

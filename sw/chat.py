@@ -109,6 +109,30 @@ def show_header(view, title, status, help_mark=True, button=None):
     mark[0].update([phantom] if help_mark else [])
 
 
+STATUS_HTML = '<span style="color: %s">%%s</span>' % FADED
+
+
+def make_status(window, conversation):
+    """The status line between the bench's floor and the Tools pane's ceiling: what the
+    conversation is about (the agent's status) and whether an answer is on its way (Jakub). It is
+    shown nowhere else, neither in a header nor in the status bar."""
+    view = make_side_view(window, "Status", {"word_wrap": False, "scroll_past_end": False,
+                                             "sight_walk_blank": True})
+    view.assign_syntax(SYNTAX)
+    view.run_command("sight_walk_replace", {"text": " "})
+    view.set_read_only(True)
+    return view
+
+
+def show_status(view, text):
+    if kept(view).get("status") == text:
+        return
+    kept(view)["status"] = text
+    html = STATUS_HTML % text.replace("&", "&amp;").replace("<", "&lt;")
+    phantoms(view, "sight_walk_status").update(
+        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_INLINE)] if text else [])
+
+
 def show_help(view, point):
     """On hovering the right end of the first line, where the mark sits."""
     end = view.line(0).b

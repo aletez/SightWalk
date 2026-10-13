@@ -71,14 +71,15 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None):
+def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, status=0.0):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
     the editor if open; once top is known, the Tools pane; the Sights; the conversation and, once
     top is known, its header and the Tools pane's header.
     top: the conversation header's bottom, split: the conversation's bottom (px).
     bench: the Vetting Bench's (left, right) as shares of the width.
     reach: how far the Tools pane reaches over the strip's border (a share, negative to the left).
-    editor: (header height, left, right, top) or None."""
+    editor: (header height, left, right, top) or None.
+    status: the status line's height (px), at the conversation's bottom; its group comes last."""
     rects = list(code_rects)
     x0, x1 = bench
     if not top:
@@ -88,8 +89,8 @@ def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None):
     # them: the two blank areas read as one (Jakub). With another tool there, no reach: a border.
     below = split + top
     tools = (x0 + min(reach, 0.0), below, x1 + max(reach, 0.0), total)
-    rects = [tools] + rects + [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP),
-                               (x0, split, x1, below + OVERLAP)]
+    rects = [tools] + rects + [(x0, top, x1, split - status), (x0, 0.0, x1, top + OVERLAP),
+                               (x0, split, x1, below + OVERLAP), (x0, split - status, x1, split)]
     if editor:
         header, left, right, dy = editor
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects

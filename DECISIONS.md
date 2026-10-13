@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- Strip with icons, step 1 (2026-10-13): the scroll strip takes the code font (`match_font`), so its line height is the code's (measured by a temporary command in Jakub's Sublime: code and strip line 17 px). Step 5, measured the same way: an image phantom as tall as the line leaves the line at 17 px, one 2 px taller makes it 19; icons will be the line height − 2 px. (Verified by Jakub, 2026-10-13.)
 - The wheel over a sight's header or frozen lines does nothing (Jakub, 2026-10-13): those views are only put back. The whole trip scrolls by the strip, the fillers and the scroll pad. (Verified by Jakub, 2026-10-13.)
 - The scroll pad reaches over the strip (2 px at first; 6 px after Jakub still saw a faint line) and is drawn over it, so the two blank areas join without a border (Jakub, 2026-10-13; seen by Claude on screen). Found on the way: since the line-1 gutter measurement went, nothing redrew the trip once its layout was drawn, so the strip was measured too narrow; one redraw after start restores it. (Verified by Jakub, 2026-10-13.)
 - A sight at line 1 is a plain sight (Jakub, 2026-10-13): the three-view mechanism (`line_one.py`, `twin.py`, the gutter measurement) is gone; it existed so the wheel over such a sight could scroll the whole trip, which now only the strip, fillers, headers and Tools pane do. Scrolling over line 2 now scrolls line 1 too, under the header, like any sight. (Verified by Jakub, 2026-10-13.)

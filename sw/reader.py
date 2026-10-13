@@ -24,7 +24,7 @@ from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sig
 from .tint import apply_grey, apply_tint, hue_for, tint_color
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
                     draw_outlines, forget, header_top, hide_chrome, line_top, make_blank_view,
-                    make_browser, make_copy, make_header, make_side_view, reader_layout,
+                    make_browser, make_copy, make_header, make_side_view, match_font, reader_layout,
                     selected_text, to_layout)
 
 CLASS = re.compile(r"^\s*class\s+(\w+)")
@@ -214,6 +214,7 @@ class Reader(Geometry):
     def make_items(self):
         """The cells of the virtual document: each sight's header, then its code."""
         self.lh = self.sights[0].view.line_height()
+        match_font(self.strip, self.sights[0].view)  # the strip's lines level with the code's
         self.items = []
         for sight in self.sights:
             sight.header_item = plan.Item(sight.header, header_top(sight.header), self.lh, True)

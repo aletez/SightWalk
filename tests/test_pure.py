@@ -101,7 +101,9 @@ class MarksTest(unittest.TestCase):
                   {"sight": 1, "line": 11, "icon": "letter_a"},
                   {"sight": 1, "line": 11, "icon": "pass_down"}]
         self.assertEqual(marks.strip_icons(sights, marks_, LH),
-                         {1: ["digit_1"], 6: ["letter_a", "pass_down"]})
+                         {6: ["pass_down"]})  # the second; the first is in the gutter
+        self.assertEqual(marks.gutter_icons(marks_, (0, 0), (1, 11)),
+                         {(0, 2): "digit_1", (1, 11): "letter_a"})
 
 
 class QuestionsTest(unittest.TestCase):

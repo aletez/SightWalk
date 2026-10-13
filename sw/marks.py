@@ -97,12 +97,16 @@ def visible_lines(sights, offset, height, lh):
 
 
 def gutter_icons(indicators, first, last):
-    """{(sight, line): icon} for the screen. An eye on the first or last line, looking up or down,
-    stands for marks off screen in that direction and replaces that line's own icon."""
+    """{(sight, line): icon} for the screen: a line's first mark (its second stands on the strip,
+    see strip_icons). An eye on the first or last line, looking up or down, stands for marks off
+    screen in that direction and replaces that line's own icon."""
     if first is None:
         return {}
     keys = [((m["sight"], m["line"]), m["icon"]) for m in indicators]
-    icons = {key: icon for key, icon in keys if first <= key <= last}
+    icons = {}
+    for key, icon in keys:
+        if first <= key <= last:
+            icons.setdefault(key, icon)
     if any(key < first for key, _ in keys):
         icons[first] = "eye_up"
     if any(key > last for key, _ in keys):
@@ -111,12 +115,14 @@ def gutter_icons(indicators, first, last):
 
 
 def strip_icons(sights, indicators, lh):
-    """{strip line: [icon, …]}: each mark's code line counted in lines from the first sight's code
-    start, which every sight's code start is a whole number of lines from (see plan.stack). Marks
-    on one line stand side by side, in the order given."""
-    first = sights[0].code_item.y
-    lines = {}
+    """{strip line: [icon]}: the second mark of a line, whose first stands in the gutter; never
+    more than two on a line (Jakub). A strip line counts lines from the first sight's code start,
+    which every sight's code start is a whole number of lines from (see plan.stack)."""
+    first, seen, lines = sights[0].code_item.y, set(), {}
     for m in indicators:
-        y = line_y(sights[m["sight"]], m["line"], lh) - first
-        lines.setdefault(int(round(y / lh)), []).append(m["icon"])
+        key = (m["sight"], m["line"])
+        if key in seen:
+            y = line_y(sights[m["sight"]], m["line"], lh) - first
+            lines.setdefault(int(round(y / lh)), []).append(m["icon"])
+        seen.add(key)
     return lines

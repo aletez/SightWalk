@@ -83,7 +83,7 @@ class Reader(Geometry):
         # wheel over a sight scrolls only that sight, until the trip next moves (Jakub).
         self.strip = make_blank_view(self.window, "")
         self.strip.assign_syntax(chat.SYNTAX)  # the bench's colours (Jakub)
-        self.strip.settings().set("margin", 0)  # room for two icons in a scroll bar's width
+        self.strip.settings().set("margin", 0)  # room for an icon in a scroll bar's width
         self.strip_floor = make_blank_view(self.window, "")  # ▼, under the strip (Jakub)
         self.strip_floor.assign_syntax(chat.SYNTAX)
         self.strip_floor.settings().set("margin", 0)
@@ -468,12 +468,11 @@ class Reader(Geometry):
             self.render()
 
     def draw_gutter(self):
-        """The marks' icons on the strip; in the gutter only an eye for marks off screen (see
-        marks.gutter_icons), until the eyes move next to ▲ and ▼."""
+        """A line's first mark in the gutter, with an eye for marks off screen (see
+        marks.gutter_icons); its second on the strip (Jakub)."""
         self.draw_strip_marks()
         first, last = marks.visible_lines(self.sights, self.offset, self.room(), self.lh)
         icons = marks.gutter_icons(self.indicators, first, last)
-        icons = {key: icon for key, icon in icons.items() if icon.startswith("eye_")}
         for index, sight in enumerate(self.sights):
             mine = {line: icon for (i, line), icon in icons.items() if i == index and line}
             draw_icons(sight.view, sight.icons, mine)
@@ -484,8 +483,7 @@ class Reader(Geometry):
             sight.header_icons = header
 
     def draw_strip_marks(self):
-        """Every mark's icon on the strip, which scrolls with the code; drawn only when they
-        change."""
+        """Second marks on the strip, which scrolls with the code; drawn only when they change."""
         lines = marks.strip_icons(self.sights, self.indicators, self.lh)
         if lines != self.strip_marks:
             draw_strip_icons(self.strip, BLANK_LINES, lines)

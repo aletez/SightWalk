@@ -4,7 +4,8 @@ import os
 
 import sublime
 
-from .config import BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES
+from .config import (BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES,
+                     STRIP_ICON_SHIFT)
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
@@ -240,9 +241,10 @@ def draw_icons(view, old, new):
 
 
 def draw_strip_icons(strip, first_line, lines):
-    """The marks' icons on the strip: {line from first_line: [icon, …]}, side by side."""
+    """Second marks on the strip: {line from first_line: [icon]}, as far from the border as the
+    gutter's icon is on its other side (Jakub)."""
     size = int(strip.line_height()) - 2
-    html = '<body style="margin: 0; padding: 0">%s</body>'
+    html = '<body style="margin: 0; padding: 0 0 0 %dpx">%%s</body>' % STRIP_ICON_SHIFT
     phantoms(strip, "sight_walk_strip_icons").update([
         sublime.Phantom(sublime.Region(strip.text_point(first_line + line, 0)),
                         html % "".join(STRIP_IMG % (icon, size, size) for icon in icons),

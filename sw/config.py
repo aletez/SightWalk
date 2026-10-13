@@ -20,6 +20,7 @@ ROOM_LINES = 20  # lines of room for the wheel above and below a header's text
 FROZEN_PARENTS = ["class", "def"]  # blocks whose opening line is frozen above a sight (Jakub)
 STRIP_STEP = 0.15  # how far ▲ and ▼ on the strip move the trip, as a share of the screen
 STRIP_PX = 32  # the scroll strip between the bench and the Sights: twice a scroll bar (Jakub)
+STRIP_ICON_SHIFT = 6  # a strip icon's push right: it mirrors the gutter's icon across the border
 GUTTER_PX = 26  # about a sight's gutter, for the editor's setback (see Reader.editor_geometry)
 GAP_PX = 16  # room between the gutter and the code, a phantom at each line's start (Jakub)
 OVERLAP = 2  # border between sights, half taken by each neighbour (Jakub)

@@ -28,7 +28,7 @@ from .sw.commands import (  # noqa: E402,F401
     SightWalkToggleGuideCommand,
     SightWalkWindowListener,
 )
-from .sw.setup import SightWalkSetupCommand  # noqa: E402,F401
+from .sw.setup import SightWalkRestartCommand, SightWalkSetupCommand  # noqa: E402,F401
 
 
 def plugin_loaded():

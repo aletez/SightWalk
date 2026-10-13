@@ -61,3 +61,12 @@ def show_instructions(window, text):
     panel = window.create_output_panel("sight_walk_setup")
     panel.run_command("sight_walk_replace", {"text": text})
     window.run_command("show_panel", {"panel": "output.sight_walk_setup"})
+
+
+class SightWalkRestartCommand(sublime_plugin.ApplicationCommand):
+    """Temporary, technical: touches sight_walk.py, so Sublime reloads the plugin; that closes the
+    trips and the guide SightWalk started, and the next message on a bench starts a fresh one."""
+
+    def run(self):
+        entry = os.path.join(sublime.packages_path(), "SightWalk", "sight_walk.py")
+        os.utime(entry, None)

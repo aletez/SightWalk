@@ -172,6 +172,7 @@ class CallMapTest(unittest.TestCase):
         self.assertEqual(callmap.edges(nodes), [((0, 1), (1, 1))])
         source = callmap.dot_source(nodes, ("Helvetica", "#000000", "#888888"))
         self.assertIn('"s0_1" -> "s1_1";', source)
+        self.assertIn("Arrows guessed", source)
         self.assertIn('label="class A";', source)
 
     def test_authored_calls_win(self):

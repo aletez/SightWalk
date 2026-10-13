@@ -25,9 +25,9 @@ The setup command writes the token and the MCP server; the server reads them and
 - `sw/setup.py:57-67` install_server
 - `sw/setup.py:70-73` show_instructions
 - `sw/commands.py:13-20` SightWalkReplaceCommand.run
-- `mcp_server/sight_walk_mcp.py:84-87` load_config
-- `mcp_server/sight_walk_mcp.py:107-112` show
-- `mcp_server/sight_walk_mcp.py:93-104` call
+- `mcp_server/sight_walk_mcp.py:87-90` load_config
+- `mcp_server/sight_walk_mcp.py:110-118` show
+- `mcp_server/sight_walk_mcp.py:96-107` call
 
 ## 3. A request arrives (8 views)
 
@@ -146,7 +146,7 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
-- `mcp_server/sight_walk_mcp.py:126-132` point
+- `mcp_server/sight_walk_mcp.py:132-138` point
 - `sw/bridge.py:129-132` op_point
 - `sw/state.py:40-46` require_ready
 - `sw/reader.py:432-440` Reader.point
@@ -168,11 +168,11 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:455-460` Reader.draw_outlines
 - `sw/views.py:239-249` draw_outlines
 
-## 13. The agent says something (48 views)
+## 13. The agent says something (49 views)
 
 A reply reaches the Vetting Bench past the transcript guard.
 
-- `mcp_server/sight_walk_mcp.py:115-123` say
+- `mcp_server/sight_walk_mcp.py:121-129` say
 - `sw/bridge.py:117-126` op_say
 - `sw/reader.py:634-640` Reader.say
 - `sw/reader.py:522-530` Reader.show_headers
@@ -189,6 +189,7 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/callmap.py:23-29` first_definition
 - `sw/callmap.py:92-99` authored_calls
 - `sw/callmap.py:102-103` node_id
+- `sw/callmap.py:144-152` guess_warning
 - `sw/bridge.py:50-65` split_sights
 - `sw/bridge.py:68-83` check_calls
 - `sw/vetting.py:34-39` make_map
@@ -198,7 +199,7 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/vetting.py:75-87` render
 - `sw/vetting.py:90-92` png_size
 - `sw/vetting.py:95-103` show_image
-- `sw/vetting.py:106-108` show_note
+- `sw/vetting.py:106-109` show_note
 - `sw/callmap.py:18-20` Node.__init__
 - `sw/callmap.py:32-34` function_name
 - `sw/callmap.py:37-53` called_names
@@ -254,7 +255,7 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 - `sw/chat.py:157-171` take_draft
 - `sw/reader.py:515-518` Reader.take_edits
 - `sw/bridge.py:205-219` wait_for_user
-- `mcp_server/sight_walk_mcp.py:166-169` wait_for_user
+- `mcp_server/sight_walk_mcp.py:172-175` wait_for_user
 
 ## 15. Opening the editor (9 views)
 
@@ -314,7 +315,7 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 - `sw/commands.py:112-113` SightWalkWindowListener.on_load
 - `sw/reader.py:151-159` Reader.take_file
 - `sw/bridge.py:148-159` op_browse
-- `mcp_server/sight_walk_mcp.py:148-153` browse
+- `mcp_server/sight_walk_mcp.py:154-159` browse
 - `sw/views.py:112-123` make_browser
 
 ## 19. MCP over HTTP (a probe) (12 views)
@@ -344,8 +345,8 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `sw/guide.py:36-37` running
 - `sw/guide.py:40-45` find_claude
 - `sw/guide.py:61-70` start
-- `mcp_server/sight_walk_mcp.py:166-169` wait_for_user
-- `mcp_server/sight_walk_mcp.py:93-104` call
+- `mcp_server/sight_walk_mcp.py:172-175` wait_for_user
+- `mcp_server/sight_walk_mcp.py:96-107` call
 - `sw/bridge.py:230-239` dispatch
 - `sw/bridge.py:205-219` wait_for_user
 
@@ -371,7 +372,7 @@ The guide is stopped, windows close.
 - `sw/commands.py:147-150` SightWalkResetSightsCommand.run
 - `sw/commands.py:152-154` SightWalkResetSightsCommand.is_enabled
 - `sw/state.py:25-29` forget
-- `mcp_server/sight_walk_mcp.py:142-145` close
+- `mcp_server/sight_walk_mcp.py:148-151` close
 - `sw/bridge.py:140-145` op_close
 - `sw/state.py:36-37` current_reader
 
@@ -406,8 +407,8 @@ The small classes and hooks the trips above stand on.
 
 The agent's view of the settings, and colour helpers.
 
-- `mcp_server/sight_walk_mcp.py:156-163` settings
-- `mcp_server/sight_walk_mcp.py:135-139` state
+- `mcp_server/sight_walk_mcp.py:162-169` settings
+- `mcp_server/sight_walk_mcp.py:141-145` state
 - `sw/commands.py:93-94` SightWalkScrollCommand.is_enabled
 - `sw/tint.py:78-80` band_amount
 - `sw/tint.py:57-67` from_tm_theme

@@ -149,7 +149,7 @@ Open:
 ## Decisions
 
 Map
-- J (2026-10-13): calls are named by the trip's author as pairs <sight, line> calls <sight, line>: the calling line and the line of the definition it reaches, both file lines. A target is a definition, not a sight, so a sight may show two functions of one name (overloads in Java; a universal representation, Jakub). In show: {"sight": "file:begin-end", "calls": [{"line": 15, "to": [3, 42]}]}; a plain spec still works. Nodes of the map are definitions (sight, line): each sight's first one and every line a call points at. Authored calls win; without them the map guesses (by class, then run order). Wrong calls come back in one message (line outside its sight, no such sight, target outside its sight).
+- J (2026-10-13): calls are named by the trip's author as pairs <sight, line> calls <sight, line>: the calling line and the line of the definition it reaches, both file lines. A target is a definition, not a sight, so a sight may show two functions of one name (overloads in Java; a universal representation, Jakub). In show: {"sight": "file:begin-end", "calls": [{"line": 15, "to": [3, 42]}]}; a plain spec still works. Nodes of the map are definitions (sight, line): each sight's first one and every line a call points at. Authored calls win; without them the map guesses (by class, then run order), and a warning under the map says the arrows are guessed (Jakub). Wrong calls come back in one message (line outside its sight, no such sight, target outside its sight).
 
 Tools pane
 - J (2026-10-13): the Scroll tab's blank area is called the scroll pad. It joins the scroll strip without a border only while it is shown; when another tool (Itinerary, Map…) is in the Tools pane, the pane has its usual size with a border to the strip.
@@ -222,6 +222,9 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-13, the Map's arrows, in three steps that each cut the guessing: first class:function instead of names alone, where Claude had pointed to type checking as the costly way; then "the guide's own layout of the sights already says which function is called", so an ambiguous call goes to the sight the trip shows next; then the trip's author names the control flow itself, as pairs <sight, line> → <sight, line>, a definition rather than a sight as the target (Claude had proposed the sight's number), so one sight may show two functions of one name: a representation meant to hold for any language. And a warning on the map whenever its arrows are guessed.
+- 2026-10-13, Map before Itinerary, with Graphviz; without "here" on it until the UI shows clearly where here is.
+- 2026-10-13, stopping an answer, the status line between the bench's floor and the Tools pane's ceiling, the scroll pad joined to the strip without a border except when another tool is shown.
 - 2026-10-13, a guide on free local models (M1 Pro, 64 GB): keeps the HTTP MCP server as the one interface, with a thin agent loop of our own, so the model can be swapped; and a reason to keep the guide's tools and manual short.
 - 2026-10-12, sights as scratch copies ("a card in rough"): no sight or frozen line is a clone of the file, only the editor opens the file itself. It ended the shared-buffer troubles at once: doubled gaps, read-only shared by clones, edits reaching every view.
 - 2026-10-12, "you are wrong, look again": insisted that one function was indented and the others not, when Claude was sure all lines had the gap. He had scrolled a sight on its own; two defects came out: gaps only on a sight's own range, and line positions measured before a fresh copy was laid out (a sight showed lines 27 above its range).

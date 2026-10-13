@@ -138,4 +138,15 @@ def dot_source(nodes, style):
     for file in sorted({n.file for n in nodes}):
         lines += file_block(file, [n for n in nodes if n.file == file])
     lines += ["  %s -> %s;" % (node_id(a), node_id(b)) for a, b in edges(nodes)]
-    return "\n".join(lines + ["}"])
+    return "\n".join(lines + guess_warning(nodes) + ["}"])
+
+
+def guess_warning(nodes):
+    """Under the map, when some arrows are guessed from the code: the trip named no calls for
+    some sights (Jakub)."""
+    guessed = [n for n in nodes if n.authored is None]
+    if not guessed:
+        return []
+    text = ("Arrows guessed from names: the trip names no calls" if len(guessed) == len(nodes)
+            else "Some arrows guessed from names: the trip names no calls for some sights")
+    return ['  label=%s; labelloc="b"; fontcolor="#a0522d";' % quote("⚠ " + text)]

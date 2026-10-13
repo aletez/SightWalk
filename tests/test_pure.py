@@ -150,12 +150,19 @@ class CallMapTest(unittest.TestCase):
     def test_names_and_calls(self):
         lines = ["class A:", "    def run(self):", "        self.go(1)", "        print(x)"]
         self.assertEqual(callmap.function_name(lines, 2, 4), "run")
-        self.assertEqual(callmap.called_names("\n".join(lines[1:])), {"go", "print"})
+        self.assertEqual(callmap.called_names("\n".join(lines[1:])),
+                         {("self", "go"), ("", "print")})
         self.assertEqual(callmap.called_names("def broken(:"), set())
 
+    def test_edges_by_class(self):
+        nodes = [self.node(0, "run", "A", {("self", "go")}), self.node(1, "go", "A", set()),
+                 self.node(2, "go", "B", set()), self.node(3, "go", "", set()),
+                 self.node(4, "main", "", {("", "go"), ("B", "go"), ("obj", "run")})]
+        self.assertEqual(callmap.edges(nodes), [(0, 1), (4, 0), (4, 2), (4, 3)])
+
     def test_edges_and_dot(self):
-        nodes = [self.node(0, "run", "A", {"go"}), self.node(1, "go", "", {"run", "go"})]
-        self.assertEqual(callmap.edges(nodes), [(0, 1), (1, 0)])
+        nodes = [self.node(0, "run", "A", {("", "go")}), self.node(1, "go", "", {("", "run")})]
+        self.assertEqual(callmap.edges(nodes), [(0, 1)])
         source = callmap.dot_source(nodes, ("Helvetica", "#000000", "#888888"))
         self.assertIn('"s0" -> "s1";', source)
         self.assertIn('label="class A";', source)

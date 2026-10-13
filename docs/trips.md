@@ -168,7 +168,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:445-450` Reader.draw_outlines
 - `sw/views.py:239-249` draw_outlines
 
-## 13. The agent says something (39 views)
+## 13. The agent says something (40 views)
 
 A reply reaches the Vetting Bench past the transcript guard.
 
@@ -185,22 +185,23 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/reader.py:572-575` Reader.draw_map
 - `sw/reader.py:577-588` Reader.map_node
 - `sw/vetting.py:34-39` make_map
-- `sw/vetting.py:42-52` show_tabs
-- `sw/vetting.py:57-61` find_dot
-- `sw/vetting.py:64-71` draw_map
-- `sw/vetting.py:74-84` render
-- `sw/vetting.py:87-89` png_size
-- `sw/vetting.py:92-100` show_image
-- `sw/vetting.py:103-105` show_note
+- `sw/vetting.py:42-53` show_tabs
+- `sw/vetting.py:58-62` find_dot
+- `sw/vetting.py:65-72` draw_map
+- `sw/vetting.py:75-87` render
+- `sw/vetting.py:90-92` png_size
+- `sw/vetting.py:95-103` show_image
+- `sw/vetting.py:106-108` show_note
 - `sw/callmap.py:16-18` Node.__init__
 - `sw/callmap.py:21-27` function_name
-- `sw/callmap.py:30-41` called_names
-- `sw/callmap.py:44-50` edges
-- `sw/callmap.py:53-54` quote
-- `sw/callmap.py:57-60` cluster
-- `sw/callmap.py:63-65` node_line
-- `sw/callmap.py:68-74` file_block
-- `sw/callmap.py:77-88` dot_source
+- `sw/callmap.py:30-46` called_names
+- `sw/callmap.py:49-59` callees
+- `sw/callmap.py:62-65` edges
+- `sw/callmap.py:68-69` quote
+- `sw/callmap.py:72-75` cluster
+- `sw/callmap.py:78-80` node_line
+- `sw/callmap.py:83-89` file_block
+- `sw/callmap.py:92-103` dot_source
 - `sw/reader.py:594-601` Reader.stop_answer
 - `sw/reader.py:603-606` Reader.withdraw_unread_messages
 - `sw/commands.py:160-163` SightWalkStopAnswerCommand.run

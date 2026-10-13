@@ -28,26 +28,41 @@ def function_name(lines, begin, end):
 
 
 def called_names(text):
-    """The names the code calls: f(...) and obj.f(...). Code that does not parse gives none."""
+    """What the code calls, as (on, name): on is "" for f(...), the name before the dot for
+    self.f(...) or Class.f(...), and None when the call is on anything else (obj().f, a[0].f).
+    Code that does not parse gives none."""
     try:
         tree = ast.parse(textwrap.dedent(text))
     except SyntaxError:
         return set()
-    names = set()
+    calls = set()
     for node in ast.walk(tree):
-        if isinstance(node, ast.Call):
-            func = node.func
-            names.add(func.id if isinstance(func, ast.Name) else getattr(func, "attr", ""))
-    return names - {""}
+        func = getattr(node, "func", None) if isinstance(node, ast.Call) else None
+        if isinstance(func, ast.Name):
+            calls.add(("", func.id))
+        elif isinstance(func, ast.Attribute):
+            on = func.value.id if isinstance(func.value, ast.Name) else None
+            calls.add((on, func.attr))
+    return calls
+
+
+def callees(caller, on, name, nodes):
+    """The sights a call may reach (Jakub: by class, not by name alone): f() a function outside
+    any class, self.f() and cls.f() the caller's own class, Class.f() that class; on another
+    object, whose class is not known, any sight's f."""
+    named = [n for n in nodes if n.function == name and n.key != caller.key]
+    if on == "":
+        return [n for n in named if not n.owner]
+    if on in ("self", "cls"):
+        return [n for n in named if n.owner == caller.owner]
+    owned = [n for n in named if n.owner == on]
+    return owned or ([] if on in {n.owner for n in nodes} else named)
 
 
 def edges(nodes):
     """(caller key, callee key) for each call from one sight to another sight's function."""
-    by_name = {}
-    for node in nodes:
-        by_name.setdefault(node.function, []).append(node.key)
-    return sorted({(n.key, callee) for n in nodes for name in n.calls
-                   for callee in by_name.get(name, []) if callee != n.key})
+    return sorted({(n.key, callee.key) for n in nodes for on, name in n.calls
+                   for callee in callees(n, on, name, nodes)})
 
 
 def quote(text):

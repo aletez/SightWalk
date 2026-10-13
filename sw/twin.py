@@ -6,13 +6,12 @@ the only line it can reach there."""
 import sublime
 
 from .config import ROOM_LINES
-from .views import CODE_SETTINGS, match_font
+from .views import CODE_SETTINGS, match_font, phantoms
 
 ROOM_HTML = '<div style="height: %dpx"></div>'
 # No gutter and no margin: the cell beside the twin shows the real view's gutter and margin.
 TWIN_SETTINGS = (("gutter", False), ("line_numbers", False), ("margin", 0),
                  ("scroll_past_end", False))
-PHANTOMS = {}
 
 
 def make(window, name, code_view, text):
@@ -33,8 +32,7 @@ def fill(twin, text, lh):
     """The text after one blank line, with the room phantoms; again after an edit."""
     twin.run_command("sight_walk_replace", {"text": "\n" + text})
     html = ROOM_HTML % (ROOM_LINES * lh)
-    phantoms = PHANTOMS.setdefault(twin.id(), sublime.PhantomSet(twin, "sight_walk_room"))
-    phantoms.update([sublime.Phantom(sublime.Region(twin.line(0).b), html, sublime.LAYOUT_BLOCK),
+    phantoms(twin, "sight_walk_room").update([sublime.Phantom(sublime.Region(twin.line(0).b), html, sublime.LAYOUT_BLOCK),
                      sublime.Phantom(sublime.Region(twin.size()), html, sublime.LAYOUT_BLOCK)])
 
 

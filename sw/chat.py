@@ -8,7 +8,7 @@ import sublime_plugin
 
 from .config import PROMPT
 from .header import MARK_ROOM, title_lines
-from .views import BUTTON, BUTTON_HTML, FADED, make_side_view, match_font
+from .views import BUTTON, BUTTON_HTML, FADED, kept, make_side_view, match_font, phantoms
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 
@@ -17,7 +17,7 @@ SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 PROTECTED = {}
 GUARDS = {}
 # The one conversation, carried from trip to trip (Jakub).
-TRANSCRIPT = [""]
+TRANSCRIPT = ""
 MAC = sublime.platform() == "osx"
 KEYS = (("Enter (⇧+Enter: new line)", "⌃⌘↓", "⌃⌘↑") if MAC
         else ("Enter (Shift+Enter: new line)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
@@ -26,7 +26,6 @@ MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1p
              'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))
 HELP_HTML = ("<div><b>%s</b> send<br><b>%s</b> explain next<br><b>%s</b> explain previous</div>"
              % KEYS)
-MARKS = {}
 
 
 def protected_end(end, changes):
@@ -70,7 +69,7 @@ class Guard(sublime_plugin.TextChangeListener):
 def start(view):
     buffer_id = view.buffer_id()
     view.assign_syntax(SYNTAX)
-    PROTECTED[buffer_id] = TRANSCRIPT[0] + PROMPT
+    PROTECTED[buffer_id] = TRANSCRIPT + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[buffer_id]})
     GUARDS[buffer_id] = Guard(view)
     GUARDS[buffer_id].attach(view.buffer())
@@ -84,7 +83,7 @@ def make_header(window, conversation, name):
         "sight_walk_header": True})
     match_font(view, conversation)  # Plain Text has its own font
     view.set_read_only(True)
-    MARKS[view.id()] = [sublime.PhantomSet(view, "sight_walk_mark"), None]
+    kept(view)["mark"] = [phantoms(view, "sight_walk_mark"), None]
     return view
 
 
@@ -94,7 +93,7 @@ def show_header(view, title, status, help_mark=True, button=None):
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
     room = len(button[0]) + 4 - MARK_ROOM if button is not None else 0
     text = title_lines(title, status, columns - room)  # the first line ends where the mark goes
-    mark = MARKS[view.id()]
+    mark = kept(view)["mark"]
     if text == mark[1]:
         return
     mark[1] = text
@@ -118,22 +117,24 @@ def show_help(view, point):
 
 
 def say(view, text, prefix="A: "):
+    global TRANSCRIPT
     protected = PROTECTED[view.buffer_id()]
     point = len(protected) - len(PROMPT)
     message = prefix + text.strip() + "\n\n"
-    TRANSCRIPT[0] += message
+    TRANSCRIPT += message
     PROTECTED[view.buffer_id()] = protected[:point] + message + PROMPT
     view.run_command("sight_walk_insert", {"point": point, "text": message})
 
 
 def take_draft(view, edit):
     """Turns the draft into a sent message and opens a new prompt."""
+    global TRANSCRIPT
     protected = PROTECTED[view.buffer_id()]
     start_of_draft = len(protected)
     draft = view.substr(sublime.Region(start_of_draft, view.size()))
     if not draft.strip():
         return None
-    TRANSCRIPT[0] += "U: " + draft + "\n\n"
+    TRANSCRIPT += "U: " + draft + "\n\n"
     PROTECTED[view.buffer_id()] = protected[:-len(PROMPT)] + "U: " + draft + "\n\n" + PROMPT
     view.replace(edit, sublime.Region(start_of_draft - len(PROMPT), start_of_draft), "U: ")
     view.insert(edit, view.size(), "\n\n" + PROMPT)
@@ -163,8 +164,8 @@ def catch_up(view):
     """Shows what was said on another bench meanwhile, keeping the draft."""
     protected = PROTECTED[view.buffer_id()]
     blanks = len(protected) - len(protected.lstrip("\n"))
-    if protected[blanks:] == TRANSCRIPT[0] + PROMPT:
+    if protected[blanks:] == TRANSCRIPT + PROMPT:
         return
-    PROTECTED[view.buffer_id()] = "\n" * blanks + TRANSCRIPT[0] + PROMPT
+    PROTECTED[view.buffer_id()] = "\n" * blanks + TRANSCRIPT + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[view.buffer_id()],
                                             "end": len(protected)})

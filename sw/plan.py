@@ -39,6 +39,10 @@ class Sight:
         """Every view showing the sight's code."""
         return [self.view] + (self.line_one.views() if self.line_one is not None else [])
 
+    def all_views(self):
+        """Every view the sight made: code, header, frozen lines."""
+        return [v for v in self.code_views() + [self.header] + [v for _, v in self.frozen] if v]
+
 
 def stack(items, overhead):
     y = 0.0

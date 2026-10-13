@@ -24,17 +24,17 @@ PROMPT = ("You are the Vetting guide. The user talks to you in SightWalk, in Sub
 COMING = "the guide is coming…"
 THINKING = "the guide is thinking…"
 TOOLS = ["mcp__sight-walk", "Read", "Grep", "Glob"]
-PROCESS = [None]
-LAST_ASKED = [0.0]  # when the user last sent the guide something
+PROCESS = None  # the guide SightWalk started, if it did
+LAST_ASKED = 0.0  # when the user last sent the guide something
 
 
 def listening():
     """An agent is waiting for the user, or was a moment ago (it answers between waits)."""
-    return state.WAITING[0] > 0 or time.time() - state.LAST_WAIT[0] < 30
+    return state.WAITING > 0 or time.time() - state.LAST_WAIT < 30
 
 
 def running():
-    return PROCESS[0] is not None and PROCESS[0].poll() is None
+    return PROCESS is not None and PROCESS.poll() is None
 
 
 def find_claude():
@@ -59,13 +59,14 @@ def ensure(folder):
 
 
 def start(claude, folder):
+    global PROCESS, LAST_ASKED
     env = dict(os.environ, PATH=os.path.dirname(claude) + os.pathsep + os.environ.get("PATH", ""))
     with open(LOG, "a", encoding="utf-8") as log:
         log.write("\n--- %s, in %s\n" % (time.ctime(), folder))
-        PROCESS[0] = subprocess.Popen([claude, "-p", PROMPT, "--allowedTools"] + TOOLS,
-                                      cwd=folder, env=env, stdin=subprocess.DEVNULL,
-                                      stdout=log, stderr=log)
-    LAST_ASKED[0] = time.time()
+        PROCESS = subprocess.Popen([claude, "-p", PROMPT, "--allowedTools"] + TOOLS,
+                                   cwd=folder, env=env, stdin=subprocess.DEVNULL,
+                                   stdout=log, stderr=log)
+    LAST_ASKED = time.time()
     sublime.set_timeout(stop_when_idle, 60000)
 
 
@@ -75,20 +76,22 @@ def stop_when_idle():
     Only while it waits: never in the middle of an answer."""
     if not running():
         return
-    if state.WAITING[0] > 0 and time.time() - LAST_ASKED[0] > GUIDE_IDLE_S:
+    if state.WAITING > 0 and time.time() - LAST_ASKED > GUIDE_IDLE_S:
         stop()
         return
     sublime.set_timeout(stop_when_idle, 60000)
 
 
 def stop():
+    global PROCESS
     if running():
-        PROCESS[0].terminate()
-    PROCESS[0] = None
+        PROCESS.terminate()
+    PROCESS = None
 
 
 def await_answer(owner):
     """After the user's message: the bench's header says an answer is on its way, and a guide
     starts if none listens, so the user never waits without knowing (Jakub)."""
-    LAST_ASKED[0] = time.time()
+    global LAST_ASKED
+    LAST_ASKED = time.time()
     owner.note_waiting(COMING if ensure(owner.folder()) else THINKING)

@@ -29,7 +29,7 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
     """primary+enter on a trip's bench: the draft goes to the agent."""
 
     def run(self, edit):
-        owner = state.owner(self.view)
+        owner = state.reader_for(self.view.window())
         if owner is None:
             return
         context = owner.context()
@@ -43,7 +43,7 @@ class SightWalkAskCommand(sublime_plugin.TextCommand):
     """Sends a fixed message, such as "Explain next.", without touching the draft."""
 
     def run(self, edit, text):
-        owner = state.owner(self.view)
+        owner = state.reader_for(self.view.window())
         if owner is None:
             return
         owner.say(text, prefix="U: ")
@@ -106,7 +106,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
 
 class SightWalkWindowListener(sublime_plugin.EventListener):
     def on_activated(self, view):
-        scrollbars.reader_focused(state.owner(view) is not None)
+        scrollbars.reader_focused(state.reader_for(view.window()) is not None)
         self.offer_to_browser(view)
 
     def on_load(self, view):
@@ -133,7 +133,7 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
     def offer_to_browser(self, view):
         """A file opened from a trip's file browser becomes its sight (see Reader.take_file)."""
-        reader = state.owner(view)
+        reader = state.reader_for(view.window())
         if reader is not None:
             reader.take_file(view)
 

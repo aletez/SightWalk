@@ -8,12 +8,12 @@ import sublime
 
 from . import questions
 from .spec import repo_root
+from .views import kept
 
 SKIP = ("__pycache__", "venv", ".venv", "node_modules")
 MAX_FILES = 500
 FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE | sublime.DRAW_STIPPLED_UNDERLINE
-SHOWN = {}  # view id: (view, [(region, html)])
-ON = [True]  # the underlines are shown; the "References without sentinel" button toggles it
+ON = True  # the underlines are shown; sight_walk_toggle_sentinels toggles it
 
 
 def sources(root):
@@ -53,21 +53,21 @@ def mark(view, found, known):
         b = len(raw[:end].decode("utf-8", "replace"))
         region = sublime.Region(view.text_point(line - 1, a), view.text_point(line - 1, b))
         shown.append((region, popup_html(missing, known)))
-    SHOWN[view.id()] = (view, shown)
+    kept(view)["asked"] = shown
     paint(view, shown)
 
 
 def paint(view, shown):
-    regions = [r for r, _ in shown] if ON[0] else []
+    regions = [r for r, _ in shown] if ON else []
     view.add_regions("sight_walk_asked", regions, "sight_walk.outline", "", FLAGS)
 
 
 def toggle():
-    """The "References without sentinel" button: underlines on or off in every trip (Jakub)."""
-    ON[0] = not ON[0]
-    for view, shown in list(SHOWN.values()):
-        if view.is_valid():
-            paint(view, shown)
+    """References without sentinel: underlines on or off in every trip (Jakub)."""
+    global ON
+    ON = not ON
+    for view in [v for w in sublime.windows() for v in w.views() if "asked" in kept(v)]:
+        paint(view, kept(view)["asked"])
 
 
 def popup_html(missing, known):
@@ -86,7 +86,7 @@ def escape(text):
 
 def show_popup(view, point):
     """On hovering an underlined use."""
-    for region, html in SHOWN.get(view.id(), (view, []))[1] if ON[0] else []:
+    for region, html in kept(view).get("asked", []) if ON else []:
         if region.contains(point):
             view.show_popup(html, sublime.HIDE_ON_MOUSE_MOVE_AWAY, point, max_width=700)
             return

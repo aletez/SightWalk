@@ -4,24 +4,26 @@ for the agent."""
 import queue
 
 READERS = {}
-ACTIVE = [None]
+ACTIVE = None  # the trip the agent talks to
 INBOX = queue.Queue()  # the user's messages, from a trip
-WAITING = [0]  # agents waiting for the user right now
-LAST_WAIT = [0.0]  # when an agent last stopped waiting
+WAITING = 0  # agents waiting for the user right now
+LAST_WAIT = 0.0  # when an agent last stopped waiting
 # Something to say about: a message came, or the agent opened a trip, since it last waited. A say
 # without it would only fill the silence ("I am here, waiting"), so the bridge refuses it (Jakub).
-ADDRESSED = [False]
+ADDRESSED = False
 
 
 def register(reader):
+    global ACTIVE
     READERS[reader.window.id()] = reader
-    ACTIVE[0] = reader
+    ACTIVE = reader
 
 
 def forget(window):
+    global ACTIVE
     reader = READERS.pop(window.id(), None)
-    if reader is not None and ACTIVE[0] is reader:
-        ACTIVE[0] = None
+    if reader is not None and ACTIVE is reader:
+        ACTIVE = None
 
 
 def reader_for(window):
@@ -29,8 +31,7 @@ def reader_for(window):
 
 
 def current_reader():
-    reader = ACTIVE[0]
-    return reader if reader is not None and reader.window.is_valid() else None
+    return ACTIVE if ACTIVE is not None and ACTIVE.window.is_valid() else None
 
 
 def require_ready():
@@ -43,12 +44,13 @@ def require_ready():
 
 
 def close_all():
+    global ACTIVE
     # Called before a reload: the new modules would not know these windows, so they'd be orphans.
     for reader in list(READERS.values()):
         if reader.window.is_valid():
             reader.window.run_command("close_window")
     READERS.clear()
-    ACTIVE[0] = None
+    ACTIVE = None
 
 
 def render_all():
@@ -57,7 +59,3 @@ def render_all():
         if reader.ready and reader.window.is_valid():
             reader.render()
 
-
-def owner(view):
-    """The trip whose window the view is in, or None."""
-    return reader_for(view.window())

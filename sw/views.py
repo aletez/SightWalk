@@ -23,8 +23,27 @@ BUTTON_HTML = ('<a href="edit" style="color: %s; text-decoration: none; border: 
                'border-radius: 3px; padding: 0 4px">%s</a>' % (FADED, FADED, BUTTON))
 # A zero-width space: Sublime leaves out an empty phantom.
 GAP_HTML = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
-BUTTONS = {}
-GAPS = {}  # buffer id: (its gap phantoms, the lines that have one)
+# view id: what SightWalk keeps for that view (phantom sets, text last drawn). Forgotten when the
+# view closes: Sublime reuses the ids of closed views.
+KEPT = {}
+
+
+# Kept per view
+
+def kept(view):
+    return KEPT.setdefault(view.id(), {})
+
+
+def phantoms(view, key):
+    """The view's phantom set named key, made on first use."""
+    mine = kept(view)
+    if key not in mine:
+        mine[key] = sublime.PhantomSet(view, key)
+    return mine[key]
+
+
+def forget(view):
+    KEPT.pop(view.id(), None)
 
 
 # The window
@@ -55,7 +74,7 @@ def to_layout(rects, total):
 def reader_layout(code_rects, total, top, split, bench, editor=None):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
     the editor if open, the Sights, the conversation and, once top is known, its header, the
-    vetting pane's header and the vetting pane.
+    Tools pane's header and the Tools pane.
     top: the conversation header's bottom, split: the conversation's bottom (px).
     bench: the Vetting Bench's (left, right) as shares of the width.
     editor: (header height, left, right, top) or None."""
@@ -63,7 +82,7 @@ def reader_layout(code_rects, total, top, split, bench, editor=None):
     x0, x1 = bench
     if not top:
         return to_layout(rects + [(x0, 0.0, x1, total)], total)
-    # The vetting pane's header is as tall as the bench's, and stays put while the pane scrolls.
+    # The Tools pane's header is as tall as the bench's, and stays put while the pane scrolls.
     below = split + top
     rects += [(x0, top, x1, split), (x0, 0.0, x1, top + OVERLAP), (x0, split, x1, below + OVERLAP),
               (x0, below, x1, total)]
@@ -126,7 +145,7 @@ class FileCopy:
 
 def make_copy(window, copy, name):
     """A sight's view: a scratch copy of the file, not the file, so no two views of a file share a
-    buffer (phantoms, read-only, clones) and nothing can change the file but the editor (Jakub)."""
+    buffer (phantoms, read-only) and nothing can change the file but the editor (Jakub)."""
     view = window.new_file()
     view.set_scratch(True)
     view.set_name(name)
@@ -185,14 +204,13 @@ def draw_edit_button(header, text, on_click):
     """The header's text, padded so the edit button sits at its right edge."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
     padded = text.ljust(max(columns - len(BUTTON) - 4, len(text) + 1))
-    button = BUTTONS.setdefault(header.id(), [sublime.PhantomSet(header, "sight_walk_edit"), None])
-    if button[1] == padded:
+    if kept(header).get("edit_text") == padded:
         return
-    button[1] = padded
+    kept(header)["edit_text"] = padded
     write_header(header, padded)
     point = header.line(header.text_point(ROOM_LINES, 0)).b
-    button[0].update([sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE,
-                                      on_click)])
+    phantoms(header, "sight_walk_edit").update([
+        sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE, on_click)])
 
 
 # Drawing on code views
@@ -225,22 +243,11 @@ def draw_outlines(view, lines):
 def draw_gap(view, first, last):
     """An inline phantom at the start of lines first..last (1-based): room between the gutter and
     the code, which the margin setting cannot give, as Sublime paints the margin in the gutter's
-    colour (Jakub). Sublime shows a view's phantoms in all its clones, so each file keeps one set
-    for all its views, every line in it once: two sights of a file would otherwise double the
-    room (seen by Claude on screen)."""
-    phantoms, lines = GAPS.get(view.buffer_id(), (None, set()))
-    if phantoms is None or not phantoms.view.is_valid():
-        phantoms, lines = sublime.PhantomSet(view, "sight_walk_gap"), set()
-        GAPS[view.buffer_id()] = (phantoms, lines)
-    lines.update(range(first, last + 1))
-    points = [view.text_point(line - 1, 0) for line in sorted(lines)]
-    phantoms.update([sublime.Phantom(sublime.Region(p), GAP_HTML, sublime.LAYOUT_INLINE)
-                     for p in points])
-
-
-def forget_gaps(view):
-    """Before a file's views close: the next trip draws its gaps afresh."""
-    GAPS.pop(view.buffer_id(), None)
+    colour (Jakub). Sublime shows phantoms in every clone of a view, so sights are copies, never
+    clones (see make_copy)."""
+    points = [view.text_point(line - 1, 0) for line in range(first, last + 1)]
+    phantoms(view, "sight_walk_gap").update([
+        sublime.Phantom(sublime.Region(p), GAP_HTML, sublime.LAYOUT_INLINE) for p in points])
 
 
 def selected_text(view):

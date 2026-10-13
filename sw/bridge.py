@@ -18,27 +18,29 @@ from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
-SERVER = [None]
+SERVER = None
 EDITABLE = {"tint": TINT, "default_conversation_height": DEFAULT_CONVERSATION_HEIGHT,
             "bench_side": DEFAULT_BENCH_SIDE}
 
 
 # Operations, run on Sublime's main thread
 
-def line_count(path):
+def file_lines(path):
     with open(path, "rb") as f:
         return sum(1 for _ in f)
 
 
 def check_sights(sights, root):
     """Every problem with the sights in one message, so the agent can fix them all at once."""
+    if not sights:
+        raise ValueError('Give at least one sight, like "app.py:12-30".')
     problems = []
     for spec in sights:
         path, _, end = parse_spec(spec, root)
         if not os.path.isfile(path):
             problems.append("%s: no file at %s" % (spec, path))
-        elif end > line_count(path):
-            problems.append("%s: the file has %d lines" % (spec, line_count(path)))
+        elif end > file_lines(path):
+            problems.append("%s: the file has %d lines" % (spec, file_lines(path)))
     if problems and not root and any("no file" in p for p in problems):
         problems.append("relative paths need root, or give absolute paths")
     if problems:
@@ -58,36 +60,23 @@ def new_reader():
     return reader
 
 
-def check_show(sights, center, panes):
-    """Arguments an outdated agent manual would send, and a missing sequence."""
-    if panes is not None:
-        raise ValueError("show takes sights now, not panes. Ask the user to run 'SightWalk: Set Up "
-                         "Agent Bridge' and start a new session.")
-    # Older MCP servers still send center=None; a real value means an outdated agent manual.
-    if center is not None:
-        raise ValueError("show has no center any more: the trip opens at the top. Leave it out.")
-    if not sights:
-        raise ValueError('Give at least one sight, like "app.py:12-30".')
-
-
-def op_show(sights=None, root=None, center=None, trip=None, panes=None):
-    check_show(sights, center, panes)
+def op_show(sights=None, root=None, trip=None):
     check_sights(sights, root)
     reader = state.current_reader() or new_reader()
     reader.load(sights, root, trip)
-    state.ADDRESSED[0] = True  # the agent may say what the trip is about
+    state.ADDRESSED = True  # the agent may say what the trip is about
     scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}
 
 
 def op_say(text, status=None):
-    listener = state.current_reader()
-    if listener is None:
+    reader = state.current_reader()
+    if reader is None:
         raise RuntimeError("No trip is open. Call show first.")
-    if not state.ADDRESSED[0]:
+    if not state.ADDRESSED:
         raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
                          "Say nothing; call wait_for_user.")
-    listener.say(text, status)
+    reader.say(text, status)
     return {"ok": True}
 
 
@@ -169,18 +158,18 @@ def run_on_main(fn, timeout=10):
 def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}
-    state.WAITING[0] += 1
-    state.ADDRESSED[0] = False
+    state.WAITING += 1
+    state.ADDRESSED = False
     try:
         message = state.INBOX.get(timeout=timeout_s)
-        state.ADDRESSED[0] = True
+        state.ADDRESSED = True
         return message
     except queue.Empty:
         # The agent must not fill the silence: the user sees every say (Jakub).
         return {"timeout": True, "next": "No message yet. Say nothing; call wait_for_user again."}
     finally:
-        state.WAITING[0] -= 1
-        state.LAST_WAIT[0] = time.time()
+        state.WAITING -= 1
+        state.LAST_WAIT = time.time()
 
 
 # Request handling, on server threads
@@ -229,23 +218,23 @@ def load_config():
     old_port = CONFIG["port"]
     CONFIG["token"] = settings.get("token")
     CONFIG["port"] = settings.get("port", DEFAULT_PORT)
-    if SERVER[0] is not None and CONFIG["port"] != old_port:
+    if SERVER is not None and CONFIG["port"] != old_port:
         stop_server()
         start_server()
 
 
 def start_server():
-    server = Server(("127.0.0.1", CONFIG["port"]), Handler)
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-    SERVER[0] = server
+    global SERVER
+    SERVER = Server(("127.0.0.1", CONFIG["port"]), Handler)
+    threading.Thread(target=SERVER.serve_forever, daemon=True).start()
 
 
 def stop_server():
-    server = SERVER[0]
-    if server is not None:
-        server.shutdown()
-        server.server_close()
-        SERVER[0] = None
+    global SERVER
+    if SERVER is not None:
+        SERVER.shutdown()
+        SERVER.server_close()
+        SERVER = None
 
 
 def start():

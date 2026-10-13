@@ -1,5 +1,5 @@
-"""The reader: one window with the sights of one program run (Sights), the conversation (Vetting
-Bench) and the Itinerary and Map below it.
+"""The reader: one trip's window, with the sights of one program run (Sights), the conversation
+(Vetting Bench), the Tools pane under it and the scroll strip between them.
 
 The code column is a virtual document, every sight's header and code stacked (plan). Each view
 keeps a permanent cell at its place in that document, above and below the screen too: a layout's
@@ -14,21 +14,19 @@ import sublime
 
 from . import asked, chat, marks, plan, state, vetting
 from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT,
-                     FROZEN_PARENTS, GUTTER_PX, INSET, STRIP_PX, STRIP_STEP, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S,
-                     WHEEL_MS)
+                     FROZEN_PARENTS, GUTTER_PX, INSET, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE,
+                     SETTLE_MS, SETTLE_S, STRIP_PX, STRIP_STEP, WHEEL_MS)
 from .editor import Editor
 from .header import BENCH, SIGHTS, STRIP
 from .line_one import LineOne, line_top
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint
-from .views import (anchor, bench_font, draw_edit_button, draw_gap, forget_gaps, draw_icons, draw_outlines,
-                    header_top, hide_chrome, make_blank_view, to_layout, make_browser, make_header, make_side_view,
-                    FileCopy, make_copy, reader_layout, selected_text)
+from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
+                    draw_outlines, forget, header_top, hide_chrome, make_blank_view,
+                    make_browser, make_copy, make_header, make_side_view, reader_layout,
+                    selected_text, to_layout)
 
-
-BROWSER_HEADER = 0.05  # a header's height in a trip with no sights, as a share (no measure yet)
-
-
+EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (nothing measured)
 ARROWS = {"up": "▲", "down": "▼"}
 STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--foreground); '
                      'font-size: 1.6rem">%s</a>')
@@ -36,6 +34,12 @@ STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--fo
 
 def line_count(view):
     return view.rowcol(view.size())[0] + 1
+
+
+def item_top(item):
+    """The layout y of a cell's top line. A code line is measured afresh: a fresh copy is laid out
+    late."""
+    return line_top(item.view, item.line) if item.line else item.top_layout
 
 
 class Reader:
@@ -106,7 +110,7 @@ class Reader:
 
     def empty_layout(self):
         """Before any sight is measured: the usual columns at fixed heights (Jakub)."""
-        h, split = BROWSER_HEADER, DEFAULT_CONVERSATION_HEIGHT
+        h, split = EMPTY_HEADER, DEFAULT_CONVERSATION_HEIGHT
         (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
         cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split), self.chat),
                  ((b0, split, b1, split + h), self.below_header), ((b0, split + h, b1, 1.0), self.below),
@@ -133,7 +137,7 @@ class Reader:
             return
         if view in (self.browser, self.chat):
             return
-        path, lines = view.file_name(), view.rowcol(view.size())[0] + 1
+        path, lines = view.file_name(), line_count(view)
         view.close()  # the sight is a copy; the file itself opens only in the editor
         self.load(["%s:1-%d" % (path, lines)])
 
@@ -145,19 +149,9 @@ class Reader:
             self.editor.header.close()
             self.editor.view.close()
             self.editor = None
-        for sight in self.sights:
-            for view in [sight.view] + [v for _, v in sight.frozen] + \
-                    (sight.line_one.views() if sight.line_one else []):
-                if view is not None and view.is_valid():
-                    forget_gaps(view)
-            for view in (sight.view, sight.header):
-                if view is not None and view.is_valid():
-                    view.close()
-            if sight.line_one is not None:
-                sight.line_one.close()
-            for _, view in sight.frozen:
-                if view.is_valid():
-                    view.close()
+        for view in [v for sight in self.sights for v in sight.all_views() if v.is_valid()]:
+            forget(view)
+            view.close()
 
     def build(self, copies):
         for sight in self.sights:
@@ -193,7 +187,7 @@ class Reader:
         """Every file in its own hue (see tint)."""
         for path in paths:
             mine = [s for s in self.sights if s.path == path]
-            views = [v for s in mine for v in s.code_views() + [view for _, view in s.frozen]]
+            views = [v for s in mine for v in s.all_views() if v != s.header]
             apply_tint(views, [s.header for s in mine], path)
 
     def draw_gaps(self):
@@ -297,7 +291,7 @@ class Reader:
 
     def conversation_rows(self):
         """The bottoms of the conversation's header and of the conversation, in px; 0, 0 until
-        calibrated. The vetting pane takes the rest of the column."""
+        calibrated. The Tools pane takes the rest of the column."""
         if self.overhead is None:
             return 0, 0
         top = 2 * self.chat_header.line_height() + self.overhead  # its font may differ
@@ -385,7 +379,7 @@ class Reader:
         hide_chrome(self.window)
 
     def assign_groups(self, views, full):
-        # Until calibrated, the header and the vetting pane wait behind the conversation.
+        # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
         ordered = first + views + [self.chat]
         for group, view in enumerate(ordered):
@@ -445,9 +439,7 @@ class Reader:
         places = [(view, anchor(view))
                   for view in (self.filler, self.strip, self.top_filler, self.below)]
         for sight in self.sights:
-            # A fresh copy is laid out late, so a code line's place is measured each time.
-            texts = [(item.view, line_top(item.view, item.line) if item.line else item.top_layout)
-                     for item in sight.items()]
+            texts = [(item.view, item_top(item)) for item in sight.items()]
             if sight.line_one is not None:
                 texts += sight.line_one.places()
             places += [(view, max(y - OVERLAP / 2, 0.0)) for view, y in texts]
@@ -457,8 +449,7 @@ class Reader:
         """The views whose wheel moves the whole trip: the strip, the fillers, the Scroll pane under
         the bench and the sights' headers. A sight's code scrolls on its own (Jakub)."""
         heads = [i for s in self.sights for i in [s.header_item] + s.frozen_items]
-        headers = [(i.view, max((line_top(i.view, i.line) if i.line else i.top_layout)
-                                - OVERLAP / 2, 0.0)) for i in heads]
+        headers = [(i.view, max(item_top(i) - OVERLAP / 2, 0.0)) for i in heads]
         return self.places()[:4] + headers
 
     def scroll_views(self):
@@ -513,7 +504,7 @@ class Reader:
         sublime.set_timeout(self.poll_wheel, WHEEL_MS)
 
     def follow_resize(self):
-        """A panel or a window resize changes the room. The conversation and the vetting pane
+        """A panel or a window resize changes the room. The conversation and the Tools pane
         together span the column under the fixed header, so their heights change one to one."""
         size = self.chat.viewport_extent()[1] + self.below.viewport_extent()[1]
         if self.resize_base is None:

@@ -592,18 +592,10 @@ class Reader(Geometry):
         main = callmap.first_definition(lines, sight.begin, sight.end) or (sight.begin, "?")
         targets = {t[1] for s in self.sights for _, t in s.calls if t[0] == index}
         authored = callmap.authored_calls(sorted({main[0]} | targets), sight.calls)
-        calls = callmap.called_names("\n".join(lines[sight.begin - 1:sight.end]))
         colour = tint_color("#ffffff", hue_for(sight.path), 0.25)
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
-                             display_path(sight.path), colour,
-                             calls if line == main[0] else set(),
-                             authored[line] if self.calls_named() else None)
+                             display_path(sight.path), colour, authored[line])
                 for line in sorted({main[0]} | targets)]
-
-    def calls_named(self):
-        """Whether the trip's author named calls at all: then a sight without any calls no other
-        sight, and nothing is guessed (Jakub)."""
-        return any(s.calls for s in self.sights)
 
     def owner(self, sight):
         """The class around a sight, from its frozen lines, or ""."""

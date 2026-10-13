@@ -14,9 +14,9 @@ Showing code
   function as control reaches it. When the user asks about another branch (an error, a
   different input, another caller), call show again with the sequence for that branch.
 - Each sight holds exactly one whole function, from its signature to its last line.
-- Name the calls between sights (show's calls): from the calling line to the line of the
-  definition it reaches. You know which function a call reaches; the Map tab draws these arrows,
-  and without them it can only guess by name.
+- Name every call between the trip's sights (show's calls, required for each sight): from the
+  calling line to the line of the definition it reaches; "calls": [] for a sight that calls no
+  other sight. The Map tab draws exactly these arrows and never guesses.
 - Where control passes through code outside the project (a library calls the project's method
   by name, a framework dispatches to a handler), show that library function too, with an
   absolute path, and mark the jump with point. The user should never have to take it on faith.
@@ -81,19 +81,19 @@ def tool(name, description, properties=None, required=()):
                             "required": list(required)}}
 
 
-SIGHT = {"anyOf": [{"type": "string"}, {"type": "object", "properties": {
+SIGHT = {"type": "object", "required": ["sight", "calls"], "properties": {
     "sight": {"type": "string"},
     "calls": {"type": "array", "items": {"type": "object", "properties": {
         "line": {"type": "integer"},
-        "to": {"type": "array", "items": {"type": "integer"}}}}}}}]}
+        "to": {"type": "array", "items": {"type": "integer"}}}}}}}
 
 TOOLS = [
-    tool("show", "Open or replace the reader, scrolled to the top. sights: specs like "
-         '"src/app.py:12-30" in program-run order, or {"sight": "src/app.py:12-30", "calls": '
-         '[{"line": 15, "to": [3, 42]}]} when you know the calls: line 15 of this sight calls '
-         "the definition at line 42 of sight 3 (sights numbered from 0, file lines). root: base "
-         "folder for relative paths. trip: the trip's name, a few words, shown in the header "
-         "over the Sights.",
+    tool("show", "Open or replace the reader, scrolled to the top. sights, in program-run "
+         'order, each {"sight": "src/app.py:12-30", "calls": [{"line": 15, "to": [3, 42]}]}: '
+         "line 15 of this sight calls the definition at line 42 of sight 3 (sights numbered "
+         'from 0, file lines); "calls": [] when it calls no other sight. root: base folder for '
+         "relative paths. trip: the trip's name, a few words, shown in the header over the "
+         "Sights.",
          {"sights": {"type": "array", "items": SIGHT}, "root": {"type": "string"},
           "trip": {"type": "string"}}, ["sights"]),
     tool("say", 'Append your message to the Vetting Bench: say(text="..."). status: a few words '

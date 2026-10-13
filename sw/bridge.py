@@ -44,21 +44,22 @@ def check_sights(sights, root):
         raise ValueError("; ".join(problems) + ".")
 
 
+SIGHT_FORM = ('{"sight": "file:begin-end", "calls": [{"line": 15, "to": [3, 42]}]}: line 15 '
+              'of this sight calls the definition at line 42 of sight 3 (sights from 0, file '
+              'lines); "calls": [] when it calls no other sight')
+
+
 def split_sights(sights):
-    """A sight is "file:begin-end", or {"sight": "file:begin-end", "calls": [{"line": 15,
-    "to": [3, 42]}]}: line 15 of this sight calls the definition at line 42 of sight 3 (Jakub).
+    """Every sight names its calls, an empty list included: the map never guesses (Jakub).
     Returns the specs and, per sight, its calls as [(line, (sight, line))]."""
     specs, calls = [], []
-    for entry in sights or []:
-        if isinstance(entry, str):
-            specs.append(entry)
-            calls.append([])
-            continue
-        if not isinstance(entry, dict) or not isinstance(entry.get("sight"), str):
-            raise ValueError('A sight is "file:begin-end" or {"sight": "file:begin-end", '
-                             '"calls": [{"line": 15, "to": [3, 42]}]}.')
+    for i, entry in enumerate(sights or []):
+        if not isinstance(entry, dict) or not isinstance(entry.get("sight"), str) \
+                or not isinstance(entry.get("calls"), list):
+            raise ValueError("Sight %d: give each sight as %s. Name every call between the "
+                             "trip's sights; the Map draws them." % (i, SIGHT_FORM))
         specs.append(entry["sight"])
-        calls.append([(c.get("line"), tuple(c.get("to") or ())) for c in entry.get("calls", [])])
+        calls.append([(c.get("line"), tuple(c.get("to") or ())) for c in entry["calls"]])
     return specs, calls
 
 

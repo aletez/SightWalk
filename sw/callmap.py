@@ -147,6 +147,7 @@ def guess_warning(nodes):
     guessed = [n for n in nodes if n.authored is None]
     if not guessed:
         return []
-    text = ("Arrows guessed from names: the trip names no calls" if len(guessed) == len(nodes)
-            else "Some arrows guessed from names: the trip names no calls for some sights")
+    text = ("Arrows guessed from names: the trip definition lacks calls"
+            if len(guessed) == len(nodes) else
+            "Some arrows guessed from names: the trip definition lacks calls for some sights")
     return ['  label=%s; labelloc="b"; fontcolor="#a0522d";' % quote("⚠ " + text)]

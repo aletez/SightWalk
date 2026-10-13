@@ -40,6 +40,7 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- A sight without a function (a script's top-level code) is named on the map by its range, e.g. script.py:10-17, instead of "?"; the manual allows such sights as the one exception to "one whole function per sight" (Jakub, 2026-10-13). New manual: a new Claude Code session.
 - The map never guesses (Jakub, 2026-10-13): show requires every sight as {"sight", "calls"}, an empty list meaning it calls no other sight; a plain spec is refused with the right form, so the guide either names the calls or confirms there are none. The guessing (ast, by class, by run order, the warning) is gone. Sights opened inside the plugin (a file from the browser, Reset Sights) have no calls.
 - MCP over HTTP replaces the stdio server (Jakub, 2026-10-13): the plugin is the MCP server (`sw/mcp_http.py`, on the settings' port, 47321), with the manual and the tools' schemas in `sw/manual.py`; `mcp_server/`, the venv and the copied file are gone, and the TCP socket in `bridge.py` with them. wait_for_user waits at most 50 s (Claude Code cuts a call off after about 60). Setup puts `claude mcp add --scope user --transport http sight-walk http://127.0.0.1:<port>/mcp --header "Authorization: Bearer <token>"` on the clipboard. Re-registered on Jakub's machine; checked by Claude with `claude -p`: instructions received, show, state and a 50 s wait_for_user work. A new manual or tool needs only a new Claude Code session.
 - Calls named by the trip's author drive the Map (see Decisions, Map). Checked by Claude: a wrong call list refused with both problems named; a right one drew run → scroll_to → render keyed by definition lines. The guide's manual asks for calls; needs setup and a new guide session.
@@ -127,6 +128,8 @@ Open:
 - Possible VS Code port; open question: one scroll for the whole layout or per-pane scrolling.
 
 ## Plans (Jakub)
+
+- Two ideas for scripts (2026-10-13, not now): (1) the guide's language grows a "then" relation, control passing from one sight to the next without a call (e.g. "then": [1, 25]), given by the author like calls; (2) whether and how the Map shows such relations, kept apart from calls so the map stays clear. A language question and a display question, decided separately (Jakub).
 
 - Later (2026-10-13): a guide on free local models on Jakub's M1 Pro, 64 GB (LM Studio is installed). Shape: the HTTP MCP server stays the one interface; a thin agent loop of our own talks to a local OpenAI-compatible endpoint, so the model can be swapped. Small models need few tools, short descriptions and a short manual.
 

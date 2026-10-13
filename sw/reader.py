@@ -589,7 +589,9 @@ class Reader(Geometry):
         calls point at, with the class around them, the file and its hue."""
         sight = self.sights[index]
         lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
-        main = callmap.first_definition(lines, sight.begin, sight.end) or (sight.begin, "?")
+        # A sight without a function (a script's top-level code) is named by its range (Jakub).
+        main = callmap.first_definition(lines, sight.begin, sight.end) or (
+            sight.begin, sight_title(sight).rsplit("/", 1)[-1])
         targets = {t[1] for s in self.sights for _, t in s.calls if t[0] == index}
         authored = callmap.authored_calls(sorted({main[0]} | targets), sight.calls)
         colour = tint_color("#ffffff", hue_for(sight.path), 0.25)

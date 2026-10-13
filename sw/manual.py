@@ -13,7 +13,9 @@ Showing code
 - Show the sights in the order of one possible program run: the entry point first, then each
   function as control reaches it. When the user asks about another branch (an error, a
   different input, another caller), call show again with the sequence for that branch.
-- Each sight holds exactly one whole function, from its signature to its last line.
+- Each sight holds exactly one whole function, from its signature to its last line. The one
+  exception is a script's top-level code, which is no function: show it in sights of about the
+  same length, each a step that reads as one.
 - Name every call between the trip's sights (show's calls, required for each sight): from the
   calling line to the line of the definition it reaches; "calls": [] for a sight that calls no
   other sight. The Map tab draws exactly these arrows and never guesses.

@@ -1,6 +1,6 @@
-"""A probe (2026-10-12): the plugin itself as an MCP server over HTTP (Streamable HTTP, JSON
-replies only, no event stream), so Claude Code connects without a separate process. Two tools:
-state, and probe_wait, which holds a request open to see how long Claude Code lets it run."""
+"""The plugin as an MCP server over HTTP (Streamable HTTP, JSON replies only, no event stream), so
+Claude Code connects to Sublime itself: no separate process, nothing to install. Claude Code
+registers it with `claude mcp add --transport http` and a bearer token (see setup)."""
 
 import hmac
 import http.server
@@ -9,50 +9,46 @@ import threading
 import time
 import uuid
 
-from . import bridge
+import sublime
 
-PORT = 47322
+from . import bridge
+from .config import SETTINGS_FILE
+from .manual import MANUAL, TOOLS
+
 SERVER = None
 SESSIONS = {}  # session id: when it began
-SEEN = []  # probe: (method, the session id the request carried), the last 50
-TOOLS = [
-    {"name": "state", "description": "The sights shown, the one in focus and the visible ones.",
-     "inputSchema": {"type": "object", "properties": {}}},
-    {"name": "probe_sessions", "description": "The session ids requests carried. A test.",
-     "inputSchema": {"type": "object", "properties": {}}},
-    {"name": "probe_wait", "description": "Waits the given seconds, then answers. A test.",
-     "inputSchema": {"type": "object", "properties": {"seconds": {"type": "number"}},
-                     "required": ["seconds"]}},
-]
+WAIT_S = 50  # Claude Code cuts a tool call off after about 60 s
 
 
 def call_tool(name, args):
-    if name == "state":
-        return bridge.dispatch(dict(op="state", token=bridge.CONFIG["token"]))
-    if name == "probe_sessions":
-        return {"seen": SEEN[-20:], "sessions": list(SESSIONS)}
-    if name == "probe_wait":
-        time.sleep(float(args.get("seconds", 0)))
-        return {"waited": args.get("seconds")}
-    raise ValueError("Unknown tool %r" % name)
+    if name == "wait_for_user":
+        return bridge.wait_for_user(min(int(args.get("timeout_s") or WAIT_S), WAIT_S))
+    if name == "say" and "message" in args:  # an agent may name text so
+        args = dict(args, text=args.get("text") or args.pop("message"))
+    if name not in bridge.OPS:
+        names = ", ".join(t["name"] for t in TOOLS)
+        raise ValueError("Unknown tool %r. Tools: %s." % (name, names))
+    return bridge.run_on_main(lambda: bridge.OPS[name](**args))
 
 
 def tool_result(name, args):
     try:
         result = call_tool(name, args)
-        error = "error" in result
+    except (ValueError, RuntimeError, TypeError) as e:
+        result = {"error": str(e)}
     except Exception as e:
-        result, error = {"error": "%s: %s" % (type(e).__name__, e)}, True
+        # Unexpected: name the kind, so it can be told apart from a wrong argument.
+        result = {"error": "%s in SightWalk: %s" % (type(e).__name__, e)}
     text = json.dumps(result, ensure_ascii=False)
-    return {"content": [{"type": "text", "text": text}], "isError": error}
+    return {"content": [{"type": "text", "text": text}], "isError": "error" in result}
 
 
 def answer(method, params):
     """The result of one JSON-RPC request."""
     if method == "initialize":
         return {"protocolVersion": params.get("protocolVersion", "2025-06-18"),
-                "capabilities": {"tools": {}},
-                "serverInfo": {"name": "sight-walk-http", "version": "0.1"}}
+                "capabilities": {"tools": {}}, "instructions": MANUAL,
+                "serverInfo": {"name": "sight-walk", "version": "1.0"}}
     if method == "tools/list":
         return {"tools": TOOLS}
     if method == "tools/call":
@@ -93,10 +89,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def do_POST(self):
         if not self.authorized():
-            return self.send(401, {"error": "Unauthorized"})
+            return self.send(401, {"error": "Unauthorized. Run 'SightWalk: Set Up Agent Bridge' "
+                                            "in Sublime and register the server again."})
         message = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
         headers = []
-        SEEN[:] = SEEN[-49:] + [(message.get("method"), self.headers.get("Mcp-Session-Id"))]
         if message.get("method") == "initialize":
             session = uuid.uuid4().hex
             SESSIONS[session] = time.time()
@@ -115,16 +111,36 @@ class Handler(http.server.BaseHTTPRequestHandler):
         pass
 
 
-def start():
+def start_server():
     global SERVER
-    SERVER = http.server.ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
+    SERVER = http.server.ThreadingHTTPServer(("127.0.0.1", bridge.CONFIG["port"]), Handler)
     SERVER.daemon_threads = True
     threading.Thread(target=SERVER.serve_forever, daemon=True).start()
 
 
-def stop():
+def stop_server():
     global SERVER
     if SERVER is not None:
         SERVER.shutdown()
         SERVER.server_close()
         SERVER = None
+
+
+def settings_changed():
+    """A new token applies at once; a new port restarts the server."""
+    port = bridge.CONFIG["port"]
+    bridge.load_config()
+    if SERVER is not None and bridge.CONFIG["port"] != port:
+        stop_server()
+        start_server()
+
+
+def start():
+    sublime.load_settings(SETTINGS_FILE).add_on_change("sight_walk_bridge", settings_changed)
+    bridge.load_config()
+    start_server()
+
+
+def stop():
+    sublime.load_settings(SETTINGS_FILE).clear_on_change("sight_walk_bridge")
+    stop_server()

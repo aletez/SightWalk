@@ -20,11 +20,11 @@ Console (View > Show Console): `reloading plugin SightWalk.sight_walk`, with no 
 
 Command palette: **SightWalk: Set Up Agent Bridge**. Pass:
 - An output panel with three steps appears.
-- `~/.sight_walk/` contains `sight_walk_mcp.py` and `config.json`; `config.json` is `-rw-------`.
-- The clipboard holds `claude mcp add --scope user sight-walk -- "/Users/…/.sight_walk/venv/bin/python" "/Users/…/.sight_walk/sight_walk_mcp.py"`.
+- `~/.sight_walk/config.json` holds the token and port, `-rw-------`.
+- The clipboard holds `claude mcp add --scope user --transport http sight-walk http://127.0.0.1:47321/mcp --header "Authorization: Bearer …"`.
 - `Packages/User/SightWalk.sublime-settings` contains a `token`.
 
-Running it again keeps the token. Run it after every change in `mcp_server/`.
+Running it again keeps the token.
 
 ## 3. The bridge without the agent
 
@@ -55,7 +55,6 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 ## 6. The agent
 
-1. `~/.sight_walk/venv/bin/python -c "import mcp.server.mcpserver"` runs silently (the environment from the setup panel, step 1).
-2. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 7 tools.
-3. Prompt: "Use the sight-walk tools to walk me through what happens when the bridge receives a show request, from sw/bridge.py dispatch to Reader.column_rects, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
+1. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 8 tools.
+3. Prompt: "Use the sight-walk tools to walk me through what happens when the bridge receives a show request, from mcp_http's do_POST to Reader.column_rects, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
 4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ⤵ and ↳; "what if the file doesn't exist?" rebuilds the sequence.

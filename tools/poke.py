@@ -1,4 +1,4 @@
-"""Talks to the running plugin without an agent, one operation per call.
+"""Talks to the running plugin without an agent, one tool call per run, over MCP's HTTP.
 
 Usage: python3 tools/poke.py show|say|point|state|close|settings|badtoken [file1 file2]
 
@@ -6,7 +6,8 @@ Without files it shows two of the plugin's own modules, so it works from any che
 """
 import json
 import os
-import socket
+import urllib.error
+import urllib.request
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -15,9 +16,16 @@ CONFIG = os.path.expanduser("~/.sight_walk/config.json")
 
 
 def call(config, op, **args):
-    conn = socket.create_connection(("127.0.0.1", config["port"]), timeout=15)
-    conn.sendall((json.dumps(dict(args, op=op, token=config["token"])) + "\n").encode("utf-8"))
-    print(op, "->", conn.makefile(encoding="utf-8").readline().strip())
+    body = {"jsonrpc": "2.0", "id": 1, "method": "tools/call",
+            "params": {"name": op, "arguments": args}}
+    request = urllib.request.Request(
+        "http://127.0.0.1:%d/mcp" % config["port"], json.dumps(body).encode("utf-8"),
+        {"Content-Type": "application/json", "Authorization": "Bearer " + config["token"]})
+    try:
+        reply = json.load(urllib.request.urlopen(request, timeout=60))
+        print(op, "->", reply["result"]["content"][0]["text"])
+    except urllib.error.HTTPError as e:
+        print(op, "->", e.code, e.read().decode("utf-8"))
 
 
 def main():

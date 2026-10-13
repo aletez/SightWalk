@@ -1,4 +1,5 @@
-"""Command palette: 'SightWalk: Set Up Agent Bridge'."""
+"""Command palette: 'SightWalk: Set Up Agent Bridge'. The plugin serves MCP over HTTP itself (see
+mcp_http), so setting up is a token and one line for Claude Code."""
 
 import json
 import os
@@ -9,39 +10,32 @@ import sublime_plugin
 
 from .config import DEFAULT_PORT, SETTINGS_FILE
 
-PACKAGE = __package__.split(".")[0]
-SERVER_RESOURCE = "Packages/%s/mcp_server/sight_walk_mcp.py" % PACKAGE
-INSTALL_DIR = os.path.join(os.path.expanduser("~"), ".sight_walk")
-VENV_DIR = os.path.join(INSTALL_DIR, "venv")
-VENV_PYTHON = os.path.join(VENV_DIR, "bin", "python")
+FOLDER = os.path.join(os.path.expanduser("~"), ".sight_walk")
 
 INSTRUCTIONS = """SightWalk: agent bridge set up.
 
-The bridge is installed in {folder}
-
-1. Create a Python environment for the bridge, with Python 3.10 or newer as python3:
-
-   python3 -m venv "{venv}" && "{python}" -m pip install "mcp>=2"
-
-2. Register the bridge in Claude Code. This line is already on your clipboard:
+1. Register SightWalk in Claude Code. This line is already on your clipboard:
 
    {command}
 
-3. Start a Claude Code session on this computer and check that /mcp lists sight-walk.
+   If an older sight-walk is registered, remove it first:
 
-Running this command again keeps your token and refreshes the bridge file.
+   claude mcp remove --scope user sight-walk
+
+2. Start a Claude Code session on this computer and check that /mcp lists sight-walk.
+
+Running this command again keeps your token.
 """
 
 
 class SightWalkSetupCommand(sublime_plugin.WindowCommand):
     def run(self):
         token, port = ensure_token()
-        path = install_server(token, port)
-        command = 'claude mcp add --scope user sight-walk -- "%s" "%s"' % (VENV_PYTHON, path)
+        write_config(token, port)
+        command = ('claude mcp add --scope user --transport http sight-walk '
+                   'http://127.0.0.1:%d/mcp --header "Authorization: Bearer %s"' % (port, token))
         sublime.set_clipboard(command)
-        text = INSTRUCTIONS.format(folder=INSTALL_DIR, venv=VENV_DIR, python=VENV_PYTHON,
-                                   command=command)
-        show_instructions(self.window, text)
+        show_instructions(self.window, INSTRUCTIONS.format(command=command))
 
 
 def ensure_token():
@@ -54,17 +48,13 @@ def ensure_token():
     return token, settings.get("port", DEFAULT_PORT)
 
 
-def install_server(token, port):
-    # The package may be a zip, so the bridge is read as a resource and written out as a plain file.
-    os.makedirs(INSTALL_DIR, exist_ok=True)
-    path = os.path.join(INSTALL_DIR, "sight_walk_mcp.py")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(sublime.load_resource(SERVER_RESOURCE))
-    config = os.path.join(INSTALL_DIR, "config.json")
+def write_config(token, port):
+    """~/.sight_walk/config.json, for tools that talk to the plugin without Claude Code (poke)."""
+    os.makedirs(FOLDER, exist_ok=True)
+    config = os.path.join(FOLDER, "config.json")
     with open(config, "w", encoding="utf-8") as f:
         json.dump({"token": token, "port": port}, f)
     os.chmod(config, 0o600)
-    return path
 
 
 def show_instructions(window, text):

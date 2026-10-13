@@ -1,10 +1,8 @@
-"""Local socket server that the MCP bridge talks to. One JSON object per line each way."""
+"""What the agent's tools do in Sublime (see mcp_http, which serves them): each operation runs on
+Sublime's main thread; wait_for_user waits on the inbox on the server's own thread."""
 
-import hmac
-import json
 import os
 import queue
-import socketserver
 import threading
 import time
 
@@ -18,7 +16,6 @@ from .spec import parse_spec
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
-SERVER = None
 EDITABLE = {"tint": TINT, "default_conversation_height": DEFAULT_CONVERSATION_HEIGHT,
             "bench_side": DEFAULT_BENCH_SIDE}
 
@@ -219,78 +216,10 @@ def wait_for_user(timeout_s=110):
         state.LAST_WAIT = time.time()
 
 
-# Request handling, on server threads
-
-def authorized(request):
-    expected = CONFIG["token"]
-    given = request.pop("token", "") or ""
-    return bool(expected) and hmac.compare_digest(str(given), expected)
-
-
-def dispatch(request):
-    if not authorized(request):
-        return {"error": "Unauthorized. Run 'SightWalk: Set Up Agent Bridge' in Sublime."}
-    op = request.pop("op", None)
-    if op == "wait_for_user":
-        return wait_for_user(**request)
-    if op in OPS:
-        return run_on_main(lambda: OPS[op](**request))
-    return {"error": "Unknown op %r. Known: wait_for_user, %s. If the agent's tools are newer than "
-                     "the plugin, update the plugin and restart Sublime." % (op, ", ".join(OPS))}
-
-
-class Handler(socketserver.StreamRequestHandler):
-    def handle(self):
-        for raw in self.rfile:
-            try:
-                result = dispatch(json.loads(raw.decode("utf-8")))
-            except (ValueError, RuntimeError) as e:
-                result = {"error": str(e)}
-            except Exception as e:
-                # Unexpected: name the kind, so it can be told apart from a wrong argument.
-                result = {"error": "%s in SightWalk: %s" % (type(e).__name__, e)}
-            self.wfile.write((json.dumps(result, ensure_ascii=False) + "\n").encode("utf-8"))
-            self.wfile.flush()
-
-
-class Server(socketserver.ThreadingTCPServer):
-    allow_reuse_address = True
-    daemon_threads = True
-
-
-# Lifecycle
+# Settings
 
 def load_config():
+    """The token Claude Code must send and the port the server listens on (see mcp_http)."""
     settings = sublime.load_settings(SETTINGS_FILE)
-    old_port = CONFIG["port"]
     CONFIG["token"] = settings.get("token")
     CONFIG["port"] = settings.get("port", DEFAULT_PORT)
-    if SERVER is not None and CONFIG["port"] != old_port:
-        stop_server()
-        start_server()
-
-
-def start_server():
-    global SERVER
-    SERVER = Server(("127.0.0.1", CONFIG["port"]), Handler)
-    threading.Thread(target=SERVER.serve_forever, daemon=True).start()
-
-
-def stop_server():
-    global SERVER
-    if SERVER is not None:
-        SERVER.shutdown()
-        SERVER.server_close()
-        SERVER = None
-
-
-def start():
-    settings = sublime.load_settings(SETTINGS_FILE)
-    settings.add_on_change("sight_walk_bridge", load_config)
-    load_config()
-    start_server()
-
-
-def stop():
-    sublime.load_settings(SETTINGS_FILE).clear_on_change("sight_walk_bridge")
-    stop_server()

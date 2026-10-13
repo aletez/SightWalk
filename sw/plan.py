@@ -21,7 +21,6 @@ class Sight:
         self.spec, self.path, self.begin, self.end = spec, path, begin, end
         self.view = None
         self.header = None
-        self.line_one = None  # the extra views of a sight at line 1 (see line_one)
         self.header_item = None
         self.frozen = []  # (line, view): the lines that open the blocks around the range (Jakub)
         self.frozen_items = []
@@ -35,13 +34,9 @@ class Sight:
         """The sight's cells from top to bottom: header, frozen lines, code."""
         return [self.header_item] + self.frozen_items + [self.code_item]
 
-    def code_views(self):
-        """Every view showing the sight's code."""
-        return [self.view] + (self.line_one.views() if self.line_one is not None else [])
-
     def all_views(self):
         """Every view the sight made: code, header, frozen lines."""
-        return [v for v in self.code_views() + [self.header] + [v for _, v in self.frozen] if v]
+        return [v for v in [self.view, self.header] + [v for _, v in self.frozen] if v]
 
 
 def stack(items, overhead):

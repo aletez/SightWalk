@@ -196,6 +196,10 @@ def write_header(view, text):
     view.sel().add(sublime.Region(view.text_point(ROOM_LINES, 0)))
 
 
+def line_top(view, line):
+    return view.text_to_layout(view.text_point(line - 1, 0))[1]
+
+
 def header_top(view):
     return view.text_to_layout(view.text_point(ROOM_LINES, 0))[1]
 

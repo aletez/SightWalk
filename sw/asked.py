@@ -40,8 +40,7 @@ def draw(sights):
             known_by_root[root] = questions.catalogue(sources(root))
         text = sight.view.substr(sublime.Region(0, sight.view.size()))
         found = questions.unasked(text, sight.begin, sight.end, known_by_root[root])
-        for view in sight.code_views()[:2]:  # not a twin: it holds only line 1
-            mark(view, found, known_by_root[root])
+        mark(sight.view, found, known_by_root[root])
 
 
 def mark(view, found, known):

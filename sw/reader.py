@@ -18,11 +18,10 @@ from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_BENCH_SIDE, DEFAULT_CONVE
                      SETTLE_MS, SETTLE_S, STRIP_PX, STRIP_STEP, WHEEL_MS)
 from .editor import Editor
 from .header import BENCH, SIGHTS, STRIP
-from .line_one import LineOne, line_top
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
-                    draw_outlines, forget, header_top, hide_chrome, make_blank_view,
+                    draw_outlines, forget, header_top, hide_chrome, line_top, make_blank_view,
                     make_browser, make_copy, make_header, make_side_view, reader_layout,
                     selected_text, to_layout)
 
@@ -49,8 +48,7 @@ class Reader:
         self.offset = self.lead = 0.0  # lead: room above a short trip (see plan.lead)
         # px: the window's height, the height a cell adds to its content, a code line's height.
         self.height = self.overhead = self.lh = None
-        self.ready = self.measured = False
-        self.gutter, self.gutter_tries = GUTTER_PX, 0
+        self.ready = False
         self.resize_base = None
         self.settle_until = 0.0
         self.last_ids = []
@@ -92,11 +90,10 @@ class Reader:
 
     def load(self, specs, root=None, trip=None, marks=None):
         self.shown = (list(specs), root, trip)  # for Reset Sights
-        self.ready = self.measured = False
+        self.ready = False
         self.trip = trip or ""
         chat.catch_up(self.chat)  # what was said in another trip meanwhile
         self.close_sights()
-        self.gutter, self.gutter_tries = GUTTER_PX, 0
         self.sights = [plan.Sight(spec, *parse_spec(spec, root)) for spec in specs]
         self.indicators = marks or []
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
@@ -159,8 +156,6 @@ class Reader:
             sight.view = make_copy(self.window, copy, display_path(sight.path))
             sight.header = make_header(self.window, sight_title(sight), sight.view)
             self.surround(sight, copy)
-            if sight.begin == 1:
-                sight.line_one = LineOne(self.window, sight, copy)
         self.tint(copies)
         self.draw_gaps()
         asked.draw(self.sights)
@@ -195,8 +190,6 @@ class Reader:
         range: a sight scrolled on its own shows its neighbours aligned too (Jakub)."""
         for sight in self.sights:
             draw_gap(sight.view, 1, line_count(sight.view))
-            if sight.line_one is not None:
-                sight.line_one.draw_gaps()
 
     def make_items(self):
         """The cells of the virtual document: each sight's header, then its code."""
@@ -237,22 +230,6 @@ class Reader:
         self.ready = True
         self.scroll_to(0)
 
-    def measure_gutter(self):
-        """A sight at line 1 shows line 1's code beside its gutter: it must start where the code
-        below it starts. The gutter's width moves by the difference, one step per poll. Then the
-        reader starts at the top, whatever a view settling meanwhile was read as."""
-        line_one = next((s.line_one for s in self.sights if s.line_one), None)
-        if line_one is not None and self.gutter_tries < 9:
-            off = line_one.misalignment()
-            if abs(off) > 0.5:
-                self.gutter = max(self.gutter + off, 1)
-                self.gutter_tries += 1
-                self.render()
-                return
-        self.measured = True
-        self.offset = 0.0
-        self.render()
-
     # Layout
 
     def share(self, px):
@@ -287,7 +264,7 @@ class Reader:
         """The Sights as shares of the window's width: their left edge, the right edge of a
         sight's gutter, their right edge, and a border's width."""
         left, right = self.spans()[1]
-        return left, left + self.share(self.gutter), right, self.share(OVERLAP)
+        return left, left + self.share(GUTTER_PX), right, self.share(OVERLAP)
 
     def conversation_rows(self):
         """The bottoms of the conversation's header and of the conversation, in px; 0, 0 until
@@ -348,13 +325,8 @@ class Reader:
         rects, views = [], []
         for item in sight.items():
             top = self.head() + self.lead + item.y - self.offset - OVERLAP / 2
-            bottom = top + item.content + self.overhead + OVERLAP
-            if item is sight.code_item and sight.line_one is not None:
-                cells = sight.line_one.rects(column, top, bottom, self.lh)
-            else:
-                cells = [(left, top, right, bottom)], [item.view]
-            rects += cells[0]
-            views += cells[1]
+            rects.append((left, top, right, top + item.content + self.overhead + OVERLAP))
+            views.append(item.view)
         return rects, views
 
     def layout(self, rects, total):
@@ -440,8 +412,6 @@ class Reader:
                   for view in (self.filler, self.strip, self.top_filler, self.below)]
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
-            if sight.line_one is not None:
-                texts += sight.line_one.places()
             places += [(view, max(y - OVERLAP / 2, 0.0)) for view, y in texts]
         return places
 
@@ -482,15 +452,12 @@ class Reader:
         return state.READERS.get(self.window.id()) is self and self.chat.is_valid()
 
     def poll(self):
-        """The slow loop: the conversation's bottom and header, the gutter's width at first, then
-        the window's size."""
+        """The slow loop: the conversation's bottom, the headers and the window's size."""
         if not self.alive():
             return
         chat.keep_at_bottom(self.chat)
         self.show_headers()  # they rewrap when a column is resized
-        if self.ready and not self.measured:
-            self.measure_gutter()
-        elif self.ready:
+        if self.ready:
             self.follow_resize()
         sublime.set_timeout(self.poll, POLL_MS)
 
@@ -534,8 +501,6 @@ class Reader:
         for index, sight in enumerate(self.sights):
             mine = {line: icon for (i, line), icon in icons.items() if i == index and line}
             draw_icons(sight.view, sight.icons, mine)
-            if sight.line_one is not None:
-                sight.line_one.draw_icons(sight.icons, mine)
             sight.icons = mine
             # A header's line 0 is drawn on its text line.
             header = {ROOM_LINES + 1: icons[(index, 0)]} if (index, 0) in icons else {}
@@ -547,8 +512,6 @@ class Reader:
             lines = set(m["line"] for m in self.indicators if m["sight"] == index)
             if lines != sight.outlines:
                 draw_outlines(sight.view, lines)
-                if sight.line_one is not None:
-                    sight.line_one.draw_outlines(lines)
                 sight.outlines = lines
 
     # Editing
@@ -573,7 +536,7 @@ class Reader:
     def sight_of(self, view):
         """The index of the sight that shows the view, or None."""
         for index, sight in enumerate(self.sights):
-            if view in sight.code_views():
+            if view == sight.view:
                 return index
         return None
 
@@ -629,8 +592,7 @@ class Reader:
         elif self.touched is not None and self.touched.is_valid():
             self.window.focus_view(self.touched)
         elif self.sights:
-            first = self.sights[0]
-            self.window.focus_view(first.line_one.rest if first.line_one else first.view)
+            self.window.focus_view(self.sights[0].view)
 
     def note_selection(self, view):
         """The user put the caret or a selection in view: "here" is there now (Jakub)."""

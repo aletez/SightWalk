@@ -8,11 +8,12 @@ one cheap set_layout. The wheel is read by polling: a view the wheel moved off i
 back and the movement taken over (read_wheel)."""
 
 import os
+import re
 import time
 
 import sublime
 
-from . import asked, chat, marks, plan, state, vetting
+from . import asked, callmap, chat, marks, plan, state, vetting
 from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
@@ -20,12 +21,13 @@ from .editor import Editor
 from .geometry import Geometry
 from .header import BENCH, SIGHTS, STRIP
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
-from .tint import apply_grey, apply_tint
+from .tint import apply_grey, apply_tint, hue_for, tint_color
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
                     draw_outlines, forget, header_top, hide_chrome, line_top, make_blank_view,
                     make_browser, make_copy, make_header, make_side_view, reader_layout,
                     selected_text, to_layout)
 
+CLASS = re.compile(r"^\s*class\s+(\w+)")
 EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (nothing measured)
 ARROWS = {"up": "▲", "down": "▼"}
 STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--foreground); '
@@ -53,7 +55,8 @@ class Reader(Geometry):
         self.resize_base = None
         self.settle_until = 0.0
         self.last_ids = []
-        self.status = self.trip = self.note = ""  # note: the guide is coming or thinking
+        # note: non-empty = an answer is on its way (guide coming or thinking); shows [Stop]
+        self.status = self.trip = self.note = ""
         self.bench_width = BENCH_WIDTH
         self.editor = None
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
@@ -84,7 +87,9 @@ class Reader(Geometry):
             apply_grey(header)
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
-        self.below_header = chat.make_header(self.window, self.chat, vetting.TABS)
+        self.map_view = vetting.make_map(self.window)
+        self.tool = vetting.SCROLL  # the Tools pane's tab shown
+        self.below_header = chat.make_header(self.window, self.chat, "Tools")
         self.status_view = chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
         apply_grey(self.below_header)
@@ -115,7 +120,7 @@ class Reader(Geometry):
         cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split - h / 2), self.chat),
                  ((b0, split - h / 2, b1, split), self.status_view),
                  ((b0, split, b1, split + h), self.below_header),
-                 ((b0, split + h, b1, 1.0), self.below),
+                 ((b0, split + h, b1, 1.0), self.tool_view()),
                  ((s0, 0.0, s1, h), self.strip_header),
                  ((s0, h, s1, 1.0), self.strip), ((c0, 0.0, c1, h), self.sights_header),
                  ((c0, h, c1, 1.0), self.browser)]  # the browser heads itself with its folder
@@ -234,6 +239,7 @@ class Reader(Geometry):
         self.lead = self.centred_lead()
         self.ready = True
         self.scroll_to(0)
+        self.draw_map()
         # Widths are shares measured from the bench (see share), which Sublime reports right only
         # once this layout is drawn: once more then.
         sublime.set_timeout(lambda: self.scroll_to(self.offset), SETTLE_MS)
@@ -244,7 +250,9 @@ class Reader(Geometry):
         top, split = self.conversation_rows()
         if top and self.editor is None:
             self.keep_bench_width()
+        # Only the scroll pad joins the strip; another tool has its border (Jakub).
         reach = self.share(OVERLAP) * (1 if self.bench_side() != "right" else -1)
+        reach = reach if self.tool == vetting.SCROLL else 0.0
         status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
                                              self.editor_geometry(), status))
@@ -266,7 +274,7 @@ class Reader(Geometry):
     def assign_groups(self, views, full):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
-        ordered = first + ([self.below] if full else []) + views + [self.chat]
+        ordered = first + ([self.tool_view()] if full else []) + views + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -275,9 +283,13 @@ class Reader(Geometry):
                 self.window.focus_view(view)
         n = len(ordered)
         rest = [self.chat_header, self.below_header, self.status_view]
-        rest = rest if full else rest + [self.below]
-        for k, view in enumerate(rest):
-            self.window.set_view_index(view, n + k if full else n - 1, 0 if full else k + 1)
+        if full:
+            for k, view in enumerate(rest):
+                self.window.set_view_index(view, n + k, 0)
+        else:
+            for k, view in enumerate(rest + [self.tool_view()]):
+                self.window.set_view_index(view, n - 1, k + 1)
+        self.window.set_view_index(self.hidden_tool(), n - 1, 1)  # behind the conversation
 
     def render(self, settle=True):
         """A wheel step only shifts the layout's rows (see column_rects); anything else lays every
@@ -396,7 +408,7 @@ class Reader(Geometry):
     def follow_resize(self):
         """A panel or a window resize changes the room. The conversation and the Tools pane
         together span the column under the fixed header, so their heights change one to one."""
-        size = self.chat.viewport_extent()[1] + self.below.viewport_extent()[1]
+        size = self.chat.viewport_extent()[1] + self.tool_view().viewport_extent()[1]
         if self.resize_base is None:
             self.resize_base = (size, self.height)
         elif abs(size - self.resize_base[0] - (self.height - self.resize_base[1])) > 0.5:
@@ -501,7 +513,7 @@ class Reader(Geometry):
         chat.show_header(self.chat_header, BENCH, "")
         chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
-        chat.show_header(self.below_header, vetting.TABS, "", help_mark=False)
+        vetting.show_tabs(self.below_header, self.tool, self.select_tool)
         chat.show_header(self.sights_header, SIGHTS, self.trip,
                          button=("Reset positions", self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
@@ -543,6 +555,38 @@ class Reader(Geometry):
         step = sublime.load_settings(SETTINGS_FILE).get("strip_step", STRIP_STEP)
         self.scroll_to(self.offset + (-step if href == "up" else step) * self.room())
 
+    # Tools
+
+    def tool_view(self):
+        return self.below if self.tool == vetting.SCROLL else self.map_view
+
+    def hidden_tool(self):
+        return self.map_view if self.tool == vetting.SCROLL else self.below
+
+    def select_tool(self, name):
+        self.tool = name
+        if self.ready:
+            self.render()
+            sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
+
+    def draw_map(self):
+        if self.sights:
+            vetting.draw_map(self.map_view, [self.map_node(i) for i in range(len(self.sights))],
+                             ("Helvetica", "#222222", "#888888"))
+
+    def map_node(self, index):
+        """The map's node for a sight: its function, the class around it, its file and hue."""
+        sight = self.sights[index]
+        lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
+        owners = [CLASS.match(v.substr(v.line(v.text_point(line - 1, 0))))
+                  for line, v in sight.frozen]
+        owner = next((m.group(1) for m in reversed(owners) if m), "")
+        code = "\n".join(lines[sight.begin - 1:sight.end])
+        return callmap.Node(index, callmap.function_name(lines, sight.begin, sight.end) or "?",
+                            owner, display_path(sight.path),
+                            tint_color("#ffffff", hue_for(sight.path), 0.25),
+                            callmap.called_names(code))
+
     def note_waiting(self, note):
         self.note = note
         self.show_headers()
@@ -553,9 +597,13 @@ class Reader(Geometry):
         if not self.note:
             return
         state.STOPPED, self.note = True, ""
-        while not state.INBOX.empty():  # a message no agent has taken yet is withdrawn
-            state.INBOX.get_nowait()
+        self.withdraw_unread_messages()
         self.say("(stopped)", prefix="")
+
+    def withdraw_unread_messages(self):
+        """A message no agent has taken yet is withdrawn."""
+        while not state.INBOX.empty():
+            state.INBOX.get_nowait()
 
     def folder(self):
         """Where a guide started for this trip works: the first sight's repository."""

@@ -6,7 +6,7 @@
 import os
 import unittest
 
-from sw import header, marks, plan, questions, spec
+from sw import callmap, header, marks, plan, questions, spec
 
 LH = 10.0  # line height
 OVERHEAD = 4.0  # px a cell adds to its content
@@ -141,3 +141,22 @@ class AncestorsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CallMapTest(unittest.TestCase):
+    def node(self, key, function, owner, calls):
+        return callmap.Node(key, function, owner, "a.py", "#ffffff", calls)
+
+    def test_names_and_calls(self):
+        lines = ["class A:", "    def run(self):", "        self.go(1)", "        print(x)"]
+        self.assertEqual(callmap.function_name(lines, 2, 4), "run")
+        self.assertEqual(callmap.called_names("\n".join(lines[1:])), {"go", "print"})
+        self.assertEqual(callmap.called_names("def broken(:"), set())
+
+    def test_edges_and_dot(self):
+        nodes = [self.node(0, "run", "A", {"go"}), self.node(1, "go", "", {"run", "go"})]
+        self.assertEqual(callmap.edges(nodes), [(0, 1), (1, 0)])
+        source = callmap.dot_source(nodes, ("Helvetica", "#000000", "#888888"))
+        self.assertIn('"s0" -> "s1";', source)
+        self.assertIn('label="class A";', source)
+

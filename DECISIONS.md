@@ -119,6 +119,8 @@ Open:
 
 ## Plans (Jakub)
 
+- Later (2026-10-13): a guide on free local models on Jakub's M1 Pro, 64 GB (LM Studio is installed). Shape: the HTTP MCP server stays the one interface; a thin agent loop of our own talks to a local OpenAI-compatible endpoint, so the model can be swapped. Small models need few tools, short descriptions and a short manual.
+
 - Next, after the break of 2026-10-12, to be able to start vetting the plugin with itself: (1) the trouble with line marks, perhaps double marks; (2) the HTTP MCP server replacing the stdio one; (3) the Itinerary tab. Before that, a careful clean-up of the whole code, as short as possible.
 
 - Philosophy (Jakub): vettable code or no code at all.

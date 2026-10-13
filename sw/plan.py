@@ -24,6 +24,7 @@ class Sight:
         self.header_item = None
         self.frozen = []  # (line, view): the lines that open the blocks around the range (Jakub)
         self.frozen_items = []
+        self.calls = []  # [(line, (sight, line))]: the author's calls from this sight (Jakub)
         self.pad = (0, 0)  # blank lines shown above and below the range as given (spec.breathing)
         self.code_item = None
         self.header_icons = {}

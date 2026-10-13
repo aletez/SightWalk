@@ -1,6 +1,7 @@
-"""The Map tab's graph: the trip's sights as nodes, grouped by file and class, and an arrow where
-one sight's code calls another sight's function (Jakub). Pure functions, no Sublime API: the calls
-are read statically with ast, nothing runs."""
+"""The Map tab's graph: the functions the trip's sights show, grouped by file and class, and an
+arrow where one calls another (Jakub). A node is a definition: (sight, line). The arrows come from
+the trip's author when the sights name their calls (<sight, line> calls <sight, line>), else they
+are read statically with ast. Pure functions, no Sublime API; nothing runs."""
 
 import ast
 import re
@@ -10,21 +11,27 @@ DEF = re.compile(r"^\s*(?:async\s+)?def\s+(\w+)")
 
 
 class Node:
-    """A sight on the map: its key (the sight's index), the function it shows, the class around
-    it (or ""), its file as shown, its colour and the names its code calls."""
+    """A definition on the map: its key (sight index, line), the function's name, the class
+    around it (or ""), its file as shown, its colour, the names its code calls (on, name), and
+    the keys the trip's author says it calls (None when the author said nothing)."""
 
-    def __init__(self, key, function, owner, file, colour, calls):
+    def __init__(self, key, function, owner, file, colour, calls, authored=None):
         self.key, self.function, self.owner, self.file = key, function, owner, file
-        self.colour, self.calls = colour, calls
+        self.colour, self.calls, self.authored = colour, calls, authored
+
+
+def first_definition(lines, begin, end):
+    """(line, name) of the first function defined in lines begin..end (1-based), or None."""
+    for number in range(begin, end + 1):
+        found = DEF.match(lines[number - 1]) if number <= len(lines) else None
+        if found:
+            return number, found.group(1)
+    return None
 
 
 def function_name(lines, begin, end):
-    """The first function defined in lines begin..end (1-based), or None."""
-    for line in lines[begin - 1:end]:
-        found = DEF.match(line)
-        if found:
-            return found.group(1)
-    return None
+    found = first_definition(lines, begin, end)
+    return found[1] if found else None
 
 
 def called_names(text):
@@ -69,14 +76,31 @@ def in_run_order(caller, found):
 
 
 def edges(nodes):
-    """(caller key, callee key) for each call from one sight to another sight's function."""
+    """(caller key, callee key): as the trip's author names them, else read from the code."""
     pairs = set()
     for n in nodes:
+        if n.authored is not None:
+            pairs.update((n.key, key) for key in n.authored)
+            continue
         for on, name in n.calls:
             callee = in_run_order(n, callees(n, on, name, nodes))
             if callee is not None:
                 pairs.add((n.key, callee.key))
     return sorted(pairs)
+
+
+def authored_calls(definitions, calls):
+    """{caller key: [callee keys]} from a sight's calls [(line, (sight, line))]: each call belongs
+    to the last of the sight's definitions (lines) at or above it, else to the first."""
+    found = {line: [] for line in definitions}
+    for line, target in calls:
+        above = [d for d in definitions if d <= line]
+        found[max(above) if above else min(definitions)].append(target)
+    return found
+
+
+def node_id(key):
+    return quote("s%d_%d" % key)
 
 
 def quote(text):
@@ -90,7 +114,7 @@ def cluster(name, label, body, indent):
 
 
 def node_line(node, indent):
-    return '%s%s [label=%s, fillcolor="%s"];' % ("  " * indent, quote("s%d" % node.key),
+    return '%s%s [label=%s, fillcolor="%s"];' % ("  " * indent, node_id(node.key),
                                                  quote(node.function), node.colour)
 
 
@@ -113,5 +137,5 @@ def dot_source(nodes, style):
              '  edge [color="%s"];' % line]
     for file in sorted({n.file for n in nodes}):
         lines += file_block(file, [n for n in nodes if n.file == file])
-    lines += ['  "s%d" -> "s%d";' % pair for pair in edges(nodes)]
+    lines += ["  %s -> %s;" % (node_id(a), node_id(b)) for a, b in edges(nodes)]
     return "\n".join(lines + ["}"])

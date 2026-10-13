@@ -38,6 +38,14 @@ def line_count(view):
     return view.rowcol(view.size())[0] + 1
 
 
+def defined_name(lines, line, main):
+    """The name defined at line, or the line's start when it defines nothing Python knows."""
+    found = callmap.DEF.match(lines[line - 1]) if line <= len(lines) else None
+    if found:
+        return found.group(1)
+    return main[1] if line == main[0] else lines[line - 1].strip()[:30]
+
+
 def item_top(item):
     """The layout y of a cell's top line. A code line is measured afresh: a fresh copy is laid out
     late."""
@@ -96,13 +104,15 @@ class Reader(Geometry):
 
     # Loading
 
-    def load(self, specs, root=None, trip=None, marks=None):
-        self.shown = (list(specs), root, trip)  # for Reset Sights
+    def load(self, specs, root=None, trip=None, marks=None, calls=None):
+        self.shown = (list(specs), root, trip, None, calls)  # for Reset Sights
         self.ready = False
         self.trip = trip or ""
         chat.catch_up(self.chat)  # what was said in another trip meanwhile
         self.close_sights()
         self.sights = [plan.Sight(spec, *parse_spec(spec, root)) for spec in specs]
+        for sight, mine in zip(self.sights, calls or []):
+            sight.calls = mine
         self.indicators = marks or []
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
@@ -493,7 +503,7 @@ class Reader(Geometry):
             begin, end = ranges.get(i, (sight.begin, sight.end))
             self.move_range(sight, begin + sight.pad[0], end - sight.pad[1])
             specs.append(sight.spec)
-        self.load(specs, self.shown[1], self.shown[2], self.indicators)
+        self.load(specs, self.shown[1], self.shown[2], self.indicators, self.shown[4])
 
     def move_range(self, sight, begin, end):
         """The range as given (without the blank lines shown around it) moved to begin-end."""
@@ -571,21 +581,30 @@ class Reader(Geometry):
 
     def draw_map(self):
         if self.sights:
-            vetting.draw_map(self.map_view, [self.map_node(i) for i in range(len(self.sights))],
-                             ("Helvetica", "#222222", "#888888"))
+            nodes = [n for i in range(len(self.sights)) for n in self.map_nodes(i)]
+            vetting.draw_map(self.map_view, nodes, ("Helvetica", "#222222", "#888888"))
 
-    def map_node(self, index):
-        """The map's node for a sight: its function, the class around it, its file and hue."""
+    def map_nodes(self, index):
+        """The map's nodes for a sight: its first definition and every line another sight's
+        calls point at, with the class around them, the file and its hue."""
         sight = self.sights[index]
         lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
-        owners = [CLASS.match(v.substr(v.line(v.text_point(line - 1, 0))))
-                  for line, v in sight.frozen]
-        owner = next((m.group(1) for m in reversed(owners) if m), "")
-        code = "\n".join(lines[sight.begin - 1:sight.end])
-        return callmap.Node(index, callmap.function_name(lines, sight.begin, sight.end) or "?",
-                            owner, display_path(sight.path),
-                            tint_color("#ffffff", hue_for(sight.path), 0.25),
-                            callmap.called_names(code))
+        main = callmap.first_definition(lines, sight.begin, sight.end) or (sight.begin, "?")
+        targets = {t[1] for s in self.sights for _, t in s.calls if t[0] == index}
+        authored = callmap.authored_calls(sorted({main[0]} | targets), sight.calls)
+        calls = callmap.called_names("\n".join(lines[sight.begin - 1:sight.end]))
+        colour = tint_color("#ffffff", hue_for(sight.path), 0.25)
+        return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
+                             display_path(sight.path), colour,
+                             calls if line == main[0] else set(),
+                             authored[line] if sight.calls else None)
+                for line in sorted({main[0]} | targets)]
+
+    def owner(self, sight):
+        """The class around a sight, from its frozen lines, or ""."""
+        found = [CLASS.match(v.substr(v.line(v.text_point(line - 1, 0))))
+                 for line, v in sight.frozen]
+        return next((m.group(1) for m in reversed(found) if m), "")
 
     def note_waiting(self, note):
         self.note = note

@@ -104,5 +104,6 @@ def show_image(view, path):
 
 
 def show_note(view, html):
-    phantoms(view, "sight_walk_map").update([sublime.Phantom(
-        sublime.Region(0), '<div style="color: %s">%s</div>' % (FADED, html), sublime.LAYOUT_BLOCK)])
+    note = '<div style="color: %s">%s</div>' % (FADED, html)
+    phantoms(view, "sight_walk_map").update(
+        [sublime.Phantom(sublime.Region(0), note, sublime.LAYOUT_BLOCK)])

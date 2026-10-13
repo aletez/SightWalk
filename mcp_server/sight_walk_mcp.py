@@ -1,7 +1,7 @@
 import json
 import os
 import socket
-from typing import Optional
+from typing import Optional, Union
 
 from mcp.server.mcpserver import MCPServer
 
@@ -21,6 +21,9 @@ Showing code
   function as control reaches it. When the user asks about another branch (an error, a
   different input, another caller), call show again with the sequence for that branch.
 - Each sight holds exactly one whole function, from its signature to its last line.
+- Name the calls between sights (show's calls): from the calling line to the line of the
+  definition it reaches. You know which function a call reaches; the Map tab draws these arrows,
+  and without them it can only guess by name.
 - Where control passes through code outside the project (a library calls the project's method
   by name, a framework dispatches to a handler), show that library function too, with an
   absolute path, and mark the jump with point. The user should never have to take it on faith.
@@ -105,10 +108,13 @@ def call(op, timeout=15, **args):
 
 
 @mcp.tool()
-def show(sights: list[str], root: Optional[str] = None, trip: Optional[str] = None) -> dict:
+def show(sights: list[Union[str, dict]], root: Optional[str] = None,
+         trip: Optional[str] = None) -> dict:
     """Open or replace the reader, scrolled to the top. sights: specs like "src/app.py:12-30" in
-    program-run order. root: base folder for relative paths. trip: the trip's name, a few
-    words, shown in the header over the Sights."""
+    program-run order, or {"sight": "src/app.py:12-30", "calls": [{"line": 15, "to": [3, 42]}]}
+    when you know the calls: line 15 of this sight calls the definition at line 42 of sight 3
+    (sights numbered from 0, file lines). root: base folder for relative paths. trip: the trip's
+    name, a few words, shown in the header over the Sights."""
     return call("show", sights=sights, root=root, trip=trip)
 
 

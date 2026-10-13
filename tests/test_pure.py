@@ -144,8 +144,8 @@ if __name__ == "__main__":
 
 
 class CallMapTest(unittest.TestCase):
-    def node(self, key, function, owner, calls):
-        return callmap.Node(key, function, owner, "a.py", "#ffffff", calls)
+    def node(self, key, function, owner, calls, authored=None):
+        return callmap.Node((key, 1), function, owner, "a.py", "#ffffff", calls, authored)
 
     def test_names_and_calls(self):
         lines = ["class A:", "    def run(self):", "        self.go(1)", "        print(x)"]
@@ -158,19 +158,26 @@ class CallMapTest(unittest.TestCase):
         nodes = [self.node(0, "run", "A", {("self", "go")}), self.node(1, "go", "A", set()),
                  self.node(2, "go", "B", set()), self.node(3, "go", "", set()),
                  self.node(4, "main", "", {("", "go"), ("B", "go"), ("obj", "run")})]
-        self.assertEqual(callmap.edges(nodes), [(0, 1), (4, 0), (4, 2), (4, 3)])
+        self.assertEqual(callmap.edges(nodes), [((0, 1), (1, 1)), ((4, 1), (0, 1)), ((4, 1), (2, 1)), ((4, 1), (3, 1))])
 
     def test_ambiguous_call_takes_the_next_sight(self):
         nodes = [self.node(0, "go", "A", set()), self.node(1, "main", "", {("obj", "go")}),
                  self.node(2, "go", "B", set()), self.node(3, "go", "C", set())]
-        self.assertEqual(callmap.edges(nodes), [(1, 2)])
+        self.assertEqual(callmap.edges(nodes), [((1, 1), (2, 1))])
         nodes[2].function = nodes[3].function = "stay"
-        self.assertEqual(callmap.edges(nodes), [(1, 0)])  # none after it: the nearest before
+        self.assertEqual(callmap.edges(nodes), [((1, 1), (0, 1))])  # none after: the nearest before
 
     def test_edges_and_dot(self):
         nodes = [self.node(0, "run", "A", {("", "go")}), self.node(1, "go", "", {("", "run")})]
-        self.assertEqual(callmap.edges(nodes), [(0, 1)])
+        self.assertEqual(callmap.edges(nodes), [((0, 1), (1, 1))])
         source = callmap.dot_source(nodes, ("Helvetica", "#000000", "#888888"))
-        self.assertIn('"s0" -> "s1";', source)
+        self.assertIn('"s0_1" -> "s1_1";', source)
         self.assertIn('label="class A";', source)
+
+    def test_authored_calls_win(self):
+        nodes = [self.node(0, "run", "A", {("", "go")}, authored=[(2, 40)]),
+                 self.node(1, "go", "", set())]
+        self.assertEqual(callmap.edges(nodes), [((0, 1), (2, 40))])
+        found = callmap.authored_calls([10, 20], [(15, (1, 5)), (25, (2, 7)), (5, (3, 9))])
+        self.assertEqual(found, {10: [(1, 5), (3, 9)], 20: [(2, 7)]})
 

@@ -168,7 +168,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:445-450` Reader.draw_outlines
 - `sw/views.py:239-249` draw_outlines
 
-## 13. The agent says something (40 views)
+## 13. The agent says something (41 views)
 
 A reply reaches the Vetting Bench past the transcript guard.
 
@@ -196,12 +196,13 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/callmap.py:21-27` function_name
 - `sw/callmap.py:30-46` called_names
 - `sw/callmap.py:49-59` callees
-- `sw/callmap.py:62-65` edges
-- `sw/callmap.py:68-69` quote
-- `sw/callmap.py:72-75` cluster
-- `sw/callmap.py:78-80` node_line
-- `sw/callmap.py:83-89` file_block
-- `sw/callmap.py:92-103` dot_source
+- `sw/callmap.py:62-68` in_run_order
+- `sw/callmap.py:71-79` edges
+- `sw/callmap.py:82-83` quote
+- `sw/callmap.py:86-89` cluster
+- `sw/callmap.py:92-94` node_line
+- `sw/callmap.py:97-103` file_block
+- `sw/callmap.py:106-117` dot_source
 - `sw/reader.py:594-601` Reader.stop_answer
 - `sw/reader.py:603-606` Reader.withdraw_unread_messages
 - `sw/commands.py:160-163` SightWalkStopAnswerCommand.run

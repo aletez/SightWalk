@@ -160,6 +160,13 @@ class CallMapTest(unittest.TestCase):
                  self.node(4, "main", "", {("", "go"), ("B", "go"), ("obj", "run")})]
         self.assertEqual(callmap.edges(nodes), [(0, 1), (4, 0), (4, 2), (4, 3)])
 
+    def test_ambiguous_call_takes_the_next_sight(self):
+        nodes = [self.node(0, "go", "A", set()), self.node(1, "main", "", {("obj", "go")}),
+                 self.node(2, "go", "B", set()), self.node(3, "go", "C", set())]
+        self.assertEqual(callmap.edges(nodes), [(1, 2)])
+        nodes[2].function = nodes[3].function = "stay"
+        self.assertEqual(callmap.edges(nodes), [(1, 0)])  # none after it: the nearest before
+
     def test_edges_and_dot(self):
         nodes = [self.node(0, "run", "A", {("", "go")}), self.node(1, "go", "", {("", "run")})]
         self.assertEqual(callmap.edges(nodes), [(0, 1)])

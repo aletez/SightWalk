@@ -59,10 +59,24 @@ def callees(caller, on, name, nodes):
     return owned or ([] if on in {n.owner for n in nodes} else named)
 
 
+def in_run_order(caller, found):
+    """Of several sights a call may reach, the one the trip shows next after the caller, as the
+    guide lays sights out in the order of a run (Jakub); failing that, the nearest before it."""
+    after = [n for n in found if n.key > caller.key]
+    if after:
+        return min(after, key=lambda n: n.key)
+    return max(found, key=lambda n: n.key) if found else None
+
+
 def edges(nodes):
     """(caller key, callee key) for each call from one sight to another sight's function."""
-    return sorted({(n.key, callee.key) for n in nodes for on, name in n.calls
-                   for callee in callees(n, on, name, nodes)})
+    pairs = set()
+    for n in nodes:
+        for on, name in n.calls:
+            callee = in_run_order(n, callees(n, on, name, nodes))
+            if callee is not None:
+                pairs.add((n.key, callee.key))
+    return sorted(pairs)
 
 
 def quote(text):

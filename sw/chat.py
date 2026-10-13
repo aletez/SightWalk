@@ -143,12 +143,11 @@ def take_draft(view, edit):
     return draft.strip()
 
 
-def keep_at_bottom(view, room=0):
-    """Adds or removes blank lines above the transcript until the prompt line touches the bottom,
-    or stands room lines above it. Real lines, not a phantom, so a click anywhere in the pane
-    lands in the conversation."""
+def keep_at_bottom(view):
+    """Adds or removes blank lines above the transcript until the prompt line touches the bottom.
+    Real lines, not a phantom, so a click anywhere in the pane lands in the conversation."""
     lh = view.line_height()
-    bottom = view.text_to_layout(view.size())[1] + (1 + room) * lh - view.viewport_position()[1]
+    bottom = view.text_to_layout(view.size())[1] + lh - view.viewport_position()[1]
     protected = PROTECTED[view.buffer_id()]
     blanks = len(protected) - len(protected.lstrip("\n"))
     # Rounded down, so a line fits or not and the count never flips back and forth.

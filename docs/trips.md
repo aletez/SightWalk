@@ -133,7 +133,7 @@ After a new layout: every view into its group, then back at its place.
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:454-462` Reader.poll
-- `sw/chat.py:146-160` keep_at_bottom
+- `sw/chat.py:146-159` keep_at_bottom
 - `sw/reader.py:464-471` Reader.poll_wheel
 - `sw/reader.py:451-452` Reader.alive
 - `sw/reader.py:435-447` Reader.read_wheel
@@ -225,11 +225,11 @@ Enter or the header's button: the editor laid over the sights, ranges and marks 
 - `sw/commands.py:57-64` SightWalkEditCommand.run
 - `sw/reader.py:536-541` Reader.sight_of
 - `sw/reader.py:524-534` Reader.open_editor
-- `sw/editor.py:21-29` Editor.__init__
-- `sw/editor.py:13-17` open_live
-- `sw/editor.py:31-36` Editor.start
-- `sw/editor.py:38-50` Editor.track
-- `sw/editor.py:52-57` Editor.hold
+- `sw/editor.py:22-30` Editor.__init__
+- `sw/editor.py:14-18` open_live
+- `sw/editor.py:32-37` Editor.start
+- `sw/editor.py:39-51` Editor.track
+- `sw/editor.py:53-58` Editor.hold
 - `sw/reader.py:287-295` Reader.editor_geometry
 
 ## 16. Closing the editor (7 views)
@@ -238,9 +238,9 @@ Esc: Sublime asks about changes, the reader reads back the moved ranges and mark
 
 - `sw/commands.py:70-73` SightWalkCloseEditorCommand.run
 - `sw/reader.py:543-544` Reader.close_editor
-- `sw/editor.py:73-84` Editor.close
-- `sw/editor.py:66-71` Editor.read_back
-- `sw/editor.py:59-64` Editor.rows
+- `sw/editor.py:74-85` Editor.close
+- `sw/editor.py:67-72` Editor.read_back
+- `sw/editor.py:60-65` Editor.rows
 - `sw/reader.py:546-561` Reader.editor_closed
 - `sw/reader.py:563-568` Reader.move_range
 
@@ -317,7 +317,7 @@ A question goes to the inbox with what is selected; the answer comes back to the
 
 - `sw/commands.py:47-51` SightWalkAskCommand.run
 - `sw/views.py:257-261` selected_text
-- `sw/chat.py:163-171` catch_up
+- `sw/chat.py:162-170` catch_up
 
 ## 22. Endings (13 views)
 

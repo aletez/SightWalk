@@ -9,8 +9,8 @@ from .spec import matches
 BAD_LINE = 'Write a line as "file:line" or {"sight": index, "line": line}, not %r.'
 
 
-def line_y(segment, line, lh):
-    return segment.code_item.y + (line - segment.begin) * lh
+def line_y(sight, line, lh):
+    return sight.code_item.y + (line - sight.begin) * lh
 
 
 def resolve_target(sights, target):

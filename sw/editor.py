@@ -10,6 +10,7 @@ import sublime
 from .spec import display_path
 from .views import draw_icons, draw_outlines, make_header, wait_until_loaded
 
+
 def open_live(window, path):
     """The file itself, the one view a trip shows of it that is not a copy (Jakub)."""
     view = window.open_file(path)

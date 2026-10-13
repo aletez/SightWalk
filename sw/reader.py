@@ -230,6 +230,9 @@ class Reader(Geometry):
         self.lead = self.centred_lead()
         self.ready = True
         self.scroll_to(0)
+        # Widths are shares measured from the bench (see share), which Sublime reports right only
+        # once this layout is drawn: once more then.
+        sublime.set_timeout(lambda: self.scroll_to(self.offset), SETTLE_MS)
 
     # Layout
 
@@ -237,7 +240,8 @@ class Reader(Geometry):
         top, split = self.conversation_rows()
         if top and self.editor is None:
             self.keep_bench_width()
-        self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0],
+        reach = self.share(OVERLAP) * (1 if self.bench_side() != "right" else -1)
+        self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
                                              self.editor_geometry()))
         return top
 
@@ -257,7 +261,7 @@ class Reader(Geometry):
     def assign_groups(self, views, full):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
-        ordered = first + views + [self.chat]
+        ordered = first + ([self.below] if full else []) + views + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -265,7 +269,8 @@ class Reader(Geometry):
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        for k, view in enumerate([self.chat_header, self.below_header, self.below]):
+        rest = [self.chat_header, self.below_header] + ([] if full else [self.below])
+        for k, view in enumerate(rest):
             self.window.set_view_index(view, n + k if full else n - 1, 0 if full else k + 1)
 
     def render(self, settle=True):

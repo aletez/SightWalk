@@ -38,6 +38,7 @@ Verified in Sublime:
 - Per-file hues: code tint 2%, header band 25%; schemes applied only after indexing (no error dialogs).
 
 Changed, not yet verified in Sublime:
+- The Tools pane's Scroll area reaches 2 px over the strip and is drawn over it, so the two blank areas join without a border (Jakub, 2026-10-13; seen by Claude on screen). Found on the way: since the line-1 gutter measurement went, nothing redrew the trip once its layout was drawn, so the strip was measured too narrow; one redraw after start restores it.
 - A SightWalk view whose scheme another plugin replaced: the user asks the agent to refresh (show again); not documented (Jakub).
 - MCP over HTTP, a probe (2026-10-12, `sw/mcp_http.py`, port 47322, registered as `sight-walk-http`): the plugin itself answers as an MCP server (Streamable HTTP, JSON replies, stdlib only), so no separate process, venv or copied file. Checked by Claude with `claude -p`: tools listed and called; Claude Code cuts a tool call off after about 60 s (55 s passes, 65 s times out; MCP_TOOL_TIMEOUT lifts it); Claude Code sends the Mcp-Session-Id back on every request after initialize, so the plugin can tell sessions apart. Decided (Jakub): wait_for_user waits at most 50 s over HTTP, no configuration. Next: move every tool over and retire `mcp_server/`.
 - Pending tests for Jakub (2026-10-12): (1) the strip's removal: nothing of it left in the palette, context menu or keys; (2) the `settings` tool (`close` verified).

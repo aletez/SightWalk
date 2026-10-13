@@ -162,7 +162,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 A reply reaches the Vetting Bench past the transcript guard.
 
 - `sw/bridge.py:115-124` op_say
-- `sw/reader.py:631-637` Reader.say
+- `sw/reader.py:633-639` Reader.say
 - `sw/reader.py:522-530` Reader.show_headers
 - `sw/chat.py:90-109` show_header
 - `sw/chat.py:115-124` make_status
@@ -171,8 +171,8 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/reader.py:573-574` Reader.hidden_tool
 - `sw/reader.py:576-580` Reader.select_tool
 - `sw/reader.py:582-585` Reader.draw_map
-- `sw/reader.py:587-598` Reader.map_nodes
-- `sw/reader.py:600-604` Reader.owner
+- `sw/reader.py:587-600` Reader.map_nodes
+- `sw/reader.py:602-606` Reader.owner
 - `sw/reader.py:41-46` defined_name
 - `sw/callmap.py:21-27` first_definition
 - `sw/callmap.py:35-42` authored_calls
@@ -194,8 +194,8 @@ A reply reaches the Vetting Bench past the transcript guard.
 - `sw/callmap.py:59-61` node_line
 - `sw/callmap.py:64-70` file_block
 - `sw/callmap.py:73-84` dot_source
-- `sw/reader.py:610-617` Reader.stop_answer
-- `sw/reader.py:619-622` Reader.withdraw_unread_messages
+- `sw/reader.py:612-619` Reader.stop_answer
+- `sw/reader.py:621-624` Reader.withdraw_unread_messages
 - `sw/commands.py:160-163` SightWalkStopAnswerCommand.run
 - `sw/bridge.py:97-100` check_not_stopped
 - `sw/header.py:12-22` title_lines
@@ -212,7 +212,7 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 - `sw/commands.py:37-41` SightWalkSendCommand.run
 - `sw/commands.py:28-31` send
 - `sw/state.py:32-33` reader_for
-- `sw/reader.py:639-653` Reader.context
+- `sw/reader.py:641-655` Reader.context
 - `sw/commands.py:122-132` SightWalkWindowListener.on_selection_modified
 - `sw/reader.py:544-547` Reader.note_selection
 - `sw/plan.py:66-71` lead
@@ -306,7 +306,7 @@ The plugin itself as an MCP server: one tool call from the request to the reply.
 - `sw/mcp_http.py:138-141` start
 - `sw/mcp_http.py:114-118` start_server
 - `sw/mcp_http.py:129-135` settings_changed
-- `sw/manual.py:78-81` tool
+- `sw/manual.py:80-83` tool
 - `sw/mcp_http.py:121-126` stop_server
 - `sw/mcp_http.py:90-101` Handler.do_POST
 - `sw/mcp_http.py:74-77` Handler.authorized
@@ -371,8 +371,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:60-62` Geometry.room
 - `sw/reader.py:464-467` Reader.draw_edit_buttons
 - `sw/bridge.py:133-135` op_state
-- `sw/reader.py:624-629` Reader.folder
-- `sw/reader.py:606-608` Reader.note_waiting
+- `sw/reader.py:626-631` Reader.folder
+- `sw/reader.py:608-610` Reader.note_waiting
 
 ## 24. Building blocks (5 views)
 

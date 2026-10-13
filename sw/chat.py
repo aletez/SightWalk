@@ -124,13 +124,17 @@ def make_status(window, conversation):
     return view
 
 
-def show_status(view, text):
-    if kept(view).get("status") == text:
+def show_status(view, text, on_stop=None):
+    """on_stop: while an answer is on its way, a [Stop] button after the text calls it."""
+    if kept(view).get("status") == (text, bool(on_stop)):
         return
-    kept(view)["status"] = text
+    kept(view)["status"] = (text, bool(on_stop))
     html = STATUS_HTML % text.replace("&", "&amp;").replace("<", "&lt;")
-    phantoms(view, "sight_walk_status").update(
-        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_INLINE)] if text else [])
+    if on_stop:
+        html += "&nbsp;&nbsp;" + BUTTON_HTML.replace('href="edit"', 'href="stop"').replace(
+            BUTTON, "Stop (Esc)")
+    phantoms(view, "sight_walk_status").update([sublime.Phantom(
+        sublime.Region(0), html, sublime.LAYOUT_INLINE, lambda _: on_stop and on_stop())])
 
 
 def show_help(view, point):

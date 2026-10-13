@@ -6,15 +6,15 @@ Each trip follows one stretch of a run, in run order, one view per function. Wri
 
 Sublime loads the plugin, the bridge starts listening; on unload, readers close and the bridge stops.
 
-- `sight_walk.py:33-37` plugin_loaded
-- `sw/bridge.py:240-244` start
-- `sw/bridge.py:216-223` load_config
-- `sw/bridge.py:226-229` start_server
-- `sight_walk.py:40-46` plugin_unloaded
+- `sight_walk.py:34-38` plugin_loaded
+- `sw/bridge.py:249-253` start
+- `sw/bridge.py:225-232` load_config
+- `sw/bridge.py:235-238` start_server
+- `sight_walk.py:41-47` plugin_unloaded
 - `sw/scrollbars.py:13-25` reader_focused
-- `sw/state.py:46-53` close_all
-- `sw/bridge.py:247-249` stop
-- `sw/bridge.py:232-237` stop_server
+- `sw/state.py:49-56` close_all
+- `sw/bridge.py:256-258` stop
+- `sw/bridge.py:241-246` stop_server
 
 ## 2. Setting up the agent bridge (8 views)
 
@@ -25,19 +25,19 @@ The setup command writes the token and the MCP server; the server reads them and
 - `sw/setup.py:57-67` install_server
 - `sw/setup.py:70-73` show_instructions
 - `sw/commands.py:13-20` SightWalkReplaceCommand.run
-- `mcp_server/sight_walk_mcp.py:82-85` load_config
-- `mcp_server/sight_walk_mcp.py:105-110` show
-- `mcp_server/sight_walk_mcp.py:91-102` call
+- `mcp_server/sight_walk_mcp.py:84-87` load_config
+- `mcp_server/sight_walk_mcp.py:107-112` show
+- `mcp_server/sight_walk_mcp.py:93-104` call
 
 ## 3. A request arrives (8 views)
 
 From the socket to the show operation, with every check on the way.
 
-- `sw/bridge.py:196-206` Handler.handle
-- `sw/bridge.py:183-192` dispatch
-- `sw/bridge.py:177-180` authorized
-- `sw/bridge.py:139-155` run_on_main
-- `sw/bridge.py:63-69` op_show
+- `sw/bridge.py:205-215` Handler.handle
+- `sw/bridge.py:192-201` dispatch
+- `sw/bridge.py:186-189` authorized
+- `sw/bridge.py:148-164` run_on_main
+- `sw/bridge.py:69-76` op_show
 - `sw/bridge.py:33-47` check_sights
 - `sw/spec.py:9-22` parse_spec
 - `sw/bridge.py:28-30` file_lines
@@ -56,7 +56,7 @@ The window and every view but the sights.
 - `sw/chat.py:69-75` start
 - `sw/chat.py:78-87` make_header
 - `sw/vetting.py:11-15` make
-- `sw/state.py:16-19` register
+- `sw/state.py:19-22` register
 
 ## 5. Loading the sights (8 views)
 
@@ -133,7 +133,7 @@ After a new layout: every view into its group, then back at its place.
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:377-385` Reader.poll
-- `sw/chat.py:170-183` keep_at_bottom
+- `sw/chat.py:174-187` keep_at_bottom
 - `sw/reader.py:387-394` Reader.poll_wheel
 - `sw/reader.py:374-375` Reader.alive
 - `sw/reader.py:354-370` Reader.read_wheel
@@ -146,9 +146,9 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
-- `mcp_server/sight_walk_mcp.py:124-130` point
-- `sw/bridge.py:83-85` op_point
-- `sw/state.py:37-43` require_ready
+- `mcp_server/sight_walk_mcp.py:126-132` point
+- `sw/bridge.py:91-94` op_point
+- `sw/state.py:40-46` require_ready
 - `sw/reader.py:410-418` Reader.point
 - `sw/marks.py:66-81` resolve_marks
 - `sw/marks.py:56-63` jump
@@ -168,19 +168,22 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:433-438` Reader.draw_outlines
 - `sw/views.py:239-249` draw_outlines
 
-## 13. The agent says something (13 views)
+## 13. The agent says something (16 views)
 
 A reply reaches the Vetting Bench past the transcript guard.
 
-- `mcp_server/sight_walk_mcp.py:113-121` say
-- `sw/bridge.py:72-80` op_say
-- `sw/reader.py:556-562` Reader.say
-- `sw/reader.py:500-507` Reader.show_headers
+- `mcp_server/sight_walk_mcp.py:115-123` say
+- `sw/bridge.py:79-88` op_say
+- `sw/reader.py:567-573` Reader.say
+- `sw/reader.py:500-508` Reader.show_headers
 - `sw/chat.py:90-109` show_header
 - `sw/chat.py:115-124` make_status
-- `sw/chat.py:127-133` show_status
+- `sw/chat.py:127-137` show_status
+- `sw/reader.py:550-558` Reader.stop_answer
+- `sw/commands.py:160-163` SightWalkStopAnswerCommand.run
+- `sw/bridge.py:63-66` check_not_stopped
 - `sw/header.py:12-22` title_lines
-- `sw/chat.py:143-150` say
+- `sw/chat.py:147-154` say
 - `sw/commands.py:24-25` SightWalkInsertCommand.run
 - `sw/chat.py:49-66` Guard.on_text_changed
 - `sw/chat.py:31-39` protected_end
@@ -192,10 +195,10 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 
 - `sw/commands.py:37-41` SightWalkSendCommand.run
 - `sw/commands.py:28-31` send
-- `sw/state.py:29-30` reader_for
-- `sw/reader.py:564-578` Reader.context
+- `sw/state.py:32-33` reader_for
+- `sw/reader.py:575-589` Reader.context
 - `sw/commands.py:122-132` SightWalkWindowListener.on_selection_modified
-- `sw/reader.py:521-524` Reader.note_selection
+- `sw/reader.py:522-525` Reader.note_selection
 - `sw/plan.py:65-70` lead
 - `sw/plan.py:59-62` free_room
 - `sw/plan.py:73-79` offset_range
@@ -212,14 +215,14 @@ The draft becomes a message, with the focus and the visible sights, and the agen
 - `sw/spec.py:61-62` indent
 - `sw/spec.py:65-71` opens_block
 - `sw/plan.py:33-35` Sight.items
-- `sw/reader.py:531-539` Reader.draw_strip_buttons
-- `sw/reader.py:541-543` Reader.strip_button
-- `sw/reader.py:526-529` Reader.reset_sights
+- `sw/reader.py:532-540` Reader.draw_strip_buttons
+- `sw/reader.py:542-544` Reader.strip_button
+- `sw/reader.py:527-530` Reader.reset_sights
 - `sw/plan.py:82-85` visible_specs
-- `sw/chat.py:153-167` take_draft
+- `sw/chat.py:157-171` take_draft
 - `sw/reader.py:493-496` Reader.take_edits
-- `sw/bridge.py:158-172` wait_for_user
-- `mcp_server/sight_walk_mcp.py:164-167` wait_for_user
+- `sw/bridge.py:167-181` wait_for_user
+- `mcp_server/sight_walk_mcp.py:166-169` wait_for_user
 
 ## 15. Opening the editor (9 views)
 
@@ -257,29 +260,29 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/geometry.py:27-31` Geometry.strip_span
 - `sw/geometry.py:33-35` Geometry.strip_share
 - `sw/geometry.py:37-38` Geometry.bench_side
-- `sw/state.py:56-60` render_all
-- `sw/bridge.py:125-132` op_settings
-- `sw/bridge.py:115-122` check_setting
+- `sw/state.py:59-63` render_all
+- `sw/bridge.py:134-141` op_settings
+- `sw/bridge.py:124-131` check_setting
 - `sw/commands.py:108-110` SightWalkWindowListener.on_activated
 - `sw/commands.py:87-91` SightWalkScrollCommand.run
 - `sw/commands.py:81-83` SightWalkHeaderListener.on_hover
-- `sw/chat.py:136-140` show_help
+- `sw/chat.py:140-144` show_help
 
 ## 18. primary+g (12 views)
 
 In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.
 
-- `sw/commands.py:178-189` SightWalkToggleGuideCommand.run
-- `sw/reader.py:509-519` Reader.toggle_focus
-- `sw/commands.py:191-196` SightWalkToggleGuideCommand.folder
+- `sw/commands.py:187-198` SightWalkToggleGuideCommand.run
+- `sw/reader.py:510-520` Reader.toggle_focus
+- `sw/commands.py:200-205` SightWalkToggleGuideCommand.folder
 - `sw/reader.py:105-109` Reader.open_empty
 - `sw/reader.py:111-127` Reader.empty_layout
 - `sw/reader.py:129-134` Reader.close_hijacker
 - `sw/commands.py:134-138` SightWalkWindowListener.offer_to_browser
 - `sw/commands.py:112-113` SightWalkWindowListener.on_load
 - `sw/reader.py:136-144` Reader.take_file
-- `sw/bridge.py:101-112` op_browse
-- `mcp_server/sight_walk_mcp.py:146-151` browse
+- `sw/bridge.py:110-121` op_browse
+- `mcp_server/sight_walk_mcp.py:148-153` browse
 - `sw/views.py:112-123` make_browser
 
 ## 19. MCP over HTTP (a probe) (12 views)
@@ -309,10 +312,10 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `sw/guide.py:36-37` running
 - `sw/guide.py:40-45` find_claude
 - `sw/guide.py:61-70` start
-- `mcp_server/sight_walk_mcp.py:164-167` wait_for_user
-- `mcp_server/sight_walk_mcp.py:91-102` call
-- `sw/bridge.py:183-192` dispatch
-- `sw/bridge.py:158-172` wait_for_user
+- `mcp_server/sight_walk_mcp.py:166-169` wait_for_user
+- `mcp_server/sight_walk_mcp.py:93-104` call
+- `sw/bridge.py:192-201` dispatch
+- `sw/bridge.py:167-181` wait_for_user
 
 ## 21. Talking on the bench (3 views)
 
@@ -320,25 +323,25 @@ A question goes to the inbox with what is selected; the answer comes back to the
 
 - `sw/commands.py:47-51` SightWalkAskCommand.run
 - `sw/views.py:262-266` selected_text
-- `sw/chat.py:186-194` catch_up
+- `sw/chat.py:190-198` catch_up
 
 ## 22. Endings (13 views)
 
 The guide is stopped, windows close.
 
-- `sw/commands.py:166-167` SightWalkStopGuideCommand.run
-- `sw/commands.py:169-170` SightWalkStopGuideCommand.is_enabled
+- `sw/commands.py:175-176` SightWalkStopGuideCommand.run
+- `sw/commands.py:178-179` SightWalkStopGuideCommand.is_enabled
 - `sw/guide.py:85-89` stop
 - `sw/guide.py:73-82` stop_when_idle
 - `sw/commands.py:140-141` SightWalkWindowListener.on_pre_close_window
 - `sw/commands.py:115-120` SightWalkWindowListener.on_window_command
-- `sw/commands.py:158-160` SightWalkCloseTripCommand.run
+- `sw/commands.py:167-169` SightWalkCloseTripCommand.run
 - `sw/commands.py:147-150` SightWalkResetSightsCommand.run
 - `sw/commands.py:152-154` SightWalkResetSightsCommand.is_enabled
-- `sw/state.py:22-26` forget
-- `mcp_server/sight_walk_mcp.py:140-143` close
-- `sw/bridge.py:93-98` op_close
-- `sw/state.py:33-34` current_reader
+- `sw/state.py:25-29` forget
+- `mcp_server/sight_walk_mcp.py:142-145` close
+- `sw/bridge.py:102-107` op_close
+- `sw/state.py:36-37` current_reader
 
 ## 23. Names and room (12 views)
 
@@ -353,9 +356,9 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:56-58` Geometry.head
 - `sw/geometry.py:60-62` Geometry.room
 - `sw/reader.py:442-445` Reader.draw_edit_buttons
-- `sw/bridge.py:88-90` op_state
-- `sw/reader.py:549-554` Reader.folder
-- `sw/reader.py:545-547` Reader.note_waiting
+- `sw/bridge.py:97-99` op_state
+- `sw/reader.py:560-565` Reader.folder
+- `sw/reader.py:546-548` Reader.note_waiting
 
 ## 24. Building blocks (5 views)
 
@@ -371,8 +374,8 @@ The small classes and hooks the trips above stand on.
 
 The agent's view of the settings, and colour helpers.
 
-- `mcp_server/sight_walk_mcp.py:154-161` settings
-- `mcp_server/sight_walk_mcp.py:133-137` state
+- `mcp_server/sight_walk_mcp.py:156-163` settings
+- `mcp_server/sight_walk_mcp.py:135-139` state
 - `sw/commands.py:93-94` SightWalkScrollCommand.is_enabled
 - `sw/tint.py:78-80` band_amount
 - `sw/tint.py:57-67` from_tm_theme
@@ -403,9 +406,9 @@ The underline and the popup that says where the code asks the question.
 - `sw/asked.py:46-56` mark
 - `sw/asked.py:72-79` popup_html
 - `sw/asked.py:82-83` escape
-- `sw/commands.py:202-204` SightWalkSightListener.is_applicable
-- `sw/commands.py:206-208` SightWalkSightListener.on_hover
+- `sw/commands.py:211-213` SightWalkSightListener.is_applicable
+- `sw/commands.py:215-217` SightWalkSightListener.on_hover
 - `sw/asked.py:86-91` show_popup
 - `sw/asked.py:59-61` paint
 - `sw/asked.py:64-69` toggle
-- `sw/commands.py:214-215` SightWalkToggleSentinelsCommand.run
+- `sw/commands.py:223-224` SightWalkToggleSentinelsCommand.run

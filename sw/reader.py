@@ -499,7 +499,8 @@ class Reader(Geometry):
 
     def show_headers(self):
         chat.show_header(self.chat_header, BENCH, "")
-        chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t))
+        chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
+                         self.stop_answer if self.note else None)
         chat.show_header(self.below_header, vetting.TABS, "", help_mark=False)
         chat.show_header(self.sights_header, SIGHTS, self.trip,
                          button=("Reset positions", self.reset_sights))
@@ -545,6 +546,16 @@ class Reader(Geometry):
     def note_waiting(self, note):
         self.note = note
         self.show_headers()
+
+    def stop_answer(self):
+        """[Stop] or Esc while an answer is on its way (Jakub): the agent's further say, show and
+        point are refused until it waits for the user again (see bridge)."""
+        if not self.note:
+            return
+        state.STOPPED, self.note = True, ""
+        while not state.INBOX.empty():  # a message no agent has taken yet is withdrawn
+            state.INBOX.get_nowait()
+        self.say("(stopped)", prefix="")
 
     def folder(self):
         """Where a guide started for this trip works: the first sight's repository."""

@@ -60,7 +60,14 @@ def new_reader():
     return reader
 
 
+def check_not_stopped():
+    if state.STOPPED:
+        raise RuntimeError("The user stopped this answer. Say and show nothing more about it; "
+                           "call wait_for_user.")
+
+
 def op_show(sights=None, root=None, trip=None):
+    check_not_stopped()
     check_sights(sights, root)
     reader = state.current_reader() or new_reader()
     reader.load(sights, root, trip)
@@ -70,6 +77,7 @@ def op_show(sights=None, root=None, trip=None):
 
 
 def op_say(text, status=None):
+    check_not_stopped()
     reader = state.current_reader()
     if reader is None:
         raise RuntimeError("No trip is open. Call show first.")
@@ -81,6 +89,7 @@ def op_say(text, status=None):
 
 
 def op_point(marks, reveal=True, clear=True):
+    check_not_stopped()
     state.require_ready().point(marks, reveal, clear)
     return {"ok": True}
 
@@ -159,7 +168,7 @@ def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}
     state.WAITING += 1
-    state.ADDRESSED = False
+    state.ADDRESSED = state.STOPPED = False
     try:
         message = state.INBOX.get(timeout=timeout_s)
         state.ADDRESSED = True

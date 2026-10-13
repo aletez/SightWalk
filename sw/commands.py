@@ -154,6 +154,15 @@ class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):
         return reader is not None and bool(reader.sights)
 
 
+class SightWalkStopAnswerCommand(sublime_plugin.TextCommand):
+    """Esc on the bench while an answer is on its way: stops it (see Reader.stop_answer)."""
+
+    def run(self, edit):
+        reader = state.reader_for(self.view.window())
+        if reader is not None:
+            reader.stop_answer()
+
+
 class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
     def run(self):
         if sublime.ok_cancel_dialog("Close the Vetting Trip window?", "Close"):

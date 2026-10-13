@@ -11,6 +11,9 @@ LAST_WAIT = 0.0  # when an agent last stopped waiting
 # Something to say about: a message came, or the agent opened a trip, since it last waited. A say
 # without it would only fill the silence ("I am here, waiting"), so the bridge refuses it (Jakub).
 ADDRESSED = False
+# The user stopped the answer on its way: the agent's say, show and point are refused until it
+# waits for the user again (Jakub).
+STOPPED = False
 
 
 def register(reader):

@@ -211,6 +211,21 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-13, a guide on free local models (M1 Pro, 64 GB): keeps the HTTP MCP server as the one interface, with a thin agent loop of our own, so the model can be swapped; and a reason to keep the guide's tools and manual short.
+- 2026-10-12, sights as scratch copies ("a card in rough"): no sight or frozen line is a clone of the file, only the editor opens the file itself. It ended the shared-buffer troubles at once: doubled gaps, read-only shared by clones, edits reaching every view.
+- 2026-10-12, "you are wrong, look again": insisted that one function was indented and the others not, when Claude was sure all lines had the gap. He had scrolled a sight on its own; two defects came out: gaps only on a sight's own range, and line positions measured before a fresh copy was laid out (a sight showed lines 27 above its range).
+- 2026-10-12, ⌘G went back to "every second view": the catch that showed view listeners never apply to clones, as a clone gets its settings after it is made.
+- 2026-10-12, frozen parent lines under a sight's header (which class a `run` belongs to), always shown, with the kinds of blocks as a setting; and blank lines around a function shown, so it does not look cramped.
+- 2026-10-12, "here" is where the user last changed the selection, not the sight nearest the middle, which failed on header heights, the bench ending at 2/3 and sights of very different heights; "Explain next" follows the code's logic from there; ⌘G goes back to the view used last.
+- 2026-10-12, libraries in trips: felt at `getattr` in `handle_one_request` that the method "gives a lot" when control passes through code outside the project; now a rule in the guide's manual.
+- 2026-10-12, a leaner UI to work sooner: the standalone bench removed for now (the feature he expects to use most), all interaction in trips; ⌘G or the `browse` tool opens a trip with no sights, FileBrowser in their place, and a file opened there becomes the sight.
+- 2026-10-12, the scroll strip back, not scroll bars: a sight often needs scrolling on its own, so the wheel over code scrolls only that sight, which goes back on the next move; ▲▼ for a mouse without a wheel; the Tools pane under the bench with a Scroll tab in a fixed header, as Option + wheel works for a mouse but not a touchpad.
+- 2026-10-12, why a separate stdio MCP process and a TCP socket at all? The question led to the plugin answering MCP over HTTP itself, with session ids, no venv and no copied file (probe done).
+- 2026-10-12, the trip's look: the bench's colours down the left column, the strip and the fillers; a short trip centred in the window and scrolling from ceiling to floor; line numbers lost on a light band (now in the text colour); just convert a .tmTheme instead of refusing it.
+- 2026-10-12, a SightWalk view should change nothing in a scheme but the gutter and header band; and his colour-scheme plugin kept free of SightWalk, to be published.
+- 2026-10-12, "and why is that better?": questioned the one-element-list pattern for module state; it was a trick, now plain variables with `global`.
+- 2026-10-12, after editing, a sight's range was lost: led to [Reset positions] for the alpha and then to the copies above.
+- 2026-10-12, ⌘W in a trip asks to close the whole window, instead of closing one view by accident.
 - 2026-10-06, the strip lives as long as its window: parked out of the window instead of closed, so what the user set on it stays, and an empty window no longer closes.
 - 2026-10-06, the bridge validates say: a guide that says something with nothing to answer is refused, after instructions alone failed twice.
 - 2026-10-06, "this" is the selection at the moment of asking, not at opening, and an expression, not the function around it.

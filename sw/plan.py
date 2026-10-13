@@ -40,11 +40,33 @@ class Sight:
         return [v for v in [self.view, self.header] + [v for _, v in self.frozen] if v]
 
 
-def stack(items, overhead):
-    y = 0.0
+def stack(items, overhead, lh=None):
+    """Each item's y, one under another. With lh, every sight's code starts a whole number of
+    lines below the first sight's, so the scroll strip's lines stay level with the code: the slack
+    (under a line) goes to the bottom of the code above, never between a header and its code."""
+    y, first, code = 0.0, None, None
+    for group in sight_groups(items):
+        start = y + sum(i.content + overhead for i in group[:-1])  # where this code would start
+        if lh and first is not None:
+            slack = (first - start) % lh
+            slack = 0.0 if lh - slack < 1e-6 else slack
+            code.content += slack
+            y, start = y + slack, start + slack
+        first = start if first is None else first
+        for item in group:
+            item.y = y
+            y += item.content + overhead
+        code = group[-1]
+
+
+def sight_groups(items):
+    """items cut before every header: one list per sight, its code last."""
+    groups = []
     for item in items:
-        item.y = y
-        y += item.content + overhead
+        if item.header or not groups:
+            groups.append([])
+        groups[-1].append(item)
+    return groups
 
 
 def max_offset(items, height, overhead):

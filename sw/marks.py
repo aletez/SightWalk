@@ -108,3 +108,15 @@ def gutter_icons(indicators, first, last):
     if any(key > last for key, _ in keys):
         icons[last] = "eye_down"
     return icons
+
+
+def strip_icons(sights, indicators, lh):
+    """{strip line: [icon, …]}: each mark's code line counted in lines from the first sight's code
+    start, which every sight's code start is a whole number of lines from (see plan.stack). Marks
+    on one line stand side by side, in the order given."""
+    first = sights[0].code_item.y
+    lines = {}
+    for m in indicators:
+        y = line_y(sights[m["sight"]], m["line"], lh) - first
+        lines.setdefault(int(round(y / lh)), []).append(m["icon"])
+    return lines

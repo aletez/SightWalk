@@ -23,9 +23,9 @@ from .header import BENCH, SIGHTS, STRIP
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint, hue_for, tint_color
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
-                    draw_outlines, forget, header_top, hide_chrome, line_top, make_blank_view,
-                    make_browser, make_copy, make_header, make_side_view, match_font, reader_layout,
-                    selected_text, to_layout)
+                    draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
+                    make_blank_view, make_browser, make_copy, make_header, make_side_view,
+                    match_font, phantoms, reader_layout, selected_text, to_layout)
 
 CLASS = re.compile(r"^\s*class\s+(\w+)")
 EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (nothing measured)
@@ -67,6 +67,7 @@ class Reader(Geometry):
         self.status = self.trip = self.note = ""
         self.bench_width = BENCH_WIDTH
         self.editor = None
+        self.strip_marks = None  # the icons last drawn on the strip
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
         self.root = self.browser = None  # a trip with no sights yet: its folder and file browser
         self.make_side_views()
@@ -82,8 +83,10 @@ class Reader(Geometry):
         # wheel over a sight scrolls only that sight, until the trip next moves (Jakub).
         self.strip = make_blank_view(self.window, "")
         self.strip.assign_syntax(chat.SYNTAX)  # the bench's colours (Jakub)
-        self.strip_buttons = sublime.PhantomSet(self.strip, "sight_walk_strip_buttons")
-        self.strip.settings().set("margin", 0)  # room for the arrows in a scroll bar's width
+        self.strip.settings().set("margin", 0)  # room for two icons in a scroll bar's width
+        self.strip_floor = make_blank_view(self.window, "")  # ▼, under the strip (Jakub)
+        self.strip_floor.assign_syntax(chat.SYNTAX)
+        self.strip_floor.settings().set("margin", 0)
         self.chat = make_side_view(self.window, "Vetting Bench", {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": False})
         chat.start(self.chat)
@@ -93,6 +96,8 @@ class Reader(Geometry):
         self.strip_header = chat.make_header(self.window, self.chat, STRIP)
         for header in (self.chat_header, self.sights_header, self.strip_header):
             apply_grey(header)
+        self.strip_header.settings().set("gutter", False)  # ▲ in a scroll bar's width
+        self.strip_header.settings().set("margin", 0)
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
         self.map_view = vetting.make_map(self.window)
@@ -138,6 +143,7 @@ class Reader(Geometry):
         for group, (_, view) in enumerate(cells):
             self.window.set_view_index(view, group, 0)
         self.window.set_view_index(self.filler, len(cells) - 1, 1)
+        self.window.set_view_index(self.strip_floor, len(cells) - 1, 2)
         self.show_headers()
         self.window.focus_view(self.browser)
 
@@ -246,8 +252,9 @@ class Reader(Geometry):
         self.start()
 
     def start(self):
-        plan.stack(self.items, self.overhead)
+        plan.stack(self.items, self.overhead, self.lh)
         self.lead = self.centred_lead()
+        self.write_strip()
         self.ready = True
         self.scroll_to(0)
         self.draw_map()
@@ -347,7 +354,8 @@ class Reader(Geometry):
         views at their text, half a border lower, as their cells begin that much higher (never
         above line 1)."""
         places = [(view, anchor(view))
-                  for view in (self.filler, self.strip, self.top_filler, self.below)]
+                  for view in (self.filler, self.strip_floor, self.top_filler, self.below)]
+        places.insert(1, (self.strip, self.strip_place()))
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
             places += [(view, max(y - OVERLAP / 2, 0.0)) for view, y in texts]
@@ -355,8 +363,8 @@ class Reader(Geometry):
 
     def wheel_places(self):
         """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
-        under the bench. A sight's code scrolls on its own (Jakub)."""
-        return self.places()[:4]
+        under the bench, and ▼'s cell. A sight's code scrolls on its own (Jakub)."""
+        return self.places()[:5]
 
     def pinned_places(self):
         """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A
@@ -366,18 +374,22 @@ class Reader(Geometry):
 
     def scroll_views(self):
         """Every view at its place; the cells move, the views do not. Views already there are
-        left alone, as this runs on every wheel step."""
+        left alone, as this runs on every wheel step. The blank views never move sideways: a
+        touchpad's sideways part carried the strip's ▲▼ off to the left (Jakub)."""
+        blank = [view for view, _ in self.wheel_places()]
         for view, place in self.places():
             x, y = view.viewport_position()
-            if abs(y - place) > 0.5:
+            x = 0.0 if view in blank else x
+            if abs(y - place) > 0.5 or x != view.viewport_position()[0]:
                 view.set_viewport_position((x, place), False)
         if self.editor is not None:  # its header's text sits between blank lines too
             self.editor.header.set_viewport_position((0, header_top(self.editor.header)), False)
 
     def read_wheel(self):
-        """The wheel moves a view of wheel_places off its place: the reader puts it back and
-        takes the movement over. A jump larger than a screen is a view being laid out, not the
-        wheel; while a new layout settles, movements are only undone."""
+        """The wheel moves a view of wheel_places off its place: the trip takes the movement over,
+        and scroll_views puts every view at its new place; the strip is already there, as its
+        place follows the offset (see strip_place). A jump larger than a screen is a view being
+        laid out, not the wheel; while a new layout settles, movements are only undone."""
         settling = time.time() < self.settle_until
         for view, place in self.pinned_places():
             x, y = view.viewport_position()
@@ -385,12 +397,27 @@ class Reader(Geometry):
                 view.set_viewport_position((x, place), False)
         for view, place in self.wheel_places():
             x, y = view.viewport_position()
-            if abs(y - place) <= 0.5:
+            if abs(y - place) <= 0.5 and x == 0:
                 continue
-            view.set_viewport_position((x, place), False)
-            if not settling and abs(y - place) < self.height:
-                self.scroll_to(self.offset + y - place, wheel=True)
-                return
+            if settling or abs(y - place) >= self.height:
+                view.set_viewport_position((0.0, place), False)
+                continue
+            self.scroll_to(self.offset + y - place, wheel=True)
+            return
+
+    def strip_place(self):
+        """Where the strip stands, so its lines are level with the code's: line BLANK_LINES is the
+        first sight's code start, and every sight's code starts whole lines from it (plan.stack)."""
+        first = self.sights[0].code_item.y if self.sights else 0.0
+        return BLANK_LINES * self.lh + self.offset - self.lead - first
+
+    def write_strip(self):
+        """As many lines as the trip, with BLANK_LINES of room either way for the wheel."""
+        code = self.items[-1]
+        lines = 2 * BLANK_LINES + int((code.y + code.content) / self.lh) + 1
+        self.strip.run_command("sight_walk_replace", {"text": "\n" * lines})
+        self.strip.sel().clear()
+        self.strip_marks = None  # drawn again (see draw_gutter)
 
     # Polling
 
@@ -441,9 +468,12 @@ class Reader(Geometry):
             self.render()
 
     def draw_gutter(self):
-        """Icons for the marks on screen, an eye for those off it (see marks.gutter_icons)."""
+        """The marks' icons on the strip; in the gutter only an eye for marks off screen (see
+        marks.gutter_icons), until the eyes move next to ▲ and ▼."""
+        self.draw_strip_marks()
         first, last = marks.visible_lines(self.sights, self.offset, self.room(), self.lh)
         icons = marks.gutter_icons(self.indicators, first, last)
+        icons = {key: icon for key, icon in icons.items() if icon.startswith("eye_")}
         for index, sight in enumerate(self.sights):
             mine = {line: icon for (i, line), icon in icons.items() if i == index and line}
             draw_icons(sight.view, sight.icons, mine)
@@ -452,6 +482,14 @@ class Reader(Geometry):
             header = {ROOM_LINES + 1: icons[(index, 0)]} if (index, 0) in icons else {}
             draw_icons(sight.header, sight.header_icons, header)
             sight.header_icons = header
+
+    def draw_strip_marks(self):
+        """Every mark's icon on the strip, which scrolls with the code; drawn only when they
+        change."""
+        lines = marks.strip_icons(self.sights, self.indicators, self.lh)
+        if lines != self.strip_marks:
+            draw_strip_icons(self.strip, BLANK_LINES, lines)
+            self.strip_marks = lines
 
     def draw_outlines(self):
         for index, sight in enumerate(self.sights):
@@ -553,14 +591,13 @@ class Reader(Geometry):
             self.load(*self.shown)
 
     def draw_strip_buttons(self):
-        """Up at the strip's top and down at its floor, for a mouse without a wheel (Jakub)."""
-        rows = int(self.strip.viewport_extent()[1] / max(self.strip.line_height(), 1))
-        lines = [(BLANK_LINES, "up"), (BLANK_LINES + max(rows - 2, 1), "down")]  # ▼ is taller
-        phantoms = [sublime.Phantom(sublime.Region(self.strip.text_point(line, 0)),
-                                    STRIP_BUTTON_HTML % (href, ARROWS[href]),
-                                    sublime.LAYOUT_INLINE, self.strip_button)
-                    for line, href in lines]
-        self.strip_buttons.update(phantoms)
+        """▲ in the strip's header and ▼ in its own cell under the strip, which scrolls now
+        (Jakub): for a mouse without a wheel."""
+        for view, line, href in ((self.strip_header, 0, "up"), (self.strip_floor, BLANK_LINES,
+                                                                  "down")):
+            phantoms(view, "sight_walk_strip_buttons").update([sublime.Phantom(
+                sublime.Region(view.text_point(line, 0)), STRIP_BUTTON_HTML % (href, ARROWS[href]),
+                sublime.LAYOUT_INLINE, self.strip_button)])
 
     def strip_button(self, href):
         step = sublime.load_settings(SETTINGS_FILE).get("strip_step", STRIP_STEP)

@@ -16,6 +16,9 @@ CODE_SETTINGS = (("word_wrap", False), ("scroll_past_end", True), ("sight_walk",
 FONT_KEYS = ("font_face", "font_size", "font_options", "line_padding_top", "line_padding_bottom")
 ICONS = "Packages/SightWalk/icons/%s.png"
 ICON_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE
+# On the scroll strip: a little shorter than the line, which an image as tall as it leaves as it is
+# (measured by Jakub: 17 px stays 17, 19 makes the line 19).
+STRIP_IMG = '<img src="res://Packages/SightWalk/icons/%s@3x.png" width="%d" height="%d">'
 FADED = "color(var(--foreground) alpha(0.45))"
 # Faded and outlined at all times, so it reads as a control, not as text.
 BUTTON = "Edit (Enter)"
@@ -234,6 +237,17 @@ def draw_icons(view, old, new):
             point = view.text_point(line - 1, 0)
             view.add_regions("sight_walk_icon_%d" % line, [sublime.Region(point)],
                              "sight_walk.icon", ICONS % icon, ICON_FLAGS)
+
+
+def draw_strip_icons(strip, first_line, lines):
+    """The marks' icons on the strip: {line from first_line: [icon, …]}, side by side."""
+    size = int(strip.line_height()) - 2
+    html = '<body style="margin: 0; padding: 0">%s</body>'
+    phantoms(strip, "sight_walk_strip_icons").update([
+        sublime.Phantom(sublime.Region(strip.text_point(first_line + line, 0)),
+                        html % "".join(STRIP_IMG % (icon, size, size) for icon in icons),
+                        sublime.LAYOUT_INLINE)
+        for line, icons in sorted(lines.items())])
 
 
 def draw_outlines(view, lines):

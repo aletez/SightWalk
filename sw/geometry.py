@@ -90,10 +90,16 @@ class Geometry:
         rects.append((left, end, right, max(end, 0.0) + self.height))
         views.append(self.filler)
         strip_left, strip_right = self.strip_span()
+        floor = self.height - self.floor_height()
         rects += [(strip_left, 0.0, strip_right, self.head() + OVERLAP),
-                  (strip_left, self.head(), strip_right, self.height)]
-        views += [self.strip_header, self.strip]
+                  (strip_left, self.head(), strip_right, floor + OVERLAP),
+                  (strip_left, floor, strip_right, self.height)]
+        views += [self.strip_header, self.strip, self.strip_floor]
         return rects, views
+
+    def floor_height(self):
+        """▼'s cell under the strip: two of its lines, room for the larger arrow."""
+        return 2 * self.strip_floor.line_height() + self.overhead
 
     def sight_cells(self, sight, column):
         """A sight's header and code. Earlier cells are drawn over later ones, and each neighbour

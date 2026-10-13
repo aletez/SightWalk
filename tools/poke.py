@@ -1,6 +1,6 @@
 """Talks to the running plugin without an agent, one tool call per run, over MCP's HTTP.
 
-Usage: python3 tools/poke.py show|say|point|state|close|settings|badtoken [file1 file2]
+Usage: python3 tools/poke.py show|say|point|double|state|close|settings|badtoken [file1 file2]
 
 Without files it shows two of the plugin's own modules, so it works from any checkout.
 """
@@ -41,6 +41,11 @@ def main():
         jump = {"from": {"sight": 0, "line": 5}, "to": {"sight": 1, "line": 40}}
         call(config, "point", marks=[jump, {"at": {"sight": 0, "line": 8}, "mark": "1"},
                                      {"at": {"sight": 0, "line": 12}, "mark": "A"}])
+    elif op == "double":  # two marks on line 8, and a jump that starts on line 12 beside a mark
+        jump = {"from": {"sight": 0, "line": 12}, "to": {"sight": 1, "line": 40}}
+        call(config, "point", marks=[{"at": {"sight": 0, "line": 8}, "mark": "1"},
+                                     {"at": {"sight": 0, "line": 8}, "mark": "A"},
+                                     {"at": {"sight": 0, "line": 12}, "mark": "2"}, jump])
     elif op == "state":
         call(config, "state")
     elif op == "close":

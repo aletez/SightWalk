@@ -30,6 +30,23 @@ class PlanTest(unittest.TestCase):
         _, items = stacked((1, 3), (10, 11))
         self.assertEqual([i.y for i in items], [0.0, 14.0, 48.0, 62.0])
 
+    def test_stack_on_lines(self):
+        # Code starts at 14 and, unaligned, at 62: 2 px of slack make it 64 = 14 + 5 lines.
+        _, items = stacked((1, 3), (10, 11))
+        plan.stack(items, OVERHEAD, LH)
+        self.assertEqual([i.y for i in items], [0.0, 14.0, 50.0, 64.0])
+        self.assertEqual(items[1].content, 32.0)  # the slack at the bottom of the code above
+        self.assertEqual(items[3].content, 20.0)  # the last code keeps its height
+
+    def test_stack_on_lines_with_frozen(self):
+        header = plan.Item(None, 0.0, LH, header=True)
+        frozen = plan.Item(None, 0.0, LH, line=1)
+        items = [plan.Item(None, 0.0, LH, header=True), plan.Item(None, 0.0, 25.0, line=2),
+                 header, frozen, plan.Item(None, 0.0, LH, line=5)]
+        plan.stack(items, OVERHEAD, LH)
+        self.assertEqual((items[4].y - items[1].y) % LH, 0.0)
+        self.assertEqual(frozen.y - header.y, LH + OVERHEAD)  # nothing between header and code
+
     def test_max_offset_short_last_pane(self):
         _, items = stacked((1, 3), (10, 11))
         self.assertEqual(plan.max_offset(items, 100.0, OVERHEAD), 48.0)
@@ -75,6 +92,16 @@ class MarksTest(unittest.TestCase):
         self.assertEqual((first, last), ((0, 0), (1, 0)))  # line 0 is a sight's header
         self.assertEqual(marks.gutter_icons(indicators, first, last),
                          {(0, 1): "digit_1", (1, 0): "eye_down"})
+
+
+    def test_strip_icons(self):
+        sights, items = stacked((1, 3), (10, 11))
+        plan.stack(items, OVERHEAD, LH)  # code starts at 14 and 64: 5 lines apart
+        marks_ = [{"sight": 0, "line": 2, "icon": "digit_1"},
+                  {"sight": 1, "line": 11, "icon": "letter_a"},
+                  {"sight": 1, "line": 11, "icon": "pass_down"}]
+        self.assertEqual(marks.strip_icons(sights, marks_, LH),
+                         {1: ["digit_1"], 6: ["letter_a", "pass_down"]})
 
 
 class QuestionsTest(unittest.TestCase):

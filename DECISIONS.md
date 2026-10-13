@@ -129,6 +129,8 @@ Open:
 
 ## Plans (Jakub)
 
+- To work out (Jakub, 2026-10-13): what a sight may hold, not only one whole function. Candidates: a class definition, when its fields or live code outside functions matter; a part of an unbearably long function; two small complementary classes together. Affects the manual, the Map (a sight is labelled by its function or range) and the "one function per pane" rule.
+
 - Two ideas for scripts (2026-10-13, not now): (1) the guide's language grows a "then" relation, control passing from one sight to the next without a call (e.g. "then": [1, 25]), given by the author like calls; (2) whether and how the Map shows such relations, kept apart from calls so the map stays clear. A language question and a display question, decided separately (Jakub).
 
 - Later (2026-10-13): a guide on free local models on Jakub's M1 Pro, 64 GB (LM Studio is installed). Shape: the HTTP MCP server stays the one interface; a thin agent loop of our own talks to a local OpenAI-compatible endpoint, so the model can be swapped. Small models need few tools, short descriptions and a short manual.

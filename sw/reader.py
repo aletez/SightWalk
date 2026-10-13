@@ -251,7 +251,7 @@ class Reader(Geometry):
         if top and self.editor is None:
             self.keep_bench_width()
         # Only the scroll pad joins the strip; another tool has its border (Jakub).
-        reach = self.share(OVERLAP) * (1 if self.bench_side() != "right" else -1)
+        reach = self.share(3 * OVERLAP) * (1 if self.bench_side() != "right" else -1)
         reach = reach if self.tool == vetting.SCROLL else 0.0
         status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,

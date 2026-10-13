@@ -47,7 +47,8 @@ def show_tabs(header, active, on_select):
     header.run_command("sight_walk_replace", {"text": " "})
     links = ["<b>%s</b>" % t if t == active else
              '<a href="%s" style="text-decoration: none">%s</a>' % (t, t) for t in TABS]
-    html = "&nbsp;&nbsp;&nbsp;".join(links)
+    html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
+    html = html.join(links)
     phantoms(header, "sight_walk_tabs").update(
         [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_INLINE, on_select)])
 
@@ -74,6 +75,8 @@ def draw_map(view, nodes, style):
 def render(view, dot, source):
     os.makedirs(MAPS, exist_ok=True)
     path = os.path.join(MAPS, hashlib.sha1(source.encode("utf-8")).hexdigest()[:16] + ".png")
+    with open(path[:-4] + ".dot", "w", encoding="utf-8") as f:  # to read what was drawn
+        f.write(source)
     if not os.path.exists(path):
         done = subprocess.run([dot, "-Tpng", "-Gdpi=144", "-o", path], input=source.encode(),
                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)

@@ -4,6 +4,8 @@ Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIO
 
 ## Plans (Jakub)
 
+- Two ideas for scripts (2026-10-13, not now): (1) the guide's language grows a "then" relation, control passing from one sight to the next without a call (e.g. "then": [1, 25]), given by the author like calls; (2) whether and how the Map shows such relations, kept apart from calls so the map stays clear. A language question and a display question, decided separately (Jakub).
+
 - Later (2026-10-13): a guide on free local models on Jakub's M1 Pro, 64 GB (LM Studio is installed). Shape: the HTTP MCP server stays the one interface; a thin agent loop of our own talks to a local OpenAI-compatible endpoint, so the model can be swapped. Small models need few tools, short descriptions and a short manual.
 
 - Next, after the break of 2026-10-12, to be able to start vetting the plugin with itself: (1) the trouble with line marks, perhaps double marks; (2) the HTTP MCP server replacing the stdio one; (3) the Itinerary tab. Before that, a careful clean-up of the whole code, as short as possible.
@@ -33,6 +35,12 @@ Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIO
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-13, the map never guesses: the server asks for calls, and the guide either names them or confirms there are none; a guessing map "could come out funny". Removed the guessing code altogether. Before that, the warning's wording: "the trip definition lacks calls".
+- 2026-10-13, scripts: a sight of top-level code is the one allowed exception to "one whole function per sight", named on the map by its range; and the "then" relation split into two separate questions, extending the guide's language and showing (or not) such relations on the map, so the map stays clear.
+- 2026-10-13, MCP over HTTP carried through as the plugin itself: no venv, no copied server, sessions told apart; and the clean-up before vetting (plain module state, the line-1 mechanism removed, one registry per view).
+- 2026-10-13, the Map's arrows, in three steps that each cut the guessing: first class:function instead of names alone, where Claude had pointed to type checking as the costly way; then "the guide's own layout of the sights already says which function is called", so an ambiguous call goes to the sight the trip shows next; then the trip's author names the control flow itself, as pairs <sight, line> → <sight, line>, a definition rather than a sight as the target (Claude had proposed the sight's number), so one sight may show two functions of one name: a representation meant to hold for any language. And a warning on the map whenever its arrows are guessed.
+- 2026-10-13, Map before Itinerary, with Graphviz; without "here" on it until the UI shows clearly where here is.
+- 2026-10-13, stopping an answer, the status line between the bench's floor and the Tools pane's ceiling, the scroll pad joined to the strip without a border except when another tool is shown.
 - 2026-10-13, a guide on free local models (M1 Pro, 64 GB): keeps the HTTP MCP server as the one interface, with a thin agent loop of our own, so the model can be swapped; and a reason to keep the guide's tools and manual short.
 - 2026-10-12, sights as scratch copies ("a card in rough"): no sight or frozen line is a clone of the file, only the editor opens the file itself. It ended the shared-buffer troubles at once: doubled gaps, read-only shared by clones, edits reaching every view.
 - 2026-10-12, "you are wrong, look again": insisted that one function was indented and the others not, when Claude was sure all lines had the gap. He had scrolled a sight on its own; two defects came out: gaps only on a sight's own range, and line positions measured before a fresh copy was laid out (a sight showed lines 27 above its range).

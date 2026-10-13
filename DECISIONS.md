@@ -227,6 +227,9 @@ Process
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-13, the map never guesses: the server asks for calls, and the guide either names them or confirms there are none; a guessing map "could come out funny". Removed the guessing code altogether. Before that, the warning's wording: "the trip definition lacks calls".
+- 2026-10-13, scripts: a sight of top-level code is the one allowed exception to "one whole function per sight", named on the map by its range; and the "then" relation split into two separate questions, extending the guide's language and showing (or not) such relations on the map, so the map stays clear.
+- 2026-10-13, MCP over HTTP carried through as the plugin itself: no venv, no copied server, sessions told apart; and the clean-up before vetting (plain module state, the line-1 mechanism removed, one registry per view).
 - 2026-10-13, the Map's arrows, in three steps that each cut the guessing: first class:function instead of names alone, where Claude had pointed to type checking as the costly way; then "the guide's own layout of the sights already says which function is called", so an ambiguous call goes to the sight the trip shows next; then the trip's author names the control flow itself, as pairs <sight, line> → <sight, line>, a definition rather than a sight as the target (Claude had proposed the sight's number), so one sight may show two functions of one name: a representation meant to hold for any language. And a warning on the map whenever its arrows are guessed.
 - 2026-10-13, Map before Itinerary, with Graphviz; without "here" on it until the UI shows clearly where here is.
 - 2026-10-13, stopping an answer, the status line between the bench's floor and the Tools pane's ceiling, the scroll pad joined to the strip without a border except when another tool is shown.

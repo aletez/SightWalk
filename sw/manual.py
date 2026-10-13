@@ -73,6 +73,10 @@ Indicators
      two lines to compare.
   1, 2, 3 ... any ordered relation: a value produced and where it is used, a cause and its
      symptom, steps. Say what the order means.
+- A line holds at most two marks. Its first mark (in the order of your marks) stands in the
+  gutter, its second on the scroll strip just left of it. So all first marks line up in one
+  column and all second marks in another: give marks that belong together (a series 1, 2, 3, a
+  pair A, B) the same place, all first or all second, so they read down one column.
 - When a mark is off screen, an eye on the first or last visible line looks towards it.
 """
 

@@ -325,11 +325,15 @@ class Reader(Geometry):
         return places
 
     def wheel_places(self):
-        """The views whose wheel moves the whole trip: the strip, the fillers, the Scroll pane under
-        the bench and the sights' headers. A sight's code scrolls on its own (Jakub)."""
+        """The views whose wheel moves the whole trip: the strip, the fillers and the Scroll pane
+        under the bench. A sight's code scrolls on its own (Jakub)."""
+        return self.places()[:4]
+
+    def pinned_places(self):
+        """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A
+        wheel step over them is only undone."""
         heads = [i for s in self.sights for i in [s.header_item] + s.frozen_items]
-        headers = [(i.view, max(item_top(i) - OVERLAP / 2, 0.0)) for i in heads]
-        return self.places()[:4] + headers
+        return [(i.view, max(item_top(i) - OVERLAP / 2, 0.0)) for i in heads]
 
     def scroll_views(self):
         """Every view at its place; the cells move, the views do not. Views already there are
@@ -346,6 +350,10 @@ class Reader(Geometry):
         takes the movement over. A jump larger than a screen is a view being laid out, not the
         wheel; while a new layout settles, movements are only undone."""
         settling = time.time() < self.settle_until
+        for view, place in self.pinned_places():
+            x, y = view.viewport_position()
+            if abs(y - place) > 0.5:
+                view.set_viewport_position((x, place), False)
         for view, place in self.wheel_places():
             x, y = view.viewport_position()
             if abs(y - place) <= 0.5:

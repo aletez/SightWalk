@@ -61,7 +61,7 @@ TRIPS = [
      "The two loops: the gutter measured once, the reader opening at the top; the wheel read "
      "and taken over.",
      ["reader.Reader.poll", "chat.keep_at_bottom", "reader.Reader.poll_wheel", "reader.Reader.alive",
-      "reader.Reader.read_wheel", "reader.Reader.wheel_places", "reader.Reader.places",
+      "reader.Reader.read_wheel", "reader.Reader.wheel_places", "reader.Reader.pinned_places", "reader.Reader.places",
       "reader.Reader.scroll_to"]),
     ("Pointing",
      "The agent's marks resolved to sights and lines, the reader scrolled to show them.",

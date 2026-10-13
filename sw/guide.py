@@ -1,5 +1,5 @@
-"""Starting the Vetting guide from Sublime (Jakub): when no agent session is listening, asking the
-guide starts a Claude Code session in the background, in the selection's repository, told to
+"""Starting the Vetting guide from Sublime (Jakub): when no agent session is listening, a message
+on the bench starts a Claude Code session in the background, in the trip's repository, told to
 listen. It talks only through the bridge; what it prints goes to ~/.sight_walk/guide.log."""
 
 import os

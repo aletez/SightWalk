@@ -1,7 +1,7 @@
 # SightWalk: instructions for every session
 
 ## What this is
-A Sublime Text plugin for vetting AI-generated code. An agent connected over MCP opens a reader window and shows a sequence of panes (`file:begin-end`) that mirrors one run of the program, one whole function per pane. It marks lines with icons in the gutter and talks with the user in a conversation pane, resolving "here" and "this" against the pane nearest the centre.
+A Sublime Text plugin for vetting AI-generated code. An agent connected over MCP opens a reader window and shows a sequence of panes (`file:begin-end`) chosen for one question: most often one run of the program, or a comparison, or a survey; one whole function per pane. It marks lines with icons in the gutter and talks with the user in a conversation pane, resolving "here" and "this" against the pane nearest the centre.
 
 Names (see DECISIONS.md): the code column is **Sights** and a pane a **sight**; whatever one `show` opens is a **trip**, however long (the window too is called the trip; `docs/trips.md` only lists prepared ones); the UML diagram is the **Map**; the conversation is the **Vetting Bench**; the reader window is, metonymically, the **trip**; the assistant is the **Vetting guide**. In code too a sight is a sight (`plan.Sight`, `reader.sights`); the agent's `show` takes `sights` and a mark `{"sight": index, "line": line}`. The Polish names are a metaphor of their own: panorama, widok, wycieczka, mapa, ławka, przewodnik (and wycieczka for the window too).
 

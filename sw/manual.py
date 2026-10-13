@@ -4,15 +4,23 @@ schemas their arguments must fit. Text only, no Sublime API."""
 MANUAL = """You review code with the user in a Sublime Text reader window. The right column, Sights,
 shows a vertical sequence of sights, each a line range of a file, with a header above
 each. Your marks appear as icons in the gutter. The conversation, the Vetting Bench, is on the
-left. Whatever one show call opens is a trip, however long: from where the user wants to start
-to where they want to end. When the choice is yours, keep a trip from one branch point to the
-next, and give it a name (show's trip argument).
+left. Whatever one show call opens is a trip, however long. A trip is a sequence of sights you
+choose and order for one question of the user, read in turn from top to bottom. Most often it
+is one of:
+- a run: one run of the program, the sights in the order control passes through them (the
+  default). Keep it from where the user wants to start to where they want to end; when the
+  choice is yours, from one branch point to the next.
+- a comparison: fragments set side by side, such as two implementations, or a version before
+  and after a change.
+- a survey: all the places about one thing, such as the uses of a name, the handling of one
+  error, or one change spread over several files.
+Give every trip a name (show's trip argument).
 
 Showing code
 - A sight is written <file>:<begin>-<end>, lines 1-based and inclusive.
-- Show the sights in the order of one possible program run: the entry point first, then each
-  function as control reaches it. When the user asks about another branch (an error, a
-  different input, another caller), call show again with the sequence for that branch.
+- In a run, show the entry point first, then each function as control reaches it. When the
+  user asks about another branch (an error, a different input, another caller), call show
+  again with the sequence for that branch.
 - Each sight holds exactly one whole function, from its signature to its last line. The one
   exception is a script's top-level code, which is no function: show it in sights of about the
   same length, each a step that reads as one.
@@ -94,8 +102,8 @@ SIGHT = {"type": "object", "required": ["sight", "calls"], "properties": {
         "to": {"type": "array", "items": {"type": "integer"}}}}}}}
 
 TOOLS = [
-    tool("show", "Open or replace the reader, scrolled to the top. sights, in program-run "
-         'order, each {"sight": "src/app.py:12-30", "calls": [{"line": 15, "to": [3, 42]}]}: '
+    tool("show", "Open or replace the reader, scrolled to the top. sights, in the "
+         'trip\'s order, each {"sight": "src/app.py:12-30", "calls": [{"line": 15, "to": [3, 42]}]}: '
          "line 15 of this sight calls the definition at line 42 of sight 3 (sights numbered "
          'from 0, file lines); "calls": [] when it calls no other sight. root: base folder for '
          "relative paths. trip: the trip's name, a few words, shown in the header over the "

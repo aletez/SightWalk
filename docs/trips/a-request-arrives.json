@@ -1,7 +1,7 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "c773d4907b18dcc22fc66bbbc983101c5e1be399",
+ "commit": "8867c96535e4e445e7572529a6ae463f86aff3bb",
  "sights": [
   "sw/bridge.py:184-200",
   "sw/bridge.py:87-95",

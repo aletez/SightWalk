@@ -1,7 +1,7 @@
 {
  "name": "Names and room",
  "kind": "survey",
- "commit": "c773d4907b18dcc22fc66bbbc983101c5e1be399",
+ "commit": "8867c96535e4e445e7572529a6ae463f86aff3bb",
  "sights": [
   "sw/spec.py:46-50",
   "sw/spec.py:36-43",

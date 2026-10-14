@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "c773d4907b18dcc22fc66bbbc983101c5e1be399",
+ "commit": "8867c96535e4e445e7572529a6ae463f86aff3bb",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -2236,32 +2236,6 @@
    "from": [
     "the-layout",
     4,
-    79
-   ],
-   "to": [
-    "names-and-room",
-    6,
-    56
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-layout",
-    4,
-    80
-   ],
-   "to": [
-    "names-and-room",
-    6,
-    56
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-layout",
-    4,
     81
    ],
    "to": [
@@ -2288,20 +2262,7 @@
    "from": [
     "the-layout",
     4,
-    92
-   ],
-   "to": [
-    "window-events",
-    3,
-    27
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-layout",
-    4,
-    94
+    83
    ],
    "to": [
     "names-and-room",
@@ -2314,7 +2275,46 @@
    "from": [
     "the-layout",
     4,
-    95
+    84
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    94
+   ],
+   "to": [
+    "window-events",
+    3,
+    27
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    96
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    97
    ],
    "to": [
     "names-and-room",
@@ -2364,7 +2364,7 @@
    "from": [
     "the-layout",
     6,
-    104
+    106
    ],
    "to": [
     "the-layout"
@@ -2375,7 +2375,7 @@
    "from": [
     "the-layout",
     6,
-    109
+    111
    ],
    "to": [
     "building-blocks",
@@ -2388,7 +2388,7 @@
    "from": [
     "the-layout",
     6,
-    110
+    112
    ],
    "to": [
     "names-and-room",
@@ -2401,7 +2401,7 @@
    "from": [
     "the-layout",
     7,
-    100
+    102
    ],
    "to": [
     "the-layout"

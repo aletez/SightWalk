@@ -1,7 +1,7 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "7ea030145b4f3dd1290d2c12704f0024e54652c9",
+ "commit": "d62f75016184ccbaed778a97039e0a3dcf3d3295",
  "sights": [
   "sw/reader.py:738-746",
   "sw/reader.py:748-761",

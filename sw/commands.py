@@ -7,7 +7,7 @@ import os
 import sublime
 import sublime_plugin
 
-from . import asked, bridge, chat, guide, scrollbars, state
+from . import asked, bridge, chat, guide, scrollbars, state, tint
 from .config import SETTINGS_FILE
 from .spec import repo_root
 from .words import trips_count, word
@@ -144,6 +144,13 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
     def on_pre_close_window(self, window):
         state.forget(window)
+        sublime.set_timeout(clear_schemes_if_unused, 2000)  # once the window's views are gone
+
+
+def clear_schemes_if_unused():
+    """The written colour schemes go once no trip is open (Jakub); the next trip writes anew."""
+    if not state.READERS:
+        tint.clear_schemes()
 
 
 class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):

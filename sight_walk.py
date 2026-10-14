@@ -8,7 +8,7 @@ import sublime
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import guide, mcp_http, scrollbars, state, words  # noqa: E402
+from .sw import commands, guide, mcp_http, scrollbars, state, words  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkChatListener,
@@ -36,6 +36,8 @@ from .sw.setup import SightWalkRestartCommand, SightWalkSetupCommand  # noqa: E4
 
 def plugin_loaded():
     mcp_http.start()
+    # Schemes left by an earlier session or reload, once its trip windows have closed.
+    sublime.set_timeout(commands.clear_schemes_if_unused, 2000)
     settings = sublime.load_settings("SightWalk.sublime-settings")
     words.set_language(settings.get("language"))
     settings.add_on_change("sight_walk_layout", settings_changed)

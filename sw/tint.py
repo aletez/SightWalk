@@ -67,8 +67,12 @@ def from_tm_theme(theme):
     return {"name": theme.get("name", ""), "globals": globals_, "rules": rules}
 
 
+def scheme_folder():
+    return os.path.join(sublime.packages_path(), "User", "SightWalk")
+
+
 def write_scheme(scheme, name):
-    folder = os.path.join(sublime.packages_path(), "User", "SightWalk")
+    folder = scheme_folder()
     os.makedirs(folder, exist_ok=True)
     with open(os.path.join(folder, name), "w", encoding="utf-8") as f:
         json.dump(scheme, f)
@@ -167,3 +171,16 @@ def apply_grey(header):
     schemes = schemes_for(None, header, None)
     if schemes is not None:
         set_schemes([([header], schemes[1])])
+
+
+def clear_schemes():
+    """Deletes the schemes SightWalk wrote, once no trip uses them (Jakub: left behind, they
+    crowd Sublime's list of colour schemes), with their backups Sublime may have made."""
+    SCHEMES.clear()
+    folder = scheme_folder()
+    for name in os.listdir(folder) if os.path.isdir(folder) else []:
+        if ".sublime-color-scheme" in name:
+            try:
+                os.remove(os.path.join(folder, name))
+            except OSError:
+                pass

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "3ae1c69b54d22e0ac74d62978eda4bb778b7097c",
+ "commit": "54b2a86b4d7bbe0d4203cc24c140a1e54d25dabe",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -3944,7 +3944,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    234
+    237
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -3955,7 +3955,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    235
+    238
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5414,7 +5414,7 @@
    "from": [
     "primary-g",
     0,
-    255
+    258
    ],
    "to": [
     "primary-g"
@@ -5425,7 +5425,7 @@
    "from": [
     "primary-g",
     0,
-    256
+    259
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5438,7 +5438,7 @@
    "from": [
     "primary-g",
     0,
-    260
+    263
    ],
    "to": [
     "endings",
@@ -5451,7 +5451,7 @@
    "from": [
     "primary-g",
     0,
-    265
+    268
    ],
    "to": [
     "a-new-reader-window",
@@ -5464,7 +5464,7 @@
    "from": [
     "primary-g",
     0,
-    266
+    269
    ],
    "to": [
     "plugin-start-and-stop",
@@ -5488,7 +5488,7 @@
    "from": [
     "primary-g",
     2,
-    268
+    271
    ],
    "to": [
     "primary-g"
@@ -5499,7 +5499,7 @@
    "from": [
     "primary-g",
     2,
-    271
+    274
    ],
    "to": [
     "names-and-room",
@@ -6390,7 +6390,7 @@
    "from": [
     "endings",
     0,
-    243
+    246
    ],
    "to": [
     "endings"
@@ -6401,7 +6401,7 @@
    "from": [
     "endings",
     1,
-    246
+    249
    ],
    "to": [
     "endings"
@@ -6412,7 +6412,7 @@
    "from": [
     "endings",
     1,
-    247
+    250
    ],
    "to": [
     "how-claude-comes-to-listen-to-sublime",
@@ -7473,7 +7473,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    206
+    209
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -7484,7 +7484,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    212
+    215
    ],
    "to": [
     "names-and-room",
@@ -7497,7 +7497,7 @@
    "from": [
     "an-informator-and-its-tour",
     3,
-    219
+    222
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -7508,7 +7508,7 @@
    "from": [
     "an-informator-and-its-tour",
     4,
-    223
+    226
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8535,7 +8535,7 @@
    "from": [
     "seeing-where-the-code-asks",
     3,
-    280
+    283
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -8546,7 +8546,7 @@
    "from": [
     "seeing-where-the-code-asks",
     4,
-    283
+    286
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -8629,7 +8629,7 @@
    "from": [
     "seeing-where-the-code-asks",
     8,
-    291
+    294
    ],
    "to": [
     "seeing-where-the-code-asks"

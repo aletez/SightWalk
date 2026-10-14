@@ -221,7 +221,7 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 - `sw/reader.py:627-632` Reader.select_tool
 - `sw/vetting.py:68-87` show_tabs
 - `sw/reader.py:634-636` Reader.panning
-- `sw/commands.py:234-237` SightWalkTogglePanningCommand.run
+- `sw/commands.py:237-240` SightWalkTogglePanningCommand.run
 - `sw/reader.py:638-644` Reader.toggle_panning
 - `sw/vetting.py:48-55` set_panning
 - `sw/vetting.py:58-60` content_point
@@ -327,9 +327,9 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 
 In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.
 
-- `sw/commands.py:255-266` SightWalkToggleGuideCommand.run
+- `sw/commands.py:258-269` SightWalkToggleGuideCommand.run
 - `sw/reader.py:581-591` Reader.toggle_focus
-- `sw/commands.py:268-273` SightWalkToggleGuideCommand.folder
+- `sw/commands.py:271-276` SightWalkToggleGuideCommand.folder
 - `sw/reader.py:135-139` Reader.open_empty
 - `sw/reader.py:141-158` Reader.empty_layout
 - `sw/reader.py:160-165` Reader.close_hijacker
@@ -397,8 +397,8 @@ The caret or a selection in a sight becomes here; a shortcut sends a question, l
 
 The guide is stopped, windows close.
 
-- `sw/commands.py:243-244` SightWalkStopGuideCommand.run
-- `sw/commands.py:246-247` SightWalkStopGuideCommand.is_enabled
+- `sw/commands.py:246-247` SightWalkStopGuideCommand.run
+- `sw/commands.py:249-250` SightWalkStopGuideCommand.is_enabled
 - `sw/guide.py:85-89` stop
 - `sw/guide.py:73-82` stop_when_idle
 - `sw/commands.py:143-144` SightWalkWindowListener.on_pre_close_window
@@ -502,10 +502,10 @@ Transitions between places, checked; the trip, the informator and the tour.
 Open Tour: an informator's tours to choose from, the informator read from its files, its trips in the tour's order in the Tour tab, a trip opened from it, its conversation kept, a box ticked by hand.
 
 - `sw/commands.py:180-186` SightWalkOpenTourCommand.run
-- `sw/commands.py:195-203` tour_choices
-- `sw/commands.py:206-216` found_files
-- `sw/commands.py:219-220` read_name
-- `sw/commands.py:223-228` read_field
+- `sw/commands.py:195-206` tour_choices
+- `sw/commands.py:209-219` found_files
+- `sw/commands.py:222-223` read_name
+- `sw/commands.py:226-231` read_field
 - `sw/commands.py:188-192` SightWalkOpenTourCommand.open
 - `sw/reader.py:648-660` Reader.open_tour
 - `sw/reader.py:785-787` read_json
@@ -559,9 +559,9 @@ The underline and the popup that says where the code asks the question.
 - `sw/asked.py:46-56` mark
 - `sw/asked.py:72-79` popup_html
 - `sw/asked.py:82-83` escape
-- `sw/commands.py:279-281` SightWalkSightListener.is_applicable
-- `sw/commands.py:283-285` SightWalkSightListener.on_hover
+- `sw/commands.py:282-284` SightWalkSightListener.is_applicable
+- `sw/commands.py:286-288` SightWalkSightListener.on_hover
 - `sw/asked.py:86-91` show_popup
 - `sw/asked.py:59-61` paint
 - `sw/asked.py:64-69` toggle
-- `sw/commands.py:291-292` SightWalkToggleSentinelsCommand.run
+- `sw/commands.py:294-295` SightWalkToggleSentinelsCommand.run

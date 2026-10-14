@@ -1,7 +1,7 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "ec9328d9eba165325edb287638ce525e64418f55",
+ "commit": "5f80375c6321951b825630bae01230ee63cb04a1",
  "sights": [
   "sw/vetting.py:87-94",
   "sw/vetting.py:80-84",

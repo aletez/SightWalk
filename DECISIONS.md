@@ -184,19 +184,21 @@ Open:
 
 - Texts get sights too (Jakub, 2026-10-14): tools/trips.py shows chosen top-level texts (TEXTS: the manual, cut at its headings into sections, the tools' schemas, the guide's prompt), in the trip "What the agent is told". Holidays written by hand (docs/holidays/*.json: name, informator, trips in order; tools/trips.py HOLIDAYS), the first "How the program talks to the agent". "SightWalk: Open Holiday" replaces Open Informator (Jakub: trips should come linearized): it lists every informator's whole holiday and the holidays written by hand; kept conversations (*.transcripts.json) no longer show in the list. Seen by Claude: the list with both holidays. (Changed, unverified by Jakub.)
 
+- The holiday renamed the tour (Jakub, 2026-10-14; Polish: turnus, not urlop or wczasy): a stay with a set plan and order, as a tour is a planned sequence of trips. In code Tour, tour(), docs/tours/, the Tour tab, "SightWalk: Open Tour". Entries above keep the old name.
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:
 - **Collection**: members one level down, without order. A line is no entity, a number; the hierarchy ends there.
-- **Sequence** (a collection): its members in order, so one can walk it. A **sight** is a sequence of a file's lines; a **holiday** a sequence of trips.
+- **Sequence** (a collection): its members in order, so one can walk it. A **sight** is a sequence of a file's lines; a **tour** a sequence of trips.
 - **Network** (a collection): a bag of transitions between its places; an id from its name and the commit hash its lines are counted in. Self-contained: it knows only itself and its members. The **informator** is a network of trips, without order.
 - **Trip**: a sequence and a network of sights at once; kind run, comparison or survey (see the manual).
-- **Holiday**: an entity, a sequence of one informator's trips, linearized by chosen transition types (by default leads_to); it keeps which informator and which types. A trip nothing leads to may start one, unless its purpose says otherwise (a comparison).
+- **Tour**: an entity, a sequence of one informator's trips, linearized by chosen transition types (by default leads_to); it keeps which informator and which types. A trip nothing leads to may start one, unless its purpose says otherwise (a comparison).
 - **Place**: a path into a network, of any length from 0: in a trip ⟨⟩, ⟨sight⟩, ⟨sight, line⟩; in an informator ⟨⟩, ⟨trip⟩, ⟨trip, sight⟩, ⟨trip, sight, line⟩. A trip by its id, a sight by its index in the trip, a line as in the network's commit.
 - **Transition**: type, source and target, both places. It reads as a sentence, the predicate true of the source. Types: `calls` (a call's line → the definition's line), `returns` (a line giving control back → the call's line), `leads_to` (the story goes on at the target), `101s` (the target must be understood to understand the source), `passes_data` (a value made at the source is used at the target), `comparable` (no direction meant), `own_trip` (informator only: ⟨trip, sight, definition's line⟩ → ⟨trip⟩). New types need no change of structure.
 - **Own trip**: every definition (function, method, class) has one, independently: a method's may differ from its class's.
 - All transitions are given by the author of the trip or informator; a script may only validate them.
-- In code (`sw/ontology.py`, pure, unit-tested; 2026-10-14): Collection, Sequence, Network, Sight, Trip (Sequence and Network), Informator, Holiday, Transition; a place is a tuple. Composition with the Sublime side, the reader will hold a trip; inheritance only among the pure classes. Used by the plugin (2026-10-14): show builds an ontology.Trip (`bridge.make_trip`; the ontology checks the calls, the bridge only that the files have the lines), the reader holds it (`reader.trip`, panes `plan.Pane` hold its sights), an edit moves it (`Trip.moved` keeps the transitions that still fit), the Map reads its calls. Seen by Claude: a wrong call refused, trip 3 shown, its Map drawn. (Changed, unverified by Jakub.) Next: trip and informator files, show's format with typed transitions.
+- In code (`sw/ontology.py`, pure, unit-tested; 2026-10-14): Collection, Sequence, Network, Sight, Trip (Sequence and Network), Informator, Tour, Transition; a place is a tuple. Composition with the Sublime side, the reader will hold a trip; inheritance only among the pure classes. Used by the plugin (2026-10-14): show builds an ontology.Trip (`bridge.make_trip`; the ontology checks the calls, the bridge only that the files have the lines), the reader holds it (`reader.trip`, panes `plan.Pane` hold its sights), an edit moves it (`Trip.moved` keeps the transitions that still fit), the Map reads its calls. Seen by Claude: a wrong call refused, trip 3 shown, its Map drawn. (Changed, unverified by Jakub.) Next: trip and informator files, show's format with typed transitions.
 
 ## Decisions
 

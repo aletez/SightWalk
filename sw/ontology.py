@@ -1,4 +1,4 @@
-"""SightWalk's ontology (Jakub, see DECISIONS.md): sights, trips, informators and holidays, the
+"""SightWalk's ontology (Jakub, see DECISIONS.md): sights, trips, informators and tours, the
 places in them and the transitions between places. Pure, no Sublime API: the Sublime side holds
 these objects (composition), it does not inherit from them."""
 
@@ -190,8 +190,8 @@ class Informator(Network):
         return "trip %r" % (key,)
 
 
-class Holiday(Sequence):
-    """One informator's trips in one order (Polish: wczasy): laid out from the informator by the
+class Tour(Sequence):
+    """One informator's trips in one order (Polish: turnus): laid out from the informator by the
     transition types it follows, or chosen and ordered by an author under a name (types ())."""
 
     def __init__(self, informator, trips, types=("leads_to",), name=None):
@@ -203,7 +203,7 @@ class Holiday(Sequence):
         self.name = name or "%s: all trips" % informator.name
 
 
-def holiday(informator, types=("leads_to", "101s")):
+def tour(informator, types=("leads_to", "101s")):
     """The informator's trips in one order (Jakub): from each trip nothing leads to, on along
     leads_to, depth first; a trip a 101s transition names comes before the trip that needs it.
     Trips left over follow in the informator's order."""
@@ -216,7 +216,7 @@ def holiday(informator, types=("leads_to", "101s")):
     order = []
     for trip in sorted(informator.members, key=lambda trip: trip.id in reached):
         visit(trip.id, nexts, needs, order, set())
-    return Holiday(informator, [informator.member(key) for key in order], types)
+    return Tour(informator, [informator.member(key) for key in order], types)
 
 
 def visit(key, nexts, needs, order, seen):
@@ -278,17 +278,17 @@ def dumps(data):
                   lambda m: "[%s]" % re.sub(r",\s+", ", ", m.group(1)), text) + "\n"
 
 
-def holiday_data(holiday, informator_file):
-    """An author's holiday: its name, its informator's file (relative to the holiday's) and its
+def tour_data(tour, informator_file):
+    """An author's tour: its name, its informator's file (relative to the tour's) and its
     trips' ids in order."""
-    return {"name": holiday.name, "informator": informator_file,
-            "trips": [trip.id for trip in holiday]}
+    return {"name": tour.name, "informator": informator_file,
+            "trips": [trip.id for trip in tour]}
 
 
-def holiday_from(data, informator):
+def tour_from(data, informator):
     missing = [key for key in data["trips"] if informator.member(key) is None]
     if missing:
         raise ValueError("%s: no such trips in %s: %s" % (data["name"], informator.name,
                                                          ", ".join(missing)))
-    return Holiday(informator, [informator.member(key) for key in data["trips"]], (),
+    return Tour(informator, [informator.member(key) for key in data["trips"]], (),
                    data["name"])

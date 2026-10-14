@@ -477,7 +477,7 @@ Members without order, sequences one can walk, places as paths into them, and th
 
 ## 32. The ontology: networks (17 views, survey)
 
-Transitions between places, checked; the trip, the informator and the holiday.
+Transitions between places, checked; the trip, the informator and the tour.
 
 - `sw/ontology.py:90-97` Network.__init__
 - `sw/ontology.py:13-15` slug
@@ -495,36 +495,36 @@ Transitions between places, checked; the trip, the informator and the holiday.
 - `sw/ontology.py:183-184` Informator.member
 - `sw/ontology.py:186-187` Informator.label
 - `sw/ontology.py:189-190` Informator.member_label
-- `sw/ontology.py:197-203` Holiday.__init__
+- `sw/ontology.py:197-203` Tour.__init__
 
-## 33. An informator and its holiday (24 views)
+## 33. An informator and its tour (24 views)
 
-Open Holiday: an informator's holidays to choose from, the informator read from its files, its trips in the holiday's order in the Holiday tab, a trip opened from it, its conversation kept, a box ticked by hand.
+Open Tour: an informator's tours to choose from, the informator read from its files, its trips in the tour's order in the Tour tab, a trip opened from it, its conversation kept, a box ticked by hand.
 
-- `sw/commands.py:180-186` SightWalkOpenHolidayCommand.run
-- `sw/commands.py:195-203` holiday_choices
+- `sw/commands.py:180-186` SightWalkOpenTourCommand.run
+- `sw/commands.py:195-203` tour_choices
 - `sw/commands.py:206-216` found_files
 - `sw/commands.py:219-220` read_name
 - `sw/commands.py:223-228` read_field
-- `sw/commands.py:188-192` SightWalkOpenHolidayCommand.open
-- `sw/reader.py:648-660` Reader.open_holiday
+- `sw/commands.py:188-192` SightWalkOpenTourCommand.open
+- `sw/reader.py:648-660` Reader.open_tour
 - `sw/reader.py:785-787` read_json
-- `sw/ontology.py:288-294` holiday_from
+- `sw/ontology.py:288-294` tour_from
 - `sw/ontology.py:267-271` informator_from
 - `sw/ontology.py:251-254` trip_from
 - `sw/ontology.py:241-242` transition_from
-- `sw/ontology.py:206-219` holiday
+- `sw/ontology.py:206-219` tour
 - `sw/ontology.py:222-230` visit
 - `sw/vetting.py:167-173` read_walked
-- `sw/reader.py:662-674` Reader.holiday_link
+- `sw/reader.py:662-674` Reader.tour_link
 - `sw/reader.py:676-684` Reader.keep_transcript
 - `sw/reader.py:772-774` transcripts_path
 - `sw/reader.py:777-782` read_transcripts
 - `sw/chat.py:190-193` set_transcript
 - `sw/ontology.py:274-278` dumps
 - `sw/vetting.py:176-185` save_walked
-- `sw/reader.py:686-688` Reader.draw_holiday
-- `sw/vetting.py:148-164` show_holiday
+- `sw/reader.py:686-688` Reader.draw_tour
+- `sw/vetting.py:148-164` show_tour
 
 ## 34. Trip files (6 views)
 
@@ -535,7 +535,7 @@ A trip opened from its file by the guide, and the files written for an informato
 - `sw/ontology.py:245-248` trip_data
 - `sw/ontology.py:236-238` transition_data
 - `sw/ontology.py:257-264` informator_data
-- `sw/ontology.py:281-285` holiday_data
+- `sw/ontology.py:281-285` tour_data
 
 ## 35. Questions the code already asks (10 views)
 

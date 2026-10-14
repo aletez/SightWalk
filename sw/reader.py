@@ -68,8 +68,8 @@ class Reader(Geometry):
         # note: non-empty = an answer is on its way (guide coming or thinking); shows [Stop]
         self.status = self.note = ""
         self.trip = None  # the ontology.Trip shown
-        self.informator = self.holiday = self.informator_root = None  # see open_holiday
-        self.informator_path = self.holiday_trip = None
+        self.informator = self.tour = self.informator_root = None  # see open_tour
+        self.informator_path = self.tour_trip = None
         self.walked = set()
         self.bench_width = BENCH_WIDTH
         self.editor = None
@@ -108,9 +108,9 @@ class Reader(Geometry):
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
         self.map_view = vetting.make_tool(self.window, "Map")
-        self.holiday_view = vetting.make_tool(self.window, "Holiday")
-        self.pan = True  # Map and Holiday take the wheel for the panorama (ctrl+s, Jakub)
-        for view in (self.map_view, self.holiday_view):
+        self.tour_view = vetting.make_tool(self.window, "Tour")
+        self.pan = True  # Map and Tour take the wheel for the panorama (ctrl+s, Jakub)
+        for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
         self.tool = vetting.SCROLL  # the Tools pane's tab shown
         self.below_header = chat.make_header(self.window, self.chat, "Tools")
@@ -268,7 +268,7 @@ class Reader(Geometry):
         self.ready = True
         self.scroll_to(0)
         self.draw_map()
-        self.draw_holiday()
+        self.draw_tour()
         # Widths are shares measured from the bench (see share), which Sublime reports right only
         # once this layout is drawn: once more then.
         sublime.set_timeout(lambda: self.scroll_to(self.offset), SETTLE_MS)
@@ -376,7 +376,7 @@ class Reader(Geometry):
 
     def wheel_places(self):
         """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
-        under the bench, ▼'s cell, and Map or Holiday while they take the wheel. A sight's code
+        under the bench, ▼'s cell, and Map or Tour while they take the wheel. A sight's code
         scrolls on its own (Jakub)."""
         return self.places()[:6 if self.panning() else 5]
 
@@ -616,7 +616,7 @@ class Reader(Geometry):
     # Tools
 
     def tools(self):
-        return {"Map": self.map_view, "Holiday": self.holiday_view, vetting.SCROLL: self.below}
+        return {"Map": self.map_view, "Tour": self.tour_view, vetting.SCROLL: self.below}
 
     def tool_view(self):
         return self.tools()[self.tool]
@@ -629,63 +629,63 @@ class Reader(Geometry):
         if self.ready:
             self.render()
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
-        self.draw_holiday()
+        self.draw_tour()
 
     def panning(self):
-        """Map or Holiday shown and taking the wheel for the panorama (Jakub)."""
+        """Map or Tour shown and taking the wheel for the panorama (Jakub)."""
         return self.pan and self.tool != vetting.SCROLL
 
     def toggle_panning(self):
-        """ctrl+s: the wheel over Map and Holiday moves the whole trip, or the tool itself."""
+        """ctrl+s: the wheel over Map and Tour moves the whole trip, or the tool itself."""
         self.pan = not self.pan
-        for view in (self.map_view, self.holiday_view):
+        for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
         self.show_headers()
         self.select_tool(self.tool)  # lays out again, draws the tools at their new place
 
-    # An informator and its holiday (Jakub)
+    # An informator and its tour (Jakub)
 
-    def open_holiday(self, path, holiday=None):
-        """The informator in path and a holiday of it, written by hand in the file holiday or else
-        all its trips in reading order, in the Holiday tab; the first trip not walked yet shown."""
+    def open_tour(self, path, tour=None):
+        """The informator in path and a tour of it, written by hand in the file tour or else
+        all its trips in reading order, in the Tour tab; the first trip not walked yet shown."""
         self.informator = ontology.informator_from(read_json(path), lambda file: read_json(
             os.path.join(os.path.dirname(path), file)))
         self.informator_root, self.informator_path = repo_root(path), path
         self.informator.transcripts = read_transcripts(path)
-        self.holiday = ontology.holiday_from(read_json(holiday), self.informator) if holiday \
-            else ontology.holiday(self.informator)
+        self.tour = ontology.tour_from(read_json(tour), self.informator) if tour \
+            else ontology.tour(self.informator)
         self.walked = vetting.read_walked(self.informator.id)
-        self.tool = "Holiday"
-        first = next((t for t in self.holiday if t.id not in self.walked), self.holiday.members[0])
-        self.holiday_link("open:" + first.id)
+        self.tool = "Tour"
+        first = next((t for t in self.tour if t.id not in self.walked), self.tour.members[0])
+        self.tour_link("open:" + first.id)
 
-    def holiday_link(self, href):
-        """open:<trip> shows a trip of the holiday; tick:<trip> ticks or unticks it as walked,
+    def tour_link(self, href):
+        """open:<trip> shows a trip of the tour; tick:<trip> ticks or unticks it as walked,
         only by hand (Jakub)."""
         what, _, key = href.partition(":")
         if what == "open":
             self.keep_transcript()
             chat.set_transcript(self.informator.transcripts.get(key, ""))
-            self.holiday_trip = key
+            self.tour_trip = key
             self.load(self.informator.member(key), self.informator_root)
         elif what == "tick":
             self.walked ^= {key}
             vetting.save_walked(self.informator.id, self.walked)
-        self.draw_holiday()
+        self.draw_tour()
 
     def keep_transcript(self):
-        """The bench's conversation kept under the holiday's trip shown (Jakub), so after Sublime
+        """The bench's conversation kept under the tour's trip shown (Jakub), so after Sublime
         closes it goes on from there. After every message, in a file beside the informator's that
         git ignores (Jakub: conversations stay out of git)."""
-        if self.informator is None or self.trip is None or self.trip.id != self.holiday_trip:
+        if self.informator is None or self.trip is None or self.trip.id != self.tour_trip:
             return
-        self.informator.transcripts[self.holiday_trip] = chat.TRANSCRIPT
+        self.informator.transcripts[self.tour_trip] = chat.TRANSCRIPT
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 
-    def draw_holiday(self):
-        vetting.show_holiday(self.holiday_view, self.holiday, self.walked,
-                             self.trip.id if self.trip else None, self.holiday_link)
+    def draw_tour(self):
+        vetting.show_tour(self.tour_view, self.tour, self.walked,
+                             self.trip.id if self.trip else None, self.tour_link)
 
     def draw_map(self):
         if self.sights:

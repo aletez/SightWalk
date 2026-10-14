@@ -1,6 +1,6 @@
 import unittest
 
-from sw.ontology import (Holiday, dumps, holiday_data, holiday_from, Informator, Sight, Transition, Trip, holiday, informator_data,
+from sw.ontology import (Tour, dumps, tour_data, tour_from, Informator, Sight, Transition, Trip, tour, informator_data,
                          informator_from, slug, trip_data, trip_from)
 
 
@@ -113,46 +113,46 @@ class InformatorTest(unittest.TestCase):
             self.informator([Transition("calls", ("first", 0, 12), ("third", 0, 1))])
 
 
-class HolidayTest(unittest.TestCase):
+class TourTest(unittest.TestCase):
     def test_trips_of_its_informator_in_order(self):
         first, second = Trip("First", two_sights()), Trip("Second", two_sights())
         informator = Informator("SightWalk", [first, second])
-        holiday = Holiday(informator, [second, first])
-        self.assertEqual(list(holiday), [second, first])
-        self.assertEqual(holiday.types, ("leads_to",))  # as given to Holiday
+        tour = Tour(informator, [second, first])
+        self.assertEqual(list(tour), [second, first])
+        self.assertEqual(tour.types, ("leads_to",))  # as given to Tour
 
     def test_refuses_a_stray_trip(self):
         informator = Informator("SightWalk", [Trip("First", two_sights())])
         with self.assertRaises(ValueError):
-            Holiday(informator, [Trip("Other", two_sights())])
+            Tour(informator, [Trip("Other", two_sights())])
 
 
 def trips(*names):
     return [Trip(name, two_sights()) for name in names]
 
 
-class HolidayOrderTest(unittest.TestCase):
+class TourOrderTest(unittest.TestCase):
     def test_follows_leads_to_from_a_start(self):
         a, b, c, d = trips("A", "B", "C", "D")
         informator = Informator("I", [c, a, b, d], [
             Transition("leads_to", ("a", 1, 9), ("b", 0)),
             Transition("leads_to", ("b",), ("c",)),
             Transition("calls", ("d", 0, 12), ("a", 0, 10))])
-        self.assertEqual([t.id for t in holiday(informator)], ["a", "b", "c", "d"])
+        self.assertEqual([t.id for t in tour(informator)], ["a", "b", "c", "d"])
 
     def test_what_is_needed_comes_first(self):
         a, b, c = trips("A", "B", "C")
         informator = Informator("I", [a, b, c], [
             Transition("leads_to", ("a",), ("b",)), Transition("101s", ("b",), ("c",))])
-        self.assertEqual([t.id for t in holiday(informator)], ["a", "c", "b"])
-        self.assertEqual([t.id for t in holiday(informator, ("leads_to",))], ["a", "b", "c"])
+        self.assertEqual([t.id for t in tour(informator)], ["a", "c", "b"])
+        self.assertEqual([t.id for t in tour(informator, ("leads_to",))], ["a", "b", "c"])
 
     def test_other_types_and_cycles(self):
         a, b = trips("A", "B")
         informator = Informator("I", [a, b], [Transition("comparable", ("b",), ("a",)),
                                               Transition("comparable", ("a",), ("b",))])
-        self.assertEqual([t.id for t in holiday(informator, ("comparable",))], ["a", "b"])
-        self.assertEqual(holiday(informator, ("comparable",)).types, ("comparable",))
+        self.assertEqual([t.id for t in tour(informator, ("comparable",))], ["a", "b"])
+        self.assertEqual(tour(informator, ("comparable",)).types, ("comparable",))
 
 
 class FilesTest(unittest.TestCase):
@@ -185,21 +185,21 @@ class TranscriptsTest(unittest.TestCase):
         self.assertIn('"from": [0, 12]', dumps({"from": [0, 12], "sights": ["a.py:1-2"]}))
 
 
-class AuthoredHolidayTest(unittest.TestCase):
+class AuthoredTourTest(unittest.TestCase):
     def test_round_trip_and_name(self):
         a, b, c = trips("A", "B", "C")
         informator = Informator("I", [a, b, c])
-        self.assertEqual(holiday(informator).name, "I: all trips")
-        chosen = Holiday(informator, [c, a], (), "Talking")
-        data = holiday_data(chosen, "../informators/i.json")
+        self.assertEqual(tour(informator).name, "I: all trips")
+        chosen = Tour(informator, [c, a], (), "Talking")
+        data = tour_data(chosen, "../informators/i.json")
         self.assertEqual(data["trips"], ["c", "a"])
-        again = holiday_from(data, informator)
+        again = tour_from(data, informator)
         self.assertEqual(([t.id for t in again], again.name), (["c", "a"], "Talking"))
 
     def test_refuses_unknown_trips(self):
         informator = Informator("I", trips("A"))
         with self.assertRaises(ValueError):
-            holiday_from({"name": "H", "informator": "i.json", "trips": ["a", "z"]}, informator)
+            tour_from({"name": "H", "informator": "i.json", "trips": ["a", "z"]}, informator)
 
 
 if __name__ == "__main__":

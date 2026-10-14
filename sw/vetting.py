@@ -1,5 +1,5 @@
 """The Tools pane (Jakub's name for now) under the Vetting Bench, with tabs in its header: Map, the
-trip's sights as a call graph drawn by Graphviz; Holiday, an informator's trips in one order; and
+trip's sights as a call graph drawn by Graphviz; Tour, an informator's trips in one order; and
 Scroll, a blank pane in the bench's colours whose wheel moves the whole trip, like the Sights'
 fillers (the scroll pad)."""
 
@@ -18,10 +18,10 @@ from .config import SETTINGS_FILE
 from .config import BLANK_LINES
 from .views import FADED, kept, make_blank_view, make_side_view, match_font, phantoms
 
-TABS = ("Map", "Holiday", "Scroll")
+TABS = ("Map", "Tour", "Scroll")
 SCROLL = "Scroll"
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
-NO_INFORMATOR = ("No holiday is open: <i>SightWalk: Open Holiday</i> in the command palette.")
+NO_INFORMATOR = ("No tour is open: <i>SightWalk: Open Tour</i> in the command palette.")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
 MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
@@ -37,7 +37,7 @@ def make(window, conversation):
 
 
 def make_tool(window, name):
-    """A tool's pane (Map, Holiday): read-only, in the bench's colours, drawn with phantoms."""
+    """A tool's pane (Map, Tour): read-only, in the bench's colours, drawn with phantoms."""
     view = make_side_view(window, name, {"word_wrap": False, "sight_walk_blank": True})
     view.assign_syntax(SYNTAX)
     view.run_command("sight_walk_replace", {"text": " "})
@@ -61,7 +61,7 @@ def content_point(view):
 
 PAN_KEY = "ctrl+s"
 TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
-PAN_HELP = ("<div><b>%s</b> the wheel over Map and Holiday: %s</div>"
+PAN_HELP = ("<div><b>%s</b> the wheel over Map and Tour: %s</div>"
             % (PAN_KEY, "%s (press to change)"))
 
 
@@ -143,15 +143,15 @@ def show_note(view, html, key="sight_walk_map"):
         [sublime.Phantom(sublime.Region(content_point(view)), note, sublime.LAYOUT_BLOCK)])
 
 
-# The holiday
+# The tour
 
-def show_holiday(view, holiday, walked, current, on_select):
-    """The holiday's trips in order, each a link, and a box the user ticks for a trip walked
+def show_tour(view, tour, walked, current, on_select):
+    """The tour's trips in order, each a link, and a box the user ticks for a trip walked
     (Jakub: never ticked by itself); the shown one in bold."""
-    if holiday is None:
-        return show_note(view, NO_INFORMATOR, "sight_walk_holiday")
+    if tour is None:
+        return show_note(view, NO_INFORMATOR, "sight_walk_tour")
     rows = []
-    for number, trip in enumerate(holiday, 1):
+    for number, trip in enumerate(tour, 1):
         box = "☑" if trip.id in walked else "☐"
         name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
         kind = ' <span style="color: %s">%s</span>' % (FADED, trip.kind) if trip.kind != "run" \
@@ -159,8 +159,8 @@ def show_holiday(view, holiday, walked, current, on_select):
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'
                     % (trip.id, box, number, trip.id, name, kind))
-    html = "<div>%s</div><br>%s" % (holiday.name, "<br>".join(rows))
-    phantoms(view, "sight_walk_holiday").update([sublime.Phantom(
+    html = "<div>%s</div><br>%s" % (tour.name, "<br>".join(rows))
+    phantoms(view, "sight_walk_tour").update([sublime.Phantom(
         sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_select)])
 
 

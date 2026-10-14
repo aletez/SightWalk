@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "5952771fab67f66e3b04e802b67935f7ec4a882a",
+ "commit": "95c4ef461c1898f915783bbf66701849ca3efb9c",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -34,7 +34,7 @@
   "../trips/settings-and-the-rest-of-the-colours.json",
   "../trips/the-ontology-collections-and-sights.json",
   "../trips/the-ontology-networks.json",
-  "../trips/an-informator-and-its-holiday.json",
+  "../trips/an-informator-and-its-tour.json",
   "../trips/trip-files.json",
   "../trips/questions-the-code-already-asks.json",
   "../trips/seeing-where-the-code-asks.json"
@@ -298,7 +298,7 @@
     "trip-files"
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
@@ -1998,7 +1998,7 @@
     271
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     22,
     686
    ]
@@ -3522,7 +3522,7 @@
     753
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     16,
     676
    ]
@@ -3847,7 +3847,7 @@
     632
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     22,
     686
    ]
@@ -4566,7 +4566,7 @@
     33
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     16,
     676
    ]
@@ -7449,40 +7449,40 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     0,
     180
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     1,
     195
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     2,
     206
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     2,
     212
    ],
@@ -7495,40 +7495,40 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     3,
     219
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     4,
     223
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     5,
     188
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     5,
     189
    ],
@@ -7541,7 +7541,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     5,
     189
    ],
@@ -7554,7 +7554,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     5,
     192
    ],
@@ -7567,18 +7567,18 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     6,
     648
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     6,
     653
    ],
@@ -7591,29 +7591,29 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     7,
     785
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     8,
     288
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     8,
     289
    ],
@@ -7626,20 +7626,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
-    8,
-    293
-   ],
-   "to": [
-    "the-ontology-networks",
-    16,
-    197
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     8,
     293
    ],
@@ -7650,20 +7637,33 @@
    ]
   },
   {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-tour",
+    8,
+    293
+   ],
+   "to": [
+    "the-ontology-networks",
+    16,
+    197
+   ]
+  },
+  {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     9,
     267
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     9,
     270
    ],
@@ -7676,7 +7676,7 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     10,
     251
    ],
@@ -7687,7 +7687,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     10,
     252
    ],
@@ -7700,7 +7700,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     10,
     252
    ],
@@ -7713,18 +7713,18 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     11,
     241
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     11,
     242
    ],
@@ -7737,31 +7737,18 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     12,
     206
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
-    12,
-    219
-   ],
-   "to": [
-    "the-ontology-networks",
-    16,
-    197
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     12,
     219
    ],
@@ -7772,42 +7759,55 @@
    ]
   },
   {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-tour",
+    12,
+    219
+   ],
+   "to": [
+    "the-ontology-networks",
+    16,
+    197
+   ]
+  },
+  {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     13,
     222
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     14,
     167
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     15,
     662
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     15,
     670
    ],
@@ -7820,7 +7820,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     15,
     670
    ],
@@ -7833,95 +7833,95 @@
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     16,
     676
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     17,
     772
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     18,
     777
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     19,
     190
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     20,
     274
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     21,
     176
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     22,
     686
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "own_trip",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     23,
     148
    ],
    "to": [
-    "an-informator-and-its-holiday"
+    "an-informator-and-its-tour"
    ]
   },
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     23,
     152
    ],
@@ -7934,7 +7934,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     23,
     163
    ],
@@ -7947,7 +7947,7 @@
   {
    "type": "calls",
    "from": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     23,
     164
    ],
@@ -8130,7 +8130,7 @@
     253
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     11,
     241
    ]
@@ -8200,7 +8200,7 @@
     284
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     12,
     206
    ]
@@ -8213,7 +8213,7 @@
     285
    ],
    "to": [
-    "an-informator-and-its-holiday",
+    "an-informator-and-its-tour",
     12,
     206
    ]

@@ -172,32 +172,32 @@ class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
             self.window.run_command("close_window")
 
 
-class SightWalkOpenHolidayCommand(sublime_plugin.WindowCommand):
-    """Chooses a holiday (wczasy) and opens it in a trip, the Holiday tab listing its trips
-    (Jakub): every informator's trips in reading order, and the holidays written by hand
-    (holidays/*.json) found in the open folders and repositories."""
+class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
+    """Chooses a tour (turnus) and opens it in a trip, the Tour tab listing its trips
+    (Jakub): every informator's trips in reading order, and the tours written by hand
+    (tours/*.json) found in the open folders and repositories."""
 
     def run(self):
-        found = holiday_choices()
+        found = tour_choices()
         if not found:
             sublime.error_message("SightWalk found no informators/*.json in the open folders.")
             return
         self.window.show_quick_panel([[label, path] for label, path, _ in found],
                                      lambda i: i >= 0 and self.open(*found[i][1:]))
 
-    def open(self, informator, holiday):
+    def open(self, informator, tour):
         reader = state.current_reader() or bridge.new_reader()
-        reader.open_holiday(informator, holiday)
+        reader.open_tour(informator, tour)
         reader.window.bring_to_front()
         scrollbars.reader_focused(True)
 
 
-def holiday_choices():
-    """(label, informator's file, holiday's file or None) for every holiday to choose from."""
+def tour_choices():
+    """(label, informator's file, tour's file or None) for every tour to choose from."""
     found = []
     for path in found_files("informators"):
         found.append((read_name(path) + ": all trips", path, None))
-    for path in found_files("holidays"):
+    for path in found_files("tours"):
         informator = os.path.join(os.path.dirname(path), read_field(path, "informator"))
         found.append((read_name(path), os.path.normpath(informator), path))
     return found
@@ -229,7 +229,7 @@ def read_field(path, key):
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):
-    """ctrl+s in a trip: the wheel over Map and Holiday moves the whole trip, or the tool."""
+    """ctrl+s in a trip: the wheel over Map and Tour moves the whole trip, or the tool."""
 
     def run(self):
         reader = state.reader_for(self.window)

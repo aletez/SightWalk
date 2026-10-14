@@ -14,8 +14,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, ".")
-from sw.ontology import (Holiday, Informator, Transition, Trip, Sight, dumps,  # noqa: E402
-                         holiday_data, informator_data, trip_data)
+from sw.ontology import (Tour, Informator, Transition, Trip, Sight, dumps,  # noqa: E402
+                         tour_data, informator_data, trip_data)
 
 FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py"]
 
@@ -199,32 +199,32 @@ TRIPS = [
       "ontology.Sequence.member", "ontology.Sight.__init__", "ontology.Sight.parse",
       "ontology.Sight.spec", "ontology.Sight.member"]),
     ("The ontology: networks",
-     "Transitions between places, checked; the trip, the informator and the holiday.",
+     "Transitions between places, checked; the trip, the informator and the tour.",
      ["ontology.Network.__init__", "ontology.slug", "ontology.Network.add", "ontology.Network.problem",
       "ontology.Transition.__init__", "ontology.Transition.__eq__", "ontology.Transition.__repr__",
       "ontology.Transition.parts", "ontology.Trip.__init__", "ontology.Trip.label",
       "ontology.Trip.member_label", "ontology.Trip.moved", "ontology.Informator.__init__",
       "ontology.Informator.member",
       "ontology.Informator.label", "ontology.Informator.member_label",
-      "ontology.Holiday.__init__"]),
-    ("An informator and its holiday",
-     "Open Holiday: an informator's holidays to choose from, the informator read from its files, "
-     "its trips in the holiday's order in the Holiday tab, a trip opened from it, its "
+      "ontology.Tour.__init__"]),
+    ("An informator and its tour",
+     "Open Tour: an informator's tours to choose from, the informator read from its files, "
+     "its trips in the tour's order in the Tour tab, a trip opened from it, its "
      "conversation kept, a box ticked by hand.",
-     ["commands.SightWalkOpenHolidayCommand.run", "commands.holiday_choices",
+     ["commands.SightWalkOpenTourCommand.run", "commands.tour_choices",
       "commands.found_files", "commands.read_name", "commands.read_field",
-      "commands.SightWalkOpenHolidayCommand.open", "reader.Reader.open_holiday", "reader.read_json",
-      "ontology.holiday_from",
+      "commands.SightWalkOpenTourCommand.open", "reader.Reader.open_tour", "reader.read_json",
+      "ontology.tour_from",
       "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
-      "ontology.holiday", "ontology.visit", "vetting.read_walked",
-      "reader.Reader.holiday_link", "reader.Reader.keep_transcript", "reader.transcripts_path",
+      "ontology.tour", "ontology.visit", "vetting.read_walked",
+      "reader.Reader.tour_link", "reader.Reader.keep_transcript", "reader.transcripts_path",
       "reader.read_transcripts", "chat.set_transcript",
-      "ontology.dumps", "vetting.save_walked", "reader.Reader.draw_holiday",
-      "vetting.show_holiday"]),
+      "ontology.dumps", "vetting.save_walked", "reader.Reader.draw_tour",
+      "vetting.show_tour"]),
     ("Trip files",
      "A trip opened from its file by the guide, and the files written for an informator.",
      ["bridge.op_open_trip", "ontology.trip_from", "ontology.trip_data",
-      "ontology.transition_data", "ontology.informator_data", "ontology.holiday_data"]),
+      "ontology.transition_data", "ontology.informator_data", "ontology.tour_data"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
      "them.",
@@ -286,7 +286,7 @@ LEADS = [
     ("Closing the editor", "primary+g"),
     ("primary+g", "Endings"),
     ("Drawing the Map", "Trip files"),
-    ("Trip files", "An informator and its holiday"),
+    ("Trip files", "An informator and its tour"),
 ]
 NEEDS = [  # (trip, the trip it needs understood first)
     ("A request arrives", "The ontology: networks"),
@@ -297,8 +297,8 @@ NEEDS = [  # (trip, the trip it needs understood first)
     ("Polling and the wheel", "Window events"),
 ]
 
-# Holidays written by hand (Jakub): a name and the trips in their order.
-HOLIDAYS = [
+# Tours written by hand (Jakub): a name and the trips in their order.
+TOURS = [
     ("How the program talks to the agent", [
         "Setting up the agent bridge", "What the agent is told", "One tool call over HTTP",
         "A request arrives", "How Claude comes to listen to Sublime", "The user sends a message",
@@ -576,11 +576,11 @@ def write_files(specs, commit):
     informator = Informator("SightWalk", made, between_trips(found, imported), commit)
     files = {trip.id: "../trips/%s.json" % trip.id for trip in made}
     write_json("docs/informators/sightwalk.json", informator_data(informator, files))
-    os.makedirs("docs/holidays", exist_ok=True)
-    for name, titles in HOLIDAYS:
-        chosen = Holiday(informator, [informator.member(Trip(t, []).id) for t in titles], (), name)
-        write_json("docs/holidays/%s.json" % Trip(name, []).id,
-                   holiday_data(chosen, "../informators/sightwalk.json"))
+    os.makedirs("docs/tours", exist_ok=True)
+    for name, titles in TOURS:
+        chosen = Tour(informator, [informator.member(Trip(t, []).id) for t in titles], (), name)
+        write_json("docs/tours/%s.json" % Trip(name, []).id,
+                   tour_data(chosen, "../informators/sightwalk.json"))
 
 
 def write_json(path, data):

@@ -1,7 +1,7 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "5952771fab67f66e3b04e802b67935f7ec4a882a",
+ "commit": "95c4ef461c1898f915783bbf66701849ca3efb9c",
  "sights": [
   "sw/reader.py:627-632",
   "sw/vetting.py:68-87",

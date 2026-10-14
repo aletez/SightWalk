@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "a3095bd165ee2093ecf7f6497f2c0d1307515a73",
+ "commit": "da73b14b4231657ccee6ee5fc7d162aa8d1c8b87",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1977,7 +1977,7 @@
    "to": [
     "the-map-s-nodes",
     0,
-    694
+    693
    ]
   },
   {
@@ -1989,8 +1989,8 @@
    ],
    "to": [
     "an-informator-and-its-holiday",
-    15,
-    690
+    17,
+    689
    ]
   },
   {
@@ -3498,7 +3498,7 @@
    "from": [
     "the-agent-says-something",
     1,
-    750
+    749
    ],
    "to": [
     "the-agent-says-something"
@@ -3509,12 +3509,12 @@
    "from": [
     "the-agent-says-something",
     1,
-    757
+    756
    ],
    "to": [
     "an-informator-and-its-holiday",
     11,
-    678
+    679
    ]
   },
   {
@@ -3538,7 +3538,7 @@
    "to": [
     "stopping-an-answer",
     1,
-    729
+    728
    ]
   },
   {
@@ -3775,7 +3775,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    729
+    728
    ],
    "to": [
     "stopping-an-answer"
@@ -3786,12 +3786,12 @@
    "from": [
     "stopping-an-answer",
     1,
-    736
+    735
    ],
    "to": [
     "the-agent-says-something",
     1,
-    750
+    749
    ]
   },
   {
@@ -3799,7 +3799,7 @@
    "from": [
     "stopping-an-answer",
     2,
-    738
+    737
    ],
    "to": [
     "stopping-an-answer"
@@ -3838,8 +3838,8 @@
    ],
    "to": [
     "an-informator-and-its-holiday",
-    15,
-    690
+    17,
+    689
    ]
   },
   {
@@ -4050,7 +4050,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    694
+    693
    ],
    "to": [
     "the-map-s-nodes"
@@ -4061,12 +4061,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    696
+    695
    ],
    "to": [
     "the-map-s-nodes",
     1,
-    704
+    703
    ]
   },
   {
@@ -4074,7 +4074,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    700
+    699
    ],
    "to": [
     "the-map-s-nodes",
@@ -4087,7 +4087,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    702
+    701
    ],
    "to": [
     "drawing-the-map",
@@ -4100,7 +4100,7 @@
    "from": [
     "the-map-s-nodes",
     0,
-    694
+    693
    ],
    "to": [
     "the-map-s-nodes"
@@ -4111,7 +4111,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    704
+    703
    ],
    "to": [
     "the-map-s-nodes"
@@ -4122,7 +4122,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    711
+    710
    ],
    "to": [
     "names-and-room",
@@ -4135,7 +4135,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    714
+    713
    ],
    "to": [
     "colours",
@@ -4148,7 +4148,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    714
+    713
    ],
    "to": [
     "colours",
@@ -4161,7 +4161,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    716
+    715
    ],
    "to": [
     "names-and-room",
@@ -4174,7 +4174,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    719
+    718
    ],
    "to": [
     "the-map-s-nodes"
@@ -4558,7 +4558,7 @@
    "to": [
     "an-informator-and-its-holiday",
     11,
-    678
+    679
    ]
   },
   {
@@ -4590,7 +4590,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    759
+    758
    ],
    "to": [
     "the-user-sends-a-message"
@@ -4601,7 +4601,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    763
+    762
    ],
    "to": [
     "names-and-room",
@@ -4614,7 +4614,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    765
+    764
    ],
    "to": [
     "opening-the-editor",
@@ -4627,7 +4627,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    768
+    767
    ],
    "to": [
     "building-blocks",
@@ -6048,7 +6048,7 @@
    "to": [
     "names-and-room",
     9,
-    743
+    742
    ]
   },
   {
@@ -6061,7 +6061,7 @@
    "to": [
     "names-and-room",
     10,
-    725
+    724
    ]
   },
   {
@@ -6238,7 +6238,7 @@
    "to": [
     "the-agent-says-something",
     1,
-    750
+    749
    ]
   },
   {
@@ -6636,7 +6636,7 @@
    "to": [
     "the-user-sends-a-message",
     4,
-    759
+    758
    ]
   },
   {
@@ -6644,7 +6644,7 @@
    "from": [
     "names-and-room",
     9,
-    743
+    742
    ],
    "to": [
     "names-and-room"
@@ -6655,7 +6655,7 @@
    "from": [
     "names-and-room",
     10,
-    725
+    724
    ],
    "to": [
     "names-and-room"
@@ -6666,7 +6666,7 @@
    "from": [
     "names-and-room",
     10,
-    727
+    726
    ],
    "to": [
     "the-agent-says-something",
@@ -7573,7 +7573,7 @@
    "from": [
     "an-informator-and-its-holiday",
     10,
-    664
+    665
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7584,7 +7584,7 @@
    "from": [
     "an-informator-and-its-holiday",
     10,
-    672
+    673
    ],
    "to": [
     "the-ontology-networks",
@@ -7597,7 +7597,7 @@
    "from": [
     "an-informator-and-its-holiday",
     10,
-    672
+    673
    ],
    "to": [
     "loading-the-sights",
@@ -7610,7 +7610,7 @@
    "from": [
     "an-informator-and-its-holiday",
     11,
-    678
+    679
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7621,7 +7621,7 @@
    "from": [
     "an-informator-and-its-holiday",
     12,
-    190
+    775
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7632,7 +7632,7 @@
    "from": [
     "an-informator-and-its-holiday",
     13,
-    272
+    780
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7643,7 +7643,7 @@
    "from": [
     "an-informator-and-its-holiday",
     14,
-    177
+    190
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7654,7 +7654,7 @@
    "from": [
     "an-informator-and-its-holiday",
     15,
-    690
+    272
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7665,6 +7665,28 @@
    "from": [
     "an-informator-and-its-holiday",
     16,
+    177
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    17,
+    689
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    18,
     149
    ],
    "to": [
@@ -7675,7 +7697,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    16,
+    18,
     153
    ],
    "to": [
@@ -7688,7 +7710,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    16,
+    18,
     164
    ],
    "to": [
@@ -7701,7 +7723,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    16,
+    18,
     165
    ],
    "to": [

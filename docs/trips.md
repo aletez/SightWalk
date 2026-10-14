@@ -195,7 +195,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.
 
 - `sw/bridge.py:98-107` op_say
-- `sw/reader.py:750-757` Reader.say
+- `sw/reader.py:749-756` Reader.say
 - `sw/reader.py:571-579` Reader.show_headers
 - `sw/chat.py:90-109` show_header
 - `sw/header.py:12-22` title_lines
@@ -211,8 +211,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
 - `sw/commands.py:162-165` SightWalkStopAnswerCommand.run
-- `sw/reader.py:729-736` Reader.stop_answer
-- `sw/reader.py:738-741` Reader.withdraw_unread_messages
+- `sw/reader.py:728-735` Reader.stop_answer
+- `sw/reader.py:737-740` Reader.withdraw_unread_messages
 
 ## 15. The Tools pane's tabs (11 views, survey)
 
@@ -228,15 +228,15 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 - `sw/reader.py:618-619` Reader.tools
 - `sw/reader.py:621-622` Reader.tool_view
 - `sw/reader.py:624-625` Reader.hidden_tools
-- `sw/reader.py:694-702` Reader.draw_map
+- `sw/reader.py:693-701` Reader.draw_map
 
 ## 16. The Map's nodes (10 views)
 
 The trip's definitions and the calls its author named, as nodes for the graph.
 
-- `sw/reader.py:694-702` Reader.draw_map
-- `sw/reader.py:704-717` Reader.map_nodes
-- `sw/reader.py:719-723` Reader.owner
+- `sw/reader.py:693-701` Reader.draw_map
+- `sw/reader.py:703-716` Reader.map_nodes
+- `sw/reader.py:718-722` Reader.owner
 - `sw/reader.py:43-48` defined_name
 - `sw/callmap.py:32-38` first_definition
 - `sw/callmap.py:41-48` node_at
@@ -272,7 +272,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/chat.py:157-171` take_draft
 - `sw/commands.py:29-33` send
 - `sw/state.py:32-33` reader_for
-- `sw/reader.py:759-773` Reader.context
+- `sw/reader.py:758-772` Reader.context
 - `sw/views.py:278-282` selected_text
 - `sw/plan.py:109-112` visible_specs
 - `sw/reader.py:564-567` Reader.take_edits
@@ -408,8 +408,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:56-58` Geometry.head
 - `sw/geometry.py:60-62` Geometry.room
 - `sw/bridge.py:116-118` op_state
-- `sw/reader.py:743-748` Reader.folder
-- `sw/reader.py:725-727` Reader.note_waiting
+- `sw/reader.py:742-747` Reader.folder
+- `sw/reader.py:724-726` Reader.note_waiting
 
 ## 28. Building blocks (11 views, survey)
 
@@ -481,26 +481,28 @@ Transitions between places, checked; the trip, the informator and the holiday.
 - `sw/ontology.py:189-190` Informator.member_label
 - `sw/ontology.py:196-201` Holiday.__init__
 
-## 32. An informator and its holiday (17 views)
+## 32. An informator and its holiday (19 views)
 
 Open Informator: the informator read from its files, its trips laid out in one order, the Holiday tab drawn, a trip opened from it and ticked as walked.
 
 - `sw/commands.py:178-183` SightWalkOpenInformatorCommand.run
 - `sw/commands.py:192-201` informator_files
 - `sw/commands.py:185-189` SightWalkOpenInformatorCommand.open
-- `sw/reader.py:648-662` Reader.open_informator
+- `sw/reader.py:648-663` Reader.open_informator
 - `sw/ontology.py:265-269` informator_from
 - `sw/ontology.py:249-252` trip_from
 - `sw/ontology.py:239-240` transition_from
 - `sw/ontology.py:204-217` holiday
 - `sw/ontology.py:220-228` visit
 - `sw/vetting.py:168-174` read_walked
-- `sw/reader.py:664-676` Reader.holiday_link
-- `sw/reader.py:678-688` Reader.keep_transcript
+- `sw/reader.py:665-677` Reader.holiday_link
+- `sw/reader.py:679-687` Reader.keep_transcript
+- `sw/reader.py:775-777` transcripts_path
+- `sw/reader.py:780-785` read_transcripts
 - `sw/chat.py:190-193` set_transcript
 - `sw/ontology.py:272-276` dumps
 - `sw/vetting.py:177-186` save_walked
-- `sw/reader.py:690-692` Reader.draw_holiday
+- `sw/reader.py:689-691` Reader.draw_holiday
 - `sw/vetting.py:149-165` show_holiday
 
 ## 33. Trip files (5 views)

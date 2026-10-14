@@ -148,9 +148,8 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
 
 def clear_schemes_if_unused():
-    """The written colour schemes go once no trip is open (Jakub); the next trip writes anew."""
-    if not state.READERS:
-        tint.clear_schemes()
+    """The written colour schemes no view uses go (Jakub); a trip writes them anew."""
+    tint.clear_schemes()
 
 
 class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):

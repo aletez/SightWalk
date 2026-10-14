@@ -196,7 +196,7 @@ class CallMapTest(unittest.TestCase):
                                              ("calls", (0, 2), (0, 1)), ("unknown", (0, 1), (1, 1))])
         self.assertEqual(arrows, [((0, 1), (1, 1), "calls"), ((1, 1), (0, 1), "returns")])
         nodes = [self.node(0, "run", "A"), self.node(1, "go", "")]
-        source = callmap.dot_source(nodes, arrows, ("Helvetica", "#000000", "#888888"))
+        source = callmap.dot_source(nodes, arrows, ("Helvetica", "#000000", "#888888", "#ffffff"))
         self.assertIn('"s0_1" -> "s1_1";', source)
         self.assertIn('"s1_1" -> "s0_1" [style=dashed, arrowhead=vee];', source)
         self.assertIn('label="class A";', source)

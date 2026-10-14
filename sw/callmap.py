@@ -104,10 +104,11 @@ def legend(kinds):
 
 def dot_source(nodes, arrows, style):
     """The graph in Graphviz's dot language. arrows: (from key, to key, type).
-    style: (font, text colour, line colour)."""
-    font, text, line = style
+    style: (font, text colour, line colour, background)."""
+    font, text, line, background = style
     lines = ["digraph map {", "  rankdir=LR;",
-             '  graph [fontname=%s, fontcolor="%s", color="%s"];' % (quote(font), text, line),
+             '  graph [fontname=%s, fontcolor="%s", color="%s", bgcolor="%s"];'
+             % (quote(font), text, line, background),
              '  node [shape=box, style="rounded,filled", fontname=%s, fontcolor="%s", '
              'color="%s"];' % (quote(font), text, line),
              '  edge [color="%s"];' % line]

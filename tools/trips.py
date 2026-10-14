@@ -108,7 +108,7 @@ TRIPS = [
       "reader.Reader.tool_view", "reader.Reader.hidden_tools", "reader.Reader.draw_map"]),
     ("The Map's nodes",
      "The trip's definitions and the calls its author named, as nodes for the graph.",
-     ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.owner",
+     ["reader.Reader.draw_map", "reader.map_style", "reader.Reader.map_nodes", "reader.Reader.owner",
       "reader.defined_name", "callmap.first_definition", "callmap.node_at",
       "callmap.Node.__init__", "callmap.edges", "callmap.node_at", "vetting.draw_map"]),
     ("Drawing the Map",

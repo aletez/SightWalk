@@ -743,7 +743,7 @@ class Reader(Geometry):
                 definitions.setdefault(node.key[0], []).append(node.key[1])
             arrows = callmap.edges(definitions, [(t.type, t.source, t.target)
                                                  for t in self.trip.transitions])
-            vetting.draw_map(self.map_view, nodes, arrows, ("Helvetica", "#222222", "#888888"))
+            vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4])
 
     def map_nodes(self, index):
         """The map's nodes for a sight: its first definition and every line a call in the trip
@@ -755,7 +755,7 @@ class Reader(Geometry):
             sight.begin, sight_title(sight).rsplit("/", 1)[-1])
         targets = {t.target[1] for t in self.trip.transitions
                    if t.type == "calls" and len(t.target) == 2 and t.target[0] == index}
-        colour = tint_color("#ffffff", hue_for(sight.path), 0.25)
+        colour = tint_color(map_style()[3], hue_for(sight.path), map_style()[4])
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
                              display_path(sight.path), colour)
                 for line in sorted({main[0]} | targets)]
@@ -833,3 +833,17 @@ def read_transcripts(informator_path):
 def read_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+LIGHT_MAP = ("Helvetica", "#222222", "#888888", "#ffffff", 0.25)
+DARK_MAP = ("Helvetica", "#dddddd", "#8a8a8a", "#1e1f22", 0.35)
+
+
+def map_style():
+    """(font, text, lines, background, nodes' hue amount): the Map dark while the system is
+    (Jakub)."""
+    try:
+        dark = sublime.ui_info()["system"]["style"] == "dark"
+    except (AttributeError, KeyError, TypeError):
+        dark = False
+    return DARK_MAP if dark else LIGHT_MAP

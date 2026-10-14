@@ -7,6 +7,7 @@ import os
 import plistlib
 import random
 import re
+import time
 
 import sublime
 
@@ -174,13 +175,22 @@ def apply_grey(header):
 
 
 def clear_schemes():
-    """Deletes the schemes SightWalk wrote, once no trip uses them (Jakub: left behind, they
-    crowd Sublime's list of colour schemes), with their backups Sublime may have made."""
-    SCHEMES.clear()
+    """Deletes the schemes SightWalk wrote that no open view uses (Jakub: left behind, they
+    crowd Sublime's list of colour schemes), with the backups Sublime may have made. Asks the
+    views, not the open trips: a timer of a module reloaded since must not delete what the new
+    one uses."""
+    used = {v.settings().get("color_scheme") for w in sublime.windows() for v in w.views()}
+    for key, schemes in list(SCHEMES.items()):
+        if schemes and not used & set(schemes):
+            del SCHEMES[key]
     folder = scheme_folder()
     for name in os.listdir(folder) if os.path.isdir(folder) else []:
-        if ".sublime-color-scheme" in name:
+        path = os.path.join(folder, name)
+        resource = "Packages/User/SightWalk/" + name.replace(".chback", "")
+        # A scheme written a moment ago may wait for Sublime to index it before a view uses it.
+        if ".sublime-color-scheme" in name and resource not in used \
+                and time.time() - os.path.getmtime(path) > 60:
             try:
-                os.remove(os.path.join(folder, name))
+                os.remove(path)
             except OSError:
                 pass

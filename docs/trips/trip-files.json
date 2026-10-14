@@ -1,7 +1,7 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "fe1a4313666addb95e8a0e1d23799b63bbc46c14",
+ "commit": "860117236befdb4324bceef319b4b30ff762fbb3",
  "sights": [
   "sw/bridge.py:163-177",
   "sw/ontology.py:251-254",

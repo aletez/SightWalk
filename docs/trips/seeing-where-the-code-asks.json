@@ -1,17 +1,17 @@
 {
  "name": "Seeing where the code asks",
  "kind": "run",
- "commit": "fe1a4313666addb95e8a0e1d23799b63bbc46c14",
+ "commit": "860117236befdb4324bceef319b4b30ff762fbb3",
  "sights": [
   "sw/asked.py:47-57",
   "sw/asked.py:73-80",
   "sw/asked.py:83-84",
-  "sw/commands.py:302-304",
-  "sw/commands.py:306-308",
+  "sw/commands.py:301-303",
+  "sw/commands.py:305-307",
   "sw/asked.py:87-92",
   "sw/asked.py:60-62",
   "sw/asked.py:65-70",
-  "sw/commands.py:314-315"
+  "sw/commands.py:313-314"
  ],
  "transitions": [
   {
@@ -31,7 +31,7 @@
   },
   {
    "type": "calls",
-   "from": [4, 308],
+   "from": [4, 307],
    "to": [5, 87]
   },
   {
@@ -41,7 +41,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 315],
+   "from": [8, 314],
    "to": [7, 65]
   }
  ]

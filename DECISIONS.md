@@ -200,7 +200,9 @@ Open:
 
 - A tool keeps its place in its content across primary+s (Jakub, 2026-10-14: the Map went back to the top of its image, so its lower part could not be kept in view while the panorama scrolled): how far down the Map or the Tour is scrolled is kept per view (`tool_offsets`) and stays while it takes the wheel. Seen by Claude: the Map scrolled to its lower part, switched on, the wheel over it moved the trip and the Map stayed there. (Changed, unverified by Jakub.)
 
-- The colour schemes SightWalk writes (Packages/User/SightWalk, two per file and band amount) are deleted once no trip is open: two seconds after the last trip window closes, and two seconds after the plugin loads (Jakub: 1875 left behind crowded Sublime's list of colour schemes; all deleted). The next trip writes them anew. Seen by Claude: 8 written for a trip, 0 after it closed. (Changed, unverified by Jakub.)
+- The colour schemes SightWalk writes (Packages/User/SightWalk, two per file and band amount) are deleted once no trip is open: two seconds after the last trip window closes, and two seconds after the plugin loads (Jakub: 1875 left behind crowded Sublime's list of colour schemes; all deleted). The next trip writes them anew. Seen by Claude: 8 written for a trip, 0 after it closed. Fixed: a timer of the module before a reload deleted schemes the new trip used (Sublime's error dialog); now a scheme goes only if no open view uses it and it is older than a minute (one just written waits for Sublime's index). (Changed, unverified by Jakub.)
+
+- The Map dark while the system is (Jakub, 2026-10-14): `sublime.ui_info()`'s system style picks the palette (`reader.map_style`): dark background, light text, nodes in a stronger hue. Seen by Claude in dark mode. (Changed, unverified by Jakub.)
 
 ## Ontology (Jakub, 2026-10-14)
 

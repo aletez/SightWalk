@@ -1,7 +1,7 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "047f6abc6b49fc5bffd6cfe78a722369cfb44394",
+ "commit": "e67e63f754526201961fd97c7beef142bd05f167",
  "sights": [
   "sw/commands.py:75-78",
   "sw/reader.py:584-585",

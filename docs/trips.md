@@ -418,7 +418,7 @@ The guide is stopped, windows close.
 - `sw/guide.py:71-80` stop_when_idle
 - `sw/commands.py:145-147` SightWalkWindowListener.on_pre_close_window
 - `sw/commands.py:150-152` clear_schemes_if_unused
-- `sw/tint.py:177-196` clear_schemes
+- `sw/tint.py:177-203` clear_schemes
 - `sw/tint.py:71-72` scheme_folder
 - `sw/commands.py:120-125` SightWalkWindowListener.on_window_command
 - `sw/commands.py:178-180` SightWalkCloseTripCommand.run

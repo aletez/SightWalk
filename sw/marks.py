@@ -1,6 +1,7 @@
 """Marks as gutter icons. Pure functions, no Sublime API."""
 
 import math
+import re
 
 from .config import DEFAULT_MARK
 from .spec import matches
@@ -126,3 +127,11 @@ def strip_icons(sights, indicators, lh):
             lines.setdefault(int(round(y / lh)), []).append(m["icon"])
         seen.add(key)
     return lines
+
+
+CODE_TALK = re.compile(r"`[^`\n]+`|\w+\.\w+:\d+|\b(?:lines?|lini[aei]|linii)\s+\d+", re.I)
+
+
+def speaks_of_code(text):
+    """The message names code: a `marked name`, file:line, or a line number (line 12, linia 12)."""
+    return bool(CODE_TALK.search(text))

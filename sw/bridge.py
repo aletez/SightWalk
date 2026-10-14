@@ -12,6 +12,7 @@ import sublime
 from . import scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
+from .marks import speaks_of_code
 from .ontology import Sight, Transition, Trip, trip_from
 from .reader import Reader
 from .spec import parse_spec, repo_root
@@ -95,6 +96,11 @@ def op_show(sights=None, transitions=None, root=None, trip=None):
     return {"ok": True}
 
 
+MARK_FIRST = ("This answer names code, and nothing is marked yet: call point first with the lines "
+              "it speaks of (each gets an outline and an icon), then say it again. The user "
+              "asked that every answer about code comes with its marks.")
+
+
 def op_say(text, status=None):
     check_not_stopped()
     reader = state.current_reader()
@@ -103,6 +109,8 @@ def op_say(text, status=None):
     if not state.ADDRESSED:
         raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
                          "Say nothing; call wait_for_user.")
+    if not state.POINTED and speaks_of_code(text):
+        raise ValueError(MARK_FIRST)
     reader.say(text, status)
     return {"ok": True}
 
@@ -110,6 +118,7 @@ def op_say(text, status=None):
 def op_point(marks, reveal=True, clear=True):
     check_not_stopped()
     state.require_ready().point(marks, reveal, clear)
+    state.POINTED = True
     return {"ok": True}
 
 
@@ -215,7 +224,7 @@ def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}
     state.WAITING += 1
-    state.ADDRESSED = state.STOPPED = False
+    state.ADDRESSED = state.STOPPED = state.POINTED = False
     try:
         message = state.INBOX.get(timeout=timeout_s)
         state.ADDRESSED = True

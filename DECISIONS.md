@@ -208,6 +208,9 @@ Open:
 
 - A short trip scrolls as a long one does, up until its last sight's header is at the top (Jakub, 2026-10-14: in full screen and distraction free a trip that then fits on the screen stopped scrolling; found with a log of the offsets: 1013 px of trip, 979 px of panorama in the window, about 1023 in full screen). It still starts centred and goes down to the floor. Seen by Claude: a three-sight trip scrolled up past the centre. (Changed, unverified by Jakub.)
 
+- A trip scrolls up until its end is level with the bench's floor (Jakub, 2026-10-14: scrolling is there to bring the code level with the eyes reading the bench); this replaces "until the last header is at the top", for short and long trips alike. Down: a short trip to the floor of the screen, a long one to its top. `plan.offset_range(…, floor_px)`, `Geometry.bench_floor`. Seen by Claude: the end of the last sight level with the bench's prompt. (Changed, unverified by Jakub.)
+- Every answer about code comes with its marks (Jakub, 2026-10-14: in the last trips he had to ask for icons and outlines each time): the manual says so, and say refuses an answer that names code (a `name`, file:line, a line number) while the guide has not called point since the user last spoke (`marks.speaks_of_code`, `state.POINTED`). Seen by Claude: say refused, point, say accepted. Needs a new guide session. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

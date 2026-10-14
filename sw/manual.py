@@ -78,8 +78,10 @@ Conversation
   Write keywords and constants plainly. Stress with wording, not with asterisks.
 
 Indicators
-- Before or together with an answer that refers to specific lines, call point. Every marked
-  line is outlined, and its icon sits in the gutter.
+- Every answer about code comes with its marks: before you say it, call point with the lines it
+  speaks of, even when the user did not ask. Every marked line is outlined, and its icon sits
+  in the gutter. say refuses an answer that names code (a `name`, file:line, a line number)
+  while nothing is marked since the user last spoke.
 - A line is "file:line" (absolute file line) or {"sight": index, "line": line}.
 - Jumps of control: {"from": line, "to": line}. Call site and the callee's first line, return
   and the call site it goes back to, raise and its handler. The arrows bend towards each other.

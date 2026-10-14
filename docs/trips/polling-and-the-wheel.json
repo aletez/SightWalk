@@ -1,27 +1,27 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "990fd233dbcb579e3e2618ae604b9e20ac728e8e",
+ "commit": "ec9328d9eba165325edb287638ce525e64418f55",
  "sights": [
-  "sw/reader.py:486-494",
+  "sw/reader.py:487-495",
   "sw/chat.py:176-185",
   "sw/chat.py:188-191",
-  "sw/reader.py:496-503",
-  "sw/reader.py:483-484",
-  "sw/reader.py:447-465",
-  "sw/reader.py:414-426",
-  "sw/reader.py:428-432",
+  "sw/reader.py:497-504",
+  "sw/reader.py:484-485",
+  "sw/reader.py:448-466",
+  "sw/reader.py:415-427",
+  "sw/reader.py:429-433",
   "sw/reader.py:52-55"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 488],
-   "to": [4, 483]
+   "from": [0, 489],
+   "to": [4, 484]
   },
   {
    "type": "calls",
-   "from": [0, 490],
+   "from": [0, 491],
    "to": [1, 176]
   },
   {
@@ -31,32 +31,32 @@
   },
   {
    "type": "calls",
-   "from": [3, 499],
-   "to": [4, 483]
+   "from": [3, 500],
+   "to": [4, 484]
   },
   {
    "type": "calls",
-   "from": [3, 502],
-   "to": [5, 447]
+   "from": [3, 503],
+   "to": [5, 448]
   },
   {
    "type": "calls",
-   "from": [5, 453],
-   "to": [7, 428]
+   "from": [5, 454],
+   "to": [7, 429]
   },
   {
    "type": "calls",
-   "from": [5, 457],
-   "to": [6, 414]
+   "from": [5, 458],
+   "to": [6, 415]
   },
   {
    "type": "calls",
-   "from": [6, 425],
+   "from": [6, 426],
    "to": [2, 188]
   },
   {
    "type": "calls",
-   "from": [7, 432],
+   "from": [7, 433],
    "to": [8, 52]
   }
  ]

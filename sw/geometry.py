@@ -57,6 +57,11 @@ class Geometry:
         """The headers' height in px: the Sights start below theirs, level with the bench's."""
         return self.conversation_rows()[0]
 
+    def bench_floor(self):
+        """The bench's floor (above its status line), in px below the Sights' top."""
+        _, split = self.conversation_rows()
+        return split - self.status_view.line_height() - self.overhead - self.head()
+
     def room(self):
         """The Sights' height in px, below their header."""
         return self.height - self.head()

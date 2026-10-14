@@ -1,12 +1,12 @@
 {
  "name": "Words in two languages",
  "kind": "run",
- "commit": "990fd233dbcb579e3e2618ae604b9e20ac728e8e",
+ "commit": "ec9328d9eba165325edb287638ce525e64418f55",
  "sights": [
   "sw/commands.py:247-250",
   "sight_walk.py:47-50",
   "sw/words.py:57-59",
-  "sw/state.py:59-64",
+  "sw/state.py:61-66",
   "sw/words.py:53-54",
   "sw/chat.py:27-31",
   "sw/views.py:30-32"
@@ -20,7 +20,7 @@
   {
    "type": "calls",
    "from": [1, 50],
-   "to": [3, 59]
+   "to": [3, 61]
   },
   {
    "type": "calls",

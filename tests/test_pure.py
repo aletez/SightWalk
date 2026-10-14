@@ -48,25 +48,32 @@ class PlanTest(unittest.TestCase):
         self.assertEqual((items[4].y - items[1].y) % LH, 0.0)
         self.assertEqual(frozen.y - header.y, LH + OVERHEAD)  # nothing between header and code
 
-    def test_max_offset_short_last_pane(self):
-        _, items = stacked((1, 3), (10, 11))
-        self.assertEqual(plan.max_offset(items, 100.0, OVERHEAD), 48.0)
-
-    def test_max_offset_tall_last_pane(self):
-        _, items = stacked((1, 3), (10, 30))
-        self.assertEqual(plan.max_offset(items, 100.0, OVERHEAD), 62.0 + 210.0 + 4.0 - 100.0)
+    def test_range_up_to_the_bench_floor(self):
+        _, items = stacked((1, 3), (10, 30))  # ends at 62 + 210 + 4 = 276
+        self.assertEqual(plan.offset_range(items, 100.0, OVERHEAD, 0.0, 60.0), (0.0, 216.0))
 
     def test_lead_and_range(self):
         _, items = stacked((1, 3), (10, 11))  # ends at 62 + 2 lines + 4 = 86
         self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 93.0), 50.0)  # centred on 93
         self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 10.0), 0.0)  # no higher than the top
         self.assertEqual(plan.lead(items, 50.0, OVERHEAD, 25.0), 0.0)  # taller than the screen
-        # A short trip scrolls from the floor up until its last header is at the top (48).
-        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0), (-50.0, 98.0))
+        # A short trip scrolls from the floor up until its end is level with the bench's floor.
+        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0, 40.0), (-50.0, 96.0))
+        # Its end already above that floor: no further up than where it starts.
+        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0, 120.0), (-50.0, 50.0))
 
     def test_visible(self):
         sights, _ = stacked((1, 3), (10, 11))
         self.assertEqual(plan.visible_specs(sights, 0.0, 20.0), [sights[0].spec])
+
+
+class CodeTalkTest(unittest.TestCase):
+    def test_names_code(self):
+        for text in ["`run_on_main` puts it on the main thread", "see sw/bridge.py:184",
+                     "line 12 calls it", "w linii 40 jest return"]:
+            self.assertTrue(marks.speaks_of_code(text), text)
+        for text in ["Yes, exactly.", "Dwa kroki dalej.", "about 12 people"]:
+            self.assertFalse(marks.speaks_of_code(text), text)
 
 
 class MarksTest(unittest.TestCase):

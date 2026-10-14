@@ -14,6 +14,8 @@ ADDRESSED = False
 # The user stopped the answer on its way: the agent's say, show and point are refused until it
 # waits for the user again (Jakub).
 STOPPED = False
+# The agent pointed at lines since the user last spoke: an answer that names code needs it (Jakub).
+POINTED = False
 
 
 def register(reader):

@@ -397,7 +397,8 @@ class Reader(Geometry):
     def scroll_to(self, offset, wheel=False):
         if not self.ready:
             return
-        low, high = plan.offset_range(self.items, self.room(), self.overhead, self.lead)
+        low, high = plan.offset_range(self.items, self.room(), self.overhead, self.lead,
+                                      self.bench_floor())
         self.offset = min(max(offset, low), high)
         self.render(settle=not wheel)
 

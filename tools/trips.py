@@ -65,7 +65,7 @@ TRIPS = [
       "plan.sight_groups", "reader.Reader.write_strip"]),
     ("The layout",
      "From an offset to Sublime's layout: every sight's cells at its place, shifted.",
-     ["reader.Reader.scroll_to", "plan.offset_range", "plan.max_offset", "reader.Reader.render",
+     ["reader.Reader.scroll_to", "plan.offset_range", "geometry.Geometry.bench_floor", "reader.Reader.render",
       "geometry.Geometry.column_rects", "geometry.Geometry.column", "geometry.Geometry.sight_cells", "geometry.Geometry.floor_height", "reader.Reader.layout", "views.reader_layout", "views.to_layout"]),
     ("Arranging the views",
      "After a new layout: every view into its group, then back at its place.",
@@ -92,7 +92,7 @@ TRIPS = [
     ("The agent says something",
      "A reply reaches the Vetting Bench past the transcript guard; the status line follows the "
      "topic.",
-     ["bridge.op_say", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
+     ["bridge.op_say", "marks.speaks_of_code", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
       "header.title_lines", "chat.show_status", "chat.say", "commands.SightWalkInsertCommand.run",
       "chat.Guard.on_text_changed", "chat.protected_end",
       "commands.SightWalkChatListener.on_modified"]),

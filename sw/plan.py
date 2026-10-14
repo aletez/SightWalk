@@ -73,16 +73,6 @@ def sight_groups(items):
     return groups
 
 
-def max_offset(items, height, overhead):
-    # A last sight that fits on the screen with its header can scroll up until its header is at
-    # the top. A taller one scrolls only until the end of its range reaches the bottom.
-    header, code = next(i for i in reversed(items) if i.header), items[-1]
-    bottom = code.y + code.content + overhead
-    if bottom - header.y <= height:
-        return header.y
-    return bottom - height
-
-
 def free_room(items, height, overhead):
     """The room a trip shorter than the screen leaves free; 0 for a taller one."""
     code = items[-1]
@@ -97,14 +87,15 @@ def lead(items, height, overhead, middle):
     return min(max(middle - total / 2, 0.0), free)
 
 
-def offset_range(items, height, overhead, lead_px):
-    """How far the trip scrolls: down to the floor, and up as a taller one does, until its last
-    sight's header is at the top (Jakub: a trip that fits once the window grows, in full screen,
-    stopped scrolling); see max_offset. A short one starts centred (lead_px)."""
+def offset_range(items, height, overhead, lead_px, floor_px):
+    """How far the trip scrolls: down to the floor of the screen (a short one) or its top (a
+    taller one), and up until its end is level with the bench's floor, floor_px below the
+    Sights' top (Jakub: scrolling brings the code level with the eyes reading the bench). A
+    short one starts centred (lead_px)."""
     free = free_room(items, height, overhead)
-    if free > 0:
-        return lead_px - free, lead_px + max_offset(items, height, overhead)
-    return 0.0, max_offset(items, height, overhead)
+    low = lead_px - free if free > 0 else 0.0
+    end = items[-1].y + items[-1].content + overhead
+    return low, max(lead_px + end - floor_px, lead_px if free > 0 else 0.0)
 
 
 def visible_specs(sights, offset, height):

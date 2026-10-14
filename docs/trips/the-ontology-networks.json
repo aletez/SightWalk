@@ -1,7 +1,7 @@
 {
  "name": "The ontology: networks",
  "kind": "survey",
- "commit": "860117236befdb4324bceef319b4b30ff762fbb3",
+ "commit": "047f6abc6b49fc5bffd6cfe78a722369cfb44394",
  "sights": [
   "sw/ontology.py:90-97",
   "sw/ontology.py:13-15",

@@ -1,0 +1,154 @@
+{
+ "name": "One tool call over HTTP",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/mcp_http.py:92-103",
+  "sw/mcp_http.py:76-79",
+  "sw/mcp_http.py:63-72",
+  "sw/mcp_http.py:48-60",
+  "sw/manual.py:100-103",
+  "sw/mcp_http.py:36-45",
+  "sw/mcp_http.py:23-33",
+  "sw/bridge.py:203-211",
+  "sw/bridge.py:184-200",
+  "sw/mcp_http.py:81-90",
+  "sw/mcp_http.py:105-106",
+  "sw/mcp_http.py:108-110",
+  "sw/mcp_http.py:112-113"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    93
+   ],
+   "to": [
+    1,
+    76
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    0,
+    94
+   ],
+   "to": [
+    9,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    0,
+    102
+   ],
+   "to": [
+    2,
+    63
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    0,
+    103
+   ],
+   "to": [
+    9,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    2,
+    68
+   ],
+   "to": [
+    3,
+    48
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    57
+   ],
+   "to": [
+    5,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    5,
+    38
+   ],
+   "to": [
+    6,
+    23
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    29
+   ],
+   "to": [
+    7,
+    203
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    33
+   ],
+   "to": [
+    8,
+    184
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    7,
+    208
+   ],
+   "to": [
+    8,
+    184
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    10,
+    106
+   ],
+   "to": [
+    9,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    11,
+    110
+   ],
+   "to": [
+    9,
+    81
+   ]
+  }
+ ]
+}

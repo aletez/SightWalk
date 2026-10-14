@@ -1,0 +1,140 @@
+{
+ "name": "Colours",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/reader.py:212-217",
+  "sw/tint.py:158-161",
+  "sw/tint.py:138-144",
+  "sw/tint.py:20-24",
+  "sw/tint.py:101-123",
+  "sw/tint.py:39-51",
+  "sw/tint.py:31-36",
+  "sw/tint.py:70-75",
+  "sw/tint.py:147-155",
+  "sw/tint.py:126-135"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    217
+   ],
+   "to": [
+    1,
+    158
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    159
+   ],
+   "to": [
+    3,
+    20
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    159
+   ],
+   "to": [
+    2,
+    138
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    161
+   ],
+   "to": [
+    8,
+    147
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    2,
+    143
+   ],
+   "to": [
+    4,
+    101
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    105
+   ],
+   "to": [
+    5,
+    39
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    110
+   ],
+   "to": [
+    6,
+    31
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    119
+   ],
+   "to": [
+    6,
+    31
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    120
+   ],
+   "to": [
+    7,
+    70
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    123
+   ],
+   "to": [
+    7,
+    70
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    155
+   ],
+   "to": [
+    9,
+    126
+   ]
+  }
+ ]
+}

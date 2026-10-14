@@ -1,0 +1,141 @@
+{
+ "name": "The layout",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/reader.py:352-357",
+  "sw/plan.py:100-106",
+  "sw/plan.py:76-83",
+  "sw/reader.py:319-328",
+  "sw/geometry.py:74-98",
+  "sw/geometry.py:40-44",
+  "sw/geometry.py:104-113",
+  "sw/geometry.py:100-102",
+  "sw/reader.py:273-283",
+  "sw/views.py:78-101",
+  "sw/views.py:68-75"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    355
+   ],
+   "to": [
+    1,
+    100
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    0,
+    357
+   ],
+   "to": [
+    3,
+    319
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    106
+   ],
+   "to": [
+    2,
+    76
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    322
+   ],
+   "to": [
+    4,
+    74
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    326
+   ],
+   "to": [
+    8,
+    273
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    77
+   ],
+   "to": [
+    5,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    85
+   ],
+   "to": [
+    6,
+    104
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    93
+   ],
+   "to": [
+    7,
+    100
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    281
+   ],
+   "to": [
+    9,
+    78
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    9,
+    90
+   ],
+   "to": [
+    10,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    9,
+    101
+   ],
+   "to": [
+    10,
+    68
+   ]
+  }
+ ]
+}

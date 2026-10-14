@@ -1,0 +1,106 @@
+{
+ "name": "Opening the editor",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/commands.py:58-65",
+  "sw/reader.py:525-530",
+  "sw/reader.py:513-523",
+  "sw/editor.py:22-30",
+  "sw/editor.py:14-18",
+  "sw/editor.py:32-37",
+  "sw/editor.py:39-51",
+  "sw/editor.py:53-58",
+  "sw/geometry.py:64-72"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    60
+   ],
+   "to": [
+    1,
+    525
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    0,
+    65
+   ],
+   "to": [
+    2,
+    513
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    2,
+    522
+   ],
+   "to": [
+    3,
+    22
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    26
+   ],
+   "to": [
+    4,
+    14
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    30
+   ],
+   "to": [
+    5,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    5,
+    33
+   ],
+   "to": [
+    6,
+    39
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    45
+   ],
+   "to": [
+    7,
+    53
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    49
+   ],
+   "to": [
+    7,
+    53
+   ]
+  }
+ ]
+}

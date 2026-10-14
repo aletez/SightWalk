@@ -1,0 +1,184 @@
+{
+ "name": "Questions the code already asks",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/reader.py:184-197",
+  "sw/asked.py:32-43",
+  "sw/asked.py:19-29",
+  "sw/questions.py:62-77",
+  "sw/questions.py:58-59",
+  "sw/questions.py:48-55",
+  "sw/questions.py:34-45",
+  "sw/questions.py:19-31",
+  "sw/questions.py:92-109",
+  "sw/questions.py:80-89"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    192
+   ],
+   "to": [
+    1,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    40
+   ],
+   "to": [
+    2,
+    19
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    40
+   ],
+   "to": [
+    3,
+    62
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    42
+   ],
+   "to": [
+    8,
+    92
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    72
+   ],
+   "to": [
+    4,
+    58
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    73
+   ],
+   "to": [
+    5,
+    48
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    74
+   ],
+   "to": [
+    6,
+    34
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    39
+   ],
+   "to": [
+    7,
+    19
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    40
+   ],
+   "to": [
+    7,
+    19
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    43
+   ],
+   "to": [
+    7,
+    19
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    44
+   ],
+   "to": [
+    7,
+    19
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    101
+   ],
+   "to": [
+    4,
+    58
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    104
+   ],
+   "to": [
+    6,
+    34
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    105
+   ],
+   "to": [
+    9,
+    80
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    9,
+    86
+   ],
+   "to": [
+    7,
+    19
+   ]
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "name": "A request arrives",
+ "kind": "run",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/bridge.py:184-200",
+  "sw/bridge.py:87-95",
+  "sw/bridge.py:81-84",
+  "sw/bridge.py:53-65",
+  "sw/ontology.py:125-133",
+  "sw/ontology.py:153-157",
+  "sw/ontology.py:89-96",
+  "sw/ontology.py:105-115",
+  "sw/bridge.py:32-46",
+  "sw/spec.py:9-22",
+  "sw/bridge.py:27-29"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    0,
+    189
+   ],
+   "to": [
+    1,
+    87
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    88
+   ],
+   "to": [
+    2,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    89
+   ],
+   "to": [
+    3,
+    53
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    1,
+    90
+   ],
+   "to": [
+    8,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    3,
+    65
+   ],
+   "to": [
+    5,
+    153
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    5,
+    157
+   ],
+   "to": [
+    6,
+    89
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    6,
+    93
+   ],
+   "to": [
+    7,
+    105
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    38
+   ],
+   "to": [
+    9,
+    9
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    41
+   ],
+   "to": [
+    10,
+    27
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    8,
+    42
+   ],
+   "to": [
+    10,
+    27
+   ]
+  }
+ ]
+}

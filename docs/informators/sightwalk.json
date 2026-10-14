@@ -1,0 +1,7907 @@
+{
+ "name": "SightWalk",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "trips": [
+  "../trips/plugin-start-and-stop.json",
+  "../trips/setting-up-the-agent-bridge.json",
+  "../trips/a-request-arrives.json",
+  "../trips/a-new-reader-window.json",
+  "../trips/loading-the-sights.json",
+  "../trips/colours.json",
+  "../trips/measuring.json",
+  "../trips/the-layout.json",
+  "../trips/arranging-the-views.json",
+  "../trips/polling-and-the-wheel.json",
+  "../trips/pointing.json",
+  "../trips/drawing-the-marks.json",
+  "../trips/the-agent-says-something.json",
+  "../trips/stopping-an-answer.json",
+  "../trips/the-tools-pane-s-tabs.json",
+  "../trips/the-map-s-nodes.json",
+  "../trips/drawing-the-map.json",
+  "../trips/the-user-sends-a-message.json",
+  "../trips/opening-the-editor.json",
+  "../trips/closing-the-editor.json",
+  "../trips/window-events.json",
+  "../trips/primary-g.json",
+  "../trips/one-tool-call-over-http.json",
+  "../trips/how-claude-comes-to-listen-to-sublime.json",
+  "../trips/talking-on-the-bench.json",
+  "../trips/endings.json",
+  "../trips/names-and-room.json",
+  "../trips/building-blocks.json",
+  "../trips/settings-and-the-rest-of-the-colours.json",
+  "../trips/the-ontology-collections-and-sights.json",
+  "../trips/the-ontology-networks.json",
+  "../trips/an-informator-and-its-holiday.json",
+  "../trips/trip-files.json",
+  "../trips/questions-the-code-already-asks.json",
+  "../trips/seeing-where-the-code-asks.json"
+ ],
+ "transitions": [
+  {
+   "type": "leads_to",
+   "from": [
+    "plugin-start-and-stop"
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "setting-up-the-agent-bridge"
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "a-request-arrives"
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "a-new-reader-window"
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "loading-the-sights"
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "colours"
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "measuring"
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-layout"
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "arranging-the-views"
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "polling-and-the-wheel"
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "pointing"
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "drawing-the-marks"
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-agent-says-something"
+   ],
+   "to": [
+    "stopping-an-answer"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "stopping-an-answer"
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-tools-pane-s-tabs"
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-map-s-nodes"
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "drawing-the-map"
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-user-sends-a-message"
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "opening-the-editor"
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "closing-the-editor"
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "window-events"
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "primary-g"
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "one-tool-call-over-http"
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime"
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "talking-on-the-bench"
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "endings"
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "names-and-room"
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "building-blocks"
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "settings-and-the-rest-of-the-colours"
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-ontology-collections-and-sights"
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "the-ontology-networks"
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "an-informator-and-its-holiday"
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "trip-files"
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "questions-the-code-already-asks"
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    0,
+    35
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "plugin-start-and-stop",
+    0,
+    38
+   ],
+   "to": [
+    "window-events",
+    6,
+    59
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    1,
+    140
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    2,
+    233
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    3,
+    116
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    4,
+    131
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    5,
+    123
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    6,
+    41
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "plugin-start-and-stop",
+    6,
+    45
+   ],
+   "to": [
+    "endings",
+    2,
+    85
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    8,
+    49
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    9,
+    146
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "plugin-start-and-stop",
+    10,
+    70
+   ],
+   "to": [
+    "plugin-start-and-stop"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "setting-up-the-agent-bridge",
+    0,
+    32
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "setting-up-the-agent-bridge",
+    1,
+    41
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "setting-up-the-agent-bridge",
+    2,
+    51
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "setting-up-the-agent-bridge",
+    3,
+    60
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ],
+   "to": [
+    "setting-up-the-agent-bridge"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    0,
+    184
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    1,
+    87
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    1,
+    90
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    1,
+    91
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    1,
+    91
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    1,
+    92
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    118
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    1,
+    94
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    2,
+    81
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    3,
+    53
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    3,
+    64
+   ],
+   "to": [
+    "the-ontology-networks",
+    3,
+    72
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    3,
+    65
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    4,
+    126
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    5,
+    153
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    6,
+    89
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    6,
+    91
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    0,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    7,
+    105
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    8,
+    32
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    9,
+    9
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    10,
+    27
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    0,
+    68
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    0,
+    72
+   ],
+   "to": [
+    "arranging-the-views",
+    3,
+    55
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    0,
+    75
+   ],
+   "to": [
+    "primary-g",
+    5,
+    155
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    0,
+    76
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    0,
+    434
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    0,
+    77
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    2,
+    444
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    1,
+    58
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    2,
+    80
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    2,
+    103
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    6,
+    164
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    2,
+    114
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    6,
+    164
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    3,
+    170
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    4,
+    182
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    5,
+    130
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    5,
+    134
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    6,
+    106
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    7,
+    69
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    7,
+    73
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    7,
+    74
+   ],
+   "to": [
+    "building-blocks",
+    8,
+    45
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    8,
+    78
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    8,
+    86
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    8,
+    86
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    9,
+    115
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    9,
+    122
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    10,
+    32
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    11,
+    39
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-new-reader-window",
+    11,
+    43
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-new-reader-window",
+    12,
+    19
+   ],
+   "to": [
+    "a-new-reader-window"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    0,
+    118
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    0,
+    123
+   ],
+   "to": [
+    "talking-on-the-bench",
+    4,
+    190
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    0,
+    125
+   ],
+   "to": [
+    "building-blocks",
+    1,
+    21
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    0,
+    125
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    0,
+    125
+   ],
+   "to": [
+    "a-request-arrives",
+    9,
+    9
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    1,
+    172
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    1,
+    180
+   ],
+   "to": [
+    "building-blocks",
+    4,
+    42
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    1,
+    181
+   ],
+   "to": [
+    "building-blocks",
+    7,
+    49
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    2,
+    61
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    3,
+    184
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    187
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    188
+   ],
+   "to": [
+    "names-and-room",
+    0,
+    46
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    190
+   ],
+   "to": [
+    "colours",
+    0,
+    212
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    191
+   ],
+   "to": [
+    "measuring",
+    0,
+    219
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    192
+   ],
+   "to": [
+    "questions-the-code-already-asks",
+    1,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    193
+   ],
+   "to": [
+    "measuring",
+    3,
+    225
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    195
+   ],
+   "to": [
+    "measuring",
+    6,
+    239
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    197
+   ],
+   "to": [
+    "measuring",
+    9,
+    259
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    4,
+    148
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    5,
+    155
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    5,
+    163
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    6,
+    199
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    6,
+    205
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    6,
+    206
+   ],
+   "to": [
+    "measuring",
+    2,
+    268
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    7,
+    74
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    8,
+    61
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    9,
+    65
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    10,
+    92
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    11,
+    191
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    11,
+    193
+   ],
+   "to": [
+    "a-new-reader-window",
+    6,
+    106
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    11,
+    194
+   ],
+   "to": [
+    "a-new-reader-window",
+    4,
+    182
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    12,
+    200
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    12,
+    203
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    0,
+    212
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    1,
+    158
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    2,
+    138
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    2,
+    141
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    1,
+    78
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    3,
+    20
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    4,
+    101
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    4,
+    104
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    3,
+    90
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    4,
+    111
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    4,
+    83
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    5,
+    39
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    5,
+    46
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    2,
+    57
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    6,
+    31
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    6,
+    33
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    5,
+    27
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "colours",
+    6,
+    34
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours",
+    5,
+    27
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    7,
+    70
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    8,
+    147
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "colours",
+    9,
+    126
+   ],
+   "to": [
+    "colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    0,
+    219
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    1,
+    39
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    2,
+    268
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    2,
+    274
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    3,
+    225
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    228
+   ],
+   "to": [
+    "a-new-reader-window",
+    4,
+    182
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    231
+   ],
+   "to": [
+    "building-blocks",
+    0,
+    8
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    232
+   ],
+   "to": [
+    "building-blocks",
+    0,
+    8
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    235
+   ],
+   "to": [
+    "building-blocks",
+    0,
+    8
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    237
+   ],
+   "to": [
+    "building-blocks",
+    3,
+    38
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    4,
+    208
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    5,
+    212
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    6,
+    239
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    6,
+    242
+   ],
+   "to": [
+    "the-layout",
+    5,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    6,
+    243
+   ],
+   "to": [
+    "arranging-the-views",
+    1,
+    293
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    7,
+    246
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    7,
+    249
+   ],
+   "to": [
+    "the-layout",
+    5,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    7,
+    250
+   ],
+   "to": [
+    "arranging-the-views",
+    1,
+    293
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    8,
+    253
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    9,
+    259
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    264
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    265
+   ],
+   "to": [
+    "the-map-s-nodes",
+    0,
+    656
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    266
+   ],
+   "to": [
+    "an-informator-and-its-holiday",
+    12,
+    652
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    269
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    10,
+    347
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    10,
+    349
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    10,
+    350
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    11,
+    92
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    12,
+    86
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    13,
+    47
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    14,
+    66
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "measuring",
+    15,
+    421
+   ],
+   "to": [
+    "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    15,
+    425
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    0,
+    352
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    0,
+    355
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    1,
+    100
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    1,
+    103
+   ],
+   "to": [
+    "measuring",
+    12,
+    86
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    2,
+    76
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    3,
+    319
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    3,
+    324
+   ],
+   "to": [
+    "arranging-the-views",
+    0,
+    330
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    3,
+    327
+   ],
+   "to": [
+    "arranging-the-views",
+    4,
+    382
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    3,
+    328
+   ],
+   "to": [
+    "drawing-the-marks",
+    0,
+    477
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    4,
+    74
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    79
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    80
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    81
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    82
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    92
+   ],
+   "to": [
+    "window-events",
+    3,
+    27
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    94
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    95
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    5,
+    40
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    5,
+    43
+   ],
+   "to": [
+    "window-events",
+    2,
+    18
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    5,
+    44
+   ],
+   "to": [
+    "names-and-room",
+    4,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    6,
+    104
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    6,
+    109
+   ],
+   "to": [
+    "building-blocks",
+    3,
+    38
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    6,
+    110
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    7,
+    100
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    8,
+    273
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    274
+   ],
+   "to": [
+    "names-and-room",
+    5,
+    46
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    276
+   ],
+   "to": [
+    "window-events",
+    1,
+    285
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    278
+   ],
+   "to": [
+    "window-events",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    278
+   ],
+   "to": [
+    "names-and-room",
+    4,
+    12
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    281
+   ],
+   "to": [
+    "window-events",
+    2,
+    18
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    8,
+    282
+   ],
+   "to": [
+    "opening-the-editor",
+    8,
+    64
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    9,
+    78
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-layout",
+    10,
+    68
+   ],
+   "to": [
+    "the-layout"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    0,
+    330
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    0,
+    337
+   ],
+   "to": [
+    "drawing-the-marks",
+    7,
+    499
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    0,
+    338
+   ],
+   "to": [
+    "the-agent-says-something",
+    2,
+    564
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    1,
+    293
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    1,
+    294
+   ],
+   "to": [
+    "the-layout",
+    8,
+    273
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    2,
+    298
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    2,
+    301
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    3,
+    614
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    2,
+    314
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    3,
+    614
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    2,
+    316
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    4,
+    617
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    3,
+    55
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    4,
+    382
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    4,
+    386
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    5,
+    371
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    4,
+    393
+   ],
+   "to": [
+    "measuring",
+    5,
+    212
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    5,
+    359
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    5,
+    365
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    8,
+    415
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    5,
+    367
+   ],
+   "to": [
+    "building-blocks",
+    3,
+    38
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    5,
+    367
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    7,
+    51
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    6,
+    140
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    7,
+    596
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    7,
+    601
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    8,
+    605
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    8,
+    607
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    8,
+    607
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    9,
+    508
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    9,
+    510
+   ],
+   "to": [
+    "names-and-room",
+    0,
+    46
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    9,
+    511
+   ],
+   "to": [
+    "opening-the-editor",
+    2,
+    513
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    10,
+    216
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    10,
+    220
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    10,
+    222
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    10,
+    223
+   ],
+   "to": [
+    "loading-the-sights",
+    12,
+    200
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    10,
+    225
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    0,
+    434
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    0,
+    439
+   ],
+   "to": [
+    "the-agent-says-something",
+    2,
+    564
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    0,
+    441
+   ],
+   "to": [
+    "window-events",
+    0,
+    453
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    1,
+    174
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    1,
+    187
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    2,
+    444
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    3,
+    431
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    4,
+    395
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    4,
+    412
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    5,
+    371
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    5,
+    374
+   ],
+   "to": [
+    "arranging-the-views",
+    5,
+    359
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    6,
+    376
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    7,
+    51
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    7,
+    54
+   ],
+   "to": [
+    "measuring",
+    4,
+    208
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "polling-and-the-wheel",
+    8,
+    415
+   ],
+   "to": [
+    "polling-and-the-wheel"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    0,
+    110
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    0,
+    111
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    81
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    1,
+    40
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    1,
+    41
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    2,
+    467
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    2,
+    471
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    2,
+    473
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    2,
+    473
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    2,
+    475
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    3,
+    66
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    4,
+    56
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    5,
+    16
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    5,
+    29
+   ],
+   "to": [
+    "names-and-room",
+    3,
+    53
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    6,
+    38
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    6,
+    43
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    7,
+    47
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    8,
+    12
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    0,
+    477
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-marks",
+    0,
+    481
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    1,
+    492
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    2,
+    117
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-marks",
+    2,
+    125
+   ],
+   "to": [
+    "pointing",
+    8,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    3,
+    243
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-marks",
+    3,
+    248
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    4,
+    84
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    5,
+    99
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    6,
+    231
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    7,
+    499
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-marks",
+    8,
+    255
+   ],
+   "to": [
+    "drawing-the-marks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    0,
+    98
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    0,
+    99
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    0,
+    100
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    1,
+    712
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    2,
+    564
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    2,
+    567
+   ],
+   "to": [
+    "stopping-an-answer",
+    1,
+    691
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    2,
+    568
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    0,
+    620
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    2,
+    568
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    1,
+    48
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    2,
+    570
+   ],
+   "to": [
+    "endings",
+    8,
+    591
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    3,
+    90
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    3,
+    96
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    3,
+    100
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    4,
+    12
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    5,
+    127
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    5,
+    129
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    5,
+    131
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    5,
+    136
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    6,
+    147
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    7,
+    25
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    8,
+    49
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-agent-says-something",
+    8,
+    60
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    9,
+    31
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    10,
+    103
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "stopping-an-answer",
+    0,
+    161
+   ],
+   "to": [
+    "stopping-an-answer"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "stopping-an-answer",
+    0,
+    162
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "stopping-an-answer",
+    1,
+    691
+   ],
+   "to": [
+    "stopping-an-answer"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "stopping-an-answer",
+    1,
+    698
+   ],
+   "to": [
+    "the-agent-says-something",
+    1,
+    712
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "stopping-an-answer",
+    2,
+    700
+   ],
+   "to": [
+    "stopping-an-answer"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    0,
+    620
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    0,
+    623
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    0,
+    625
+   ],
+   "to": [
+    "an-informator-and-its-holiday",
+    12,
+    652
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    1,
+    48
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    1,
+    50
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    1,
+    52
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    1,
+    53
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    1,
+    58
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    2,
+    611
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    3,
+    614
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    4,
+    617
+   ],
+   "to": [
+    "the-tools-pane-s-tabs"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-tools-pane-s-tabs",
+    5,
+    656
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    5,
+    658
+   ],
+   "to": [
+    "the-map-s-nodes",
+    1,
+    666
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    5,
+    662
+   ],
+   "to": [
+    "drawing-the-map",
+    8,
+    51
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    5,
+    664
+   ],
+   "to": [
+    "drawing-the-map",
+    0,
+    71
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    0,
+    656
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    0,
+    662
+   ],
+   "to": [
+    "drawing-the-map",
+    8,
+    51
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    1,
+    666
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    1,
+    673
+   ],
+   "to": [
+    "names-and-room",
+    0,
+    46
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    1,
+    676
+   ],
+   "to": [
+    "colours",
+    3,
+    20
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    1,
+    676
+   ],
+   "to": [
+    "colours",
+    6,
+    31
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    1,
+    678
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    2,
+    681
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    3,
+    43
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    4,
+    32
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    5,
+    41
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    6,
+    27
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    7,
+    71
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    7,
+    73
+   ],
+   "to": [
+    "drawing-the-map",
+    1,
+    64
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    7,
+    75
+   ],
+   "to": [
+    "drawing-the-map",
+    14,
+    112
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    7,
+    77
+   ],
+   "to": [
+    "drawing-the-map",
+    2,
+    105
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    7,
+    78
+   ],
+   "to": [
+    "drawing-the-map",
+    11,
+    81
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    0,
+    71
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    1,
+    64
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    2,
+    105
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    3,
+    80
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    4,
+    69
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    5,
+    75
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    6,
+    61
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    7,
+    65
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    8,
+    51
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-map",
+    8,
+    55
+   ],
+   "to": [
+    "the-map-s-nodes",
+    5,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    9,
+    89
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    10,
+    94
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    11,
+    81
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    12,
+    96
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    13,
+    101
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-map",
+    13,
+    108
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "drawing-the-map",
+    14,
+    112
+   ],
+   "to": [
+    "drawing-the-map"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-map",
+    14,
+    114
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    0,
+    38
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    1,
+    157
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    2,
+    29
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    2,
+    32
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime",
+    0,
+    92
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    720
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    724
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    726
+   ],
+   "to": [
+    "opening-the-editor",
+    1,
+    525
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    732
+   ],
+   "to": [
+    "talking-on-the-bench",
+    3,
+    278
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    733
+   ],
+   "to": [
+    "talking-on-the-bench",
+    3,
+    278
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    5,
+    109
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    5,
+    111
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    6,
+    557
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-user-sends-a-message",
+    7,
+    214
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    7,
+    215
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    0,
+    58
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    0,
+    59
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    1,
+    525
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    2,
+    513
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    2,
+    518
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    2,
+    523
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    3,
+    22
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    3,
+    27
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    3,
+    27
+   ],
+   "to": [
+    "loading-the-sights",
+    11,
+    191
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    3,
+    30
+   ],
+   "to": [
+    "loading-the-sights",
+    2,
+    61
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    4,
+    14
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    5,
+    32
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    6,
+    39
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    6,
+    50
+   ],
+   "to": [
+    "drawing-the-marks",
+    6,
+    231
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    6,
+    51
+   ],
+   "to": [
+    "drawing-the-marks",
+    8,
+    255
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    7,
+    53
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "opening-the-editor",
+    8,
+    64
+   ],
+   "to": [
+    "opening-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    8,
+    70
+   ],
+   "to": [
+    "the-layout",
+    5,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    8,
+    71
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "opening-the-editor",
+    8,
+    72
+   ],
+   "to": [
+    "names-and-room",
+    4,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    0,
+    71
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "closing-the-editor",
+    0,
+    72
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    1,
+    532
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    2,
+    74
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    3,
+    67
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    4,
+    60
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    5,
+    535
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "closing-the-editor",
+    5,
+    541
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "closing-the-editor",
+    5,
+    548
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    118
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "closing-the-editor",
+    6,
+    550
+   ],
+   "to": [
+    "closing-the-editor"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "closing-the-editor",
+    6,
+    554
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "closing-the-editor",
+    6,
+    555
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    0,
+    453
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    0,
+    456
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    3,
+    614
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    0,
+    461
+   ],
+   "to": [
+    "measuring",
+    10,
+    347
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    0,
+    462
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    0,
+    463
+   ],
+   "to": [
+    "arranging-the-views",
+    7,
+    596
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    1,
+    285
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    2,
+    18
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    3,
+    27
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    4,
+    33
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    4,
+    35
+   ],
+   "to": [
+    "names-and-room",
+    4,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    5,
+    37
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    6,
+    59
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    6,
+    63
+   ],
+   "to": [
+    "the-layout",
+    3,
+    319
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    7,
+    153
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    8,
+    143
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    9,
+    109
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    9,
+    110
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    9,
+    110
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    9,
+    111
+   ],
+   "to": [
+    "primary-g",
+    6,
+    135
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    10,
+    88
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    10,
+    89
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    10,
+    92
+   ],
+   "to": [
+    "names-and-room",
+    7,
+    60
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "window-events",
+    10,
+    92
+   ],
+   "to": [
+    "the-layout",
+    0,
+    352
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    11,
+    82
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "window-events",
+    12,
+    140
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    0,
+    218
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    0,
+    219
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    0,
+    223
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    0,
+    228
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    0,
+    229
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    1,
+    574
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    2,
+    231
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    2,
+    234
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    25
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    3,
+    130
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    4,
+    136
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    4,
+    139
+   ],
+   "to": [
+    "window-events",
+    2,
+    18
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    4,
+    139
+   ],
+   "to": [
+    "window-events",
+    3,
+    27
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    4,
+    143
+   ],
+   "to": [
+    "the-tools-pane-s-tabs",
+    3,
+    614
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    4,
+    147
+   ],
+   "to": [
+    "the-layout",
+    10,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    4,
+    152
+   ],
+   "to": [
+    "the-agent-says-something",
+    2,
+    564
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    5,
+    155
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    6,
+    135
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    6,
+    137
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    7,
+    113
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    8,
+    162
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    8,
+    168
+   ],
+   "to": [
+    "measuring",
+    1,
+    39
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    8,
+    170
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    8,
+    170
+   ],
+   "to": [
+    "the-ontology-networks",
+    7,
+    153
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    8,
+    170
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    118
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    9,
+    129
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    9,
+    135
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    9,
+    138
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "primary-g",
+    9,
+    139
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "primary-g",
+    10,
+    116
+   ],
+   "to": [
+    "primary-g"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    0,
+    92
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    1,
+    76
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    2,
+    63
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    3,
+    48
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    4,
+    100
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    5,
+    36
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    6,
+    23
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "one-tool-call-over-http",
+    6,
+    25
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    7,
+    214
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    7,
+    203
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "one-tool-call-over-http",
+    7,
+    208
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    8,
+    184
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    9,
+    81
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    10,
+    105
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    11,
+    108
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "one-tool-call-over-http",
+    12,
+    112
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    0,
+    92
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    0,
+    97
+   ],
+   "to": [
+    "names-and-room",
+    9,
+    705
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    0,
+    97
+   ],
+   "to": [
+    "names-and-room",
+    10,
+    687
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    1,
+    48
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    2,
+    31
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    3,
+    36
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    4,
+    40
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    5,
+    61
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    5,
+    70
+   ],
+   "to": [
+    "endings",
+    3,
+    73
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    6,
+    214
+   ],
+   "to": [
+    "the-user-sends-a-message"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "how-claude-comes-to-listen-to-sublime",
+    6,
+    215
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "talking-on-the-bench",
+    0,
+    123
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    0,
+    131
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "talking-on-the-bench",
+    1,
+    586
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    1,
+    588
+   ],
+   "to": [
+    "opening-the-editor",
+    1,
+    525
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "talking-on-the-bench",
+    2,
+    48
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    2,
+    49
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    2,
+    51
+   ],
+   "to": [
+    "the-agent-says-something",
+    1,
+    712
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    2,
+    52
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    2,
+    29
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "talking-on-the-bench",
+    3,
+    278
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "talking-on-the-bench",
+    4,
+    190
+   ],
+   "to": [
+    "talking-on-the-bench"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "talking-on-the-bench",
+    4,
+    197
+   ],
+   "to": [
+    "setting-up-the-agent-bridge",
+    4,
+    14
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    0,
+    206
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    1,
+    209
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    1,
+    210
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime",
+    3,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    2,
+    85
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    2,
+    87
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime",
+    3,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    3,
+    73
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    3,
+    77
+   ],
+   "to": [
+    "how-claude-comes-to-listen-to-sublime",
+    3,
+    36
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    4,
+    141
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    5,
+    116
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    5,
+    119
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    6,
+    168
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    7,
+    148
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    7,
+    149
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    8,
+    591
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    8,
+    594
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    118
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    9,
+    153
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "endings",
+    9,
+    154
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    10,
+    25
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    11,
+    121
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "endings",
+    12,
+    36
+   ],
+   "to": [
+    "endings"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    0,
+    46
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    1,
+    36
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    2,
+    25
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    3,
+    53
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    3,
+    56
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    4,
+    12
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    5,
+    46
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    6,
+    56
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    7,
+    60
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    8,
+    116
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    8,
+    117
+   ],
+   "to": [
+    "pointing",
+    1,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    8,
+    118
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    8,
+    118
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    4,
+    720
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    9,
+    705
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "names-and-room",
+    10,
+    687
+   ],
+   "to": [
+    "names-and-room"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    10,
+    689
+   ],
+   "to": [
+    "the-agent-says-something",
+    2,
+    564
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    0,
+    8
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    1,
+    21
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    2,
+    35
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    3,
+    38
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    4,
+    42
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    5,
+    37
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    6,
+    41
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    7,
+    49
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    8,
+    45
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    9,
+    79
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "building-blocks",
+    10,
+    100
+   ],
+   "to": [
+    "building-blocks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    0,
+    94
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    0,
+    95
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    3,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    1,
+    78
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    2,
+    57
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    3,
+    90
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    4,
+    83
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    5,
+    27
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    6,
+    164
+   ],
+   "to": [
+    "settings-and-the-rest-of-the-colours"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    6,
+    167
+   ],
+   "to": [
+    "colours",
+    2,
+    138
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "settings-and-the-rest-of-the-colours",
+    6,
+    169
+   ],
+   "to": [
+    "colours",
+    8,
+    147
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    0,
+    12
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    1,
+    21
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    2,
+    24
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    3,
+    28
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    4,
+    31
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    5,
+    45
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    6,
+    49
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    7,
+    142
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    8,
+    145
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    9,
+    57
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    10,
+    60
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    11,
+    63
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    13,
+    126
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    14,
+    136
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-collections-and-sights",
+    15,
+    139
+   ],
+   "to": [
+    "the-ontology-collections-and-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    0,
+    89
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-ontology-networks",
+    0,
+    91
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    0,
+    12
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    1,
+    98
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    2,
+    105
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    3,
+    72
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    4,
+    75
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    5,
+    78
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    6,
+    81
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    7,
+    153
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    8,
+    159
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    9,
+    162
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    10,
+    165
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    11,
+    177
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    12,
+    180
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    13,
+    183
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-ontology-networks",
+    14,
+    190
+   ],
+   "to": [
+    "the-ontology-networks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    0,
+    177
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    1,
+    191
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    1,
+    196
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    25
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    2,
+    184
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    2,
+    185
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    2,
+    185
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    2,
+    188
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    3,
+    629
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    3,
+    638
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    25
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    4,
+    251
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    5,
+    238
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    5,
+    239
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    5,
+    239
+   ],
+   "to": [
+    "the-ontology-networks",
+    7,
+    153
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    6,
+    228
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    6,
+    229
+   ],
+   "to": [
+    "the-ontology-networks",
+    3,
+    72
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    7,
+    198
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    7,
+    209
+   ],
+   "to": [
+    "the-ontology-networks",
+    14,
+    190
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    8,
+    212
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    9,
+    137
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    10,
+    645
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    10,
+    649
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    118
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    11,
+    146
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    12,
+    652
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    13,
+    120
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    13,
+    123
+   ],
+   "to": [
+    "drawing-the-map",
+    14,
+    112
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    13,
+    133
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    0,
+    163
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    166
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    81
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    172
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    25
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    173
+   ],
+   "to": [
+    "a-request-arrives",
+    8,
+    32
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    173
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    174
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    68
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    174
+   ],
+   "to": [
+    "endings",
+    12,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    176
+   ],
+   "to": [
+    "plugin-start-and-stop",
+    7,
+    13
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    177
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    1,
+    238
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    1,
+    239
+   ],
+   "to": [
+    "the-ontology-collections-and-sights",
+    12,
+    121
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    1,
+    239
+   ],
+   "to": [
+    "the-ontology-networks",
+    7,
+    153
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    1,
+    240
+   ],
+   "to": [
+    "an-informator-and-its-holiday",
+    6,
+    228
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    2,
+    232
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    2,
+    234
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    35
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    3,
+    223
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    4,
+    244
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    184
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    187
+   ],
+   "to": [
+    "names-and-room",
+    1,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    187
+   ],
+   "to": [
+    "loading-the-sights",
+    5,
+    155
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    188
+   ],
+   "to": [
+    "names-and-room",
+    0,
+    46
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    188
+   ],
+   "to": [
+    "loading-the-sights",
+    11,
+    191
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    189
+   ],
+   "to": [
+    "loading-the-sights",
+    6,
+    199
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    190
+   ],
+   "to": [
+    "colours",
+    0,
+    212
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    191
+   ],
+   "to": [
+    "measuring",
+    0,
+    219
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    193
+   ],
+   "to": [
+    "measuring",
+    3,
+    225
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    195
+   ],
+   "to": [
+    "measuring",
+    6,
+    239
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    197
+   ],
+   "to": [
+    "measuring",
+    9,
+    259
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    1,
+    32
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    1,
+    38
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    25
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    1,
+    43
+   ],
+   "to": [
+    "seeing-where-the-code-asks",
+    0,
+    46
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    2,
+    19
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    3,
+    62
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    4,
+    58
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    5,
+    48
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    6,
+    34
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    7,
+    19
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    8,
+    92
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "questions-the-code-already-asks",
+    9,
+    80
+   ],
+   "to": [
+    "questions-the-code-already-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    0,
+    46
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "seeing-where-the-code-asks",
+    0,
+    55
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    1,
+    72
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    2,
+    82
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    3,
+    243
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    4,
+    246
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    5,
+    86
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "seeing-where-the-code-asks",
+    5,
+    88
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    6,
+    59
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    7,
+    64
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "seeing-where-the-code-asks",
+    7,
+    68
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "seeing-where-the-code-asks",
+    7,
+    69
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "seeing-where-the-code-asks",
+    8,
+    254
+   ],
+   "to": [
+    "seeing-where-the-code-asks"
+   ]
+  }
+ ]
+}

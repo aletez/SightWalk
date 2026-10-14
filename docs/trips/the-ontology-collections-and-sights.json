@@ -1,0 +1,113 @@
+{
+ "name": "The ontology: collections and sights",
+ "kind": "survey",
+ "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "sights": [
+  "sw/ontology.py:12-14",
+  "sw/ontology.py:21-22",
+  "sw/ontology.py:24-26",
+  "sw/ontology.py:28-29",
+  "sw/ontology.py:31-43",
+  "sw/ontology.py:45-47",
+  "sw/ontology.py:49-50",
+  "sw/ontology.py:142-143",
+  "sw/ontology.py:145-146",
+  "sw/ontology.py:57-58",
+  "sw/ontology.py:60-61",
+  "sw/ontology.py:63-65",
+  "sw/ontology.py:121-123",
+  "sw/ontology.py:125-133",
+  "sw/ontology.py:135-137",
+  "sw/ontology.py:139-140"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [
+    3,
+    29
+   ],
+   "to": [
+    4,
+    31
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    35
+   ],
+   "to": [
+    2,
+    24
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    37
+   ],
+   "to": [
+    5,
+    45
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    37
+   ],
+   "to": [
+    6,
+    49
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    40
+   ],
+   "to": [
+    1,
+    21
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    41
+   ],
+   "to": [
+    6,
+    49
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    4,
+    43
+   ],
+   "to": [
+    6,
+    49
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    7,
+    143
+   ],
+   "to": [
+    14,
+    136
+   ]
+  }
+ ]
+}

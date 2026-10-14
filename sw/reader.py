@@ -68,7 +68,7 @@ class Reader(Geometry):
         # note: non-empty = an answer is on its way (guide coming or thinking); shows [Stop]
         self.status = self.note = ""
         self.trip = None  # the ontology.Trip shown
-        self.informator = self.holiday = self.informator_root = None  # see open_informator
+        self.informator = self.holiday = self.informator_root = None  # see open_holiday
         self.informator_path = self.holiday_trip = None
         self.walked = set()
         self.bench_width = BENCH_WIDTH
@@ -645,18 +645,15 @@ class Reader(Geometry):
 
     # An informator and its holiday (Jakub)
 
-    def open_informator(self, path):
-        """The informator in path, its trips in one order in the Holiday tab, the first one shown
-        (or the first not walked yet)."""
-        folder = os.path.dirname(path)
-
-        def read(file):
-            with open(os.path.join(folder, file), encoding="utf-8") as f:
-                return json.load(f)
-        self.informator = ontology.informator_from(read(os.path.basename(path)), read)
+    def open_holiday(self, path, holiday=None):
+        """The informator in path and a holiday of it, written by hand in the file holiday or else
+        all its trips in reading order, in the Holiday tab; the first trip not walked yet shown."""
+        self.informator = ontology.informator_from(read_json(path), lambda file: read_json(
+            os.path.join(os.path.dirname(path), file)))
         self.informator_root, self.informator_path = repo_root(path), path
         self.informator.transcripts = read_transcripts(path)
-        self.holiday = ontology.holiday(self.informator)
+        self.holiday = ontology.holiday_from(read_json(holiday), self.informator) if holiday \
+            else ontology.holiday(self.informator)
         self.walked = vetting.read_walked(self.informator.id)
         self.tool = "Holiday"
         first = next((t for t in self.holiday if t.id not in self.walked), self.holiday.members[0])
@@ -783,3 +780,8 @@ def read_transcripts(informator_path):
             return json.load(f)
     except (OSError, ValueError):
         return {}
+
+
+def read_json(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)

@@ -1,7 +1,7 @@
 {
  "name": "The ontology: networks",
  "kind": "survey",
- "commit": "da73b14b4231657ccee6ee5fc7d162aa8d1c8b87",
+ "commit": "b015419fdd85dedddfeab2dced1e78f710db6da9",
  "sights": [
   "sw/ontology.py:90-97",
   "sw/ontology.py:13-15",
@@ -19,7 +19,7 @@
   "sw/ontology.py:183-184",
   "sw/ontology.py:186-187",
   "sw/ontology.py:189-190",
-  "sw/ontology.py:196-201"
+  "sw/ontology.py:197-203"
  ],
  "transitions": [
   {
@@ -69,7 +69,7 @@
   },
   {
    "type": "calls",
-   "from": [16, 197],
+   "from": [16, 198],
    "to": [13, 183]
   }
  ]

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "da73b14b4231657ccee6ee5fc7d162aa8d1c8b87",
+ "commit": "b015419fdd85dedddfeab2dced1e78f710db6da9",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -24,6 +24,7 @@
   "../trips/closing-the-editor.json",
   "../trips/window-events.json",
   "../trips/primary-g.json",
+  "../trips/what-the-agent-is-told.json",
   "../trips/one-tool-call-over-http.json",
   "../trips/how-claude-comes-to-listen-to-sublime.json",
   "../trips/here-and-asking-by-a-shortcut.json",
@@ -52,6 +53,15 @@
    "type": "leads_to",
    "from": [
     "setting-up-the-agent-bridge"
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "what-the-agent-is-told"
    ],
    "to": [
     "one-tool-call-over-http"
@@ -541,7 +551,7 @@
    "from": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ],
    "to": [
     "setting-up-the-agent-bridge"
@@ -893,7 +903,7 @@
    "to": [
     "the-tools-pane-s-tabs",
     5,
-    49
+    48
    ]
   },
   {
@@ -952,7 +962,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -987,7 +997,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1061,7 +1071,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1069,7 +1079,7 @@
    "from": [
     "a-new-reader-window",
     10,
-    33
+    32
    ],
    "to": [
     "a-new-reader-window"
@@ -1080,7 +1090,7 @@
    "from": [
     "a-new-reader-window",
     11,
-    40
+    39
    ],
    "to": [
     "a-new-reader-window"
@@ -1091,12 +1101,12 @@
    "from": [
     "a-new-reader-window",
     11,
-    44
+    43
    ],
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1181,7 +1191,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1368,7 +1378,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1510,7 +1520,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -1977,7 +1987,7 @@
    "to": [
     "the-map-s-nodes",
     0,
-    693
+    690
    ]
   },
   {
@@ -1989,8 +1999,8 @@
    ],
    "to": [
     "an-informator-and-its-holiday",
-    17,
-    689
+    22,
+    686
    ]
   },
   {
@@ -2108,7 +2118,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -2994,7 +3004,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -3498,7 +3508,7 @@
    "from": [
     "the-agent-says-something",
     1,
-    749
+    746
    ],
    "to": [
     "the-agent-says-something"
@@ -3509,12 +3519,12 @@
    "from": [
     "the-agent-says-something",
     1,
-    756
+    753
    ],
    "to": [
     "an-informator-and-its-holiday",
-    11,
-    679
+    16,
+    676
    ]
   },
   {
@@ -3538,7 +3548,7 @@
    "to": [
     "stopping-an-answer",
     1,
-    728
+    725
    ]
   },
   {
@@ -3564,7 +3574,7 @@
    "to": [
     "the-tools-pane-s-tabs",
     1,
-    69
+    68
    ]
   },
   {
@@ -3614,7 +3624,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -3694,7 +3704,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    25
+    26
    ],
    "to": [
     "the-agent-says-something"
@@ -3721,7 +3731,7 @@
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -3740,7 +3750,7 @@
    "from": [
     "the-agent-says-something",
     10,
-    104
+    105
    ],
    "to": [
     "the-agent-says-something"
@@ -3751,7 +3761,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    162
+    163
    ],
    "to": [
     "stopping-an-answer"
@@ -3762,7 +3772,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    163
+    164
    ],
    "to": [
     "the-user-sends-a-message",
@@ -3775,7 +3785,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    728
+    725
    ],
    "to": [
     "stopping-an-answer"
@@ -3786,12 +3796,12 @@
    "from": [
     "stopping-an-answer",
     1,
-    735
+    732
    ],
    "to": [
     "the-agent-says-something",
     1,
-    749
+    746
    ]
   },
   {
@@ -3799,7 +3809,7 @@
    "from": [
     "stopping-an-answer",
     2,
-    737
+    734
    ],
    "to": [
     "stopping-an-answer"
@@ -3838,8 +3848,8 @@
    ],
    "to": [
     "an-informator-and-its-holiday",
-    17,
-    689
+    22,
+    686
    ]
   },
   {
@@ -3847,7 +3857,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    69
+    68
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -3858,7 +3868,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    73
+    72
    ],
    "to": [
     "building-blocks",
@@ -3871,7 +3881,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    75
+    74
    ],
    "to": [
     "building-blocks",
@@ -3884,12 +3894,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    77
+    76
    ],
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -3897,7 +3907,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    80
+    79
    ],
    "to": [
     "building-blocks",
@@ -3910,7 +3920,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     1,
-    87
+    86
    ],
    "to": [
     "building-blocks",
@@ -3934,7 +3944,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    207
+    234
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -3945,7 +3955,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    208
+    235
    ],
    "to": [
     "the-user-sends-a-message",
@@ -3982,7 +3992,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     5,
-    49
+    48
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -3993,12 +4003,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     5,
-    53
+    52
    ],
    "to": [
     "setting-up-the-agent-bridge",
     4,
-    14
+    15
    ]
   },
   {
@@ -4006,7 +4016,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     6,
-    59
+    58
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -4050,7 +4060,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    693
+    690
    ],
    "to": [
     "the-map-s-nodes"
@@ -4061,12 +4071,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    695
+    692
    ],
    "to": [
     "the-map-s-nodes",
     1,
-    703
+    700
    ]
   },
   {
@@ -4074,7 +4084,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    699
+    696
    ],
    "to": [
     "the-map-s-nodes",
@@ -4087,12 +4097,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     10,
-    701
+    698
    ],
    "to": [
     "drawing-the-map",
     0,
-    100
+    99
    ]
   },
   {
@@ -4100,7 +4110,7 @@
    "from": [
     "the-map-s-nodes",
     0,
-    693
+    690
    ],
    "to": [
     "the-map-s-nodes"
@@ -4111,7 +4121,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    703
+    700
    ],
    "to": [
     "the-map-s-nodes"
@@ -4122,7 +4132,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    710
+    707
    ],
    "to": [
     "names-and-room",
@@ -4135,7 +4145,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    713
+    710
    ],
    "to": [
     "colours",
@@ -4148,7 +4158,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    713
+    710
    ],
    "to": [
     "colours",
@@ -4161,7 +4171,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    715
+    712
    ],
    "to": [
     "names-and-room",
@@ -4174,7 +4184,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    718
+    715
    ],
    "to": [
     "the-map-s-nodes"
@@ -4251,7 +4261,7 @@
    "from": [
     "the-map-s-nodes",
     9,
-    100
+    99
    ],
    "to": [
     "drawing-the-map"
@@ -4262,12 +4272,12 @@
    "from": [
     "the-map-s-nodes",
     9,
-    102
+    101
    ],
    "to": [
     "drawing-the-map",
     1,
-    93
+    92
    ]
   },
   {
@@ -4275,12 +4285,12 @@
    "from": [
     "the-map-s-nodes",
     9,
-    104
+    103
    ],
    "to": [
     "drawing-the-map",
     13,
-    141
+    140
    ]
   },
   {
@@ -4288,7 +4298,7 @@
    "from": [
     "the-map-s-nodes",
     9,
-    106
+    105
    ],
    "to": [
     "drawing-the-map",
@@ -4301,12 +4311,12 @@
    "from": [
     "the-map-s-nodes",
     9,
-    107
+    106
    ],
    "to": [
     "drawing-the-map",
     10,
-    110
+    109
    ]
   },
   {
@@ -4314,7 +4324,7 @@
    "from": [
     "drawing-the-map",
     0,
-    100
+    99
    ],
    "to": [
     "drawing-the-map"
@@ -4325,7 +4335,7 @@
    "from": [
     "drawing-the-map",
     1,
-    93
+    92
    ],
    "to": [
     "drawing-the-map"
@@ -4424,7 +4434,7 @@
    "from": [
     "drawing-the-map",
     10,
-    110
+    109
    ],
    "to": [
     "drawing-the-map"
@@ -4435,7 +4445,7 @@
    "from": [
     "drawing-the-map",
     11,
-    125
+    124
    ],
    "to": [
     "drawing-the-map"
@@ -4446,10 +4456,23 @@
    "from": [
     "drawing-the-map",
     12,
-    130
+    129
    ],
    "to": [
     "drawing-the-map"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "drawing-the-map",
+    12,
+    136
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    41
    ]
   },
   {
@@ -4460,22 +4483,9 @@
     137
    ],
    "to": [
-    "building-blocks",
-    6,
-    41
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "drawing-the-map",
-    12,
-    138
-   ],
-   "to": [
     "the-tools-pane-s-tabs",
     6,
-    59
+    58
    ]
   },
   {
@@ -4483,7 +4493,7 @@
    "from": [
     "drawing-the-map",
     13,
-    141
+    140
    ],
    "to": [
     "drawing-the-map"
@@ -4494,7 +4504,7 @@
    "from": [
     "drawing-the-map",
     13,
-    143
+    142
    ],
    "to": [
     "building-blocks",
@@ -4507,12 +4517,12 @@
    "from": [
     "drawing-the-map",
     13,
-    144
+    143
    ],
    "to": [
     "the-tools-pane-s-tabs",
     6,
-    59
+    58
    ]
   },
   {
@@ -4520,7 +4530,7 @@
    "from": [
     "the-user-sends-a-message",
     0,
-    39
+    40
    ],
    "to": [
     "the-user-sends-a-message"
@@ -4542,7 +4552,7 @@
    "from": [
     "the-user-sends-a-message",
     2,
-    29
+    30
    ],
    "to": [
     "the-user-sends-a-message"
@@ -4553,12 +4563,12 @@
    "from": [
     "the-user-sends-a-message",
     2,
-    32
+    33
    ],
    "to": [
     "an-informator-and-its-holiday",
-    11,
-    679
+    16,
+    676
    ]
   },
   {
@@ -4566,7 +4576,7 @@
    "from": [
     "the-user-sends-a-message",
     2,
-    33
+    34
    ],
    "to": [
     "how-claude-comes-to-listen-to-sublime",
@@ -4590,7 +4600,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    758
+    755
    ],
    "to": [
     "the-user-sends-a-message"
@@ -4601,7 +4611,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    762
+    759
    ],
    "to": [
     "names-and-room",
@@ -4614,7 +4624,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    764
+    761
    ],
    "to": [
     "opening-the-editor",
@@ -4627,7 +4637,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    767
+    764
    ],
    "to": [
     "building-blocks",
@@ -4710,7 +4720,7 @@
    "from": [
     "opening-the-editor",
     0,
-    59
+    60
    ],
    "to": [
     "opening-the-editor"
@@ -4721,7 +4731,7 @@
    "from": [
     "opening-the-editor",
     0,
-    60
+    61
    ],
    "to": [
     "the-user-sends-a-message",
@@ -4950,7 +4960,7 @@
    "from": [
     "closing-the-editor",
     0,
-    72
+    73
    ],
    "to": [
     "closing-the-editor"
@@ -4961,7 +4971,7 @@
    "from": [
     "closing-the-editor",
     0,
-    73
+    74
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5282,7 +5292,7 @@
    "from": [
     "window-events",
     9,
-    110
+    111
    ],
    "to": [
     "window-events"
@@ -5293,7 +5303,7 @@
    "from": [
     "window-events",
     9,
-    111
+    112
    ],
    "to": [
     "plugin-start-and-stop",
@@ -5306,7 +5316,7 @@
    "from": [
     "window-events",
     9,
-    111
+    112
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5319,12 +5329,12 @@
    "from": [
     "window-events",
     9,
-    112
+    113
    ],
    "to": [
     "primary-g",
     6,
-    136
+    137
    ]
   },
   {
@@ -5332,7 +5342,7 @@
    "from": [
     "window-events",
     10,
-    89
+    90
    ],
    "to": [
     "window-events"
@@ -5343,7 +5353,7 @@
    "from": [
     "window-events",
     10,
-    90
+    91
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5356,7 +5366,7 @@
    "from": [
     "window-events",
     10,
-    93
+    94
    ],
    "to": [
     "names-and-room",
@@ -5369,7 +5379,7 @@
    "from": [
     "window-events",
     10,
-    93
+    94
    ],
    "to": [
     "the-layout",
@@ -5382,7 +5392,7 @@
    "from": [
     "window-events",
     11,
-    83
+    84
    ],
    "to": [
     "window-events"
@@ -5404,7 +5414,7 @@
    "from": [
     "primary-g",
     0,
-    228
+    255
    ],
    "to": [
     "primary-g"
@@ -5415,7 +5425,7 @@
    "from": [
     "primary-g",
     0,
-    229
+    256
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5428,7 +5438,7 @@
    "from": [
     "primary-g",
     0,
-    233
+    260
    ],
    "to": [
     "endings",
@@ -5441,7 +5451,7 @@
    "from": [
     "primary-g",
     0,
-    238
+    265
    ],
    "to": [
     "a-new-reader-window",
@@ -5454,7 +5464,7 @@
    "from": [
     "primary-g",
     0,
-    239
+    266
    ],
    "to": [
     "plugin-start-and-stop",
@@ -5478,7 +5488,7 @@
    "from": [
     "primary-g",
     2,
-    241
+    268
    ],
    "to": [
     "primary-g"
@@ -5489,7 +5499,7 @@
    "from": [
     "primary-g",
     2,
-    244
+    271
    ],
    "to": [
     "names-and-room",
@@ -5600,7 +5610,7 @@
    "from": [
     "primary-g",
     6,
-    136
+    137
    ],
    "to": [
     "primary-g"
@@ -5611,7 +5621,7 @@
    "from": [
     "primary-g",
     6,
-    138
+    139
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5624,7 +5634,7 @@
    "from": [
     "primary-g",
     7,
-    114
+    115
    ],
    "to": [
     "primary-g"
@@ -5757,6 +5767,127 @@
   {
    "type": "own_trip",
    "from": [
+    "what-the-agent-is-told",
+    0,
+    4
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    1,
+    19
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    2,
+    42
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    3,
+    47
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    4,
+    80
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    5,
+    100
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    6,
+    106
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    7,
+    112
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    8,
+    49
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    9,
+    18
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-agent-is-told",
+    10,
+    26
+   ],
+   "to": [
+    "what-the-agent-is-told"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
     "one-tool-call-over-http",
     0,
     92
@@ -5806,7 +5937,7 @@
     100
    ],
    "to": [
-    "one-tool-call-over-http"
+    "what-the-agent-is-told"
    ]
   },
   {
@@ -6048,7 +6179,7 @@
    "to": [
     "names-and-room",
     9,
-    742
+    739
    ]
   },
   {
@@ -6061,7 +6192,7 @@
    "to": [
     "names-and-room",
     10,
-    724
+    721
    ]
   },
   {
@@ -6161,7 +6292,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    124
+    125
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -6172,7 +6303,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    132
+    133
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6209,7 +6340,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    49
+    50
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -6220,7 +6351,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    50
+    51
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6233,12 +6364,12 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    52
+    53
    ],
    "to": [
     "the-agent-says-something",
     1,
-    749
+    746
    ]
   },
   {
@@ -6246,12 +6377,12 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    53
+    54
    ],
    "to": [
     "the-user-sends-a-message",
     2,
-    29
+    30
    ]
   },
   {
@@ -6259,7 +6390,7 @@
    "from": [
     "endings",
     0,
-    216
+    243
    ],
    "to": [
     "endings"
@@ -6270,7 +6401,7 @@
    "from": [
     "endings",
     1,
-    219
+    246
    ],
    "to": [
     "endings"
@@ -6281,7 +6412,7 @@
    "from": [
     "endings",
     1,
-    220
+    247
    ],
    "to": [
     "how-claude-comes-to-listen-to-sublime",
@@ -6342,7 +6473,7 @@
    "from": [
     "endings",
     4,
-    142
+    143
    ],
    "to": [
     "endings"
@@ -6353,7 +6484,7 @@
    "from": [
     "endings",
     5,
-    117
+    118
    ],
    "to": [
     "endings"
@@ -6364,7 +6495,7 @@
    "from": [
     "endings",
     5,
-    120
+    121
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6377,7 +6508,7 @@
    "from": [
     "endings",
     6,
-    169
+    170
    ],
    "to": [
     "endings"
@@ -6388,7 +6519,7 @@
    "from": [
     "endings",
     7,
-    149
+    150
    ],
    "to": [
     "endings"
@@ -6399,7 +6530,7 @@
    "from": [
     "endings",
     7,
-    150
+    151
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6436,7 +6567,7 @@
    "from": [
     "endings",
     9,
-    154
+    155
    ],
    "to": [
     "endings"
@@ -6447,7 +6578,7 @@
    "from": [
     "endings",
     9,
-    155
+    156
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6636,7 +6767,7 @@
    "to": [
     "the-user-sends-a-message",
     4,
-    758
+    755
    ]
   },
   {
@@ -6644,7 +6775,7 @@
    "from": [
     "names-and-room",
     9,
-    742
+    739
    ],
    "to": [
     "names-and-room"
@@ -6655,7 +6786,7 @@
    "from": [
     "names-and-room",
     10,
-    724
+    721
    ],
    "to": [
     "names-and-room"
@@ -6666,7 +6797,7 @@
    "from": [
     "names-and-room",
     10,
-    726
+    723
    ],
    "to": [
     "the-agent-says-something",
@@ -6791,7 +6922,7 @@
    "from": [
     "building-blocks",
     9,
-    80
+    81
    ],
    "to": [
     "building-blocks"
@@ -6802,7 +6933,7 @@
    "from": [
     "building-blocks",
     10,
-    101
+    102
    ],
    "to": [
     "building-blocks"
@@ -6813,7 +6944,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     0,
-    95
+    96
    ],
    "to": [
     "settings-and-the-rest-of-the-colours"
@@ -6824,7 +6955,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     0,
-    96
+    97
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7296,7 +7427,7 @@
    "from": [
     "the-ontology-networks",
     16,
-    196
+    197
    ],
    "to": [
     "the-ontology-networks"
@@ -7307,7 +7438,7 @@
    "from": [
     "the-ontology-networks",
     16,
-    200
+    201
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -7320,7 +7451,7 @@
    "from": [
     "an-informator-and-its-holiday",
     0,
-    178
+    180
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7331,7 +7462,18 @@
    "from": [
     "an-informator-and-its-holiday",
     1,
-    192
+    195
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    2,
+    206
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7341,8 +7483,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    1,
-    197
+    2,
+    212
    ],
    "to": [
     "names-and-room",
@@ -7354,8 +7496,30 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    2,
-    185
+    3,
+    219
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    4,
+    223
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    5,
+    188
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7365,8 +7529,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    2,
-    186
+    5,
+    189
    ],
    "to": [
     "a-new-reader-window",
@@ -7378,8 +7542,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    2,
-    186
+    5,
+    189
    ],
    "to": [
     "endings",
@@ -7391,8 +7555,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    2,
-    189
+    5,
+    192
    ],
    "to": [
     "plugin-start-and-stop",
@@ -7404,7 +7568,7 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    3,
+    6,
     648
    ],
    "to": [
@@ -7415,8 +7579,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    3,
-    657
+    6,
+    653
    ],
    "to": [
     "names-and-room",
@@ -7428,8 +7592,19 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    4,
-    265
+    7,
+    785
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    8,
+    288
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7439,8 +7614,58 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    4,
-    268
+    8,
+    289
+   ],
+   "to": [
+    "the-ontology-networks",
+    13,
+    183
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    8,
+    293
+   ],
+   "to": [
+    "the-ontology-networks",
+    16,
+    197
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    8,
+    293
+   ],
+   "to": [
+    "the-ontology-networks",
+    13,
+    183
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    9,
+    267
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "an-informator-and-its-holiday",
+    9,
+    270
    ],
    "to": [
     "the-ontology-networks",
@@ -7452,8 +7677,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    5,
-    249
+    10,
+    251
    ],
    "to": [
     "trip-files"
@@ -7463,8 +7688,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    5,
-    250
+    10,
+    252
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -7476,8 +7701,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    5,
-    250
+    10,
+    252
    ],
    "to": [
     "the-ontology-networks",
@@ -7489,8 +7714,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    6,
-    239
+    11,
+    241
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7500,8 +7725,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    6,
-    240
+    11,
+    242
    ],
    "to": [
     "the-ontology-networks",
@@ -7513,8 +7738,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    7,
-    204
+    12,
+    206
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7524,21 +7749,21 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    7,
-    217
+    12,
+    219
    ],
    "to": [
     "the-ontology-networks",
     16,
-    196
+    197
    ]
   },
   {
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    7,
-    217
+    12,
+    219
    ],
    "to": [
     "the-ontology-networks",
@@ -7550,8 +7775,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    8,
-    220
+    13,
+    222
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7561,8 +7786,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    9,
-    168
+    14,
+    167
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7572,8 +7797,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    10,
-    665
+    15,
+    662
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7583,8 +7808,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    10,
-    673
+    15,
+    670
    ],
    "to": [
     "the-ontology-networks",
@@ -7596,8 +7821,8 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    10,
-    673
+    15,
+    670
    ],
    "to": [
     "loading-the-sights",
@@ -7609,63 +7834,8 @@
    "type": "own_trip",
    "from": [
     "an-informator-and-its-holiday",
-    11,
-    679
-   ],
-   "to": [
-    "an-informator-and-its-holiday"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "an-informator-and-its-holiday",
-    12,
-    775
-   ],
-   "to": [
-    "an-informator-and-its-holiday"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "an-informator-and-its-holiday",
-    13,
-    780
-   ],
-   "to": [
-    "an-informator-and-its-holiday"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "an-informator-and-its-holiday",
-    14,
-    190
-   ],
-   "to": [
-    "an-informator-and-its-holiday"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "an-informator-and-its-holiday",
-    15,
-    272
-   ],
-   "to": [
-    "an-informator-and-its-holiday"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "an-informator-and-its-holiday",
     16,
-    177
+    676
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7676,7 +7846,7 @@
    "from": [
     "an-informator-and-its-holiday",
     17,
-    689
+    772
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7687,7 +7857,62 @@
    "from": [
     "an-informator-and-its-holiday",
     18,
-    149
+    777
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    19,
+    190
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    20,
+    274
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    21,
+    176
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    22,
+    686
+   ],
+   "to": [
+    "an-informator-and-its-holiday"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-holiday",
+    23,
+    148
    ],
    "to": [
     "an-informator-and-its-holiday"
@@ -7697,21 +7922,21 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    18,
-    153
+    23,
+    152
    ],
    "to": [
     "drawing-the-map",
     13,
-    141
+    140
    ]
   },
   {
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    18,
-    164
+    23,
+    163
    ],
    "to": [
     "building-blocks",
@@ -7723,13 +7948,13 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-holiday",
-    18,
-    165
+    23,
+    164
    ],
    "to": [
     "the-tools-pane-s-tabs",
     6,
-    59
+    58
    ]
   },
   {
@@ -7865,7 +8090,7 @@
    "from": [
     "trip-files",
     1,
-    249
+    251
    ],
    "to": [
     "trip-files"
@@ -7876,7 +8101,7 @@
    "from": [
     "trip-files",
     1,
-    250
+    252
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -7889,7 +8114,7 @@
    "from": [
     "trip-files",
     1,
-    250
+    252
    ],
    "to": [
     "the-ontology-networks",
@@ -7902,12 +8127,12 @@
    "from": [
     "trip-files",
     1,
-    251
+    253
    ],
    "to": [
     "an-informator-and-its-holiday",
-    6,
-    239
+    11,
+    241
    ]
   },
   {
@@ -7915,7 +8140,7 @@
    "from": [
     "trip-files",
     2,
-    243
+    245
    ],
    "to": [
     "trip-files"
@@ -7926,7 +8151,7 @@
    "from": [
     "trip-files",
     2,
-    245
+    247
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -7939,7 +8164,7 @@
    "from": [
     "trip-files",
     3,
-    234
+    236
    ],
    "to": [
     "trip-files"
@@ -7950,10 +8175,47 @@
    "from": [
     "trip-files",
     4,
-    255
+    257
    ],
    "to": [
     "trip-files"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "trip-files",
+    5,
+    281
+   ],
+   "to": [
+    "trip-files"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    5,
+    284
+   ],
+   "to": [
+    "an-informator-and-its-holiday",
+    12,
+    206
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    5,
+    285
+   ],
+   "to": [
+    "an-informator-and-its-holiday",
+    12,
+    206
    ]
   },
   {
@@ -8273,7 +8535,7 @@
    "from": [
     "seeing-where-the-code-asks",
     3,
-    253
+    280
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -8284,7 +8546,7 @@
    "from": [
     "seeing-where-the-code-asks",
     4,
-    256
+    283
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -8367,7 +8629,7 @@
    "from": [
     "seeing-where-the-code-asks",
     8,
-    264
+    291
    ],
    "to": [
     "seeing-where-the-code-asks"

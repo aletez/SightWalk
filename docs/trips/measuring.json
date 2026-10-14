@@ -1,7 +1,7 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "da73b14b4231657ccee6ee5fc7d162aa8d1c8b87",
+ "commit": "b015419fdd85dedddfeab2dced1e78f710db6da9",
  "sights": [
   "sw/reader.py:224-228",
   "sw/reader.py:39-40",

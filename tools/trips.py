@@ -14,8 +14,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, ".")
-from sw.ontology import (Informator, Transition, Trip, Sight, dumps,  # noqa: E402
-                         informator_data, trip_data)
+from sw.ontology import (Holiday, Informator, Transition, Trip, Sight, dumps,  # noqa: E402
+                         holiday_data, informator_data, trip_data)
 
 FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py"]
 
@@ -147,6 +147,13 @@ TRIPS = [
       "commands.SightWalkWindowListener.offer_to_browser", "commands.SightWalkWindowListener.on_load",
       "reader.Reader.take_file", "bridge.op_browse",
       "views.make_browser"]),
+    ("What the agent is told",
+     "The guide's manual, the tools' descriptions and schemas it gets at its start, and the "
+     "prompt a guide started from Sublime is given.",
+     ["manual.MANUAL: opening", "manual.MANUAL: Showing code",
+      "manual.MANUAL: Writing code that fits the reader", "manual.MANUAL: Conversation",
+      "manual.MANUAL: Indicators", "manual.tool", "manual.TRANSITION", "manual.TOOLS",
+      "bridge.TRANSITION_FORM", "guide.PROMPT", "guide.TOOLS"]),
     ("One tool call over HTTP",
      "From the request to the reply: the token checked, the JSON-RPC message answered, the tool "
      "run on Sublime's thread.",
@@ -201,10 +208,13 @@ TRIPS = [
       "ontology.Informator.label", "ontology.Informator.member_label",
       "ontology.Holiday.__init__"]),
     ("An informator and its holiday",
-     "Open Informator: the informator read from its files, its trips laid out in one order, the "
-     "Holiday tab drawn, a trip opened from it and ticked as walked.",
-     ["commands.SightWalkOpenInformatorCommand.run", "commands.informator_files",
-      "commands.SightWalkOpenInformatorCommand.open", "reader.Reader.open_informator",
+     "Open Holiday: an informator's holidays to choose from, the informator read from its files, "
+     "its trips in the holiday's order in the Holiday tab, a trip opened from it, its "
+     "conversation kept, a box ticked by hand.",
+     ["commands.SightWalkOpenHolidayCommand.run", "commands.holiday_choices",
+      "commands.found_files", "commands.read_name", "commands.read_field",
+      "commands.SightWalkOpenHolidayCommand.open", "reader.Reader.open_holiday", "reader.read_json",
+      "ontology.holiday_from",
       "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
       "ontology.holiday", "ontology.visit", "vetting.read_walked",
       "reader.Reader.holiday_link", "reader.Reader.keep_transcript", "reader.transcripts_path",
@@ -214,7 +224,7 @@ TRIPS = [
     ("Trip files",
      "A trip opened from its file by the guide, and the files written for an informator.",
      ["bridge.op_open_trip", "ontology.trip_from", "ontology.trip_data",
-      "ontology.transition_data", "ontology.informator_data"]),
+      "ontology.transition_data", "ontology.informator_data", "ontology.holiday_data"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
      "them.",
@@ -241,6 +251,7 @@ OWN_TRIPS = {
     "reader.Reader.draw_map": "The Map's nodes",
     "vetting.draw_map": "Drawing the Map",
     "bridge.wait_for_user": "The user sends a message",
+    "manual.tool": "What the agent is told",
     "ontology.trip_from": "Trip files",
     "reader.Reader.tool_view": "The Tools pane's tabs",
 }
@@ -248,7 +259,8 @@ OWN_TRIPS = {
 # The informator's reading paths (Jakub's leads_to and 101s), written by hand: (from, to).
 LEADS = [
     ("Plugin start and stop", "Setting up the agent bridge"),
-    ("Setting up the agent bridge", "One tool call over HTTP"),
+    ("Setting up the agent bridge", "What the agent is told"),
+    ("What the agent is told", "One tool call over HTTP"),
     ("Setting up the agent bridge", "How Claude comes to listen to Sublime"),
     ("One tool call over HTTP", "A request arrives"),
     ("A request arrives", "A new reader window"),
@@ -285,8 +297,16 @@ NEEDS = [  # (trip, the trip it needs understood first)
     ("Polling and the wheel", "Window events"),
 ]
 
+# Holidays written by hand (Jakub): a name and the trips in their order.
+HOLIDAYS = [
+    ("How the program talks to the agent", [
+        "Setting up the agent bridge", "What the agent is told", "One tool call over HTTP",
+        "A request arrives", "How Claude comes to listen to Sublime", "The user sends a message",
+        "The agent says something", "Stopping an answer", "Pointing", "Trip files"]),
+]
+
 # Not runs but surveys: all the places about one thing (see the manual on trips).
-SURVEYS = {"The Tools pane's tabs", "The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
+SURVEYS = {"What the agent is told", "The Tools pane's tabs", "The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
            "Settings and the rest of the colours"}
 
 # Whose method a call on another object reaches, by the object's name: the code's own
@@ -317,12 +337,48 @@ TRIP_JUMPS = {
 CLASSES = {}  # "module.Class": ["module.Base", ...], filled by definitions
 
 
+# Texts that are no function but worth a sight of their own (Jakub): what the agent is told.
+SECTIONED = ["manual.MANUAL"]
+TEXTS = ["manual.MANUAL", "manual.TRANSITION", "manual.TOOLS", "guide.PROMPT", "guide.TOOLS",
+         "bridge.TRANSITION_FORM"]
+
+
+def texts(module, tree):
+    """{"module.NAME": the assignment} for the TEXTS among a module's top-level assignments; a
+    long text in parts, one per section (see sections)."""
+    found = {}
+    for node in tree.body:
+        name = module + "." + node.targets[0].id if isinstance(node, ast.Assign) \
+            and isinstance(node.targets[0], ast.Name) else None
+        if name in TEXTS:
+            found.update(sections(name, node) if name in SECTIONED else {name: node})
+    return found
+
+
+def sections(name, node):
+    """A text split where a heading stands after a blank line: {"name: heading": part}, each part
+    a stand-in node with the part's lines, so a sight holds one section (Jakub)."""
+    lines = node.value.value.split("\n")
+    starts = [0] + [i for i, line in enumerate(lines) if i and not lines[i - 1].strip()
+                    and re.match(r"^[A-Z][^.]*$", line)]
+    parts = {}
+    for k, start in enumerate(starts):
+        end = (starts[k + 1] - 2) if k + 1 < len(starts) else len(lines) - 1
+        part = ast.Constant(value="", lineno=node.lineno + start,
+                            end_lineno=node.lineno + end, col_offset=0)
+        parts["%s: %s" % (name, lines[start].strip() if k else "opening")] = part
+    return parts
+
+
 def functions():
-    """{"module.Class.function": "file:begin-end"} for every function in FILES."""
+    """{"module.Class.function": "file:begin-end"} for every function in FILES, and the TEXTS."""
     specs = {}
     for path in FILES:
         module = path.rsplit("/", 1)[-1][:-3]
-        for node in ast.parse(open(path, encoding="utf-8").read()).body:
+        tree = ast.parse(open(path, encoding="utf-8").read())
+        specs.update((name, "%s:%d-%d" % (path, node.lineno, node.end_lineno))
+                     for name, node in texts(module, tree).items())
+        for node in tree.body:
             members = [(node.name + ".", m) for m in node.body] if isinstance(node, ast.ClassDef) \
                 else [("", node)]
             for prefix, fn in members:
@@ -343,6 +399,7 @@ def definitions():
                             .replace("sw.", "", 1)
                             for n in tree.body if isinstance(n, ast.ImportFrom) and n.level
                             for a in n.names}
+        found.update((name, (module, None, node)) for name, node in texts(module, tree).items())
         for node in tree.body:
             if isinstance(node, ast.ClassDef):
                 CLASSES[module + "." + node.name] = [
@@ -421,7 +478,7 @@ def calls(name, found, imported, title=None):
     out = set()
     for node in ast.walk(fn):
         target = reference(node, module, cls, found, imported, called) if node is not fn else None
-        if target and target != name:
+        if target and target != name and isinstance(found[target][2], ast.FunctionDef):
             out.add((node.lineno, target))
     out.update((line, callee) for caller, line, callee in jumps(title, found) if caller == name)
     for caller, line, wrong, right in fixes(found):
@@ -519,6 +576,11 @@ def write_files(specs, commit):
     informator = Informator("SightWalk", made, between_trips(found, imported), commit)
     files = {trip.id: "../trips/%s.json" % trip.id for trip in made}
     write_json("docs/informators/sightwalk.json", informator_data(informator, files))
+    os.makedirs("docs/holidays", exist_ok=True)
+    for name, titles in HOLIDAYS:
+        chosen = Holiday(informator, [informator.member(Trip(t, []).id) for t in titles], (), name)
+        write_json("docs/holidays/%s.json" % Trip(name, []).id,
+                   holiday_data(chosen, "../informators/sightwalk.json"))
 
 
 def write_json(path, data):
@@ -539,7 +601,7 @@ def main():
     write_files(specs, commit)
     # The whole code must be walked: say what no trip covers (Jakub).
     covered = set(name for _, _, names in TRIPS for name in names)
-    for name in sorted(set(specs) - covered):
+    for name in sorted(set(specs) - covered - set(TEXTS)):
         print("not in any trip:", name, specs[name], file=sys.stderr)
 
 

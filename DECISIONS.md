@@ -182,6 +182,8 @@ Open:
 
 - The border over every sight's header shows again (Jakub, 2026-10-14: the headers no longer take the wheel, so nothing joins them to the code above): a header's cell starts OVERLAP lower and no longer reaches over the cell above. Seen by Claude on screen. (Changed, unverified by Jakub.)
 
+- Texts get sights too (Jakub, 2026-10-14): tools/trips.py shows chosen top-level texts (TEXTS: the manual, cut at its headings into sections, the tools' schemas, the guide's prompt), in the trip "What the agent is told". Holidays written by hand (docs/holidays/*.json: name, informator, trips in order; tools/trips.py HOLIDAYS), the first "How the program talks to the agent". "SightWalk: Open Holiday" replaces Open Informator (Jakub: trips should come linearized): it lists every informator's whole holiday and the holidays written by hand; kept conversations (*.transcripts.json) no longer show in the list. Seen by Claude: the list with both holidays. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

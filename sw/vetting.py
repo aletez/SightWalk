@@ -21,8 +21,7 @@ from .views import FADED, kept, make_blank_view, make_side_view, match_font, pha
 TABS = ("Map", "Holiday", "Scroll")
 SCROLL = "Scroll"
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
-NO_INFORMATOR = ("No informator is open: <i>SightWalk: Open Informator</i> in the command "
-                 "palette.")
+NO_INFORMATOR = ("No holiday is open: <i>SightWalk: Open Holiday</i> in the command palette.")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
 MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
@@ -160,7 +159,7 @@ def show_holiday(view, holiday, walked, current, on_select):
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'
                     % (trip.id, box, number, trip.id, name, kind))
-    html = "<div>%s</div><br>%s" % (holiday.informator.name, "<br>".join(rows))
+    html = "<div>%s</div><br>%s" % (holiday.name, "<br>".join(rows))
     phantoms(view, "sight_walk_holiday").update([sublime.Phantom(
         sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_select)])
 

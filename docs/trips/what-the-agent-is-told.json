@@ -1,0 +1,65 @@
+{
+ "name": "What the agent is told",
+ "kind": "survey",
+ "commit": "b015419fdd85dedddfeab2dced1e78f710db6da9",
+ "sights": [
+  "sw/manual.py:4-17",
+  "sw/manual.py:19-40",
+  "sw/manual.py:42-45",
+  "sw/manual.py:47-78",
+  "sw/manual.py:80-97",
+  "sw/manual.py:100-103",
+  "sw/manual.py:106-110",
+  "sw/manual.py:112-150",
+  "sw/bridge.py:49-50",
+  "sw/guide.py:18-23",
+  "sw/guide.py:26-26"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [7, 113],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 122],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 126],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 129],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 135],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 137],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 138],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 142],
+   "to": [5, 100]
+  },
+  {
+   "type": "calls",
+   "from": [7, 147],
+   "to": [5, 100]
+  }
+ ]
+}

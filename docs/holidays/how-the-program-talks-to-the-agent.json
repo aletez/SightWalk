@@ -1,0 +1,16 @@
+{
+ "name": "How the program talks to the agent",
+ "informator": "../informators/sightwalk.json",
+ "trips": [
+  "setting-up-the-agent-bridge",
+  "what-the-agent-is-told",
+  "one-tool-call-over-http",
+  "a-request-arrives",
+  "how-claude-comes-to-listen-to-sublime",
+  "the-user-sends-a-message",
+  "the-agent-says-something",
+  "stopping-an-answer",
+  "pointing",
+  "trip-files"
+ ]
+}

@@ -1,6 +1,7 @@
 """Sublime commands and listeners. sight_walk.py imports them, which is how Sublime finds them."""
 
 import glob
+import json
 import os
 
 import sublime
@@ -171,34 +172,60 @@ class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
             self.window.run_command("close_window")
 
 
-class SightWalkOpenInformatorCommand(sublime_plugin.WindowCommand):
-    """Opens an informator (an informators/*.json found in the open folders and repositories)
-    in a trip, its holiday in the Tools pane (Jakub)."""
+class SightWalkOpenHolidayCommand(sublime_plugin.WindowCommand):
+    """Chooses a holiday (wczasy) and opens it in a trip, the Holiday tab listing its trips
+    (Jakub): every informator's trips in reading order, and the holidays written by hand
+    (holidays/*.json) found in the open folders and repositories."""
 
     def run(self):
-        found = informator_files()
+        found = holiday_choices()
         if not found:
             sublime.error_message("SightWalk found no informators/*.json in the open folders.")
             return
-        self.window.show_quick_panel(found, lambda i: i >= 0 and self.open(found[i]))
+        self.window.show_quick_panel([[label, path] for label, path, _ in found],
+                                     lambda i: i >= 0 and self.open(*found[i][1:]))
 
-    def open(self, path):
+    def open(self, informator, holiday):
         reader = state.current_reader() or bridge.new_reader()
-        reader.open_informator(path)
+        reader.open_holiday(informator, holiday)
         reader.window.bring_to_front()
         scrollbars.reader_focused(True)
 
 
-def informator_files():
-    """The informators in every window's folders and the repositories of their files."""
+def holiday_choices():
+    """(label, informator's file, holiday's file or None) for every holiday to choose from."""
+    found = []
+    for path in found_files("informators"):
+        found.append((read_name(path) + ": all trips", path, None))
+    for path in found_files("holidays"):
+        informator = os.path.join(os.path.dirname(path), read_field(path, "informator"))
+        found.append((read_name(path), os.path.normpath(informator), path))
+    return found
+
+
+def found_files(folder):
+    """The folder/*.json files in every window's folders and its files' repositories, the kept
+    conversations (*.transcripts.json) left out."""
     places = set()
     for window in sublime.windows():
         places.update(window.folders())
         places.update(repo_root(v.file_name()) for v in window.views() if v.file_name())
     found = set()
     for place in places - {None}:
-        found.update(glob.glob(os.path.join(place, "**", "informators", "*.json"), recursive=True))
-    return sorted(found)
+        found.update(glob.glob(os.path.join(place, "**", folder, "*.json"), recursive=True))
+    return sorted(f for f in found if not f.endswith(".transcripts.json"))
+
+
+def read_name(path):
+    return read_field(path, "name") or os.path.basename(path)
+
+
+def read_field(path, key):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f).get(key, "")
+    except (OSError, ValueError):
+        return ""
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):

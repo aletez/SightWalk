@@ -1,7 +1,7 @@
 [
     {"caption": "SightWalk: Set Up Agent Bridge", "command": "sight_walk_setup"},
     {"caption": "SightWalk: Stop the Vetting Guide", "command": "sight_walk_stop_guide"},
-    {"caption": "SightWalk: Open Informator", "command": "sight_walk_open_informator"},
+    {"caption": "SightWalk: Open Holiday", "command": "sight_walk_open_holiday"},
     {"caption": "SightWalk: Reset Sights", "command": "sight_walk_reset_sights"},
     {"caption": "SightWalk: Restart (technical)", "command": "sight_walk_restart"},
     {"caption": "Preferences: SightWalk Settings", "command": "edit_settings",

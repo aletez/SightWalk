@@ -1,6 +1,6 @@
 import unittest
 
-from sw.ontology import (Holiday, dumps, Informator, Sight, Transition, Trip, holiday, informator_data,
+from sw.ontology import (Holiday, dumps, holiday_data, holiday_from, Informator, Sight, Transition, Trip, holiday, informator_data,
                          informator_from, slug, trip_data, trip_from)
 
 
@@ -183,6 +183,23 @@ class TranscriptsTest(unittest.TestCase):
 
     def test_places_on_one_line(self):
         self.assertIn('"from": [0, 12]', dumps({"from": [0, 12], "sights": ["a.py:1-2"]}))
+
+
+class AuthoredHolidayTest(unittest.TestCase):
+    def test_round_trip_and_name(self):
+        a, b, c = trips("A", "B", "C")
+        informator = Informator("I", [a, b, c])
+        self.assertEqual(holiday(informator).name, "I: all trips")
+        chosen = Holiday(informator, [c, a], (), "Talking")
+        data = holiday_data(chosen, "../informators/i.json")
+        self.assertEqual(data["trips"], ["c", "a"])
+        again = holiday_from(data, informator)
+        self.assertEqual(([t.id for t in again], again.name), (["c", "a"], "Talking"))
+
+    def test_refuses_unknown_trips(self):
+        informator = Informator("I", trips("A"))
+        with self.assertRaises(ValueError):
+            holiday_from({"name": "H", "informator": "i.json", "trips": ["a", "z"]}, informator)
 
 
 if __name__ == "__main__":

@@ -191,14 +191,16 @@ class Informator(Network):
 
 
 class Holiday(Sequence):
-    """One informator's trips in one order, laid out by the transition types it follows."""
+    """One informator's trips in one order (Polish: wczasy): laid out from the informator by the
+    transition types it follows, or chosen and ordered by an author under a name (types ())."""
 
-    def __init__(self, informator, trips, types=("leads_to",)):
+    def __init__(self, informator, trips, types=("leads_to",), name=None):
         stray = [trip.id for trip in trips if informator.member(trip.id) is not trip]
         if stray:
             raise ValueError("not in %s: %s" % (informator.name, ", ".join(stray)))
         super().__init__(trips)
         self.informator, self.types = informator, tuple(types)
+        self.name = name or "%s: all trips" % informator.name
 
 
 def holiday(informator, types=("leads_to", "101s")):
@@ -274,3 +276,19 @@ def dumps(data):
     text = json.dumps(data, indent=1, ensure_ascii=False)
     return re.sub(r"\[\s*([^\[\]{}\"]*?)\s*\]",
                   lambda m: "[%s]" % re.sub(r",\s+", ", ", m.group(1)), text) + "\n"
+
+
+def holiday_data(holiday, informator_file):
+    """An author's holiday: its name, its informator's file (relative to the holiday's) and its
+    trips' ids in order."""
+    return {"name": holiday.name, "informator": informator_file,
+            "trips": [trip.id for trip in holiday]}
+
+
+def holiday_from(data, informator):
+    missing = [key for key in data["trips"] if informator.member(key) is None]
+    if missing:
+        raise ValueError("%s: no such trips in %s: %s" % (data["name"], informator.name,
+                                                         ", ".join(missing)))
+    return Holiday(informator, [informator.member(key) for key in data["trips"]], (),
+                   data["name"])

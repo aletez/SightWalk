@@ -1,18 +1,18 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "da73b14b4231657ccee6ee5fc7d162aa8d1c8b87",
+ "commit": "b015419fdd85dedddfeab2dced1e78f710db6da9",
  "sights": [
-  "sw/commands.py:216-217",
-  "sw/commands.py:219-220",
+  "sw/commands.py:243-244",
+  "sw/commands.py:246-247",
   "sw/guide.py:85-89",
   "sw/guide.py:73-82",
-  "sw/commands.py:142-143",
-  "sw/commands.py:117-122",
-  "sw/commands.py:169-171",
-  "sw/commands.py:149-152",
+  "sw/commands.py:143-144",
+  "sw/commands.py:118-123",
+  "sw/commands.py:170-172",
+  "sw/commands.py:150-153",
   "sw/reader.py:598-601",
-  "sw/commands.py:154-156",
+  "sw/commands.py:155-157",
   "sw/state.py:25-29",
   "sw/bridge.py:121-126",
   "sw/state.py:36-37"
@@ -20,7 +20,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 217],
+   "from": [0, 244],
    "to": [2, 85]
   },
   {
@@ -30,22 +30,22 @@
   },
   {
    "type": "calls",
-   "from": [4, 143],
+   "from": [4, 144],
    "to": [10, 25]
   },
   {
    "type": "calls",
-   "from": [7, 150],
+   "from": [7, 151],
    "to": [12, 36]
   },
   {
    "type": "calls",
-   "from": [7, 152],
+   "from": [7, 153],
    "to": [8, 598]
   },
   {
    "type": "calls",
-   "from": [9, 155],
+   "from": [9, 156],
    "to": [12, 36]
   },
   {

@@ -1,7 +1,7 @@
 {
  "name": "Setting up the agent bridge",
  "kind": "run",
- "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
+ "commit": "7ea030145b4f3dd1290d2c12704f0024e54652c9",
  "sights": [
   "sw/setup.py:32-38",
   "sw/setup.py:41-48",

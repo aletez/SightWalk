@@ -1,11 +1,11 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
+ "commit": "7ea030145b4f3dd1290d2c12704f0024e54652c9",
  "sights": [
   "sw/bridge.py:68-78",
   "sw/reader.py:59-80",
-  "sw/reader.py:82-121",
+  "sw/reader.py:82-122",
   "sw/views.py:175-184",
   "sw/views.py:187-191",
   "sw/views.py:135-142",
@@ -94,17 +94,17 @@
   },
   {
    "type": "calls",
-   "from": [2, 118],
+   "from": [2, 119],
    "to": [8, 81]
   },
   {
    "type": "calls",
-   "from": [2, 119],
+   "from": [2, 120],
    "to": [9, 118]
   },
   {
    "type": "calls",
-   "from": [2, 120],
+   "from": [2, 121],
    "to": [3, 175]
   },
   {

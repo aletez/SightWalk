@@ -1,9 +1,9 @@
 {
  "name": "Colours",
  "kind": "run",
- "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
+ "commit": "7ea030145b4f3dd1290d2c12704f0024e54652c9",
  "sights": [
-  "sw/reader.py:221-226",
+  "sw/reader.py:222-227",
   "sw/tint.py:158-161",
   "sw/tint.py:138-144",
   "sw/tint.py:20-24",
@@ -17,7 +17,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 226],
+   "from": [0, 227],
    "to": [1, 158]
   },
   {

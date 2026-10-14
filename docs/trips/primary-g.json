@@ -1,17 +1,17 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
+ "commit": "7ea030145b4f3dd1290d2c12704f0024e54652c9",
  "sights": [
   "sw/commands.py:271-282",
-  "sw/reader.py:625-635",
+  "sw/reader.py:627-637",
   "sw/commands.py:284-289",
-  "sw/reader.py:137-141",
-  "sw/reader.py:143-162",
-  "sw/reader.py:164-169",
+  "sw/reader.py:138-142",
+  "sw/reader.py:144-163",
+  "sw/reader.py:165-170",
   "sw/commands.py:139-143",
   "sw/commands.py:117-118",
-  "sw/reader.py:171-179",
+  "sw/reader.py:172-180",
   "sw/bridge.py:129-140",
   "sw/views.py:121-132"
  ],
@@ -19,7 +19,7 @@
   {
    "type": "calls",
    "from": [0, 274],
-   "to": [1, 625]
+   "to": [1, 627]
   },
   {
    "type": "calls",
@@ -29,22 +29,22 @@
   {
    "type": "calls",
    "from": [0, 281],
-   "to": [3, 137]
-  },
-  {
-   "type": "calls",
-   "from": [3, 140],
-   "to": [10, 121]
+   "to": [3, 138]
   },
   {
    "type": "calls",
    "from": [3, 141],
-   "to": [4, 143]
+   "to": [10, 121]
+  },
+  {
+   "type": "calls",
+   "from": [3, 142],
+   "to": [4, 144]
   },
   {
    "type": "calls",
    "from": [6, 143],
-   "to": [8, 171]
+   "to": [8, 172]
   },
   {
    "type": "calls",
@@ -54,7 +54,7 @@
   {
    "type": "calls",
    "from": [9, 138],
-   "to": [3, 137]
+   "to": [3, 138]
   }
  ]
 }

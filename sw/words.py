@@ -66,4 +66,4 @@ def trips_count(n):
     if n == 1:
         return "1 wycieczka"
     few = n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14)
-    return "%d wycieczk%s" % (n, "i" if few else "ek")
+    return "%d %s" % (n, "wycieczki" if few else "wycieczek")

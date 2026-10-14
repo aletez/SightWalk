@@ -202,5 +202,16 @@ class AuthoredTourTest(unittest.TestCase):
             tour_from({"name": "H", "informator": "i.json", "trips": ["a", "z"]}, informator)
 
 
+class WordsTest(unittest.TestCase):
+    def test_trips_counted_in_both_languages(self):
+        from sw import words
+        words.set_language("pl")
+        found = [words.trips_count(n) for n in (1, 2, 5, 12, 22, 37)]
+        words.set_language("en")
+        self.assertEqual(found, ["1 wycieczka", "2 wycieczki", "5 wycieczek", "12 wycieczek",
+                                 "22 wycieczki", "37 wycieczek"])
+        self.assertEqual([words.trips_count(n) for n in (1, 37)], ["1 trip", "37 trips"])
+
+
 if __name__ == "__main__":
     unittest.main()

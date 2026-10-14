@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "95c4ef461c1898f915783bbf66701849ca3efb9c",
+ "commit": "3ae1c69b54d22e0ac74d62978eda4bb778b7097c",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",

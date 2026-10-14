@@ -1,7 +1,7 @@
 {
  "name": "Drawing the marks",
  "kind": "run",
- "commit": "95c4ef461c1898f915783bbf66701849ca3efb9c",
+ "commit": "3ae1c69b54d22e0ac74d62978eda4bb778b7097c",
  "sights": [
   "sw/reader.py:484-497",
   "sw/reader.py:499-504",

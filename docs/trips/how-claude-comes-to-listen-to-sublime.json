@@ -1,7 +1,7 @@
 {
  "name": "How Claude comes to listen to Sublime",
  "kind": "run",
- "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
  "sights": [
   "sw/guide.py:92-97",
   "sw/guide.py:48-58",
@@ -14,58 +14,28 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [
-    0,
-    97
-   ],
-   "to": [
-    1,
-    48
-   ]
+   "from": [0, 97],
+   "to": [1, 48]
   },
   {
    "type": "calls",
-   "from": [
-    1,
-    50
-   ],
-   "to": [
-    2,
-    31
-   ]
+   "from": [1, 50],
+   "to": [2, 31]
   },
   {
    "type": "calls",
-   "from": [
-    1,
-    50
-   ],
-   "to": [
-    3,
-    36
-   ]
+   "from": [1, 50],
+   "to": [3, 36]
   },
   {
    "type": "calls",
-   "from": [
-    1,
-    52
-   ],
-   "to": [
-    4,
-    40
-   ]
+   "from": [1, 52],
+   "to": [4, 40]
   },
   {
    "type": "calls",
-   "from": [
-    1,
-    57
-   ],
-   "to": [
-    5,
-    61
-   ]
+   "from": [1, 57],
+   "to": [5, 61]
   }
  ]
 }

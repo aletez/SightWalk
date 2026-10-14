@@ -1,7 +1,7 @@
 {
  "name": "Talking on the bench",
  "kind": "run",
- "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
  "sights": [
   "sw/commands.py:123-133",
   "sw/reader.py:586-589",
@@ -12,14 +12,8 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [
-    0,
-    133
-   ],
-   "to": [
-    1,
-    586
-   ]
+   "from": [0, 133],
+   "to": [1, 586]
   }
  ]
 }

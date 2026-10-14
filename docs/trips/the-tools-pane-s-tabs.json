@@ -1,7 +1,7 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "run",
- "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
  "sights": [
   "sw/reader.py:620-625",
   "sw/vetting.py:48-59",
@@ -13,36 +13,18 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [
-    0,
-    624
-   ],
-   "to": [
-    5,
-    656
-   ]
+   "from": [0, 624],
+   "to": [5, 656]
   },
   {
    "type": "calls",
-   "from": [
-    3,
-    615
-   ],
-   "to": [
-    2,
-    611
-   ]
+   "from": [3, 615],
+   "to": [2, 611]
   },
   {
    "type": "calls",
-   "from": [
-    4,
-    618
-   ],
-   "to": [
-    2,
-    611
-   ]
+   "from": [4, 618],
+   "to": [2, 611]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
  "sights": [
   "sw/reader.py:453-463",
   "sw/reader.py:285-291",
@@ -20,69 +20,33 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [
-    2,
-    22
-   ],
-   "to": [
-    4,
-    33
-   ]
+   "from": [2, 22],
+   "to": [4, 33]
   },
   {
    "type": "calls",
-   "from": [
-    2,
-    23
-   ],
-   "to": [
-    5,
-    37
-   ]
+   "from": [2, 23],
+   "to": [5, 37]
   },
   {
    "type": "calls",
-   "from": [
-    3,
-    28
-   ],
-   "to": [
-    4,
-    33
-   ]
+   "from": [3, 28],
+   "to": [4, 33]
   },
   {
    "type": "calls",
-   "from": [
-    3,
-    29
-   ],
-   "to": [
-    5,
-    37
-   ]
+   "from": [3, 29],
+   "to": [5, 37]
   },
   {
    "type": "calls",
-   "from": [
-    7,
-    156
-   ],
-   "to": [
-    8,
-    143
-   ]
+   "from": [7, 156],
+   "to": [8, 143]
   },
   {
    "type": "calls",
-   "from": [
-    11,
-    84
-   ],
-   "to": [
-    12,
-    140
-   ]
+   "from": [11, 84],
+   "to": [12, 140]
   }
  ]
 }

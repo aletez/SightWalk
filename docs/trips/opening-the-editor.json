@@ -1,7 +1,7 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "fb850335e6221fe07b2c32fb13094418d592634a",
+ "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
  "sights": [
   "sw/commands.py:58-65",
   "sw/reader.py:525-530",
@@ -16,91 +16,43 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [
-    0,
-    60
-   ],
-   "to": [
-    1,
-    525
-   ]
+   "from": [0, 60],
+   "to": [1, 525]
   },
   {
    "type": "calls",
-   "from": [
-    0,
-    65
-   ],
-   "to": [
-    2,
-    513
-   ]
+   "from": [0, 65],
+   "to": [2, 513]
   },
   {
    "type": "calls",
-   "from": [
-    2,
-    522
-   ],
-   "to": [
-    3,
-    22
-   ]
+   "from": [2, 522],
+   "to": [3, 22]
   },
   {
    "type": "calls",
-   "from": [
-    3,
-    26
-   ],
-   "to": [
-    4,
-    14
-   ]
+   "from": [3, 26],
+   "to": [4, 14]
   },
   {
    "type": "calls",
-   "from": [
-    3,
-    30
-   ],
-   "to": [
-    5,
-    32
-   ]
+   "from": [3, 30],
+   "to": [5, 32]
   },
   {
    "type": "calls",
-   "from": [
-    5,
-    33
-   ],
-   "to": [
-    6,
-    39
-   ]
+   "from": [5, 33],
+   "to": [6, 39]
   },
   {
    "type": "calls",
-   "from": [
-    6,
-    45
-   ],
-   "to": [
-    7,
-    53
-   ]
+   "from": [6, 45],
+   "to": [7, 53]
   },
   {
    "type": "calls",
-   "from": [
-    6,
-    49
-   ],
-   "to": [
-    7,
-    53
-   ]
+   "from": [6, 49],
+   "to": [7, 53]
   }
  ]
 }

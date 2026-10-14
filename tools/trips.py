@@ -9,6 +9,7 @@ import ast
 import glob
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -428,9 +429,13 @@ def write_files(specs, commit):
 
 
 def write_json(path, data):
+    """Indented, but each place on one line: [3, 42]."""
+    text = json.dumps(data, indent=1, ensure_ascii=False)
+    text = re.sub(r"\[\s*([^\[\]{}]*?)\s*\]",
+                  lambda m: "[%s]" % re.sub(r",\s+", ", ", m.group(1)) if '"' not in m.group(1)
+                  else m.group(0), text)
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=1, ensure_ascii=False)
-        f.write("\n")
+        f.write(text + "\n")
 
 
 def main():

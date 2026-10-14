@@ -1,7 +1,7 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
+ "commit": "295e0e6a6809644f2dcdaf9263292033140a1cf1",
  "sights": [
   "sw/commands.py:215-216",
   "sw/commands.py:218-219",

@@ -1,10 +1,10 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "e57a0ad7f51521c4b425fd0fbb53e980aa3552a5",
+ "commit": "6f0729a5556d05b25fe5b52a7468d1e37b40942c",
  "sights": [
-  "sw/vetting.py:95-102",
-  "sw/vetting.py:88-92",
+  "sw/vetting.py:85-92",
+  "sw/vetting.py:78-82",
   "sw/callmap.py:105-118",
   "sw/callmap.py:80-86",
   "sw/callmap.py:69-72",
@@ -13,31 +13,31 @@
   "sw/callmap.py:65-66",
   "sw/callmap.py:89-91",
   "sw/callmap.py:94-102",
-  "sw/vetting.py:105-117",
-  "sw/vetting.py:120-122",
-  "sw/vetting.py:125-133",
-  "sw/vetting.py:136-139"
+  "sw/vetting.py:95-107",
+  "sw/vetting.py:110-112",
+  "sw/vetting.py:115-123",
+  "sw/vetting.py:126-129"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 97],
-   "to": [1, 88]
+   "from": [0, 87],
+   "to": [1, 78]
   },
   {
    "type": "calls",
-   "from": [0, 99],
-   "to": [13, 136]
+   "from": [0, 89],
+   "to": [13, 126]
   },
   {
    "type": "calls",
-   "from": [0, 101],
+   "from": [0, 91],
    "to": [2, 105]
   },
   {
    "type": "calls",
-   "from": [0, 102],
-   "to": [10, 105]
+   "from": [0, 92],
+   "to": [10, 95]
   },
   {
    "type": "calls",
@@ -131,18 +131,18 @@
   },
   {
    "type": "calls",
-   "from": [10, 115],
-   "to": [13, 136]
+   "from": [10, 105],
+   "to": [13, 126]
   },
   {
    "type": "calls",
-   "from": [10, 117],
-   "to": [12, 125]
+   "from": [10, 107],
+   "to": [12, 115]
   },
   {
    "type": "calls",
-   "from": [12, 129],
-   "to": [11, 120]
+   "from": [12, 119],
+   "to": [11, 110]
   }
  ]
 }

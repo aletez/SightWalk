@@ -1,7 +1,5 @@
 """The Tools pane (Jakub's name for now) under the Vetting Bench, with tabs in its header: Map, the
-trip's sights as a call graph drawn by Graphviz; Tour, an informator's trips in one order; and
-Scroll, a blank pane in the bench's colours whose wheel moves the whole trip, like the Sights'
-fillers (the scroll pad)."""
+trip's sights as a call graph drawn by Graphviz, and Tour, an informator's trips in one order."""
 
 import hashlib
 import json
@@ -15,22 +13,14 @@ import sublime
 from .callmap import dot_source
 from .chat import MARK_HTML, SYNTAX
 from .config import BLANK_LINES, SETTINGS_FILE
-from .views import FADED, kept, make_blank_view, make_side_view, match_font, phantoms
+from .views import FADED, kept, make_side_view, phantoms
 from .words import word
 
-TABS = ("Map", "Tour", "Scroll")
-SCROLL = "Scroll"
+TABS = ("Map", "Tour")
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
 MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
-
-
-def make(window, conversation):
-    view = make_blank_view(window, SCROLL)
-    match_font(view, conversation)
-    view.assign_syntax(SYNTAX)  # the bench's colours down the whole column (Jakub)
-    return view
 
 
 def make_tool(window, name):
@@ -44,7 +34,7 @@ def make_tool(window, name):
 
 def set_panning(view, on):
     """A tool's pane taking the wheel for the panorama (Jakub): blank lines either way of its
-    content, like the scroll pad, so the wheel moves it both ways; off, its content alone."""
+    content, like the fillers, so the wheel moves it both ways; off, its content alone."""
     view.set_read_only(False)
     view.run_command("sight_walk_replace", {"text": "\n" * (2 * BLANK_LINES) if on else " "})
     view.set_read_only(True)

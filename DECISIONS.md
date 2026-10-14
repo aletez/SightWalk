@@ -194,6 +194,8 @@ Open:
 
 - The strip reaches over, not the bench and the Tools pane (Jakub, 2026-10-14: a view reaching over another, or too wide for its pane, gets a shadow on its right edge): while the scroll pad or the bench takes the wheel, the strip's cell reaches 3 × OVERLAP over them and its group comes first (after the editor's), so it is drawn over their border. The bench's status line and the Tools pane's header then lie on top of the strip where it reaches under them, their width as ever (Jakub; reaching across the strip, tried first, was not meant). Switched off with Map or Tour shown, the strip is narrow again with both borders. The Tools header is drawn over the status line and reaches OVERLAP up over its border, so its corner has no notch (Jakub caught it). Seen by Claude on screen. (Changed, unverified by Jakub.)
 
+- The Scroll tab dropped (Jakub, 2026-10-14): with the bench, Map and Tour taking the wheel (primary+s), the scroll pad has no job left. The Tools pane has the tabs Map (shown first) and Tour; the strip reaches over the bench only while they take the wheel. The status line keeps a border to the bench 4 px shorter than the Tools header over the strip: that border is the bench's and ends where the strip lies over it; the status line on top of the strip with its border as long was tried and loses the border altogether. Seen by Claude: the tabs, the wheel over the Map moving the trip. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

@@ -107,14 +107,13 @@ class Reader(Geometry):
         self.strip_header.settings().set("gutter", False)  # ▲ in a scroll bar's width
         self.strip_header.settings().set("margin", 0)
         bench_font(self.chat)  # after the headers, which keep the font of code
-        self.below = vetting.make(self.window, self.chat)
         self.map_view = vetting.make_tool(self.window, "Map")
         self.tour_view = vetting.make_tool(self.window, "Tour")
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
         self.chat.settings().set("scroll_past_end", self.pan)
-        self.tool = vetting.SCROLL  # the Tools pane's tab shown
+        self.tool = "Map"  # the Tools pane's tab shown
         self.below_header = chat.make_header(self.window, self.chat, "Tools")
         self.status_view = chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
@@ -290,7 +289,7 @@ class Reader(Geometry):
         """While the scroll pad or the bench takes the wheel, the strip reaches over the border
         between them and comes first, so the blank areas read as one (Jakub); the strip reaches,
         not they, as a view reaching over another gets a shadow on its right edge."""
-        if not (self.pan or self.tool == vetting.SCROLL) or self.strip not in views:
+        if not self.pan or self.strip not in views:
             return [], []
         i = views.index(self.strip)
         x0, y0, x1, y1 = rects.pop(i)
@@ -384,22 +383,21 @@ class Reader(Geometry):
         """Where each view stands in its cell, as a layout y: the filler at its anchor, a sight's
         views at their text, half a border lower, as their cells begin that much higher (never
         above line 1)."""
-        tools = (self.tool_view(),) if self.panning() else ()
-        places = [(view, anchor(view)) for view in
-                  (self.filler, self.strip_floor, self.top_filler, self.below) + tools]
-        if self.pan:
-            places.insert(5, (self.chat, chat.bottom_place(self.chat)))
+        places = [(view, anchor(view)) for view in (self.filler, self.strip_floor, self.top_filler)]
         places.insert(1, (self.strip, self.strip_place()))
+        if self.pan:
+            places += [(self.tool_view(), anchor(self.tool_view())),
+                       (self.chat, chat.bottom_place(self.chat))]
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
             places += [(view, max(y - OVERLAP / 2, 0.0)) for view, y in texts]
         return places
 
     def wheel_places(self):
-        """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
-        under the bench, ▼'s cell, and Map or Tour while they take the wheel. A sight's code
-        scrolls on its own (Jakub)."""
-        return self.places()[:5 + self.panning() + self.pan]
+        """The views whose wheel moves the whole trip: the strip, the fillers, ▼'s cell, and the
+        bench and the tool shown while they take the wheel. A sight's code scrolls on its own
+        (Jakub)."""
+        return self.places()[:6 if self.pan else 4]
 
     def pinned_places(self):
         """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A
@@ -638,7 +636,7 @@ class Reader(Geometry):
     # Tools
 
     def tools(self):
-        return {"Map": self.map_view, "Tour": self.tour_view, vetting.SCROLL: self.below}
+        return {"Map": self.map_view, "Tour": self.tour_view}
 
     def tool_view(self):
         return self.tools()[self.tool]
@@ -652,10 +650,6 @@ class Reader(Geometry):
             self.render()
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
         self.draw_tour()
-
-    def panning(self):
-        """Map or Tour shown and taking the wheel for the panorama (Jakub)."""
-        return self.pan and self.tool != vetting.SCROLL
 
     def toggle_panning(self):
         """primary+s: the wheel over the bench, Map and Tour moves the whole trip, or them."""

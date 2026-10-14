@@ -69,7 +69,7 @@ TRIPS = [
       "geometry.Geometry.column_rects", "geometry.Geometry.column", "geometry.Geometry.sight_cells", "geometry.Geometry.floor_height", "reader.Reader.layout", "views.reader_layout", "views.to_layout"]),
     ("Arranging the views",
      "After a new layout: every view into its group, then back at its place.",
-     ["reader.Reader.arrange", "reader.Reader.place", "reader.Reader.assign_groups",
+     ["reader.Reader.arrange", "reader.Reader.place", "reader.Reader.strip_in_front", "reader.Reader.assign_groups",
       "views.hide_chrome",
       "reader.Reader.scroll_views", "reader.Reader.places", "reader.Reader.strip_place", "views.anchor",
       "reader.Reader.draw_strip_buttons", "reader.Reader.strip_button",

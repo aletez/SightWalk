@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "065e08c970a4a0ab5a51acf424aee4ac2d3dde6c",
+ "commit": "05e56284c645628cfd0de7ce293cb239ed1301c8",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -838,7 +838,7 @@
    ],
    "to": [
     "arranging-the-views",
-    3,
+    4,
     60
    ]
   },
@@ -2232,11 +2232,24 @@
    "from": [
     "the-layout",
     3,
+    349
+   ],
+   "to": [
+    "arranging-the-views",
+    2,
+    289
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    3,
     350
    ],
    "to": [
     "arranging-the-views",
-    4,
+    5,
     409
    ]
   },
@@ -2591,7 +2604,7 @@
    "from": [
     "arranging-the-views",
     2,
-    318
+    289
    ],
    "to": [
     "arranging-the-views"
@@ -2602,6 +2615,43 @@
    "from": [
     "arranging-the-views",
     2,
+    298
+   ],
+   "to": [
+    "names-and-room",
+    4,
+    12
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    2,
+    299
+   ],
+   "to": [
+    "window-events",
+    5,
+    37
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "arranging-the-views",
+    3,
+    318
+   ],
+   "to": [
+    "arranging-the-views"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    3,
     322
    ],
    "to": [
@@ -2614,7 +2664,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    2,
+    3,
     336
    ],
    "to": [
@@ -2627,7 +2677,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    2,
+    3,
     338
    ],
    "to": [
@@ -2640,7 +2690,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    3,
+    4,
     60
    ],
    "to": [
@@ -2651,7 +2701,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    4,
+    5,
     409
    ],
    "to": [
@@ -2662,7 +2712,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    4,
+    5,
     413
    ],
    "to": [
@@ -2675,7 +2725,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    4,
+    5,
     420
    ],
    "to": [
@@ -2688,7 +2738,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     382
    ],
    "to": [
@@ -2699,7 +2749,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     386
    ],
    "to": [
@@ -2712,7 +2762,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     386
    ],
    "to": [
@@ -2725,7 +2775,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     390
    ],
    "to": [
@@ -2738,7 +2788,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     393
    ],
    "to": [
@@ -2751,7 +2801,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    5,
+    6,
     393
    ],
    "to": [
@@ -2764,7 +2814,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    6,
+    7,
     442
    ],
    "to": [
@@ -2775,7 +2825,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    7,
+    8,
     145
    ],
    "to": [
@@ -2786,7 +2836,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    8,
+    9,
     624
    ],
    "to": [
@@ -2797,7 +2847,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    8,
+    9,
     629
    ],
    "to": [
@@ -2810,7 +2860,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    9,
+    10,
     633
    ],
    "to": [
@@ -2821,7 +2871,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    9,
+    10,
     635
    ],
    "to": [
@@ -2834,7 +2884,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    9,
+    10,
     635
    ],
    "to": [
@@ -2847,7 +2897,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    10,
+    11,
     535
    ],
    "to": [
@@ -2858,7 +2908,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    10,
+    11,
     537
    ],
    "to": [
@@ -2871,7 +2921,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    10,
+    11,
     538
    ],
    "to": [
@@ -2884,7 +2934,7 @@
    "type": "own_trip",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     221
    ],
    "to": [
@@ -2895,7 +2945,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     224
    ],
    "to": [
@@ -2908,7 +2958,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     226
    ],
    "to": [
@@ -2921,7 +2971,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     228
    ],
    "to": [
@@ -2934,7 +2984,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     229
    ],
    "to": [
@@ -2947,7 +2997,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     231
    ],
    "to": [
@@ -2960,7 +3010,7 @@
    "type": "calls",
    "from": [
     "arranging-the-views",
-    11,
+    12,
     232
    ],
    "to": [
@@ -3133,7 +3183,7 @@
    ],
    "to": [
     "arranging-the-views",
-    5,
+    6,
     382
    ]
   },
@@ -5476,7 +5526,7 @@
    ],
    "to": [
     "arranging-the-views",
-    8,
+    9,
     624
    ]
   },

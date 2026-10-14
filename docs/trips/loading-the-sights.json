@@ -1,7 +1,7 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "065e08c970a4a0ab5a51acf424aee4ac2d3dde6c",
+ "commit": "05e56284c645628cfd0de7ce293cb239ed1301c8",
  "sights": [
   "sw/reader.py:125-135",
   "sw/chat.py:200-208",

@@ -132,12 +132,13 @@ From an offset to Sublime's layout: every sight's cells at its place, shifted.
 - `sw/views.py:83-106` reader_layout
 - `sw/views.py:73-80` to_layout
 
-## 9. Arranging the views (12 views)
+## 9. Arranging the views (13 views)
 
 After a new layout: every view into its group, then back at its place.
 
 - `sw/reader.py:353-366` Reader.arrange
 - `sw/reader.py:311-316` Reader.place
+- `sw/reader.py:289-300` Reader.strip_in_front
 - `sw/reader.py:318-339` Reader.assign_groups
 - `sw/views.py:60-63` hide_chrome
 - `sw/reader.py:409-420` Reader.scroll_views

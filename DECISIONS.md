@@ -198,6 +198,8 @@ Open:
 
 - The strip in three parts (Jakub, 2026-10-14): beside the bench, beside its status line and the Tools header, beside the Tools pane (`strip_rows`); the strip and two clones of it, so the marks show in every part, each scrolled to the lines beside it. While the bench and the tool take the wheel only the outer parts reach over them; the middle one does not, so the status line and the Tools header keep their borders, both as wide as ever. (Putting the status line's cell before the strip's, asked first, was already so: the short border was the bench's.) Seen by Claude: the parts, a mark on the strip level with its line, the status line and header with their borders. The part beside the bench ends where the bench does and the middle part reaches up under it, so the corner where the bench's border meets the status line's is closed and no border runs across the strip (Jakub caught a 2 px gap there). (Verified by Jakub, 2026-10-14.)
 
+- A tool keeps its place in its content across primary+s (Jakub, 2026-10-14: the Map went back to the top of its image, so its lower part could not be kept in view while the panorama scrolled): how far down the Map or the Tour is scrolled is kept per view (`tool_offsets`) and stays while it takes the wheel. Seen by Claude: the Map scrolled to its lower part, switched on, the wheel over it moved the trip and the Map stayed there. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

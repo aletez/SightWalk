@@ -32,14 +32,15 @@ def make_tool(window, name):
     return view
 
 
-def set_panning(view, on):
+def set_panning(view, on, offset=0.0):
     """A tool's pane taking the wheel for the panorama (Jakub): blank lines either way of its
-    content, like the fillers, so the wheel moves it both ways; off, its content alone."""
+    content, like the fillers, so the wheel moves it both ways; off, its content alone, scrolled
+    offset px down, as far as it was while it took the wheel."""
     view.set_read_only(False)
     view.run_command("sight_walk_replace", {"text": "\n" * (2 * BLANK_LINES) if on else " "})
     view.set_read_only(True)
     if not on:
-        view.set_viewport_position((0.0, 0.0), False)
+        view.set_viewport_position((0.0, offset), False)
 
 
 def content_point(view):

@@ -111,6 +111,7 @@ class Reader(Geometry):
         self.map_view = vetting.make_tool(self.window, "Map")
         self.tour_view = vetting.make_tool(self.window, "Tour")
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
+        self.tool_offsets = {}  # {view id: px down its content}, kept while a tool takes the wheel
         for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
         self.chat.settings().set("scroll_past_end", self.pan)
@@ -419,7 +420,8 @@ class Reader(Geometry):
         places += [(part, self.strip_place() + top - self.head())
                    for part, (top, _) in zip(self.strip_parts, self.strip_rows())]
         if self.pan:
-            places += [(self.tool_view(), anchor(self.tool_view())),
+            tool = self.tool_view()
+            places += [(tool, anchor(tool) + self.tool_offsets.get(tool.id(), 0.0)),
                        (self.chat, chat.bottom_place(self.chat))]
         return places
 
@@ -679,7 +681,10 @@ class Reader(Geometry):
         """primary+s: the wheel over the bench, Map and Tour moves the whole trip, or them."""
         self.pan = not self.pan
         for view in (self.map_view, self.tour_view):
-            vetting.set_panning(view, self.pan)
+            # How far down its content the tool is scrolled stays across the switch (Jakub).
+            y = view.viewport_position()[1]
+            self.tool_offsets[view.id()] = max(y - anchor(view) if not self.pan else y, 0.0)
+            vetting.set_panning(view, self.pan, self.tool_offsets[view.id()])
         self.chat.settings().set("scroll_past_end", self.pan)  # so the wheel moves it down too
         self.show_headers()
         self.select_tool(self.tool)  # lays out again, draws the tools at their new place

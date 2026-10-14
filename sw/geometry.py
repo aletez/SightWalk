@@ -95,7 +95,11 @@ class Geometry:
         floor = self.height - self.floor_height()
         rows = self.strip_rows()
         rects += [(strip_left, -OVERLAP, strip_right, self.head() + OVERLAP)]
-        rects += [(strip_left, top, strip_right, bottom + OVERLAP) for top, bottom in rows]
+        # The part beside the bench ends where the bench does: reaching lower, it would cover the
+        # corner where the bench's border meets the status line's (Jakub); the middle part
+        # reaches up under it instead, so no border runs across the strip.
+        rects += [(strip_left, top - (OVERLAP if k == 1 else 0.0), strip_right,
+                   bottom + (OVERLAP if k else 0.0)) for k, (top, bottom) in enumerate(rows)]
         rects += [(strip_left, floor, strip_right, self.height)]
         views += [self.strip_header] + self.strip_parts[:len(rows)] + [self.strip_floor]
         return rects, views

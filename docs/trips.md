@@ -36,10 +36,10 @@ From the HTTP server's thread to the show operation on Sublime's, with every che
 - `sw/bridge.py:88-96` op_show
 - `sw/bridge.py:82-85` check_not_stopped
 - `sw/bridge.py:53-66` make_trip
-- `sw/ontology.py:108-116` Sight.parse
-- `sw/ontology.py:130-134` Trip.__init__
-- `sw/ontology.py:73-80` Network.__init__
-- `sw/ontology.py:89-98` Network.problem
+- `sw/ontology.py:125-133` Sight.parse
+- `sw/ontology.py:153-157` Trip.__init__
+- `sw/ontology.py:89-96` Network.__init__
+- `sw/ontology.py:105-115` Network.problem
 - `sw/bridge.py:31-45` check_sights
 - `sw/spec.py:9-22` parse_spec
 - `sw/bridge.py:26-28` file_lines
@@ -431,37 +431,46 @@ The agent's view of the settings, and colour helpers.
 - `sw/tint.py:27-28` hex_rgb
 - `sw/tint.py:164-169` apply_grey
 
-## 30. The ontology: collections and sights (11 views, survey)
+## 30. The ontology: collections and sights (16 views, survey)
 
 Members without order, sequences one can walk, places as paths into them, and the sight.
 
 - `sw/ontology.py:12-14` slug
 - `sw/ontology.py:21-22` Collection.__init__
 - `sw/ontology.py:24-26` Collection.member
-- `sw/ontology.py:28-34` Collection.has_place
-- `sw/ontology.py:41-42` Sequence.__iter__
-- `sw/ontology.py:44-45` Sequence.__len__
-- `sw/ontology.py:47-49` Sequence.member
-- `sw/ontology.py:104-106` Sight.__init__
-- `sw/ontology.py:108-116` Sight.parse
-- `sw/ontology.py:118-120` Sight.spec
-- `sw/ontology.py:122-123` Sight.member
+- `sw/ontology.py:28-29` Collection.has_place
+- `sw/ontology.py:31-43` Collection.place_problem
+- `sw/ontology.py:45-47` Collection.label
+- `sw/ontology.py:49-50` Collection.member_label
+- `sw/ontology.py:142-143` Sight.label
+- `sw/ontology.py:145-146` Sight.member_label
+- `sw/ontology.py:57-58` Sequence.__iter__
+- `sw/ontology.py:60-61` Sequence.__len__
+- `sw/ontology.py:63-65` Sequence.member
+- `sw/ontology.py:121-123` Sight.__init__
+- `sw/ontology.py:125-133` Sight.parse
+- `sw/ontology.py:135-137` Sight.spec
+- `sw/ontology.py:139-140` Sight.member
 
-## 31. The ontology: networks (11 views, survey)
+## 31. The ontology: networks (15 views, survey)
 
 Transitions between places, checked; the trip, the informator and the holiday.
 
-- `sw/ontology.py:73-80` Network.__init__
-- `sw/ontology.py:82-87` Network.add
-- `sw/ontology.py:89-98` Network.problem
-- `sw/ontology.py:56-57` Transition.__init__
-- `sw/ontology.py:59-60` Transition.__eq__
-- `sw/ontology.py:62-63` Transition.__repr__
-- `sw/ontology.py:65-66` Transition.parts
-- `sw/ontology.py:130-134` Trip.__init__
-- `sw/ontology.py:136-141` Trip.moved
-- `sw/ontology.py:148-149` Informator.member
-- `sw/ontology.py:155-160` Holiday.__init__
+- `sw/ontology.py:89-96` Network.__init__
+- `sw/ontology.py:98-103` Network.add
+- `sw/ontology.py:105-115` Network.problem
+- `sw/ontology.py:72-73` Transition.__init__
+- `sw/ontology.py:75-76` Transition.__eq__
+- `sw/ontology.py:78-79` Transition.__repr__
+- `sw/ontology.py:81-82` Transition.parts
+- `sw/ontology.py:153-157` Trip.__init__
+- `sw/ontology.py:159-160` Trip.label
+- `sw/ontology.py:162-163` Trip.member_label
+- `sw/ontology.py:165-170` Trip.moved
+- `sw/ontology.py:177-178` Informator.member
+- `sw/ontology.py:180-181` Informator.label
+- `sw/ontology.py:183-184` Informator.member_label
+- `sw/ontology.py:190-195` Holiday.__init__
 
 ## 32. Questions the code already asks (10 views)
 

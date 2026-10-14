@@ -26,12 +26,28 @@ class Collection:
         return None
 
     def has_place(self, path):
+        return self.place_problem(path) is None
+
+    def place_problem(self, path):
+        """Why path is no place in the collection, or None if it is one."""
         if not path:
-            return True
+            return None
         found = self.member(path[0])
         if found is None:
-            return False
-        return len(path) == 1 or (isinstance(found, Collection) and found.has_place(path[1:]))
+            return "%s is not in %s" % (self.member_label(path[0]), self.label())
+        if len(path) == 1:
+            return None
+        if not isinstance(found, Collection):
+            return "%s has nothing inside" % self.member_label(path[0])
+        why = found.place_problem(path[1:])
+        return why and "%s: %s" % (self.member_label(path[0]), why)
+
+    def label(self):
+        """How a message names the collection."""
+        return "it"
+
+    def member_label(self, key):
+        return repr(key)
 
 
 class Sequence(Collection):
@@ -92,9 +108,10 @@ class Network(Collection):
         if transition.type in INFORMATOR_ONLY and not isinstance(self, Informator):
             return "%s belongs to an informator, not a trip" % transition.type
         for end in ("source", "target"):
-            if not self.has_place(getattr(transition, end)):
-                return "%s %s → %s: the %s is no place here" % (
-                    transition.type, list(transition.source), list(transition.target), end)
+            why = self.place_problem(getattr(transition, end))
+            if why:
+                return "%s %s → %s: the %s: %s" % (
+                    transition.type, list(transition.source), list(transition.target), end, why)
         return None
 
 
@@ -122,6 +139,12 @@ class Sight(Sequence):
     def member(self, key):
         return key if isinstance(key, int) and self.begin <= key <= self.end else None
 
+    def label(self):
+        return self.spec
+
+    def member_label(self, key):
+        return "line %r" % (key,)
+
 
 class Trip(Sequence, Network):
     """A sequence of sights chosen for one question, and a network of transitions between them:
@@ -132,6 +155,12 @@ class Trip(Sequence, Network):
             raise ValueError("%s: unknown kind %r (kinds: %s)" % (name, kind, ", ".join(KINDS)))
         self.kind = kind
         Network.__init__(self, name, sights, transitions, commit)
+
+    def label(self):
+        return "the trip (sights 0 to %d)" % (len(self) - 1)
+
+    def member_label(self, key):
+        return "sight %r" % (key,)
 
     def moved(self, sights):
         """The same trip over sights at new ranges (an edit moved them), keeping the transitions
@@ -147,6 +176,12 @@ class Informator(Network):
 
     def member(self, key):
         return next((trip for trip in self.members if trip.id == key), None)
+
+    def label(self):
+        return "the informator " + self.name
+
+    def member_label(self, key):
+        return "trip %r" % (key,)
 
 
 class Holiday(Sequence):

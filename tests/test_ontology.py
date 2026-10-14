@@ -62,6 +62,14 @@ class TripTest(unittest.TestCase):
         self.assertIn("source", str(caught.exception))
         self.assertIn("target", str(caught.exception))
 
+    def test_messages_name_the_wrong_part(self):
+        trip = Trip("t", two_sights())
+        self.assertEqual(trip.place_problem((0, 99)), "sight 0: line 99 is not in sw/a.py:10-20")
+        self.assertEqual(trip.place_problem((2, 5)), "sight 2 is not in the trip (sights 0 to 1)")
+        problem = trip.problem(Transition("calls", (0, 12), (1, 50)))
+        self.assertEqual(problem, "calls [0, 12] → [1, 50]: the target: sight 1: line 50 is not "
+                                  "in sw/b.py:5-9")
+
     def test_moved_keeps_what_fits(self):
         fits, lost = Transition("calls", (0, 12), (1, 5)), Transition("calls", (0, 19), (1, 9))
         trip = Trip("t", two_sights(), [fits, lost], commit="c", kind="survey")

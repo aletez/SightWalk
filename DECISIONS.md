@@ -186,6 +186,8 @@ Open:
 
 - The holiday renamed the tour (Jakub, 2026-10-14; Polish: turnus, not urlop or wczasy): a stay with a set plan and order, as a tour is a planned sequence of trips. In code Tour, tour(), docs/tours/, the Tour tab, "SightWalk: Open Tour". Entries above keep the old name.
 
+- SightWalk in Polish (Jakub, 2026-10-14): the setting `language` ("en" or "pl"), switched by "SightWalk: Switch Language (English / Polski)", changes at once in open trips every word the user reads: headers (Ławka, Panorama), tabs (Mapa, Turnus, Przewijanie), buttons (Edytuj (Enter), Przywróć położenia, Zatrzymaj (Esc)), help popups, notes, the guide's status, "(zatrzymano)", the trips' kinds, the tour list, dialogs and errors; the words live in `sw/words.py`. Not translated: the command palette's captions (Sublime reads them from a file), the setup panel, the trips' own names, and what goes to the agent. Open Tour: "SightWalk: All trips", each tour with its number of trips under it ("37 trips", "37 wycieczek"). Seen by Claude: the tour list, a tour opened, the switch to Polish in an open trip. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

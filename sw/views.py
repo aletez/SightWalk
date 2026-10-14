@@ -6,6 +6,7 @@ import sublime
 
 from .config import (BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES,
                      STRIP_ICON_SHIFT)
+from .words import word
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
                  ("highlight_line", False), ("scroll_past_end", True), ("sight_walk", True))
@@ -22,9 +23,13 @@ ICON_FLAGS = sublime.DRAW_NO_FILL | sublime.DRAW_NO_OUTLINE
 STRIP_IMG = '<img src="res://Packages/SightWalk/icons/%s@3x.png" width="%d" height="%d">'
 FADED = "color(var(--foreground) alpha(0.45))"
 # Faded and outlined at all times, so it reads as a control, not as text.
-BUTTON = "Edit (Enter)"
-BUTTON_HTML = ('<a href="edit" style="color: %s; text-decoration: none; border: 1px solid %s; '
-               'border-radius: 3px; padding: 0 4px">%s</a>' % (FADED, FADED, BUTTON))
+BUTTON_STYLE = ('style="color: %s; text-decoration: none; border: 1px solid %s; border-radius: 3px; '
+                'padding: 0 4px"' % (FADED, FADED))
+
+
+def button_html(label, href="edit"):
+    """A faded, outlined button: the sign of something read-only (Jakub)."""
+    return '<a href="%s" %s>%s</a>' % (href, BUTTON_STYLE, label)
 # A zero-width space: Sublime leaves out an empty phantom.
 GAP_HTML = '<span style="padding-left: %dpx">&#8203;</span>' % GAP_PX
 # view id: what SightWalk keeps for that view (phantom sets, text last drawn). Forgotten when the
@@ -216,14 +221,16 @@ def header_top(view):
 def draw_edit_button(header, text, on_click):
     """The header's text, padded so the edit button sits at its right edge."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
-    padded = text.ljust(max(columns - len(BUTTON) - 4, len(text) + 1))
-    if kept(header).get("edit_text") == padded:
+    label = word("edit")
+    padded = text.ljust(max(columns - len(label) - 4, len(text) + 1))
+    if kept(header).get("edit_text") == (padded, label):
         return
-    kept(header)["edit_text"] = padded
+    kept(header)["edit_text"] = (padded, label)
     write_header(header, padded)
     point = header.line(header.text_point(ROOM_LINES, 0)).b
     phantoms(header, "sight_walk_edit").update([
-        sublime.Phantom(sublime.Region(point), BUTTON_HTML, sublime.LAYOUT_INLINE, on_click)])
+        sublime.Phantom(sublime.Region(point), button_html(label), sublime.LAYOUT_INLINE,
+                        on_click)])
 
 
 # Drawing on code views

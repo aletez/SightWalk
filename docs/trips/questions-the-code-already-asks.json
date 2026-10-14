@@ -1,11 +1,11 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "54b2a86b4d7bbe0d4203cc24c140a1e54d25dabe",
+ "commit": "3e2526cb2c6b3e7104880a447c9e1f1a4acd3407",
  "sights": [
-  "sw/reader.py:189-202",
-  "sw/asked.py:32-43",
-  "sw/asked.py:19-29",
+  "sw/reader.py:190-203",
+  "sw/asked.py:33-44",
+  "sw/asked.py:20-30",
   "sw/questions.py:62-77",
   "sw/questions.py:58-59",
   "sw/questions.py:48-55",
@@ -17,22 +17,22 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 197],
-   "to": [1, 32]
+   "from": [0, 198],
+   "to": [1, 33]
   },
   {
    "type": "calls",
-   "from": [1, 40],
-   "to": [2, 19]
+   "from": [1, 41],
+   "to": [2, 20]
   },
   {
    "type": "calls",
-   "from": [1, 40],
+   "from": [1, 41],
    "to": [3, 62]
   },
   {
    "type": "calls",
-   "from": [1, 42],
+   "from": [1, 43],
    "to": [8, 92]
   },
   {

@@ -61,4 +61,5 @@ def render_all():
     for reader in list(READERS.values()):
         if reader.ready and reader.window.is_valid():
             reader.render()
+            reader.draw_tour()  # its words may be in another language now
 

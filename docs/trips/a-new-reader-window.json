@@ -1,27 +1,27 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "54b2a86b4d7bbe0d4203cc24c140a1e54d25dabe",
+ "commit": "3e2526cb2c6b3e7104880a447c9e1f1a4acd3407",
  "sights": [
   "sw/bridge.py:68-78",
-  "sw/reader.py:58-79",
-  "sw/reader.py:81-119",
-  "sw/views.py:170-179",
-  "sw/views.py:182-186",
-  "sw/views.py:130-137",
-  "sw/views.py:106-113",
-  "sw/chat.py:69-75",
-  "sw/chat.py:78-87",
-  "sw/chat.py:115-124",
-  "sw/vetting.py:32-36",
-  "sw/vetting.py:39-45",
+  "sw/reader.py:59-80",
+  "sw/reader.py:82-120",
+  "sw/views.py:175-184",
+  "sw/views.py:187-191",
+  "sw/views.py:135-142",
+  "sw/views.py:111-118",
+  "sw/chat.py:73-79",
+  "sw/chat.py:82-91",
+  "sw/chat.py:119-128",
+  "sw/vetting.py:29-33",
+  "sw/vetting.py:36-42",
   "sw/state.py:19-22"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 73],
-   "to": [1, 58]
+   "to": [1, 59]
   },
   {
    "type": "calls",
@@ -30,123 +30,123 @@
   },
   {
    "type": "calls",
-   "from": [1, 79],
-   "to": [2, 81]
+   "from": [1, 80],
+   "to": [2, 82]
   },
   {
    "type": "calls",
-   "from": [2, 84],
-   "to": [5, 130]
+   "from": [2, 85],
+   "to": [5, 135]
   },
   {
    "type": "calls",
-   "from": [2, 86],
-   "to": [5, 130]
+   "from": [2, 87],
+   "to": [5, 135]
   },
   {
    "type": "calls",
-   "from": [2, 90],
-   "to": [5, 130]
+   "from": [2, 91],
+   "to": [5, 135]
   },
   {
    "type": "calls",
-   "from": [2, 93],
-   "to": [5, 130]
+   "from": [2, 94],
+   "to": [5, 135]
   },
   {
    "type": "calls",
-   "from": [2, 96],
-   "to": [6, 106]
+   "from": [2, 97],
+   "to": [6, 111]
   },
   {
    "type": "calls",
-   "from": [2, 99],
-   "to": [7, 69]
-  },
-  {
-   "type": "calls",
-   "from": [2, 101],
-   "to": [8, 78]
+   "from": [2, 100],
+   "to": [7, 73]
   },
   {
    "type": "calls",
    "from": [2, 102],
-   "to": [8, 78]
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 103],
-   "to": [8, 78]
+   "to": [8, 82]
   },
   {
    "type": "calls",
-   "from": [2, 108],
-   "to": [3, 170]
+   "from": [2, 104],
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 109],
-   "to": [10, 32]
+   "to": [3, 175]
   },
   {
    "type": "calls",
    "from": [2, 110],
-   "to": [11, 39]
+   "to": [10, 29]
   },
   {
    "type": "calls",
    "from": [2, 111],
-   "to": [11, 39]
+   "to": [11, 36]
   },
   {
    "type": "calls",
-   "from": [2, 116],
-   "to": [8, 78]
+   "from": [2, 112],
+   "to": [11, 36]
   },
   {
    "type": "calls",
    "from": [2, 117],
-   "to": [9, 115]
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 118],
-   "to": [3, 170]
+   "to": [9, 119]
   },
   {
    "type": "calls",
-   "from": [5, 133],
-   "to": [6, 106]
+   "from": [2, 119],
+   "to": [3, 175]
   },
   {
    "type": "calls",
-   "from": [8, 81],
-   "to": [6, 106]
+   "from": [5, 138],
+   "to": [6, 111]
   },
   {
    "type": "calls",
-   "from": [8, 84],
-   "to": [4, 182]
+   "from": [8, 85],
+   "to": [6, 111]
   },
   {
    "type": "calls",
-   "from": [9, 119],
-   "to": [6, 106]
+   "from": [8, 88],
+   "to": [4, 187]
   },
   {
    "type": "calls",
-   "from": [10, 33],
-   "to": [5, 130]
+   "from": [9, 123],
+   "to": [6, 111]
   },
   {
    "type": "calls",
-   "from": [10, 34],
-   "to": [4, 182]
+   "from": [10, 30],
+   "to": [5, 135]
   },
   {
    "type": "calls",
-   "from": [11, 41],
-   "to": [6, 106]
+   "from": [10, 31],
+   "to": [4, 187]
+  },
+  {
+   "type": "calls",
+   "from": [11, 38],
+   "to": [6, 111]
   }
  ]
 }

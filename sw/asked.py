@@ -9,6 +9,7 @@ import sublime
 from . import questions
 from .spec import repo_root
 from .views import kept
+from .words import word
 
 SKIP = ("__pycache__", "venv", ".venv", "node_modules")
 MAX_FILES = 500
@@ -76,7 +77,7 @@ def popup_html(missing, known):
         for path, line, function, text in known[question][:3]:
             rows.append("<code>%s</code><br><small>%s:%d, %s</small>" % (
                 escape(text), escape(os.path.basename(path)), line, escape(function)))
-    return ("<div><b>The code asks this elsewhere:</b><br>%s</div>" % "<br>".join(rows))
+    return "<div><b>%s</b><br>%s</div>" % (word("asked"), "<br>".join(rows))
 
 
 def escape(text):

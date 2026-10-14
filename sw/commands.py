@@ -8,7 +8,9 @@ import sublime
 import sublime_plugin
 
 from . import asked, bridge, chat, guide, scrollbars, state
+from .config import SETTINGS_FILE
 from .spec import repo_root
+from .words import trips_count, word
 
 
 class SightWalkReplaceCommand(sublime_plugin.TextCommand):
@@ -168,7 +170,7 @@ class SightWalkStopAnswerCommand(sublime_plugin.TextCommand):
 
 class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
     def run(self):
-        if sublime.ok_cancel_dialog("Close the Vetting Trip window?", "Close"):
+        if sublime.ok_cancel_dialog(word("close_trip"), word("close")):
             self.window.run_command("close_window")
 
 
@@ -180,10 +182,10 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
     def run(self):
         found = tour_choices()
         if not found:
-            sublime.error_message("SightWalk found no informators/*.json in the open folders.")
+            sublime.error_message(word("no_informators"))
             return
-        self.window.show_quick_panel([label for label, _, _ in found],
-                                     lambda i: i >= 0 and self.open(*found[i][1:]))
+        self.window.show_quick_panel([[label, trips_count(n)] for label, n, _, _ in found],
+                                     lambda i: i >= 0 and self.open(*found[i][2:]))
 
     def open(self, informator, tour):
         reader = state.current_reader() or bridge.new_reader()
@@ -193,16 +195,18 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
 
 
 def tour_choices():
-    """(label, informator's file, tour's file or None) for every tour to choose from, each
-    labelled "informator: tour", one line, no paths (Jakub)."""
+    """(label, number of trips, informator's file, tour's file or None) for every tour to choose
+    from, each labelled "informator: tour", its number of trips under it (Jakub)."""
     found = []
     for path in found_files("informators"):
-        found.append((read_name(path) + ": all trips", path, None))
+        found.append((read_name(path) + ": " + word("all_trips"), len(read_field(path, "trips")),
+                      path, None))
     for path in found_files("tours"):
         informator = os.path.normpath(os.path.join(os.path.dirname(path),
                                                    read_field(path, "informator")))
         # Named after its informator too, like the whole one (Jakub).
-        found.append((read_name(informator) + ": " + read_name(path), informator, path))
+        found.append((read_name(informator) + ": " + read_name(path),
+                      len(read_field(path, "trips")), informator, path))
     return found
 
 
@@ -229,6 +233,15 @@ def read_field(path, key):
             return json.load(f).get(key, "")
     except (OSError, ValueError):
         return ""
+
+
+class SightWalkSwitchLanguageCommand(sublime_plugin.ApplicationCommand):
+    """The plugin's words in English or Polish (Jakub): the setting language, switched."""
+
+    def run(self):
+        settings = sublime.load_settings(SETTINGS_FILE)
+        settings.set("language", "en" if settings.get("language", "en") == "pl" else "pl")
+        sublime.save_settings(SETTINGS_FILE)
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):

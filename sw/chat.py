@@ -8,7 +8,8 @@ import sublime_plugin
 
 from .config import PROMPT
 from .header import MARK_ROOM, title_lines
-from .views import BUTTON, BUTTON_HTML, FADED, kept, make_side_view, match_font, phantoms
+from .views import FADED, button_html, kept, make_side_view, match_font, phantoms
+from .words import word
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 
@@ -19,13 +20,16 @@ GUARDS = {}
 # The one conversation, carried from trip to trip (Jakub).
 TRANSCRIPT = ""
 MAC = sublime.platform() == "osx"
-KEYS = (("Enter (⇧+Enter: new line)", "⌃⌘↓", "⌃⌘↑") if MAC
-        else ("Enter (Shift+Enter: new line)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
+KEYS = (("Enter (⇧+Enter: %s)", "⌃⌘↓", "⌃⌘↑") if MAC
+        else ("Enter (Shift+Enter: %s)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
 # The help mark: faded and outlined at all times, so it reads as read-only.
 MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1px solid %s; '
              'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))
-HELP_HTML = ("<div><b>%s</b> send<br><b>%s</b> explain next<br><b>%s</b> explain previous</div>"
-             % KEYS)
+def help_html():
+    """The bench's keys, in the user's language."""
+    send, nxt, previous = KEYS
+    return "<div><b>%s</b> %s<br><b>%s</b> %s<br><b>%s</b> %s</div>" % (
+        send % word("new_line"), word("send"), nxt, word("next"), previous, word("previous"))
 
 
 def protected_end(end, changes):
@@ -100,12 +104,12 @@ def show_header(view, title, status, help_mark=True, button=None):
     view.run_command("sight_walk_replace", {"text": text})
     point = view.line(0).b
     if button is not None:
-        html = BUTTON_HTML.replace('href="edit"', 'href="b"').replace(BUTTON, button[0])
+        html = button_html(button[0], "b")
         mark[0].update([sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
                                         lambda _: button[1]())])
         return
     phantom = sublime.Phantom(sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
-                              lambda _: view.show_popup(HELP_HTML, location=point))
+                              lambda _: view.show_popup(help_html(), location=point))
     mark[0].update([phantom] if help_mark else [])
 
 
@@ -126,13 +130,12 @@ def make_status(window, conversation):
 
 def show_status(view, text, on_stop=None):
     """on_stop: while an answer is on its way, a [Stop] button after the text calls it."""
-    if kept(view).get("status") == (text, bool(on_stop)):
+    if kept(view).get("status") == (text, bool(on_stop), word("stop")):
         return
-    kept(view)["status"] = (text, bool(on_stop))
+    kept(view)["status"] = (text, bool(on_stop), word("stop"))
     html = STATUS_HTML % text.replace("&", "&amp;").replace("<", "&lt;")
     if on_stop:
-        html += "&nbsp;&nbsp;" + BUTTON_HTML.replace('href="edit"', 'href="stop"').replace(
-            BUTTON, "Stop (Esc)")
+        html += "&nbsp;&nbsp;" + button_html(word("stop"), "stop")
     phantoms(view, "sight_walk_status").update([sublime.Phantom(
         sublime.Region(0), html, sublime.LAYOUT_INLINE, lambda _: on_stop and on_stop())])
 
@@ -141,7 +144,7 @@ def show_help(view, point):
     """On hovering the right end of the first line, where the mark sits."""
     end = view.line(0).b
     if end - MARK_ROOM <= point <= end:
-        view.show_popup(HELP_HTML, sublime.HIDE_ON_MOUSE_MOVE_AWAY, end)
+        view.show_popup(help_html(), sublime.HIDE_ON_MOUSE_MOVE_AWAY, end)
 
 
 def say(view, text, prefix="A: "):

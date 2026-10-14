@@ -1,4 +1,8 @@
 {
+    // The language of SightWalk's words (headers, tabs, buttons, notes): "en" or "pl".
+    // "SightWalk: Switch Language" in the command palette switches it.
+    "language": "en",
+
     // Port of the local bridge. The token is written to your User settings by the setup command.
     "port": 47321,
 

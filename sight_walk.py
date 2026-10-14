@@ -8,7 +8,7 @@ import sublime
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import guide, mcp_http, scrollbars, state  # noqa: E402
+from .sw import guide, mcp_http, scrollbars, state, words  # noqa: E402
 from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkChatListener,
@@ -23,6 +23,7 @@ from .sw.commands import (  # noqa: E402,F401
     SightWalkScrollCommand,
     SightWalkSendCommand,
     SightWalkSightListener,
+    SightWalkSwitchLanguageCommand,
     SightWalkStopAnswerCommand,
     SightWalkStopGuideCommand,
     SightWalkToggleSentinelsCommand,
@@ -35,8 +36,15 @@ from .sw.setup import SightWalkRestartCommand, SightWalkSetupCommand  # noqa: E4
 
 def plugin_loaded():
     mcp_http.start()
-    sublime.load_settings("SightWalk.sublime-settings").add_on_change("sight_walk_layout",
-                                                                    state.render_all)
+    settings = sublime.load_settings("SightWalk.sublime-settings")
+    words.set_language(settings.get("language"))
+    settings.add_on_change("sight_walk_layout", settings_changed)
+
+
+def settings_changed():
+    """A changed setting shows at once, the language included."""
+    words.set_language(sublime.load_settings("SightWalk.sublime-settings").get("language"))
+    state.render_all()
 
 
 def plugin_unloaded():

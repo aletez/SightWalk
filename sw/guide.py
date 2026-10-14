@@ -11,6 +11,7 @@ import sublime
 
 from . import state
 from .config import GUIDE_IDLE_S, SETTINGS_FILE
+from .words import word
 
 LOG = os.path.join(os.path.expanduser("~"), ".sight_walk", "guide.log")
 # Where Claude Code is usually installed; Sublime does not see the shell's PATH.
@@ -21,8 +22,6 @@ PROMPT = ("You are the Vetting guide. The user talks to you in SightWalk, in Sub
           "user wants to walk through code, call show. A message with selected is about exactly "
           "that text, not the function around it. On a timeout, call wait_for_user again at once "
           "and say nothing: never announce that you wait. Never end your turn.")
-COMING = "the guide is coming…"
-THINKING = "the guide is thinking…"
 TOOLS = ["mcp__sight-walk", "Read", "Grep", "Glob"]
 PROCESS = None  # the guide SightWalk started, if it did
 LAST_ASKED = 0.0  # when the user last sent the guide something
@@ -51,8 +50,7 @@ def ensure(folder):
         return False
     claude = find_claude()
     if claude is None:
-        sublime.error_message("SightWalk could not find Claude Code. Set \"claude_path\" in "
-                              "Preferences: SightWalk Settings, or start claude yourself.")
+        sublime.error_message(word("no_claude"))
         return False
     sublime.set_timeout_async(lambda: start(claude, folder), 0)
     return True
@@ -94,4 +92,4 @@ def await_answer(owner):
     starts if none listens, so the user never waits without knowing (Jakub)."""
     global LAST_ASKED
     LAST_ASKED = time.time()
-    owner.note_waiting(COMING if ensure(owner.folder()) else THINKING)
+    owner.note_waiting(word("coming") if ensure(owner.folder()) else word("thinking"))

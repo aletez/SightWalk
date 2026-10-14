@@ -189,7 +189,7 @@ class AuthoredTourTest(unittest.TestCase):
     def test_round_trip_and_name(self):
         a, b, c = trips("A", "B", "C")
         informator = Informator("I", [a, b, c])
-        self.assertEqual(tour(informator).name, "I: all trips")
+        self.assertEqual(tour(informator).name, "I: All trips")
         chosen = Tour(informator, [c, a], (), "Talking")
         data = tour_data(chosen, "../informators/i.json")
         self.assertEqual(data["trips"], ["c", "a"])

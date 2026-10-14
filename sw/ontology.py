@@ -200,7 +200,7 @@ class Tour(Sequence):
             raise ValueError("not in %s: %s" % (informator.name, ", ".join(stray)))
         super().__init__(trips)
         self.informator, self.types = informator, tuple(types)
-        self.name = name or "%s: all trips" % informator.name
+        self.name = name or "%s: All trips" % informator.name
 
 
 def tour(informator, types=("leads_to", "101s")):

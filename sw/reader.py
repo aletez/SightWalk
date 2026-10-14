@@ -22,6 +22,7 @@ from .editor import Editor
 from .geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
+from .words import word
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint, hue_for, tint_color
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
@@ -569,12 +570,13 @@ class Reader(Geometry):
     # Conversation
 
     def show_headers(self):
-        chat.show_header(self.chat_header, BENCH, "")
+        chat.show_header(self.chat_header, word("bench"), "")
+        self.chat.set_name(word("bench_view"))
         chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
         vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan)
-        chat.show_header(self.sights_header, SIGHTS, self.trip.name if self.trip else "",
-                         button=("Reset positions", self.reset_sights))
+        chat.show_header(self.sights_header, word("sights"), self.trip.name if self.trip else "",
+                         button=(word("reset"), self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
         chat.show_header(self.strip_header, "", "", help_mark=False)
 
@@ -654,6 +656,8 @@ class Reader(Geometry):
         self.informator.transcripts = read_transcripts(path)
         self.tour = ontology.tour_from(read_json(tour), self.informator) if tour \
             else ontology.tour(self.informator)
+        if not tour:
+            self.tour.name = "%s: %s" % (self.informator.name, word("all_trips"))
         self.walked = vetting.read_walked(self.informator.id)
         self.tool = "Tour"
         first = next((t for t in self.tour if t.id not in self.walked), self.tour.members[0])
@@ -729,7 +733,7 @@ class Reader(Geometry):
             return
         state.STOPPED, self.note = True, ""
         self.withdraw_unread_messages()
-        self.say("(stopped)", prefix="")
+        self.say(word("stopped"), prefix="")
 
     def withdraw_unread_messages(self):
         """A message no agent has taken yet is withdrawn."""

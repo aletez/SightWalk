@@ -1,7 +1,7 @@
 {
  "name": "What the agent is told",
  "kind": "survey",
- "commit": "54b2a86b4d7bbe0d4203cc24c140a1e54d25dabe",
+ "commit": "3e2526cb2c6b3e7104880a447c9e1f1a4acd3407",
  "sights": [
   "sw/manual.py:4-17",
   "sw/manual.py:19-40",
@@ -12,8 +12,8 @@
   "sw/manual.py:106-110",
   "sw/manual.py:112-150",
   "sw/bridge.py:49-50",
-  "sw/guide.py:18-23",
-  "sw/guide.py:26-26"
+  "sw/guide.py:19-24",
+  "sw/guide.py:25-25"
  ],
  "transitions": [
   {

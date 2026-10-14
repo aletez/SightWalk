@@ -14,19 +14,16 @@ import sublime
 
 from .callmap import dot_source
 from .chat import MARK_HTML, SYNTAX
-from .config import SETTINGS_FILE
-from .config import BLANK_LINES
+from .config import BLANK_LINES, SETTINGS_FILE
 from .views import FADED, kept, make_blank_view, make_side_view, match_font, phantoms
+from .words import word
 
 TABS = ("Map", "Tour", "Scroll")
 SCROLL = "Scroll"
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
-NO_INFORMATOR = ("No tour is open: <i>SightWalk: Open Tour</i> in the command palette.")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
 MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
-NO_DOT = ("The map needs Graphviz: <code>brew install graphviz</code>, or set "
-          "<code>dot_path</code> in Preferences: SightWalk Settings.")
 
 
 def make(window, conversation):
@@ -61,26 +58,25 @@ def content_point(view):
 
 PAN_KEY = "ctrl+s"
 TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
-PAN_HELP = ("<div><b>%s</b> the wheel over Map and Tour: %s</div>"
-            % (PAN_KEY, "%s (press to change)"))
+PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
 
 def show_tabs(header, active, on_select, panning):
     """The tabs as links in the Tools pane's header, the shown one in bold, and at the right the
     help mark, as on the bench's header: what ctrl+s does (Jakub)."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
-    if kept(header).get("tabs") == (active, panning, columns):
+    if kept(header).get("tabs") == (active, panning, columns, word("Map")):
         return
-    kept(header)["tabs"] = (active, panning, columns)
+    kept(header)["tabs"] = (active, panning, columns, word("Map"))
     # The tabs, an inline phantom at the start, take about TABS_ROOM columns of the line.
     header.run_command("sight_walk_replace", {"text": " " * max(columns - 6 - TABS_ROOM, 1)})
-    state = "moves the whole trip" if panning else "scrolls the tool itself"
+    state = word("pan_on" if panning else "pan_off")
     point = header.line(0).b
     phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
         sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
-        lambda _: header.show_popup(PAN_HELP % state, location=point))])
-    links = ["<b>%s</b>" % t if t == active else
-             '<a href="%s" style="text-decoration: none">%s</a>' % (t, t) for t in TABS]
+        lambda _: header.show_popup(PAN_HELP % (word("pan") % state), location=point))])
+    links = ["<b>%s</b>" % word(t) if t == active else
+             '<a href="%s" style="text-decoration: none">%s</a>' % (t, word(t)) for t in TABS]
     html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
     html = html.join(links)
     phantoms(header, "sight_walk_tabs").update(
@@ -100,7 +96,7 @@ def draw_map(view, nodes, arrows, style):
     """Draws the map off the main thread (a subprocess would block the bridge), then shows it."""
     dot = find_dot()
     if dot is None:
-        show_note(view, NO_DOT)
+        show_note(view, word("no_dot"))
         return
     source = dot_source(nodes, arrows, style)
     sublime.set_timeout_async(lambda: render(view, dot, source), 0)
@@ -116,7 +112,7 @@ def render(view, dot, source):
                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)
         if done.returncode:
             msg = done.stderr.decode("utf-8", "replace")[:300]
-            sublime.set_timeout(lambda: show_note(view, "Graphviz failed: " + msg), 0)
+            sublime.set_timeout(lambda: show_note(view, word("dot_failed") + msg), 0)
             return
     sublime.set_timeout(lambda: show_image(view, path), 0)
 
@@ -149,12 +145,12 @@ def show_tour(view, tour, walked, current, on_select):
     """The tour's trips in order, each a link, and a box the user ticks for a trip walked
     (Jakub: never ticked by itself); the shown one in bold."""
     if tour is None:
-        return show_note(view, NO_INFORMATOR, "sight_walk_tour")
+        return show_note(view, word("no_tour"), "sight_walk_tour")
     rows = []
     for number, trip in enumerate(tour, 1):
         box = "☑" if trip.id in walked else "☐"
         name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
-        kind = ' <span style="color: %s">%s</span>' % (FADED, trip.kind) if trip.kind != "run" \
+        kind = ' <span style="color: %s">%s</span>' % (FADED, word(trip.kind)) if trip.kind != "run" \
             else ""
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'

@@ -1,13 +1,13 @@
 {
  "name": "Setting up the agent bridge",
  "kind": "run",
- "commit": "54b2a86b4d7bbe0d4203cc24c140a1e54d25dabe",
+ "commit": "3e2526cb2c6b3e7104880a447c9e1f1a4acd3407",
  "sights": [
   "sw/setup.py:32-38",
   "sw/setup.py:41-48",
   "sw/setup.py:51-57",
   "sw/setup.py:60-63",
-  "sw/commands.py:15-22"
+  "sw/commands.py:17-24"
  ],
  "transitions": [
   {
@@ -28,7 +28,7 @@
   {
    "type": "calls",
    "from": [3, 62],
-   "to": [4, 15]
+   "to": [4, 17]
   }
  ]
 }

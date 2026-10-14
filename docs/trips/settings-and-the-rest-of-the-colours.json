@@ -1,7 +1,7 @@
 {
  "name": "Settings and the rest of the colours",
  "kind": "survey",
- "commit": "295e0e6a6809644f2dcdaf9263292033140a1cf1",
+ "commit": "9d5b737605df346cbd170b108c8f1d875ad4d12b",
  "sights": [
   "sw/commands.py:94-95",
   "sw/tint.py:78-80",

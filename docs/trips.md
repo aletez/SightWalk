@@ -67,8 +67,8 @@ The window and every view but the sights.
 Files read, each sight's copy, header and frozen lines made.
 
 - `sw/reader.py:121-131` Reader.load
+- `sw/chat.py:190-198` catch_up
 - `sw/reader.py:175-185` Reader.close_sights
-- `sw/views.py:61-65` wait_until_loaded
 - `sw/reader.py:187-200` Reader.build
 - `sw/views.py:148-152` FileCopy.__init__
 - `sw/views.py:155-167` make_copy
@@ -132,7 +132,7 @@ From an offset to Sublime's layout: every sight's cells at its place, shifted.
 - `sw/views.py:78-101` reader_layout
 - `sw/views.py:68-75` to_layout
 
-## 9. Arranging the views (11 views)
+## 9. Arranging the views (12 views)
 
 After a new layout: every view into its group, then back at its place.
 
@@ -142,13 +142,14 @@ After a new layout: every view into its group, then back at its place.
 - `sw/views.py:55-58` hide_chrome
 - `sw/reader.py:387-398` Reader.scroll_views
 - `sw/reader.py:362-373` Reader.places
+- `sw/reader.py:420-424` Reader.strip_place
 - `sw/views.py:140-142` anchor
 - `sw/reader.py:601-608` Reader.draw_strip_buttons
 - `sw/reader.py:610-612` Reader.strip_button
 - `sw/reader.py:513-516` Reader.draw_edit_buttons
 - `sw/views.py:216-226` draw_edit_button
 
-## 10. Polling and the wheel (9 views)
+## 10. Polling and the wheel (8 views)
 
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
@@ -160,7 +161,6 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 - `sw/reader.py:375-379` Reader.wheel_places
 - `sw/reader.py:381-385` Reader.pinned_places
 - `sw/reader.py:51-54` item_top
-- `sw/reader.py:420-424` Reader.strip_place
 
 ## 11. Pointing (9 views)
 
@@ -214,7 +214,7 @@ Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages 
 - `sw/reader.py:712-719` Reader.stop_answer
 - `sw/reader.py:721-724` Reader.withdraw_unread_messages
 
-## 15. The Tools pane's tabs (11 views)
+## 15. The Tools pane's tabs (11 views, survey)
 
 Map and Scroll: the tab links, and the tab shown in the pane.
 
@@ -230,7 +230,7 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 - `sw/reader.py:622-623` Reader.hidden_tools
 - `sw/reader.py:677-685` Reader.draw_map
 
-## 16. The Map's nodes (8 views)
+## 16. The Map's nodes (10 views)
 
 The trip's definitions and the calls its author named, as nodes for the graph.
 
@@ -241,9 +241,11 @@ The trip's definitions and the calls its author named, as nodes for the graph.
 - `sw/callmap.py:32-38` first_definition
 - `sw/callmap.py:41-48` node_at
 - `sw/callmap.py:27-29` Node.__init__
+- `sw/callmap.py:51-58` edges
+- `sw/callmap.py:41-48` node_at
 - `sw/vetting.py:100-107` draw_map
 
-## 17. Drawing the Map (15 views)
+## 17. Drawing the Map (14 views)
 
 The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.
 
@@ -255,7 +257,6 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 - `sw/callmap.py:75-77` node_line
 - `sw/callmap.py:61-62` node_id
 - `sw/callmap.py:65-66` quote
-- `sw/callmap.py:51-58` edges
 - `sw/callmap.py:89-91` arrow
 - `sw/callmap.py:94-102` legend
 - `sw/vetting.py:110-122` render
@@ -263,7 +264,7 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 - `sw/vetting.py:130-138` show_image
 - `sw/vetting.py:141-144` show_note
 
-## 18. The user sends a message (8 views)
+## 18. The user sends a message (9 views)
 
 The draft becomes a message, with the focus, the visible sights and the edits, and the agent receives it.
 
@@ -272,11 +273,12 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/commands.py:29-32` send
 - `sw/state.py:32-33` reader_for
 - `sw/reader.py:741-755` Reader.context
+- `sw/views.py:278-282` selected_text
 - `sw/plan.py:109-112` visible_specs
 - `sw/reader.py:562-565` Reader.take_edits
 - `sw/bridge.py:214-228` wait_for_user
 
-## 19. Opening the editor (9 views)
+## 19. Opening the editor (10 views)
 
 Enter or the header's button: the editor laid over the sights, ranges and marks held.
 
@@ -284,6 +286,7 @@ Enter or the header's button: the editor laid over the sights, ranges and marks 
 - `sw/reader.py:530-535` Reader.sight_of
 - `sw/reader.py:518-528` Reader.open_editor
 - `sw/editor.py:22-30` Editor.__init__
+- `sw/views.py:61-65` wait_until_loaded
 - `sw/editor.py:14-18` open_live
 - `sw/editor.py:32-37` Editor.start
 - `sw/editor.py:39-51` Editor.track
@@ -366,15 +369,13 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `sw/guide.py:61-70` start
 - `sw/bridge.py:214-228` wait_for_user
 
-## 25. Talking on the bench (5 views)
+## 25. Here, and asking by a shortcut (3 views)
 
-A question goes to the inbox with what is selected; the answer comes back to the bench.
+The caret or a selection in a sight becomes here; a shortcut sends a question, like "Explain next.", as a message.
 
 - `sw/commands.py:123-133` SightWalkWindowListener.on_selection_modified
 - `sw/reader.py:591-594` Reader.note_selection
 - `sw/commands.py:48-52` SightWalkAskCommand.run
-- `sw/views.py:278-282` selected_text
-- `sw/chat.py:190-198` catch_up
 
 ## 26. Endings (13 views, survey)
 
@@ -438,11 +439,10 @@ The agent's view of the settings, and colour helpers.
 - `sw/tint.py:27-28` hex_rgb
 - `sw/tint.py:164-169` apply_grey
 
-## 30. The ontology: collections and sights (16 views, survey)
+## 30. The ontology: collections and sights (15 views, survey)
 
 Members without order, sequences one can walk, places as paths into them, and the sight.
 
-- `sw/ontology.py:12-14` slug
 - `sw/ontology.py:21-22` Collection.__init__
 - `sw/ontology.py:24-26` Collection.member
 - `sw/ontology.py:28-29` Collection.has_place
@@ -459,11 +459,12 @@ Members without order, sequences one can walk, places as paths into them, and th
 - `sw/ontology.py:135-137` Sight.spec
 - `sw/ontology.py:139-140` Sight.member
 
-## 31. The ontology: networks (15 views, survey)
+## 31. The ontology: networks (16 views, survey)
 
 Transitions between places, checked; the trip, the informator and the holiday.
 
 - `sw/ontology.py:89-96` Network.__init__
+- `sw/ontology.py:12-14` slug
 - `sw/ontology.py:98-103` Network.add
 - `sw/ontology.py:105-115` Network.problem
 - `sw/ontology.py:72-73` Transition.__init__

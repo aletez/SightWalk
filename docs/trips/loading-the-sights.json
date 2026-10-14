@@ -1,11 +1,11 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "295e0e6a6809644f2dcdaf9263292033140a1cf1",
+ "commit": "9d5b737605df346cbd170b108c8f1d875ad4d12b",
  "sights": [
   "sw/reader.py:121-131",
+  "sw/chat.py:190-198",
   "sw/reader.py:175-185",
-  "sw/views.py:61-65",
   "sw/reader.py:187-200",
   "sw/views.py:148-152",
   "sw/views.py:155-167",
@@ -20,8 +20,13 @@
  "transitions": [
   {
    "type": "calls",
+   "from": [0, 126],
+   "to": [1, 190]
+  },
+  {
+   "type": "calls",
    "from": [0, 127],
-   "to": [1, 175]
+   "to": [2, 175]
   },
   {
    "type": "calls",

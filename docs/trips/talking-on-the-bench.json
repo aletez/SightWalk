@@ -1,13 +1,11 @@
 {
  "name": "Talking on the bench",
  "kind": "run",
- "commit": "295e0e6a6809644f2dcdaf9263292033140a1cf1",
+ "commit": "9d5b737605df346cbd170b108c8f1d875ad4d12b",
  "sights": [
   "sw/commands.py:123-133",
   "sw/reader.py:591-594",
-  "sw/commands.py:48-52",
-  "sw/views.py:278-282",
-  "sw/chat.py:190-198"
+  "sw/commands.py:48-52"
  ],
  "transitions": [
   {

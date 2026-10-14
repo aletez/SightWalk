@@ -1,14 +1,20 @@
-# SightWalk: plans and Jakub's contributions (export, 2026-10-13)
+# SightWalk: plans and Jakub's contributions (export, 2026-10-14)
 
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIONS.md and Claude's memory of the project.
 
 ## Plans (Jakub)
 
+- Done (2026-10-13; see the status above), the scroll strip as a scrolling view with the icons on it; solves two marks on one line (Sublime's gutter shows one icon per line). The rule: the strip is a blank view of newlines as tall, optically, as the Sights; the wheel scrolls it the usual way (no reading and undoing), and the Sights only follow: offset = strip position + a constant. Mark icons stand on the strip's lines, level with their code lines, several side by side (images in an inline phantom); the code gutter keeps only line numbers; outlines stay. ▲ moves to the strip's header, ▼ to a small cell of its own at the floor. The eyes stay (Jakub), by ▲ and ▼. Plan (Claude): (1) the strip takes the code font, so the code's line height; (2) `plan.stack` puts every sight's code start on a multiple of the line height, the slack (under a line, from the cells' overhead) going to the bottom of the sight above, which has breathing lines anyway, never between header and code (pure, unit-tested); (3) at the ends the ranges differ by under a line: the Sights stop and the strip is set back; (4) a move from elsewhere (point, ▲▼, fillers, scroll pad) sets the strip with set_viewport_position; (5) to check first in Sublime: an image phantom must not make its line taller (images a little shorter than the line); (6) while scrolling the Sights follow one wheel loop late, so the icons lead the code a moment.
+
+- Itinerary dropped (Jakub, 2026-10-13): a trip need not be one run of the program passing control along, it may compare a few fragments, so a run order does not fit every trip. Calls are on the Map; a list of sights with captions instead was considered and not taken.
+
+- To work out (Jakub, 2026-10-13): what a sight may hold, not only one whole function. Candidates: a class definition, when its fields or live code outside functions matter; a part of an unbearably long function; two small complementary classes together. Affects the manual, the Map (a sight is labelled by its function or range) and the "one function per pane" rule.
+
 - Two ideas for scripts (2026-10-13, not now): (1) the guide's language grows a "then" relation, control passing from one sight to the next without a call (e.g. "then": [1, 25]), given by the author like calls; (2) whether and how the Map shows such relations, kept apart from calls so the map stays clear. A language question and a display question, decided separately (Jakub).
 
 - Later (2026-10-13): a guide on free local models on Jakub's M1 Pro, 64 GB (LM Studio is installed). Shape: the HTTP MCP server stays the one interface; a thin agent loop of our own talks to a local OpenAI-compatible endpoint, so the model can be swapped. Small models need few tools, short descriptions and a short manual.
 
-- Next, after the break of 2026-10-12, to be able to start vetting the plugin with itself: (1) the trouble with line marks, perhaps double marks; (2) the HTTP MCP server replacing the stdio one; (3) the Itinerary tab. Before that, a careful clean-up of the whole code, as short as possible.
+- Next, after the break of 2026-10-12, to be able to start vetting the plugin with itself: (1) the trouble with line marks, perhaps double marks (done 2026-10-13: a line's second mark on the strip; seen again on screen by Claude, verified by Jakub); (2) the HTTP MCP server replacing the stdio one (done 2026-10-13); (3) the Itinerary tab (dropped 2026-10-13, see above). Before that, a careful clean-up of the whole code, as short as possible.
 
 - Philosophy (Jakub): vettable code or no code at all.
 - Vettify / vettification (names, Jakub): making code vettable, the mechanical refactorer below.
@@ -26,6 +32,20 @@ Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIO
   - Stories as specification: the user's own tellings stay with the sights; every later change is checked, dry, against all earlier stories about those places (a regression of meaning).
   - Walkable code or none: a mechanical gate before any human looks (each function fits a sight, each changed line lies on a named trip from branch point to branch point); and the guide is never the session that wrote the code.
 
+## Ontology (Jakub, 2026-10-14)
+
+Entities:
+- **Collection**: members one level down, without order. A line is no entity, a number; the hierarchy ends there.
+- **Sequence** (a collection): its members in order, so one can walk it. A **sight** is a sequence of a file's lines; a **holiday** a sequence of trips.
+- **Network** (a collection): a bag of transitions between its places; an id from its name and the commit hash its lines are counted in. Self-contained: it knows only itself and its members. The **informator** is a network of trips, without order.
+- **Trip**: a sequence and a network of sights at once; kind run, comparison or survey (see the manual).
+- **Holiday**: an entity, a sequence of one informator's trips, linearized by chosen transition types (by default leads_to); it keeps which informator and which types. A trip nothing leads to may start one, unless its purpose says otherwise (a comparison).
+- **Place**: a path into a network, of any length from 0: in a trip ⟨⟩, ⟨sight⟩, ⟨sight, line⟩; in an informator ⟨⟩, ⟨trip⟩, ⟨trip, sight⟩, ⟨trip, sight, line⟩. A trip by its id, a sight by its index in the trip, a line as in the network's commit.
+- **Transition**: type, source and target, both places. It reads as a sentence, the predicate true of the source. Types: `calls` (a call's line → the definition's line), `returns` (a line giving control back → the call's line), `leads_to` (the story goes on at the target), `101s` (the target must be understood to understand the source), `passes_data` (a value made at the source is used at the target), `comparable` (no direction meant), `own_trip` (informator only: ⟨trip, sight, definition's line⟩ → ⟨trip⟩). New types need no change of structure.
+- **Own trip**: every definition (function, method, class) has one, independently: a method's may differ from its class's.
+- All transitions are given by the author of the trip or informator; a script may only validate them.
+- In code (`sw/ontology.py`, pure): composition with the Sublime side, the reader holds a trip; inheritance only among the pure classes.
+
 ## Memory notes
 
 - The README: the English README links to a Polish one, written in the Polish metaphor (panorama, widok, wycieczka, marszruta, mapa, ławka); "zabytek" sounds dead and negative in technology.
@@ -35,6 +55,13 @@ Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIO
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-14, the ontology's hierarchy: a collection has no order, so a sequence is a level of its own; a place is a path of any length, zero included, so a whole trip or the network itself is a place and `own_trip` fits the network's definition; the holiday is an entity, not a passing result ("the ontology is also for conceptual order, so it should cover more rather than less"); a method may have another own trip than its class.
+- 2026-10-14, the informator and its transitions: a set of trips (Claude proposed "bedeker" and "guidebook"; Jakub chose informator) as a network of sensible passages, like the alternative reading orders of a technical handbook's chapters. A trip stays self-contained and knows only itself; relations between trips live one level up, so one trip can serve several informators, whose numbers would not match. All transitions in one bag, each tagged by type, extensible like UML's arrows; Jakub's first types: natural continuation, control flow, "101". The predicate is true of the source (source = subject, target = object): Claude's "continues" and "needs" mixed the two up; final types calls, returns, leads_to, 101s, passes_data, comparable (from Claude's "compares"), own_trip, in snake_case.
+- 2026-10-14, places as ⟨trip, sight, line⟩ for source and target alike (a function may stand in two sights; Claude had proposed function names), robustness to code changes taken from a commit hash on every trip and informator instead; every transition given by the author, none computed from code (overloads, untyped languages), a script at most validates them; each trip gives only its suggested exits, a trip nobody leads to may start, by default after leads_to unless the trip's purpose says otherwise.
+- 2026-10-14, the function's own trip (name by Jakub, after Claude's "home trip", "host trip" and others): an arrow from the definition's occurrence to the trip, without a sight, since a definition may appear there twice; for classes too. And the holiday: the trips of an informator linearized by chosen transition types, computed from the informator, so one informator grounds many holidays.
+- 2026-10-14, "so you did not write full trip definitions, only slimmed ones that skip what is obvious?": the trips' calls were computed by a script, only between sights of one trip, and silently missed what it could not resolve; it led to the informator.
+- 2026-10-13, the Itinerary dropped: a trip need not be a run passing control along, it may compare fragments; and the trip redefined as a sequence of sights for one question (run, comparison, survey).
+- 2026-10-13, the guide told how a line's two marks line up: first marks in one column, second marks in another, so related marks share a column; and a temporary "Restart" command that touches the entry point.
 - 2026-10-13, the map never guesses: the server asks for calls, and the guide either names them or confirms there are none; a guessing map "could come out funny". Removed the guessing code altogether. Before that, the warning's wording: "the trip definition lacks calls".
 - 2026-10-13, scripts: a sight of top-level code is the one allowed exception to "one whole function per sight", named on the map by its range; and the "then" relation split into two separate questions, extending the guide's language and showing (or not) such relations on the map, so the map stays clear.
 - 2026-10-13, MCP over HTTP carried through as the plugin itself: no venv, no copied server, sessions told apart; and the clean-up before vetting (plain module state, the line-1 mechanism removed, one registry per view).

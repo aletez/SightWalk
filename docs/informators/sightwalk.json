@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "9e1f8c5f69f465b21c4cb0e66a1e9d9480b4ba3c",
+ "commit": "990fd233dbcb579e3e2618ae604b9e20ac728e8e",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -2212,7 +2212,7 @@
    "from": [
     "the-layout",
     1,
-    103
+    104
    ],
    "to": [
     "measuring",
@@ -5233,7 +5233,7 @@
    "from": [
     "the-user-sends-a-message",
     6,
-    109
+    110
    ],
    "to": [
     "the-user-sends-a-message"
@@ -5244,7 +5244,7 @@
    "from": [
     "the-user-sends-a-message",
     6,
-    111
+    112
    ],
    "to": [
     "building-blocks",

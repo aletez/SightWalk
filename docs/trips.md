@@ -120,7 +120,7 @@ The gap phantoms, the cells of the virtual document, and the window's height mea
 From an offset to Sublime's layout: every sight's cells at its place, shifted.
 
 - `sw/reader.py:397-402` Reader.scroll_to
-- `sw/plan.py:100-106` offset_range
+- `sw/plan.py:100-107` offset_range
 - `sw/plan.py:76-83` max_offset
 - `sw/reader.py:363-373` Reader.render
 - `sw/geometry.py:74-105` Geometry.column_rects
@@ -279,7 +279,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/state.py:32-33` reader_for
 - `sw/reader.py:803-817` Reader.context
 - `sw/views.py:285-289` selected_text
-- `sw/plan.py:109-112` visible_specs
+- `sw/plan.py:110-113` visible_specs
 - `sw/reader.py:609-612` Reader.take_edits
 - `sw/bridge.py:214-228` wait_for_user
 

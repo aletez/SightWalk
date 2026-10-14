@@ -170,6 +170,18 @@ TRIPS = [
      "The agent's view of the settings, and colour helpers.",
      ["commands.SightWalkScrollCommand.is_enabled",
       "tint.band_amount", "tint.from_tm_theme", "tint.resolved_scheme", "tint.scheme_stem", "tint.hex_rgb", "tint.apply_grey"]),
+    ("The ontology: collections and sights",
+     "Members without order, sequences one can walk, places as paths into them, and the sight.",
+     ["ontology.slug", "ontology.Collection.__init__", "ontology.Collection.member",
+      "ontology.Collection.has_place", "ontology.Sequence.__iter__", "ontology.Sequence.__len__",
+      "ontology.Sequence.member", "ontology.Sight.__init__", "ontology.Sight.parse",
+      "ontology.Sight.spec", "ontology.Sight.member"]),
+    ("The ontology: networks",
+     "Transitions between places, checked; the trip, the informator and the holiday.",
+     ["ontology.Network.__init__", "ontology.Network.add", "ontology.Network.problem",
+      "ontology.Transition.__init__", "ontology.Transition.__eq__", "ontology.Transition.__repr__",
+      "ontology.Transition.parts", "ontology.Trip.__init__", "ontology.Informator.member",
+      "ontology.Holiday.__init__"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
      "them.",
@@ -186,7 +198,7 @@ TRIPS = [
 
 
 # Not runs but surveys: all the places about one thing (see the manual on trips).
-SURVEYS = {"Window events", "Endings", "Names and room", "Building blocks",
+SURVEYS = {"The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
            "Settings and the rest of the colours"}
 
 # Whose method a call on another object reaches, by the object's name: the code's own

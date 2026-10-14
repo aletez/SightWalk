@@ -177,7 +177,7 @@ Entities:
 - **Transition**: type, source and target, both places. It reads as a sentence, the predicate true of the source. Types: `calls` (a call's line → the definition's line), `returns` (a line giving control back → the call's line), `leads_to` (the story goes on at the target), `101s` (the target must be understood to understand the source), `passes_data` (a value made at the source is used at the target), `comparable` (no direction meant), `own_trip` (informator only: ⟨trip, sight, definition's line⟩ → ⟨trip⟩). New types need no change of structure.
 - **Own trip**: every definition (function, method, class) has one, independently: a method's may differ from its class's.
 - All transitions are given by the author of the trip or informator; a script may only validate them.
-- In code (`sw/ontology.py`, pure): composition with the Sublime side, the reader holds a trip; inheritance only among the pure classes.
+- In code (`sw/ontology.py`, pure, unit-tested; 2026-10-14): Collection, Sequence, Network, Sight, Trip (Sequence and Network), Informator, Holiday, Transition; a place is a tuple. Composition with the Sublime side, the reader will hold a trip; inheritance only among the pure classes. Not used by the plugin yet: next, the trip files and show read through it.
 
 ## Decisions
 

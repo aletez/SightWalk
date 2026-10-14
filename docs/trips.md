@@ -426,7 +426,38 @@ The agent's view of the settings, and colour helpers.
 - `sw/tint.py:27-28` hex_rgb
 - `sw/tint.py:164-169` apply_grey
 
-## 30. Questions the code already asks (10 views)
+## 30. The ontology: collections and sights (11 views, survey)
+
+Members without order, sequences one can walk, places as paths into them, and the sight.
+
+- `sw/ontology.py:12-14` slug
+- `sw/ontology.py:21-22` Collection.__init__
+- `sw/ontology.py:24-26` Collection.member
+- `sw/ontology.py:28-34` Collection.has_place
+- `sw/ontology.py:41-42` Sequence.__iter__
+- `sw/ontology.py:44-45` Sequence.__len__
+- `sw/ontology.py:47-49` Sequence.member
+- `sw/ontology.py:101-103` Sight.__init__
+- `sw/ontology.py:105-111` Sight.parse
+- `sw/ontology.py:113-115` Sight.spec
+- `sw/ontology.py:117-118` Sight.member
+
+## 31. The ontology: networks (10 views, survey)
+
+Transitions between places, checked; the trip, the informator and the holiday.
+
+- `sw/ontology.py:73-78` Network.__init__
+- `sw/ontology.py:80-85` Network.add
+- `sw/ontology.py:87-95` Network.problem
+- `sw/ontology.py:56-57` Transition.__init__
+- `sw/ontology.py:59-60` Transition.__eq__
+- `sw/ontology.py:62-63` Transition.__repr__
+- `sw/ontology.py:65-66` Transition.parts
+- `sw/ontology.py:125-129` Trip.__init__
+- `sw/ontology.py:136-137` Informator.member
+- `sw/ontology.py:143-148` Holiday.__init__
+
+## 32. Questions the code already asks (10 views)
 
 Guards found in the code itself, carried to the sights that use the same objects without them.
 
@@ -441,7 +472,7 @@ Guards found in the code itself, carried to the sights that use the same objects
 - `sw/questions.py:92-109` unasked
 - `sw/questions.py:80-89` uses
 
-## 31. Seeing where the code asks (9 views)
+## 33. Seeing where the code asks (9 views)
 
 The underline and the popup that says where the code asks the question.
 

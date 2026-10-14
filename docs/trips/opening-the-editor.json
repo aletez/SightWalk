@@ -1,11 +1,11 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "05e56284c645628cfd0de7ce293cb239ed1301c8",
+ "commit": "731395cdd135992d47f936be20eddb78b33eb483",
  "sights": [
   "sw/commands.py:62-69",
-  "sw/reader.py:552-557",
-  "sw/reader.py:540-550",
+  "sw/reader.py:557-562",
+  "sw/reader.py:545-555",
   "sw/editor.py:22-30",
   "sw/views.py:66-70",
   "sw/editor.py:14-18",
@@ -18,16 +18,16 @@
   {
    "type": "calls",
    "from": [0, 64],
-   "to": [1, 552]
+   "to": [1, 557]
   },
   {
    "type": "calls",
    "from": [0, 69],
-   "to": [2, 540]
+   "to": [2, 545]
   },
   {
    "type": "calls",
-   "from": [2, 549],
+   "from": [2, 554],
    "to": [3, 22]
   },
   {

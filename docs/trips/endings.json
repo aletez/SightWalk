@@ -1,7 +1,7 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "05e56284c645628cfd0de7ce293cb239ed1301c8",
+ "commit": "731395cdd135992d47f936be20eddb78b33eb483",
  "sights": [
   "sw/commands.py:259-260",
   "sw/commands.py:262-263",
@@ -11,7 +11,7 @@
   "sw/commands.py:120-125",
   "sw/commands.py:172-174",
   "sw/commands.py:152-155",
-  "sw/reader.py:619-622",
+  "sw/reader.py:624-627",
   "sw/commands.py:157-159",
   "sw/state.py:25-29",
   "sw/bridge.py:121-126",
@@ -41,7 +41,7 @@
   {
    "type": "calls",
    "from": [7, 155],
-   "to": [8, 619]
+   "to": [8, 624]
   },
   {
    "type": "calls",

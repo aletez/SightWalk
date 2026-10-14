@@ -190,6 +190,8 @@ Open:
 
 - The bench's prompt kept at the bottom by scrolling, not by blank lines added (Jakub, 2026-10-14): BLANK_LINES real lines stand above the transcript once and for all, and whenever the text or the pane's height changes the view is scrolled so the prompt's line touches the bottom (`chat.keep_at_bottom`, `bottom_place`); between changes the history can be scrolled. A step towards the bench taking the wheel for the panorama (asked, open). Seen by Claude: a message at the bench's bottom. (Changed, unverified by Jakub.)
 
+- The bench takes the wheel for the panorama too, with Map and Tour, and primary+s switches it instead of ctrl+s (Jakub, 2026-10-14: in a trip saving means nothing, outside the editor, and the fingers find it more easily). While on, the bench stands at its bottom place and its wheel moves the whole trip; its group comes right after the Tools pane, before the Sights, and reaches over the strip, so the border between them goes; off, the bench scrolls its history and the border is back. The help mark says ⌘S (Ctrl+S elsewhere). Seen by Claude: the wheel over the bench moved the trip; switched off, the bench scrolled itself and the border came back. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

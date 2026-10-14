@@ -80,7 +80,8 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, status=0.0):
+def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, status=0.0,
+                  bench_reach=0.0):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
     the editor if open; once top is known, the Tools pane; the Sights; the conversation and, once
     top is known, its header and the Tools pane's header.
@@ -88,7 +89,9 @@ def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, 
     bench: the Vetting Bench's (left, right) as shares of the width.
     reach: how far the Tools pane reaches over the strip's border (a share, negative to the left).
     editor: (header height, left, right, top) or None.
-    status: the status line's height (px), at the conversation's bottom; its group comes last."""
+    status: the status line's height (px), at the conversation's bottom; its group comes last.
+    bench_reach: as reach, for the bench while it takes the wheel (Jakub); then its group comes
+    right after the Tools pane, before the Sights, so it is drawn over the strip's border."""
     rects = list(code_rects)
     x0, x1 = bench
     if not top:
@@ -98,8 +101,10 @@ def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, 
     # them: the two blank areas read as one (Jakub). With another tool there, no reach: a border.
     below = split + top
     tools = (x0 + min(reach, 0.0), below, x1 + max(reach, 0.0), total)
-    rects = [tools] + rects + [(x0, top, x1, split - status), (x0, -OVERLAP, x1, top + OVERLAP),
-                               (x0, split, x1, below + OVERLAP), (x0, split - status, x1, split)]
+    bench = (x0 + min(bench_reach, 0.0), top, x1 + max(bench_reach, 0.0), split - status)
+    rest = [(x0, -OVERLAP, x1, top + OVERLAP), (x0, split, x1, below + OVERLAP),
+            (x0, split - status, x1, split)]
+    rects = [tools, bench] + rects + rest if bench_reach else [tools] + rects + [bench] + rest
     if editor:
         header, left, right, dy = editor
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects

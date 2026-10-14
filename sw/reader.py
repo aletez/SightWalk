@@ -110,9 +110,10 @@ class Reader(Geometry):
         self.below = vetting.make(self.window, self.chat)
         self.map_view = vetting.make_tool(self.window, "Map")
         self.tour_view = vetting.make_tool(self.window, "Tour")
-        self.pan = True  # Map and Tour take the wheel for the panorama (ctrl+s, Jakub)
+        self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
+        self.chat.settings().set("scroll_past_end", self.pan)
         self.tool = vetting.SCROLL  # the Tools pane's tab shown
         self.below_header = chat.make_header(self.window, self.chat, "Tools")
         self.status_view = chat.make_status(self.window, self.chat)
@@ -282,10 +283,11 @@ class Reader(Geometry):
             self.keep_bench_width()
         # Only the scroll pad joins the strip; another tool has its border (Jakub).
         reach = self.share(3 * OVERLAP) * (1 if self.bench_side() != "right" else -1)
-        reach = reach if self.tool == vetting.SCROLL or self.panning() else 0.0
         status = self.status_view.line_height() + self.overhead if top else 0.0
+        bench_reach = reach if self.pan else 0.0
+        reach = reach if self.tool == vetting.SCROLL or self.panning() else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
-                                             self.editor_geometry(), status))
+                                             self.editor_geometry(), status, bench_reach))
         return top
 
     def keep_bench_width(self):
@@ -304,7 +306,11 @@ class Reader(Geometry):
     def assign_groups(self, views, full):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
-        ordered = first + ([self.tool_view()] if full else []) + views + [self.chat]
+        # While the bench takes the wheel its group comes before the Sights (see reader_layout).
+        if full and self.pan:
+            ordered = first + [self.tool_view(), self.chat] + views
+        else:
+            ordered = first + ([self.tool_view()] if full else []) + views + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -319,8 +325,8 @@ class Reader(Geometry):
         else:
             for k, view in enumerate(rest + [self.tool_view()]):
                 self.window.set_view_index(view, n - 1, k + 1)
-        for view in self.hidden_tools():
-            self.window.set_view_index(view, n - 1, 1)  # behind the conversation
+        for view in self.hidden_tools():  # behind the conversation
+            self.window.set_view_index(view, ordered.index(self.chat), 1)
 
     def render(self, settle=True):
         """A wheel step only shifts the layout's rows (see column_rects); anything else lays every
@@ -369,6 +375,8 @@ class Reader(Geometry):
         tools = (self.tool_view(),) if self.panning() else ()
         places = [(view, anchor(view)) for view in
                   (self.filler, self.strip_floor, self.top_filler, self.below) + tools]
+        if self.pan:
+            places.insert(5, (self.chat, chat.bottom_place(self.chat)))
         places.insert(1, (self.strip, self.strip_place()))
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
@@ -379,7 +387,7 @@ class Reader(Geometry):
         """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
         under the bench, ▼'s cell, and Map or Tour while they take the wheel. A sight's code
         scrolls on its own (Jakub)."""
-        return self.places()[:6 if self.panning() else 5]
+        return self.places()[:5 + self.panning() + self.pan]
 
     def pinned_places(self):
         """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A
@@ -638,10 +646,11 @@ class Reader(Geometry):
         return self.pan and self.tool != vetting.SCROLL
 
     def toggle_panning(self):
-        """ctrl+s: the wheel over Map and Tour moves the whole trip, or the tool itself."""
+        """primary+s: the wheel over the bench, Map and Tour moves the whole trip, or them."""
         self.pan = not self.pan
         for view in (self.map_view, self.tour_view):
             vetting.set_panning(view, self.pan)
+        self.chat.settings().set("scroll_past_end", self.pan)  # so the wheel moves it down too
         self.show_headers()
         self.select_tool(self.tool)  # lays out again, draws the tools at their new place
 

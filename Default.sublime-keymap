@@ -9,7 +9,10 @@
     {"keys": ["pageup"], "command": "sight_walk_scroll", "args": {"pages": -0.9}, "context": [{"key": "setting.sight_walk"}]},
     {"keys": ["enter"], "command": "sight_walk_edit", "context": [{"key": "setting.sight_walk_code"}]},
     {"keys": ["escape"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}, {"key": "auto_complete_visible", "operand": false}, {"key": "has_next_field", "operand": false}, {"key": "num_selections", "operand": 1}, {"key": "popup_visible", "operand": false}, {"key": "panel_visible", "operand": false}]},
-    {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]}
+    {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]},
+    // In a trip, but not in the editor, saving means nothing: primary+s switches whether the wheel
+    // over the bench, Map and Tour moves the whole trip (Jakub).
+    {"keys": ["primary+s"], "command": "sight_walk_toggle_panning", "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]}
     // A proposal: primary+g moves the focus between a trip's bench and its sights. It would take the place of Find Next
     // (macOS) and Go to Line (Windows, Linux), so it is left for the user to turn on.
     // {"keys": ["primary+g"], "command": "sight_walk_toggle_guide"}

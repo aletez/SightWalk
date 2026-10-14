@@ -245,7 +245,7 @@ class SightWalkSwitchLanguageCommand(sublime_plugin.ApplicationCommand):
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):
-    """ctrl+s in a trip: the wheel over Map and Tour moves the whole trip, or the tool."""
+    """primary+s in a trip: the wheel over the bench, Map and Tour moves the whole trip, or them."""
 
     def run(self):
         reader = state.reader_for(self.window)

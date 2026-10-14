@@ -56,14 +56,14 @@ def content_point(view):
     """Where a tool's content is drawn: at the anchor line while it takes the wheel, else at 0."""
     return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
 
-PAN_KEY = "ctrl+s"
+PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
 TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
 
 def show_tabs(header, active, on_select, panning):
     """The tabs as links in the Tools pane's header, the shown one in bold, and at the right the
-    help mark, as on the bench's header: what ctrl+s does (Jakub)."""
+    help mark, as on the bench's header: what primary+s does (Jakub)."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
     if kept(header).get("tabs") == (active, panning, columns, word("Map")):
         return

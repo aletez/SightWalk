@@ -1,7 +1,7 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "5cc432a4b18a04a0911416d557f4666b4b41d23c",
+ "commit": "a3095bd165ee2093ecf7f6497f2c0d1307515a73",
  "sights": [
   "sw/commands.py:228-239",
   "sw/reader.py:581-591",

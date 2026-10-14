@@ -126,7 +126,7 @@ From an offset to Sublime's layout: every sight's cells at its place, shifted.
 - `sw/reader.py:324-333` Reader.render
 - `sw/geometry.py:74-100` Geometry.column_rects
 - `sw/geometry.py:40-44` Geometry.column
-- `sw/geometry.py:106-115` Geometry.sight_cells
+- `sw/geometry.py:106-117` Geometry.sight_cells
 - `sw/geometry.py:102-104` Geometry.floor_height
 - `sw/reader.py:278-288` Reader.layout
 - `sw/views.py:78-101` reader_layout

@@ -102,7 +102,9 @@ def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, s
     below = split + top
     lines = [(x0, split - status, x1, split), (x0, split, x1, below + OVERLAP)]
     if lines_first and top:
-        front = lines + list(front)
+        # The header over the status line, reaching up over its border: no notch at its corner.
+        header = (x0, split - OVERLAP, x1, below + OVERLAP)
+        front = [header, lines[0]] + list(front)
         lines = []
     rects = list(front) + [(x0, below, x1, total)] + rects + [
         (x0, top, x1, split - status), (x0, -OVERLAP, x1, top + OVERLAP)] + lines[::-1]

@@ -320,7 +320,7 @@ class Reader(Geometry):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
         tools = [self.tool_view()] if full else []
-        lines = [self.status_view, self.below_header] if full and front else []
+        lines = [self.below_header, self.status_view] if full and front else []  # see reader_layout
         ordered = first + lines + views[:front] + tools + views[front:] + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already

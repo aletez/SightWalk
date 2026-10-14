@@ -1,7 +1,7 @@
 {
  "name": "Words in two languages",
  "kind": "run",
- "commit": "f63de9e902ab811c4510a401b79192125ad54e62",
+ "commit": "4d9500dfbae4291a1ba57e9d07abdc80f067e0bb",
  "sights": [
   "sw/commands.py:241-244",
   "sight_walk.py:44-47",

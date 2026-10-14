@@ -81,7 +81,7 @@ def to_layout(rects, total):
 
 
 def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, status=0.0,
-                  cover=None):
+                  lines_first=False):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
     the editor if open; once top is known, the Tools pane; the Sights; the conversation and, once
     top is known, its header and the Tools pane's header.
@@ -92,9 +92,8 @@ def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, s
     reaching over another gets a shadow on its right edge, so the strip reaches, not they).
     editor: (header height, left, right, top) or None.
     status: the status line's height (px), at the conversation's bottom; its group comes last.
-    cover: with front, the strip's far edge (a share): the status line and the Tools pane's
-    header then reach across the strip and come first of all, so they are drawn over it (Jakub):
-    one line each, they never get a shadow."""
+    lines_first: with front, the status line and the Tools pane's header come first of all, so
+    they lie on top of the strip where it reaches over the bench, their width as ever (Jakub)."""
     rects = list(code_rects)
     x0, x1 = bench
     if not top:
@@ -102,8 +101,7 @@ def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, s
     # The Tools pane's header is as tall as the bench's, and stays put while the pane scrolls.
     below = split + top
     lines = [(x0, split - status, x1, split), (x0, split, x1, below + OVERLAP)]
-    if cover is not None:
-        lines = [(min(a, cover), y0, max(b, cover), y1) for a, y0, b, y1 in lines]
+    if lines_first and top:
         front = lines + list(front)
         lines = []
     rects = list(front) + [(x0, below, x1, total)] + rects + [

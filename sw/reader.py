@@ -282,12 +282,8 @@ class Reader(Geometry):
         if top and self.editor is None:
             self.keep_bench_width()
         status = self.status_view.line_height() + self.overhead if top else 0.0
-        cover = None
-        if front:  # the strip's far edge: the status line and the Tools header reach across it
-            x0, _, x1, _ = front[0]
-            cover = x1 if self.bench_side() != "right" else x0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], front,
-                                             self.editor_geometry(), status, cover))
+                                             self.editor_geometry(), status, bool(front)))
         return top
 
     def strip_in_front(self, rects, views):

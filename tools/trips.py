@@ -97,13 +97,14 @@ TRIPS = [
      ["reader.Reader.select_tool", "vetting.show_tabs", "reader.Reader.draw_map"]),
     ("The Map's nodes",
      "The trip's definitions and the calls its author named, as nodes for the graph.",
-     ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.calls", "reader.Reader.owner",
-      "reader.defined_name", "callmap.first_definition", "callmap.authored_calls",
+     ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.owner",
+      "reader.defined_name", "callmap.first_definition", "callmap.node_at",
       "callmap.Node.__init__", "vetting.draw_map"]),
     ("Drawing the Map",
      "The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.",
      ["vetting.draw_map", "vetting.find_dot", "callmap.dot_source", "callmap.file_block",
       "callmap.cluster", "callmap.node_line", "callmap.node_id", "callmap.quote", "callmap.edges",
+      "callmap.arrow", "callmap.legend",
       "vetting.render", "vetting.png_size", "vetting.show_image", "vetting.show_note"]),
     ("The user sends a message",
      "The draft becomes a message, with the focus, the visible sights and the edits, and the "
@@ -322,14 +323,14 @@ def jumps(title, found):
 
 
 def trip_sights(title, names, specs, found, imported):
-    """The trip's sights for show, each with its calls to the trip's other sights."""
+    """The trip for show: its sights, and the calls between them as transitions."""
     index = {name: i for i, name in enumerate(names)}
-    sights = []
-    for name in names:
+    transitions = []
+    for i, name in enumerate(names):
         mine = calls(name, found, imported) + [(l, c) for n, l, c in jumps(title, found) if n == name]
-        sights.append({"sight": specs[name], "calls": [
-            {"line": line, "to": [index[t], found[t][2].lineno]} for line, t in mine if t in index]})
-    return sights
+        transitions += [{"type": "calls", "from": [i, line], "to": [index[t], found[t][2].lineno]}
+                        for line, t in mine if t in index]
+    return {"sights": [specs[name] for name in names], "transitions": transitions}
 
 
 def markdown(specs):
@@ -353,7 +354,7 @@ def main():
     if len(sys.argv) > 1:
         title, _, names = TRIPS[int(sys.argv[1]) - 1]
         found, imported = definitions()
-        print(json.dumps({"trip": title, "sights": trip_sights(title, names, specs, found, imported)}))
+        print(json.dumps(dict(trip_sights(title, names, specs, found, imported), trip=title)))
         return
     with open("docs/trips.md", "w", encoding="utf-8") as f:
         f.write(markdown(specs))

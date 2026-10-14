@@ -617,29 +617,27 @@ class Reader(Geometry):
     def draw_map(self):
         if self.sights:
             nodes = [n for i in range(len(self.sights)) for n in self.map_nodes(i)]
-            vetting.draw_map(self.map_view, nodes, ("Helvetica", "#222222", "#888888"))
+            definitions = {}
+            for node in nodes:
+                definitions.setdefault(node.key[0], []).append(node.key[1])
+            arrows = callmap.edges(definitions, [(t.type, t.source, t.target)
+                                                 for t in self.trip.transitions])
+            vetting.draw_map(self.map_view, nodes, arrows, ("Helvetica", "#222222", "#888888"))
 
     def map_nodes(self, index):
-        """The map's nodes for a sight: its first definition and every line another sight's
-        calls point at, with the class around them, the file and its hue."""
+        """The map's nodes for a sight: its first definition and every line a call in the trip
+        points at, with the class around them, the file and its hue."""
         sight = self.sights[index]
         lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
         # A sight without a function (a script's top-level code) is named by its range (Jakub).
         main = callmap.first_definition(lines, sight.begin, sight.end) or (
             sight.begin, sight_title(sight).rsplit("/", 1)[-1])
-        calls = self.calls()
-        targets = {target[1] for _, target in calls if target[0] == index}
-        mine = [(source[1], target) for source, target in calls if source[0] == index]
-        authored = callmap.authored_calls(sorted({main[0]} | targets), mine)
+        targets = {t.target[1] for t in self.trip.transitions
+                   if t.type == "calls" and len(t.target) == 2 and t.target[0] == index}
         colour = tint_color("#ffffff", hue_for(sight.path), 0.25)
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
-                             display_path(sight.path), colour, authored[line])
+                             display_path(sight.path), colour)
                 for line in sorted({main[0]} | targets)]
-
-    def calls(self):
-        """The trip's calls between lines of its sights, as (source, target) places."""
-        return [(t.source, t.target) for t in self.trip.transitions
-                if t.type == "calls" and len(t.source) == len(t.target) == 2]
 
     def owner(self, sight):
         """The class around a sight, from its frozen lines, or ""."""

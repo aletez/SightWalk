@@ -165,6 +165,8 @@ Open:
   - Stories as specification: the user's own tellings stay with the sights; every later change is checked, dry, against all earlier stories about those places (a regression of meaning).
   - Walkable code or none: a mechanical gate before any human looks (each function fits a sight, each changed line lies on a named trip from branch point to branch point); and the guide is never the session that wrote the code.
 
+- show takes typed transitions (Jakub, 2026-10-14): `sights` as specs, `transitions` required ([] when none), each {"type", "from", "to"} with places [sight] or [sight, line]; the manual lists the types. The Map draws each type its own way (calls solid, returns dashed with an open head, leads_to thick, 101s dotted with a diamond, passes_data blue with a dot, comparable dotted without heads) with a legend of the types drawn (Jakub chose a legend over labels). Error messages name the wrong part: "the source: sight 0: line 99 is not in sw/guide.py:40-45". Seen by Claude: a test trip with four types, its Map and legend. (Changed, unverified by Jakub; the guide needs a new Claude Code session for the new show.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

@@ -24,9 +24,17 @@ Showing code
 - Each sight holds exactly one whole function, from its signature to its last line. The one
   exception is a script's top-level code, which is no function: show it in sights of about the
   same length, each a step that reads as one.
-- Name every call between the trip's sights (show's calls, required for each sight): from the
-  calling line to the line of the definition it reaches; "calls": [] for a sight that calls no
-  other sight. The Map tab draws exactly these arrows and never guesses.
+- Name the transitions between the trip's sights (show's transitions, required; [] when there
+  are none). Each is {"type": t, "from": place, "to": place}; a place is [sight] or
+  [sight, line], sights numbered from 0, lines of the file. It reads as a sentence true of its
+  source: "from calls to". Types:
+  calls        the calling line → the line of the definition it reaches. Name every one.
+  returns      a line giving control back → the line of the call it returns to.
+  leads_to     where the story goes on, though no code calls it (an event handled later).
+  101s         the target must be understood to understand the source.
+  passes_data  a value made at the source is used at the target.
+  comparable   source and target are worth comparing (direction means nothing).
+  The Map tab draws exactly these arrows, each type its own way, and never guesses.
 - Where control passes through code outside the project (a library calls the project's method
   by name, a framework dispatches to a handler), show that library function too, with an
   absolute path, and mark the jump with point. The user should never have to take it on faith.
@@ -95,21 +103,22 @@ def tool(name, description, properties=None, required=()):
                             "required": list(required)}}
 
 
-SIGHT = {"type": "object", "required": ["sight", "calls"], "properties": {
-    "sight": {"type": "string"},
-    "calls": {"type": "array", "items": {"type": "object", "properties": {
-        "line": {"type": "integer"},
-        "to": {"type": "array", "items": {"type": "integer"}}}}}}}
+TRANSITION = {"type": "object", "required": ["type", "from", "to"], "properties": {
+    "type": {"type": "string", "enum": ["calls", "returns", "leads_to", "101s", "passes_data",
+                                        "comparable"]},
+    "from": {"type": "array", "items": {"type": "integer"}},
+    "to": {"type": "array", "items": {"type": "integer"}}}}
 
 TOOLS = [
-    tool("show", "Open or replace the reader, scrolled to the top. sights, in the "
-         'trip\'s order, each {"sight": "src/app.py:12-30", "calls": [{"line": 15, "to": [3, 42]}]}: '
-         "line 15 of this sight calls the definition at line 42 of sight 3 (sights numbered "
-         'from 0, file lines); "calls": [] when it calls no other sight. root: base folder for '
-         "relative paths. trip: the trip's name, a few words, shown in the header over the "
-         "Sights.",
-         {"sights": {"type": "array", "items": SIGHT}, "root": {"type": "string"},
-          "trip": {"type": "string"}}, ["sights"]),
+    tool("show", "Open or replace the reader, scrolled to the top. sights: specs in the trip's "
+         'order, like ["src/app.py:12-30", "src/db.py:5-20"]. transitions (required, [] when '
+         'none): {"type": "calls", "from": [0, 15], "to": [1, 7]} says line 15 of sight 0 '
+         "calls the definition at line 7 of sight 1 (sights from 0, file lines); see the manual "
+         "for the other types. root: base folder for relative paths. trip: the trip's name, a "
+         "few words, shown in the header over the Sights.",
+         {"sights": {"type": "array", "items": {"type": "string"}},
+          "transitions": {"type": "array", "items": TRANSITION}, "root": {"type": "string"},
+          "trip": {"type": "string"}}, ["sights", "transitions"]),
     tool("say", 'Append your message to the Vetting Bench: say(text="..."). status: a few words '
          "on what the conversation is about right now, shown in the status line until changed.",
          {"text": {"type": "string"}, "status": {"type": "string"}}, ["text"]),

@@ -62,13 +62,13 @@ def find_dot():
     return shutil.which("dot", path=os.pathsep.join(PLACES + [os.environ.get("PATH", "")]))
 
 
-def draw_map(view, nodes, style):
+def draw_map(view, nodes, arrows, style):
     """Draws the map off the main thread (a subprocess would block the bridge), then shows it."""
     dot = find_dot()
     if dot is None:
         show_note(view, NO_DOT)
         return
-    source = dot_source(nodes, style)
+    source = dot_source(nodes, arrows, style)
     sublime.set_timeout_async(lambda: render(view, dot, source), 0)
 
 

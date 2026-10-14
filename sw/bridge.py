@@ -45,25 +45,23 @@ def check_sights(sights, root):
         raise ValueError("; ".join(problems) + ".")
 
 
-SIGHT_FORM = ('{"sight": "file:begin-end", "calls": [{"line": 15, "to": [3, 42]}]}: line 15 '
-              'of this sight calls the definition at line 42 of sight 3 (sights from 0, file '
-              'lines); "calls": [] when it calls no other sight')
+TRANSITION_FORM = ('{"type": "calls", "from": [0, 15], "to": [3, 42]}: line 15 of sight 0 '
+                   'calls the definition at line 42 of sight 3 (sights from 0, file lines)')
 
 
-def make_trip(sights, name):
-    """The trip show was given, its calls checked by the ontology. Every sight names its calls,
+def make_trip(sights, transitions, name):
+    """The trip show was given, its transitions checked by the ontology. transitions is required,
     an empty list included: the map never guesses (Jakub)."""
-    found, calls = [], []
-    for i, entry in enumerate(sights or []):
-        if not isinstance(entry, dict) or not isinstance(entry.get("sight"), str) \
-                or not isinstance(entry.get("calls"), list) \
-                or not all(isinstance(c, dict) for c in entry["calls"]):
-            raise ValueError("Sight %d: give each sight as %s. Name every call between the "
-                             "trip's sights; the Map draws them." % (i, SIGHT_FORM))
-        found.append(Sight.parse(entry["sight"]))
-        calls += [Transition("calls", (i, c.get("line")), c.get("to") or ())
-                  for c in entry["calls"]]
-    return Trip(name or "", found, calls)
+    if not isinstance(sights, list) or not all(isinstance(s, str) for s in sights):
+        raise ValueError('sights: a list like ["app.py:12-30", "app.py:40-52"].')
+    if not isinstance(transitions, list) or not all(
+            isinstance(t, dict) and all(isinstance(t.get(end), list) for end in ("from", "to"))
+            for t in transitions):
+        raise ValueError("transitions: name every call (and other transition) between the "
+                         "trip's sights, each as %s; [] when there are none. The Map draws "
+                         "them." % TRANSITION_FORM)
+    made = [Transition(t.get("type"), t["from"], t["to"]) for t in transitions]
+    return Trip(name or "", [Sight.parse(spec) for spec in sights], made)
 
 
 def new_reader():
@@ -85,9 +83,9 @@ def check_not_stopped():
                            "call wait_for_user.")
 
 
-def op_show(sights=None, root=None, trip=None):
+def op_show(sights=None, transitions=None, root=None, trip=None):
     check_not_stopped()
-    made = make_trip(sights, trip)
+    made = make_trip(sights, transitions, trip)
     check_sights([sight.spec for sight in made], root)
     reader = state.current_reader() or new_reader()
     reader.load(made, root)

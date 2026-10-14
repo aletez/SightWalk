@@ -174,19 +174,31 @@ if __name__ == "__main__":
 
 
 class CallMapTest(unittest.TestCase):
-    def node(self, key, function, owner, calls):
-        return callmap.Node((key, 1), function, owner, "a.py", "#ffffff", calls)
+    def node(self, key, function, owner):
+        return callmap.Node((key, 1), function, owner, "a.py", "#ffffff")
 
     def test_definitions(self):
         lines = ["class A:", "    def run(self):", "        self.go(1)"]
         self.assertEqual(callmap.first_definition(lines, 1, 3), (2, "run"))
         self.assertIsNone(callmap.first_definition(lines, 3, 3))
 
-    def test_authored_calls_and_dot(self):
-        found = callmap.authored_calls([10, 20], [(15, (1, 5)), (25, (2, 7)), (5, (3, 9))])
-        self.assertEqual(found, {10: [(1, 5), (3, 9)], 20: [(2, 7)]})
-        nodes = [self.node(0, "run", "A", [(1, 1)]), self.node(1, "go", "", [])]
-        self.assertEqual(callmap.edges(nodes), [((0, 1), (1, 1))])
-        source = callmap.dot_source(nodes, ("Helvetica", "#000000", "#888888"))
+    def test_node_at(self):
+        definitions = {0: [10, 20], 1: [5]}
+        self.assertEqual(callmap.node_at(definitions, (0, 15)), (0, 10))
+        self.assertEqual(callmap.node_at(definitions, (0, 25)), (0, 20))
+        self.assertEqual(callmap.node_at(definitions, (0, 5)), (0, 10))
+        self.assertEqual(callmap.node_at(definitions, (0,)), (0, 10))
+        self.assertIsNone(callmap.node_at(definitions, (2, 1)))
+
+    def test_typed_edges_and_dot(self):
+        definitions = {0: [1], 1: [1]}
+        arrows = callmap.edges(definitions, [("calls", (0, 3), (1, 1)), ("returns", (1, 4), (0, 3)),
+                                             ("calls", (0, 2), (0, 1)), ("unknown", (0, 1), (1, 1))])
+        self.assertEqual(arrows, [((0, 1), (1, 1), "calls"), ((1, 1), (0, 1), "returns")])
+        nodes = [self.node(0, "run", "A"), self.node(1, "go", "")]
+        source = callmap.dot_source(nodes, arrows, ("Helvetica", "#000000", "#888888"))
         self.assertIn('"s0_1" -> "s1_1";', source)
+        self.assertIn('"s1_1" -> "s0_1" [style=dashed, arrowhead=vee];', source)
         self.assertIn('label="class A";', source)
+        self.assertIn('label="returns"', source)
+        self.assertNotIn('label="leads_to"', source)

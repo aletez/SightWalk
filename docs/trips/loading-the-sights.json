@@ -1,15 +1,15 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
-  "sw/reader.py:118-128",
-  "sw/reader.py:172-182",
+  "sw/reader.py:121-131",
+  "sw/reader.py:175-185",
   "sw/views.py:61-65",
-  "sw/reader.py:184-197",
+  "sw/reader.py:187-200",
   "sw/views.py:148-152",
   "sw/views.py:155-167",
-  "sw/reader.py:199-210",
+  "sw/reader.py:202-213",
   "sw/spec.py:74-89",
   "sw/spec.py:61-62",
   "sw/spec.py:65-71",
@@ -20,47 +20,47 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 124],
-   "to": [1, 172]
+   "from": [0, 127],
+   "to": [1, 175]
   },
   {
    "type": "calls",
-   "from": [0, 128],
-   "to": [3, 184]
+   "from": [0, 131],
+   "to": [3, 187]
   },
   {
    "type": "calls",
-   "from": [0, 128],
+   "from": [0, 131],
    "to": [4, 148]
   },
   {
    "type": "calls",
-   "from": [3, 187],
+   "from": [3, 190],
    "to": [5, 155]
   },
   {
    "type": "calls",
-   "from": [3, 188],
+   "from": [3, 191],
    "to": [11, 191]
   },
   {
    "type": "calls",
-   "from": [3, 189],
-   "to": [6, 199]
+   "from": [3, 192],
+   "to": [6, 202]
   },
   {
    "type": "calls",
-   "from": [6, 204],
+   "from": [6, 207],
    "to": [7, 74]
   },
   {
    "type": "calls",
-   "from": [6, 205],
+   "from": [6, 208],
    "to": [5, 155]
   },
   {
    "type": "calls",
-   "from": [6, 208],
+   "from": [6, 211],
    "to": [10, 92]
   },
   {

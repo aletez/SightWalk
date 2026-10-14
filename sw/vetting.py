@@ -13,8 +13,9 @@ import subprocess
 import sublime
 
 from .callmap import dot_source
-from .chat import SYNTAX
+from .chat import MARK_HTML, SYNTAX
 from .config import SETTINGS_FILE
+from .config import BLANK_LINES
 from .views import FADED, kept, make_blank_view, make_side_view, match_font, phantoms
 
 TABS = ("Map", "Holiday", "Scroll")
@@ -45,12 +46,40 @@ def make_tool(window, name):
     return view
 
 
-def show_tabs(header, active, on_select):
-    """The tabs as links in the Tools pane's header, the shown one in bold."""
-    if kept(header).get("tabs") == active:
+def set_panning(view, on):
+    """A tool's pane taking the wheel for the panorama (Jakub): blank lines either way of its
+    content, like the scroll pad, so the wheel moves it both ways; off, its content alone."""
+    view.set_read_only(False)
+    view.run_command("sight_walk_replace", {"text": "\n" * (2 * BLANK_LINES) if on else " "})
+    view.set_read_only(True)
+    if not on:
+        view.set_viewport_position((0.0, 0.0), False)
+
+
+def content_point(view):
+    """Where a tool's content is drawn: at the anchor line while it takes the wheel, else at 0."""
+    return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
+
+PAN_KEY = "ctrl+s"
+TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
+PAN_HELP = ("<div><b>%s</b> the wheel over Map and Holiday: %s</div>"
+            % (PAN_KEY, "%s (press to change)"))
+
+
+def show_tabs(header, active, on_select, panning):
+    """The tabs as links in the Tools pane's header, the shown one in bold, and at the right the
+    help mark, as on the bench's header: what ctrl+s does (Jakub)."""
+    columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
+    if kept(header).get("tabs") == (active, panning, columns):
         return
-    kept(header)["tabs"] = active
-    header.run_command("sight_walk_replace", {"text": " "})
+    kept(header)["tabs"] = (active, panning, columns)
+    # The tabs, an inline phantom at the start, take about TABS_ROOM columns of the line.
+    header.run_command("sight_walk_replace", {"text": " " * max(columns - 6 - TABS_ROOM, 1)})
+    state = "moves the whole trip" if panning else "scrolls the tool itself"
+    point = header.line(0).b
+    phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
+        sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
+        lambda _: header.show_popup(PAN_HELP % state, location=point))])
     links = ["<b>%s</b>" % t if t == active else
              '<a href="%s" style="text-decoration: none">%s</a>' % (t, t) for t in TABS]
     html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
@@ -106,32 +135,34 @@ def show_image(view, path):
     scale = min(0.5, max(view.viewport_extent()[0] - 16, 50) / width)
     html = '<img src="file://%s" width="%d" height="%d">' % (path, width * scale, height * scale)
     phantoms(view, "sight_walk_map").update(
-        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK)])
+        [sublime.Phantom(sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK)])
 
 
 def show_note(view, html, key="sight_walk_map"):
     note = '<div style="color: %s">%s</div>' % (FADED, html)
     phantoms(view, key).update(
-        [sublime.Phantom(sublime.Region(0), note, sublime.LAYOUT_BLOCK)])
+        [sublime.Phantom(sublime.Region(content_point(view)), note, sublime.LAYOUT_BLOCK)])
 
 
 # The holiday
 
 def show_holiday(view, holiday, walked, current, on_select):
-    """The holiday's trips in order, each a link; walked ones ticked, the shown one in bold."""
+    """The holiday's trips in order, each a link, and a box the user ticks for a trip walked
+    (Jakub: never ticked by itself); the shown one in bold."""
     if holiday is None:
         return show_note(view, NO_INFORMATOR, "sight_walk_holiday")
     rows = []
     for number, trip in enumerate(holiday, 1):
-        tick = "✓" if trip.id in walked else "&nbsp;&nbsp;"
+        box = "☑" if trip.id in walked else "☐"
         name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
         kind = ' <span style="color: %s">%s</span>' % (FADED, trip.kind) if trip.kind != "run" \
             else ""
-        rows.append('%s %d. <a href="%s" style="text-decoration: none">%s</a>%s'
-                    % (tick, number, trip.id, name, kind))
+        rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
+                    '<a href="open:%s" style="text-decoration: none">%s</a>%s'
+                    % (trip.id, box, number, trip.id, name, kind))
     html = "<div>%s</div><br>%s" % (holiday.informator.name, "<br>".join(rows))
-    phantoms(view, "sight_walk_holiday").update(
-        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK, on_select)])
+    phantoms(view, "sight_walk_holiday").update([sublime.Phantom(
+        sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_select)])
 
 
 def read_walked(informator):

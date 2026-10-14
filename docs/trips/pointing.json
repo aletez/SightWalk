@@ -1,11 +1,11 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
   "sw/bridge.py:110-113",
   "sw/state.py:40-46",
-  "sw/reader.py:467-475",
+  "sw/reader.py:472-480",
   "sw/marks.py:66-81",
   "sw/marks.py:56-63",
   "sw/marks.py:16-35",
@@ -17,7 +17,7 @@
   {
    "type": "calls",
    "from": [0, 112],
-   "to": [2, 467]
+   "to": [2, 472]
   },
   {
    "type": "calls",
@@ -26,12 +26,12 @@
   },
   {
    "type": "calls",
-   "from": [2, 468],
+   "from": [2, 473],
    "to": [3, 66]
   },
   {
    "type": "calls",
-   "from": [2, 470],
+   "from": [2, 475],
    "to": [8, 12]
   },
   {

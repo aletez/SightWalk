@@ -107,6 +107,9 @@ class Reader(Geometry):
         self.below = vetting.make(self.window, self.chat)
         self.map_view = vetting.make_tool(self.window, "Map")
         self.holiday_view = vetting.make_tool(self.window, "Holiday")
+        self.pan = True  # Map and Holiday take the wheel for the panorama (ctrl+s, Jakub)
+        for view in (self.map_view, self.holiday_view):
+            vetting.set_panning(view, self.pan)
         self.tool = vetting.SCROLL  # the Tools pane's tab shown
         self.below_header = chat.make_header(self.window, self.chat, "Tools")
         self.status_view = chat.make_status(self.window, self.chat)
@@ -276,7 +279,7 @@ class Reader(Geometry):
             self.keep_bench_width()
         # Only the scroll pad joins the strip; another tool has its border (Jakub).
         reach = self.share(3 * OVERLAP) * (1 if self.bench_side() != "right" else -1)
-        reach = reach if self.tool == vetting.SCROLL else 0.0
+        reach = reach if self.tool == vetting.SCROLL or self.panning() else 0.0
         status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
                                              self.editor_geometry(), status))
@@ -360,8 +363,9 @@ class Reader(Geometry):
         """Where each view stands in its cell, as a layout y: the filler at its anchor, a sight's
         views at their text, half a border lower, as their cells begin that much higher (never
         above line 1)."""
-        places = [(view, anchor(view))
-                  for view in (self.filler, self.strip_floor, self.top_filler, self.below)]
+        tools = (self.tool_view(),) if self.panning() else ()
+        places = [(view, anchor(view)) for view in
+                  (self.filler, self.strip_floor, self.top_filler, self.below) + tools]
         places.insert(1, (self.strip, self.strip_place()))
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
@@ -370,8 +374,9 @@ class Reader(Geometry):
 
     def wheel_places(self):
         """The views whose wheel moves the whole trip: the strip, the fillers and the scroll pad
-        under the bench, and ▼'s cell. A sight's code scrolls on its own (Jakub)."""
-        return self.places()[:5]
+        under the bench, ▼'s cell, and Map or Holiday while they take the wheel. A sight's code
+        scrolls on its own (Jakub)."""
+        return self.places()[:6 if self.panning() else 5]
 
     def pinned_places(self):
         """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A
@@ -565,7 +570,7 @@ class Reader(Geometry):
         chat.show_header(self.chat_header, BENCH, "")
         chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
-        vetting.show_tabs(self.below_header, self.tool, self.select_tool)
+        vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan)
         chat.show_header(self.sights_header, SIGHTS, self.trip.name if self.trip else "",
                          button=("Reset positions", self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
@@ -624,6 +629,18 @@ class Reader(Geometry):
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
         self.draw_holiday()
 
+    def panning(self):
+        """Map or Holiday shown and taking the wheel for the panorama (Jakub)."""
+        return self.pan and self.tool != vetting.SCROLL
+
+    def toggle_panning(self):
+        """ctrl+s: the wheel over Map and Holiday moves the whole trip, or the tool itself."""
+        self.pan = not self.pan
+        for view in (self.map_view, self.holiday_view):
+            vetting.set_panning(view, self.pan)
+        self.show_headers()
+        self.select_tool(self.tool)  # lays out again, draws the tools at their new place
+
     # An informator and its holiday (Jakub)
 
     def open_informator(self, path):
@@ -640,18 +657,22 @@ class Reader(Geometry):
         self.walked = vetting.read_walked(self.informator.id)
         self.tool = "Holiday"
         first = next((t for t in self.holiday if t.id not in self.walked), self.holiday.members[0])
-        self.open_holiday_trip(first.id)
+        self.holiday_link("open:" + first.id)
 
-    def open_holiday_trip(self, key):
-        """A trip of the holiday, chosen in the Holiday tab: shown, and ticked as walked."""
-        self.walked.add(key)
-        vetting.save_walked(self.informator.id, self.walked)
-        self.load(self.informator.member(key), self.informator_root)
+    def holiday_link(self, href):
+        """open:<trip> shows a trip of the holiday; tick:<trip> ticks or unticks it as walked,
+        only by hand (Jakub)."""
+        what, _, key = href.partition(":")
+        if what == "open":
+            self.load(self.informator.member(key), self.informator_root)
+        elif what == "tick":
+            self.walked ^= {key}
+            vetting.save_walked(self.informator.id, self.walked)
         self.draw_holiday()
 
     def draw_holiday(self):
         vetting.show_holiday(self.holiday_view, self.holiday, self.walked,
-                             self.trip.id if self.trip else None, self.open_holiday_trip)
+                             self.trip.id if self.trip else None, self.holiday_link)
 
     def draw_map(self):
         if self.sights:

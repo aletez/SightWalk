@@ -200,6 +200,15 @@ def informator_files():
     return sorted(found)
 
 
+class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):
+    """ctrl+s in a trip: the wheel over Map and Holiday moves the whole trip, or the tool."""
+
+    def run(self):
+        reader = state.reader_for(self.window)
+        if reader is not None:
+            reader.toggle_panning()
+
+
 class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
     """Ends the Vetting guide that SightWalk started in the background."""
 

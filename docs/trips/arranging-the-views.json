@@ -1,79 +1,79 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
-  "sw/reader.py:330-343",
-  "sw/reader.py:293-296",
-  "sw/reader.py:298-317",
+  "sw/reader.py:333-346",
+  "sw/reader.py:296-299",
+  "sw/reader.py:301-320",
   "sw/views.py:55-58",
-  "sw/reader.py:382-393",
-  "sw/reader.py:359-369",
+  "sw/reader.py:387-398",
+  "sw/reader.py:362-373",
   "sw/views.py:140-142",
-  "sw/reader.py:596-603",
-  "sw/reader.py:605-607",
-  "sw/reader.py:508-511",
+  "sw/reader.py:601-608",
+  "sw/reader.py:610-612",
+  "sw/reader.py:513-516",
   "sw/views.py:216-226"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 333],
-   "to": [1, 293]
-  },
-  {
-   "type": "calls",
-   "from": [0, 339],
-   "to": [9, 508]
-  },
-  {
-   "type": "calls",
-   "from": [0, 340],
-   "to": [7, 596]
-  },
-  {
-   "type": "calls",
-   "from": [0, 341],
-   "to": [7, 596]
+   "from": [0, 336],
+   "to": [1, 296]
   },
   {
    "type": "calls",
    "from": [0, 342],
-   "to": [4, 382]
+   "to": [9, 513]
   },
   {
    "type": "calls",
    "from": [0, 343],
-   "to": [4, 382]
+   "to": [7, 601]
   },
   {
    "type": "calls",
-   "from": [1, 295],
-   "to": [2, 298]
+   "from": [0, 344],
+   "to": [7, 601]
   },
   {
    "type": "calls",
-   "from": [1, 296],
+   "from": [0, 345],
+   "to": [4, 387]
+  },
+  {
+   "type": "calls",
+   "from": [0, 346],
+   "to": [4, 387]
+  },
+  {
+   "type": "calls",
+   "from": [1, 298],
+   "to": [2, 301]
+  },
+  {
+   "type": "calls",
+   "from": [1, 299],
    "to": [3, 55]
   },
   {
    "type": "calls",
-   "from": [4, 387],
-   "to": [5, 359]
+   "from": [4, 392],
+   "to": [5, 362]
   },
   {
    "type": "calls",
-   "from": [5, 363],
+   "from": [5, 367],
    "to": [6, 140]
   },
   {
    "type": "calls",
-   "from": [7, 603],
-   "to": [8, 605]
+   "from": [7, 608],
+   "to": [8, 610]
   },
   {
    "type": "calls",
-   "from": [9, 510],
+   "from": [9, 515],
    "to": [10, 216]
   }
  ]

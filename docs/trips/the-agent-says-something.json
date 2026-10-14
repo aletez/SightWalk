@@ -1,11 +1,11 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
   "sw/bridge.py:98-107",
-  "sw/reader.py:712-718",
-  "sw/reader.py:564-572",
+  "sw/reader.py:733-739",
+  "sw/reader.py:569-577",
   "sw/chat.py:90-109",
   "sw/header.py:12-22",
   "sw/chat.py:127-137",
@@ -19,36 +19,36 @@
   {
    "type": "calls",
    "from": [0, 106],
-   "to": [1, 712]
+   "to": [1, 733]
   },
   {
    "type": "calls",
-   "from": [1, 717],
-   "to": [2, 564]
+   "from": [1, 738],
+   "to": [2, 569]
   },
   {
    "type": "calls",
-   "from": [1, 718],
+   "from": [1, 739],
    "to": [6, 147]
   },
   {
    "type": "calls",
-   "from": [2, 565],
+   "from": [2, 570],
    "to": [3, 90]
   },
   {
    "type": "calls",
-   "from": [2, 566],
+   "from": [2, 571],
    "to": [5, 127]
   },
   {
    "type": "calls",
-   "from": [2, 569],
+   "from": [2, 574],
    "to": [3, 90]
   },
   {
    "type": "calls",
-   "from": [2, 572],
+   "from": [2, 577],
    "to": [3, 90]
   },
   {

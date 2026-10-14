@@ -1,15 +1,15 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
   "sw/commands.py:38-42",
   "sw/chat.py:157-171",
   "sw/commands.py:29-32",
   "sw/state.py:32-33",
-  "sw/reader.py:720-734",
+  "sw/reader.py:741-755",
   "sw/plan.py:109-112",
-  "sw/reader.py:557-560",
+  "sw/reader.py:562-565",
   "sw/bridge.py:214-228"
  ],
  "transitions": [
@@ -31,16 +31,16 @@
   {
    "type": "calls",
    "from": [2, 31],
-   "to": [4, 720]
+   "to": [4, 741]
   },
   {
    "type": "calls",
    "from": [2, 31],
-   "to": [6, 557]
+   "to": [6, 562]
   },
   {
    "type": "calls",
-   "from": [4, 723],
+   "from": [4, 744],
    "to": [5, 109]
   }
  ]

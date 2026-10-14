@@ -1,10 +1,10 @@
 {
  "name": "Talking on the bench",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
   "sw/commands.py:123-133",
-  "sw/reader.py:586-589",
+  "sw/reader.py:591-594",
   "sw/commands.py:48-52",
   "sw/views.py:278-282",
   "sw/chat.py:190-198"
@@ -13,7 +13,7 @@
   {
    "type": "calls",
    "from": [0, 133],
-   "to": [1, 586]
+   "to": [1, 591]
   }
  ]
 }

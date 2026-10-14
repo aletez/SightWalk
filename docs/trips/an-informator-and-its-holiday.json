@@ -1,22 +1,22 @@
 {
  "name": "An informator and its holiday",
  "kind": "run",
- "commit": "41e9b76e2242e51a7fd8ea1971b4d706effb6974",
+ "commit": "6d781ba20a0e493597c519a53f8e3da5b1222e5b",
  "sights": [
   "sw/commands.py:177-182",
   "sw/commands.py:191-200",
   "sw/commands.py:184-188",
-  "sw/reader.py:629-643",
+  "sw/reader.py:646-660",
   "sw/ontology.py:251-255",
   "sw/ontology.py:238-241",
   "sw/ontology.py:228-229",
   "sw/ontology.py:198-209",
   "sw/ontology.py:212-217",
-  "sw/vetting.py:137-143",
-  "sw/reader.py:645-650",
-  "sw/vetting.py:146-155",
-  "sw/reader.py:652-654",
-  "sw/vetting.py:120-134"
+  "sw/vetting.py:168-174",
+  "sw/reader.py:662-671",
+  "sw/vetting.py:177-186",
+  "sw/reader.py:673-675",
+  "sw/vetting.py:149-165"
  ],
  "transitions": [
   {
@@ -32,27 +32,27 @@
   {
    "type": "calls",
    "from": [2, 186],
-   "to": [3, 629]
+   "to": [3, 646]
   },
   {
    "type": "calls",
-   "from": [3, 637],
+   "from": [3, 654],
    "to": [4, 251]
   },
   {
    "type": "calls",
-   "from": [3, 639],
+   "from": [3, 656],
    "to": [7, 198]
   },
   {
    "type": "calls",
-   "from": [3, 640],
-   "to": [9, 137]
+   "from": [3, 657],
+   "to": [9, 168]
   },
   {
    "type": "calls",
-   "from": [3, 643],
-   "to": [10, 645]
+   "from": [3, 660],
+   "to": [10, 662]
   },
   {
    "type": "calls",
@@ -76,23 +76,23 @@
   },
   {
    "type": "calls",
-   "from": [10, 648],
-   "to": [11, 146]
+   "from": [10, 670],
+   "to": [11, 177]
   },
   {
    "type": "calls",
-   "from": [10, 650],
-   "to": [12, 652]
+   "from": [10, 671],
+   "to": [12, 673]
   },
   {
    "type": "calls",
-   "from": [12, 653],
-   "to": [13, 120]
+   "from": [12, 674],
+   "to": [13, 149]
   },
   {
    "type": "calls",
-   "from": [12, 654],
-   "to": [10, 645]
+   "from": [12, 675],
+   "to": [10, 662]
   }
  ]
 }

@@ -55,9 +55,9 @@ The window and every view but the sights.
 - `sw/views.py:187-191` match_font
 - `sw/views.py:135-142` make_blank_view
 - `sw/views.py:111-118` make_side_view
-- `sw/chat.py:73-79` start
-- `sw/chat.py:82-91` make_header
-- `sw/chat.py:119-128` make_status
+- `sw/chat.py:72-78` start
+- `sw/chat.py:81-90` make_header
+- `sw/chat.py:118-127` make_status
 - `sw/vetting.py:29-33` make
 - `sw/vetting.py:36-42` make_tool
 - `sw/state.py:19-22` register
@@ -67,7 +67,7 @@ The window and every view but the sights.
 Files read, each sight's copy, header and frozen lines made.
 
 - `sw/reader.py:124-134` Reader.load
-- `sw/chat.py:199-207` catch_up
+- `sw/chat.py:200-208` catch_up
 - `sw/reader.py:178-188` Reader.close_sights
 - `sw/reader.py:190-203` Reader.build
 - `sw/views.py:153-157` FileCopy.__init__
@@ -154,7 +154,7 @@ After a new layout: every view into its group, then back at its place.
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:442-450` Reader.poll
-- `sw/chat.py:177-190` keep_at_bottom
+- `sw/chat.py:176-185` keep_at_bottom
 - `sw/reader.py:452-459` Reader.poll_wheel
 - `sw/reader.py:439-440` Reader.alive
 - `sw/reader.py:403-421` Reader.read_wheel
@@ -197,13 +197,13 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/bridge.py:98-107` op_say
 - `sw/reader.py:750-757` Reader.say
 - `sw/reader.py:572-581` Reader.show_headers
-- `sw/chat.py:94-113` show_header
+- `sw/chat.py:93-112` show_header
 - `sw/header.py:12-22` title_lines
-- `sw/chat.py:131-140` show_status
-- `sw/chat.py:150-157` say
+- `sw/chat.py:130-139` show_status
+- `sw/chat.py:149-156` say
 - `sw/commands.py:28-29` SightWalkInsertCommand.run
-- `sw/chat.py:53-70` Guard.on_text_changed
-- `sw/chat.py:35-43` protected_end
+- `sw/chat.py:52-69` Guard.on_text_changed
+- `sw/chat.py:34-42` protected_end
 - `sw/commands.py:107-109` SightWalkChatListener.on_modified
 
 ## 14. Stopping an answer (3 views)
@@ -269,7 +269,7 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 The draft becomes a message, with the focus, the visible sights and the edits, and the agent receives it.
 
 - `sw/commands.py:42-46` SightWalkSendCommand.run
-- `sw/chat.py:160-174` take_draft
+- `sw/chat.py:159-173` take_draft
 - `sw/commands.py:32-36` send
 - `sw/state.py:32-33` reader_for
 - `sw/reader.py:759-773` Reader.context
@@ -321,7 +321,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/commands.py:113-115` SightWalkWindowListener.on_activated
 - `sw/commands.py:92-96` SightWalkScrollCommand.run
 - `sw/commands.py:86-88` SightWalkHeaderListener.on_hover
-- `sw/chat.py:143-147` show_help
+- `sw/chat.py:142-146` show_help
 
 ## 22. primary+g (11 views)
 
@@ -402,7 +402,7 @@ Switch Language: the setting changes, the words follow at once, in every open tr
 - `sw/words.py:57-59` set_language
 - `sw/state.py:59-64` render_all
 - `sw/words.py:53-54` word
-- `sw/chat.py:28-32` help_html
+- `sw/chat.py:27-31` help_html
 - `sw/views.py:30-32` button_html
 
 ## 28. Endings (13 views, survey)
@@ -451,7 +451,7 @@ The small classes and hooks the trips above stand on.
 - `sw/views.py:42-43` kept
 - `sw/views.py:46-51` phantoms
 - `sw/views.py:54-55` forget
-- `sw/chat.py:49-51` Guard.__init__
+- `sw/chat.py:48-50` Guard.__init__
 - `sw/commands.py:82-84` SightWalkHeaderListener.is_applicable
 - `sw/commands.py:103-105` SightWalkChatListener.is_applicable
 
@@ -533,7 +533,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/reader.py:680-688` Reader.keep_transcript
 - `sw/reader.py:776-778` transcripts_path
 - `sw/reader.py:781-786` read_transcripts
-- `sw/chat.py:193-196` set_transcript
+- `sw/chat.py:194-197` set_transcript
 - `sw/ontology.py:274-278` dumps
 - `sw/vetting.py:172-181` save_walked
 - `sw/reader.py:690-692` Reader.draw_tour

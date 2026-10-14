@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "e91a76e2d1f0c4e6ab3cb6e3ce8fc3392b2cd058",
+ "commit": "dee46a42b9fd9a79fe851e055c8deee6f15c3702",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1004,7 +1004,7 @@
    "from": [
     "a-new-reader-window",
     7,
-    73
+    72
    ],
    "to": [
     "a-new-reader-window"
@@ -1015,7 +1015,7 @@
    "from": [
     "a-new-reader-window",
     7,
-    77
+    76
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -1028,12 +1028,12 @@
    "from": [
     "a-new-reader-window",
     7,
-    78
+    77
    ],
    "to": [
     "building-blocks",
     8,
-    49
+    48
    ]
   },
   {
@@ -1041,7 +1041,7 @@
    "from": [
     "a-new-reader-window",
     8,
-    82
+    81
    ],
    "to": [
     "a-new-reader-window"
@@ -1052,7 +1052,7 @@
    "from": [
     "a-new-reader-window",
     8,
-    90
+    89
    ],
    "to": [
     "building-blocks",
@@ -1065,7 +1065,7 @@
    "from": [
     "a-new-reader-window",
     8,
-    90
+    89
    ],
    "to": [
     "building-blocks",
@@ -1078,7 +1078,7 @@
    "from": [
     "a-new-reader-window",
     9,
-    119
+    118
    ],
    "to": [
     "a-new-reader-window"
@@ -1089,7 +1089,7 @@
    "from": [
     "a-new-reader-window",
     9,
-    126
+    125
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -1198,7 +1198,7 @@
    "from": [
     "loading-the-sights",
     1,
-    199
+    200
    ],
    "to": [
     "loading-the-sights"
@@ -1209,7 +1209,7 @@
    "from": [
     "loading-the-sights",
     1,
-    206
+    207
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -3037,7 +3037,7 @@
    "from": [
     "polling-and-the-wheel",
     1,
-    177
+    176
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3048,12 +3048,25 @@
    "from": [
     "polling-and-the-wheel",
     1,
-    190
+    182
    ],
    "to": [
-    "setting-up-the-agent-bridge",
-    4,
-    17
+    "building-blocks",
+    5,
+    42
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "polling-and-the-wheel",
+    1,
+    184
+   ],
+   "to": [
+    "building-blocks",
+    5,
+    42
    ]
   },
   {
@@ -3696,7 +3709,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    94
+    93
    ],
    "to": [
     "the-agent-says-something"
@@ -3707,7 +3720,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    100
+    99
    ],
    "to": [
     "building-blocks",
@@ -3720,7 +3733,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    104
+    103
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -3733,7 +3746,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    107
+    106
    ],
    "to": [
     "words-in-two-languages",
@@ -3746,12 +3759,12 @@
    "from": [
     "the-agent-says-something",
     3,
-    112
+    111
    ],
    "to": [
     "words-in-two-languages",
     5,
-    28
+    27
    ]
   },
   {
@@ -3770,7 +3783,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    131
+    130
    ],
    "to": [
     "the-agent-says-something"
@@ -3781,7 +3794,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    133
+    132
    ],
    "to": [
     "building-blocks",
@@ -3794,7 +3807,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    133
+    132
    ],
    "to": [
     "words-in-two-languages",
@@ -3807,7 +3820,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    135
+    134
    ],
    "to": [
     "building-blocks",
@@ -3820,7 +3833,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    135
+    134
    ],
    "to": [
     "words-in-two-languages",
@@ -3833,7 +3846,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    138
+    137
    ],
    "to": [
     "words-in-two-languages",
@@ -3846,7 +3859,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    138
+    137
    ],
    "to": [
     "words-in-two-languages",
@@ -3859,7 +3872,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    139
+    138
    ],
    "to": [
     "building-blocks",
@@ -3872,7 +3885,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    150
+    149
    ],
    "to": [
     "the-agent-says-something"
@@ -3894,7 +3907,7 @@
    "from": [
     "the-agent-says-something",
     8,
-    53
+    52
    ],
    "to": [
     "the-agent-says-something"
@@ -3905,7 +3918,7 @@
    "from": [
     "the-agent-says-something",
     8,
-    64
+    63
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -3918,7 +3931,7 @@
    "from": [
     "the-agent-says-something",
     9,
-    35
+    34
    ],
    "to": [
     "the-agent-says-something"
@@ -4850,7 +4863,7 @@
    "from": [
     "the-user-sends-a-message",
     1,
-    160
+    159
    ],
    "to": [
     "the-user-sends-a-message"
@@ -5725,7 +5738,7 @@
    "from": [
     "window-events",
     12,
-    143
+    142
    ],
    "to": [
     "window-events"
@@ -5736,12 +5749,12 @@
    "from": [
     "window-events",
     12,
-    147
+    146
    ],
    "to": [
     "words-in-two-languages",
     5,
-    28
+    27
    ]
   },
   {
@@ -6832,7 +6845,7 @@
    "from": [
     "words-in-two-languages",
     5,
-    28
+    27
    ],
    "to": [
     "words-in-two-languages"
@@ -7388,7 +7401,7 @@
    "from": [
     "building-blocks",
     8,
-    49
+    48
    ],
    "to": [
     "building-blocks"
@@ -8395,7 +8408,7 @@
    "from": [
     "an-informator-and-its-tour",
     20,
-    193
+    194
    ],
    "to": [
     "an-informator-and-its-tour"

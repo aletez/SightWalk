@@ -12,6 +12,7 @@ WORDS = {
     "tools": ("Tools", "Narzędzia"),
     "Map": ("Map", "Mapa"),
     "Tour": ("Tour", "Turnus"),
+    "fit": ("fit", "dopasuj"),
     "edit": ("Edit (Enter)", "Edytuj (Enter)"),
     "reset": ("Reset positions", "Przywróć położenia"),
     "stop": ("Stop (Esc)", "Zatrzymaj (Esc)"),

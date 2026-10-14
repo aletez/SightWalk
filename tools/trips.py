@@ -116,7 +116,8 @@ TRIPS = [
      ["vetting.draw_map", "vetting.find_dot", "callmap.dot_source", "callmap.file_block",
       "callmap.cluster", "callmap.node_line", "callmap.node_id", "callmap.quote",
       "callmap.arrow", "callmap.legend",
-      "vetting.render", "vetting.png_size", "vetting.show_image", "vetting.show_note"]),
+      "vetting.render", "vetting.png_size", "vetting.show_image", "vetting.zoom",
+      "commands.SightWalkZoomMapCommand.run", "vetting.show_note"]),
     ("The user sends a message",
      "The draft becomes a message, with the focus, the visible sights and the edits, and the "
      "agent receives it.",

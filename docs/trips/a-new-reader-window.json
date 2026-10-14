@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "e67e63f754526201961fd97c7beef142bd05f167",
+ "commit": "344a22d0672e1db74cdb11425b19269de0c0cb1f",
  "sights": [
   "sw/bridge.py:68-78",
   "sw/reader.py:59-80",
@@ -13,7 +13,7 @@
   "sw/chat.py:72-78",
   "sw/chat.py:81-90",
   "sw/chat.py:118-127",
-  "sw/vetting.py:26-32",
+  "sw/vetting.py:26-33",
   "sw/state.py:19-22"
  ],
  "transitions": [

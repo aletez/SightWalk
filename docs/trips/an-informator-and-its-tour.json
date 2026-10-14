@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "e67e63f754526201961fd97c7beef142bd05f167",
+ "commit": "344a22d0672e1db74cdb11425b19269de0c0cb1f",
  "sights": [
   "sw/commands.py:188-194",
   "sw/commands.py:203-216",
@@ -9,7 +9,7 @@
   "sw/commands.py:232-233",
   "sw/commands.py:236-241",
   "sw/commands.py:196-200",
-  "sw/words.py:61-68",
+  "sw/words.py:62-69",
   "sw/reader.py:694-708",
   "sw/reader.py:833-835",
   "sw/ontology.py:288-294",
@@ -18,16 +18,16 @@
   "sw/ontology.py:241-242",
   "sw/ontology.py:206-219",
   "sw/ontology.py:222-230",
-  "sw/vetting.py:154-160",
+  "sw/vetting.py:176-182",
   "sw/reader.py:710-722",
   "sw/reader.py:724-732",
   "sw/reader.py:820-822",
   "sw/reader.py:825-830",
   "sw/chat.py:194-197",
   "sw/ontology.py:274-278",
-  "sw/vetting.py:163-172",
+  "sw/vetting.py:185-194",
   "sw/reader.py:734-736",
-  "sw/vetting.py:135-151"
+  "sw/vetting.py:157-173"
  ],
  "transitions": [
   {
@@ -38,7 +38,7 @@
   {
    "type": "calls",
    "from": [0, 193],
-   "to": [6, 61]
+   "to": [6, 62]
   },
   {
    "type": "calls",
@@ -123,7 +123,7 @@
   {
    "type": "calls",
    "from": [7, 705],
-   "to": [15, 154]
+   "to": [15, 176]
   },
   {
    "type": "calls",
@@ -163,7 +163,7 @@
   {
    "type": "calls",
    "from": [16, 721],
-   "to": [22, 163]
+   "to": [22, 185]
   },
   {
    "type": "calls",
@@ -183,7 +183,7 @@
   {
    "type": "calls",
    "from": [23, 735],
-   "to": [24, 135]
+   "to": [24, 157]
   },
   {
    "type": "calls",

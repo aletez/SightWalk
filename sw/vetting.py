@@ -25,7 +25,8 @@ MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
 
 def make_tool(window, name):
     """A tool's pane (Map, Tour): read-only, in the bench's colours, drawn with phantoms."""
-    view = make_side_view(window, name, {"word_wrap": False, "sight_walk_blank": True})
+    view = make_side_view(window, name, {"word_wrap": False, "sight_walk_blank": True,
+                                         "sight_walk_tool": name})
     view.assign_syntax(SYNTAX)
     view.run_command("sight_walk_replace", {"text": " "})
     view.set_read_only(True)
@@ -95,11 +96,11 @@ def draw_map(view, nodes, arrows, style):
 
 def render(view, dot, source):
     os.makedirs(MAPS, exist_ok=True)
-    path = os.path.join(MAPS, hashlib.sha1(source.encode("utf-8")).hexdigest()[:16] + ".png")
+    path = os.path.join(MAPS, hashlib.sha1(source.encode("utf-8")).hexdigest()[:16] + "-288.png")
     with open(path[:-4] + ".dot", "w", encoding="utf-8") as f:  # to read what was drawn
         f.write(source)
     if not os.path.exists(path):
-        done = subprocess.run([dot, "-Tpng", "-Gdpi=144", "-o", path], input=source.encode(),
+        done = subprocess.run([dot, "-Tpng", "-Gdpi=288", "-o", path], input=source.encode(),
                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=20)
         if done.returncode:
             msg = done.stderr.decode("utf-8", "replace")[:300]
@@ -113,15 +114,36 @@ def png_size(path):
         return struct.unpack(">II", f.read(24)[16:24])
 
 
-def show_image(view, path):
-    """The map as wide as the pane at most, at half its pixels (it is drawn at 144 dpi)."""
-    if not view.is_valid():
+ZOOM_STEP = 1.25
+ZOOM_HTML = ('<div><a href="out" style="text-decoration: none">&nbsp;−&nbsp;</a>&nbsp;&nbsp;'
+             '<a href="in" style="text-decoration: none">&nbsp;+&nbsp;</a>&nbsp;&nbsp;'
+             '<a href="fit" style="text-decoration: none">%s</a></div>')
+
+
+def show_image(view, path=None):
+    """The map, at first as wide as the pane at most, then zoomed (Jakub): − and + over it, or
+    primary+minus and primary+= with the Map in focus; at most its own pixels (drawn at 288 dpi,
+    shown at a quarter to fit, so it stays sharp four times larger)."""
+    path = path or kept(view).get("map_path")
+    if not view.is_valid() or not path:
         return
+    kept(view)["map_path"] = path
     width, height = png_size(path)
-    scale = min(0.5, max(view.viewport_extent()[0] - 16, 50) / width)
-    html = '<img src="file://%s" width="%d" height="%d">' % (path, width * scale, height * scale)
-    phantoms(view, "sight_walk_map").update(
-        [sublime.Phantom(sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK)])
+    fit = min(0.25, max(view.viewport_extent()[0] - 16, 50) / width)
+    scale = min(fit * view.settings().get("sight_walk_zoom", 1.0), 1.0)
+    html = ZOOM_HTML % word("fit") + '<img src="file://%s" width="%d" height="%d">' % (
+        path, width * scale, height * scale)
+    phantoms(view, "sight_walk_map").update([sublime.Phantom(
+        sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK,
+        lambda href: zoom(view, href))])
+
+
+def zoom(view, how):
+    """in, out or fit: the Map larger, smaller, or as wide as the pane again."""
+    now = view.settings().get("sight_walk_zoom", 1.0)
+    now = {"in": now * ZOOM_STEP, "out": max(now / ZOOM_STEP, 1.0)}.get(how, 1.0)
+    view.settings().set("sight_walk_zoom", min(now, 8.0))
+    show_image(view)
 
 
 def show_note(view, html, key="sight_walk_map"):

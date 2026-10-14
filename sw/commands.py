@@ -7,7 +7,7 @@ import os
 import sublime
 import sublime_plugin
 
-from . import asked, bridge, chat, guide, scrollbars, state, tint
+from . import asked, bridge, chat, guide, scrollbars, state, tint, vetting
 from .config import SETTINGS_FILE
 from .spec import repo_root
 from .words import trips_count, word
@@ -248,6 +248,13 @@ class SightWalkSwitchLanguageCommand(sublime_plugin.ApplicationCommand):
         settings = sublime.load_settings(SETTINGS_FILE)
         settings.set("language", "en" if settings.get("language", "en") == "pl" else "pl")
         sublime.save_settings(SETTINGS_FILE)
+
+
+class SightWalkZoomMapCommand(sublime_plugin.TextCommand):
+    """primary+= / primary+minus / primary+0 on the Map: larger, smaller, as wide as the pane."""
+
+    def run(self, edit, how):
+        vetting.zoom(self.view, how)
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):

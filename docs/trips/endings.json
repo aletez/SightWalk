@@ -1,10 +1,10 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "e67e63f754526201961fd97c7beef142bd05f167",
+ "commit": "344a22d0672e1db74cdb11425b19269de0c0cb1f",
  "sights": [
-  "sw/commands.py:265-266",
-  "sw/commands.py:268-269",
+  "sw/commands.py:272-273",
+  "sw/commands.py:275-276",
   "sw/guide.py:83-87",
   "sw/guide.py:71-80",
   "sw/commands.py:145-147",
@@ -23,7 +23,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 266],
+   "from": [0, 273],
    "to": [2, 83]
   },
   {

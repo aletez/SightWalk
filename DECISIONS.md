@@ -204,6 +204,8 @@ Open:
 
 - The Map dark while the system is (Jakub, 2026-10-14): `sublime.ui_info()`'s system style picks the palette (`reader.map_style`): dark background, light text, nodes in a stronger hue. Seen by Claude in dark mode; its font Helvetica Neue Medium, heavier, as light text on dark reads thinner (Jakub). (Changed, unverified by Jakub.)
 
+- The Map zooms (Jakub, 2026-10-14: unreadable; Sublime passes no pinch to plugins): − + and "fit" over it, and primary+= / primary+minus / primary+0 with the Map in focus; the zoom kept per view. Drawn at 288 dpi and shown at a quarter to fit, so it stays sharp up to four times larger. Seen by Claude: + twice, the Map larger and sharp. While the bench and the tools take the wheel (primary+s), a zoomed Map is moved in by switching that off. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

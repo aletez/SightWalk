@@ -277,18 +277,27 @@ class Reader(Geometry):
 
     # Layout
 
-    def layout(self, rects, total):
+    def layout(self, rects, total, front=()):
         top, split = self.conversation_rows()
         if top and self.editor is None:
             self.keep_bench_width()
-        # Only the scroll pad joins the strip; another tool has its border (Jakub).
-        reach = self.share(3 * OVERLAP) * (1 if self.bench_side() != "right" else -1)
         status = self.status_view.line_height() + self.overhead if top else 0.0
-        bench_reach = reach if self.pan else 0.0
-        reach = reach if self.tool == vetting.SCROLL or self.panning() else 0.0
-        self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], reach,
-                                             self.editor_geometry(), status, bench_reach))
+        self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], front,
+                                             self.editor_geometry(), status))
         return top
+
+    def strip_in_front(self, rects, views):
+        """While the scroll pad or the bench takes the wheel, the strip reaches over the border
+        between them and comes first, so the blank areas read as one (Jakub); the strip reaches,
+        not they, as a view reaching over another gets a shadow on its right edge."""
+        if not (self.pan or self.tool == vetting.SCROLL) or self.strip not in views:
+            return [], []
+        i = views.index(self.strip)
+        x0, y0, x1, y1 = rects.pop(i)
+        views.pop(i)
+        reach = self.share(3 * OVERLAP)
+        rect = (x0 - reach, y0, x1, y1) if self.bench_side() != "right" else (x0, y0, x1 + reach, y1)
+        return [rect], [self.strip]
 
     def keep_bench_width(self):
         """A bench the user widened by dragging keeps its width. Measured on its header, whose
@@ -300,18 +309,18 @@ class Reader(Geometry):
             self.bench_width = layout["cols"][x1] - layout["cols"][x0]
 
     def place(self, rects, views, total):
-        top = self.layout(rects, total)
-        self.assign_groups(views, bool(top))
+        rects, views = list(rects), list(views)
+        front_rects, front_views = self.strip_in_front(rects, views)
+        top = self.layout(rects, total, front_rects)
+        self.assign_groups(front_views + views, bool(top), len(front_views))
         hide_chrome(self.window)
 
-    def assign_groups(self, views, full):
+    def assign_groups(self, views, full, front=0):
+        """views: the front ones (see strip_in_front), then the Sights' and the strip's."""
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
-        # While the bench takes the wheel its group comes before the Sights (see reader_layout).
-        if full and self.pan:
-            ordered = first + [self.tool_view(), self.chat] + views
-        else:
-            ordered = first + ([self.tool_view()] if full else []) + views + [self.chat]
+        tools = [self.tool_view()] if full else []
+        ordered = first + views[:front] + tools + views[front:] + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -336,7 +345,8 @@ class Reader(Geometry):
         if settle or [v.id() for v in views] != self.last_ids:
             self.arrange(rects, views)
         else:
-            self.layout(rects, self.height)
+            rects, views = list(rects), list(views)
+            self.layout(rects, self.height, self.strip_in_front(rects, views)[0])
             self.scroll_views()  # a sight scrolled on its own goes back to its first line (Jakub)
         self.draw_gutter()  # the eyes depend on what is on screen
 

@@ -291,9 +291,10 @@ class Reader(Geometry):
         return top
 
     def keep_bench_width(self):
-        """A bench the user widened by dragging keeps its width."""
+        """A bench the user widened by dragging keeps its width. Measured on its header, whose
+        cell never reaches over the strip (the bench's does while it takes the wheel)."""
         layout = self.window.get_layout()
-        group = self.window.get_view_index(self.chat)[0]
+        group = self.window.get_view_index(self.chat_header)[0]
         if 0 <= group < len(layout["cells"]):
             x0, _, x1, _ = layout["cells"][group]
             self.bench_width = layout["cols"][x1] - layout["cols"][x0]

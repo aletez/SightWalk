@@ -836,12 +836,12 @@ def read_json(path):
 
 
 LIGHT_MAP = ("Helvetica", "#222222", "#888888", "#ffffff", 0.25)
-DARK_MAP = ("Helvetica", "#dddddd", "#8a8a8a", "#1e1f22", 0.35)
+DARK_MAP = ("Helvetica Neue Medium", "#dddddd", "#8a8a8a", "#1e1f22", 0.35)
 
 
 def map_style():
     """(font, text, lines, background, nodes' hue amount): the Map dark while the system is
-    (Jakub)."""
+    (Jakub), its font heavier there, as light text on dark reads thinner."""
     try:
         dark = sublime.ui_info()["system"]["style"] == "dark"
     except (AttributeError, KeyError, TypeError):

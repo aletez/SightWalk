@@ -148,7 +148,7 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
 
 def clear_schemes_if_unused():
-    """The written colour schemes no view uses go (Jakub); a trip writes them anew."""
+    """The written colour schemes no trip uses go (Jakub); a trip writes them anew."""
     tint.clear_schemes()
 
 

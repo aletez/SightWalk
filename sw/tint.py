@@ -175,11 +175,18 @@ def apply_grey(header):
 
 
 def clear_schemes():
-    """Deletes the schemes SightWalk wrote that no open view uses (Jakub: left behind, they
+    """Deletes the schemes SightWalk wrote that no trip's view uses (Jakub: left behind, they
     crowd Sublime's list of colour schemes), with the backups Sublime may have made. Asks the
-    views, not the open trips: a timer of a module reloaded since must not delete what the new
-    one uses."""
-    used = {v.settings().get("color_scheme") for w in sublime.windows() for v in w.views()}
+    views (a timer of a module reloaded since knows no trips): a view of SightWalk's keeps its
+    scheme; any other that kept one (a file opened in a trip and moved out) gets its own back,
+    or Sublime would complain of a missing scheme."""
+    used = set()
+    for view in [v for w in sublime.windows() for v in w.views()]:
+        scheme = view.settings().get("color_scheme") or ""
+        if view.settings().get("sight_walk") or view.settings().get("sight_walk_editor"):
+            used.add(scheme)
+        elif scheme.startswith("Packages/User/SightWalk/"):
+            view.settings().erase("color_scheme")
     for key, schemes in list(SCHEMES.items()):
         if schemes and not used & set(schemes):
             del SCHEMES[key]

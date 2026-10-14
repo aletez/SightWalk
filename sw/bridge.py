@@ -1,6 +1,7 @@
 """What the agent's tools do in Sublime (see mcp_http, which serves them): each operation runs on
 Sublime's main thread; wait_for_user waits on the inbox on the server's own thread."""
 
+import json
 import os
 import queue
 import threading
@@ -11,9 +12,9 @@ import sublime
 from . import scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
-from .ontology import Sight, Transition, Trip
+from .ontology import Sight, Transition, Trip, trip_from
 from .reader import Reader
-from .spec import parse_spec
+from .spec import parse_spec, repo_root
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
@@ -159,8 +160,25 @@ def op_settings(values=None):
     return {key: settings.get(key, default) for key, default in EDITABLE.items()}
 
 
+def op_open_trip(file, root=None):
+    """A trip from its file (written by an informator's author), its paths relative to root, by
+    default the file's repository."""
+    check_not_stopped()
+    try:
+        with open(os.path.expanduser(file), encoding="utf-8") as f:
+            trip = trip_from(json.load(f))
+    except (OSError, ValueError, KeyError) as e:
+        raise ValueError("Cannot read a trip from %s: %s" % (file, e)) from None
+    root = root or repo_root(os.path.expanduser(file))
+    check_sights([sight.spec for sight in trip], root)
+    (state.current_reader() or new_reader()).load(trip, root)
+    state.ADDRESSED = True
+    scrollbars.reader_focused(True)
+    return {"ok": True, "trip": trip.name, "sights": [sight.spec for sight in trip]}
+
+
 OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,
-       "close": op_close, "settings": op_settings, "browse": op_browse}
+       "close": op_close, "settings": op_settings, "browse": op_browse, "open_trip": op_open_trip}
 
 
 def run_on_main(fn, timeout=10):

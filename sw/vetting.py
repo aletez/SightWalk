@@ -1,8 +1,10 @@
 """The Tools pane (Jakub's name for now) under the Vetting Bench, with tabs in its header: Map, the
-trip's sights as a call graph drawn by Graphviz, and Scroll, a blank pane in the bench's colours
-whose wheel moves the whole trip, like the Sights' fillers (the scroll pad)."""
+trip's sights as a call graph drawn by Graphviz; Holiday, an informator's trips in one order; and
+Scroll, a blank pane in the bench's colours whose wheel moves the whole trip, like the Sights'
+fillers (the scroll pad)."""
 
 import hashlib
+import json
 import os
 import shutil
 import struct
@@ -15,8 +17,11 @@ from .chat import SYNTAX
 from .config import SETTINGS_FILE
 from .views import FADED, kept, make_blank_view, make_side_view, match_font, phantoms
 
-TABS = ("Map", "Scroll")
+TABS = ("Map", "Holiday", "Scroll")
 SCROLL = "Scroll"
+WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
+NO_INFORMATOR = ("No informator is open: <i>SightWalk: Open Informator</i> in the command "
+                 "palette.")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
 MAPS = os.path.join(os.path.expanduser("~"), ".sight_walk", "maps")
@@ -31,8 +36,9 @@ def make(window, conversation):
     return view
 
 
-def make_map(window):
-    view = make_side_view(window, "Map", {"word_wrap": False, "sight_walk_blank": True})
+def make_tool(window, name):
+    """A tool's pane (Map, Holiday): read-only, in the bench's colours, drawn with phantoms."""
+    view = make_side_view(window, name, {"word_wrap": False, "sight_walk_blank": True})
     view.assign_syntax(SYNTAX)
     view.run_command("sight_walk_replace", {"text": " "})
     view.set_read_only(True)
@@ -103,7 +109,47 @@ def show_image(view, path):
         [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK)])
 
 
-def show_note(view, html):
+def show_note(view, html, key="sight_walk_map"):
     note = '<div style="color: %s">%s</div>' % (FADED, html)
-    phantoms(view, "sight_walk_map").update(
+    phantoms(view, key).update(
         [sublime.Phantom(sublime.Region(0), note, sublime.LAYOUT_BLOCK)])
+
+
+# The holiday
+
+def show_holiday(view, holiday, walked, current, on_select):
+    """The holiday's trips in order, each a link; walked ones ticked, the shown one in bold."""
+    if holiday is None:
+        return show_note(view, NO_INFORMATOR, "sight_walk_holiday")
+    rows = []
+    for number, trip in enumerate(holiday, 1):
+        tick = "✓" if trip.id in walked else "&nbsp;&nbsp;"
+        name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
+        kind = ' <span style="color: %s">%s</span>' % (FADED, trip.kind) if trip.kind != "run" \
+            else ""
+        rows.append('%s %d. <a href="%s" style="text-decoration: none">%s</a>%s'
+                    % (tick, number, trip.id, name, kind))
+    html = "<div>%s</div><br>%s" % (holiday.informator.name, "<br>".join(rows))
+    phantoms(view, "sight_walk_holiday").update(
+        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_BLOCK, on_select)])
+
+
+def read_walked(informator):
+    """The ids of the informator's trips the user has opened, kept across sessions."""
+    try:
+        with open(WALKED, encoding="utf-8") as f:
+            return set(json.load(f).get(informator, []))
+    except (OSError, ValueError):
+        return set()
+
+
+def save_walked(informator, walked):
+    try:
+        with open(WALKED, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        data = {}
+    data[informator] = sorted(walked)
+    os.makedirs(os.path.dirname(WALKED), exist_ok=True)
+    with open(WALKED, "w", encoding="utf-8") as f:
+        json.dump(data, f)

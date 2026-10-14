@@ -1,5 +1,6 @@
 """Sublime commands and listeners. sight_walk.py imports them, which is how Sublime finds them."""
 
+import glob
 import os
 
 import sublime
@@ -167,6 +168,36 @@ class SightWalkCloseTripCommand(sublime_plugin.WindowCommand):
     def run(self):
         if sublime.ok_cancel_dialog("Close the Vetting Trip window?", "Close"):
             self.window.run_command("close_window")
+
+
+class SightWalkOpenInformatorCommand(sublime_plugin.WindowCommand):
+    """Opens an informator (an informators/*.json found in the open folders and repositories)
+    in a trip, its holiday in the Tools pane (Jakub)."""
+
+    def run(self):
+        found = informator_files()
+        if not found:
+            sublime.error_message("SightWalk found no informators/*.json in the open folders.")
+            return
+        self.window.show_quick_panel(found, lambda i: i >= 0 and self.open(found[i]))
+
+    def open(self, path):
+        reader = state.current_reader() or bridge.new_reader()
+        reader.open_informator(path)
+        reader.window.bring_to_front()
+        scrollbars.reader_focused(True)
+
+
+def informator_files():
+    """The informators in every window's folders and the repositories of their files."""
+    places = set()
+    for window in sublime.windows():
+        places.update(window.folders())
+        places.update(repo_root(v.file_name()) for v in window.views() if v.file_name())
+    found = set()
+    for place in places - {None}:
+        found.update(glob.glob(os.path.join(place, "**", "informators", "*.json"), recursive=True))
+    return sorted(found)
 
 
 class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):

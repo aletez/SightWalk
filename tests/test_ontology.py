@@ -1,6 +1,7 @@
 import unittest
 
-from sw.ontology import Holiday, Informator, Sight, Transition, Trip, slug
+from sw.ontology import (Holiday, Informator, Sight, Transition, Trip, holiday, informator_data,
+                         informator_from, slug, trip_data, trip_from)
 
 
 def two_sights():
@@ -124,6 +125,44 @@ class HolidayTest(unittest.TestCase):
         informator = Informator("SightWalk", [Trip("First", two_sights())])
         with self.assertRaises(ValueError):
             Holiday(informator, [Trip("Other", two_sights())])
+
+
+def trips(*names):
+    return [Trip(name, two_sights()) for name in names]
+
+
+class HolidayOrderTest(unittest.TestCase):
+    def test_follows_leads_to_from_a_start(self):
+        a, b, c, d = trips("A", "B", "C", "D")
+        informator = Informator("I", [c, a, b, d], [
+            Transition("leads_to", ("a", 1, 9), ("b", 0)),
+            Transition("leads_to", ("b",), ("c",)),
+            Transition("calls", ("d", 0, 12), ("a", 0, 10))])
+        self.assertEqual([t.id for t in holiday(informator)], ["a", "b", "c", "d"])
+
+    def test_other_types_and_cycles(self):
+        a, b = trips("A", "B")
+        informator = Informator("I", [a, b], [Transition("comparable", ("b",), ("a",)),
+                                              Transition("comparable", ("a",), ("b",))])
+        self.assertEqual([t.id for t in holiday(informator, ("comparable",))], ["a", "b"])
+        self.assertEqual(holiday(informator, ("comparable",)).types, ("comparable",))
+
+
+class FilesTest(unittest.TestCase):
+    def test_trip_round_trip(self):
+        trip = Trip("T", two_sights(), [Transition("calls", (0, 12), (1, 5))], "c1", "survey")
+        again = trip_from(trip_data(trip))
+        self.assertEqual(trip_data(again), trip_data(trip))
+        self.assertEqual(again.transitions, trip.transitions)
+
+    def test_informator_names_trip_files(self):
+        a, b = trips("A", "B")
+        informator = Informator("I", [a, b], [Transition("own_trip", ("a", 0, 10), ("b",))], "c2")
+        data = informator_data(informator, {"a": "trips/a.json", "b": "trips/b.json"})
+        self.assertEqual(data["trips"], ["trips/a.json", "trips/b.json"])
+        files = {"trips/a.json": trip_data(a), "trips/b.json": trip_data(b)}
+        again = informator_from(data, files.get)
+        self.assertEqual(informator_data(again, {"a": "trips/a.json", "b": "trips/b.json"}), data)
 
 
 if __name__ == "__main__":

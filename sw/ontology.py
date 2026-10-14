@@ -193,3 +193,63 @@ class Holiday(Sequence):
             raise ValueError("not in %s: %s" % (informator.name, ", ".join(stray)))
         super().__init__(trips)
         self.informator, self.types = informator, tuple(types)
+
+
+def holiday(informator, types=("leads_to",)):
+    """The informator's trips in one order (Jakub): from each trip nothing of types leads to, on
+    along those transitions, depth first; trips left over follow in the informator's order."""
+    nexts = {}
+    for t in informator.transitions:
+        if t.type in types and t.source and t.target and t.source[0] != t.target[0]:
+            nexts.setdefault(t.source[0], []).append(t.target[0])
+    reached = {target for targets in nexts.values() for target in targets}
+    order = []
+    for trip in sorted(informator.members, key=lambda trip: trip.id in reached):
+        visit(trip.id, nexts, order)
+    return Holiday(informator, [informator.member(key) for key in order], types)
+
+
+def visit(key, nexts, order):
+    if key in order:
+        return
+    order.append(key)
+    for target in nexts.get(key, []):
+        visit(target, nexts, order)
+
+
+# Files: a trip and an informator as JSON-ready data. An informator names its trips' files, so
+# a trip stays self-contained and can serve several informators.
+
+def transition_data(transition):
+    return {"type": transition.type, "from": list(transition.source),
+            "to": list(transition.target)}
+
+
+def transition_from(data):
+    return Transition(data.get("type"), data.get("from") or (), data.get("to") or ())
+
+
+def trip_data(trip):
+    return {"name": trip.name, "kind": trip.kind, "commit": trip.commit,
+            "sights": [sight.spec for sight in trip],
+            "transitions": [transition_data(t) for t in trip.transitions]}
+
+
+def trip_from(data):
+    return Trip(data["name"], [Sight.parse(spec) for spec in data["sights"]],
+                [transition_from(t) for t in data.get("transitions", [])],
+                data.get("commit"), data.get("kind", "run"))
+
+
+def informator_data(informator, files):
+    """files: {trip id: the trip's file, relative to the informator's}."""
+    return {"name": informator.name, "commit": informator.commit,
+            "trips": [files[trip.id] for trip in informator.members],
+            "transitions": [transition_data(t) for t in informator.transitions]}
+
+
+def informator_from(data, read_trip):
+    """read_trip(file) gives a trip's data."""
+    trips = [trip_from(read_trip(file)) for file in data["trips"]]
+    return Informator(data["name"], trips, [transition_from(t) for t in data["transitions"]],
+                      data.get("commit"))

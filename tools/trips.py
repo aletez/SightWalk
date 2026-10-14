@@ -8,7 +8,13 @@ current lines. Run from the repository root after the code changes:
 import ast
 import glob
 import json
+import os
+import subprocess
 import sys
+
+sys.path.insert(0, ".")
+from sw.ontology import (Informator, Transition, Trip, Sight, informator_data,  # noqa: E402
+                         trip_data)
 
 FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py"]
 
@@ -36,7 +42,7 @@ TRIPS = [
      "The window and every view but the sights.",
      ["bridge.new_reader", "reader.Reader.__init__", "reader.Reader.make_side_views", "views.bench_font", "views.match_font",
       "views.make_blank_view", "views.make_side_view", "chat.start", "chat.make_header",
-      "chat.make_status", "vetting.make", "vetting.make_map", "state.register"]),
+      "chat.make_status", "vetting.make", "vetting.make_tool", "state.register"]),
     ("Loading the sights",
      "Files read, each sight's copy, header and frozen lines made.",
      ["reader.Reader.load", "reader.Reader.close_sights", "views.wait_until_loaded",
@@ -63,7 +69,7 @@ TRIPS = [
     ("Arranging the views",
      "After a new layout: every view into its group, then back at its place.",
      ["reader.Reader.arrange", "reader.Reader.place", "reader.Reader.assign_groups",
-      "views.hide_chrome", "reader.Reader.tool_view", "reader.Reader.hidden_tool",
+      "views.hide_chrome",
       "reader.Reader.scroll_views", "reader.Reader.places", "views.anchor",
       "reader.Reader.draw_strip_buttons", "reader.Reader.strip_button",
       "reader.Reader.draw_edit_buttons", "views.draw_edit_button"]),
@@ -94,7 +100,8 @@ TRIPS = [
       "reader.Reader.withdraw_unread_messages"]),
     ("The Tools pane's tabs",
      "Map and Scroll: the tab links, and the tab shown in the pane.",
-     ["reader.Reader.select_tool", "vetting.show_tabs", "reader.Reader.draw_map"]),
+     ["reader.Reader.select_tool", "vetting.show_tabs", "reader.Reader.tools",
+      "reader.Reader.tool_view", "reader.Reader.hidden_tools", "reader.Reader.draw_map"]),
     ("The Map's nodes",
      "The trip's definitions and the calls its author named, as nodes for the graph.",
      ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.owner",
@@ -188,6 +195,19 @@ TRIPS = [
       "ontology.Trip.member_label", "ontology.Trip.moved", "ontology.Informator.member",
       "ontology.Informator.label", "ontology.Informator.member_label",
       "ontology.Holiday.__init__"]),
+    ("An informator and its holiday",
+     "Open Informator: the informator read from its files, its trips laid out in one order, the "
+     "Holiday tab drawn, a trip opened from it and ticked as walked.",
+     ["commands.SightWalkOpenInformatorCommand.run", "commands.informator_files",
+      "commands.SightWalkOpenInformatorCommand.open", "reader.Reader.open_informator",
+      "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
+      "ontology.holiday", "ontology.visit", "vetting.read_walked",
+      "reader.Reader.open_holiday_trip", "vetting.save_walked", "reader.Reader.draw_holiday",
+      "vetting.show_holiday"]),
+    ("Trip files",
+     "A trip opened from its file by the guide, and the files written for an informator.",
+     ["bridge.op_open_trip", "ontology.trip_from", "ontology.trip_data",
+      "ontology.transition_data", "ontology.informator_data"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
      "them.",
@@ -202,6 +222,21 @@ TRIPS = [
       "commands.SightWalkToggleSentinelsCommand.run"]),
 ]
 
+
+# A function in several trips is discussed in its own trip (Jakub); the others show it on the way.
+OWN_TRIPS = {
+    "bridge.run_on_main": "One tool call over HTTP",
+    "ontology.Sight.parse": "The ontology: collections and sights",
+    "ontology.Trip.__init__": "The ontology: networks",
+    "ontology.Network.__init__": "The ontology: networks",
+    "ontology.Network.problem": "The ontology: networks",
+    "reader.Reader.build": "Loading the sights",
+    "reader.Reader.draw_map": "The Map's nodes",
+    "vetting.draw_map": "Drawing the Map",
+    "bridge.wait_for_user": "The user sends a message",
+    "ontology.trip_from": "Trip files",
+    "reader.Reader.tool_view": "The Tools pane's tabs",
+}
 
 # Not runs but surveys: all the places about one thing (see the manual on trips).
 SURVEYS = {"The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
@@ -349,6 +384,55 @@ def markdown(specs):
     return "\n".join(out)
 
 
+def make_trip(title, names, specs, found, imported, commit):
+    data = trip_sights(title, names, specs, found, imported)
+    kind = "survey" if title in SURVEYS else "run"
+    return Trip(title, [Sight.parse(spec) for spec in data["sights"]],
+                [Transition(t["type"], t["from"], t["to"]) for t in data["transitions"]],
+                commit, kind)
+
+
+def own_trip(name):
+    """The id of the trip that discusses name."""
+    return Trip(OWN_TRIPS.get(name) or next(t for t, _, ns in TRIPS if name in ns), []).id
+
+
+def between_trips(found, imported):
+    """The informator's transitions: the trips' reading order (leads_to), every sight's own trip,
+    and the calls that leave a trip, to the callee in its own trip."""
+    ids = [Trip(title, []).id for title, _, _ in TRIPS]
+    out = [Transition("leads_to", (a,), (b,)) for a, b in zip(ids, ids[1:])]
+    for (title, _, names), trip in zip(TRIPS, ids):
+        for i, name in enumerate(names):
+            out.append(Transition("own_trip", (trip, i, found[name][2].lineno), (own_trip(name),)))
+            for line, callee in calls(name, found, imported):
+                if callee not in names and any(callee in ns for _, _, ns in TRIPS):
+                    home = own_trip(callee)
+                    sight = next(ns for t, _, ns in TRIPS if Trip(t, []).id == home).index(callee)
+                    out.append(Transition("calls", (trip, i, line),
+                                          (home, sight, found[callee][2].lineno)))
+    return out
+
+
+def write_files(specs, commit):
+    """docs/trips/<id>.json for every trip, docs/informators/sightwalk.json naming them."""
+    found, imported = definitions()
+    made = [make_trip(t, ns, specs, found, imported, commit) for t, _, ns in TRIPS]
+    os.makedirs("docs/trips", exist_ok=True)
+    os.makedirs("docs/informators", exist_ok=True)
+    for trip in made:
+        write_json("docs/trips/%s.json" % trip.id, trip_data(trip))
+    informator = Informator("SightWalk", made, between_trips(found, imported), commit)
+    files = {trip.id: "../trips/%s.json" % trip.id for trip in made}
+    write_json("docs/informators/sightwalk.json", informator_data(informator, files))
+
+
+def write_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+
+
 def main():
     specs = functions()
     if len(sys.argv) > 1:
@@ -358,6 +442,8 @@ def main():
         return
     with open("docs/trips.md", "w", encoding="utf-8") as f:
         f.write(markdown(specs))
+    commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    write_files(specs, commit)
     # The whole code must be walked: say what no trip covers (Jakub).
     covered = set(name for _, _, names in TRIPS for name in names)
     for name in sorted(set(specs) - covered):

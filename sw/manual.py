@@ -119,6 +119,10 @@ TOOLS = [
          {"sights": {"type": "array", "items": {"type": "string"}},
           "transitions": {"type": "array", "items": TRANSITION}, "root": {"type": "string"},
           "trip": {"type": "string"}}, ["sights", "transitions"]),
+    tool("open_trip", "Open a trip from its file (JSON, as an informator keeps it: name, kind, "
+         "sights, transitions), instead of composing it with show. root: base folder for its "
+         "relative paths, by default the file's repository.",
+         {"file": {"type": "string"}, "root": {"type": "string"}}, ["file"]),
     tool("say", 'Append your message to the Vetting Bench: say(text="..."). status: a few words '
          "on what the conversation is about right now, shown in the status line until changed.",
          {"text": {"type": "string"}, "status": {"type": "string"}}, ["text"]),

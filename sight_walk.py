@@ -17,6 +17,7 @@ from .sw.commands import (  # noqa: E402,F401
     SightWalkEditCommand,
     SightWalkHeaderListener,
     SightWalkInsertCommand,
+    SightWalkOpenInformatorCommand,
     SightWalkReplaceCommand,
     SightWalkResetSightsCommand,
     SightWalkScrollCommand,

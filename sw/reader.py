@@ -7,13 +7,14 @@ rows may lie outside 0..1 (Jakub found). Scrolling only shifts the rows (column_
 one cheap set_layout. The wheel is read by polling: a view the wheel moved off its place is put
 back and the movement taken over (read_wheel)."""
 
+import json
 import os
 import re
 import time
 
 import sublime
 
-from . import asked, callmap, chat, marks, plan, state, vetting
+from . import asked, callmap, chat, marks, ontology, plan, state, vetting
 from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
@@ -67,6 +68,8 @@ class Reader(Geometry):
         # note: non-empty = an answer is on its way (guide coming or thinking); shows [Stop]
         self.status = self.note = ""
         self.trip = None  # the ontology.Trip shown
+        self.informator = self.holiday = self.informator_root = None  # see open_informator
+        self.walked = set()
         self.bench_width = BENCH_WIDTH
         self.editor = None
         self.strip_marks = None  # the icons last drawn on the strip
@@ -102,7 +105,8 @@ class Reader(Geometry):
         self.strip_header.settings().set("margin", 0)
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.below = vetting.make(self.window, self.chat)
-        self.map_view = vetting.make_map(self.window)
+        self.map_view = vetting.make_tool(self.window, "Map")
+        self.holiday_view = vetting.make_tool(self.window, "Holiday")
         self.tool = vetting.SCROLL  # the Tools pane's tab shown
         self.below_header = chat.make_header(self.window, self.chat, "Tools")
         self.status_view = chat.make_status(self.window, self.chat)
@@ -259,6 +263,7 @@ class Reader(Geometry):
         self.ready = True
         self.scroll_to(0)
         self.draw_map()
+        self.draw_holiday()
         # Widths are shares measured from the bench (see share), which Sublime reports right only
         # once this layout is drawn: once more then.
         sublime.set_timeout(lambda: self.scroll_to(self.offset), SETTLE_MS)
@@ -308,7 +313,8 @@ class Reader(Geometry):
         else:
             for k, view in enumerate(rest + [self.tool_view()]):
                 self.window.set_view_index(view, n - 1, k + 1)
-        self.window.set_view_index(self.hidden_tool(), n - 1, 1)  # behind the conversation
+        for view in self.hidden_tools():
+            self.window.set_view_index(view, n - 1, 1)  # behind the conversation
 
     def render(self, settle=True):
         """A wheel step only shifts the layout's rows (see column_rects); anything else lays every
@@ -602,17 +608,50 @@ class Reader(Geometry):
 
     # Tools
 
-    def tool_view(self):
-        return self.below if self.tool == vetting.SCROLL else self.map_view
+    def tools(self):
+        return {"Map": self.map_view, "Holiday": self.holiday_view, vetting.SCROLL: self.below}
 
-    def hidden_tool(self):
-        return self.map_view if self.tool == vetting.SCROLL else self.below
+    def tool_view(self):
+        return self.tools()[self.tool]
+
+    def hidden_tools(self):
+        return [view for name, view in self.tools().items() if name != self.tool]
 
     def select_tool(self, name):
         self.tool = name
         if self.ready:
             self.render()
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
+        self.draw_holiday()
+
+    # An informator and its holiday (Jakub)
+
+    def open_informator(self, path):
+        """The informator in path, its trips in one order in the Holiday tab, the first one shown
+        (or the first not walked yet)."""
+        folder = os.path.dirname(path)
+
+        def read(file):
+            with open(os.path.join(folder, file), encoding="utf-8") as f:
+                return json.load(f)
+        self.informator = ontology.informator_from(read(os.path.basename(path)), read)
+        self.informator_root = repo_root(path)
+        self.holiday = ontology.holiday(self.informator)
+        self.walked = vetting.read_walked(self.informator.id)
+        self.tool = "Holiday"
+        first = next((t for t in self.holiday if t.id not in self.walked), self.holiday.members[0])
+        self.open_holiday_trip(first.id)
+
+    def open_holiday_trip(self, key):
+        """A trip of the holiday, chosen in the Holiday tab: shown, and ticked as walked."""
+        self.walked.add(key)
+        vetting.save_walked(self.informator.id, self.walked)
+        self.load(self.informator.member(key), self.informator_root)
+        self.draw_holiday()
+
+    def draw_holiday(self):
+        vetting.show_holiday(self.holiday_view, self.holiday, self.walked,
+                             self.trip.id if self.trip else None, self.open_holiday_trip)
 
     def draw_map(self):
         if self.sights:

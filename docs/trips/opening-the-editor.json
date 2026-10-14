@@ -1,7 +1,7 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "43880f142bbc950617017aa7e313b47366ebae72",
+ "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
  "sights": [
   "sw/commands.py:62-69",
   "sw/reader.py:575-580",

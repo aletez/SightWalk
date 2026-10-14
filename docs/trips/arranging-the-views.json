@@ -1,12 +1,12 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "43880f142bbc950617017aa7e313b47366ebae72",
+ "commit": "51609ba29917f3d01096e047e27a0a5174f87d27",
  "sights": [
   "sw/reader.py:374-387",
   "sw/reader.py:331-336",
   "sw/reader.py:305-320",
-  "sw/geometry.py:103-112",
+  "sw/geometry.py:107-116",
   "sw/reader.py:234-245",
   "sw/reader.py:338-360",
   "sw/views.py:60-63",

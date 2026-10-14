@@ -182,7 +182,7 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
         if not found:
             sublime.error_message("SightWalk found no informators/*.json in the open folders.")
             return
-        self.window.show_quick_panel([[label, path] for label, path, _ in found],
+        self.window.show_quick_panel([label for label, _, _ in found],
                                      lambda i: i >= 0 and self.open(*found[i][1:]))
 
     def open(self, informator, tour):
@@ -193,13 +193,16 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
 
 
 def tour_choices():
-    """(label, informator's file, tour's file or None) for every tour to choose from."""
+    """(label, informator's file, tour's file or None) for every tour to choose from, each
+    labelled "informator: tour", one line, no paths (Jakub)."""
     found = []
     for path in found_files("informators"):
         found.append((read_name(path) + ": all trips", path, None))
     for path in found_files("tours"):
-        informator = os.path.join(os.path.dirname(path), read_field(path, "informator"))
-        found.append((read_name(path), os.path.normpath(informator), path))
+        informator = os.path.normpath(os.path.join(os.path.dirname(path),
+                                                   read_field(path, "informator")))
+        # Named after its informator too, like the whole one (Jakub).
+        found.append((read_name(informator) + ": " + read_name(path), informator, path))
     return found
 
 

@@ -1,31 +1,31 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "aa9862828101940d8ca6476a5d2be4ec8cce635f",
+ "commit": "3ac983279bbc21f55df187093ffdd2f19fff2f88",
  "sights": [
   "sw/commands.py:75-78",
-  "sw/reader.py:558-559",
+  "sw/reader.py:582-583",
   "sw/editor.py:74-85",
   "sw/editor.py:67-72",
   "sw/editor.py:60-65",
-  "sw/reader.py:561-574",
-  "sw/reader.py:576-581"
+  "sw/reader.py:585-598",
+  "sw/reader.py:600-605"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 78],
-   "to": [1, 558]
+   "to": [1, 582]
   },
   {
    "type": "calls",
-   "from": [1, 559],
+   "from": [1, 583],
    "to": [2, 74]
   },
   {
    "type": "calls",
-   "from": [1, 559],
-   "to": [5, 561]
+   "from": [1, 583],
+   "to": [5, 585]
   },
   {
    "type": "calls",
@@ -44,8 +44,8 @@
   },
   {
    "type": "calls",
-   "from": [5, 573],
-   "to": [6, 576]
+   "from": [5, 597],
+   "to": [6, 600]
   }
  ]
 }

@@ -93,11 +93,23 @@ class Geometry:
         views.append(self.filler)
         strip_left, strip_right = self.strip_span()
         floor = self.height - self.floor_height()
-        rects += [(strip_left, -OVERLAP, strip_right, self.head() + OVERLAP),
-                  (strip_left, self.head(), strip_right, floor + OVERLAP),
-                  (strip_left, floor, strip_right, self.height)]
-        views += [self.strip_header, self.strip, self.strip_floor]
+        rows = self.strip_rows()
+        rects += [(strip_left, -OVERLAP, strip_right, self.head() + OVERLAP)]
+        rects += [(strip_left, top, strip_right, bottom + OVERLAP) for top, bottom in rows]
+        rects += [(strip_left, floor, strip_right, self.height)]
+        views += [self.strip_header] + self.strip_parts[:len(rows)] + [self.strip_floor]
         return rects, views
+
+    def strip_rows(self):
+        """The strip's parts, (top, bottom) in px: beside the bench, beside its status line and
+        the Tools header, beside the Tools pane (Jakub: only the outer two reach over the bench
+        and the pane while they take the wheel); one part until the bench is measured."""
+        top, split = self.conversation_rows()
+        floor = self.height - self.floor_height()
+        if not top:
+            return [(self.head(), floor)]
+        status = self.status_view.line_height() + self.overhead
+        return [(self.head(), split - status), (split - status, split + top), (split + top, floor)]
 
     def floor_height(self):
         """▼'s cell under the strip: two of its lines, room for the larger arrow."""

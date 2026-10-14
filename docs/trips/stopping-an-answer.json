@@ -1,22 +1,22 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "aa9862828101940d8ca6476a5d2be4ec8cce635f",
+ "commit": "3ac983279bbc21f55df187093ffdd2f19fff2f88",
  "sights": [
   "sw/commands.py:165-168",
-  "sw/reader.py:744-751",
-  "sw/reader.py:753-756"
+  "sw/reader.py:768-775",
+  "sw/reader.py:777-780"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 168],
-   "to": [1, 744]
+   "to": [1, 768]
   },
   {
    "type": "calls",
-   "from": [1, 750],
-   "to": [2, 753]
+   "from": [1, 774],
+   "to": [2, 777]
   }
  ]
 }

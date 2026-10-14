@@ -91,6 +91,7 @@ class Reader(Geometry):
         self.strip = make_blank_view(self.window, "")
         self.strip.assign_syntax(chat.SYNTAX)  # the bench's colours (Jakub)
         self.strip.settings().set("margin", 0)  # room for an icon in a scroll bar's width
+        self.strip_parts = [self.strip] + [self.clone(self.strip) for _ in range(2)]
         self.strip_floor = make_blank_view(self.window, "")  # ▼, under the strip (Jakub)
         self.strip_floor.assign_syntax(chat.SYNTAX)
         self.strip_floor.settings().set("margin", 0)
@@ -155,6 +156,8 @@ class Reader(Geometry):
             self.window.set_view_index(view, group, 0)
         self.window.set_view_index(self.filler, len(cells) - 1, 1)
         self.window.set_view_index(self.strip_floor, len(cells) - 1, 2)
+        for part in self.strip_parts[1:]:
+            self.window.set_view_index(part, len(cells) - 1, 3)
         self.show_headers()
         self.window.focus_view(self.browser)
 
@@ -228,10 +231,24 @@ class Reader(Geometry):
         for sight in self.sights:
             draw_gap(sight.view, 1, line_count(sight.view))
 
+    def clone(self, view):
+        """A clone of view: the strip in parts (see strip_rows) shares one buffer, so its marks,
+        phantoms, show in every part."""
+        self.window.focus_view(view)
+        self.window.run_command("clone_file")
+        clone = self.window.active_view()
+        for key in ("margin", "sight_walk_blank", "sight_walk", "gutter", "line_numbers",
+                    "word_wrap", "draw_indent_guides", "highlight_line", "scroll_past_end"):
+            clone.settings().set(key, view.settings().get(key))
+        clone.assign_syntax(view.settings().get("syntax"))
+        clone.sel().clear()
+        return clone
+
     def make_items(self):
         """The cells of the virtual document: each sight's header, then its code."""
         self.lh = self.sights[0].view.line_height()
-        match_font(self.strip, self.sights[0].view)  # the strip's lines level with the code's
+        for part in self.strip_parts:
+            match_font(part, self.sights[0].view)  # the strip's lines level with the code's
         self.items = []
         for sight in self.sights:
             sight.header_item = plan.Item(sight.header, header_top(sight.header), self.lh, True)
@@ -282,21 +299,25 @@ class Reader(Geometry):
             self.keep_bench_width()
         status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], front,
-                                             self.editor_geometry(), status, bool(front)))
+                                             self.editor_geometry(), status))
         return top
 
     def strip_in_front(self, rects, views):
-        """While the scroll pad or the bench takes the wheel, the strip reaches over the border
-        between them and comes first, so the blank areas read as one (Jakub); the strip reaches,
-        not they, as a view reaching over another gets a shadow on its right edge."""
-        if not self.pan or self.strip not in views:
-            return [], []
-        i = views.index(self.strip)
-        x0, y0, x1, y1 = rects.pop(i)
-        views.pop(i)
+        """While the bench and the tool take the wheel, the strip's parts beside them reach over
+        the border and come first, so the blank areas read as one (Jakub); the strip reaches, not
+        they, as a view reaching over another gets a shadow on its right edge. The part beside the
+        status line and the Tools header does not: their borders stay (Jakub)."""
+        parts = [self.strip_parts[0], self.strip_parts[2]] if self.pan else []
+        front_rects, front_views = [], []
         reach = self.share(3 * OVERLAP)
-        rect = (x0 - reach, y0, x1, y1) if self.bench_side() != "right" else (x0, y0, x1 + reach, y1)
-        return [rect], [self.strip]
+        for part in [p for p in parts if p in views]:
+            i = views.index(part)
+            x0, y0, x1, y1 = rects.pop(i)
+            views.pop(i)
+            front_rects.append((x0 - reach, y0, x1, y1) if self.bench_side() != "right"
+                               else (x0, y0, x1 + reach, y1))
+            front_views.append(part)
+        return front_rects, front_views
 
     def keep_bench_width(self):
         """A bench the user widened by dragging keeps its width. Measured on its header, whose
@@ -319,8 +340,7 @@ class Reader(Geometry):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
         tools = [self.tool_view()] if full else []
-        lines = [self.below_header, self.status_view] if full and front else []  # see reader_layout
-        ordered = first + lines + views[:front] + tools + views[front:] + [self.chat]
+        ordered = first + views[:front] + tools + views[front:] + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -328,14 +348,15 @@ class Reader(Geometry):
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        rest = [self.chat_header] + ([] if lines else [self.below_header, self.status_view])
+        rest = [self.chat_header, self.below_header, self.status_view]
         if full:
             for k, view in enumerate(rest):
                 self.window.set_view_index(view, n + k, 0)
         else:
             for k, view in enumerate(rest + [self.tool_view()]):
                 self.window.set_view_index(view, n - 1, k + 1)
-        for view in self.hidden_tools():  # behind the conversation
+        hidden = self.hidden_tools() + [v for v in self.strip_parts if v not in ordered]
+        for view in hidden:  # behind the conversation
             self.window.set_view_index(view, ordered.index(self.chat), 1)
 
     def render(self, settle=True):
@@ -383,11 +404,7 @@ class Reader(Geometry):
         """Where each view stands in its cell, as a layout y: the filler at its anchor, a sight's
         views at their text, half a border lower, as their cells begin that much higher (never
         above line 1)."""
-        places = [(view, anchor(view)) for view in (self.filler, self.strip_floor, self.top_filler)]
-        places.insert(1, (self.strip, self.strip_place()))
-        if self.pan:
-            places += [(self.tool_view(), anchor(self.tool_view())),
-                       (self.chat, chat.bottom_place(self.chat))]
+        places = self.wheel_places()
         for sight in self.sights:
             texts = [(item.view, item_top(item)) for item in sight.items()]
             places += [(view, max(y - OVERLAP / 2, 0.0)) for view, y in texts]
@@ -397,7 +414,14 @@ class Reader(Geometry):
         """The views whose wheel moves the whole trip: the strip, the fillers, ▼'s cell, and the
         bench and the tool shown while they take the wheel. A sight's code scrolls on its own
         (Jakub)."""
-        return self.places()[:6 if self.pan else 4]
+        places = [(view, anchor(view)) for view in (self.filler, self.strip_floor, self.top_filler)]
+        # Each part of the strip shows the lines beside it (see strip_rows).
+        places += [(part, self.strip_place() + top - self.head())
+                   for part, (top, _) in zip(self.strip_parts, self.strip_rows())]
+        if self.pan:
+            places += [(self.tool_view(), anchor(self.tool_view())),
+                       (self.chat, chat.bottom_place(self.chat))]
+        return places
 
     def pinned_places(self):
         """The views the wheel does nothing to (Jakub): the sights' headers and frozen lines. A

@@ -93,7 +93,7 @@ def reader_layout(code_rects, total, top, split, bench, reach=0.0, editor=None, 
     # them: the two blank areas read as one (Jakub). With another tool there, no reach: a border.
     below = split + top
     tools = (x0 + min(reach, 0.0), below, x1 + max(reach, 0.0), total)
-    rects = [tools] + rects + [(x0, top, x1, split - status), (x0, 0.0, x1, top + OVERLAP),
+    rects = [tools] + rects + [(x0, top, x1, split - status), (x0, -OVERLAP, x1, top + OVERLAP),
                                (x0, split, x1, below + OVERLAP), (x0, split - status, x1, split)]
     if editor:
         header, left, right, dy = editor

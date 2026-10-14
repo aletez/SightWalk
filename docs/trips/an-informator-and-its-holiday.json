@@ -1,7 +1,7 @@
 {
  "name": "An informator and its holiday",
  "kind": "run",
- "commit": "8867c96535e4e445e7572529a6ae463f86aff3bb",
+ "commit": "405ffb91dd12067e7285538c7a5e7781fcaf52d2",
  "sights": [
   "sw/commands.py:177-182",
   "sw/commands.py:191-200",

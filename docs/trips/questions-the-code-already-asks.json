@@ -1,7 +1,7 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "4d9500dfbae4291a1ba57e9d07abdc80f067e0bb",
+ "commit": "e522b3fab1911a83806b4344f6a2f6986ac5d785",
  "sights": [
   "sw/reader.py:191-204",
   "sw/asked.py:33-44",

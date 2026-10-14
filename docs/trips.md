@@ -51,10 +51,10 @@ The window and every view but the sights.
 - `sw/bridge.py:68-78` new_reader
 - `sw/reader.py:59-80` Reader.__init__
 - `sw/reader.py:82-121` Reader.make_side_views
-- `sw/views.py:181-190` bench_font
-- `sw/views.py:193-197` match_font
-- `sw/views.py:141-148` make_blank_view
-- `sw/views.py:117-124` make_side_view
+- `sw/views.py:183-192` bench_font
+- `sw/views.py:195-199` match_font
+- `sw/views.py:143-150` make_blank_view
+- `sw/views.py:119-126` make_side_view
 - `sw/chat.py:72-78` start
 - `sw/chat.py:81-90` make_header
 - `sw/chat.py:118-127` make_status
@@ -70,15 +70,15 @@ Files read, each sight's copy, header and frozen lines made.
 - `sw/chat.py:200-208` catch_up
 - `sw/reader.py:179-189` Reader.close_sights
 - `sw/reader.py:191-204` Reader.build
-- `sw/views.py:159-163` FileCopy.__init__
-- `sw/views.py:166-178` make_copy
+- `sw/views.py:161-165` FileCopy.__init__
+- `sw/views.py:168-180` make_copy
 - `sw/reader.py:206-217` Reader.surround
 - `sw/spec.py:74-89` ancestors
 - `sw/spec.py:61-62` indent
 - `sw/spec.py:65-71` opens_block
 - `sw/spec.py:92-99` breathing
-- `sw/views.py:202-208` make_header
-- `sw/views.py:211-216` write_header
+- `sw/views.py:204-210` make_header
+- `sw/views.py:213-218` write_header
 
 ## 6. Colours (10 views)
 
@@ -101,10 +101,10 @@ The gap phantoms, the cells of the virtual document, and the window's height mea
 
 - `sw/reader.py:226-230` Reader.draw_gaps
 - `sw/reader.py:40-41` line_count
-- `sw/views.py:281-288` draw_gap
+- `sw/views.py:283-290` draw_gap
 - `sw/reader.py:232-244` Reader.make_items
-- `sw/views.py:219-220` line_top
-- `sw/views.py:223-224` header_top
+- `sw/views.py:221-222` line_top
+- `sw/views.py:225-226` header_top
 - `sw/reader.py:246-251` Reader.calibrate
 - `sw/reader.py:253-258` Reader.measure_full
 - `sw/reader.py:260-264` Reader.measure_half
@@ -129,7 +129,7 @@ From an offset to Sublime's layout: every sight's cells at its place, shifted.
 - `sw/geometry.py:106-117` Geometry.sight_cells
 - `sw/geometry.py:102-104` Geometry.floor_height
 - `sw/reader.py:280-287` Reader.layout
-- `sw/views.py:83-112` reader_layout
+- `sw/views.py:83-114` reader_layout
 - `sw/views.py:73-80` to_layout
 
 ## 9. Arranging the views (13 views)
@@ -144,11 +144,11 @@ After a new layout: every view into its group, then back at its place.
 - `sw/reader.py:410-421` Reader.scroll_views
 - `sw/reader.py:383-396` Reader.places
 - `sw/reader.py:443-447` Reader.strip_place
-- `sw/views.py:151-153` anchor
+- `sw/views.py:153-155` anchor
 - `sw/reader.py:625-632` Reader.draw_strip_buttons
 - `sw/reader.py:634-636` Reader.strip_button
 - `sw/reader.py:536-539` Reader.draw_edit_buttons
-- `sw/views.py:227-239` draw_edit_button
+- `sw/views.py:229-241` draw_edit_button
 
 ## 10. Polling and the wheel (9 views)
 
@@ -185,12 +185,12 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:505-518` Reader.draw_gutter
 - `sw/reader.py:520-525` Reader.draw_strip_marks
 - `sw/marks.py:117-128` strip_icons
-- `sw/views.py:256-265` draw_strip_icons
+- `sw/views.py:258-267` draw_strip_icons
 - `sw/marks.py:84-96` visible_lines
 - `sw/marks.py:99-114` gutter_icons
-- `sw/views.py:244-253` draw_icons
+- `sw/views.py:246-255` draw_icons
 - `sw/reader.py:527-532` Reader.draw_outlines
-- `sw/views.py:268-278` draw_outlines
+- `sw/views.py:270-280` draw_outlines
 
 ## 13. The agent says something (11 views)
 
@@ -275,7 +275,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/commands.py:32-36` send
 - `sw/state.py:32-33` reader_for
 - `sw/reader.py:780-794` Reader.context
-- `sw/views.py:291-295` selected_text
+- `sw/views.py:293-297` selected_text
 - `sw/plan.py:109-112` visible_specs
 - `sw/reader.py:585-588` Reader.take_edits
 - `sw/bridge.py:214-228` wait_for_user
@@ -339,7 +339,7 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 - `sw/commands.py:117-118` SightWalkWindowListener.on_load
 - `sw/reader.py:169-177` Reader.take_file
 - `sw/bridge.py:129-140` op_browse
-- `sw/views.py:127-138` make_browser
+- `sw/views.py:129-140` make_browser
 
 ## 23. What the agent is told (11 views, survey)
 

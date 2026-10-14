@@ -1,7 +1,7 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "f36f2f81a995e6906fdcfcf975d567821e127047",
+ "commit": "e57a0ad7f51521c4b425fd0fbb53e980aa3552a5",
  "sights": [
   "sw/reader.py:376-381",
   "sw/plan.py:100-106",
@@ -12,7 +12,7 @@
   "sw/geometry.py:106-117",
   "sw/geometry.py:102-104",
   "sw/reader.py:280-287",
-  "sw/views.py:83-112",
+  "sw/views.py:83-114",
   "sw/views.py:73-80"
  ],
  "transitions": [
@@ -68,7 +68,7 @@
   },
   {
    "type": "calls",
-   "from": [9, 112],
+   "from": [9, 114],
    "to": [10, 73]
   }
  ]

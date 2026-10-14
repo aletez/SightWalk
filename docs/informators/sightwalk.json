@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "f36f2f81a995e6906fdcfcf975d567821e127047",
+ "commit": "e57a0ad7f51521c4b425fd0fbb53e980aa3552a5",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -947,7 +947,7 @@
    "from": [
     "a-new-reader-window",
     3,
-    181
+    183
    ],
    "to": [
     "a-new-reader-window"
@@ -958,7 +958,7 @@
    "from": [
     "a-new-reader-window",
     4,
-    193
+    195
    ],
    "to": [
     "a-new-reader-window"
@@ -969,7 +969,7 @@
    "from": [
     "a-new-reader-window",
     5,
-    141
+    143
    ],
    "to": [
     "a-new-reader-window"
@@ -980,7 +980,7 @@
    "from": [
     "a-new-reader-window",
     5,
-    145
+    147
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -993,7 +993,7 @@
    "from": [
     "a-new-reader-window",
     6,
-    117
+    119
    ],
    "to": [
     "a-new-reader-window"
@@ -1374,7 +1374,7 @@
    "from": [
     "loading-the-sights",
     4,
-    159
+    161
    ],
    "to": [
     "loading-the-sights"
@@ -1385,7 +1385,7 @@
    "from": [
     "loading-the-sights",
     5,
-    166
+    168
    ],
    "to": [
     "loading-the-sights"
@@ -1396,7 +1396,7 @@
    "from": [
     "loading-the-sights",
     5,
-    174
+    176
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -1438,7 +1438,7 @@
    "to": [
     "measuring",
     2,
-    281
+    283
    ]
   },
   {
@@ -1490,7 +1490,7 @@
    "from": [
     "loading-the-sights",
     11,
-    202
+    204
    ],
    "to": [
     "loading-the-sights"
@@ -1501,12 +1501,12 @@
    "from": [
     "loading-the-sights",
     11,
-    204
+    206
    ],
    "to": [
     "a-new-reader-window",
     6,
-    117
+    119
    ]
   },
   {
@@ -1514,12 +1514,12 @@
    "from": [
     "loading-the-sights",
     11,
-    205
+    207
    ],
    "to": [
     "a-new-reader-window",
     4,
-    193
+    195
    ]
   },
   {
@@ -1527,7 +1527,7 @@
    "from": [
     "loading-the-sights",
     12,
-    211
+    213
    ],
    "to": [
     "loading-the-sights"
@@ -1538,7 +1538,7 @@
    "from": [
     "loading-the-sights",
     12,
-    214
+    216
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -1774,7 +1774,7 @@
    "from": [
     "measuring",
     2,
-    281
+    283
    ],
    "to": [
     "measuring"
@@ -1785,7 +1785,7 @@
    "from": [
     "measuring",
     2,
-    287
+    289
    ],
    "to": [
     "building-blocks",
@@ -1814,7 +1814,7 @@
    "to": [
     "a-new-reader-window",
     4,
-    193
+    195
    ]
   },
   {
@@ -1874,7 +1874,7 @@
    "from": [
     "measuring",
     4,
-    219
+    221
    ],
    "to": [
     "measuring"
@@ -1885,7 +1885,7 @@
    "from": [
     "measuring",
     5,
-    223
+    225
    ],
    "to": [
     "measuring"
@@ -2731,7 +2731,7 @@
    "to": [
     "measuring",
     5,
-    223
+    225
    ]
   },
   {
@@ -2826,7 +2826,7 @@
    "from": [
     "arranging-the-views",
     8,
-    151
+    153
    ],
    "to": [
     "arranging-the-views"
@@ -2935,7 +2935,7 @@
    "from": [
     "arranging-the-views",
     12,
-    227
+    229
    ],
    "to": [
     "arranging-the-views"
@@ -2946,25 +2946,12 @@
    "from": [
     "arranging-the-views",
     12,
-    230
+    232
    ],
    "to": [
     "words-in-two-languages",
     4,
     53
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "arranging-the-views",
-    12,
-    232
-   ],
-   "to": [
-    "building-blocks",
-    5,
-    42
    ]
   },
   {
@@ -2985,12 +2972,12 @@
    "from": [
     "arranging-the-views",
     12,
-    235
+    236
    ],
    "to": [
-    "loading-the-sights",
-    12,
-    211
+    "building-blocks",
+    5,
+    42
    ]
   },
   {
@@ -2999,6 +2986,19 @@
     "arranging-the-views",
     12,
     237
+   ],
+   "to": [
+    "loading-the-sights",
+    12,
+    213
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "arranging-the-views",
+    12,
+    239
    ],
    "to": [
     "building-blocks",
@@ -3011,7 +3011,7 @@
    "from": [
     "arranging-the-views",
     12,
-    238
+    240
    ],
    "to": [
     "words-in-two-languages",
@@ -3219,7 +3219,7 @@
    "to": [
     "measuring",
     4,
-    219
+    221
    ]
   },
   {
@@ -3489,7 +3489,7 @@
    "from": [
     "drawing-the-marks",
     3,
-    256
+    258
    ],
    "to": [
     "drawing-the-marks"
@@ -3500,7 +3500,7 @@
    "from": [
     "drawing-the-marks",
     3,
-    261
+    263
    ],
    "to": [
     "building-blocks",
@@ -3535,7 +3535,7 @@
    "from": [
     "drawing-the-marks",
     6,
-    244
+    246
    ],
    "to": [
     "drawing-the-marks"
@@ -3557,7 +3557,7 @@
    "from": [
     "drawing-the-marks",
     8,
-    268
+    270
    ],
    "to": [
     "drawing-the-marks"
@@ -5007,7 +5007,7 @@
    "from": [
     "the-user-sends-a-message",
     5,
-    291
+    293
    ],
    "to": [
     "the-user-sends-a-message"
@@ -5178,7 +5178,7 @@
    "to": [
     "loading-the-sights",
     11,
-    202
+    204
    ]
   },
   {
@@ -5235,7 +5235,7 @@
    "to": [
     "drawing-the-marks",
     6,
-    244
+    246
    ]
   },
   {
@@ -5248,7 +5248,7 @@
    "to": [
     "drawing-the-marks",
     8,
-    268
+    270
    ]
   },
   {
@@ -6141,7 +6141,7 @@
    "from": [
     "primary-g",
     10,
-    127
+    129
    ],
    "to": [
     "primary-g"
@@ -8853,7 +8853,7 @@
    "to": [
     "loading-the-sights",
     5,
-    166
+    168
    ]
   },
   {
@@ -8879,7 +8879,7 @@
    "to": [
     "loading-the-sights",
     11,
-    202
+    204
    ]
   },
   {

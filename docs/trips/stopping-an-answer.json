@@ -1,7 +1,7 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "f36f2f81a995e6906fdcfcf975d567821e127047",
+ "commit": "e57a0ad7f51521c4b425fd0fbb53e980aa3552a5",
  "sights": [
   "sw/commands.py:165-168",
   "sw/reader.py:750-757",

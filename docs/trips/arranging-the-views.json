@@ -1,7 +1,7 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "f36f2f81a995e6906fdcfcf975d567821e127047",
+ "commit": "e57a0ad7f51521c4b425fd0fbb53e980aa3552a5",
  "sights": [
   "sw/reader.py:354-367",
   "sw/reader.py:311-316",
@@ -11,11 +11,11 @@
   "sw/reader.py:410-421",
   "sw/reader.py:383-396",
   "sw/reader.py:443-447",
-  "sw/views.py:151-153",
+  "sw/views.py:153-155",
   "sw/reader.py:625-632",
   "sw/reader.py:634-636",
   "sw/reader.py:536-539",
-  "sw/views.py:227-239"
+  "sw/views.py:229-241"
  ],
  "transitions": [
   {
@@ -71,7 +71,7 @@
   {
    "type": "calls",
    "from": [6, 388],
-   "to": [8, 151]
+   "to": [8, 153]
   },
   {
    "type": "calls",
@@ -86,7 +86,7 @@
   {
    "type": "calls",
    "from": [11, 538],
-   "to": [12, 227]
+   "to": [12, 229]
   }
  ]
 }

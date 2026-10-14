@@ -110,6 +110,8 @@ class Geometry:
         rects, views = [], []
         for item in sight.items():
             top = self.head() + self.lead + item.y - self.offset - OVERLAP / 2
-            rects.append((left, top, right, top + item.content + self.overhead + OVERLAP))
+            bottom = top + item.content + self.overhead + OVERLAP
+            # A header does not reach over the cell above: the border over it shows (Jakub).
+            rects.append((left, top + OVERLAP if item.header else top, right, bottom))
             views.append(item.view)
         return rects, views

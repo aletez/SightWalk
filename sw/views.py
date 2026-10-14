@@ -80,7 +80,8 @@ def to_layout(rects, total):
     return {"cols": xs, "rows": [y / total for y in ys], "cells": cells}
 
 
-def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, status=0.0):
+def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, status=0.0,
+                  cover=None):
     """code_rects: the Sights' rectangles, in drawing order (earlier is on top). Groups in order:
     the editor if open; once top is known, the Tools pane; the Sights; the conversation and, once
     top is known, its header and the Tools pane's header.
@@ -90,16 +91,23 @@ def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, s
     and the Tools pane: the strip, reaching over them while they take the wheel (Jakub: a view
     reaching over another gets a shadow on its right edge, so the strip reaches, not they).
     editor: (header height, left, right, top) or None.
-    status: the status line's height (px), at the conversation's bottom; its group comes last."""
+    status: the status line's height (px), at the conversation's bottom; its group comes last.
+    cover: with front, the strip's far edge (a share): the status line and the Tools pane's
+    header then reach across the strip and come first of all, so they are drawn over it (Jakub):
+    one line each, they never get a shadow."""
     rects = list(code_rects)
     x0, x1 = bench
     if not top:
         return to_layout(list(front) + rects + [(x0, 0.0, x1, total)], total)
     # The Tools pane's header is as tall as the bench's, and stays put while the pane scrolls.
     below = split + top
+    lines = [(x0, split - status, x1, split), (x0, split, x1, below + OVERLAP)]
+    if cover is not None:
+        lines = [(min(a, cover), y0, max(b, cover), y1) for a, y0, b, y1 in lines]
+        front = lines + list(front)
+        lines = []
     rects = list(front) + [(x0, below, x1, total)] + rects + [
-        (x0, top, x1, split - status), (x0, -OVERLAP, x1, top + OVERLAP),
-        (x0, split, x1, below + OVERLAP), (x0, split - status, x1, split)]
+        (x0, top, x1, split - status), (x0, -OVERLAP, x1, top + OVERLAP)] + lines[::-1]
     if editor:
         header, left, right, dy = editor
         rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects

@@ -282,8 +282,12 @@ class Reader(Geometry):
         if top and self.editor is None:
             self.keep_bench_width()
         status = self.status_view.line_height() + self.overhead if top else 0.0
+        cover = None
+        if front:  # the strip's far edge: the status line and the Tools header reach across it
+            x0, _, x1, _ = front[0]
+            cover = x1 if self.bench_side() != "right" else x0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], front,
-                                             self.editor_geometry(), status))
+                                             self.editor_geometry(), status, cover))
         return top
 
     def strip_in_front(self, rects, views):
@@ -320,7 +324,8 @@ class Reader(Geometry):
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
         first = [] if self.editor is None else [self.editor.header, self.editor.view]
         tools = [self.tool_view()] if full else []
-        ordered = first + views[:front] + tools + views[front:] + [self.chat]
+        lines = [self.status_view, self.below_header] if full and front else []
+        ordered = first + lines + views[:front] + tools + views[front:] + [self.chat]
         for group, view in enumerate(ordered):
             # Moving and focusing views is what makes a layout slow: only views not already
             # shown in their group are moved, and focused so their group shows them.
@@ -328,7 +333,7 @@ class Reader(Geometry):
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        rest = [self.chat_header, self.below_header, self.status_view]
+        rest = [self.chat_header] + ([] if lines else [self.below_header, self.status_view])
         if full:
             for k, view in enumerate(rest):
                 self.window.set_view_index(view, n + k, 0)

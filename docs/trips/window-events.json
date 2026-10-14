@@ -1,10 +1,10 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "731395cdd135992d47f936be20eddb78b33eb483",
+ "commit": "f36f2f81a995e6906fdcfcf975d567821e127047",
  "sights": [
-  "sw/reader.py:485-495",
-  "sw/reader.py:306-313",
+  "sw/reader.py:481-491",
+  "sw/reader.py:302-309",
   "sw/geometry.py:18-25",
   "sw/geometry.py:27-31",
   "sw/geometry.py:33-35",

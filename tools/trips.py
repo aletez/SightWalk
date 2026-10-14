@@ -207,7 +207,8 @@ TRIPS = [
       "commands.SightWalkOpenInformatorCommand.open", "reader.Reader.open_informator",
       "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
       "ontology.holiday", "ontology.visit", "vetting.read_walked",
-      "reader.Reader.holiday_link", "reader.Reader.keep_transcript", "chat.set_transcript",
+      "reader.Reader.holiday_link", "reader.Reader.keep_transcript", "reader.transcripts_path",
+      "reader.read_transcripts", "chat.set_transcript",
       "ontology.dumps", "vetting.save_walked", "reader.Reader.draw_holiday",
       "vetting.show_holiday"]),
     ("Trip files",
@@ -515,19 +516,9 @@ def write_files(specs, commit):
     os.makedirs("docs/informators", exist_ok=True)
     for trip in made:
         write_json("docs/trips/%s.json" % trip.id, trip_data(trip))
-    informator = Informator("SightWalk", made, between_trips(found, imported), commit,
-                            kept_transcripts("docs/informators/sightwalk.json"))
+    informator = Informator("SightWalk", made, between_trips(found, imported), commit)
     files = {trip.id: "../trips/%s.json" % trip.id for trip in made}
     write_json("docs/informators/sightwalk.json", informator_data(informator, files))
-
-
-def kept_transcripts(path):
-    """The conversations already kept in the informator's file: writing it again keeps them."""
-    try:
-        with open(path, encoding="utf-8") as f:
-            return json.load(f).get("transcripts", {})
-    except (OSError, ValueError):
-        return {}
 
 
 def write_json(path, data):

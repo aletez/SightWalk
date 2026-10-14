@@ -655,6 +655,7 @@ class Reader(Geometry):
                 return json.load(f)
         self.informator = ontology.informator_from(read(os.path.basename(path)), read)
         self.informator_root, self.informator_path = repo_root(path), path
+        self.informator.transcripts = read_transcripts(path)
         self.holiday = ontology.holiday(self.informator)
         self.walked = vetting.read_walked(self.informator.id)
         self.tool = "Holiday"
@@ -676,16 +677,14 @@ class Reader(Geometry):
         self.draw_holiday()
 
     def keep_transcript(self):
-        """The bench's conversation kept in the informator's file under the holiday's trip shown
-        (Jakub), so after Sublime closes it goes on from there. After every message."""
+        """The bench's conversation kept under the holiday's trip shown (Jakub), so after Sublime
+        closes it goes on from there. After every message, in a file beside the informator's that
+        git ignores (Jakub: conversations stay out of git)."""
         if self.informator is None or self.trip is None or self.trip.id != self.holiday_trip:
             return
         self.informator.transcripts[self.holiday_trip] = chat.TRANSCRIPT
-        with open(self.informator_path, encoding="utf-8") as f:
-            data = json.load(f)
-        data["transcripts"] = self.informator.transcripts
-        with open(self.informator_path, "w", encoding="utf-8") as f:
-            f.write(ontology.dumps(data))
+        with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
+            json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 
     def draw_holiday(self):
         vetting.show_holiday(self.holiday_view, self.holiday, self.walked,
@@ -771,3 +770,16 @@ class Reader(Geometry):
         if selected_text(view):
             context["selected"] = selected_text(view)
         return context
+
+
+def transcripts_path(informator_path):
+    """sightwalk.json's conversations: sightwalk.transcripts.json, ignored by git."""
+    return os.path.splitext(informator_path)[0] + ".transcripts.json"
+
+
+def read_transcripts(informator_path):
+    try:
+        with open(transcripts_path(informator_path), encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {}

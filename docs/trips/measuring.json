@@ -1,84 +1,84 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "405ffb91dd12067e7285538c7a5e7781fcaf52d2",
+ "commit": "bf707cf74587f4248779f2e8e71fa53adeec9943",
  "sights": [
-  "sw/reader.py:223-227",
+  "sw/reader.py:224-228",
   "sw/reader.py:39-40",
   "sw/views.py:268-275",
-  "sw/reader.py:229-241",
+  "sw/reader.py:230-242",
   "sw/views.py:208-209",
   "sw/views.py:212-213",
-  "sw/reader.py:243-248",
-  "sw/reader.py:250-255",
-  "sw/reader.py:257-261",
-  "sw/reader.py:263-273",
-  "sw/reader.py:351-354",
+  "sw/reader.py:244-249",
+  "sw/reader.py:251-256",
+  "sw/reader.py:258-262",
+  "sw/reader.py:264-274",
+  "sw/reader.py:352-355",
   "sw/plan.py:92-97",
   "sw/plan.py:86-89",
   "sw/plan.py:47-63",
   "sw/plan.py:66-73",
-  "sw/reader.py:427-433"
+  "sw/reader.py:428-434"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 227],
+   "from": [0, 228],
    "to": [1, 39]
   },
   {
    "type": "calls",
-   "from": [0, 227],
+   "from": [0, 228],
    "to": [2, 268]
   },
   {
    "type": "calls",
-   "from": [3, 235],
+   "from": [3, 236],
    "to": [5, 212]
   },
   {
    "type": "calls",
-   "from": [3, 236],
+   "from": [3, 237],
    "to": [4, 208]
   },
   {
    "type": "calls",
-   "from": [3, 239],
+   "from": [3, 240],
    "to": [4, 208]
   },
   {
    "type": "calls",
-   "from": [6, 248],
-   "to": [7, 250]
+   "from": [6, 249],
+   "to": [7, 251]
   },
   {
    "type": "calls",
-   "from": [7, 255],
-   "to": [8, 257]
+   "from": [7, 256],
+   "to": [8, 258]
   },
   {
    "type": "calls",
-   "from": [8, 261],
-   "to": [9, 263]
-  },
-  {
-   "type": "calls",
-   "from": [9, 264],
-   "to": [13, 47]
+   "from": [8, 262],
+   "to": [9, 264]
   },
   {
    "type": "calls",
    "from": [9, 265],
-   "to": [10, 351]
+   "to": [13, 47]
   },
   {
    "type": "calls",
    "from": [9, 266],
-   "to": [15, 427]
+   "to": [10, 352]
   },
   {
    "type": "calls",
-   "from": [10, 354],
+   "from": [9, 267],
+   "to": [15, 428]
+  },
+  {
+   "type": "calls",
+   "from": [10, 355],
    "to": [11, 92]
   },
   {

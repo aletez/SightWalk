@@ -2,6 +2,7 @@
 places in them and the transitions between places. Pure, no Sublime API: the Sublime side holds
 these objects (composition), it does not inherit from them."""
 
+import json
 import re
 
 TYPES = ("calls", "returns", "leads_to", "101s", "passes_data", "comparable", "own_trip")
@@ -172,7 +173,12 @@ class Trip(Sequence, Network):
 
 class Informator(Network):
     """A network of trips, without order: a place is ⟨⟩, ⟨trip⟩, ⟨trip, sight⟩ or
-    ⟨trip, sight, line⟩, a trip by its id."""
+    ⟨trip, sight, line⟩, a trip by its id. It keeps each trip's conversation (transcripts:
+    {trip id: text}), so a walk goes on where it stopped (Jakub)."""
+
+    def __init__(self, name, members, transitions=(), commit=None, transcripts=None):
+        super().__init__(name, members, transitions, commit)
+        self.transcripts = dict(transcripts or {})
 
     def member(self, key):
         return next((trip for trip in self.members if trip.id == key), None)
@@ -248,13 +254,23 @@ def trip_from(data):
 
 def informator_data(informator, files):
     """files: {trip id: the trip's file, relative to the informator's}."""
-    return {"name": informator.name, "commit": informator.commit,
+    data = {"name": informator.name, "commit": informator.commit,
             "trips": [files[trip.id] for trip in informator.members],
             "transitions": [transition_data(t) for t in informator.transitions]}
+    if informator.transcripts:
+        data["transcripts"] = informator.transcripts
+    return data
 
 
 def informator_from(data, read_trip):
     """read_trip(file) gives a trip's data."""
     trips = [trip_from(read_trip(file)) for file in data["trips"]]
     return Informator(data["name"], trips, [transition_from(t) for t in data["transitions"]],
-                      data.get("commit"))
+                      data.get("commit"), data.get("transcripts"))
+
+
+def dumps(data):
+    """JSON for a trip's or an informator's file: indented, each place on one line, [3, 42]."""
+    text = json.dumps(data, indent=1, ensure_ascii=False)
+    return re.sub(r"\[\s*([^\[\]{}\"]*?)\s*\]",
+                  lambda m: "[%s]" % re.sub(r",\s+", ", ", m.group(1)), text) + "\n"

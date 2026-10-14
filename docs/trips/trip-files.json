@@ -1,29 +1,29 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "405ffb91dd12067e7285538c7a5e7781fcaf52d2",
+ "commit": "bf707cf74587f4248779f2e8e71fa53adeec9943",
  "sights": [
   "sw/bridge.py:163-177",
+  "sw/ontology.py:249-252",
   "sw/ontology.py:243-246",
-  "sw/ontology.py:237-240",
-  "sw/ontology.py:228-230",
-  "sw/ontology.py:249-253"
+  "sw/ontology.py:234-236",
+  "sw/ontology.py:255-262"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 169],
-   "to": [1, 243]
+   "to": [1, 249]
   },
   {
    "type": "calls",
-   "from": [2, 240],
-   "to": [3, 228]
+   "from": [2, 246],
+   "to": [3, 234]
   },
   {
    "type": "calls",
-   "from": [4, 253],
-   "to": [3, 228]
+   "from": [4, 259],
+   "to": [3, 234]
   }
  ]
 }

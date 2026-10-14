@@ -69,6 +69,7 @@ class Reader(Geometry):
         self.status = self.note = ""
         self.trip = None  # the ontology.Trip shown
         self.informator = self.holiday = self.informator_root = None  # see open_informator
+        self.informator_path = self.holiday_trip = None
         self.walked = set()
         self.bench_width = BENCH_WIDTH
         self.editor = None
@@ -653,7 +654,7 @@ class Reader(Geometry):
             with open(os.path.join(folder, file), encoding="utf-8") as f:
                 return json.load(f)
         self.informator = ontology.informator_from(read(os.path.basename(path)), read)
-        self.informator_root = repo_root(path)
+        self.informator_root, self.informator_path = repo_root(path), path
         self.holiday = ontology.holiday(self.informator)
         self.walked = vetting.read_walked(self.informator.id)
         self.tool = "Holiday"
@@ -665,11 +666,26 @@ class Reader(Geometry):
         only by hand (Jakub)."""
         what, _, key = href.partition(":")
         if what == "open":
+            self.keep_transcript()
+            chat.set_transcript(self.informator.transcripts.get(key, ""))
+            self.holiday_trip = key
             self.load(self.informator.member(key), self.informator_root)
         elif what == "tick":
             self.walked ^= {key}
             vetting.save_walked(self.informator.id, self.walked)
         self.draw_holiday()
+
+    def keep_transcript(self):
+        """The bench's conversation kept in the informator's file under the holiday's trip shown
+        (Jakub), so after Sublime closes it goes on from there. After every message."""
+        if self.informator is None or self.trip is None or self.trip.id != self.holiday_trip:
+            return
+        self.informator.transcripts[self.holiday_trip] = chat.TRANSCRIPT
+        with open(self.informator_path, encoding="utf-8") as f:
+            data = json.load(f)
+        data["transcripts"] = self.informator.transcripts
+        with open(self.informator_path, "w", encoding="utf-8") as f:
+            f.write(ontology.dumps(data))
 
     def draw_holiday(self):
         vetting.show_holiday(self.holiday_view, self.holiday, self.walked,
@@ -738,6 +754,7 @@ class Reader(Geometry):
             self.status = status
         self.show_headers()
         chat.say(self.chat, text, prefix)
+        self.keep_transcript()
 
     def context(self):
         if not self.ready:

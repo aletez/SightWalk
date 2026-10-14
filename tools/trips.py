@@ -14,8 +14,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, ".")
-from sw.ontology import (Informator, Transition, Trip, Sight, informator_data,  # noqa: E402
-                         trip_data)
+from sw.ontology import (Informator, Transition, Trip, Sight, dumps,  # noqa: E402
+                         informator_data, trip_data)
 
 FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py"]
 
@@ -196,7 +196,8 @@ TRIPS = [
      ["ontology.Network.__init__", "ontology.slug", "ontology.Network.add", "ontology.Network.problem",
       "ontology.Transition.__init__", "ontology.Transition.__eq__", "ontology.Transition.__repr__",
       "ontology.Transition.parts", "ontology.Trip.__init__", "ontology.Trip.label",
-      "ontology.Trip.member_label", "ontology.Trip.moved", "ontology.Informator.member",
+      "ontology.Trip.member_label", "ontology.Trip.moved", "ontology.Informator.__init__",
+      "ontology.Informator.member",
       "ontology.Informator.label", "ontology.Informator.member_label",
       "ontology.Holiday.__init__"]),
     ("An informator and its holiday",
@@ -206,7 +207,8 @@ TRIPS = [
       "commands.SightWalkOpenInformatorCommand.open", "reader.Reader.open_informator",
       "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
       "ontology.holiday", "ontology.visit", "vetting.read_walked",
-      "reader.Reader.holiday_link", "vetting.save_walked", "reader.Reader.draw_holiday",
+      "reader.Reader.holiday_link", "reader.Reader.keep_transcript", "chat.set_transcript",
+      "ontology.dumps", "vetting.save_walked", "reader.Reader.draw_holiday",
       "vetting.show_holiday"]),
     ("Trip files",
      "A trip opened from its file by the guide, and the files written for an informator.",
@@ -513,19 +515,24 @@ def write_files(specs, commit):
     os.makedirs("docs/informators", exist_ok=True)
     for trip in made:
         write_json("docs/trips/%s.json" % trip.id, trip_data(trip))
-    informator = Informator("SightWalk", made, between_trips(found, imported), commit)
+    informator = Informator("SightWalk", made, between_trips(found, imported), commit,
+                            kept_transcripts("docs/informators/sightwalk.json"))
     files = {trip.id: "../trips/%s.json" % trip.id for trip in made}
     write_json("docs/informators/sightwalk.json", informator_data(informator, files))
 
 
+def kept_transcripts(path):
+    """The conversations already kept in the informator's file: writing it again keeps them."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f).get("transcripts", {})
+    except (OSError, ValueError):
+        return {}
+
+
 def write_json(path, data):
-    """Indented, but each place on one line: [3, 42]."""
-    text = json.dumps(data, indent=1, ensure_ascii=False)
-    text = re.sub(r"\[\s*([^\[\]{}]*?)\s*\]",
-                  lambda m: "[%s]" % re.sub(r",\s+", ", ", m.group(1)) if '"' not in m.group(1)
-                  else m.group(0), text)
     with open(path, "w", encoding="utf-8") as f:
-        f.write(text + "\n")
+        f.write(dumps(data))
 
 
 def main():

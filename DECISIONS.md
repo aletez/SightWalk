@@ -178,6 +178,8 @@ Open:
 
 - The bench's, the Sights' and the strip's headers reach OVERLAP above the screen (Jakub, 2026-10-14: a slit over the top header showed the code scrolled under it). Seen by Claude: no slit after scrolling. (Changed, unverified by Jakub.)
 
+- Each trip's conversation kept in the informator's file (Jakub, 2026-10-14): `transcripts` {trip id: text}. Opening a trip from the Holiday tab keeps the bench's conversation under the trip shown and puts the chosen trip's on the bench; after every message (sent or said) it is written to the file, so after Sublime closes the walk goes on where it stopped. tools/trips.py keeps the transcripts when it writes the file again. Seen by Claude: a message said in trip 1, Sublime's plugin reloaded, the informator opened again, the message back on the bench (the test's text removed from the file afterwards). The informator in docs/ is in git, so the conversations show in its diffs. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

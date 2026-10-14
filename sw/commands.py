@@ -29,6 +29,7 @@ class SightWalkInsertCommand(sublime_plugin.TextCommand):
 def send(owner, text):
     """A message from the trip to the agent, with what the user sees and any edited ranges."""
     state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
+    owner.keep_transcript()
     guide.await_answer(owner)
 
 

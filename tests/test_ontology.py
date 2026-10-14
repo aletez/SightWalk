@@ -1,6 +1,6 @@
 import unittest
 
-from sw.ontology import (Holiday, Informator, Sight, Transition, Trip, holiday, informator_data,
+from sw.ontology import (Holiday, dumps, Informator, Sight, Transition, Trip, holiday, informator_data,
                          informator_from, slug, trip_data, trip_from)
 
 
@@ -170,6 +170,19 @@ class FilesTest(unittest.TestCase):
         files = {"trips/a.json": trip_data(a), "trips/b.json": trip_data(b)}
         again = informator_from(data, files.get)
         self.assertEqual(informator_data(again, {"a": "trips/a.json", "b": "trips/b.json"}), data)
+
+
+class TranscriptsTest(unittest.TestCase):
+    def test_kept_in_the_informator_file(self):
+        a, = trips("A")
+        informator = Informator("I", [a], transcripts={"a": "U: why?\n\nA: because.\n\n"})
+        data = informator_data(informator, {"a": "a.json"})
+        again = informator_from(data, {"a.json": trip_data(a)}.get)
+        self.assertEqual(again.transcripts, informator.transcripts)
+        self.assertNotIn("transcripts", informator_data(Informator("J", [a]), {"a": "a.json"}))
+
+    def test_places_on_one_line(self):
+        self.assertIn('"from": [0, 12]', dumps({"from": [0, 12], "sights": ["a.py:1-2"]}))
 
 
 if __name__ == "__main__":

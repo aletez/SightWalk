@@ -1,70 +1,76 @@
 {
  "name": "The ontology: networks",
  "kind": "survey",
- "commit": "405ffb91dd12067e7285538c7a5e7781fcaf52d2",
+ "commit": "bf707cf74587f4248779f2e8e71fa53adeec9943",
  "sights": [
-  "sw/ontology.py:89-96",
-  "sw/ontology.py:12-14",
-  "sw/ontology.py:98-103",
-  "sw/ontology.py:105-115",
-  "sw/ontology.py:72-73",
-  "sw/ontology.py:75-76",
-  "sw/ontology.py:78-79",
-  "sw/ontology.py:81-82",
-  "sw/ontology.py:153-157",
-  "sw/ontology.py:159-160",
-  "sw/ontology.py:162-163",
-  "sw/ontology.py:165-170",
-  "sw/ontology.py:177-178",
-  "sw/ontology.py:180-181",
+  "sw/ontology.py:90-97",
+  "sw/ontology.py:13-15",
+  "sw/ontology.py:99-104",
+  "sw/ontology.py:106-116",
+  "sw/ontology.py:73-74",
+  "sw/ontology.py:76-77",
+  "sw/ontology.py:79-80",
+  "sw/ontology.py:82-83",
+  "sw/ontology.py:154-158",
+  "sw/ontology.py:160-161",
+  "sw/ontology.py:163-164",
+  "sw/ontology.py:166-171",
+  "sw/ontology.py:179-181",
   "sw/ontology.py:183-184",
-  "sw/ontology.py:190-195"
+  "sw/ontology.py:186-187",
+  "sw/ontology.py:189-190",
+  "sw/ontology.py:196-201"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 91],
-   "to": [1, 12]
+   "from": [0, 92],
+   "to": [1, 13]
   },
   {
    "type": "calls",
-   "from": [0, 93],
-   "to": [3, 105]
+   "from": [0, 94],
+   "to": [3, 106]
   },
   {
    "type": "calls",
-   "from": [2, 100],
-   "to": [3, 105]
+   "from": [2, 101],
+   "to": [3, 106]
   },
   {
    "type": "calls",
-   "from": [5, 76],
-   "to": [7, 81]
+   "from": [5, 77],
+   "to": [7, 82]
   },
   {
    "type": "calls",
-   "from": [6, 79],
-   "to": [7, 81]
+   "from": [6, 80],
+   "to": [7, 82]
   },
   {
    "type": "calls",
-   "from": [8, 157],
-   "to": [0, 89]
-  },
-  {
-   "type": "calls",
-   "from": [11, 168],
-   "to": [8, 153]
+   "from": [8, 158],
+   "to": [0, 90]
   },
   {
    "type": "calls",
    "from": [11, 169],
-   "to": [3, 105]
+   "to": [8, 154]
   },
   {
    "type": "calls",
-   "from": [15, 191],
-   "to": [12, 177]
+   "from": [11, 170],
+   "to": [3, 106]
+  },
+  {
+   "type": "calls",
+   "from": [12, 180],
+   "to": [0, 90]
+  },
+  {
+   "type": "calls",
+   "from": [16, 197],
+   "to": [13, 183]
   }
  ]
 }

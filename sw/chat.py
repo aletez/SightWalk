@@ -187,6 +187,12 @@ def keep_at_bottom(view):
     view.run_command("sight_walk_replace", {"text": "\n" * (blanks + lines), "end": blanks})
 
 
+def set_transcript(text):
+    """Another conversation on the bench (a trip's kept one); catch_up shows it."""
+    global TRANSCRIPT
+    TRANSCRIPT = text
+
+
 def catch_up(view):
     """Shows what was said on another bench meanwhile, keeping the draft."""
     protected = PROTECTED[view.buffer_id()]

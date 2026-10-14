@@ -1,7 +1,7 @@
 {
  "name": "Seeing where the code asks",
  "kind": "run",
- "commit": "3ac983279bbc21f55df187093ffdd2f19fff2f88",
+ "commit": "43880f142bbc950617017aa7e313b47366ebae72",
  "sights": [
   "sw/asked.py:47-57",
   "sw/asked.py:73-80",

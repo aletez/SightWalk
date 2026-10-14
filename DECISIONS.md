@@ -206,6 +206,8 @@ Open:
 
 - The Map zooms (Jakub, 2026-10-14: unreadable; Sublime passes no pinch to plugins): − + and "fit" over it, and primary+= / primary+minus / primary+0 with the Map in focus; the zoom kept per view. Drawn at 288 dpi and shown at a quarter to fit, so it stays sharp up to four times larger. Seen by Claude: + twice, the Map larger and sharp. While the bench and the tools take the wheel (primary+s), a zoomed Map is moved in by switching that off. (Verified by Jakub, 2026-10-14.)
 
+- A short trip scrolls as a long one does, up until its last sight's header is at the top (Jakub, 2026-10-14: in full screen and distraction free a trip that then fits on the screen stopped scrolling; found with a log of the offsets: 1013 px of trip, 979 px of panorama in the window, about 1023 in full screen). It still starts centred and goes down to the floor. Seen by Claude: a three-sight trip scrolled up past the centre. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

@@ -98,11 +98,12 @@ def lead(items, height, overhead, middle):
 
 
 def offset_range(items, height, overhead, lead_px):
-    """How far the trip scrolls: a short one from the ceiling to the floor (Jakub), a taller one
-    from its top until its end (see max_offset)."""
+    """How far the trip scrolls: down to the floor, and up as a taller one does, until its last
+    sight's header is at the top (Jakub: a trip that fits once the window grows, in full screen,
+    stopped scrolling); see max_offset. A short one starts centred (lead_px)."""
     free = free_room(items, height, overhead)
     if free > 0:
-        return lead_px - free, lead_px
+        return lead_px - free, lead_px + max_offset(items, height, overhead)
     return 0.0, max_offset(items, height, overhead)
 
 

@@ -61,7 +61,8 @@ class PlanTest(unittest.TestCase):
         self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 93.0), 50.0)  # centred on 93
         self.assertEqual(plan.lead(items, 186.0, OVERHEAD, 10.0), 0.0)  # no higher than the top
         self.assertEqual(plan.lead(items, 50.0, OVERHEAD, 25.0), 0.0)  # taller than the screen
-        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0), (-50.0, 50.0))
+        # A short trip scrolls from the floor up until its last header is at the top (48).
+        self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0), (-50.0, 98.0))
 
     def test_visible(self):
         sights, _ = stacked((1, 3), (10, 11))

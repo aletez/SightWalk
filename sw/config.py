@@ -33,3 +33,4 @@ OUTLINE_TINT = 0.7  # outlines of marked lines
 # Conversation and marks
 PROMPT = ">>> "
 DEFAULT_MARK = "A"
+BENCH_MARGIN = 14  # px between the bench's left edge and its text (Jakub: it read too close)

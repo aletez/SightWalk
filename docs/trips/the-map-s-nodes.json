@@ -1,11 +1,11 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "a9b41f385f581aa131401312c8ac1f23b48422da",
+ "commit": "377d35d8b9231b16cfa99cfda35e8af708c8bec2",
  "sights": [
-  "sw/reader.py:677-685",
-  "sw/reader.py:687-700",
-  "sw/reader.py:702-706",
+  "sw/reader.py:678-686",
+  "sw/reader.py:688-701",
+  "sw/reader.py:703-707",
   "sw/reader.py:43-48",
   "sw/callmap.py:32-38",
   "sw/callmap.py:41-48",
@@ -17,37 +17,37 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 679],
-   "to": [1, 687]
+   "from": [0, 680],
+   "to": [1, 688]
   },
   {
    "type": "calls",
-   "from": [0, 683],
+   "from": [0, 684],
    "to": [7, 51]
   },
   {
    "type": "calls",
-   "from": [0, 685],
+   "from": [0, 686],
    "to": [9, 100]
   },
   {
    "type": "calls",
-   "from": [1, 693],
+   "from": [1, 694],
    "to": [4, 32]
   },
   {
    "type": "calls",
-   "from": [1, 698],
+   "from": [1, 699],
    "to": [6, 27]
   },
   {
    "type": "calls",
-   "from": [1, 698],
-   "to": [2, 702]
+   "from": [1, 699],
+   "to": [2, 703]
   },
   {
    "type": "calls",
-   "from": [1, 698],
+   "from": [1, 699],
    "to": [3, 43]
   },
   {

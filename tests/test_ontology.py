@@ -119,7 +119,7 @@ class HolidayTest(unittest.TestCase):
         informator = Informator("SightWalk", [first, second])
         holiday = Holiday(informator, [second, first])
         self.assertEqual(list(holiday), [second, first])
-        self.assertEqual(holiday.types, ("leads_to",))
+        self.assertEqual(holiday.types, ("leads_to",))  # as given to Holiday
 
     def test_refuses_a_stray_trip(self):
         informator = Informator("SightWalk", [Trip("First", two_sights())])
@@ -139,6 +139,13 @@ class HolidayOrderTest(unittest.TestCase):
             Transition("leads_to", ("b",), ("c",)),
             Transition("calls", ("d", 0, 12), ("a", 0, 10))])
         self.assertEqual([t.id for t in holiday(informator)], ["a", "b", "c", "d"])
+
+    def test_what_is_needed_comes_first(self):
+        a, b, c = trips("A", "B", "C")
+        informator = Informator("I", [a, b, c], [
+            Transition("leads_to", ("a",), ("b",)), Transition("101s", ("b",), ("c",))])
+        self.assertEqual([t.id for t in holiday(informator)], ["a", "c", "b"])
+        self.assertEqual([t.id for t in holiday(informator, ("leads_to",))], ["a", "b", "c"])
 
     def test_other_types_and_cycles(self):
         a, b = trips("A", "B")

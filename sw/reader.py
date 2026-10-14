@@ -15,7 +15,7 @@ import time
 import sublime
 
 from . import asked, callmap, chat, marks, ontology, plan, state, vetting
-from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
+from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
 from .editor import Editor
@@ -94,6 +94,7 @@ class Reader(Geometry):
         self.strip_floor.settings().set("margin", 0)
         self.chat = make_side_view(self.window, "Vetting Bench", {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": False})
+        self.chat.settings().set("margin", BENCH_MARGIN)
         chat.start(self.chat)
         # Headers over the bench and over the Sights play the role of tabs, since tabs are off.
         self.chat_header = chat.make_header(self.window, self.chat, BENCH)

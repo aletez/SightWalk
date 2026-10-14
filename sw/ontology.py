@@ -195,26 +195,31 @@ class Holiday(Sequence):
         self.informator, self.types = informator, tuple(types)
 
 
-def holiday(informator, types=("leads_to",)):
-    """The informator's trips in one order (Jakub): from each trip nothing of types leads to, on
-    along those transitions, depth first; trips left over follow in the informator's order."""
-    nexts = {}
+def holiday(informator, types=("leads_to", "101s")):
+    """The informator's trips in one order (Jakub): from each trip nothing leads to, on along
+    leads_to, depth first; a trip a 101s transition names comes before the trip that needs it.
+    Trips left over follow in the informator's order."""
+    nexts, needs = {}, {}
     for t in informator.transitions:
         if t.type in types and t.source and t.target and t.source[0] != t.target[0]:
-            nexts.setdefault(t.source[0], []).append(t.target[0])
+            table = needs if t.type == "101s" else nexts
+            table.setdefault(t.source[0], []).append(t.target[0])
     reached = {target for targets in nexts.values() for target in targets}
     order = []
     for trip in sorted(informator.members, key=lambda trip: trip.id in reached):
-        visit(trip.id, nexts, order)
+        visit(trip.id, nexts, needs, order, set())
     return Holiday(informator, [informator.member(key) for key in order], types)
 
 
-def visit(key, nexts, order):
-    if key in order:
+def visit(key, nexts, needs, order, seen):
+    if key in order or key in seen:
         return
+    seen.add(key)
+    for need in needs.get(key, []):
+        visit(need, nexts, needs, order, seen)
     order.append(key)
     for target in nexts.get(key, []):
-        visit(target, nexts, order)
+        visit(target, nexts, needs, order, seen)
 
 
 # Files: a trip and an informator as JSON-ready data. An informator names its trips' files, so

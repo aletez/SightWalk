@@ -1,21 +1,21 @@
 {
  "name": "An informator and its holiday",
  "kind": "run",
- "commit": "a9b41f385f581aa131401312c8ac1f23b48422da",
+ "commit": "377d35d8b9231b16cfa99cfda35e8af708c8bec2",
  "sights": [
   "sw/commands.py:177-182",
   "sw/commands.py:191-200",
   "sw/commands.py:184-188",
-  "sw/reader.py:646-660",
-  "sw/ontology.py:251-255",
-  "sw/ontology.py:238-241",
-  "sw/ontology.py:228-229",
-  "sw/ontology.py:198-209",
-  "sw/ontology.py:212-217",
+  "sw/reader.py:647-661",
+  "sw/ontology.py:256-260",
+  "sw/ontology.py:243-246",
+  "sw/ontology.py:233-234",
+  "sw/ontology.py:198-211",
+  "sw/ontology.py:214-222",
   "sw/vetting.py:168-174",
-  "sw/reader.py:662-671",
+  "sw/reader.py:663-672",
   "sw/vetting.py:177-186",
-  "sw/reader.py:673-675",
+  "sw/reader.py:674-676",
   "sw/vetting.py:149-165"
  ],
  "transitions": [
@@ -32,67 +32,67 @@
   {
    "type": "calls",
    "from": [2, 186],
-   "to": [3, 646]
+   "to": [3, 647]
   },
   {
    "type": "calls",
-   "from": [3, 654],
-   "to": [4, 251]
-  },
-  {
-   "type": "calls",
-   "from": [3, 656],
-   "to": [7, 198]
+   "from": [3, 655],
+   "to": [4, 256]
   },
   {
    "type": "calls",
    "from": [3, 657],
+   "to": [7, 198]
+  },
+  {
+   "type": "calls",
+   "from": [3, 658],
    "to": [9, 168]
   },
   {
    "type": "calls",
-   "from": [3, 660],
-   "to": [10, 662]
+   "from": [3, 661],
+   "to": [10, 663]
   },
   {
    "type": "calls",
-   "from": [4, 253],
-   "to": [5, 238]
+   "from": [4, 258],
+   "to": [5, 243]
   },
   {
    "type": "calls",
-   "from": [4, 254],
-   "to": [6, 228]
+   "from": [4, 259],
+   "to": [6, 233]
   },
   {
    "type": "calls",
-   "from": [5, 240],
-   "to": [6, 228]
+   "from": [5, 245],
+   "to": [6, 233]
   },
   {
    "type": "calls",
-   "from": [7, 208],
-   "to": [8, 212]
-  },
-  {
-   "type": "calls",
-   "from": [10, 670],
-   "to": [11, 177]
+   "from": [7, 210],
+   "to": [8, 214]
   },
   {
    "type": "calls",
    "from": [10, 671],
-   "to": [12, 673]
+   "to": [11, 177]
   },
   {
    "type": "calls",
-   "from": [12, 674],
-   "to": [13, 149]
+   "from": [10, 672],
+   "to": [12, 674]
   },
   {
    "type": "calls",
    "from": [12, 675],
-   "to": [10, 662]
+   "to": [13, 149]
+  },
+  {
+   "type": "calls",
+   "from": [12, 676],
+   "to": [10, 663]
   }
  ]
 }

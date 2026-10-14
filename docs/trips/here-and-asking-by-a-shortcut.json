@@ -1,17 +1,17 @@
 {
  "name": "Here, and asking by a shortcut",
  "kind": "run",
- "commit": "a9b41f385f581aa131401312c8ac1f23b48422da",
+ "commit": "377d35d8b9231b16cfa99cfda35e8af708c8bec2",
  "sights": [
   "sw/commands.py:123-133",
-  "sw/reader.py:591-594",
+  "sw/reader.py:592-595",
   "sw/commands.py:48-52"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 133],
-   "to": [1, 591]
+   "to": [1, 592]
   }
  ]
 }

@@ -174,6 +174,8 @@ Open:
 
 - SightWalk's informator reviewed by hand (Claude, 2026-10-14, Jakub asked): the script's reading of calls checked line by line for what it missed and what it got wrong. Now it also follows a class named in the code (Sight.parse), super(), inheritance in general, `(a() or b()).load`, receivers named informator and trip, and counts a class only where it is made, not in isinstance; JUMPS written by hand (call_tool reaches every op_ through OPS; three a name rule cannot see) and FIXES where `sight` is an ontology.Sight, not a pane. Of 594 calls, 538 are calls on the line and 56 callbacks passed on (set_timeout, phantoms' links, run_command): kept as calls. Sights moved to the trip that calls them (wait_until_loaded, strip_place, edges and node_at, selected_text, catch_up, slug); "Talking on the bench" became "Here, and asking by a shortcut"; the Tools pane's tabs a survey. The reading paths are written by hand: LEADS (leads_to, branching: the request through the reader to the bench, the guide's side, the editor, the Map to the informator) and NEEDS (101s: the ontology before a request, the surveys before the runs that use them). The holiday follows leads_to only, so the surveys come last. (Changed, unverified by Jakub.)
 
+- The holiday follows 101s too (Jakub, 2026-10-14): a trip a 101s transition names comes before the trip that needs it, so the ontology comes before the request, the surveys before the runs that use them. And the bench's text stands BENCH_MARGIN = 14 px from its left edge (Jakub: it read too close). (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

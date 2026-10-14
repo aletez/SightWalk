@@ -149,12 +149,13 @@ After a new layout: every view into its group, then back at its place.
 - `sw/reader.py:516-519` Reader.draw_edit_buttons
 - `sw/views.py:221-233` draw_edit_button
 
-## 10. Polling and the wheel (8 views)
+## 10. Polling and the wheel (9 views)
 
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:442-450` Reader.poll
 - `sw/chat.py:176-185` keep_at_bottom
+- `sw/chat.py:188-191` bottom_place
 - `sw/reader.py:452-459` Reader.poll_wheel
 - `sw/reader.py:439-440` Reader.alive
 - `sw/reader.py:403-421` Reader.read_wheel

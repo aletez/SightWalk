@@ -188,6 +188,8 @@ Open:
 
 - SightWalk in Polish (Jakub, 2026-10-14): the setting `language` ("en" or "pl"), switched by "SightWalk: Switch Language (English / Polski)", changes at once in open trips every word the user reads: headers (Ławka, Panorama), tabs (Mapa, Turnus, Przewijanie), buttons (Edytuj (Enter), Przywróć położenia, Zatrzymaj (Esc)), help popups, notes, the guide's status, "(zatrzymano)", the trips' kinds, the tour list, dialogs and errors; the words live in `sw/words.py`. Not translated: the command palette's captions (Sublime reads them from a file), the setup panel, the trips' own names, and what goes to the agent. Open Tour: "SightWalk: All trips", each tour with its number of trips under it ("37 trips", "37 wycieczek"). Seen by Claude: the tour list, a tour opened, the switch to Polish in an open trip. (Changed, unverified by Jakub.)
 
+- The bench's prompt kept at the bottom by scrolling, not by blank lines added (Jakub, 2026-10-14): BLANK_LINES real lines stand above the transcript once and for all, and whenever the text or the pane's height changes the view is scrolled so the prompt's line touches the bottom (`chat.keep_at_bottom`, `bottom_place`); between changes the history can be scrolled. A step towards the bench taking the wheel for the panorama (asked, open). Seen by Claude: a message at the bench's bottom. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

@@ -1,12 +1,11 @@
 """The conversation pane: the transcript, which a guard keeps read-only, the draft after the
 prompt, kept at the bottom of the pane, and the two-line header in place of a tab."""
 
-import math
 
 import sublime
 import sublime_plugin
 
-from .config import PROMPT
+from .config import BLANK_LINES, PROMPT
 from .header import MARK_ROOM, title_lines
 from .views import FADED, button_html, kept, make_side_view, match_font, phantoms
 from .words import word
@@ -73,7 +72,7 @@ class Guard(sublime_plugin.TextChangeListener):
 def start(view):
     buffer_id = view.buffer_id()
     view.assign_syntax(SYNTAX)
-    PROTECTED[buffer_id] = TRANSCRIPT + PROMPT
+    PROTECTED[buffer_id] = "\n" * BLANK_LINES + TRANSCRIPT + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[buffer_id]})
     GUARDS[buffer_id] = Guard(view)
     GUARDS[buffer_id].attach(view.buffer())
@@ -175,19 +174,21 @@ def take_draft(view, edit):
 
 
 def keep_at_bottom(view):
-    """Adds or removes blank lines above the transcript until the prompt line touches the bottom.
-    Real lines, not a phantom, so a click anywhere in the pane lands in the conversation."""
-    lh = view.line_height()
-    bottom = view.text_to_layout(view.size())[1] + lh - view.viewport_position()[1]
-    protected = PROTECTED[view.buffer_id()]
-    blanks = len(protected) - len(protected.lstrip("\n"))
-    # Rounded down, so a line fits or not and the count never flips back and forth.
-    lines = max(math.floor((view.viewport_extent()[1] - bottom) / lh + 0.01), -blanks)
-    if lines == 0:
+    """The prompt's line at the pane's bottom, by scrolling the view there whenever the text or
+    the pane's height changes (Jakub: computed, not blank lines added); between changes the user
+    may scroll the history. Above the transcript stand BLANK_LINES real lines, so a short one
+    can sit at the bottom too, and a click anywhere lands in the conversation."""
+    now = (view.size(), view.viewport_extent()[1])
+    if kept(view).get("bottom") == now:
         return
-    # Only the leading blank lines change; the protected text is recorded before the edit.
-    PROTECTED[view.buffer_id()] = "\n" * (blanks + lines) + protected[blanks:]
-    view.run_command("sight_walk_replace", {"text": "\n" * (blanks + lines), "end": blanks})
+    kept(view)["bottom"] = now
+    view.set_viewport_position((0.0, bottom_place(view)), False)
+
+
+def bottom_place(view):
+    """The viewport's y with the prompt's line at the pane's bottom."""
+    end = view.text_to_layout(view.size())[1] + view.line_height()
+    return max(end - view.viewport_extent()[1], 0.0)
 
 
 def set_transcript(text):

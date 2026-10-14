@@ -74,8 +74,10 @@ class Network(Collection):
         super().__init__(members)
         self.name, self.id, self.commit = name, slug(name), commit
         self.transitions = []
-        for transition in transitions:
-            self.add(transition)
+        problems = [self.problem(t) for t in transitions]
+        if any(problems):
+            raise ValueError("%s: %s." % (self.name, "; ".join(p for p in problems if p)))
+        self.transitions = list(transitions)
 
     def add(self, transition):
         """Adds a transition after checking it; ValueError says what is wrong."""
@@ -91,7 +93,8 @@ class Network(Collection):
             return "%s belongs to an informator, not a trip" % transition.type
         for end in ("source", "target"):
             if not self.has_place(getattr(transition, end)):
-                return "the %s %r is no place in it" % (end, getattr(transition, end))
+                return "%s %s → %s: the %s is no place here" % (
+                    transition.type, list(transition.source), list(transition.target), end)
         return None
 
 
@@ -104,11 +107,13 @@ class Sight(Sequence):
 
     @classmethod
     def parse(cls, spec):
-        """A sight from "file:begin-end"."""
-        found = re.match(r"^(.+):(\d+)-(\d+)$", spec)
-        if not found or int(found.group(2)) > int(found.group(3)):
+        """A sight from "file:begin-end", or "file:line" for one line."""
+        found = re.match(r"^(.+):(\d+)(?:-(\d+))?$", str(spec))
+        begin, end = (int(found.group(2)), int(found.group(3) or found.group(2))) if found \
+            else (0, 0)
+        if not found or not 1 <= begin <= end:
             raise ValueError("%r is no sight: write file:begin-end" % spec)
-        return cls(found.group(1), int(found.group(2)), int(found.group(3)))
+        return cls(found.group(1), begin, end)
 
     @property
     def spec(self):
@@ -127,6 +132,13 @@ class Trip(Sequence, Network):
             raise ValueError("%s: unknown kind %r (kinds: %s)" % (name, kind, ", ".join(KINDS)))
         self.kind = kind
         Network.__init__(self, name, sights, transitions, commit)
+
+    def moved(self, sights):
+        """The same trip over sights at new ranges (an edit moved them), keeping the transitions
+        that still fit."""
+        trip = Trip(self.name, sights, commit=self.commit, kind=self.kind)
+        trip.transitions = [t for t in self.transitions if not trip.problem(t)]
+        return trip
 
 
 class Informator(Network):

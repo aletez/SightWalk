@@ -29,8 +29,9 @@ TRIPS = [
      "From the HTTP server's thread to the show operation on Sublime's, with every check on the "
      "way.",
      ["bridge.run_on_main",
-      "bridge.op_show", "bridge.check_not_stopped", "bridge.split_sights", "bridge.check_sights",
-      "spec.parse_spec", "bridge.file_lines", "bridge.check_calls"]),
+      "bridge.op_show", "bridge.check_not_stopped", "bridge.make_trip", "ontology.Sight.parse",
+      "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem",
+      "bridge.check_sights", "spec.parse_spec", "bridge.file_lines"]),
     ("A new reader window",
      "The window and every view but the sights.",
      ["bridge.new_reader", "reader.Reader.__init__", "reader.Reader.make_side_views", "views.bench_font", "views.match_font",
@@ -96,7 +97,7 @@ TRIPS = [
      ["reader.Reader.select_tool", "vetting.show_tabs", "reader.Reader.draw_map"]),
     ("The Map's nodes",
      "The trip's definitions and the calls its author named, as nodes for the graph.",
-     ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.owner",
+     ["reader.Reader.draw_map", "reader.Reader.map_nodes", "reader.Reader.calls", "reader.Reader.owner",
       "reader.defined_name", "callmap.first_definition", "callmap.authored_calls",
       "callmap.Node.__init__", "vetting.draw_map"]),
     ("Drawing the Map",
@@ -163,7 +164,7 @@ TRIPS = [
       "reader.Reader.folder", "reader.Reader.note_waiting"]),
     ("Building blocks",
      "The small classes and hooks the trips above stand on.",
-     ["plan.Item.__init__", "plan.Sight.__init__", "plan.Sight.items", "plan.Sight.all_views",
+     ["plan.Item.__init__", "plan.Pane.__init__", "plan.Pane.spec", "plan.Pane.items", "plan.Pane.all_views",
       "views.kept", "views.phantoms", "views.forget", "chat.Guard.__init__", "commands.SightWalkHeaderListener.is_applicable",
       "commands.SightWalkChatListener.is_applicable"]),
     ("Settings and the rest of the colours",
@@ -180,7 +181,8 @@ TRIPS = [
      "Transitions between places, checked; the trip, the informator and the holiday.",
      ["ontology.Network.__init__", "ontology.Network.add", "ontology.Network.problem",
       "ontology.Transition.__init__", "ontology.Transition.__eq__", "ontology.Transition.__repr__",
-      "ontology.Transition.parts", "ontology.Trip.__init__", "ontology.Informator.member",
+      "ontology.Transition.parts", "ontology.Trip.__init__", "ontology.Trip.moved",
+      "ontology.Informator.member",
       "ontology.Holiday.__init__"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
@@ -205,7 +207,7 @@ SURVEYS = {"The ontology: collections and sights", "The ontology: networks", "Wi
 # convention (a reader is called reader or owner), not a guess by the method's name.
 RECEIVERS = {"reader": "reader.Reader", "owner": "reader.Reader", "current_reader": "reader.Reader",
              "require_ready": "reader.Reader", "new_reader": "reader.Reader",
-             "reader_for": "reader.Reader", "editor": "editor.Editor", "sight": "plan.Sight"}
+             "reader_for": "reader.Reader", "editor": "editor.Editor", "sight": "plan.Pane"}
 
 
 # Jumps the code makes through data, which no name in it shows: per trip, (caller, a piece of

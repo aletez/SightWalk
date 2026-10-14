@@ -7,6 +7,7 @@ import os
 import unittest
 
 from sw import callmap, header, marks, plan, questions, spec
+from sw.ontology import Sight
 
 LH = 10.0  # line height
 OVERHEAD = 4.0  # px a cell adds to its content
@@ -16,7 +17,7 @@ def stacked(*ranges):
     """Segments for "a.py:begin-end" ranges, stacked as the reader stacks them."""
     sights, items = [], []
     for begin, end in ranges:
-        sight = plan.Sight("/r/a.py:%d-%d" % (begin, end), "/r/a.py", begin, end)
+        sight = plan.Pane(Sight("/r/a.py", begin, end), "/r/a.py", begin, end)
         sight.header_item = plan.Item(None, 0.0, LH, header=True)
         sight.code_item = plan.Item(None, 0.0, (end - begin + 1) * LH)
         items += [sight.header_item, sight.code_item]
@@ -138,7 +139,7 @@ class SpecTest(unittest.TestCase):
                 spec.parse_spec(bad)
 
     def test_matches(self):
-        sight = plan.Sight("/r/reader.py:1-2", "/r/reader.py", 1, 2)
+        sight = plan.Pane(Sight("/r/reader.py", 1, 2), "/r/reader.py", 1, 2)
         self.assertTrue(spec.matches(sight, "reader.py"))
         self.assertFalse(spec.matches(sight, "der.py"))
 

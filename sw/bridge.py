@@ -11,6 +11,7 @@ import sublime
 from . import scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
+from .ontology import Sight, Transition, Trip
 from .reader import Reader
 from .spec import parse_spec
 from .views import hide_chrome
@@ -49,36 +50,20 @@ SIGHT_FORM = ('{"sight": "file:begin-end", "calls": [{"line": 15, "to": [3, 42]}
               'lines); "calls": [] when it calls no other sight')
 
 
-def split_sights(sights):
-    """Every sight names its calls, an empty list included: the map never guesses (Jakub).
-    Returns the specs and, per sight, its calls as [(line, (sight, line))]."""
-    specs, calls = [], []
+def make_trip(sights, name):
+    """The trip show was given, its calls checked by the ontology. Every sight names its calls,
+    an empty list included: the map never guesses (Jakub)."""
+    found, calls = [], []
     for i, entry in enumerate(sights or []):
         if not isinstance(entry, dict) or not isinstance(entry.get("sight"), str) \
-                or not isinstance(entry.get("calls"), list):
+                or not isinstance(entry.get("calls"), list) \
+                or not all(isinstance(c, dict) for c in entry["calls"]):
             raise ValueError("Sight %d: give each sight as %s. Name every call between the "
                              "trip's sights; the Map draws them." % (i, SIGHT_FORM))
-        specs.append(entry["sight"])
-        calls.append([(c.get("line"), tuple(c.get("to") or ())) for c in entry["calls"]])
-    return specs, calls
-
-
-def check_calls(specs, calls, root):
-    """Every wrong call in one message: the line must lie in its sight, the target in its."""
-    ranges = [parse_spec(spec, root)[1:] for spec in specs]
-    problems = []
-    for i, mine in enumerate(calls):
-        for line, target in mine:
-            if not isinstance(line, int) or not ranges[i][0] <= line <= ranges[i][1]:
-                problems.append("sight %d: line %r is not in %s" % (i, line, specs[i]))
-            elif len(target) != 2 or not 0 <= target[0] < len(specs):
-                problems.append("sight %d, line %d: to must be [sight number from 0, line]"
-                                % (i, line))
-            elif not ranges[target[0]][0] <= target[1] <= ranges[target[0]][1]:
-                problems.append("sight %d, line %d: line %d is not in %s"
-                                % (i, line, target[1], specs[target[0]]))
-    if problems:
-        raise ValueError("; ".join(problems) + ".")
+        found.append(Sight.parse(entry["sight"]))
+        calls += [Transition("calls", (i, c.get("line")), c.get("to") or ())
+                  for c in entry["calls"]]
+    return Trip(name or "", found, calls)
 
 
 def new_reader():
@@ -102,11 +87,10 @@ def check_not_stopped():
 
 def op_show(sights=None, root=None, trip=None):
     check_not_stopped()
-    specs, calls = split_sights(sights)
-    check_sights(specs, root)
-    check_calls(specs, calls, root)
+    made = make_trip(sights, trip)
+    check_sights([sight.spec for sight in made], root)
     reader = state.current_reader() or new_reader()
-    reader.load(specs, root, trip, calls=calls)
+    reader.load(made, root)
     state.ADDRESSED = True  # the agent may say what the trip is about
     scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True}

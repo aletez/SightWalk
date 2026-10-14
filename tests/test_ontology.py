@@ -14,8 +14,11 @@ class SightTest(unittest.TestCase):
         self.assertEqual(sight.spec, "sw/a.py:10-20")
         self.assertEqual(len(sight), 11)
 
+    def test_one_line(self):
+        self.assertEqual(Sight.parse("sw/a.py:7").spec, "sw/a.py:7-7")
+
     def test_bad_specs(self):
-        for spec in ("sw/a.py", "sw/a.py:20-10", "sw/a.py:x-3"):
+        for spec in ("sw/a.py", "sw/a.py:20-10", "sw/a.py:x-3", "sw/a.py:0-3"):
             with self.assertRaises(ValueError):
                 Sight.parse(spec)
 
@@ -51,6 +54,20 @@ class TripTest(unittest.TestCase):
                       Transition("own_trip", (0, 10), ())]:
             with self.assertRaises(ValueError):
                 Trip("t", two_sights(), [wrong])
+
+    def test_all_problems_in_one_message(self):
+        with self.assertRaises(ValueError) as caught:
+            Trip("t", two_sights(), [Transition("calls", (0, 30), (1, 5)),
+                                     Transition("calls", (0, 12), (1, 50))])
+        self.assertIn("source", str(caught.exception))
+        self.assertIn("target", str(caught.exception))
+
+    def test_moved_keeps_what_fits(self):
+        fits, lost = Transition("calls", (0, 12), (1, 5)), Transition("calls", (0, 19), (1, 9))
+        trip = Trip("t", two_sights(), [fits, lost], commit="c", kind="survey")
+        moved = trip.moved([Sight.parse("sw/a.py:10-18"), Sight.parse("sw/b.py:5-9")])
+        self.assertEqual((moved.name, moved.commit, moved.kind), ("t", "c", "survey"))
+        self.assertEqual(moved.transitions, [fits])
 
     def test_kinds(self):
         self.assertEqual(Trip("t", two_sights(), kind="survey").kind, "survey")

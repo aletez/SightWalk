@@ -14,22 +14,26 @@ class Item:
         self.y = 0.0
 
 
-class Sight:
-    """A sight: one range of a file, its views, cells and drawn marks."""
+class Pane:
+    """A sight as shown (ontology.Sight): the range on screen (with the blank lines around it),
+    its file's path, its views, cells and drawn marks."""
 
-    def __init__(self, spec, path, begin, end):
-        self.spec, self.path, self.begin, self.end = spec, path, begin, end
+    def __init__(self, sight, path, begin, end):
+        self.sight, self.path, self.begin, self.end = sight, path, begin, end
         self.view = None
         self.header = None
         self.header_item = None
         self.frozen = []  # (line, view): the lines that open the blocks around the range (Jakub)
         self.frozen_items = []
-        self.calls = []  # [(line, (sight, line))]: the author's calls from this sight (Jakub)
         self.pad = (0, 0)  # blank lines shown above and below the range as given (spec.breathing)
         self.code_item = None
         self.header_icons = {}
         self.icons = {}
         self.outlines = set()
+
+    @property
+    def spec(self):
+        return self.sight.spec
 
     def items(self):
         """The sight's cells from top to bottom: header, frozen lines, code."""

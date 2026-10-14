@@ -19,6 +19,7 @@ from .config import (BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZ
                      WHEEL_MS)
 from .editor import Editor
 from .geometry import Geometry
+from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
 from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
 from .tint import apply_grey, apply_tint, hue_for, tint_color
@@ -64,7 +65,8 @@ class Reader(Geometry):
         self.settle_until = 0.0
         self.last_ids = []
         # note: non-empty = an answer is on its way (guide coming or thinking); shows [Stop]
-        self.status = self.trip = self.note = ""
+        self.status = self.note = ""
+        self.trip = None  # the ontology.Trip shown
         self.bench_width = BENCH_WIDTH
         self.editor = None
         self.strip_marks = None  # the icons last drawn on the strip
@@ -109,15 +111,14 @@ class Reader(Geometry):
 
     # Loading
 
-    def load(self, specs, root=None, trip=None, marks=None, calls=None):
-        self.shown = (list(specs), root, trip, None, calls)  # for Reset Sights
+    def load(self, trip, root=None, marks=None):
+        """Shows trip (an ontology.Trip): its sights' files read, every view made."""
+        self.shown = (trip, root)  # for Reset Sights
         self.ready = False
-        self.trip = trip or ""
+        self.trip = trip
         chat.catch_up(self.chat)  # what was said in another trip meanwhile
         self.close_sights()
-        self.sights = [plan.Sight(spec, *parse_spec(spec, root)) for spec in specs]
-        for sight, mine in zip(self.sights, calls or []):
-            sight.calls = mine
+        self.sights = [plan.Pane(sight, *parse_spec(sight.spec, root)) for sight in trip]
         self.indicators = marks or []
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
@@ -162,7 +163,7 @@ class Reader(Geometry):
             return
         path, lines = view.file_name(), line_count(view)
         view.close()  # the sight is a copy; the file itself opens only in the editor
-        self.load(["%s:1-%d" % (path, lines)])
+        self.load(Trip("", [Sight(path, 1, lines)]))
 
     def close_sights(self):
         if self.browser is not None and self.browser.is_valid():
@@ -535,19 +536,17 @@ class Reader(Geometry):
             return
         for k, line in lines.items():
             self.indicators[k]["line"] = line
-        specs = []
         for i, sight in enumerate(self.sights):
             begin, end = ranges.get(i, (sight.begin, sight.end))
             self.move_range(sight, begin + sight.pad[0], end - sight.pad[1])
-            specs.append(sight.spec)
-        self.load(specs, self.shown[1], self.shown[2], self.indicators, self.shown[4])
+        self.load(self.trip.moved([s.sight for s in self.sights]), self.shown[1], self.indicators)
 
     def move_range(self, sight, begin, end):
         """The range as given (without the blank lines shown around it) moved to begin-end."""
         if (begin, end) == (sight.begin + sight.pad[0], sight.end - sight.pad[1]):
             return
         self.edits.append("%s, now %d-%d" % (sight.spec, begin, end))
-        sight.spec = "%s:%d-%d" % (sight.spec.rpartition(":")[0], begin, end)
+        sight.sight = Sight(sight.sight.file, begin, end)
 
     def take_edits(self):
         """Ranges the user changed in the editor, for the agent's next message."""
@@ -561,7 +560,7 @@ class Reader(Geometry):
         chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
         vetting.show_tabs(self.below_header, self.tool, self.select_tool)
-        chat.show_header(self.sights_header, SIGHTS, self.trip,
+        chat.show_header(self.sights_header, SIGHTS, self.trip.name if self.trip else "",
                          button=("Reset positions", self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
         chat.show_header(self.strip_header, "", "", help_mark=False)
@@ -628,12 +627,19 @@ class Reader(Geometry):
         # A sight without a function (a script's top-level code) is named by its range (Jakub).
         main = callmap.first_definition(lines, sight.begin, sight.end) or (
             sight.begin, sight_title(sight).rsplit("/", 1)[-1])
-        targets = {t[1] for s in self.sights for _, t in s.calls if t[0] == index}
-        authored = callmap.authored_calls(sorted({main[0]} | targets), sight.calls)
+        calls = self.calls()
+        targets = {target[1] for _, target in calls if target[0] == index}
+        mine = [(source[1], target) for source, target in calls if source[0] == index]
+        authored = callmap.authored_calls(sorted({main[0]} | targets), mine)
         colour = tint_color("#ffffff", hue_for(sight.path), 0.25)
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
                              display_path(sight.path), colour, authored[line])
                 for line in sorted({main[0]} | targets)]
+
+    def calls(self):
+        """The trip's calls between lines of its sights, as (source, target) places."""
+        return [(t.source, t.target) for t in self.trip.transitions
+                if t.type == "calls" and len(t.source) == len(t.target) == 2]
 
     def owner(self, sight):
         """The class around a sight, from its frozen lines, or ""."""

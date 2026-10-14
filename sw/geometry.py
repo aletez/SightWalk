@@ -76,7 +76,9 @@ class Geometry:
         (rects, views), rects in px from the top of the screen, shifted by the offset."""
         column = self.column()
         left, _, right, _ = column
-        rects, views = [(left, 0.0, right, self.head() + OVERLAP)], [self.sights_header]
+        # The headers reach above the screen, so their own border does not leave a slit there
+        # through which the code scrolled under them shows (Jakub).
+        rects, views = [(left, -OVERLAP, right, self.head() + OVERLAP)], [self.sights_header]
         lead_bottom = self.head() + self.lead - self.offset
         if lead_bottom > self.head() + 1:
             rects.append((left, self.head(), right, lead_bottom))
@@ -91,7 +93,7 @@ class Geometry:
         views.append(self.filler)
         strip_left, strip_right = self.strip_span()
         floor = self.height - self.floor_height()
-        rects += [(strip_left, 0.0, strip_right, self.head() + OVERLAP),
+        rects += [(strip_left, -OVERLAP, strip_right, self.head() + OVERLAP),
                   (strip_left, self.head(), strip_right, floor + OVERLAP),
                   (strip_left, floor, strip_right, self.height)]
         views += [self.strip_header, self.strip, self.strip_floor]

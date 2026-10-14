@@ -176,6 +176,8 @@ Open:
 
 - The holiday follows 101s too (Jakub, 2026-10-14): a trip a 101s transition names comes before the trip that needs it, so the ontology comes before the request, the surveys before the runs that use them. And the bench's text stands BENCH_MARGIN = 14 px from its left edge (Jakub: it read too close). (Changed, unverified by Jakub.)
 
+- The Sights' header and the strip's header reach OVERLAP above the screen (Jakub, 2026-10-14: a slit over the top header showed the code scrolled under it). Seen by Claude: no slit after scrolling. (Changed, unverified by Jakub.)
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

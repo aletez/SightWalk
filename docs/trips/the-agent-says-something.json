@@ -1,10 +1,10 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
+ "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
  "sights": [
-  "sw/bridge.py:104-115",
-  "sw/bridge.py:99-101",
+  "sw/bridge.py:107-119",
+  "sw/bridge.py:99-102",
   "sw/marks.py:140-142",
   "sw/marks.py:137-137",
   "sw/reader.py:796-804",
@@ -21,12 +21,12 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 112],
+   "from": [0, 115],
    "to": [2, 140]
   },
   {
    "type": "calls",
-   "from": [0, 114],
+   "from": [0, 117],
    "to": [4, 796]
   },
   {

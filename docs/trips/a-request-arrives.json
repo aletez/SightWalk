@@ -1,9 +1,9 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
+ "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
  "sights": [
-  "sw/bridge.py:193-209",
+  "sw/bridge.py:197-213",
   "sw/bridge.py:88-96",
   "sw/bridge.py:82-85",
   "sw/bridge.py:54-66",
@@ -18,7 +18,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 198],
+   "from": [0, 202],
    "to": [1, 88]
   },
   {

@@ -8,13 +8,13 @@ Sublime loads the plugin, which starts its MCP server; a new port restarts it; o
 
 - `sight_walk.py:39-45` plugin_loaded
 - `sw/mcp_http.py:140-143` start
-- `sw/bridge.py:242-246` load_config
+- `sw/bridge.py:248-252` load_config
 - `sw/mcp_http.py:116-120` start_server
 - `sw/mcp_http.py:131-137` settings_changed
 - `sw/mcp_http.py:123-128` stop_server
 - `sight_walk.py:54-59` plugin_unloaded
 - `sw/scrollbars.py:13-25` reader_focused
-- `sw/state.py:51-58` close_all
+- `sw/state.py:52-59` close_all
 - `sw/mcp_http.py:146-148` stop
 - `sw/setup.py:70-72` SightWalkRestartCommand.run
 
@@ -32,7 +32,7 @@ The setup command keeps a token, writes it for poke, and puts Claude Code's regi
 
 From the HTTP server's thread to the show operation on Sublime's, with every check on the way.
 
-- `sw/bridge.py:193-209` run_on_main
+- `sw/bridge.py:197-213` run_on_main
 - `sw/bridge.py:88-96` op_show
 - `sw/bridge.py:82-85` check_not_stopped
 - `sw/bridge.py:54-66` make_trip
@@ -59,7 +59,7 @@ The window and every view but the sights.
 - `sw/chat.py:82-91` make_header
 - `sw/chat.py:119-128` make_status
 - `sw/vetting.py:26-33` make_tool
-- `sw/state.py:21-24` register
+- `sw/state.py:22-25` register
 
 ## 5. Loading the sights (13 views)
 
@@ -169,8 +169,8 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
-- `sw/bridge.py:118-122` op_point
-- `sw/state.py:42-48` require_ready
+- `sw/bridge.py:122-126` op_point
+- `sw/state.py:43-49` require_ready
 - `sw/reader.py:520-529` Reader.point
 - `sw/marks.py:71-87` resolve_marks
 - `sw/marks.py:60-68` jump
@@ -197,8 +197,8 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 
 A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.
 
-- `sw/bridge.py:104-115` op_say
-- `sw/bridge.py:99-101` MARK_FIRST
+- `sw/bridge.py:107-119` op_say
+- `sw/bridge.py:99-102` MARK_FIRST
 - `sw/marks.py:140-142` speaks_of_code
 - `sw/marks.py:137-137` CODE_TALK
 - `sw/reader.py:796-804` Reader.say
@@ -279,12 +279,12 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/commands.py:42-46` SightWalkSendCommand.run
 - `sw/chat.py:160-174` take_draft
 - `sw/commands.py:32-36` send
-- `sw/state.py:34-35` reader_for
+- `sw/state.py:35-36` reader_for
 - `sw/reader.py:806-820` Reader.context
 - `sw/views.py:285-289` selected_text
 - `sw/plan.py:101-104` visible_specs
 - `sw/reader.py:611-614` Reader.take_edits
-- `sw/bridge.py:223-237` wait_for_user
+- `sw/bridge.py:227-243` wait_for_user
 
 ## 19. Opening the editor (10 views)
 
@@ -323,9 +323,9 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/geometry.py:27-31` Geometry.strip_span
 - `sw/geometry.py:33-35` Geometry.strip_share
 - `sw/geometry.py:37-38` Geometry.bench_side
-- `sw/state.py:61-66` render_all
-- `sw/bridge.py:162-169` op_settings
-- `sw/bridge.py:152-159` check_setting
+- `sw/state.py:62-67` render_all
+- `sw/bridge.py:166-173` op_settings
+- `sw/bridge.py:156-163` check_setting
 - `sw/commands.py:113-115` SightWalkWindowListener.on_activated
 - `sw/commands.py:92-96` SightWalkScrollCommand.run
 - `sw/commands.py:86-88` SightWalkHeaderListener.on_hover
@@ -344,7 +344,7 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 - `sw/commands.py:139-143` SightWalkWindowListener.offer_to_browser
 - `sw/commands.py:117-118` SightWalkWindowListener.on_load
 - `sw/reader.py:172-180` Reader.take_file
-- `sw/bridge.py:138-149` op_browse
+- `sw/bridge.py:142-153` op_browse
 - `sw/views.py:121-132` make_browser
 
 ## 23. What the agent is told (11 views, survey)
@@ -374,8 +374,8 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/manual.py:104-107` tool
 - `sw/mcp_http.py:36-45` tool_result
 - `sw/mcp_http.py:23-33` call_tool
-- `sw/bridge.py:212-220` wait_until_ready
-- `sw/bridge.py:193-209` run_on_main
+- `sw/bridge.py:216-224` wait_until_ready
+- `sw/bridge.py:197-213` run_on_main
 - `sw/mcp_http.py:81-90` Handler.send
 - `sw/mcp_http.py:105-106` Handler.do_GET
 - `sw/mcp_http.py:108-110` Handler.do_DELETE
@@ -391,7 +391,7 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `sw/guide.py:35-36` running
 - `sw/guide.py:39-44` find_claude
 - `sw/guide.py:59-68` start
-- `sw/bridge.py:223-237` wait_for_user
+- `sw/bridge.py:227-243` wait_for_user
 
 ## 26. Here, and asking by a shortcut (3 views)
 
@@ -408,7 +408,7 @@ Switch Language: the setting changes, the words follow at once, in every open tr
 - `sw/commands.py:247-250` SightWalkSwitchLanguageCommand.run
 - `sight_walk.py:48-51` settings_changed
 - `sw/words.py:57-59` set_language
-- `sw/state.py:61-66` render_all
+- `sw/state.py:62-67` render_all
 - `sw/words.py:53-54` word
 - `sw/chat.py:28-32` help_html
 - `sw/views.py:30-32` button_html
@@ -430,9 +430,9 @@ The guide is stopped, windows close.
 - `sw/commands.py:158-161` SightWalkResetSightsCommand.run
 - `sw/reader.py:646-649` Reader.reset_sights
 - `sw/commands.py:163-165` SightWalkResetSightsCommand.is_enabled
-- `sw/state.py:27-31` forget
-- `sw/bridge.py:130-135` op_close
-- `sw/state.py:38-39` current_reader
+- `sw/state.py:28-32` forget
+- `sw/bridge.py:134-139` op_close
+- `sw/state.py:39-40` current_reader
 
 ## 29. Names and room (11 views, survey)
 
@@ -446,7 +446,7 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:46-54` Geometry.conversation_rows
 - `sw/geometry.py:56-58` Geometry.head
 - `sw/geometry.py:65-67` Geometry.room
-- `sw/bridge.py:125-127` op_state
+- `sw/bridge.py:129-131` op_state
 - `sw/reader.py:789-794` Reader.folder
 - `sw/reader.py:771-773` Reader.note_waiting
 
@@ -554,7 +554,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 
 A trip opened from its file by the guide, and the files written for an informator.
 
-- `sw/bridge.py:172-186` op_open_trip
+- `sw/bridge.py:176-190` op_open_trip
 - `sw/ontology.py:251-254` trip_from
 - `sw/ontology.py:245-248` trip_data
 - `sw/ontology.py:236-238` transition_data

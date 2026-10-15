@@ -1,7 +1,7 @@
 {
  "name": "One tool call over HTTP",
  "kind": "run",
- "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
+ "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
  "sights": [
   "sw/mcp_http.py:92-103",
   "sw/mcp_http.py:76-79",
@@ -10,8 +10,8 @@
   "sw/manual.py:104-107",
   "sw/mcp_http.py:36-45",
   "sw/mcp_http.py:23-33",
-  "sw/bridge.py:212-220",
-  "sw/bridge.py:193-209",
+  "sw/bridge.py:216-224",
+  "sw/bridge.py:197-213",
   "sw/mcp_http.py:81-90",
   "sw/mcp_http.py:105-106",
   "sw/mcp_http.py:108-110",
@@ -56,17 +56,17 @@
   {
    "type": "calls",
    "from": [6, 29],
-   "to": [7, 212]
+   "to": [7, 216]
   },
   {
    "type": "calls",
    "from": [6, 33],
-   "to": [8, 193]
+   "to": [8, 197]
   },
   {
    "type": "calls",
-   "from": [7, 217],
-   "to": [8, 193]
+   "from": [7, 221],
+   "to": [8, 197]
   },
   {
    "type": "calls",

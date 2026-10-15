@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
+ "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
  "sights": [
   "sw/bridge.py:69-79",
   "sw/reader.py:59-80",
@@ -14,7 +14,7 @@
   "sw/chat.py:82-91",
   "sw/chat.py:119-128",
   "sw/vetting.py:26-33",
-  "sw/state.py:21-24"
+  "sw/state.py:22-25"
  ],
  "transitions": [
   {
@@ -25,7 +25,7 @@
   {
    "type": "calls",
    "from": [0, 75],
-   "to": [11, 21]
+   "to": [11, 22]
   },
   {
    "type": "calls",

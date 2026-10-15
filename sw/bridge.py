@@ -98,7 +98,10 @@ def op_show(sights=None, transitions=None, root=None, trip=None):
 
 MARK_FIRST = ("This answer names code, and nothing is marked yet: call point first with the lines "
               "it speaks of (each gets an outline and an icon), then say it again. The user "
-              "asked that every answer about code comes with its marks.")
+              "asked that every answer about code comes with its marks. Do not call wait_for_user "
+              "before you have answered.")
+UNANSWERED = ("The user's message is still unanswered: answer it with say (point first if the "
+              "answer names code), then wait.")
 
 
 def op_say(text, status=None):
@@ -112,6 +115,7 @@ def op_say(text, status=None):
     if not state.POINTED and speaks_of_code(text):
         raise ValueError(MARK_FIRST)
     reader.say(text, status)
+    state.ANSWERED = True
     return {"ok": True}
 
 
@@ -223,8 +227,10 @@ def wait_until_ready(timeout=8):
 def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}
+    if state.ADDRESSED and not state.ANSWERED and not state.STOPPED:
+        return {"error": UNANSWERED}
     state.WAITING += 1
-    state.ADDRESSED = state.STOPPED = state.POINTED = False
+    state.ADDRESSED = state.STOPPED = state.POINTED = state.ANSWERED = False
     try:
         message = state.INBOX.get(timeout=timeout_s)
         state.ADDRESSED = True

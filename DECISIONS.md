@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- wait_for_user refuses while the user's last message has no say yet (2026-10-15): after say refused an unmarked answer, the guide waited instead of pointing, which dropped the message and then refused every say as "Nothing to answer" (Jakub saw the guide think long, point, say nothing). (Changed, unverified.)
 - Digits and letters in the guide's latest answer that name an icon now in the trip are outlined in the icon's colour: digits region.orangish, letters region.bluish (Jakub, 2026-10-15). Only standing alone and only icons shown, so "2 kroki" without icon 2 stays plain. (Changed, unverified.)
 - SightWalk: Compare Bench Fonts (Jakub, 2026-10-15): a window of six panes with a kept conversation in Helvetica Neue, Avenir Next, Charter, Iowan Old Style, Georgia and Palatino, to choose bench_font_face. Charter chosen by Jakub (2026-10-15), now the macOS default. (Changed, unverified.)
 - Jumps of control in colours (Jakub, 2026-10-15: the guide often shows all calls at once, they must pair up): each jump of one point call takes the next colour, green, red, yellow, purple, brown, then green again; both ends alike. The plugin picks it; the manual tells the guide to name jumps by colour. (Changed, unverified.)

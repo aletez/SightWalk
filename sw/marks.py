@@ -140,3 +140,19 @@ CODE_TALK = re.compile(r"`[^`\n]+`|\w+\.\w+:\d+|\b(?:lines?|lini[aei]|linii)\s+\
 def speaks_of_code(text):
     """The message names code: a `marked name`, file:line, or a line number (line 12, linia 12)."""
     return bool(CODE_TALK.search(text))
+
+
+ICON_REF = re.compile(r"(?<![\w.'’-])([1-9]|[A-Z])(?![\w'’-])")
+REF_SCOPES = {"digit": "region.orangish", "letter": "region.bluish"}
+
+
+def icon_refs(text, indicators):
+    """[(start, end, scope)]: the digits and capital letters in text that stand alone and name an
+    icon now in the trip, to be outlined in the icon's colour (Jakub)."""
+    icons = set(m["icon"] for m in indicators)
+    found = []
+    for match in ICON_REF.finditer(text):
+        kind = "digit" if match.group(1).isdigit() else "letter"
+        if "%s_%s" % (kind, match.group(1).lower()) in icons:
+            found.append((match.start(), match.end(), REF_SCOPES[kind]))
+    return found

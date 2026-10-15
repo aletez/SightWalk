@@ -319,3 +319,37 @@ class SightWalkToggleSentinelsCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         asked.toggle()
+
+
+COMPARED_FONTS = ("Helvetica Neue", "Avenir Next", "Charter", "Iowan Old Style", "Georgia",
+                  "Palatino")
+
+
+class SightWalkCompareFontsCommand(sublime_plugin.ApplicationCommand):
+    """A window of six panes with the bench's conversation, each in another font (Jakub), to
+    choose bench_font_face."""
+
+    def run(self):
+        sample = (chat.TRANSCRIPT or kept_conversation())[-2500:]
+        sublime.run_command("new_window")
+        window = sublime.active_window()
+        window.set_layout({"cols": [0, 1 / 3, 2 / 3, 1], "rows": [0, 0.5, 1],
+                           "cells": [[c, r, c + 1, r + 1] for r in range(2) for c in range(3)]})
+        for group, face in enumerate(COMPARED_FONTS):
+            window.focus_group(group)
+            view = window.new_file(syntax=chat.SYNTAX)
+            view.set_scratch(True)
+            view.set_name(face)
+            view.settings().update({"font_face": face, "word_wrap": True, "gutter": False})
+            view.run_command("append", {"characters": face + "\n\n" + sample})
+
+
+def kept_conversation():
+    """The longest conversation kept beside an informator in the open folders, for samples."""
+    texts = [""]
+    for window in sublime.windows():
+        for folder in window.folders():
+            for path in glob.glob(os.path.join(folder, "**", "*.transcripts.json"), recursive=True):
+                with open(path, encoding="utf-8") as f:
+                    texts += list(json.load(f).values())
+    return max(texts, key=len)

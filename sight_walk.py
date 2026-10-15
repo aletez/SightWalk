@@ -13,6 +13,7 @@ from .sw.commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkChatListener,
     SightWalkCloseEditorCommand,
+    SightWalkCompareFontsCommand,
     SightWalkCloseTripCommand,
     SightWalkEditCommand,
     SightWalkHeaderListener,

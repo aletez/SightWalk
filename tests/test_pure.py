@@ -77,6 +77,12 @@ class CodeTalkTest(unittest.TestCase):
 
 
 class MarksTest(unittest.TestCase):
+    def test_icon_refs(self):
+        shown = [{"icon": "digit_1"}, {"icon": "letter_b"}]
+        text = "1. Here B calls it; 2 is not shown, A neither, B's and v1.2 are no names."
+        self.assertEqual(marks.icon_refs(text, shown),
+                         [(0, 1, "region.orangish"), (8, 9, "region.bluish")])
+
     def test_targets(self):
         sights, _ = stacked((1, 3), (10, 11))
         self.assertEqual(marks.resolve_target(sights, "a.py:11"), (1, 11))

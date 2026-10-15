@@ -5,6 +5,7 @@ prompt, kept at the bottom of the pane, and the two-line header in place of a ta
 import sublime
 import sublime_plugin
 
+from . import marks
 from .config import BLANK_LINES, PROMPT
 from .header import MARK_ROOM, title_lines
 from .views import FADED, button_html, kept, make_side_view, match_font, phantoms
@@ -213,3 +214,16 @@ def catch_up(view):
     PROTECTED[view.buffer_id()] = "\n" * blanks + TRANSCRIPT + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[view.buffer_id()],
                                             "end": len(protected)})
+
+
+def outline_refs(view, indicators):
+    """The digits and letters naming icons, outlined in their colours, in what the guide said
+    since the user last spoke: earlier answers named icons no longer there."""
+    protected = PROTECTED.get(view.buffer_id(), "")
+    start = protected.rfind("\nU: ") + 1
+    by_scope = {}
+    for begin, end, scope in marks.icon_refs(protected[start:], indicators):
+        by_scope.setdefault(scope, []).append(sublime.Region(start + begin, start + end))
+    for scope in marks.REF_SCOPES.values():
+        view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",
+                         sublime.DRAW_NO_FILL)

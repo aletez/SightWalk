@@ -520,6 +520,7 @@ class Reader(Geometry):
     def point(self, new_marks, reveal=True, clear=True):
         resolved = marks.resolve_marks(self.sights, new_marks)
         self.indicators = resolved if clear else self.indicators + resolved
+        chat.outline_refs(self.chat, self.indicators)
         ys = [marks.line_y(self.sights[m["sight"]], m["line"], self.lh) for m in resolved]
         bottom = self.offset + self.room() - 2 * self.lh
         if reveal and ys and not all(self.offset <= y <= bottom for y in ys):
@@ -799,6 +800,7 @@ class Reader(Geometry):
             self.status = status
         self.show_headers()
         chat.say(self.chat, text, prefix)
+        chat.outline_refs(self.chat, self.indicators)
         self.keep_transcript()
 
     def context(self):

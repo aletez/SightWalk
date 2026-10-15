@@ -5,6 +5,8 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- Digits and letters in the guide's latest answer that name an icon now in the trip are outlined in the icon's colour: digits region.orangish, letters region.bluish (Jakub, 2026-10-15). Only standing alone and only icons shown, so "2 kroki" without icon 2 stays plain. (Changed, unverified.)
+- SightWalk: Compare Bench Fonts (Jakub, 2026-10-15): a window of six panes with a kept conversation in Helvetica Neue, Avenir Next, Charter, Iowan Old Style, Georgia and Palatino, to choose bench_font_face. (Opened by Claude; choice open.)
 - Jumps of control in colours (Jakub, 2026-10-15: the guide often shows all calls at once, they must pair up): each jump of one point call takes the next colour, green, red, yellow, purple, brown, then green again; both ends alike. The plugin picks it; the manual tells the guide to name jumps by colour. (Changed, unverified.)
 - Sending a message no longer moves the Sights while the wheel pans (Jakub, 2026-10-15): the bench's wheel reference is the place it last put itself at the bottom, so text arriving is not read as a wheel step. (Changed, unverified.)
 - The eyes for marks off screen stay in the gutter, not by ▲ and ▼ as planned (Jakub, 2026-10-13). (Verified by Jakub, 2026-10-13.)

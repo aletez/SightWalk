@@ -193,12 +193,14 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/reader.py:552-557` Reader.draw_outlines
 - `sw/views.py:262-272` draw_outlines
 
-## 13. The agent says something (12 views)
+## 13. The agent says something (14 views)
 
 A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.
 
 - `sw/bridge.py:104-115` op_say
+- `sw/bridge.py:99-101` MARK_FIRST
 - `sw/marks.py:135-137` speaks_of_code
+- `sw/marks.py:132-132` CODE_TALK
 - `sw/reader.py:795-802` Reader.say
 - `sw/reader.py:617-626` Reader.show_headers
 - `sw/chat.py:93-112` show_header

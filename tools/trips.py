@@ -92,7 +92,8 @@ TRIPS = [
     ("The agent says something",
      "A reply reaches the Vetting Bench past the transcript guard; the status line follows the "
      "topic.",
-     ["bridge.op_say", "marks.speaks_of_code", "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
+     ["bridge.op_say", "bridge.MARK_FIRST", "marks.speaks_of_code", "marks.CODE_TALK",
+      "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
       "header.title_lines", "chat.show_status", "chat.say", "commands.SightWalkInsertCommand.run",
       "chat.Guard.on_text_changed", "chat.protected_end",
       "commands.SightWalkChatListener.on_modified"]),
@@ -349,7 +350,7 @@ CLASSES = {}  # "module.Class": ["module.Base", ...], filled by definitions
 # Texts that are no function but worth a sight of their own (Jakub): what the agent is told.
 SECTIONED = ["manual.MANUAL"]
 TEXTS = ["manual.MANUAL", "manual.TRANSITION", "manual.TOOLS", "guide.PROMPT", "guide.TOOLS",
-         "bridge.TRANSITION_FORM"]
+         "bridge.TRANSITION_FORM", "bridge.MARK_FIRST", "marks.CODE_TALK"]
 
 
 def texts(module, tree):

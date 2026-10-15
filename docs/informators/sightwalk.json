@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "5f80375c6321951b825630bae01230ee63cb04a1",
+ "commit": "680a5df11c29be3622b76f101d03dd634eda365d",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -2625,7 +2625,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ]
   },
@@ -3141,7 +3141,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ]
   },
@@ -3759,7 +3759,7 @@
    "from": [
     "the-agent-says-something",
     1,
-    135
+    99
    ],
    "to": [
     "the-agent-says-something"
@@ -3770,6 +3770,28 @@
    "from": [
     "the-agent-says-something",
     2,
+    135
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    3,
+    132
+   ],
+   "to": [
+    "the-agent-says-something"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-agent-says-something",
+    4,
     795
    ],
    "to": [
@@ -3780,7 +3802,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    2,
+    4,
     802
    ],
    "to": [
@@ -3793,7 +3815,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ],
    "to": [
@@ -3804,7 +3826,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     618
    ],
    "to": [
@@ -3817,7 +3839,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     619
    ],
    "to": [
@@ -3830,7 +3852,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     621
    ],
    "to": [
@@ -3843,7 +3865,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     622
    ],
    "to": [
@@ -3856,7 +3878,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     622
    ],
    "to": [
@@ -3869,7 +3891,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     623
    ],
    "to": [
@@ -3882,7 +3904,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     624
    ],
    "to": [
@@ -3895,7 +3917,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    3,
+    5,
     624
    ],
    "to": [
@@ -3908,7 +3930,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    4,
+    6,
     93
    ],
    "to": [
@@ -3919,7 +3941,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    4,
+    6,
     99
    ],
    "to": [
@@ -3932,7 +3954,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    4,
+    6,
     103
    ],
    "to": [
@@ -3945,7 +3967,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    4,
+    6,
     106
    ],
    "to": [
@@ -3958,7 +3980,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    4,
+    6,
     111
    ],
    "to": [
@@ -3971,7 +3993,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    5,
+    7,
     12
    ],
    "to": [
@@ -3982,7 +4004,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     130
    ],
    "to": [
@@ -3993,7 +4015,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     132
    ],
    "to": [
@@ -4006,7 +4028,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     132
    ],
    "to": [
@@ -4019,7 +4041,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     134
    ],
    "to": [
@@ -4032,7 +4054,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     134
    ],
    "to": [
@@ -4045,7 +4067,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     137
    ],
    "to": [
@@ -4058,7 +4080,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     137
    ],
    "to": [
@@ -4071,7 +4093,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    6,
+    8,
     138
    ],
    "to": [
@@ -4084,7 +4106,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    7,
+    9,
     149
    ],
    "to": [
@@ -4095,7 +4117,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    8,
+    10,
     28
    ],
    "to": [
@@ -4106,7 +4128,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    9,
+    11,
     52
    ],
    "to": [
@@ -4117,7 +4139,7 @@
    "type": "calls",
    "from": [
     "the-agent-says-something",
-    9,
+    11,
     63
    ],
    "to": [
@@ -4130,7 +4152,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    10,
+    12,
     34
    ],
    "to": [
@@ -4141,7 +4163,7 @@
    "type": "own_trip",
    "from": [
     "the-agent-says-something",
-    11,
+    13,
     107
    ],
    "to": [
@@ -4192,7 +4214,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    2,
+    4,
     795
    ]
   },
@@ -4468,7 +4490,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ]
   },
@@ -6225,7 +6247,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ]
   },
@@ -7029,7 +7051,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    2,
+    4,
     795
    ]
   },
@@ -7611,7 +7633,7 @@
    ],
    "to": [
     "the-agent-says-something",
-    3,
+    5,
     617
    ]
   },

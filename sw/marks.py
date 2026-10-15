@@ -54,14 +54,18 @@ def icon_for(mark):
     raise ValueError("A mark is a digit 1-9 or a letter A-Z, not %r" % mark)
 
 
-def jump(sights, mark):
-    """A jump of control: both arrows bend towards the other end, in reader order."""
+JUMP_COLOURS = ("", "_red", "_yellow", "_purple", "_brown")  # see tools/draw_icons.py
+
+
+def jump(sights, mark, colour=""):
+    """A jump of control: both arrows bend towards the other end, in reader order, both in the
+    jump's colour."""
     sender = resolve_target(sights, mark["from"])
     receiver = resolve_target(sights, mark["to"])
     down = sender <= receiver
-    return [{"sight": sender[0], "line": sender[1], "icon": "pass_down" if down else "pass_up"},
+    return [{"sight": sender[0], "line": sender[1], "icon": ("pass_down" if down else "pass_up") + colour},
             {"sight": receiver[0], "line": receiver[1],
-             "icon": "take_above" if down else "take_below"}]
+             "icon": ("take_above" if down else "take_below") + colour}]
 
 
 def resolve_marks(sights, marks):
@@ -71,7 +75,8 @@ def resolve_marks(sights, marks):
         if "from" in mark or "to" in mark:
             if not ("from" in mark and "to" in mark):
                 raise ValueError('A jump needs both ends: {"from": line, "to": line}.')
-            resolved += jump(sights, mark)
+            jumps = sum(1 for m in resolved if m["icon"].startswith("pass_"))
+            resolved += jump(sights, mark, JUMP_COLOURS[jumps % len(JUMP_COLOURS)])
         else:
             if "at" not in mark:
                 raise ValueError('A mark is {"at": line, "mark": "1"} or {"from": line, '

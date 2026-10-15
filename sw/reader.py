@@ -423,7 +423,7 @@ class Reader(Geometry):
         if self.pan:
             tool = self.tool_view()
             places += [(tool, anchor(tool) + self.tool_offsets.get(tool.id(), 0.0)),
-                       (self.chat, chat.bottom_place(self.chat))]
+                       (self.chat, chat.kept_place(self.chat))]
         return places
 
     def pinned_places(self):

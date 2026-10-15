@@ -86,6 +86,8 @@ Indicators
 - Jumps of control: {"from": line, "to": line}. Call site and the callee's first line, return
   and the call site it goes back to, raise and its handler. The arrows bend towards each other.
   Say in the conversation which jump it is. There and back are two separate point calls.
+  Several jumps in one call each take their own colour, both ends alike, in order: green, red,
+  yellow, purple, brown; name them by colour ("the red call").
 - Other marks: {"at": line, "mark": "A"}.
   A, B, C ... lines without an order: A alone is the line your sentence is about; A and B are
      two lines to compare.

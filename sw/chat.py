@@ -182,7 +182,14 @@ def keep_at_bottom(view):
     if kept(view).get("bottom") == now:
         return
     kept(view)["bottom"] = now
-    view.set_viewport_position((0.0, bottom_place(view)), False)
+    kept(view)["place"] = bottom_place(view)
+    view.set_viewport_position((0.0, kept(view)["place"]), False)
+
+
+def kept_place(view):
+    """Where keep_at_bottom last put the view: the wheel's reference, so text arriving (a sent
+    message, an answer) is not read as a wheel step that moves the trip."""
+    return kept(view).get("place", bottom_place(view))
 
 
 def bottom_place(view):

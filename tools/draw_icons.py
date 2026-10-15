@@ -1,6 +1,7 @@
 """Draws the gutter icons into icons/ at 1x, 2x and 3x. Needs Pillow; run from the repository root:
 
     python3 tools/draw_icons.py path/to/InterVariable.ttf
+    python3 tools/draw_icons.py --arrows    (only the jump arrows, which need no font)
 
 Glyphs use Inter (SIL Open Font License, github.com/rsms/inter), which may be used in shipped images.
 
@@ -24,6 +25,10 @@ GREEN, LIME = "#23894E", "#E4F7B5"
 AMBER, PLUM = "#C77A0E", "#3A1838"
 BLUE, BUTTER = "#2C6ED5", "#FFEFB0"
 GRAPHITE = "#1E1F23"
+# Jump colours, one per jump of a point call, both ends alike (Jakub: they pair up). Must match
+# marks.JUMP_COLOURS; green keeps the plain names.
+JUMPS = {"green": (GREEN, LIME), "red": ("#C8372D", "#FFE3DE"), "yellow": ("#E3B505", "#3A2A00"),
+         "purple": ("#7B3FB5", "#F0E2FF"), "brown": ("#8A5A2B", "#F7E6D0")}
 
 # Polylines with one quadratic corner each: (start, control, end) of the bend, plus straight ends.
 ARROWS = {
@@ -63,13 +68,18 @@ def stroke(draw, points, width, colour, closed=False):
         draw.ellipse([x - w / 2, y - w / 2, x + w / 2, y + w / 2], fill=colour)
 
 
-def arrow(name):
+def arrow(name, background=GREEN, colour=LIME):
     first, bend, last, head = ARROWS[name]
-    image = square(GREEN)
+    image = square(background)
     draw = ImageDraw.Draw(image)
-    stroke(draw, first + quad(*bend) + last, 1.7, LIME)
-    stroke(draw, head, 1.7, LIME)
+    stroke(draw, first + quad(*bend) + last, 1.7, colour)
+    stroke(draw, head, 1.7, colour)
     return image
+
+
+def arrows():
+    return {name if hue == "green" else "%s_%s" % (name, hue): arrow(name, *colours)
+            for hue, colours in JUMPS.items() for name in ARROWS}
 
 
 def glyph(char, background, colour, size, weight):
@@ -97,7 +107,7 @@ def eye(direction, h=8.5):
 
 
 def all_icons():
-    icons = {name: arrow(name) for name in ARROWS}
+    icons = arrows()
     icons.update(("digit_%d" % n, glyph(str(n), AMBER, PLUM, 12.5, 600)) for n in range(1, 10))
     icons.update(("letter_%s" % c.lower(), glyph(c, BLUE, BUTTER, 11, 400))
                  for c in string.ascii_uppercase)
@@ -117,7 +127,8 @@ def with_margin(image):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    icons = {name: with_margin(image) for name, image in all_icons().items()}
+    drawn = arrows() if "--arrows" in sys.argv else all_icons()
+    icons = {name: with_margin(image) for name, image in drawn.items()}
     for name, image in icons.items():
         for suffix, size in SIZES.items():
             image.resize((size, size), Image.LANCZOS).save(os.path.join(OUT, name + suffix + ".png"))

@@ -5,6 +5,8 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- Jumps of control in colours (Jakub, 2026-10-15: the guide often shows all calls at once, they must pair up): each jump of one point call takes the next colour, green, red, yellow, purple, brown, then green again; both ends alike. The plugin picks it; the manual tells the guide to name jumps by colour. (Changed, unverified.)
+- Sending a message no longer moves the Sights while the wheel pans (Jakub, 2026-10-15): the bench's wheel reference is the place it last put itself at the bottom, so text arriving is not read as a wheel step. (Changed, unverified.)
 - The eyes for marks off screen stay in the gutter, not by ▲ and ▼ as planned (Jakub, 2026-10-13). (Verified by Jakub, 2026-10-13.)
 - A strip icon mirrors the gutter's icon across the border between strip and gutter (Jakub, 2026-10-13): pushed right by `STRIP_ICON_SHIFT` = 6 px; measured by Claude on screen, both about 7 px from the border. (Verified by Jakub, 2026-10-13.)
 - The plugin split into 31 trips for vetting it with itself (2026-10-13, `docs/trips.md`): runs and five surveys, 3 to 16 sights each; `tools/trips.py N` prints trip N for show with the calls between its sights, read from the code's names (functions, modules, self, a reader's or editor's methods, run_command strings) plus jumps through data written by hand (`JUMPS`). Trip 1 shown by Claude with poke. (Changed, unverified by Jakub.)

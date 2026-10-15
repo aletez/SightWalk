@@ -90,6 +90,10 @@ class MarksTest(unittest.TestCase):
         resolved = marks.resolve_marks(sights, [{"from": "a.py:11", "to": "a.py:2"},
                                               {"at": "a.py:3", "mark": "7"}])
         self.assertEqual([m["icon"] for m in resolved], ["pass_up", "take_below", "digit_7"])
+        two = marks.resolve_marks(sights, [{"from": "a.py:2", "to": "a.py:11"},
+                                           {"from": "a.py:3", "to": "a.py:10"}])
+        self.assertEqual([m["icon"] for m in two],  # each jump its own colour, both ends alike
+                         ["pass_down", "take_above", "pass_down_red", "take_above_red"])
         with self.assertRaises(ValueError):
             marks.resolve_marks(sights, [{"from": "a.py:2"}])
 

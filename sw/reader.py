@@ -376,7 +376,8 @@ class Reader(Geometry):
         """Every view into its own group, focused if it was not shown there yet, then the rest of
         what a layout decides."""
         self.place(rects, views, self.height)
-        self.window.focus_view(self.chat if self.editor is None else self.editor.view)
+        if sublime.active_window() == self.window:  # focusing would raise it over another window
+            self.window.focus_view(self.chat if self.editor is None else self.editor.view)
         self.last_ids = [v.id() for v in views]
         self.settle_until = time.time() + SETTLE_S  # the views may be off their places a moment
         self.draw_outlines()
@@ -451,6 +452,8 @@ class Reader(Geometry):
         place follows the offset (see strip_place). A jump larger than a screen is a view being
         laid out, not the wheel; while a new layout settles, movements are only undone."""
         settling = time.time() < self.settle_until
+        if self.pan:
+            chat.keep_at_bottom(self.chat)  # its own changes first, not read as the wheel
         for view, place in self.pinned_places():
             x, y = view.viewport_position()
             if abs(y - place) > 0.5:

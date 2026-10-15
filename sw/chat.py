@@ -179,7 +179,7 @@ def keep_at_bottom(view):
     the pane's height changes (Jakub: computed, not blank lines added); between changes the user
     may scroll the history. Above the transcript stand BLANK_LINES real lines, so a short one
     can sit at the bottom too, and a click anywhere lands in the conversation."""
-    now = (view.size(), view.viewport_extent()[1])
+    now = (view.size(), view.viewport_extent()[1], view.line_height())  # a font size too
     if kept(view).get("bottom") == now:
         return
     kept(view)["bottom"] = now

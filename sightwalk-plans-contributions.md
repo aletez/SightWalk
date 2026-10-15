@@ -1,4 +1,4 @@
-# SightWalk: plans and Jakub's contributions (export, 2026-10-15)
+# SightWalk: plans and Jakub's contributions (export, 2026-10-15, evening)
 
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIONS.md and Claude's memory of the project.
 
@@ -88,6 +88,10 @@ Entities:
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-15, names on the bench, the guide's responsibility: guessing a name's kind from the code would make things worse where a variable shares a function's name, so the guide marks each name with an explicit tag that is hard to ignore (<func>, <class>, <var>, <str>). Then asked for delimiters that are barely visible and not on the keyboard, which led to the four invisible operators Sublime draws as nothing; weighed against a syntax that colours by position ("we are nearly reinventing ANSI colours").
+- 2026-10-15, colour where schemes give none: most schemes, even good ones, leave function calls and variables plain, so on the bench functions take the colour of definitions and variables a faint background. Also caught that his own message ran to the pane's edge and into the next line in schemes that give every scope a background.
+- 2026-10-15, colours that pair up: the guide often shows all calls at once, so each jump of control takes its own colour, both ends alike; a marked line's outline takes its icon's colour; and digits and letters in the guide's text that name an icon are outlined in that icon's colour, which ties the bench to the code.
+- 2026-10-15, catches in use: the trip stole the focus from another Sublime window; a font-size change on the bench panned the trip; the guide thought long, pointed and said nothing, which uncovered a refused answer that dropped the user's message, and a new guide that could not see the message its predecessor had taken.
 - 2026-10-15, scrolling is there to bring the code level with the eyes reading the bench: so a trip scrolls up until its end meets the bench's floor, short and long alike; found from "the panorama does not scroll in full screen", which a log showed was the rule for short trips, not a fault.
 - 2026-10-15, "I always had to ask for icons and outlines": every answer about code now comes with its marks, the bridge refusing an unmarked one; and the question which part refuses, bridge or server, with the refusal's own text put in the tour.
 - 2026-10-14, the Map: dark while the system is, in a heavier font there; zoomed by buttons and keys as no pinch reaches a plugin; the schemes SightWalk writes deleted after use, as they crowded Sublime's list; and the error dialog that deleting them caused, until a restart.

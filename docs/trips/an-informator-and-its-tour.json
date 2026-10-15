@@ -1,14 +1,14 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "c45875d6c136f2505f88d12b0e740b6de78b83c3",
+ "commit": "2886ff516d7ab132578e7652fea5943a5cc56d1f",
  "sights": [
-  "sw/commands.py:208-214",
-  "sw/commands.py:223-236",
-  "sw/commands.py:239-249",
-  "sw/commands.py:252-253",
-  "sw/commands.py:256-261",
-  "sw/commands.py:216-220",
+  "sw/commands.py:195-201",
+  "sw/commands.py:210-223",
+  "sw/commands.py:226-236",
+  "sw/commands.py:239-240",
+  "sw/commands.py:243-248",
+  "sw/commands.py:203-207",
   "sw/words.py:62-69",
   "sw/reader.py:703-717",
   "sw/reader.py:843-845",
@@ -32,62 +32,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 209],
-   "to": [1, 223]
+   "from": [0, 196],
+   "to": [1, 210]
   },
   {
    "type": "calls",
-   "from": [0, 213],
+   "from": [0, 200],
    "to": [6, 62]
   },
   {
    "type": "calls",
-   "from": [0, 214],
-   "to": [5, 216]
+   "from": [0, 201],
+   "to": [5, 203]
   },
   {
    "type": "calls",
-   "from": [1, 227],
-   "to": [2, 239]
+   "from": [1, 214],
+   "to": [2, 226]
   },
   {
    "type": "calls",
-   "from": [1, 228],
-   "to": [4, 256]
+   "from": [1, 215],
+   "to": [4, 243]
   },
   {
    "type": "calls",
-   "from": [1, 228],
-   "to": [3, 252]
+   "from": [1, 215],
+   "to": [3, 239]
   },
   {
    "type": "calls",
-   "from": [1, 230],
-   "to": [2, 239]
+   "from": [1, 217],
+   "to": [2, 226]
   },
   {
    "type": "calls",
-   "from": [1, 232],
-   "to": [4, 256]
+   "from": [1, 219],
+   "to": [4, 243]
   },
   {
    "type": "calls",
-   "from": [1, 234],
-   "to": [3, 252]
+   "from": [1, 221],
+   "to": [3, 239]
   },
   {
    "type": "calls",
-   "from": [1, 235],
-   "to": [4, 256]
+   "from": [1, 222],
+   "to": [4, 243]
   },
   {
    "type": "calls",
-   "from": [3, 253],
-   "to": [4, 256]
+   "from": [3, 240],
+   "to": [4, 243]
   },
   {
    "type": "calls",
-   "from": [5, 218],
+   "from": [5, 205],
    "to": [7, 703]
   },
   {

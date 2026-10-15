@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "c45875d6c136f2505f88d12b0e740b6de78b83c3",
+ "commit": "2886ff516d7ab132578e7652fea5943a5cc56d1f",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -386,7 +386,7 @@
    "to": [
     "endings",
     5,
-    170
+    157
    ]
   },
   {
@@ -4321,7 +4321,7 @@
    "from": [
     "the-agent-says-something",
     15,
-    125
+    112
    ],
    "to": [
     "the-agent-says-something"
@@ -4343,17 +4343,6 @@
    "from": [
     "the-agent-says-something",
     17,
-    112
-   ],
-   "to": [
-    "the-agent-says-something"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-agent-says-something",
-    18,
     232
    ],
    "to": [
@@ -4365,7 +4354,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    191
+    178
    ],
    "to": [
     "stopping-an-answer"
@@ -4376,7 +4365,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    192
+    179
    ],
    "to": [
     "the-user-sends-a-message",
@@ -4628,7 +4617,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     2,
-    283
+    270
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -4639,7 +4628,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     2,
-    284
+    271
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5303,7 +5292,7 @@
    "from": [
     "drawing-the-map",
     14,
-    276
+    263
    ],
    "to": [
     "drawing-the-map"
@@ -6126,7 +6115,7 @@
    "from": [
     "window-events",
     9,
-    133
+    120
    ],
    "to": [
     "window-events"
@@ -6137,7 +6126,7 @@
    "from": [
     "window-events",
     9,
-    134
+    121
    ],
    "to": [
     "plugin-start-and-stop",
@@ -6150,7 +6139,7 @@
    "from": [
     "window-events",
     9,
-    134
+    121
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6163,12 +6152,12 @@
    "from": [
     "window-events",
     9,
-    135
+    122
    ],
    "to": [
     "primary-g",
     6,
-    159
+    146
    ]
   },
   {
@@ -6261,7 +6250,7 @@
    "from": [
     "primary-g",
     0,
-    304
+    291
    ],
    "to": [
     "primary-g"
@@ -6272,7 +6261,7 @@
    "from": [
     "primary-g",
     0,
-    305
+    292
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6285,7 +6274,7 @@
    "from": [
     "primary-g",
     0,
-    309
+    296
    ],
    "to": [
     "endings",
@@ -6298,7 +6287,7 @@
    "from": [
     "primary-g",
     0,
-    314
+    301
    ],
    "to": [
     "a-new-reader-window",
@@ -6311,7 +6300,7 @@
    "from": [
     "primary-g",
     0,
-    315
+    302
    ],
    "to": [
     "plugin-start-and-stop",
@@ -6335,7 +6324,7 @@
    "from": [
     "primary-g",
     2,
-    317
+    304
    ],
    "to": [
     "primary-g"
@@ -6346,7 +6335,7 @@
    "from": [
     "primary-g",
     2,
-    320
+    307
    ],
    "to": [
     "names-and-room",
@@ -6457,7 +6446,7 @@
    "from": [
     "primary-g",
     6,
-    159
+    146
    ],
    "to": [
     "primary-g"
@@ -6468,7 +6457,7 @@
    "from": [
     "primary-g",
     6,
-    161
+    148
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6481,7 +6470,7 @@
    "from": [
     "primary-g",
     7,
-    137
+    124
    ],
    "to": [
     "primary-g"
@@ -7165,7 +7154,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    147
+    134
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -7176,7 +7165,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    155
+    142
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7263,7 +7252,7 @@
    "from": [
     "words-in-two-languages",
     0,
-    267
+    254
    ],
    "to": [
     "words-in-two-languages"
@@ -7366,7 +7355,7 @@
    "from": [
     "words-in-two-languages",
     7,
-    352
+    339
    ],
    "to": [
     "words-in-two-languages"
@@ -7377,7 +7366,7 @@
    "from": [
     "words-in-two-languages",
     8,
-    367
+    354
    ],
    "to": [
     "words-in-two-languages"
@@ -7388,7 +7377,7 @@
    "from": [
     "endings",
     0,
-    292
+    279
    ],
    "to": [
     "endings"
@@ -7399,7 +7388,7 @@
    "from": [
     "endings",
     1,
-    295
+    282
    ],
    "to": [
     "endings"
@@ -7410,7 +7399,7 @@
    "from": [
     "endings",
     1,
-    296
+    283
    ],
    "to": [
     "how-claude-comes-to-listen-to-sublime",
@@ -7471,7 +7460,7 @@
    "from": [
     "endings",
     4,
-    165
+    152
    ],
    "to": [
     "endings"
@@ -7482,7 +7471,7 @@
    "from": [
     "endings",
     5,
-    170
+    157
    ],
    "to": [
     "endings"
@@ -7515,7 +7504,7 @@
    "from": [
     "endings",
     8,
-    140
+    127
    ],
    "to": [
     "endings"
@@ -7526,7 +7515,7 @@
    "from": [
     "endings",
     8,
-    143
+    130
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7539,7 +7528,7 @@
    "from": [
     "endings",
     9,
-    198
+    185
    ],
    "to": [
     "endings"
@@ -7550,7 +7539,7 @@
    "from": [
     "endings",
     9,
-    199
+    186
    ],
    "to": [
     "words-in-two-languages",
@@ -7563,7 +7552,7 @@
    "from": [
     "endings",
     10,
-    178
+    165
    ],
    "to": [
     "endings"
@@ -7574,7 +7563,7 @@
    "from": [
     "endings",
     10,
-    179
+    166
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7611,7 +7600,7 @@
    "from": [
     "endings",
     12,
-    183
+    170
    ],
    "to": [
     "endings"
@@ -7622,7 +7611,7 @@
    "from": [
     "endings",
     12,
-    184
+    171
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8495,7 +8484,7 @@
    "from": [
     "an-informator-and-its-tour",
     0,
-    208
+    195
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8506,7 +8495,7 @@
    "from": [
     "an-informator-and-its-tour",
     0,
-    211
+    198
    ],
    "to": [
     "words-in-two-languages",
@@ -8519,7 +8508,7 @@
    "from": [
     "an-informator-and-its-tour",
     1,
-    223
+    210
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8530,7 +8519,7 @@
    "from": [
     "an-informator-and-its-tour",
     1,
-    228
+    215
    ],
    "to": [
     "words-in-two-languages",
@@ -8543,7 +8532,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    239
+    226
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8554,7 +8543,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    245
+    232
    ],
    "to": [
     "names-and-room",
@@ -8567,7 +8556,7 @@
    "from": [
     "an-informator-and-its-tour",
     3,
-    252
+    239
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8578,7 +8567,7 @@
    "from": [
     "an-informator-and-its-tour",
     4,
-    256
+    243
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8589,7 +8578,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    216
+    203
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -8600,7 +8589,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    217
+    204
    ],
    "to": [
     "a-new-reader-window",
@@ -8613,7 +8602,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    217
+    204
    ],
    "to": [
     "endings",
@@ -8626,7 +8615,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    220
+    207
    ],
    "to": [
     "plugin-start-and-stop",
@@ -9668,7 +9657,7 @@
    "from": [
     "seeing-where-the-code-asks",
     3,
-    329
+    316
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -9679,7 +9668,7 @@
    "from": [
     "seeing-where-the-code-asks",
     4,
-    332
+    319
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -9762,7 +9751,7 @@
    "from": [
     "seeing-where-the-code-asks",
     8,
-    340
+    327
    ],
    "to": [
     "seeing-where-the-code-asks"

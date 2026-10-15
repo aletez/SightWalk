@@ -1,7 +1,7 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "c45875d6c136f2505f88d12b0e740b6de78b83c3",
+ "commit": "2886ff516d7ab132578e7652fea5943a5cc56d1f",
  "sights": [
   "sw/reader.py:399-405",
   "sw/plan.py:90-98",

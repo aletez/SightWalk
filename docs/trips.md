@@ -197,7 +197,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/marks.py:63-69` icon_colour
 - `sw/views.py:266-279` draw_outlines
 
-## 13. The agent says something (19 views)
+## 13. The agent says something (18 views)
 
 A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.
 
@@ -216,16 +216,15 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/chat.py:53-70` Guard.on_text_changed
 - `sw/chat.py:35-43` protected_end
 - `sw/commands.py:107-110` SightWalkChatListener.on_modified
-- `sw/commands.py:125-129` SightWalkChatListener.on_post_text_command
+- `sw/commands.py:112-116` SightWalkChatListener.on_post_text_command
 - `sw/marks.py:198-200` clean
-- `sw/commands.py:112-123` SightWalkChatListener.on_selection_modified
 - `sw/chat.py:232-237` shade_variables
 
 ## 14. Stopping an answer (3 views)
 
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
-- `sw/commands.py:191-194` SightWalkStopAnswerCommand.run
+- `sw/commands.py:178-181` SightWalkStopAnswerCommand.run
 - `sw/reader.py:782-789` Reader.stop_answer
 - `sw/reader.py:791-794` Reader.withdraw_unread_messages
 
@@ -235,7 +234,7 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 
 - `sw/reader.py:682-687` Reader.select_tool
 - `sw/vetting.py:56-75` show_tabs
-- `sw/commands.py:283-286` SightWalkTogglePanningCommand.run
+- `sw/commands.py:270-273` SightWalkTogglePanningCommand.run
 - `sw/reader.py:689-699` Reader.toggle_panning
 - `sw/vetting.py:36-44` set_panning
 - `sw/vetting.py:47-49` content_point
@@ -278,7 +277,7 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 - `sw/vetting.py:112-114` png_size
 - `sw/vetting.py:123-138` show_image
 - `sw/vetting.py:141-146` zoom
-- `sw/commands.py:276-277` SightWalkZoomMapCommand.run
+- `sw/commands.py:263-264` SightWalkZoomMapCommand.run
 - `sw/vetting.py:149-152` show_note
 
 ## 18. The user sends a message (9 views)
@@ -335,7 +334,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/state.py:63-68` render_all
 - `sw/bridge.py:167-174` op_settings
 - `sw/bridge.py:157-164` check_setting
-- `sw/commands.py:133-135` SightWalkWindowListener.on_activated
+- `sw/commands.py:120-122` SightWalkWindowListener.on_activated
 - `sw/commands.py:92-96` SightWalkScrollCommand.run
 - `sw/commands.py:86-88` SightWalkHeaderListener.on_hover
 - `sw/chat.py:143-147` show_help
@@ -344,14 +343,14 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 
 In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.
 
-- `sw/commands.py:304-315` SightWalkToggleGuideCommand.run
+- `sw/commands.py:291-302` SightWalkToggleGuideCommand.run
 - `sw/reader.py:636-646` Reader.toggle_focus
-- `sw/commands.py:317-322` SightWalkToggleGuideCommand.folder
+- `sw/commands.py:304-309` SightWalkToggleGuideCommand.folder
 - `sw/reader.py:138-142` Reader.open_empty
 - `sw/reader.py:144-163` Reader.empty_layout
 - `sw/reader.py:165-170` Reader.close_hijacker
-- `sw/commands.py:159-163` SightWalkWindowListener.offer_to_browser
-- `sw/commands.py:137-138` SightWalkWindowListener.on_load
+- `sw/commands.py:146-150` SightWalkWindowListener.offer_to_browser
+- `sw/commands.py:124-125` SightWalkWindowListener.on_load
 - `sw/reader.py:172-180` Reader.take_file
 - `sw/bridge.py:143-154` op_browse
 - `sw/views.py:122-133` make_browser
@@ -406,7 +405,7 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 
 The caret or a selection in a sight becomes here; a shortcut sends a question, like "Explain next.", as a message.
 
-- `sw/commands.py:147-157` SightWalkWindowListener.on_selection_modified
+- `sw/commands.py:134-144` SightWalkWindowListener.on_selection_modified
 - `sw/reader.py:648-651` Reader.note_selection
 - `sw/commands.py:52-56` SightWalkAskCommand.run
 
@@ -414,33 +413,33 @@ The caret or a selection in a sight becomes here; a shortcut sends a question, l
 
 Switch Language: the setting changes, the words follow at once, in every open trip.
 
-- `sw/commands.py:267-270` SightWalkSwitchLanguageCommand.run
+- `sw/commands.py:254-257` SightWalkSwitchLanguageCommand.run
 - `sight_walk.py:48-51` settings_changed
 - `sw/words.py:57-59` set_language
 - `sw/state.py:63-68` render_all
 - `sw/words.py:53-54` word
 - `sw/chat.py:28-32` help_html
 - `sw/views.py:31-33` button_html
-- `sw/commands.py:352-364` SightWalkCompareFontsCommand.run
-- `sw/commands.py:367-375` kept_conversation
+- `sw/commands.py:339-351` SightWalkCompareFontsCommand.run
+- `sw/commands.py:354-362` kept_conversation
 
 ## 28. Endings (16 views, survey)
 
 The guide is stopped, windows close.
 
-- `sw/commands.py:292-293` SightWalkStopGuideCommand.run
-- `sw/commands.py:295-296` SightWalkStopGuideCommand.is_enabled
+- `sw/commands.py:279-280` SightWalkStopGuideCommand.run
+- `sw/commands.py:282-283` SightWalkStopGuideCommand.is_enabled
 - `sw/guide.py:83-87` stop
 - `sw/guide.py:71-80` stop_when_idle
-- `sw/commands.py:165-167` SightWalkWindowListener.on_pre_close_window
-- `sw/commands.py:170-172` clear_schemes_if_unused
+- `sw/commands.py:152-154` SightWalkWindowListener.on_pre_close_window
+- `sw/commands.py:157-159` clear_schemes_if_unused
 - `sw/tint.py:180-206` clear_schemes
 - `sw/tint.py:72-73` scheme_folder
-- `sw/commands.py:140-145` SightWalkWindowListener.on_window_command
-- `sw/commands.py:198-200` SightWalkCloseTripCommand.run
-- `sw/commands.py:178-181` SightWalkResetSightsCommand.run
+- `sw/commands.py:127-132` SightWalkWindowListener.on_window_command
+- `sw/commands.py:185-187` SightWalkCloseTripCommand.run
+- `sw/commands.py:165-168` SightWalkResetSightsCommand.run
 - `sw/reader.py:653-656` Reader.reset_sights
-- `sw/commands.py:183-185` SightWalkResetSightsCommand.is_enabled
+- `sw/commands.py:170-172` SightWalkResetSightsCommand.is_enabled
 - `sw/state.py:29-33` forget
 - `sw/bridge.py:135-140` op_close
 - `sw/state.py:40-41` current_reader
@@ -535,12 +534,12 @@ Transitions between places, checked; the trip, the informator and the tour.
 
 Open Tour: an informator's tours to choose from, the informator read from its files, its trips in the tour's order in the Tour tab, a trip opened from it, its conversation kept, a box ticked by hand.
 
-- `sw/commands.py:208-214` SightWalkOpenTourCommand.run
-- `sw/commands.py:223-236` tour_choices
-- `sw/commands.py:239-249` found_files
-- `sw/commands.py:252-253` read_name
-- `sw/commands.py:256-261` read_field
-- `sw/commands.py:216-220` SightWalkOpenTourCommand.open
+- `sw/commands.py:195-201` SightWalkOpenTourCommand.run
+- `sw/commands.py:210-223` tour_choices
+- `sw/commands.py:226-236` found_files
+- `sw/commands.py:239-240` read_name
+- `sw/commands.py:243-248` read_field
+- `sw/commands.py:203-207` SightWalkOpenTourCommand.open
 - `sw/words.py:62-69` trips_count
 - `sw/reader.py:703-717` Reader.open_tour
 - `sw/reader.py:843-845` read_json
@@ -594,9 +593,9 @@ The underline and the popup that says where the code asks the question.
 - `sw/asked.py:47-57` mark
 - `sw/asked.py:73-80` popup_html
 - `sw/asked.py:83-84` escape
-- `sw/commands.py:328-330` SightWalkSightListener.is_applicable
-- `sw/commands.py:332-334` SightWalkSightListener.on_hover
+- `sw/commands.py:315-317` SightWalkSightListener.is_applicable
+- `sw/commands.py:319-321` SightWalkSightListener.on_hover
 - `sw/asked.py:87-92` show_popup
 - `sw/asked.py:60-62` paint
 - `sw/asked.py:65-70` toggle
-- `sw/commands.py:340-341` SightWalkToggleSentinelsCommand.run
+- `sw/commands.py:327-328` SightWalkToggleSentinelsCommand.run

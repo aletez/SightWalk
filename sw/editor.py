@@ -7,6 +7,7 @@ import os
 
 import sublime
 
+from .config import SETTLE_MS
 from .marks import icon_colour
 from .spec import display_path
 from .views import draw_icons, draw_outlines, make_header, wait_until_loaded
@@ -37,7 +38,10 @@ class Editor:
         point = self.view.text_point(line - 1, 0)
         self.view.sel().clear()
         self.view.sel().add(sublime.Region(point))
-        self.view.show_at_center(point)
+        # The trip was laid out while the file loaded, empty: lay it out again, then show the
+        # line once the editor has its size.
+        self.reader.render()
+        sublime.set_timeout(lambda: self.view.show_at_center(point), SETTLE_MS)
 
     def track(self):
         """Hidden regions for this file's sight ranges and marks: edits move them, and read_back

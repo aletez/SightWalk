@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "5d7d236f952bab417f408c548ad5ed92fe791453",
+ "commit": "86050d3278ad624e6d9dc5ddcd52c89a67c11be8",
  "sights": [
   "sw/bridge.py:107-120",
   "sw/marks.py:180-195",
@@ -19,7 +19,8 @@
   "sw/chat.py:35-43",
   "sw/commands.py:107-109",
   "sw/commands.py:124-128",
-  "sw/marks.py:198-200"
+  "sw/marks.py:198-200",
+  "sw/commands.py:111-122"
  ],
  "transitions": [
   {

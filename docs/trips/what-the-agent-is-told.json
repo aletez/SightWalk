@@ -1,7 +1,7 @@
 {
  "name": "What the agent is told",
  "kind": "survey",
- "commit": "5d7d236f952bab417f408c548ad5ed92fe791453",
+ "commit": "86050d3278ad624e6d9dc5ddcd52c89a67c11be8",
  "sights": [
   "sw/manual.py:4-17",
   "sw/manual.py:19-40",

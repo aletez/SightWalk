@@ -197,7 +197,7 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 - `sw/marks.py:63-69` icon_colour
 - `sw/views.py:266-279` draw_outlines
 
-## 13. The agent says something (17 views)
+## 13. The agent says something (18 views)
 
 A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.
 
@@ -218,6 +218,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/commands.py:107-109` SightWalkChatListener.on_modified
 - `sw/commands.py:124-128` SightWalkChatListener.on_post_text_command
 - `sw/marks.py:198-200` clean
+- `sw/commands.py:111-122` SightWalkChatListener.on_selection_modified
 
 ## 14. Stopping an answer (3 views)
 

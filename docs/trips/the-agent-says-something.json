@@ -1,9 +1,10 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "aac767584eb98447976fcb391973a61a355b98c8",
+ "commit": "85bb74c7fd659d37bab069d2fa713631d6afccce",
  "sights": [
-  "sw/bridge.py:107-119",
+  "sw/bridge.py:107-120",
+  "sw/marks.py:180-195",
   "sw/bridge.py:99-102",
   "sw/marks.py:152-154",
   "sw/marks.py:149-149",
@@ -16,68 +17,80 @@
   "sw/commands.py:28-29",
   "sw/chat.py:53-70",
   "sw/chat.py:35-43",
-  "sw/commands.py:107-109"
+  "sw/commands.py:107-109",
+  "sw/commands.py:111-115",
+  "sw/marks.py:198-200"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 115],
-   "to": [2, 152]
+   "to": [1, 180]
   },
   {
    "type": "calls",
-   "from": [0, 117],
-   "to": [4, 802]
+   "from": [0, 116],
+   "to": [3, 152]
   },
   {
    "type": "calls",
-   "from": [4, 807],
-   "to": [5, 624]
+   "from": [0, 118],
+   "to": [5, 802]
   },
   {
    "type": "calls",
-   "from": [4, 808],
-   "to": [9, 150]
+   "from": [5, 807],
+   "to": [6, 624]
   },
   {
    "type": "calls",
-   "from": [5, 625],
-   "to": [6, 94]
+   "from": [5, 808],
+   "to": [10, 150]
   },
   {
    "type": "calls",
-   "from": [5, 627],
-   "to": [8, 131]
+   "from": [6, 625],
+   "to": [7, 94]
   },
   {
    "type": "calls",
-   "from": [5, 630],
-   "to": [6, 94]
+   "from": [6, 627],
+   "to": [9, 131]
   },
   {
    "type": "calls",
-   "from": [5, 633],
-   "to": [6, 94]
+   "from": [6, 630],
+   "to": [7, 94]
   },
   {
    "type": "calls",
-   "from": [6, 99],
-   "to": [7, 12]
+   "from": [6, 633],
+   "to": [7, 94]
   },
   {
    "type": "calls",
-   "from": [9, 157],
-   "to": [10, 28]
+   "from": [7, 99],
+   "to": [8, 12]
   },
   {
    "type": "calls",
-   "from": [11, 63],
-   "to": [12, 35]
+   "from": [10, 157],
+   "to": [11, 28]
   },
   {
    "type": "calls",
-   "from": [11, 68],
-   "to": [10, 28]
+   "from": [12, 63],
+   "to": [13, 35]
+  },
+  {
+   "type": "calls",
+   "from": [12, 68],
+   "to": [11, 28]
+  },
+  {
+   "type": "calls",
+   "from": [15, 115],
+   "to": [16, 198]
   }
  ]
 }

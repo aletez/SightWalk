@@ -1,11 +1,11 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "aac767584eb98447976fcb391973a61a355b98c8",
+ "commit": "85bb74c7fd659d37bab069d2fa713631d6afccce",
  "sights": [
   "sw/reader.py:681-686",
   "sw/vetting.py:56-75",
-  "sw/commands.py:263-266",
+  "sw/commands.py:269-272",
   "sw/reader.py:688-698",
   "sw/vetting.py:36-44",
   "sw/vetting.py:47-49",
@@ -22,7 +22,7 @@
   },
   {
    "type": "calls",
-   "from": [2, 266],
+   "from": [2, 272],
    "to": [3, 688]
   },
   {

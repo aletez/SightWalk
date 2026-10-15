@@ -146,7 +146,7 @@ def strip_icons(sights, indicators, lh):
     return lines
 
 
-CODE_TALK = re.compile(r"`[^`\n]+`|\w+\.\w+:\d+|\b(?:lines?|lini[aei]|linii)\s+\d+", re.I)
+CODE_TALK = re.compile(r"[\u2061-\u2064]|`[^`\n]+`|\w+\.\w+:\d+|\b(?:lines?|lini[aei]|linii)\s+\d+", re.I)
 
 
 def speaks_of_code(text):
@@ -168,3 +168,33 @@ def icon_refs(text, indicators):
         if "%s_%s" % (kind, match.group(1).lower()) in icons:
             found.append((match.start(), match.end(), REF_SCOPES[kind]))
     return found
+
+
+# The guide's names: tags it writes, invisible operators the bench shows (Jakub, 2026-10-15).
+TAGS = {"func": "\u2061", "class": "\u2062", "var": "\u2063", "str": "\u2064"}
+INVISIBLE = re.compile("[\u2061-\u2064]")
+TAG = re.compile(r"<(/?)([a-z]+)>")
+OLD_MARKUP = re.compile(r"`|\*\*")
+
+
+def untag(text):
+    """The guide's text with <func>name</func> and the like turned into invisible operators
+    around the name; ValueError says what is wrong."""
+    if OLD_MARKUP.search(text):
+        raise ValueError("Mark names with tags, not backticks or asterisks: <func>run</func>, "
+                         "<class>Reader</class>, <var>token</var>, <str>sight_walk_setup</str>.")
+    unknown = sorted(set(m.group(2) for m in TAG.finditer(text)) - set(TAGS))
+    if unknown:
+        raise ValueError("Unknown tags: %s; the tags are %s." % (", ".join(unknown),
+                                                                  ", ".join(TAGS)))
+    out = re.sub(r"<(func|class|var|str)>([^<>\n]+)</\1>",
+                 lambda m: TAGS[m.group(1)] + m.group(2) + TAGS[m.group(1)], text)
+    if TAG.search(out):
+        raise ValueError("A tag is not closed on its line, or holds another: %s"
+                         % TAG.search(out).group(0))
+    return out
+
+
+def clean(text):
+    """Text without the invisible operators: what leaves the bench by copying."""
+    return INVISIBLE.sub("", text)

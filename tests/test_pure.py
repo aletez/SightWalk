@@ -76,6 +76,20 @@ class CodeTalkTest(unittest.TestCase):
             self.assertFalse(marks.speaks_of_code(text), text)
 
 
+class TagsTest(unittest.TestCase):
+    def test_tags_become_invisible(self):
+        text = marks.untag("<func>run</func> takes <var>token</var> from <class>Reader</class>")
+        self.assertEqual(text, "\u2061run\u2061 takes \u2063token\u2063 from \u2062Reader\u2062")
+        self.assertEqual(marks.clean(text), "run takes token from Reader")
+        self.assertTrue(marks.speaks_of_code(text))
+        self.assertEqual(marks.untag("a < b, plainly"), "a < b, plainly")
+
+    def test_refused(self):
+        for bad in ["`run`", "**Reader**", "<fn>run</fn>", "<func>run", "<func>a\nb</func>"]:
+            with self.assertRaises(ValueError):
+                marks.untag(bad)
+
+
 class MarksTest(unittest.TestCase):
     def test_icon_colours(self):
         self.assertEqual([marks.icon_colour(i) for i in

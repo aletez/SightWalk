@@ -39,6 +39,21 @@ contexts:
   # Names of code, in the scopes they have in code, so they take the code's colours. The
   # delimiters stay faint.
   names:
+    # The guide's names, between invisible operators the bridge writes for its <func>, <class>,
+    # <var> and <str> tags (Jakub): no delimiter shows, only the colour.
+    - match: '(\x{2061})([^\x{2061}\n]+)(\x{2061})'
+      captures:
+        2: meta.symbol.sight-walk variable.function.sight-walk
+    - match: '(\x{2062})([^\x{2062}\n]+)(\x{2062})'
+      captures:
+        2: meta.symbol.sight-walk entity.name.class.sight-walk
+    - match: '(\x{2063})([^\x{2063}\n]+)(\x{2063})'
+      captures:
+        2: meta.symbol.sight-walk meta.generic-name.sight-walk
+    - match: '(\x{2064})([^\x{2064}\n]+)(\x{2064})'
+      captures:
+        2: string.quoted.single.sight-walk
+    # The user's own: `function`, **Class**, *variable*, 'string'.
     - match: '(`)([^`\n]+)(`)'
       captures:
         1: comment.punctuation.name.sight-walk

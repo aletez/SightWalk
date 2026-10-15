@@ -1,7 +1,7 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "aac767584eb98447976fcb391973a61a355b98c8",
+ "commit": "85bb74c7fd659d37bab069d2fa713631d6afccce",
  "sights": [
   "sw/commands.py:42-46",
   "sw/chat.py:160-174",
@@ -11,7 +11,7 @@
   "sw/views.py:292-296",
   "sw/plan.py:101-104",
   "sw/reader.py:617-620",
-  "sw/bridge.py:227-243"
+  "sw/bridge.py:228-244"
  ],
  "transitions": [
   {

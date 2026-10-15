@@ -12,7 +12,7 @@ import sublime
 from . import scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
-from .marks import speaks_of_code
+from .marks import speaks_of_code, untag
 from .ontology import Sight, Transition, Trip, trip_from
 from .reader import Reader
 from .spec import parse_spec, repo_root
@@ -112,6 +112,7 @@ def op_say(text, status=None):
     if not state.ADDRESSED:
         raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
                          "Say nothing; call wait_for_user.")
+    text = untag(text)
     if not state.POINTED and speaks_of_code(text):
         raise ValueError(MARK_FIRST)
     reader.say(text, status)

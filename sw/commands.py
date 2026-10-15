@@ -7,7 +7,7 @@ import os
 import sublime
 import sublime_plugin
 
-from . import asked, bridge, chat, guide, scrollbars, state, tint, vetting
+from . import asked, bridge, chat, guide, marks, scrollbars, state, tint, vetting
 from .config import SETTINGS_FILE
 from .spec import repo_root
 from .words import trips_count, word
@@ -107,6 +107,12 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
     def on_modified(self):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
+
+    def on_post_text_command(self, command_name, args):
+        """What leaves the bench by copying leaves without the invisible operators around names
+        (see marks.untag)."""
+        if command_name in ("copy", "cut"):
+            sublime.set_clipboard(marks.clean(sublime.get_clipboard()))
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

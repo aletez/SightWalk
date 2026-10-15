@@ -1,7 +1,7 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "aac767584eb98447976fcb391973a61a355b98c8",
+ "commit": "85bb74c7fd659d37bab069d2fa713631d6afccce",
  "sights": [
   "sw/reader.py:509-519",
   "sw/reader.py:323-330",
@@ -10,9 +10,9 @@
   "sw/geometry.py:33-35",
   "sw/geometry.py:37-38",
   "sw/state.py:63-68",
-  "sw/bridge.py:166-173",
-  "sw/bridge.py:156-163",
-  "sw/commands.py:113-115",
+  "sw/bridge.py:167-174",
+  "sw/bridge.py:157-164",
+  "sw/commands.py:119-121",
   "sw/commands.py:92-96",
   "sw/commands.py:86-88",
   "sw/chat.py:143-147"
@@ -40,8 +40,8 @@
   },
   {
    "type": "calls",
-   "from": [7, 169],
-   "to": [8, 156]
+   "from": [7, 170],
+   "to": [8, 157]
   },
   {
    "type": "calls",

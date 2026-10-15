@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- Functions in the bench take the colour of function definitions (entity.name.function), not of calls (Jakub, 2026-10-15: most schemes, even good ones, leave calls plain, so a tagged function looked untagged). Supersedes "functions scoped as calls". (Changed, unverified.)
 - The guide tags names: <func>, <class>, <var>, <str> (Jakub, 2026-10-15: explicit, hard to ignore; the guide had written every name as `function`). The bridge turns each tag into an invisible operator (U+2061 to U+2064, the four Sublime draws as nothing; others show as <0x…>, checked by Claude) around the name, and the bench syntax colours by them: only the colour shows. say refuses backticks, double asterisks, unknown and unclosed tags. Copying from the bench drops the operators. Chosen over light visible dots and over a generated syntax colouring by position (slower, heavier). Checking for untagged names left out for now (Jakub: see how the guide does). Needs a new guide session. (Changed, unverified.)
 - The Tour's kind of a trip in parentheses: "(przegląd)" (Jakub, 2026-10-15). (Changed, unverified.)
 - A marked line's outline takes its icon's colour (Jakub, 2026-10-15): digits amber, letters blue, jumps their own colour; a line with two marks, its first's (the gutter's). Replaces the file's strong hue. (Changed, unverified.)

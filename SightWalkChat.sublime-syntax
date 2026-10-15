@@ -43,7 +43,7 @@ contexts:
     # <var> and <str> tags (Jakub): no delimiter shows, only the colour.
     - match: '(\x{2061})([^\x{2061}\n]+)(\x{2061})'
       captures:
-        2: meta.symbol.sight-walk variable.function.sight-walk
+        2: meta.symbol.sight-walk entity.name.function.sight-walk
     - match: '(\x{2062})([^\x{2062}\n]+)(\x{2062})'
       captures:
         2: meta.symbol.sight-walk entity.name.class.sight-walk
@@ -57,7 +57,7 @@ contexts:
     - match: '(`)([^`\n]+)(`)'
       captures:
         1: comment.punctuation.name.sight-walk
-        2: meta.symbol.sight-walk variable.function.sight-walk
+        2: meta.symbol.sight-walk entity.name.function.sight-walk
         3: comment.punctuation.name.sight-walk
     # Python's built-in classes, as its syntax scopes them; other classes as defined ones.
     - match: '(\*\*)((?:ArithmeticError|AssertionError|AttributeError|BaseException|BaseExceptionGroup|BlockingIOError|BrokenPipeError|BufferError|BytesWarning|ChildProcessError|ConnectionAbortedError|ConnectionError|ConnectionRefusedError|ConnectionResetError|DeprecationWarning|EOFError|EncodingWarning|EnvironmentError|Exception|ExceptionGroup|FileExistsError|FileNotFoundError|FloatingPointError|FutureWarning|GeneratorExit|IOError|ImportError|ImportWarning|IndentationError|IndexError|InterruptedError|IsADirectoryError|KeyError|KeyboardInterrupt|LookupError|MemoryError|ModuleNotFoundError|NameError|NotADirectoryError|NotImplementedError|OSError|OverflowError|PendingDeprecationWarning|PermissionError|ProcessLookupError|PythonFinalizationError|RecursionError|ReferenceError|ResourceWarning|RuntimeError|RuntimeWarning|StopAsyncIteration|StopIteration|SyntaxError|SyntaxWarning|SystemError|SystemExit|TabError|TimeoutError|TypeError|UnboundLocalError|UnicodeDecodeError|UnicodeEncodeError|UnicodeError|UnicodeTranslateError|UnicodeWarning|UserWarning|ValueError|Warning|ZeroDivisionError|bool|bytearray|bytes|classmethod|complex|dict|enumerate|filter|float|frozenset|int|list|map|memoryview|object|property|range|reversed|set|slice|staticmethod|str|super|tuple|type|zip))(\*\*)'

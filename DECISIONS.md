@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- The editor opened broken (Jakub, 2026-10-15, in "What the agent is told"): the outlines' new colours had left the editor's call to draw_outlines behind, so opening stopped halfway, before the caret was placed. Fixed; the editor also no longer wraps long lines, so it stays line for line with the sight it covers. (Changed, unverified.)
 - The guide writes no line numbers, only references to icons (Jakub, 2026-10-15: line numbers obscure the answer terribly). say refuses "line 33", "linia 33", "(l. 42)", "(35)", "file.py:32-38" and the like, and names what it found; a call's numeric argument, such as token_hex(16), passes. Line numbers stay in point's and show's arguments. Needs a new guide session. (Changed, unverified.)
 - A pale box at the end of a wrapped bench line, when a name opens the next line (seen by Jakub in Foggy Morning): Sublime fills a wrapped line's rest with the background of the next line's first token; backticks do the same (probe by Claude). Accepted as it is (Jakub, 2026-10-15).
 - The user's words on the bench are a quote (markup.quote), no longer a comment, and scoped character by character without the newline (Jakub, 2026-10-15): in schemes that give every scope a faint background (Foggy Morning) the user's message no longer runs to the pane's edge and into the line below. Seen by Claude. (Changed, unverified.)

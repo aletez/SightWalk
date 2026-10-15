@@ -7,6 +7,7 @@ import os
 
 import sublime
 
+from .marks import icon_colour
 from .spec import display_path
 from .views import draw_icons, draw_outlines, make_header, wait_until_loaded
 
@@ -15,6 +16,7 @@ def open_live(window, path):
     """The file itself, the one view a trip shows of it that is not a copy (Jakub)."""
     view = window.open_file(path)
     view.settings().set("sight_walk_editor", True)
+    view.settings().set("word_wrap", False)  # line for line with the sight it covers
     return view
 
 
@@ -48,7 +50,7 @@ class Editor:
         for k, mark in mine:
             self.hold("at_%d" % k, mark["line"], mark["line"])
         draw_icons(self.view, {}, {m["line"]: m["icon"] for _, m in mine})
-        draw_outlines(self.view, set(m["line"] for _, m in mine))
+        draw_outlines(self.view, {m["line"]: icon_colour(m["icon"]) for _, m in mine})
 
     def hold(self, key, begin, end):
         """A hidden region from the start of line begin to the end of line end."""

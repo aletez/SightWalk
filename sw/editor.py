@@ -16,7 +16,6 @@ def open_live(window, path):
     """The file itself, the one view a trip shows of it that is not a copy (Jakub)."""
     view = window.open_file(path)
     view.settings().set("sight_walk_editor", True)
-    view.settings().set("word_wrap", False)  # line for line with the sight it covers
     return view
 
 
@@ -32,6 +31,8 @@ class Editor:
         wait_until_loaded([self.view], lambda: self.start(line))
 
     def start(self, line):
+        # Line for line with the sight it covers; once loaded, or the syntax's setting wins.
+        self.view.settings().set("word_wrap", False)
         self.track()
         point = self.view.text_point(line - 1, 0)
         self.view.sel().clear()

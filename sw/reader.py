@@ -347,8 +347,7 @@ class Reader(Geometry):
             # shown in their group are moved, and focused so their group shows them.
             if self.window.active_view_in_group(group) != view:
                 self.window.set_view_index(view, group, 0)
-                if sublime.active_window() == self.window:  # it would raise the window
-                    self.window.focus_view(view)
+                self.window.focus_view(view)
         n = len(ordered)
         rest = [self.chat_header, self.below_header, self.status_view]
         if full:
@@ -375,8 +374,12 @@ class Reader(Geometry):
 
     def arrange(self, rects, views):
         """Every view into its own group, focused if it was not shown there yet, then the rest of
-        what a layout decides."""
+        what a layout decides. Focusing raises the window: one behind another gives the focus
+        back to the window in front (Jakub)."""
+        front = sublime.active_window()
         self.place(rects, views, self.height)
+        if front is not None and front != self.window and front.active_view() is not None:
+            front.focus_view(front.active_view())
         if sublime.active_window() == self.window:  # focusing would raise it over another window
             self.window.focus_view(self.chat if self.editor is None else self.editor.view)
         self.last_ids = [v.id() for v in views]

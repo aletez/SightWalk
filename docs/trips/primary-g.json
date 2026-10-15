@@ -1,10 +1,10 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
+ "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
  "sights": [
   "sw/commands.py:284-295",
-  "sw/reader.py:629-639",
+  "sw/reader.py:632-642",
   "sw/commands.py:297-302",
   "sw/reader.py:138-142",
   "sw/reader.py:144-163",
@@ -19,7 +19,7 @@
   {
    "type": "calls",
    "from": [0, 287],
-   "to": [1, 629]
+   "to": [1, 632]
   },
   {
    "type": "calls",

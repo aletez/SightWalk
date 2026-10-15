@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
+ "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
  "sights": [
   "sw/commands.py:188-194",
   "sw/commands.py:203-216",
@@ -10,8 +10,8 @@
   "sw/commands.py:236-241",
   "sw/commands.py:196-200",
   "sw/words.py:62-69",
-  "sw/reader.py:696-710",
-  "sw/reader.py:836-838",
+  "sw/reader.py:699-713",
+  "sw/reader.py:839-841",
   "sw/ontology.py:288-294",
   "sw/ontology.py:267-271",
   "sw/ontology.py:251-254",
@@ -19,14 +19,14 @@
   "sw/ontology.py:206-219",
   "sw/ontology.py:222-230",
   "sw/vetting.py:176-182",
-  "sw/reader.py:712-724",
-  "sw/reader.py:726-734",
-  "sw/reader.py:823-825",
-  "sw/reader.py:828-833",
+  "sw/reader.py:715-727",
+  "sw/reader.py:729-737",
+  "sw/reader.py:826-828",
+  "sw/reader.py:831-836",
   "sw/chat.py:202-205",
   "sw/ontology.py:274-278",
   "sw/vetting.py:185-194",
-  "sw/reader.py:736-738",
+  "sw/reader.py:739-741",
   "sw/vetting.py:157-173"
  ],
  "transitions": [
@@ -88,47 +88,47 @@
   {
    "type": "calls",
    "from": [5, 198],
-   "to": [7, 696]
-  },
-  {
-   "type": "calls",
-   "from": [7, 699],
-   "to": [10, 267]
-  },
-  {
-   "type": "calls",
-   "from": [7, 699],
-   "to": [8, 836]
+   "to": [7, 699]
   },
   {
    "type": "calls",
    "from": [7, 702],
-   "to": [19, 828]
+   "to": [10, 267]
   },
   {
    "type": "calls",
-   "from": [7, 703],
+   "from": [7, 702],
+   "to": [8, 839]
+  },
+  {
+   "type": "calls",
+   "from": [7, 705],
+   "to": [19, 831]
+  },
+  {
+   "type": "calls",
+   "from": [7, 706],
    "to": [9, 288]
   },
   {
    "type": "calls",
-   "from": [7, 703],
-   "to": [8, 836]
-  },
-  {
-   "type": "calls",
-   "from": [7, 704],
-   "to": [13, 206]
+   "from": [7, 706],
+   "to": [8, 839]
   },
   {
    "type": "calls",
    "from": [7, 707],
-   "to": [15, 176]
+   "to": [13, 206]
   },
   {
    "type": "calls",
    "from": [7, 710],
-   "to": [16, 712]
+   "to": [15, 176]
+  },
+  {
+   "type": "calls",
+   "from": [7, 713],
+   "to": [16, 715]
   },
   {
    "type": "calls",
@@ -152,43 +152,43 @@
   },
   {
    "type": "calls",
-   "from": [16, 717],
-   "to": [17, 726]
+   "from": [16, 720],
+   "to": [17, 729]
   },
   {
    "type": "calls",
-   "from": [16, 718],
+   "from": [16, 721],
    "to": [20, 202]
   },
   {
    "type": "calls",
-   "from": [16, 723],
+   "from": [16, 726],
    "to": [22, 185]
   },
   {
    "type": "calls",
-   "from": [16, 724],
-   "to": [23, 736]
+   "from": [16, 727],
+   "to": [23, 739]
   },
   {
    "type": "calls",
-   "from": [17, 733],
-   "to": [18, 823]
+   "from": [17, 736],
+   "to": [18, 826]
   },
   {
    "type": "calls",
-   "from": [19, 830],
-   "to": [18, 823]
+   "from": [19, 833],
+   "to": [18, 826]
   },
   {
    "type": "calls",
-   "from": [23, 737],
+   "from": [23, 740],
    "to": [24, 157]
   },
   {
    "type": "calls",
-   "from": [23, 738],
-   "to": [16, 712]
+   "from": [23, 741],
+   "to": [16, 715]
   }
  ]
 }

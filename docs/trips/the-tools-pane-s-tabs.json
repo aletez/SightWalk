@@ -1,49 +1,49 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
+ "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
  "sights": [
-  "sw/reader.py:675-680",
+  "sw/reader.py:678-683",
   "sw/vetting.py:56-75",
   "sw/commands.py:263-266",
-  "sw/reader.py:682-692",
+  "sw/reader.py:685-695",
   "sw/vetting.py:36-44",
   "sw/vetting.py:47-49",
-  "sw/reader.py:666-667",
   "sw/reader.py:669-670",
   "sw/reader.py:672-673",
-  "sw/reader.py:740-748"
+  "sw/reader.py:675-676",
+  "sw/reader.py:743-751"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 679],
-   "to": [9, 740]
+   "from": [0, 682],
+   "to": [9, 743]
   },
   {
    "type": "calls",
    "from": [2, 266],
-   "to": [3, 682]
-  },
-  {
-   "type": "calls",
-   "from": [3, 689],
-   "to": [4, 36]
+   "to": [3, 685]
   },
   {
    "type": "calls",
    "from": [3, 692],
-   "to": [0, 675]
+   "to": [4, 36]
   },
   {
    "type": "calls",
-   "from": [7, 670],
-   "to": [6, 666]
+   "from": [3, 695],
+   "to": [0, 678]
   },
   {
    "type": "calls",
-   "from": [8, 673],
-   "to": [6, 666]
+   "from": [7, 673],
+   "to": [6, 669]
+  },
+  {
+   "type": "calls",
+   "from": [8, 676],
+   "to": [6, 669]
   }
  ]
 }

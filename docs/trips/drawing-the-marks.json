@@ -1,57 +1,57 @@
 {
  "name": "Drawing the marks",
  "kind": "run",
- "commit": "24e785f869df2aca35837211e8db1f2e28fcb198",
+ "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
  "sights": [
-  "sw/reader.py:531-544",
-  "sw/reader.py:546-551",
+  "sw/reader.py:534-547",
+  "sw/reader.py:549-554",
   "sw/marks.py:123-134",
   "sw/views.py:250-259",
   "sw/marks.py:90-102",
   "sw/marks.py:105-120",
   "sw/views.py:238-247",
-  "sw/reader.py:553-558",
+  "sw/reader.py:556-561",
   "sw/views.py:262-272"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 534],
-   "to": [1, 546]
+   "from": [0, 537],
+   "to": [1, 549]
   },
   {
    "type": "calls",
-   "from": [0, 535],
+   "from": [0, 538],
    "to": [4, 90]
   },
   {
    "type": "calls",
-   "from": [0, 536],
+   "from": [0, 539],
    "to": [5, 105]
   },
   {
    "type": "calls",
-   "from": [0, 539],
+   "from": [0, 542],
    "to": [6, 238]
   },
   {
    "type": "calls",
-   "from": [0, 543],
+   "from": [0, 546],
    "to": [6, 238]
   },
   {
    "type": "calls",
-   "from": [1, 548],
+   "from": [1, 551],
    "to": [2, 123]
   },
   {
    "type": "calls",
-   "from": [1, 550],
+   "from": [1, 553],
    "to": [3, 250]
   },
   {
    "type": "calls",
-   "from": [7, 557],
+   "from": [7, 560],
    "to": [8, 262]
   }
  ]

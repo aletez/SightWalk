@@ -163,7 +163,7 @@ def show_tour(view, tour, walked, current, on_select):
     for number, trip in enumerate(tour, 1):
         box = "☑" if trip.id in walked else "☐"
         name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
-        kind = ' <span style="color: %s">%s</span>' % (FADED, word(trip.kind)) if trip.kind != "run" \
+        kind = ' <span style="color: %s">(%s)</span>' % (FADED, word(trip.kind)) if trip.kind != "run" \
             else ""
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'

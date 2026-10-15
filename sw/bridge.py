@@ -100,8 +100,8 @@ MARK_FIRST = ("This answer names code, and nothing is marked yet: call point fir
               "it speaks of (each gets an outline and an icon), then say it again. The user "
               "asked that every answer about code comes with its marks. Do not call wait_for_user "
               "before you have answered.")
-UNANSWERED = ("The user's message is still unanswered: answer it with say (point first if the "
-              "answer names code), then wait.")
+UNANSWERED = ("This message is still unanswered (a guide before you may have taken it): answer "
+              "it with say, point first if the answer names code, then wait.")
 
 
 def op_say(text, status=None):
@@ -227,13 +227,13 @@ def wait_until_ready(timeout=8):
 def wait_for_user(timeout_s=110):
     if state.current_reader() is None:
         return {"error": "No trip is open. Call show first."}
-    if state.ADDRESSED and not state.ANSWERED and not state.STOPPED:
-        return {"error": UNANSWERED}
+    if state.ADDRESSED and not state.ANSWERED and not state.STOPPED and state.LAST_MESSAGE:
+        return dict(state.LAST_MESSAGE, unanswered=UNANSWERED)
     state.WAITING += 1
     state.ADDRESSED = state.STOPPED = state.POINTED = state.ANSWERED = False
     try:
         message = state.INBOX.get(timeout=timeout_s)
-        state.ADDRESSED = True
+        state.ADDRESSED, state.LAST_MESSAGE = True, message
         return message
     except queue.Empty:
         # The agent must not fill the silence: the user sees every say (Jakub).

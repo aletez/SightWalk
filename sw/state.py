@@ -17,6 +17,7 @@ STOPPED = False
 # The agent pointed at lines since the user last spoke: an answer that names code needs it (Jakub).
 POINTED = False
 ANSWERED = False  # a say since the user's last message
+LAST_MESSAGE = None  # the user's last message, given again while unanswered
 
 
 def register(reader):

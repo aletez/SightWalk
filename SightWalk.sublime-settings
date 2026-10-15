@@ -28,7 +28,7 @@
     // The bench's font, proportional for easier reading: one font, or one per system; "" keeps
     // your editor's font. Its size is set per syntax: in "SightWalkChat.sublime-settings"
     // (Preferences → Settings – Syntax Specific, with the cursor on a bench).
-    "bench_font_face": {"osx": "Helvetica Neue", "windows": "Segoe UI", "linux": "Noto Sans"},
+    "bench_font_face": {"osx": "Charter", "windows": "Segoe UI", "linux": "Noto Sans"},
 
     // Where Graphviz's dot is, if SightWalk cannot find it to draw the Map tab.
     // "dot_path": "/opt/homebrew/bin/dot",

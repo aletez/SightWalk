@@ -347,7 +347,8 @@ class Reader(Geometry):
             # shown in their group are moved, and focused so their group shows them.
             if self.window.active_view_in_group(group) != view:
                 self.window.set_view_index(view, group, 0)
-                self.window.focus_view(view)
+                if sublime.active_window() == self.window:  # it would raise the window
+                    self.window.focus_view(view)
         n = len(ordered)
         rest = [self.chat_header, self.below_header, self.status_view]
         if full:

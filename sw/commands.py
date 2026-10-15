@@ -108,6 +108,19 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
 
+    def on_selection_modified(self):
+        """The caret never rests just after an invisible operator, where it looks as it does just
+        before it: it steps on in the direction it moved, so no step is invisible (Jakub)."""
+        sel = self.view.sel()
+        if len(sel) != 1 or not sel[0].empty():
+            return
+        p, last = sel[0].b, getattr(self, "last_caret", 0)
+        if p > 0 and marks.INVISIBLE.match(self.view.substr(p - 1)):
+            p = min(p + 1, self.view.size()) if p > last else p - 1
+            sel.clear()
+            sel.add(sublime.Region(p))
+        self.last_caret = p
+
     def on_post_text_command(self, command_name, args):
         """What leaves the bench by copying leaves without the invisible operators around names
         (see marks.untag)."""

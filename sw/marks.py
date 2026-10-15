@@ -198,3 +198,14 @@ def untag(text):
 def clean(text):
     """Text without the invisible operators: what leaves the bench by copying."""
     return INVISIBLE.sub("", text)
+
+
+# Line numbers the guide may not write: the user reads lines by their icons (Jakub, 2026-10-15).
+LINE_REF = re.compile(
+    r"\b(?:lines?|lini[aeię]|linii|liniach|linijk[aię]|l\.)\s*\d+(?:\s*[-–]\s*\d+)?"
+    r"|[\w/]+\.\w+:\d+(?:-\d+)?|(?<![\w)⁡-⁤])\(\s*\d{2,}(?:\s*[-–]\s*\d+)?\s*\)", re.I)
+
+
+def line_refs(text):
+    """The line numbers in text: "linia 33", "(l. 42)", "line 12", "setup.py:32-38", "(35)"."""
+    return [m.group(0) for m in LINE_REF.finditer(text)]

@@ -76,6 +76,17 @@ class CodeTalkTest(unittest.TestCase):
             self.assertFalse(marks.speaks_of_code(text), text)
 
 
+class LineRefsTest(unittest.TestCase):
+    def test_found(self):
+        text = ("1. (linia 33) zwraca token, (l. 42) ładuje, line 12 calls, "
+                "sw/setup.py:32-38 i (35), linie 15-28.")
+        self.assertEqual(marks.line_refs(text), ["linia 33", "l. 42", "line 12",
+                                                 "sw/setup.py:32-38", "(35)", "linie 15-28"])
+
+    def test_icons_and_counts_pass(self):
+        self.assertEqual(marks.line_refs("Kroki 1 i 2, potem A (3). 32 znaki, port 8765, token_hex(16), \u2061f\u2061(10)."), [])
+
+
 class TagsTest(unittest.TestCase):
     def test_tags_become_invisible(self):
         text = marks.untag("<func>run</func> takes <var>token</var> from <class>Reader</class>")

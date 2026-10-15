@@ -92,7 +92,7 @@ TRIPS = [
     ("The agent says something",
      "A reply reaches the Vetting Bench past the transcript guard; the status line follows the "
      "topic.",
-     ["bridge.op_say", "marks.untag", "bridge.MARK_FIRST", "marks.speaks_of_code", "marks.CODE_TALK",
+     ["bridge.op_say", "marks.untag", "marks.line_refs", "bridge.NO_LINE_NUMBERS", "bridge.MARK_FIRST", "marks.speaks_of_code", "marks.CODE_TALK",
       "reader.Reader.say", "reader.Reader.show_headers", "chat.show_header",
       "header.title_lines", "chat.show_status", "chat.say", "commands.SightWalkInsertCommand.run",
       "chat.Guard.on_text_changed", "chat.protected_end",

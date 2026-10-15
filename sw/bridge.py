@@ -12,7 +12,7 @@ import sublime
 from . import scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
-from .marks import speaks_of_code, untag
+from .marks import line_refs, speaks_of_code, untag
 from .ontology import Sight, Transition, Trip, trip_from
 from .reader import Reader
 from .spec import parse_spec, repo_root
@@ -100,6 +100,8 @@ MARK_FIRST = ("This answer names code, and nothing is marked yet: call point fir
               "it speaks of (each gets an outline and an icon), then say it again. The user "
               "asked that every answer about code comes with its marks. Do not call wait_for_user "
               "before you have answered.")
+NO_LINE_NUMBERS = ("Line numbers obscure the answer (the user asked): point at the lines and name "
+                   "them by their icons, 1, 2, A, B, never by numbers or file:line. Found: %s.")
 UNANSWERED = ("This message is still unanswered (a guide before you may have taken it): answer "
               "it with say, point first if the answer names code, then wait.")
 
@@ -113,6 +115,9 @@ def op_say(text, status=None):
         raise ValueError("Nothing to answer: the user has said nothing since you last waited. "
                          "Say nothing; call wait_for_user.")
     text = untag(text)
+    numbers = line_refs(text)
+    if numbers:
+        raise ValueError(NO_LINE_NUMBERS % ", ".join(numbers))
     if not state.POINTED and speaks_of_code(text):
         raise ValueError(MARK_FIRST)
     reader.say(text, status)

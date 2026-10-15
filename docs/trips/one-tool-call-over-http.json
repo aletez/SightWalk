@@ -1,13 +1,13 @@
 {
  "name": "One tool call over HTTP",
  "kind": "run",
- "commit": "680a5df11c29be3622b76f101d03dd634eda365d",
+ "commit": "c3a65b1696ea9973a2b33f85e5602544e10dbd70",
  "sights": [
   "sw/mcp_http.py:92-103",
   "sw/mcp_http.py:76-79",
   "sw/mcp_http.py:63-72",
   "sw/mcp_http.py:48-60",
-  "sw/manual.py:102-105",
+  "sw/manual.py:104-107",
   "sw/mcp_http.py:36-45",
   "sw/mcp_http.py:23-33",
   "sw/bridge.py:212-220",

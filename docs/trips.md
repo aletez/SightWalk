@@ -66,7 +66,7 @@ The window and every view but the sights.
 Files read, each sight's copy, header and frozen lines made.
 
 - `sw/reader.py:126-136` Reader.load
-- `sw/chat.py:200-208` catch_up
+- `sw/chat.py:207-215` catch_up
 - `sw/reader.py:182-192` Reader.close_sights
 - `sw/reader.py:194-207` Reader.build
 - `sw/views.py:153-157` FileCopy.__init__
@@ -156,8 +156,8 @@ After a new layout: every view into its group, then back at its place.
 The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.
 
 - `sw/reader.py:487-495` Reader.poll
-- `sw/chat.py:176-185` keep_at_bottom
-- `sw/chat.py:188-191` bottom_place
+- `sw/chat.py:176-186` keep_at_bottom
+- `sw/chat.py:195-198` bottom_place
 - `sw/reader.py:497-504` Reader.poll_wheel
 - `sw/reader.py:484-485` Reader.alive
 - `sw/reader.py:448-466` Reader.read_wheel
@@ -172,8 +172,8 @@ The agent's marks resolved to sights and lines, the reader scrolled to show them
 - `sw/bridge.py:118-122` op_point
 - `sw/state.py:42-48` require_ready
 - `sw/reader.py:520-528` Reader.point
-- `sw/marks.py:67-82` resolve_marks
-- `sw/marks.py:57-64` jump
+- `sw/marks.py:71-87` resolve_marks
+- `sw/marks.py:60-68` jump
 - `sw/marks.py:17-36` resolve_target
 - `sw/marks.py:39-45` sight_target
 - `sw/marks.py:48-54` icon_for
@@ -185,10 +185,10 @@ Icons on screen, eyes for marks off it, outlines on marked lines.
 
 - `sw/reader.py:530-543` Reader.draw_gutter
 - `sw/reader.py:545-550` Reader.draw_strip_marks
-- `sw/marks.py:118-129` strip_icons
+- `sw/marks.py:123-134` strip_icons
 - `sw/views.py:250-259` draw_strip_icons
-- `sw/marks.py:85-97` visible_lines
-- `sw/marks.py:100-115` gutter_icons
+- `sw/marks.py:90-102` visible_lines
+- `sw/marks.py:105-120` gutter_icons
 - `sw/views.py:238-247` draw_icons
 - `sw/reader.py:552-557` Reader.draw_outlines
 - `sw/views.py:262-272` draw_outlines
@@ -199,8 +199,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 
 - `sw/bridge.py:104-115` op_say
 - `sw/bridge.py:99-101` MARK_FIRST
-- `sw/marks.py:135-137` speaks_of_code
-- `sw/marks.py:132-132` CODE_TALK
+- `sw/marks.py:140-142` speaks_of_code
+- `sw/marks.py:137-137` CODE_TALK
 - `sw/reader.py:795-802` Reader.say
 - `sw/reader.py:617-626` Reader.show_headers
 - `sw/chat.py:93-112` show_header
@@ -355,10 +355,10 @@ The guide's manual, the tools' descriptions and schemas it gets at its start, an
 - `sw/manual.py:19-40` MANUAL: Showing code
 - `sw/manual.py:42-45` MANUAL: Writing code that fits the reader
 - `sw/manual.py:47-78` MANUAL: Conversation
-- `sw/manual.py:80-99` MANUAL: Indicators
-- `sw/manual.py:102-105` tool
-- `sw/manual.py:108-112` TRANSITION
-- `sw/manual.py:114-152` TOOLS
+- `sw/manual.py:80-101` MANUAL: Indicators
+- `sw/manual.py:104-107` tool
+- `sw/manual.py:110-114` TRANSITION
+- `sw/manual.py:116-154` TOOLS
 - `sw/bridge.py:50-51` TRANSITION_FORM
 - `sw/guide.py:19-24` PROMPT
 - `sw/guide.py:25-25` TOOLS
@@ -371,7 +371,7 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/mcp_http.py:76-79` Handler.authorized
 - `sw/mcp_http.py:63-72` reply
 - `sw/mcp_http.py:48-60` answer
-- `sw/manual.py:102-105` tool
+- `sw/manual.py:104-107` tool
 - `sw/mcp_http.py:36-45` tool_result
 - `sw/mcp_http.py:23-33` call_tool
 - `sw/bridge.py:212-220` wait_until_ready
@@ -544,7 +544,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/reader.py:725-733` Reader.keep_transcript
 - `sw/reader.py:821-823` transcripts_path
 - `sw/reader.py:826-831` read_transcripts
-- `sw/chat.py:194-197` set_transcript
+- `sw/chat.py:201-204` set_transcript
 - `sw/ontology.py:274-278` dumps
 - `sw/vetting.py:185-194` save_walked
 - `sw/reader.py:735-737` Reader.draw_tour

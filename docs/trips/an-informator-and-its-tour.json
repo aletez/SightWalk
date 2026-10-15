@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "680a5df11c29be3622b76f101d03dd634eda365d",
+ "commit": "c3a65b1696ea9973a2b33f85e5602544e10dbd70",
  "sights": [
   "sw/commands.py:188-194",
   "sw/commands.py:203-216",
@@ -23,7 +23,7 @@
   "sw/reader.py:725-733",
   "sw/reader.py:821-823",
   "sw/reader.py:826-831",
-  "sw/chat.py:194-197",
+  "sw/chat.py:201-204",
   "sw/ontology.py:274-278",
   "sw/vetting.py:185-194",
   "sw/reader.py:735-737",
@@ -158,7 +158,7 @@
   {
    "type": "calls",
    "from": [16, 717],
-   "to": [20, 194]
+   "to": [20, 201]
   },
   {
    "type": "calls",

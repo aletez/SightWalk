@@ -55,6 +55,18 @@ def icon_for(mark):
 
 
 JUMP_COLOURS = ("", "_red", "_yellow", "_purple", "_brown")  # see tools/draw_icons.py
+# The icons' own colours (tools/draw_icons.py): a marked line's outline takes its icon's (Jakub).
+ICON_COLOURS = {"digit": "#C77A0E", "letter": "#2C6ED5", "green": "#23894E", "red": "#C8372D",
+                "yellow": "#E3B505", "purple": "#7B3FB5", "brown": "#8A5A2B"}
+
+
+def icon_colour(icon):
+    """The ICON_COLOURS key of an icon: digit_3 → digit, pass_up_red → red, pass_up → green."""
+    kind = icon.split("_")[0]
+    if kind in ("digit", "letter"):
+        return kind
+    last = icon.split("_")[-1]
+    return last if last in ICON_COLOURS else "green"
 
 
 def jump(sights, mark, colour=""):

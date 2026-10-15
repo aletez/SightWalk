@@ -5,8 +5,9 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- A marked line's outline takes its icon's colour (Jakub, 2026-10-15): digits amber, letters blue, jumps their own colour; a line with two marks, its first's (the gutter's). Replaces the file's strong hue. (Changed, unverified.)
 - A trip no longer steals the focus from another Sublime window (Jakub, 2026-10-15): every render focused the bench, which on macOS raises the window; now only while the trip's window is active. A new trip's first layout may still raise it once. (Changed, not yet reloaded.)
-- A bench font-size change no longer pans the trip (Jakub, 2026-10-15): the bench's bottom place is recomputed when its line height changes, and before the wheel is read. (Changed, not yet reloaded.)
+- A bench font-size change no longer pans the trip (Jakub, 2026-10-15): the bench's bottom place is recomputed when its line height changes, and before the wheel is read. (Verified by Jakub, 2026-10-15: the wheel over the bench and font changes.)
 - wait_for_user refuses while the user's last message has no say yet (2026-10-15): after say refused an unmarked answer, the guide waited instead of pointing, which dropped the message and then refused every say as "Nothing to answer" (Jakub saw the guide think long, point, say nothing). (Changed, unverified.)
 - Digits and letters in the guide's latest answer that name an icon now in the trip are outlined in the icon's colour: digits region.orangish, letters region.bluish (Jakub, 2026-10-15). Only standing alone and only icons shown, so "2 kroki" without icon 2 stays plain. (Changed, unverified.)
 - SightWalk: Compare Bench Fonts (Jakub, 2026-10-15): a window of six panes with a kept conversation in Helvetica Neue, Avenir Next, Charter, Iowan Old Style, Georgia and Palatino, to choose bench_font_face. Charter chosen by Jakub (2026-10-15), now the macOS default. (Changed, unverified.)

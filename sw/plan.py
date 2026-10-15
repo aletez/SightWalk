@@ -29,7 +29,7 @@ class Pane:
         self.code_item = None
         self.header_icons = {}
         self.icons = {}
-        self.outlines = set()
+        self.outlines = {}
 
     @property
     def spec(self):

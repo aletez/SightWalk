@@ -11,6 +11,7 @@ import time
 
 import sublime
 
+from . import marks
 from .config import OUTLINE_TINT, SETTINGS_FILE, SETTLE_MS, TINT
 
 HUE_START = random.random()
@@ -121,7 +122,9 @@ def tinted_schemes(view, hue, amount):
         view.style().get("foreground", "#808080")
     scheme.setdefault("rules", []).extend([
         {"scope": "sight_walk.icon", "foreground": "#ffffff"},
-        {"scope": "sight_walk.outline", "foreground": tint_color(background, hue, OUTLINE_TINT)}])
+        {"scope": "sight_walk.outline", "foreground": tint_color(background, hue, OUTLINE_TINT)}]
+        + [{"scope": "sight_walk.outline." + key, "foreground": colour}
+           for key, colour in marks.ICON_COLOURS.items()])
     code = write_scheme(scheme, stem + "-code.sublime-color-scheme")
     # The header's caret line paints its gutter in the line highlight; make that the band too.
     globals_["background"] = globals_["line_highlight"] = band

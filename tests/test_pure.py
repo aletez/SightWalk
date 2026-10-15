@@ -77,6 +77,11 @@ class CodeTalkTest(unittest.TestCase):
 
 
 class MarksTest(unittest.TestCase):
+    def test_icon_colours(self):
+        self.assertEqual([marks.icon_colour(i) for i in
+                          ("digit_3", "letter_a", "pass_up", "take_below_red", "pass_down_brown")],
+                         ["digit", "letter", "green", "red", "brown"])
+
     def test_icon_refs(self):
         shown = [{"icon": "digit_1"}, {"icon": "letter_b"}]
         text = "1. Here B calls it; 2 is not shown, A neither, B's and v1.2 are no names."

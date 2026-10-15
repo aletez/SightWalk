@@ -555,7 +555,10 @@ class Reader(Geometry):
 
     def draw_outlines(self):
         for index, sight in enumerate(self.sights):
-            lines = set(m["line"] for m in self.indicators if m["sight"] == index)
+            lines = {}  # a line's outline in its first mark's colour, as its gutter icon
+            for m in self.indicators:
+                if m["sight"] == index:
+                    lines.setdefault(m["line"], marks.icon_colour(m["icon"]))
             if lines != sight.outlines:
                 draw_outlines(sight.view, lines)
                 sight.outlines = lines

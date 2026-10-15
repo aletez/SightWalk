@@ -6,6 +6,7 @@ import sublime
 
 from .config import (BENCH_FONTS, SETTINGS_FILE, GAP_PX, OVERLAP, ROOM_LINES, SETTLE_MS, BLANK_LINES,
                      STRIP_ICON_SHIFT)
+from . import marks
 from .words import word
 
 SIDE_SETTINGS = (("gutter", False), ("line_numbers", False), ("draw_indent_guides", False),
@@ -259,17 +260,23 @@ def draw_strip_icons(strip, first_line, lines):
         for line, icons in sorted(lines.items())])
 
 
+OUTLINE_KEYS = tuple(marks.ICON_COLOURS)
+
+
 def draw_outlines(view, lines):
-    """An outline around the text of each marked line, in the file's strong hue."""
-    regions = []
-    for line in sorted(lines):
+    """An outline around the text of each marked line ({line: colour key}), in its icon's colour
+    (marks.ICON_COLOURS)."""
+    regions = {}
+    for line, colour in sorted(lines.items()):
         whole = view.line(view.text_point(line - 1, 0))
         text = view.substr(whole)
         start = whole.a + len(text) - len(text.lstrip())
         end = whole.b - (len(text) - len(text.rstrip()))
         if start < end:
-            regions.append(sublime.Region(start, end))
-    view.add_regions("sight_walk_outline", regions, "sight_walk.outline", "", sublime.DRAW_NO_FILL)
+            regions.setdefault(colour, []).append(sublime.Region(start, end))
+    for colour in OUTLINE_KEYS:
+        view.add_regions("sight_walk_outline_" + colour, regions.get(colour, []),
+                         "sight_walk.outline." + colour, "", sublime.DRAW_NO_FILL)
 
 
 def draw_gap(view, first, last):

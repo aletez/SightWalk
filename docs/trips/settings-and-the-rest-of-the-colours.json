@@ -1,15 +1,15 @@
 {
  "name": "Settings and the rest of the colours",
  "kind": "survey",
- "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
+ "commit": "3863a521da1ff887944ac596092d413243879ebb",
  "sights": [
   "sw/commands.py:98-99",
-  "sw/tint.py:83-85",
-  "sw/tint.py:58-68",
-  "sw/tint.py:95-103",
-  "sw/tint.py:88-92",
-  "sw/tint.py:28-29",
-  "sw/tint.py:169-174"
+  "sw/tint.py:84-86",
+  "sw/tint.py:59-69",
+  "sw/tint.py:96-104",
+  "sw/tint.py:89-93",
+  "sw/tint.py:29-30",
+  "sw/tint.py:172-177"
  ],
  "transitions": []
 }

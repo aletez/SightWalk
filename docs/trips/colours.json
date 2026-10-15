@@ -1,74 +1,74 @@
 {
  "name": "Colours",
  "kind": "run",
- "commit": "b782d9c791875c049e5a69e4ea24a8c581943a8f",
+ "commit": "3863a521da1ff887944ac596092d413243879ebb",
  "sights": [
   "sw/reader.py:222-227",
-  "sw/tint.py:163-166",
-  "sw/tint.py:143-149",
-  "sw/tint.py:21-25",
-  "sw/tint.py:106-128",
-  "sw/tint.py:40-52",
-  "sw/tint.py:32-37",
-  "sw/tint.py:75-80",
-  "sw/tint.py:152-160",
-  "sw/tint.py:131-140"
+  "sw/tint.py:166-169",
+  "sw/tint.py:146-152",
+  "sw/tint.py:22-26",
+  "sw/tint.py:107-131",
+  "sw/tint.py:41-53",
+  "sw/tint.py:33-38",
+  "sw/tint.py:76-81",
+  "sw/tint.py:155-163",
+  "sw/tint.py:134-143"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 227],
-   "to": [1, 163]
+   "to": [1, 166]
   },
   {
    "type": "calls",
-   "from": [1, 164],
-   "to": [3, 21]
+   "from": [1, 167],
+   "to": [3, 22]
   },
   {
    "type": "calls",
-   "from": [1, 164],
-   "to": [2, 143]
+   "from": [1, 167],
+   "to": [2, 146]
   },
   {
    "type": "calls",
-   "from": [1, 166],
-   "to": [8, 152]
+   "from": [1, 169],
+   "to": [8, 155]
   },
   {
    "type": "calls",
-   "from": [2, 148],
-   "to": [4, 106]
+   "from": [2, 151],
+   "to": [4, 107]
   },
   {
    "type": "calls",
-   "from": [4, 110],
-   "to": [5, 40]
+   "from": [4, 111],
+   "to": [5, 41]
   },
   {
    "type": "calls",
-   "from": [4, 115],
-   "to": [6, 32]
-  },
-  {
-   "type": "calls",
-   "from": [4, 124],
-   "to": [6, 32]
+   "from": [4, 116],
+   "to": [6, 33]
   },
   {
    "type": "calls",
    "from": [4, 125],
-   "to": [7, 75]
+   "to": [6, 33]
   },
   {
    "type": "calls",
    "from": [4, 128],
-   "to": [7, 75]
+   "to": [7, 76]
   },
   {
    "type": "calls",
-   "from": [8, 160],
-   "to": [9, 131]
+   "from": [4, 131],
+   "to": [7, 76]
+  },
+  {
+   "type": "calls",
+   "from": [8, 163],
+   "to": [9, 134]
   }
  ]
 }

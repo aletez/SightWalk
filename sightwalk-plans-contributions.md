@@ -1,4 +1,4 @@
-# SightWalk: plans and Jakub's contributions (export, 2026-10-14)
+# SightWalk: plans and Jakub's contributions (export, 2026-10-15)
 
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIONS.md and Claude's memory of the project.
 
@@ -88,6 +88,8 @@ Entities:
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-15, scrolling is there to bring the code level with the eyes reading the bench: so a trip scrolls up until its end meets the bench's floor, short and long alike; found from "the panorama does not scroll in full screen", which a log showed was the rule for short trips, not a fault.
+- 2026-10-15, "I always had to ask for icons and outlines": every answer about code now comes with its marks, the bridge refusing an unmarked one; and the question which part refuses, bridge or server, with the refusal's own text put in the tour.
 - 2026-10-14, the Map: dark while the system is, in a heavier font there; zoomed by buttons and keys as no pinch reaches a plugin; the schemes SightWalk writes deleted after use, as they crowded Sublime's list; and the error dialog that deleting them caused, until a restart.
 - 2026-10-14, the strip in parts: the part beside the status line and the Tools header does not reach over them, so they keep their borders, while the parts beside the bench and the Tools pane do ("split the strip and widen only the upper and lower part"); after asking whether the status line's cell had simply been put before the strip's. And the catches on the way: the header longer than the status line, a notch in the header's corner, a 2 px gap where two borders meet, the Sights pushed further right at every switch of the wheel, the strip no longer narrowing.
 - 2026-10-14, a shadow on a pane's right edge when its content does not fit or when it reaches over another: so the strip reaches over the bench and the Tools pane, not they over it; the bench takes the wheel for the panorama too, switched with Map and Tour by primary+s, as saving means nothing in a trip and the fingers find it; the Scroll tab dropped, its job taken over; the bench's prompt kept at the bottom by computing the viewport instead of adding blank lines.

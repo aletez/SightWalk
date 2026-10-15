@@ -227,3 +227,11 @@ def outline_refs(view, indicators):
     for scope in marks.REF_SCOPES.values():
         view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",
                          sublime.DRAW_NO_FILL)
+
+
+def shade_variables(view):
+    """A faint background under every variable on the bench (Jakub): most schemes leave them
+    plain, and they should read as code. The fill takes the comment colour, grey in most."""
+    view.add_regions("sight_walk_variables",
+                     view.find_by_selector("meta.generic-name.sight-walk"), "comment", "",
+                     sublime.DRAW_NO_OUTLINE)

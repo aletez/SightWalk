@@ -98,7 +98,7 @@ TRIPS = [
       "chat.Guard.on_text_changed", "chat.protected_end",
       "commands.SightWalkChatListener.on_modified",
       "commands.SightWalkChatListener.on_post_text_command", "marks.clean",
-      "commands.SightWalkChatListener.on_selection_modified"]),
+      "commands.SightWalkChatListener.on_selection_modified", "chat.shade_variables"]),
     ("Stopping an answer",
      "Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.",
      ["commands.SightWalkStopAnswerCommand.run", "reader.Reader.stop_answer",

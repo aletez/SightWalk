@@ -107,6 +107,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
     def on_modified(self):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
+        sublime.set_timeout(lambda: chat.shade_variables(self.view), 50)  # after highlighting
 
     def on_selection_modified(self):
         """The caret never rests just after an invisible operator, where it looks as it does just

@@ -10,7 +10,7 @@ contexts:
   main:
     - match: '^(A:) '
       captures:
-        1: entity.name.function.agent.sight-walk
+        1: keyword.other.agent.sight-walk
       push: agent
     - match: '^(U:) '
       captures:

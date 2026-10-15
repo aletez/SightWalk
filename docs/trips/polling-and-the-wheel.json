@@ -1,11 +1,11 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "c3a65b1696ea9973a2b33f85e5602544e10dbd70",
+ "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
  "sights": [
   "sw/reader.py:487-495",
-  "sw/chat.py:176-186",
-  "sw/chat.py:195-198",
+  "sw/chat.py:177-187",
+  "sw/chat.py:196-199",
   "sw/reader.py:497-504",
   "sw/reader.py:484-485",
   "sw/reader.py:448-466",
@@ -22,12 +22,12 @@
   {
    "type": "calls",
    "from": [0, 491],
-   "to": [1, 176]
+   "to": [1, 177]
   },
   {
    "type": "calls",
-   "from": [1, 185],
-   "to": [2, 195]
+   "from": [1, 186],
+   "to": [2, 196]
   },
   {
    "type": "calls",

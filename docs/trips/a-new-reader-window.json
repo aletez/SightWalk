@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "c3a65b1696ea9973a2b33f85e5602544e10dbd70",
+ "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
  "sights": [
   "sw/bridge.py:69-79",
   "sw/reader.py:59-80",
@@ -10,9 +10,9 @@
   "sw/views.py:187-191",
   "sw/views.py:135-142",
   "sw/views.py:111-118",
-  "sw/chat.py:72-78",
-  "sw/chat.py:81-90",
-  "sw/chat.py:118-127",
+  "sw/chat.py:73-79",
+  "sw/chat.py:82-91",
+  "sw/chat.py:119-128",
   "sw/vetting.py:26-33",
   "sw/state.py:21-24"
  ],
@@ -60,22 +60,22 @@
   {
    "type": "calls",
    "from": [2, 101],
-   "to": [7, 72]
+   "to": [7, 73]
   },
   {
    "type": "calls",
    "from": [2, 103],
-   "to": [8, 81]
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 104],
-   "to": [8, 81]
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 105],
-   "to": [8, 81]
+   "to": [8, 82]
   },
   {
    "type": "calls",
@@ -95,12 +95,12 @@
   {
    "type": "calls",
    "from": [2, 119],
-   "to": [8, 81]
+   "to": [8, 82]
   },
   {
    "type": "calls",
    "from": [2, 120],
-   "to": [9, 118]
+   "to": [9, 119]
   },
   {
    "type": "calls",
@@ -114,17 +114,17 @@
   },
   {
    "type": "calls",
-   "from": [8, 84],
+   "from": [8, 85],
    "to": [6, 111]
   },
   {
    "type": "calls",
-   "from": [8, 87],
+   "from": [8, 88],
    "to": [4, 187]
   },
   {
    "type": "calls",
-   "from": [9, 122],
+   "from": [9, 123],
    "to": [6, 111]
   },
   {

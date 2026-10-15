@@ -1,15 +1,15 @@
 {
  "name": "Plugin start and stop",
  "kind": "run",
- "commit": "c3a65b1696ea9973a2b33f85e5602544e10dbd70",
+ "commit": "91f6a5f41b94be713ac0fbbc7a62495f3f97f88a",
  "sights": [
-  "sight_walk.py:38-44",
+  "sight_walk.py:39-45",
   "sw/mcp_http.py:140-143",
   "sw/bridge.py:242-246",
   "sw/mcp_http.py:116-120",
   "sw/mcp_http.py:131-137",
   "sw/mcp_http.py:123-128",
-  "sight_walk.py:53-58",
+  "sight_walk.py:54-59",
   "sw/scrollbars.py:13-25",
   "sw/state.py:51-58",
   "sw/mcp_http.py:146-148",
@@ -18,7 +18,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 39],
+   "from": [0, 40],
    "to": [1, 140]
   },
   {
@@ -53,17 +53,17 @@
   },
   {
    "type": "calls",
-   "from": [6, 54],
+   "from": [6, 55],
    "to": [7, 13]
   },
   {
    "type": "calls",
-   "from": [6, 56],
+   "from": [6, 57],
    "to": [8, 51]
   },
   {
    "type": "calls",
-   "from": [6, 58],
+   "from": [6, 59],
    "to": [9, 146]
   },
   {

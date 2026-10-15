@@ -27,10 +27,15 @@ contexts:
       pop: true
 
   user:
-    - meta_scope: meta.message.user.sight-walk comment.line.user.sight-walk
+    # The user's words as a quote, line by line: not the newline, so a scheme that gives every
+    # scope a faint background (Foggy Morning) leaves the line ends and the gap below blank
+    # (Jakub).
+    - meta_scope: meta.message.user.sight-walk
     - include: names
     - match: '(?=^(A: |U: |>>> ))'
       pop: true
+    - match: '[^\n]'
+      scope: markup.quote.user.sight-walk
 
   draft:
     - meta_scope: meta.draft.sight-walk

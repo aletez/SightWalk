@@ -1,7 +1,7 @@
 {
  "name": "Building blocks",
  "kind": "survey",
- "commit": "ed5accc3f74132542e06695ddfe1a252cbf192dc",
+ "commit": "5d7d236f952bab417f408c548ad5ed92fe791453",
  "sights": [
   "sw/plan.py:8-14",
   "sw/plan.py:21-32",

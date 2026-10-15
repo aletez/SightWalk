@@ -1,9 +1,9 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "ed5accc3f74132542e06695ddfe1a252cbf192dc",
+ "commit": "5d7d236f952bab417f408c548ad5ed92fe791453",
  "sights": [
-  "sw/reader.py:509-519",
+  "sw/reader.py:510-520",
   "sw/reader.py:323-330",
   "sw/geometry.py:18-25",
   "sw/geometry.py:27-31",
@@ -12,7 +12,7 @@
   "sw/state.py:63-68",
   "sw/bridge.py:167-174",
   "sw/bridge.py:157-164",
-  "sw/commands.py:119-121",
+  "sw/commands.py:132-134",
   "sw/commands.py:92-96",
   "sw/commands.py:86-88",
   "sw/chat.py:143-147"

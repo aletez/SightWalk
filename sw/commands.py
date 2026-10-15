@@ -66,7 +66,10 @@ class SightWalkEditCommand(sublime_plugin.TextCommand):
             return
         sight = reader.sights[index]
         line = self.view.rowcol(self.view.sel()[0].b)[0] + 1 if self.view.sel() else sight.begin
-        reader.open_editor(index, min(max(line, sight.begin), sight.end))
+        line = min(max(line, sight.begin), sight.end)
+        # After this text command: the window's layout changed inside it leaves the editor's
+        # cell empty (Jakub saw an empty frame; the header's button worked).
+        sublime.set_timeout(lambda: reader.open_editor(index, line), 0)
 
 
 class SightWalkCloseEditorCommand(sublime_plugin.TextCommand):

@@ -14,7 +14,7 @@ Sublime loads the plugin, which starts its MCP server; a new port restarts it; o
 - `sw/mcp_http.py:123-128` stop_server
 - `sight_walk.py:54-59` plugin_unloaded
 - `sw/scrollbars.py:13-25` reader_focused
-- `sw/state.py:52-59` close_all
+- `sw/state.py:53-60` close_all
 - `sw/mcp_http.py:146-148` stop
 - `sw/setup.py:70-72` SightWalkRestartCommand.run
 
@@ -59,7 +59,7 @@ The window and every view but the sights.
 - `sw/chat.py:82-91` make_header
 - `sw/chat.py:119-128` make_status
 - `sw/vetting.py:26-33` make_tool
-- `sw/state.py:22-25` register
+- `sw/state.py:23-26` register
 
 ## 5. Loading the sights (13 views)
 
@@ -170,7 +170,7 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
 - `sw/bridge.py:122-126` op_point
-- `sw/state.py:43-49` require_ready
+- `sw/state.py:44-50` require_ready
 - `sw/reader.py:523-532` Reader.point
 - `sw/marks.py:83-99` resolve_marks
 - `sw/marks.py:72-80` jump
@@ -279,7 +279,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/commands.py:42-46` SightWalkSendCommand.run
 - `sw/chat.py:160-174` take_draft
 - `sw/commands.py:32-36` send
-- `sw/state.py:35-36` reader_for
+- `sw/state.py:36-37` reader_for
 - `sw/reader.py:812-826` Reader.context
 - `sw/views.py:292-296` selected_text
 - `sw/plan.py:101-104` visible_specs
@@ -323,7 +323,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/geometry.py:27-31` Geometry.strip_span
 - `sw/geometry.py:33-35` Geometry.strip_share
 - `sw/geometry.py:37-38` Geometry.bench_side
-- `sw/state.py:62-67` render_all
+- `sw/state.py:63-68` render_all
 - `sw/bridge.py:166-173` op_settings
 - `sw/bridge.py:156-163` check_setting
 - `sw/commands.py:113-115` SightWalkWindowListener.on_activated
@@ -408,7 +408,7 @@ Switch Language: the setting changes, the words follow at once, in every open tr
 - `sw/commands.py:247-250` SightWalkSwitchLanguageCommand.run
 - `sight_walk.py:48-51` settings_changed
 - `sw/words.py:57-59` set_language
-- `sw/state.py:62-67` render_all
+- `sw/state.py:63-68` render_all
 - `sw/words.py:53-54` word
 - `sw/chat.py:28-32` help_html
 - `sw/views.py:31-33` button_html
@@ -430,9 +430,9 @@ The guide is stopped, windows close.
 - `sw/commands.py:158-161` SightWalkResetSightsCommand.run
 - `sw/reader.py:652-655` Reader.reset_sights
 - `sw/commands.py:163-165` SightWalkResetSightsCommand.is_enabled
-- `sw/state.py:28-32` forget
+- `sw/state.py:29-33` forget
 - `sw/bridge.py:134-139` op_close
-- `sw/state.py:39-40` current_reader
+- `sw/state.py:40-41` current_reader
 
 ## 29. Names and room (11 views, survey)
 

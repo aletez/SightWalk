@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "3863a521da1ff887944ac596092d413243879ebb",
+ "commit": "aac767584eb98447976fcb391973a61a355b98c8",
  "sights": [
   "sw/commands.py:188-194",
   "sw/commands.py:203-216",

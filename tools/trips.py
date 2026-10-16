@@ -36,7 +36,7 @@ TRIPS = [
      "From the HTTP server's thread to the show operation on Sublime's, with every check on the "
      "way.",
      ["bridge.run_on_main",
-      "bridge.op_show", "bridge.check_not_stopped", "bridge.make_trip", "ontology.Sight.parse",
+      "bridge.op_show", "bridge.named", "bridge.check_not_stopped", "bridge.make_trip", "ontology.Sight.parse",
       "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem",
       "bridge.check_sights", "spec.parse_spec", "bridge.file_lines"]),
     ("A new reader window",
@@ -85,7 +85,8 @@ TRIPS = [
      "The agent's marks resolved to sights and lines, the reader scrolled to show them.",
      ["bridge.op_point", "state.require_ready", "reader.Reader.point",
       "marks.resolve_marks", "marks.jump", "marks.resolve_target", "marks.sight_target",
-      "marks.icon_for", "marks.line_y", "chat.outline_refs", "marks.icon_refs"]),
+      "marks.icon_for", "marks.line_y", "chat.outline_refs", "marks.icon_refs",
+      "marks.sight_number", "spec.sight_index", "spec.sight_name"]),
     ("Drawing the marks",
      "Icons on screen, eyes for marks off it, outlines on marked lines.",
      ["reader.Reader.draw_gutter", "reader.Reader.draw_strip_marks", "marks.strip_icons", "views.draw_strip_icons", "marks.visible_lines", "marks.gutter_icons", "views.draw_icons", "reader.Reader.draw_outlines", "marks.icon_colour", "views.draw_outlines"]),

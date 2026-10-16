@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "196d74a2c02520a122f06b076293ab4324b36c22",
+ "commit": "52cf626f581ff8cc4c877455a85940dcd776c839",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -698,6 +698,30 @@
    "from": [
     "a-request-arrives",
     2,
+    99
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    2,
+    101
+   ],
+   "to": [
+    "pointing",
+    13,
+    51
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    3,
     82
    ],
    "to": [
@@ -708,7 +732,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    3,
+    4,
     54
    ],
    "to": [
@@ -719,7 +743,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    3,
+    4,
     65
    ],
    "to": [
@@ -732,7 +756,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    4,
+    5,
     127
    ],
    "to": [
@@ -743,7 +767,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    5,
+    6,
     154
    ],
    "to": [
@@ -754,7 +778,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    6,
+    7,
     90
    ],
    "to": [
@@ -765,7 +789,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    6,
+    7,
     91
    ],
    "to": [
@@ -778,7 +802,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    6,
+    7,
     92
    ],
    "to": [
@@ -791,7 +815,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    7,
+    8,
     106
    ],
    "to": [
@@ -802,7 +826,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    7,
+    8,
     112
    ],
    "to": [
@@ -815,7 +839,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    8,
+    9,
     33
    ],
    "to": [
@@ -826,7 +850,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    9,
+    10,
     9
    ],
    "to": [
@@ -837,7 +861,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    10,
+    11,
     28
    ],
    "to": [
@@ -1217,7 +1241,7 @@
    ],
    "to": [
     "a-request-arrives",
-    9,
+    10,
     9
    ]
   },
@@ -3459,7 +3483,7 @@
    ],
    "to": [
     "a-request-arrives",
-    2,
+    3,
     82
    ]
   },
@@ -3706,6 +3730,39 @@
   {
    "type": "own_trip",
    "from": [
+    "pointing",
+    11,
+    40
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    12,
+    58
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    13,
+    51
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
     "drawing-the-marks",
     0,
     538
@@ -3872,7 +3929,7 @@
    ],
    "to": [
     "a-request-arrives",
-    2,
+    3,
     82
    ]
   },
@@ -7714,6 +7771,19 @@
    ]
   },
   {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    0,
+    74
+   ],
+   "to": [
+    "pointing",
+    13,
+    51
+   ]
+  },
+  {
    "type": "own_trip",
    "from": [
     "names-and-room",
@@ -7825,6 +7895,19 @@
     "pointing",
     1,
     44
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    8,
+    142
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    99
    ]
   },
   {
@@ -9136,7 +9219,7 @@
    ],
    "to": [
     "a-request-arrives",
-    2,
+    3,
     82
    ]
   },
@@ -9162,7 +9245,7 @@
    ],
    "to": [
     "a-request-arrives",
-    8,
+    9,
     33
    ]
   },
@@ -9229,6 +9312,19 @@
     "plugin-start-and-stop",
     7,
     13
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    201
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    99
    ]
   },
   {

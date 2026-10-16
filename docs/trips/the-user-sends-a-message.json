@@ -1,7 +1,7 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "196d74a2c02520a122f06b076293ab4324b36c22",
+ "commit": "52cf626f581ff8cc4c877455a85940dcd776c839",
  "sights": [
   "sw/commands.py:42-46",
   "sw/chat.py:160-174",

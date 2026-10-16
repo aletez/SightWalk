@@ -28,12 +28,13 @@ The setup command keeps a token, writes it for poke, and puts Claude Code's regi
 - `sw/setup.py:60-63` show_instructions
 - `sw/commands.py:17-24` SightWalkReplaceCommand.run
 
-## 3. A request arrives (11 views)
+## 3. A request arrives (12 views)
 
 From the HTTP server's thread to the show operation on Sublime's, with every check on the way.
 
 - `sw/bridge.py:208-224` run_on_main
 - `sw/bridge.py:88-96` op_show
+- `sw/bridge.py:99-101` named
 - `sw/bridge.py:82-85` check_not_stopped
 - `sw/bridge.py:54-66` make_trip
 - `sw/ontology.py:126-134` Sight.parse
@@ -166,7 +167,7 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 - `sw/reader.py:434-438` Reader.pinned_places
 - `sw/reader.py:52-55` item_top
 
-## 11. Pointing (11 views)
+## 11. Pointing (14 views)
 
 The agent's marks resolved to sights and lines, the reader scrolled to show them.
 
@@ -181,6 +182,9 @@ The agent's marks resolved to sights and lines, the reader scrolled to show them
 - `sw/marks.py:14-15` line_y
 - `sw/chat.py:219-229` outline_refs
 - `sw/marks.py:169-178` icon_refs
+- `sw/marks.py:40-43` sight_number
+- `sw/spec.py:58-65` sight_index
+- `sw/spec.py:51-55` sight_name
 
 ## 12. Drawing the marks (10 views)
 

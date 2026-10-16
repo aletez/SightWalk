@@ -43,11 +43,35 @@ def display_path(path):
     return "~" + path[len(home):] if path.startswith(home + os.sep) else path
 
 
-def sight_title(sight):
-    """A sight's header: its file and lines, as given, without the blank lines shown around."""
+GREEK = ("alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa",
+         "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "sigma", "tau", "upsilon", "phi",
+         "chi", "psi", "omega")
+
+
+def sight_name(index):
+    """A sight's name in its trip (Jakub): a Greek letter spelled out, in Latin letters, so the
+    user can copy or type it; after omega the letters again with a number, "alpha 2"."""
+    turn, letter = divmod(index, len(GREEK))
+    return GREEK[letter] + (" %d" % (turn + 1) if turn else "")
+
+
+def sight_index(name):
+    """The index a sight's name stands for, or None."""
+    parts = str(name).strip().lower().split()
+    if not parts or parts[0] not in GREEK or len(parts) > 2:
+        return None
+    turn = int(parts[1]) - 1 if len(parts) == 2 and parts[1].isdigit() else 0
+    return None if turn < 0 or (len(parts) == 2 and turn == 0) else \
+        turn * len(GREEK) + GREEK.index(parts[0])
+
+
+def sight_title(sight, index=None):
+    """A sight's header: its name, then its file and lines, as given, without the blank lines
+    shown around."""
     begin, end = sight.begin + sight.pad[0], sight.end - sight.pad[1]
     lines = str(begin) if begin == end else "%d-%d" % (begin, end)
-    return "%s:%s" % (display_path(sight.path), lines)
+    title = "%s:%s" % (display_path(sight.path), lines)
+    return title if index is None else "%s · %s" % (sight_name(index), title)
 
 
 def matches(sight, name):

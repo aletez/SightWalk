@@ -1,54 +1,54 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
-  "sw/reader.py:376-390",
+  "sw/reader.py:375-393",
   "sw/reader.py:332-337",
   "sw/reader.py:306-321",
   "sw/geometry.py:112-121",
   "sw/reader.py:235-246",
-  "sw/reader.py:339-362",
+  "sw/reader.py:339-361",
   "sw/views.py:61-64",
-  "sw/reader.py:437-448",
-  "sw/reader.py:407-415",
-  "sw/reader.py:472-476",
+  "sw/reader.py:440-451",
+  "sw/reader.py:410-418",
+  "sw/reader.py:475-479",
   "sw/views.py:146-148",
-  "sw/reader.py:658-665",
-  "sw/reader.py:667-669",
-  "sw/reader.py:569-572",
+  "sw/reader.py:661-668",
+  "sw/reader.py:670-672",
+  "sw/reader.py:572-575",
   "sw/views.py:222-234"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 379],
+   "from": [0, 380],
    "to": [1, 332]
   },
   {
    "type": "calls",
-   "from": [0, 386],
-   "to": [13, 569]
-  },
-  {
-   "type": "calls",
-   "from": [0, 387],
-   "to": [11, 658]
-  },
-  {
-   "type": "calls",
-   "from": [0, 388],
-   "to": [11, 658]
-  },
-  {
-   "type": "calls",
    "from": [0, 389],
-   "to": [7, 437]
+   "to": [13, 572]
   },
   {
    "type": "calls",
    "from": [0, 390],
-   "to": [7, 437]
+   "to": [11, 661]
+  },
+  {
+   "type": "calls",
+   "from": [0, 391],
+   "to": [11, 661]
+  },
+  {
+   "type": "calls",
+   "from": [0, 392],
+   "to": [7, 440]
+  },
+  {
+   "type": "calls",
+   "from": [0, 393],
+   "to": [7, 440]
   },
   {
    "type": "calls",
@@ -67,17 +67,17 @@
   },
   {
    "type": "calls",
-   "from": [7, 442],
-   "to": [8, 407]
+   "from": [7, 445],
+   "to": [8, 410]
   },
   {
    "type": "calls",
-   "from": [11, 665],
-   "to": [12, 667]
+   "from": [11, 668],
+   "to": [12, 670]
   },
   {
    "type": "calls",
-   "from": [13, 571],
+   "from": [13, 574],
    "to": [14, 222]
   }
  ]

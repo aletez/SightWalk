@@ -1,64 +1,64 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
-  "sw/commands.py:62-69",
-  "sw/reader.py:586-591",
-  "sw/reader.py:574-584",
-  "sw/editor.py:22-30",
+  "sw/commands.py:62-72",
+  "sw/reader.py:589-594",
+  "sw/reader.py:577-587",
+  "sw/editor.py:24-32",
   "sw/views.py:67-71",
-  "sw/editor.py:14-18",
-  "sw/editor.py:32-37",
-  "sw/editor.py:39-51",
-  "sw/editor.py:53-58",
+  "sw/editor.py:16-20",
+  "sw/editor.py:34-44",
+  "sw/editor.py:46-58",
+  "sw/editor.py:60-65",
   "sw/geometry.py:69-77"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 64],
-   "to": [1, 586]
+   "to": [1, 589]
   },
   {
    "type": "calls",
-   "from": [0, 69],
-   "to": [2, 574]
+   "from": [0, 72],
+   "to": [2, 577]
   },
   {
    "type": "calls",
-   "from": [2, 583],
-   "to": [3, 22]
+   "from": [2, 586],
+   "to": [3, 24]
   },
   {
    "type": "calls",
-   "from": [3, 26],
-   "to": [5, 14]
+   "from": [3, 28],
+   "to": [5, 16]
   },
   {
    "type": "calls",
-   "from": [3, 30],
-   "to": [6, 32]
+   "from": [3, 32],
+   "to": [6, 34]
   },
   {
    "type": "calls",
-   "from": [3, 30],
+   "from": [3, 32],
    "to": [4, 67]
   },
   {
    "type": "calls",
-   "from": [6, 33],
-   "to": [7, 39]
+   "from": [6, 37],
+   "to": [7, 46]
   },
   {
    "type": "calls",
-   "from": [7, 45],
-   "to": [8, 53]
+   "from": [7, 52],
+   "to": [8, 60]
   },
   {
    "type": "calls",
-   "from": [7, 49],
-   "to": [8, 53]
+   "from": [7, 56],
+   "to": [8, 60]
   }
  ]
 }

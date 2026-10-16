@@ -192,10 +192,10 @@ class Reader(Geometry):
             view.close()
 
     def build(self, copies):
-        for sight in self.sights:
+        for index, sight in enumerate(self.sights):
             copy = copies[sight.path]
             sight.view = make_copy(self.window, copy, display_path(sight.path))
-            sight.header = make_header(self.window, sight_title(sight), sight.view)
+            sight.header = make_header(self.window, sight_title(sight, index), sight.view)
             self.surround(sight, copy)
         self.tint(copies)
         self.draw_gaps()
@@ -571,7 +571,7 @@ class Reader(Geometry):
 
     def draw_edit_buttons(self):
         for index, sight in enumerate(self.sights):
-            draw_edit_button(sight.header, sight_title(sight),
+            draw_edit_button(sight.header, sight_title(sight, index),
                              lambda _, i=index: self.open_editor(i, self.sights[i].begin))
 
     def open_editor(self, index, line):

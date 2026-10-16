@@ -1,7 +1,7 @@
 {
  "name": "Building blocks",
  "kind": "survey",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
   "sw/plan.py:8-14",
   "sw/plan.py:21-32",
@@ -12,8 +12,8 @@
   "sw/views.py:47-52",
   "sw/views.py:55-56",
   "sw/chat.py:49-51",
-  "sw/commands.py:82-84",
-  "sw/commands.py:103-105"
+  "sw/commands.py:85-87",
+  "sw/commands.py:106-108"
  ],
  "transitions": [
   {

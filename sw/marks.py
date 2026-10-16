@@ -4,10 +4,11 @@ import math
 import re
 
 from .config import DEFAULT_MARK
-from .spec import matches
+from .spec import matches, sight_index, sight_name
 
 
-BAD_LINE = 'Write a line as "file:line" or {"sight": index, "line": line}, not %r.'
+BAD_LINE = ('Write a line as "file:line" or {"sight": index or name, "line": line}, such as '
+            '{"sight": "gamma", "line": 12}, not %r.')
 
 
 def line_y(sight, line, lh):
@@ -18,7 +19,7 @@ def resolve_target(sights, target):
     """target: "file:line" or {"sight": index, "line": line}. Returns (sight, line)."""
     try:
         if isinstance(target, dict):
-            index, line = int(target["sight"]), int(target["line"])
+            index, line = sight_number(target["sight"]), int(target["line"])
         else:
             name, _, line = str(target).rpartition(":")
             line = int(line)
@@ -36,9 +37,16 @@ def resolve_target(sights, target):
     return inside[0], line
 
 
+def sight_number(sight):
+    """A sight given by its index or its name ("gamma")."""
+    index = sight_index(sight) if isinstance(sight, str) and not sight.isdigit() else None
+    return int(sight) if index is None else index
+
+
 def sight_target(sights, index, line):
     if not 0 <= index < len(sights):
-        raise ValueError("No sight %d; the sights are 0 to %d." % (index, len(sights) - 1))
+        raise ValueError("No sight %d; the sights are 0 to %d (%s to %s)." % (
+            index, len(sights) - 1, sight_name(0), sight_name(len(sights) - 1)))
     sight = sights[index]
     if not sight.begin <= line <= sight.end:
         raise ValueError("Line %d is outside sight %d (%s)." % (line, index, sight.spec))

@@ -76,6 +76,22 @@ class CodeTalkTest(unittest.TestCase):
             self.assertFalse(marks.speaks_of_code(text), text)
 
 
+class SightNamesTest(unittest.TestCase):
+    def test_names_and_back(self):
+        self.assertEqual([spec.sight_name(i) for i in (0, 2, 23, 24, 25)],
+                         ["alpha", "gamma", "omega", "alpha 2", "beta 2"])
+        for i in (0, 2, 23, 24, 25):
+            self.assertEqual(spec.sight_index(spec.sight_name(i)), i)
+        for bad in ("gama", "alpha 1", "alpha x", ""):
+            self.assertIsNone(spec.sight_index(bad))
+
+    def test_marks_by_name(self):
+        sights, _ = stacked((1, 3), (10, 11))
+        self.assertEqual(marks.resolve_target(sights, {"sight": "beta", "line": 11}), (1, 11))
+        with self.assertRaises(ValueError):
+            marks.resolve_target(sights, {"sight": "gama", "line": 11})
+
+
 class LineRefsTest(unittest.TestCase):
     def test_found(self):
         text = ("1. (linia 33) zwraca token, (l. 42) ładuje, line 12 calls, "

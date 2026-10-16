@@ -1,80 +1,80 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
-  "sw/bridge.py:123-127",
+  "sw/bridge.py:133-137",
   "sw/state.py:44-50",
-  "sw/reader.py:524-533",
-  "sw/marks.py:83-99",
-  "sw/marks.py:72-80",
-  "sw/marks.py:17-36",
-  "sw/marks.py:39-45",
-  "sw/marks.py:48-54",
-  "sw/marks.py:13-14",
+  "sw/reader.py:527-536",
+  "sw/marks.py:91-107",
+  "sw/marks.py:80-88",
+  "sw/marks.py:18-37",
+  "sw/marks.py:46-53",
+  "sw/marks.py:56-62",
+  "sw/marks.py:14-15",
   "sw/chat.py:219-229",
-  "sw/marks.py:161-170"
+  "sw/marks.py:169-178"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 125],
-   "to": [2, 524]
+   "from": [0, 135],
+   "to": [2, 527]
   },
   {
    "type": "calls",
-   "from": [0, 125],
+   "from": [0, 135],
    "to": [1, 44]
   },
   {
    "type": "calls",
-   "from": [2, 525],
-   "to": [3, 83]
+   "from": [2, 528],
+   "to": [3, 91]
   },
   {
    "type": "calls",
-   "from": [2, 527],
+   "from": [2, 530],
    "to": [9, 219]
   },
   {
    "type": "calls",
-   "from": [2, 528],
-   "to": [8, 13]
+   "from": [2, 531],
+   "to": [8, 14]
   },
   {
    "type": "calls",
-   "from": [3, 91],
-   "to": [4, 72]
+   "from": [3, 99],
+   "to": [4, 80]
   },
   {
    "type": "calls",
-   "from": [3, 96],
-   "to": [5, 17]
+   "from": [3, 104],
+   "to": [5, 18]
   },
   {
    "type": "calls",
-   "from": [3, 97],
-   "to": [7, 48]
+   "from": [3, 105],
+   "to": [7, 56]
   },
   {
    "type": "calls",
-   "from": [4, 75],
-   "to": [5, 17]
+   "from": [4, 83],
+   "to": [5, 18]
   },
   {
    "type": "calls",
-   "from": [4, 76],
-   "to": [5, 17]
+   "from": [4, 84],
+   "to": [5, 18]
   },
   {
    "type": "calls",
-   "from": [5, 28],
-   "to": [6, 39]
+   "from": [5, 29],
+   "to": [6, 46]
   },
   {
    "type": "calls",
    "from": [9, 225],
-   "to": [10, 161]
+   "to": [10, 169]
   }
  ]
 }

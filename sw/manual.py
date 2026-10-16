@@ -86,7 +86,10 @@ Indicators
   in any language. The user reads lines by their icons, so name a line by its icon: "1 takes
   the token", "at A the port is read". say refuses line numbers. Line numbers belong only in
   the arguments of point and show.
-- A line is "file:line" (absolute file line) or {"sight": index, "line": line}.
+- Every sight has a name, a Greek letter spelled out in its header: alpha, beta, gamma, … in
+  the trip's order (show, open_trip and state list them). Name sights only so, as the user
+  does ("in gamma"), never by number or file. A line is "file:line" (absolute file line) or
+  {"sight": name or index, "line": line}, such as {"sight": "gamma", "line": 12}.
 - Jumps of control: {"from": line, "to": line}. Call site and the callee's first line, return
   and the call site it goes back to, raise and its handler. The arrows bend towards each other.
   Say in the conversation which jump it is. There and back are two separate point calls.
@@ -136,8 +139,8 @@ TOOLS = [
          {"text": {"type": "string"}, "status": {"type": "string"}}, ["text"]),
     tool("point", 'Place marks. A jump of control is {"from": "app.py:57", "to": "app.py:12"}; '
          'any other mark is {"at": "app.py:30", "mark": "1"} with a digit 1-9 or a letter A-Z '
-         '(default "A"). A line is "file:line" or {"sight": 2, "line": 12}. reveal scrolls the '
-         "marks into view. clear removes earlier marks first.",
+         '(default "A"). A line is "file:line" or {"sight": "gamma", "line": 12} (a sight\'s '
+         "name or index). reveal scrolls the marks into view. clear removes earlier marks first.",
          {"marks": {"type": "array", "items": {"type": "object"}},
           "reveal": {"type": "boolean"}, "clear": {"type": "boolean"}}, ["marks"]),
     tool("state", "Return the sights, the visible sights, and the sight and line the user "

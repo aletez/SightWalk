@@ -1,7 +1,7 @@
 {
  "name": "How Claude comes to listen to Sublime",
  "kind": "run",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
   "sw/guide.py:90-95",
   "sw/guide.py:47-56",
@@ -9,7 +9,7 @@
   "sw/guide.py:35-36",
   "sw/guide.py:39-44",
   "sw/guide.py:59-68",
-  "sw/bridge.py:228-244"
+  "sw/bridge.py:238-254"
  ],
  "transitions": [
   {

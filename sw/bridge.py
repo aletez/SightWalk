@@ -15,7 +15,7 @@ from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PO
 from .marks import line_refs, speaks_of_code, untag
 from .ontology import Sight, Transition, Trip, trip_from
 from .reader import Reader
-from .spec import parse_spec, repo_root
+from .spec import parse_spec, repo_root, sight_name
 from .views import hide_chrome
 
 CONFIG = {"token": None, "port": DEFAULT_PORT}
@@ -93,7 +93,12 @@ def op_show(sights=None, transitions=None, root=None, trip=None):
     reader.load(made, root)
     state.ADDRESSED = True  # the agent may say what the trip is about
     scrollbars.reader_focused(True)  # a new window is not reported as activated
-    return {"ok": True}
+    return {"ok": True, "sights": named([sight.spec for sight in made])}
+
+
+def named(specs):
+    """The trip's sights by their names, the names the user reads in the headers."""
+    return {sight_name(i): spec for i, spec in enumerate(specs)}
 
 
 MARK_FIRST = ("This answer names code, and nothing is marked yet: call point first with the lines "
@@ -134,7 +139,7 @@ def op_point(marks, reveal=True, clear=True):
 
 def op_state():
     reader = state.require_ready()
-    return dict(reader.context(), sights=[sight.spec for sight in reader.sights])
+    return dict(reader.context(), sights=named([sight.spec for sight in reader.sights]))
 
 
 def op_close():
@@ -193,7 +198,7 @@ def op_open_trip(file, root=None):
     (state.current_reader() or new_reader()).load(trip, root)
     state.ADDRESSED = True
     scrollbars.reader_focused(True)
-    return {"ok": True, "trip": trip.name, "sights": [sight.spec for sight in trip]}
+    return {"ok": True, "trip": trip.name, "sights": named([sight.spec for sight in trip])}
 
 
 OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,

@@ -1,15 +1,16 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "55642486abcdea4cac2a2a39ecc324e119371ec4",
+ "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
  "sights": [
-  "sw/bridge.py:107-120",
-  "sw/marks.py:180-195",
-  "sw/bridge.py:99-102",
-  "sw/marks.py:152-154",
-  "sw/marks.py:149-149",
-  "sw/reader.py:803-811",
-  "sw/reader.py:625-634",
+  "sw/bridge.py:114-130",
+  "sw/marks.py:188-203",
+  "sw/marks.py:217-219",
+  "sw/bridge.py:104-107",
+  "sw/marks.py:160-162",
+  "sw/marks.py:157-157",
+  "sw/reader.py:806-814",
+  "sw/reader.py:628-637",
   "sw/chat.py:94-113",
   "sw/header.py:12-22",
   "sw/chat.py:131-140",
@@ -17,86 +18,91 @@
   "sw/commands.py:28-29",
   "sw/chat.py:53-70",
   "sw/chat.py:35-43",
-  "sw/commands.py:107-110",
-  "sw/commands.py:112-116",
-  "sw/marks.py:198-200",
+  "sw/commands.py:110-113",
+  "sw/commands.py:115-119",
+  "sw/marks.py:206-208",
   "sw/chat.py:232-237"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 115],
-   "to": [1, 180]
+   "from": [0, 122],
+   "to": [1, 188]
   },
   {
    "type": "calls",
-   "from": [0, 116],
-   "to": [3, 152]
+   "from": [0, 123],
+   "to": [2, 217]
   },
   {
    "type": "calls",
-   "from": [0, 118],
-   "to": [5, 803]
+   "from": [0, 126],
+   "to": [4, 160]
   },
   {
    "type": "calls",
-   "from": [5, 808],
-   "to": [6, 625]
+   "from": [0, 128],
+   "to": [6, 806]
   },
   {
    "type": "calls",
-   "from": [5, 809],
-   "to": [10, 150]
+   "from": [6, 811],
+   "to": [7, 628]
   },
   {
    "type": "calls",
-   "from": [6, 626],
-   "to": [7, 94]
+   "from": [6, 812],
+   "to": [11, 150]
   },
   {
    "type": "calls",
-   "from": [6, 628],
-   "to": [9, 131]
+   "from": [7, 629],
+   "to": [8, 94]
   },
   {
    "type": "calls",
-   "from": [6, 631],
-   "to": [7, 94]
+   "from": [7, 631],
+   "to": [10, 131]
   },
   {
    "type": "calls",
-   "from": [6, 634],
-   "to": [7, 94]
+   "from": [7, 634],
+   "to": [8, 94]
   },
   {
    "type": "calls",
-   "from": [7, 99],
-   "to": [8, 12]
+   "from": [7, 637],
+   "to": [8, 94]
   },
   {
    "type": "calls",
-   "from": [10, 157],
-   "to": [11, 28]
+   "from": [8, 99],
+   "to": [9, 12]
   },
   {
    "type": "calls",
-   "from": [12, 63],
-   "to": [13, 35]
+   "from": [11, 157],
+   "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [12, 68],
-   "to": [11, 28]
+   "from": [13, 63],
+   "to": [14, 35]
   },
   {
    "type": "calls",
-   "from": [14, 110],
-   "to": [17, 232]
+   "from": [13, 68],
+   "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [15, 116],
-   "to": [16, 198]
+   "from": [15, 113],
+   "to": [18, 232]
+  },
+  {
+   "type": "calls",
+   "from": [16, 119],
+   "to": [17, 206]
   }
  ]
 }

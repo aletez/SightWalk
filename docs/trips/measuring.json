@@ -1,84 +1,84 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "52cf626f581ff8cc4c877455a85940dcd776c839",
+ "commit": "e9a352bb548ee86fcab60e75704100ba677c597c",
  "sights": [
-  "sw/reader.py:229-233",
-  "sw/reader.py:40-41",
+  "sw/reader.py:233-237",
+  "sw/reader.py:43-44",
   "sw/views.py:282-289",
-  "sw/reader.py:248-261",
+  "sw/reader.py:252-265",
   "sw/views.py:214-215",
   "sw/views.py:218-219",
-  "sw/reader.py:263-268",
-  "sw/reader.py:270-275",
-  "sw/reader.py:277-281",
-  "sw/reader.py:283-293",
-  "sw/reader.py:397-400",
+  "sw/reader.py:267-272",
+  "sw/reader.py:274-279",
+  "sw/reader.py:281-285",
+  "sw/reader.py:287-297",
+  "sw/reader.py:401-404",
   "sw/plan.py:82-87",
   "sw/plan.py:76-79",
   "sw/plan.py:47-63",
   "sw/plan.py:66-73",
-  "sw/reader.py:481-487"
+  "sw/reader.py:485-491"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 233],
-   "to": [1, 40]
+   "from": [0, 237],
+   "to": [1, 43]
   },
   {
    "type": "calls",
-   "from": [0, 233],
+   "from": [0, 237],
    "to": [2, 282]
   },
   {
    "type": "calls",
-   "from": [3, 255],
+   "from": [3, 259],
    "to": [5, 218]
   },
   {
    "type": "calls",
-   "from": [3, 256],
+   "from": [3, 260],
    "to": [4, 214]
   },
   {
    "type": "calls",
-   "from": [3, 259],
+   "from": [3, 263],
    "to": [4, 214]
   },
   {
    "type": "calls",
-   "from": [6, 268],
-   "to": [7, 270]
+   "from": [6, 272],
+   "to": [7, 274]
   },
   {
    "type": "calls",
-   "from": [7, 275],
-   "to": [8, 277]
+   "from": [7, 279],
+   "to": [8, 281]
   },
   {
    "type": "calls",
-   "from": [8, 281],
-   "to": [9, 283]
+   "from": [8, 285],
+   "to": [9, 287]
   },
   {
    "type": "calls",
-   "from": [9, 284],
+   "from": [9, 288],
    "to": [13, 47]
   },
   {
    "type": "calls",
-   "from": [9, 285],
-   "to": [10, 397]
+   "from": [9, 289],
+   "to": [10, 401]
   },
   {
    "type": "calls",
-   "from": [9, 286],
-   "to": [15, 481]
+   "from": [9, 290],
+   "to": [15, 485]
   },
   {
    "type": "calls",
-   "from": [10, 400],
+   "from": [10, 404],
    "to": [11, 82]
   },
   {

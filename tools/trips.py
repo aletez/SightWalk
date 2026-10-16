@@ -74,7 +74,7 @@ TRIPS = [
       "views.hide_chrome",
       "reader.Reader.scroll_views", "reader.Reader.places", "reader.Reader.strip_place", "views.anchor",
       "reader.Reader.draw_strip_buttons", "reader.Reader.strip_button",
-      "reader.Reader.draw_edit_buttons", "views.draw_edit_button"]),
+      "reader.Reader.draw_edit_buttons", "reader.Reader.title", "views.draw_edit_button"]),
     ("Polling and the wheel",
      "The two loops: the gutter measured once, the reader opening at the top; the wheel read "
      "and taken over.",

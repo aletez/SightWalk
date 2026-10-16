@@ -23,7 +23,8 @@ from .geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
 from .words import word
-from .spec import ancestors, breathing, display_path, parse_spec, repo_root, sight_title
+from .spec import (ancestors, breathing, display_path, parse_spec, repo_root, sight_name,
+                   sight_title)
 from .tint import apply_grey, apply_tint, hue_for, tint_color
 from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
                     draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
@@ -35,6 +36,8 @@ EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (n
 ARROWS = {"up": "▲", "down": "▼"}
 STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--foreground); '
                      'font-size: 1.6rem">%s</a>')
+
+HEADER_SYNTAX = "Packages/%s/SightWalkHeader.sublime-syntax" % __package__.split(".")[0]
 
 
 def line_count(view):
@@ -195,7 +198,8 @@ class Reader(Geometry):
         for index, sight in enumerate(self.sights):
             copy = copies[sight.path]
             sight.view = make_copy(self.window, copy, display_path(sight.path))
-            sight.header = make_header(self.window, sight_title(sight, index), sight.view)
+            sight.header = make_header(self.window, self.title(index), sight.view)
+            sight.header.assign_syntax(HEADER_SYNTAX)
             self.surround(sight, copy)
         self.tint(copies)
         self.draw_gaps()
@@ -569,9 +573,14 @@ class Reader(Geometry):
 
     # Editing
 
+    def title(self, index):
+        """A sight's header text, its name padded to the trip's longest."""
+        width = max(len(sight_name(i)) for i in range(len(self.sights)))
+        return sight_title(self.sights[index], index, width)
+
     def draw_edit_buttons(self):
         for index, sight in enumerate(self.sights):
-            draw_edit_button(sight.header, sight_title(sight, index),
+            draw_edit_button(sight.header, self.title(index),
                              lambda _, i=index: self.open_editor(i, self.sights[i].begin))
 
     def open_editor(self, index, line):

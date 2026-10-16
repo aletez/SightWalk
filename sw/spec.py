@@ -65,13 +65,13 @@ def sight_index(name):
         turn * len(GREEK) + GREEK.index(parts[0])
 
 
-def sight_title(sight, index=None):
-    """A sight's header: its name, then its file and lines, as given, without the blank lines
-    shown around."""
+def sight_title(sight, index=None, width=0):
+    """A sight's header: its name, padded to width so the files stand in one column (Jakub), then
+    its file and lines, as given, without the blank lines shown around."""
     begin, end = sight.begin + sight.pad[0], sight.end - sight.pad[1]
     lines = str(begin) if begin == end else "%d-%d" % (begin, end)
     title = "%s:%s" % (display_path(sight.path), lines)
-    return title if index is None else "%s · %s" % (sight_name(index), title)
+    return title if index is None else "%s · %s" % (sight_name(index).ljust(width), title)
 
 
 def matches(sight, name):

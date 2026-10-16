@@ -1,45 +1,45 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "52cf626f581ff8cc4c877455a85940dcd776c839",
+ "commit": "e9a352bb548ee86fcab60e75704100ba677c597c",
  "sights": [
-  "sw/reader.py:402-408",
+  "sw/reader.py:406-412",
   "sw/plan.py:90-98",
   "sw/geometry.py:60-63",
-  "sw/reader.py:363-373",
+  "sw/reader.py:367-377",
   "sw/geometry.py:79-110",
   "sw/geometry.py:40-44",
   "sw/geometry.py:127-138",
   "sw/geometry.py:123-125",
-  "sw/reader.py:297-304",
+  "sw/reader.py:301-308",
   "sw/views.py:84-107",
   "sw/views.py:74-81"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 405],
+   "from": [0, 409],
    "to": [1, 90]
   },
   {
    "type": "calls",
-   "from": [0, 406],
+   "from": [0, 410],
    "to": [2, 60]
   },
   {
    "type": "calls",
-   "from": [0, 408],
-   "to": [3, 363]
+   "from": [0, 412],
+   "to": [3, 367]
   },
   {
    "type": "calls",
-   "from": [3, 366],
+   "from": [3, 370],
    "to": [4, 79]
   },
   {
    "type": "calls",
-   "from": [3, 371],
-   "to": [8, 297]
+   "from": [3, 375],
+   "to": [8, 301]
   },
   {
    "type": "calls",
@@ -58,7 +58,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 302],
+   "from": [8, 306],
    "to": [9, 84]
   },
   {

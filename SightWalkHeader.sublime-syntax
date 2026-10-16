@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
-# A sight's header: its name greyed, the comments' colour of the scheme (Jakub), then its file
-# and lines. Only for display.
+# A sight's header: its name greyed (Jakub; the colour is in SightWalk's header scheme, see
+# tint), then its file and lines. Only for display.
 name: SightWalk Sight Header
 scope: text.sight-walk.header
 hidden: true
@@ -9,5 +9,5 @@ contexts:
   main:
     - match: '^\s*([a-z]+(?: \d+)?)(\s*·)'
       captures:
-        1: comment.line.sight-name.sight-walk
-        2: comment.line.sight-name.sight-walk
+        1: meta.sight-name.sight-walk
+        2: meta.sight-name.sight-walk

@@ -128,6 +128,9 @@ def tinted_schemes(view, hue, amount):
     code = write_scheme(scheme, stem + "-code.sublime-color-scheme")
     # The header's caret line paints its gutter in the line highlight; make that the band too.
     globals_["background"] = globals_["line_highlight"] = band
+    # A sight's name greyed (Jakub): the text mixed half with the band, grey in any scheme.
+    scheme["rules"].append({"scope": "meta.sight-name.sight-walk", "foreground": tint_color(
+        band, None, 0.5, view.style().get("foreground", "#808080"))})
     return [code, write_scheme(scheme, stem + "-header.sublime-color-scheme")]
 
 

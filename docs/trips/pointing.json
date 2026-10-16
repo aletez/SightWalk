@@ -1,7 +1,7 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "e9a352bb548ee86fcab60e75704100ba677c597c",
+ "commit": "0187bd229cad2c46e3280e2d961d418903fdc7d7",
  "sights": [
   "sw/bridge.py:133-137",
   "sw/state.py:44-50",

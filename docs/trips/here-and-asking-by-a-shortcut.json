@@ -1,7 +1,7 @@
 {
  "name": "Here, and asking by a shortcut",
  "kind": "run",
- "commit": "e9a352bb548ee86fcab60e75704100ba677c597c",
+ "commit": "0187bd229cad2c46e3280e2d961d418903fdc7d7",
  "sights": [
   "sw/commands.py:137-147",
   "sw/reader.py:660-663",

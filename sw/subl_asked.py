@@ -8,7 +8,7 @@ import sublime
 
 from . import questions
 from .spec import repo_root
-from .views import kept
+from .subl_views import kept
 from .words import word
 
 SKIP = ("__pycache__", "venv", ".venv", "node_modules")

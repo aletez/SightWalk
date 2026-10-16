@@ -8,7 +8,7 @@ import sublime_plugin
 from . import marks
 from .config import BLANK_LINES, PROMPT
 from .header import MARK_ROOM, title_lines
-from .views import FADED, button_html, kept, make_side_view, match_font, phantoms
+from .subl_views import FADED, button_html, kept, make_side_view, match_font, phantoms
 from .words import word
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]

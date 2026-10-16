@@ -11,9 +11,9 @@ import subprocess
 import sublime
 
 from .callmap import dot_source
-from .chat import MARK_HTML, SYNTAX
+from .subl_chat import MARK_HTML, SYNTAX
 from .config import BLANK_LINES, SETTINGS_FILE
-from .views import FADED, kept, make_side_view, phantoms
+from .subl_views import FADED, kept, make_side_view, phantoms
 from .words import word
 
 TABS = ("Map", "Tour")
@@ -85,7 +85,7 @@ def find_dot():
 
 
 def draw_map(view, nodes, arrows, style):
-    """Draws the map off the main thread (a subprocess would block the bridge), then shows it."""
+    """Draws the map off the main thread (a subprocess would block the executor), then shows it."""
     dot = find_dot()
     if dot is None:
         show_note(view, word("no_dot"))

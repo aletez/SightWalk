@@ -10,7 +10,7 @@ import sublime
 from .config import SETTLE_MS
 from .marks import icon_colour
 from .spec import display_path
-from .views import draw_icons, draw_outlines, make_header, wait_until_loaded
+from .subl_views import draw_icons, draw_outlines, make_header, wait_until_loaded
 
 
 def open_live(window, path):

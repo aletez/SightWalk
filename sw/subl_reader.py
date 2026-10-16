@@ -14,19 +14,19 @@ import time
 
 import sublime
 
-from . import asked, callmap, chat, marks, ontology, plan, state, vetting
+from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
-from .editor import Editor
-from .geometry import Geometry
+from .subl_editor import Editor
+from .subl_geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
 from .words import word
 from .spec import (ancestors, breathing, display_path, elided, parse_spec, repo_root, sight_name,
                    sight_title)
-from .tint import apply_grey, apply_tint, hue_for, tint_color
-from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
+from .subl_tint import apply_grey, apply_tint, hue_for, tint_color
+from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
                     draw_icons,
                     draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
                     make_blank_view, make_browser, make_copy, make_header, make_side_view,
@@ -87,41 +87,41 @@ class Reader(Geometry):
         """Every view but the sights. Below the last sight an invisible filler takes the wheel
         (Jakub)."""
         self.filler = make_blank_view(self.window, "")
-        self.filler.assign_syntax(chat.SYNTAX)  # the bench's colours below the sights (Jakub)
+        self.filler.assign_syntax(subl_chat.SYNTAX)  # the bench's colours below the sights (Jakub)
         self.top_filler = make_blank_view(self.window, "")  # above a short trip (see plan.lead)
-        self.top_filler.assign_syntax(chat.SYNTAX)
+        self.top_filler.assign_syntax(subl_chat.SYNTAX)
         # Between the bench and the Sights, an empty strip whose wheel moves the whole trip; the
         # wheel over a sight scrolls only that sight, until the trip next moves (Jakub).
         self.strip = make_blank_view(self.window, "")
-        self.strip.assign_syntax(chat.SYNTAX)  # the bench's colours (Jakub)
+        self.strip.assign_syntax(subl_chat.SYNTAX)  # the bench's colours (Jakub)
         self.strip.settings().set("margin", 0)  # room for an icon in a scroll bar's width
         self.strip_parts = [self.strip] + [self.clone(self.strip) for _ in range(2)]
         self.strip_floor = make_blank_view(self.window, "")  # ▼, under the strip (Jakub)
-        self.strip_floor.assign_syntax(chat.SYNTAX)
+        self.strip_floor.assign_syntax(subl_chat.SYNTAX)
         self.strip_floor.settings().set("margin", 0)
         self.chat = make_side_view(self.window, "Vetting Bench", {
             "word_wrap": True, "wrap_width": 0, "sight_walk_chat": True, "scroll_past_end": False})
         self.chat.settings().set("margin", BENCH_MARGIN)
-        chat.start(self.chat)
+        subl_chat.start(self.chat)
         # Headers over the bench and over the Sights play the role of tabs, since tabs are off.
-        self.chat_header = chat.make_header(self.window, self.chat, BENCH)
-        self.sights_header = chat.make_header(self.window, self.chat, SIGHTS)
-        self.strip_header = chat.make_header(self.window, self.chat, STRIP)
+        self.chat_header = subl_chat.make_header(self.window, self.chat, BENCH)
+        self.sights_header = subl_chat.make_header(self.window, self.chat, SIGHTS)
+        self.strip_header = subl_chat.make_header(self.window, self.chat, STRIP)
         for header in (self.chat_header, self.sights_header, self.strip_header):
             apply_grey(header)
         self.strip_header.settings().set("gutter", False)  # ▲ in a scroll bar's width
         self.strip_header.settings().set("margin", 0)
         bench_font(self.chat)  # after the headers, which keep the font of code
-        self.map_view = vetting.make_tool(self.window, "Map")
-        self.tour_view = vetting.make_tool(self.window, "Tour")
+        self.map_view = subl_vetting.make_tool(self.window, "Map")
+        self.tour_view = subl_vetting.make_tool(self.window, "Tour")
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         self.tool_offsets = {}  # {view id: px down its content}, kept while a tool takes the wheel
         for view in (self.map_view, self.tour_view):
-            vetting.set_panning(view, self.pan)
+            subl_vetting.set_panning(view, self.pan)
         self.chat.settings().set("scroll_past_end", self.pan)
         self.tool = "Map"  # the Tools pane's tab shown
-        self.below_header = chat.make_header(self.window, self.chat, "Tools")
-        self.status_view = chat.make_status(self.window, self.chat)
+        self.below_header = subl_chat.make_header(self.window, self.chat, "Tools")
+        self.status_view = subl_chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
         apply_grey(self.below_header)
 
@@ -132,7 +132,7 @@ class Reader(Geometry):
         self.shown = (trip, root)  # for Reset Sights
         self.ready = False
         self.trip = trip
-        chat.catch_up(self.chat)  # what was said in another trip meanwhile
+        subl_chat.catch_up(self.chat)  # what was said in another trip meanwhile
         self.close_sights()
         self.sights = [plan.Pane(sight, *parse_spec(sight.spec, root)) for sight in trip]
         self.indicators = marks or []
@@ -204,7 +204,7 @@ class Reader(Geometry):
             self.surround(sight, copy)
         self.tint(copies)
         self.draw_gaps()
-        asked.draw(self.sights)
+        subl_asked.draw(self.sights)
         self.make_items()
         if self.height is None:
             self.calibrate()
@@ -483,7 +483,7 @@ class Reader(Geometry):
         if self.pan:
             tool = self.tool_view()
             places += [(tool, anchor(tool) + self.tool_offsets.get(tool.id(), 0.0)),
-                       (self.chat, chat.kept_place(self.chat))]
+                       (self.chat, subl_chat.kept_place(self.chat))]
         return places
 
     def pinned_places(self):
@@ -512,7 +512,7 @@ class Reader(Geometry):
         laid out, not the wheel; while a new layout settles, movements are only undone."""
         settling = time.time() < self.settle_until
         if self.pan:
-            chat.keep_at_bottom(self.chat)  # its own changes first, not read as the wheel
+            subl_chat.keep_at_bottom(self.chat)  # its own changes first, not read as the wheel
         for view, place in self.pinned_places():
             x, y = view.viewport_position()
             if abs(y - place) > 0.5:
@@ -550,7 +550,7 @@ class Reader(Geometry):
         """The slow loop: the conversation's bottom, the headers and the window's size."""
         if not self.alive():
             return
-        chat.keep_at_bottom(self.chat)
+        subl_chat.keep_at_bottom(self.chat)
         self.show_headers()  # they rewrap when a column is resized
         if self.ready:
             self.follow_resize()
@@ -582,7 +582,7 @@ class Reader(Geometry):
     def point(self, new_marks, reveal=True, clear=True):
         resolved = marks.resolve_marks(self.sights, new_marks)
         self.indicators = resolved if clear else self.indicators + resolved
-        chat.outline_refs(self.chat, self.indicators, len(self.sights))
+        subl_chat.outline_refs(self.chat, self.indicators, len(self.sights))
         ys = [marks.line_y(self.sights[m["sight"]], m["line"], self.lh) for m in resolved]
         bottom = self.offset + self.room() - 2 * self.lh
         if reveal and ys and not all(self.offset <= y <= bottom for y in ys):
@@ -686,15 +686,15 @@ class Reader(Geometry):
     # Conversation
 
     def show_headers(self):
-        chat.show_header(self.chat_header, word("bench"), "")
+        subl_chat.show_header(self.chat_header, word("bench"), "")
         self.chat.set_name(word("bench_view"))
-        chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
+        subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
-        vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan)
-        chat.show_header(self.sights_header, word("sights"), self.trip.name if self.trip else "",
+        subl_vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan)
+        subl_chat.show_header(self.sights_header, word("sights"), self.trip.name if self.trip else "",
                          button=(word("reset"), self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
-        chat.show_header(self.strip_header, "", "", help_mark=False)
+        subl_chat.show_header(self.strip_header, "", "", help_mark=False)
 
     def toggle_focus(self, view):
         """To the bench, or from it back to the view used last (Jakub)."""
@@ -756,7 +756,7 @@ class Reader(Geometry):
             # How far down its content the tool is scrolled stays across the switch (Jakub).
             y = view.viewport_position()[1]
             self.tool_offsets[view.id()] = max(y - anchor(view) if not self.pan else y, 0.0)
-            vetting.set_panning(view, self.pan, self.tool_offsets[view.id()])
+            subl_vetting.set_panning(view, self.pan, self.tool_offsets[view.id()])
         self.chat.settings().set("scroll_past_end", self.pan)  # so the wheel moves it down too
         self.show_headers()
         self.select_tool(self.tool)  # lays out again, draws the tools at their new place
@@ -774,7 +774,7 @@ class Reader(Geometry):
             else ontology.tour(self.informator)
         if not tour:
             self.tour.name = "%s: %s" % (self.informator.name, word("all_trips"))
-        self.walked = vetting.read_walked(self.informator.id)
+        self.walked = subl_vetting.read_walked(self.informator.id)
         self.tool = "Tour"
         first = next((t for t in self.tour if t.id not in self.walked), self.tour.members[0])
         self.tour_link("open:" + first.id)
@@ -785,12 +785,12 @@ class Reader(Geometry):
         what, _, key = href.partition(":")
         if what == "open":
             self.keep_transcript()
-            chat.set_transcript(self.informator.transcripts.get(key, ""))
+            subl_chat.set_transcript(self.informator.transcripts.get(key, ""))
             self.tour_trip = key
             self.load(self.informator.member(key), self.informator_root)
         elif what == "tick":
             self.walked ^= {key}
-            vetting.save_walked(self.informator.id, self.walked)
+            subl_vetting.save_walked(self.informator.id, self.walked)
         self.draw_tour()
 
     def keep_transcript(self):
@@ -799,12 +799,12 @@ class Reader(Geometry):
         git ignores (Jakub: conversations stay out of git)."""
         if self.informator is None or self.trip is None or self.trip.id != self.tour_trip:
             return
-        self.informator.transcripts[self.tour_trip] = chat.TRANSCRIPT
+        self.informator.transcripts[self.tour_trip] = subl_chat.TRANSCRIPT
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 
     def draw_tour(self):
-        vetting.show_tour(self.tour_view, self.tour, self.walked,
+        subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
                              self.trip.id if self.trip else None, self.tour_link)
 
     def draw_map(self):
@@ -815,7 +815,7 @@ class Reader(Geometry):
                 definitions.setdefault(node.key[0], []).append(node.key[1])
             arrows = callmap.edges(definitions, [(t.type, t.source, t.target)
                                                  for t in self.trip.transitions])
-            vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4])
+            subl_vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4])
 
     def map_nodes(self, index):
         """The map's nodes for a sight: its first definition and every line a call in the trip
@@ -844,7 +844,7 @@ class Reader(Geometry):
 
     def stop_answer(self):
         """[Stop] or Esc while an answer is on its way (Jakub): the agent's further say, show and
-        point are refused until it waits for the user again (see bridge)."""
+        point are refused until it waits for the user again (see validator)."""
         if not self.note:
             return
         state.STOPPED, self.note = True, ""
@@ -869,8 +869,8 @@ class Reader(Geometry):
         if status is not None:
             self.status = status
         self.show_headers()
-        chat.say(self.chat, text, prefix)
-        chat.outline_refs(self.chat, self.indicators, len(self.sights))
+        subl_chat.say(self.chat, text, prefix)
+        subl_chat.outline_refs(self.chat, self.indicators, len(self.sights))
         self.keep_transcript()
 
     def context(self):

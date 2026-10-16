@@ -7,7 +7,7 @@ import os
 import sublime
 import sublime_plugin
 
-from . import asked, bridge, chat, guide, marks, scrollbars, state, tint, vetting
+from . import subl_asked, subl_executor, subl_chat, subl_guide, marks, subl_scrollbars, state, subl_tint, subl_vetting
 from .config import SETTINGS_FILE
 from .spec import repo_root
 from .words import trips_count, word
@@ -33,7 +33,7 @@ def send(owner, text):
     """A message from the trip to the agent, with what the user sees and any edited ranges."""
     state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
     owner.keep_transcript()
-    guide.await_answer(owner)
+    subl_guide.await_answer(owner)
 
 
 class SightWalkSendCommand(sublime_plugin.TextCommand):
@@ -41,7 +41,7 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         owner = state.reader_for(self.view.window())
-        draft = None if owner is None else chat.take_draft(self.view, edit)
+        draft = None if owner is None else subl_chat.take_draft(self.view, edit)
         if draft:
             send(owner, draft)
 
@@ -88,7 +88,7 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
 
     def on_hover(self, point, hover_zone):
         if hover_zone == sublime.HOVER_TEXT:
-            chat.show_help(self.view, point)
+            subl_chat.show_help(self.view, point)
 
 
 class SightWalkScrollCommand(sublime_plugin.WindowCommand):
@@ -110,7 +110,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
     def on_modified(self):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
-        sublime.set_timeout(lambda: chat.shade_variables(self.view), 50)  # after highlighting
+        sublime.set_timeout(lambda: subl_chat.shade_variables(self.view), 50)  # after highlighting
 
     def on_post_text_command(self, command_name, args):
         """What leaves the bench by copying leaves without the invisible operators around names
@@ -121,7 +121,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
 
 class SightWalkWindowListener(sublime_plugin.EventListener):
     def on_activated(self, view):
-        scrollbars.reader_focused(state.reader_for(view.window()) is not None)
+        subl_scrollbars.reader_focused(state.reader_for(view.window()) is not None)
         self.offer_to_browser(view)
 
     def on_load(self, view):
@@ -159,7 +159,7 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
 def clear_schemes_if_unused():
     """The written colour schemes no trip uses go (Jakub); a trip writes them anew."""
-    tint.clear_schemes()
+    subl_tint.clear_schemes()
 
 
 class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):
@@ -204,10 +204,10 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
                                      lambda i: i >= 0 and self.open(*found[i][2:]))
 
     def open(self, informator, tour):
-        reader = state.current_reader() or bridge.new_reader()
+        reader = state.current_reader() or subl_executor.new_reader()
         reader.open_tour(informator, tour)
         reader.window.bring_to_front()
-        scrollbars.reader_focused(True)
+        subl_scrollbars.reader_focused(True)
 
 
 def tour_choices():
@@ -264,7 +264,7 @@ class SightWalkZoomMapCommand(sublime_plugin.TextCommand):
     """primary+= / primary+minus / primary+0 on the Map: larger, smaller, as wide as the pane."""
 
     def run(self, edit, how):
-        vetting.zoom(self.view, how)
+        subl_vetting.zoom(self.view, how)
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):
@@ -280,10 +280,10 @@ class SightWalkStopGuideCommand(sublime_plugin.WindowCommand):
     """Ends the Vetting guide that SightWalk started in the background."""
 
     def run(self):
-        guide.stop()
+        subl_guide.stop()
 
     def is_enabled(self):
-        return guide.running()
+        return subl_guide.running()
 
 
 class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
@@ -301,8 +301,8 @@ class SightWalkToggleGuideCommand(sublime_plugin.TextCommand):
             reader.window.bring_to_front()
             reader.window.focus_view(reader.chat)
             return
-        bridge.new_reader().open_empty(self.folder())
-        scrollbars.reader_focused(True)  # a new window is not reported as activated
+        subl_executor.new_reader().open_empty(self.folder())
+        subl_scrollbars.reader_focused(True)  # a new window is not reported as activated
 
     def folder(self):
         path = self.view.file_name()
@@ -321,14 +321,14 @@ class SightWalkSightListener(sublime_plugin.ViewEventListener):
 
     def on_hover(self, point, hover_zone):
         if hover_zone == sublime.HOVER_TEXT:
-            asked.show_popup(self.view, point)
+            subl_asked.show_popup(self.view, point)
 
 
 class SightWalkToggleSentinelsCommand(sublime_plugin.TextCommand):
     """References without sentinel: their underlines on or off (see asked)."""
 
     def run(self, edit):
-        asked.toggle()
+        subl_asked.toggle()
 
 
 COMPARED_FONTS = ("Helvetica Neue", "Avenir Next", "Charter", "Iowan Old Style", "Georgia",
@@ -340,14 +340,14 @@ class SightWalkCompareFontsCommand(sublime_plugin.ApplicationCommand):
     choose bench_font_face."""
 
     def run(self):
-        sample = (chat.TRANSCRIPT or kept_conversation())[-2500:]
+        sample = (subl_chat.TRANSCRIPT or kept_conversation())[-2500:]
         sublime.run_command("new_window")
         window = sublime.active_window()
         window.set_layout({"cols": [0, 1 / 3, 2 / 3, 1], "rows": [0, 0.5, 1],
                            "cells": [[c, r, c + 1, r + 1] for r in range(2) for c in range(3)]})
         for group, face in enumerate(COMPARED_FONTS):
             window.focus_group(group)
-            view = window.new_file(syntax=chat.SYNTAX)
+            view = window.new_file(syntax=subl_chat.SYNTAX)
             view.set_scratch(True)
             view.set_name(face)
             view.settings().update({"font_face": face, "word_wrap": True, "gutter": False})

@@ -26,9 +26,9 @@ Command palette: **SightWalk: Set Up Agent Bridge**. Pass:
 
 Running it again keeps the token.
 
-## 3. The bridge without the agent
+## 3. The executor without the agent
 
-From the repository root. A Sublime command that runs `poke.py` must start the subprocess off the main thread (`sublime.set_timeout_async`), because the bridge needs the main thread to answer; otherwise Sublime freezes for 10 s and the call fails.
+From the repository root. A Sublime command that runs `poke.py` must start the subprocess off the main thread (`sublime.set_timeout_async`), because the executor needs the main thread to answer; otherwise Sublime freezes for 10 s and the call fails.
 
 | Command | Pass |
 |---|---|
@@ -56,5 +56,5 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 ## 6. The agent
 
 1. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 8 tools.
-3. Prompt: "Use the sight-walk tools to walk me through what happens when the bridge receives a show request, from mcp_http's do_POST to Reader.column_rects, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
+3. Prompt: "Use the sight-walk tools to walk me through what happens when the plugin receives a show request, from subl_mcp_http's do_POST to Reader.column_rects, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
 4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ⤵ and ↳; "what if the file doesn't exist?" rebuilds the sequence.

@@ -11,7 +11,7 @@ import uuid
 
 import sublime
 
-from . import bridge
+from . import subl_executor
 from .config import SETTINGS_FILE
 from .manual import MANUAL, TOOLS
 
@@ -21,16 +21,18 @@ WAIT_S = 50  # Claude Code cuts a tool call off after about 60 s
 
 
 def call_tool(name, args):
+    """Two steps (Jakub): the validator judges the call, then the executor does it (see
+    subl_executor.execute)."""
     if name == "wait_for_user":
-        return bridge.wait_for_user(min(int(args.get("timeout_s") or WAIT_S), WAIT_S))
+        args = dict(args, timeout_s=min(int(args.get("timeout_s") or WAIT_S), WAIT_S))
     if name == "say" and "message" in args:  # an agent may name text so
         args = dict(args, text=args.get("text") or args.pop("message"))
     if name in ("point", "state"):
-        bridge.wait_until_ready()
-    if name not in bridge.OPS:
+        subl_executor.wait_until_ready()
+    if name not in subl_executor.OPS and name != "wait_for_user":
         names = ", ".join(t["name"] for t in TOOLS)
         raise ValueError("Unknown tool %r. Tools: %s." % (name, names))
-    return bridge.run_on_main(lambda: bridge.OPS[name](**args))
+    return subl_executor.execute(name, args)
 
 
 def tool_result(name, args):
@@ -74,7 +76,7 @@ def reply(message):
 
 class Handler(http.server.BaseHTTPRequestHandler):
     def authorized(self):
-        expected = bridge.CONFIG["token"] or ""
+        expected = subl_executor.CONFIG["token"] or ""
         given = self.headers.get("Authorization", "")
         return bool(expected) and hmac.compare_digest(given, "Bearer " + expected)
 
@@ -115,7 +117,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
 def start_server():
     global SERVER
-    SERVER = http.server.ThreadingHTTPServer(("127.0.0.1", bridge.CONFIG["port"]), Handler)
+    SERVER = http.server.ThreadingHTTPServer(("127.0.0.1", subl_executor.CONFIG["port"]), Handler)
     SERVER.daemon_threads = True
     threading.Thread(target=SERVER.serve_forever, daemon=True).start()
 
@@ -130,16 +132,16 @@ def stop_server():
 
 def settings_changed():
     """A new token applies at once; a new port restarts the server."""
-    port = bridge.CONFIG["port"]
-    bridge.load_config()
-    if SERVER is not None and bridge.CONFIG["port"] != port:
+    port = subl_executor.CONFIG["port"]
+    subl_executor.load_config()
+    if SERVER is not None and subl_executor.CONFIG["port"] != port:
         stop_server()
         start_server()
 
 
 def start():
     sublime.load_settings(SETTINGS_FILE).add_on_change("sight_walk_bridge", settings_changed)
-    bridge.load_config()
+    subl_executor.load_config()
     start_server()
 
 

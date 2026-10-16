@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "d368e9bc355914641b21b9ffcfb21e36a711bff4",
+ "commit": "a65696987550b67fcb2c09c6b565ec1a4ed5cd7e",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -905,7 +905,7 @@
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -1143,7 +1143,7 @@
    "to": [
     "primary-g",
     5,
-    169
+    176
    ]
   },
   {
@@ -1156,7 +1156,7 @@
    "to": [
     "polling-and-the-wheel",
     0,
-    554
+    561
    ]
   },
   {
@@ -1169,7 +1169,7 @@
    "to": [
     "polling-and-the-wheel",
     4,
-    564
+    571
    ]
   },
   {
@@ -1177,7 +1177,7 @@
    "from": [
     "a-new-reader-window",
     1,
-    63
+    70
    ],
    "to": [
     "a-new-reader-window"
@@ -1188,7 +1188,7 @@
    "from": [
     "a-new-reader-window",
     2,
-    86
+    93
    ],
    "to": [
     "a-new-reader-window"
@@ -1199,12 +1199,12 @@
    "from": [
     "a-new-reader-window",
     2,
-    98
+    105
    ],
    "to": [
     "arranging-the-views",
     4,
-    282
+    289
    ]
   },
   {
@@ -1212,7 +1212,7 @@
    "from": [
     "a-new-reader-window",
     2,
-    111
+    118
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -1225,7 +1225,7 @@
    "from": [
     "a-new-reader-window",
     2,
-    120
+    127
    ],
    "to": [
     "the-tools-pane-s-tabs",
@@ -1238,7 +1238,7 @@
    "from": [
     "a-new-reader-window",
     2,
-    126
+    133
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -1441,7 +1441,7 @@
    "from": [
     "loading-the-sights",
     0,
-    130
+    137
    ],
    "to": [
     "loading-the-sights"
@@ -1452,7 +1452,7 @@
    "from": [
     "loading-the-sights",
     0,
-    137
+    144
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -1465,7 +1465,7 @@
    "from": [
     "loading-the-sights",
     0,
-    137
+    144
    ],
    "to": [
     "building-blocks",
@@ -1478,7 +1478,7 @@
    "from": [
     "loading-the-sights",
     0,
-    137
+    144
    ],
    "to": [
     "a-request-arrives",
@@ -1515,7 +1515,7 @@
    "from": [
     "loading-the-sights",
     2,
-    186
+    193
    ],
    "to": [
     "loading-the-sights"
@@ -1526,7 +1526,7 @@
    "from": [
     "loading-the-sights",
     2,
-    194
+    201
    ],
    "to": [
     "building-blocks",
@@ -1539,7 +1539,7 @@
    "from": [
     "loading-the-sights",
     2,
-    195
+    202
    ],
    "to": [
     "building-blocks",
@@ -1552,7 +1552,7 @@
    "from": [
     "loading-the-sights",
     3,
-    198
+    205
    ],
    "to": [
     "loading-the-sights"
@@ -1563,7 +1563,7 @@
    "from": [
     "loading-the-sights",
     3,
-    201
+    208
    ],
    "to": [
     "names-and-room",
@@ -1576,12 +1576,12 @@
    "from": [
     "loading-the-sights",
     3,
-    202
+    209
    ],
    "to": [
     "arranging-the-views",
     14,
-    632
+    639
    ]
   },
   {
@@ -1589,23 +1589,10 @@
    "from": [
     "loading-the-sights",
     3,
-    205
+    212
    ],
    "to": [
     "colours",
-    0,
-    269
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "loading-the-sights",
-    3,
-    206
-   ],
-   "to": [
-    "measuring",
     0,
     276
    ]
@@ -1615,7 +1602,20 @@
    "from": [
     "loading-the-sights",
     3,
-    207
+    213
+   ],
+   "to": [
+    "measuring",
+    0,
+    283
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    3,
+    214
    ],
    "to": [
     "questions-the-code-already-asks",
@@ -1628,12 +1628,12 @@
    "from": [
     "loading-the-sights",
     3,
-    208
+    215
    ],
    "to": [
     "measuring",
     3,
-    295
+    302
    ]
   },
   {
@@ -1641,12 +1641,12 @@
    "from": [
     "loading-the-sights",
     3,
-    210
+    217
    ],
    "to": [
     "measuring",
     6,
-    322
+    329
    ]
   },
   {
@@ -1654,12 +1654,12 @@
    "from": [
     "loading-the-sights",
     3,
-    212
+    219
    ],
    "to": [
     "measuring",
     9,
-    342
+    349
    ]
   },
   {
@@ -1702,7 +1702,7 @@
    "from": [
     "loading-the-sights",
     6,
-    214
+    221
    ],
    "to": [
     "loading-the-sights"
@@ -1713,7 +1713,7 @@
    "from": [
     "loading-the-sights",
     6,
-    220
+    227
    ],
    "to": [
     "names-and-room",
@@ -1726,7 +1726,7 @@
    "from": [
     "loading-the-sights",
     6,
-    221
+    228
    ],
    "to": [
     "measuring",
@@ -1783,7 +1783,7 @@
    "from": [
     "loading-the-sights",
     11,
-    236
+    243
    ],
    "to": [
     "loading-the-sights"
@@ -1794,7 +1794,7 @@
    "from": [
     "loading-the-sights",
     12,
-    245
+    252
    ],
    "to": [
     "loading-the-sights"
@@ -1805,7 +1805,7 @@
    "from": [
     "loading-the-sights",
     12,
-    253
+    260
    ],
    "to": [
     "measuring",
@@ -1842,7 +1842,7 @@
    "from": [
     "loading-the-sights",
     14,
-    312
+    319
    ],
    "to": [
     "loading-the-sights"
@@ -1853,7 +1853,7 @@
    "from": [
     "loading-the-sights",
     14,
-    317
+    324
    ],
    "to": [
     "measuring",
@@ -1866,7 +1866,7 @@
    "from": [
     "loading-the-sights",
     14,
-    319
+    326
    ],
    "to": [
     "measuring",
@@ -1879,7 +1879,7 @@
    "from": [
     "loading-the-sights",
     15,
-    258
+    265
    ],
    "to": [
     "loading-the-sights"
@@ -1995,7 +1995,7 @@
    "from": [
     "colours",
     0,
-    269
+    276
    ],
    "to": [
     "colours"
@@ -2006,7 +2006,7 @@
    "from": [
     "colours",
     0,
-    273
+    280
    ],
    "to": [
     "building-blocks",
@@ -2209,7 +2209,7 @@
    "from": [
     "measuring",
     0,
-    276
+    283
    ],
    "to": [
     "measuring"
@@ -2220,7 +2220,7 @@
    "from": [
     "measuring",
     1,
-    44
+    51
    ],
    "to": [
     "measuring"
@@ -2255,7 +2255,7 @@
    "from": [
     "measuring",
     3,
-    295
+    302
    ],
    "to": [
     "measuring"
@@ -2266,7 +2266,7 @@
    "from": [
     "measuring",
     3,
-    299
+    306
    ],
    "to": [
     "a-new-reader-window",
@@ -2279,46 +2279,7 @@
    "from": [
     "measuring",
     3,
-    302
-   ],
-   "to": [
-    "building-blocks",
-    0,
-    8
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    3,
-    303
-   ],
-   "to": [
-    "building-blocks",
-    0,
-    8
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    3,
-    305
-   ],
-   "to": [
-    "loading-the-sights",
-    14,
-    312
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    3,
-    307
+    309
    ],
    "to": [
     "building-blocks",
@@ -2332,6 +2293,45 @@
     "measuring",
     3,
     310
+   ],
+   "to": [
+    "building-blocks",
+    0,
+    8
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    312
+   ],
+   "to": [
+    "loading-the-sights",
+    14,
+    319
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    314
+   ],
+   "to": [
+    "building-blocks",
+    0,
+    8
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
+    317
    ],
    "to": [
     "building-blocks",
@@ -2366,43 +2366,6 @@
    "from": [
     "measuring",
     6,
-    322
-   ],
-   "to": [
-    "measuring"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    6,
-    325
-   ],
-   "to": [
-    "the-layout",
-    5,
-    40
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    6,
-    326
-   ],
-   "to": [
-    "arranging-the-views",
-    1,
-    392
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "measuring",
-    7,
     329
    ],
    "to": [
@@ -2413,7 +2376,7 @@
    "type": "calls",
    "from": [
     "measuring",
-    7,
+    6,
     332
    ],
    "to": [
@@ -2426,20 +2389,20 @@
    "type": "calls",
    "from": [
     "measuring",
-    7,
+    6,
     333
    ],
    "to": [
     "arranging-the-views",
     1,
-    392
+    399
    ]
   },
   {
    "type": "own_trip",
    "from": [
     "measuring",
-    8,
+    7,
     336
    ],
    "to": [
@@ -2447,53 +2410,51 @@
    ]
   },
   {
+   "type": "calls",
+   "from": [
+    "measuring",
+    7,
+    339
+   ],
+   "to": [
+    "the-layout",
+    5,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    7,
+    340
+   ],
+   "to": [
+    "arranging-the-views",
+    1,
+    399
+   ]
+  },
+  {
    "type": "own_trip",
    "from": [
     "measuring",
-    9,
-    342
+    8,
+    343
    ],
    "to": [
     "measuring"
    ]
   },
   {
-   "type": "calls",
-   "from": [
-    "measuring",
-    9,
-    344
-   ],
-   "to": [
-    "loading-the-sights",
-    15,
-    258
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "measuring",
-    9,
-    348
-   ],
-   "to": [
-    "the-layout",
-    0,
-    462
-   ]
-  },
-  {
-   "type": "calls",
+   "type": "own_trip",
    "from": [
     "measuring",
     9,
     349
    ],
    "to": [
-    "the-map-s-nodes",
-    0,
-    815
+    "measuring"
    ]
   },
   {
@@ -2501,12 +2462,12 @@
    "from": [
     "measuring",
     9,
-    350
+    351
    ],
    "to": [
-    "an-informator-and-its-tour",
-    23,
-    811
+    "loading-the-sights",
+    15,
+    265
    ]
   },
   {
@@ -2514,12 +2475,51 @@
    "from": [
     "measuring",
     9,
-    353
+    355
    ],
    "to": [
     "the-layout",
     0,
-    462
+    469
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    356
+   ],
+   "to": [
+    "the-map-s-nodes",
+    0,
+    822
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    357
+   ],
+   "to": [
+    "an-informator-and-its-tour",
+    23,
+    818
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    360
+   ],
+   "to": [
+    "the-layout",
+    0,
+    469
    ]
   },
   {
@@ -2527,7 +2527,7 @@
    "from": [
     "measuring",
     10,
-    457
+    464
    ],
    "to": [
     "measuring"
@@ -2538,7 +2538,7 @@
    "from": [
     "measuring",
     10,
-    459
+    466
    ],
    "to": [
     "names-and-room",
@@ -2551,7 +2551,7 @@
    "from": [
     "measuring",
     10,
-    460
+    467
    ],
    "to": [
     "names-and-room",
@@ -2608,7 +2608,7 @@
    "from": [
     "measuring",
     15,
-    541
+    548
    ],
    "to": [
     "measuring"
@@ -2619,7 +2619,7 @@
    "from": [
     "measuring",
     15,
-    545
+    552
    ],
    "to": [
     "setting-up-the-agent-bridge",
@@ -2632,7 +2632,7 @@
    "from": [
     "the-layout",
     0,
-    462
+    469
    ],
    "to": [
     "the-layout"
@@ -2643,7 +2643,7 @@
    "from": [
     "the-layout",
     0,
-    465
+    472
    ],
    "to": [
     "names-and-room",
@@ -2717,7 +2717,7 @@
    "from": [
     "the-layout",
     3,
-    423
+    430
    ],
    "to": [
     "the-layout"
@@ -2728,12 +2728,12 @@
    "from": [
     "the-layout",
     3,
-    428
+    435
    ],
    "to": [
     "arranging-the-views",
     0,
-    435
+    442
    ]
   },
   {
@@ -2741,12 +2741,12 @@
    "from": [
     "the-layout",
     3,
-    431
+    438
    ],
    "to": [
     "arranging-the-views",
     2,
-    366
+    373
    ]
   },
   {
@@ -2754,12 +2754,12 @@
    "from": [
     "the-layout",
     3,
-    432
+    439
    ],
    "to": [
     "arranging-the-views",
     7,
-    500
+    507
    ]
   },
   {
@@ -2767,12 +2767,12 @@
    "from": [
     "the-layout",
     3,
-    433
+    440
    ],
    "to": [
     "drawing-the-marks",
     0,
-    598
+    605
    ]
   },
   {
@@ -2967,7 +2967,7 @@
    "from": [
     "the-layout",
     8,
-    357
+    364
    ],
    "to": [
     "the-layout"
@@ -2978,7 +2978,7 @@
    "from": [
     "the-layout",
     8,
-    358
+    365
    ],
    "to": [
     "names-and-room",
@@ -2991,12 +2991,12 @@
    "from": [
     "the-layout",
     8,
-    360
+    367
    ],
    "to": [
     "window-events",
     1,
-    383
+    390
    ]
   },
   {
@@ -3004,7 +3004,7 @@
    "from": [
     "the-layout",
     8,
-    362
+    369
    ],
    "to": [
     "window-events",
@@ -3017,7 +3017,7 @@
    "from": [
     "the-layout",
     8,
-    363
+    370
    ],
    "to": [
     "opening-the-editor",
@@ -3052,7 +3052,7 @@
    "from": [
     "arranging-the-views",
     0,
-    435
+    442
    ],
    "to": [
     "arranging-the-views"
@@ -3063,12 +3063,12 @@
    "from": [
     "arranging-the-views",
     0,
-    447
+    454
    ],
    "to": [
     "drawing-the-marks",
     7,
-    620
+    627
    ]
   },
   {
@@ -3076,12 +3076,12 @@
    "from": [
     "arranging-the-views",
     0,
-    448
+    455
    ],
    "to": [
     "the-agent-says-something",
     7,
-    693
+    700
    ]
   },
   {
@@ -3089,7 +3089,7 @@
    "from": [
     "arranging-the-views",
     1,
-    392
+    399
    ],
    "to": [
     "arranging-the-views"
@@ -3100,12 +3100,12 @@
    "from": [
     "arranging-the-views",
     1,
-    395
+    402
    ],
    "to": [
     "the-layout",
     8,
-    357
+    364
    ]
   },
   {
@@ -3113,7 +3113,7 @@
    "from": [
     "arranging-the-views",
     2,
-    366
+    373
    ],
    "to": [
     "arranging-the-views"
@@ -3124,7 +3124,7 @@
    "from": [
     "arranging-the-views",
     2,
-    373
+    380
    ],
    "to": [
     "names-and-room",
@@ -3137,7 +3137,7 @@
    "from": [
     "arranging-the-views",
     2,
-    378
+    385
    ],
    "to": [
     "window-events",
@@ -3213,7 +3213,7 @@
    "from": [
     "arranging-the-views",
     4,
-    282
+    289
    ],
    "to": [
     "arranging-the-views"
@@ -3224,7 +3224,7 @@
    "from": [
     "arranging-the-views",
     5,
-    399
+    406
    ],
    "to": [
     "arranging-the-views"
@@ -3235,12 +3235,12 @@
    "from": [
     "arranging-the-views",
     5,
-    403
+    410
    ],
    "to": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ]
   },
   {
@@ -3248,12 +3248,12 @@
    "from": [
     "arranging-the-views",
     5,
-    417
+    424
    ],
    "to": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ]
   },
   {
@@ -3261,12 +3261,12 @@
    "from": [
     "arranging-the-views",
     5,
-    419
+    426
    ],
    "to": [
     "the-tools-pane-s-tabs",
     8,
-    747
+    754
    ]
   },
   {
@@ -3285,7 +3285,7 @@
    "from": [
     "arranging-the-views",
     7,
-    500
+    507
    ],
    "to": [
     "arranging-the-views"
@@ -3296,12 +3296,12 @@
    "from": [
     "arranging-the-views",
     7,
-    504
+    511
    ],
    "to": [
     "polling-and-the-wheel",
     7,
-    480
+    487
    ]
   },
   {
@@ -3309,7 +3309,7 @@
    "from": [
     "arranging-the-views",
     7,
-    511
+    518
    ],
    "to": [
     "measuring",
@@ -3322,7 +3322,7 @@
    "from": [
     "arranging-the-views",
     8,
-    470
+    477
    ],
    "to": [
     "arranging-the-views"
@@ -3333,12 +3333,12 @@
    "from": [
     "arranging-the-views",
     8,
-    474
+    481
    ],
    "to": [
     "polling-and-the-wheel",
     7,
-    480
+    487
    ]
   },
   {
@@ -3346,7 +3346,7 @@
    "from": [
     "arranging-the-views",
     8,
-    476
+    483
    ],
    "to": [
     "building-blocks",
@@ -3359,12 +3359,12 @@
    "from": [
     "arranging-the-views",
     8,
-    476
+    483
    ],
    "to": [
     "polling-and-the-wheel",
     9,
-    56
+    63
    ]
   },
   {
@@ -3372,7 +3372,7 @@
    "from": [
     "arranging-the-views",
     9,
-    535
+    542
    ],
    "to": [
     "arranging-the-views"
@@ -3394,7 +3394,7 @@
    "from": [
     "arranging-the-views",
     11,
-    726
+    733
    ],
    "to": [
     "arranging-the-views"
@@ -3405,7 +3405,7 @@
    "from": [
     "arranging-the-views",
     11,
-    731
+    738
    ],
    "to": [
     "building-blocks",
@@ -3418,7 +3418,7 @@
    "from": [
     "arranging-the-views",
     12,
-    735
+    742
    ],
    "to": [
     "arranging-the-views"
@@ -3429,7 +3429,7 @@
    "from": [
     "arranging-the-views",
     12,
-    737
+    744
    ],
    "to": [
     "names-and-room",
@@ -3442,12 +3442,12 @@
    "from": [
     "arranging-the-views",
     12,
-    737
+    744
    ],
    "to": [
     "the-layout",
     0,
-    462
+    469
    ]
   },
   {
@@ -3455,7 +3455,7 @@
    "from": [
     "arranging-the-views",
     13,
-    637
+    644
    ],
    "to": [
     "arranging-the-views"
@@ -3466,12 +3466,12 @@
    "from": [
     "arranging-the-views",
     13,
-    640
+    647
    ],
    "to": [
     "opening-the-editor",
     2,
-    642
+    649
    ]
   },
   {
@@ -3479,7 +3479,7 @@
    "from": [
     "arranging-the-views",
     14,
-    632
+    639
    ],
    "to": [
     "arranging-the-views"
@@ -3490,7 +3490,7 @@
    "from": [
     "arranging-the-views",
     14,
-    634
+    641
    ],
    "to": [
     "pointing",
@@ -3503,7 +3503,7 @@
    "from": [
     "arranging-the-views",
     14,
-    635
+    642
    ],
    "to": [
     "names-and-room",
@@ -3605,7 +3605,7 @@
    "from": [
     "polling-and-the-wheel",
     0,
-    554
+    561
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3616,12 +3616,12 @@
    "from": [
     "polling-and-the-wheel",
     0,
-    559
+    566
    ],
    "to": [
     "the-agent-says-something",
     7,
-    693
+    700
    ]
   },
   {
@@ -3629,12 +3629,12 @@
    "from": [
     "polling-and-the-wheel",
     0,
-    561
+    568
    ],
    "to": [
     "window-events",
     0,
-    573
+    580
    ]
   },
   {
@@ -3740,7 +3740,7 @@
    "from": [
     "polling-and-the-wheel",
     4,
-    564
+    571
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3751,7 +3751,7 @@
    "from": [
     "polling-and-the-wheel",
     5,
-    551
+    558
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3762,7 +3762,7 @@
    "from": [
     "polling-and-the-wheel",
     6,
-    513
+    520
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3773,12 +3773,12 @@
    "from": [
     "polling-and-the-wheel",
     6,
-    532
+    539
    ],
    "to": [
     "the-layout",
     0,
-    462
+    469
    ]
   },
   {
@@ -3786,7 +3786,7 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    480
+    487
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3797,7 +3797,7 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    484
+    491
    ],
    "to": [
     "arranging-the-views",
@@ -3810,7 +3810,7 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    486
+    493
    ],
    "to": [
     "names-and-room",
@@ -3823,12 +3823,12 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    486
+    493
    ],
    "to": [
     "arranging-the-views",
     9,
-    535
+    542
    ]
   },
   {
@@ -3836,7 +3836,7 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    487
+    494
    ],
    "to": [
     "arranging-the-views",
@@ -3849,12 +3849,12 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    489
+    496
    ],
    "to": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ]
   },
   {
@@ -3862,7 +3862,7 @@
    "from": [
     "polling-and-the-wheel",
     7,
-    490
+    497
    ],
    "to": [
     "arranging-the-views",
@@ -3875,7 +3875,7 @@
    "from": [
     "polling-and-the-wheel",
     8,
-    494
+    501
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3886,7 +3886,7 @@
    "from": [
     "polling-and-the-wheel",
     9,
-    56
+    63
    ],
    "to": [
     "polling-and-the-wheel"
@@ -3897,7 +3897,7 @@
    "from": [
     "polling-and-the-wheel",
     9,
-    59
+    66
    ],
    "to": [
     "measuring",
@@ -3934,7 +3934,7 @@
    "from": [
     "pointing",
     1,
-    587
+    594
    ],
    "to": [
     "pointing"
@@ -3945,7 +3945,7 @@
    "from": [
     "pointing",
     1,
-    592
+    599
    ],
    "to": [
     "names-and-room",
@@ -3958,7 +3958,7 @@
    "from": [
     "pointing",
     1,
-    594
+    601
    ],
    "to": [
     "names-and-room",
@@ -3971,12 +3971,12 @@
    "from": [
     "pointing",
     1,
-    594
+    601
    ],
    "to": [
     "the-layout",
     0,
-    462
+    469
    ]
   },
   {
@@ -3984,12 +3984,12 @@
    "from": [
     "pointing",
     1,
-    596
+    603
    ],
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -4220,7 +4220,7 @@
    "from": [
     "drawing-the-marks",
     0,
-    598
+    605
    ],
    "to": [
     "drawing-the-marks"
@@ -4231,7 +4231,7 @@
    "from": [
     "drawing-the-marks",
     0,
-    602
+    609
    ],
    "to": [
     "names-and-room",
@@ -4244,7 +4244,7 @@
    "from": [
     "drawing-the-marks",
     1,
-    613
+    620
    ],
    "to": [
     "drawing-the-marks"
@@ -4336,7 +4336,7 @@
    "from": [
     "drawing-the-marks",
     7,
-    620
+    627
    ],
    "to": [
     "drawing-the-marks"
@@ -4448,7 +4448,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    871
+    879
    ],
    "to": [
     "the-agent-says-something"
@@ -4459,7 +4459,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    878
+    886
    ],
    "to": [
     "pointing",
@@ -4472,12 +4472,12 @@
    "from": [
     "the-agent-says-something",
     6,
-    879
+    887
    ],
    "to": [
     "an-informator-and-its-tour",
     17,
-    801
+    808
    ]
   },
   {
@@ -4485,7 +4485,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    693
+    700
    ],
    "to": [
     "the-agent-says-something"
@@ -4496,7 +4496,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    694
+    701
    ],
    "to": [
     "words-in-two-languages",
@@ -4509,7 +4509,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    695
+    702
    ],
    "to": [
     "words-in-two-languages",
@@ -4522,12 +4522,12 @@
    "from": [
     "the-agent-says-something",
     7,
-    697
+    704
    ],
    "to": [
     "stopping-an-answer",
     1,
-    850
+    858
    ]
   },
   {
@@ -4535,12 +4535,12 @@
    "from": [
     "the-agent-says-something",
     7,
-    698
+    705
    ],
    "to": [
     "the-tools-pane-s-tabs",
     0,
-    750
+    757
    ]
   },
   {
@@ -4548,7 +4548,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    698
+    705
    ],
    "to": [
     "the-tools-pane-s-tabs",
@@ -4561,7 +4561,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    699
+    706
    ],
    "to": [
     "words-in-two-languages",
@@ -4574,12 +4574,12 @@
    "from": [
     "the-agent-says-something",
     7,
-    700
+    707
    ],
    "to": [
     "endings",
     11,
-    721
+    728
    ]
   },
   {
@@ -4587,7 +4587,7 @@
    "from": [
     "the-agent-says-something",
     7,
-    700
+    707
    ],
    "to": [
     "words-in-two-languages",
@@ -4901,7 +4901,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    850
+    858
    ],
    "to": [
     "stopping-an-answer"
@@ -4912,12 +4912,12 @@
    "from": [
     "stopping-an-answer",
     1,
-    857
+    865
    ],
    "to": [
     "the-agent-says-something",
     6,
-    871
+    879
    ]
   },
   {
@@ -4925,7 +4925,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    857
+    865
    ],
    "to": [
     "words-in-two-languages",
@@ -4938,7 +4938,7 @@
    "from": [
     "stopping-an-answer",
     2,
-    859
+    867
    ],
    "to": [
     "stopping-an-answer"
@@ -4949,7 +4949,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     0,
-    750
+    757
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -4960,12 +4960,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     0,
-    753
+    760
    ],
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -4973,12 +4973,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     0,
-    755
+    762
    ],
    "to": [
     "an-informator-and-its-tour",
     23,
-    811
+    818
    ]
   },
   {
@@ -5164,7 +5164,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    757
+    764
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -5175,7 +5175,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    763
+    770
    ],
    "to": [
     "arranging-the-views",
@@ -5188,12 +5188,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     3,
-    766
+    773
    ],
    "to": [
     "the-agent-says-something",
     7,
-    693
+    700
    ]
   },
   {
@@ -5236,7 +5236,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     6,
-    741
+    748
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -5247,7 +5247,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -5258,7 +5258,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     8,
-    747
+    754
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -5269,7 +5269,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     9,
-    815
+    822
    ],
    "to": [
     "the-map-s-nodes"
@@ -5280,12 +5280,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     9,
-    817
+    824
    ],
    "to": [
     "the-map-s-nodes",
     2,
-    825
+    832
    ]
   },
   {
@@ -5293,11 +5293,11 @@
    "from": [
     "the-tools-pane-s-tabs",
     9,
-    821
+    828
    ],
    "to": [
     "the-map-s-nodes",
-    8,
+    9,
     52
    ]
   },
@@ -5306,12 +5306,12 @@
    "from": [
     "the-tools-pane-s-tabs",
     9,
-    823
+    830
    ],
    "to": [
     "the-map-s-nodes",
     1,
-    920
+    928
    ]
   },
   {
@@ -5319,7 +5319,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     9,
-    823
+    830
    ],
    "to": [
     "drawing-the-map",
@@ -5332,7 +5332,7 @@
    "from": [
     "the-map-s-nodes",
     0,
-    815
+    822
    ],
    "to": [
     "the-map-s-nodes"
@@ -5343,7 +5343,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    920
+    928
    ],
    "to": [
     "the-map-s-nodes"
@@ -5354,7 +5354,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    825
+    832
    ],
    "to": [
     "the-map-s-nodes"
@@ -5365,7 +5365,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    832
+    840
    ],
    "to": [
     "names-and-room",
@@ -5378,7 +5378,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    835
+    843
    ],
    "to": [
     "colours",
@@ -5391,7 +5391,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    835
+    843
    ],
    "to": [
     "colours",
@@ -5404,7 +5404,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    837
+    845
    ],
    "to": [
     "names-and-room",
@@ -5417,7 +5417,7 @@
    "from": [
     "the-map-s-nodes",
     2,
-    837
+    845
    ],
    "to": [
     "pointing",
@@ -5430,7 +5430,7 @@
    "from": [
     "the-map-s-nodes",
     3,
-    840
+    44
    ],
    "to": [
     "the-map-s-nodes"
@@ -5441,7 +5441,7 @@
    "from": [
     "the-map-s-nodes",
     4,
-    48
+    848
    ],
    "to": [
     "the-map-s-nodes"
@@ -5452,7 +5452,7 @@
    "from": [
     "the-map-s-nodes",
     5,
-    33
+    55
    ],
    "to": [
     "the-map-s-nodes"
@@ -5463,7 +5463,7 @@
    "from": [
     "the-map-s-nodes",
     6,
-    42
+    33
    ],
    "to": [
     "the-map-s-nodes"
@@ -5474,28 +5474,6 @@
    "from": [
     "the-map-s-nodes",
     7,
-    28
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
-    8,
-    52
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
-    9,
     42
    ],
    "to": [
@@ -5506,7 +5484,40 @@
    "type": "own_trip",
    "from": [
     "the-map-s-nodes",
+    8,
+    28
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    9,
+    52
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
     10,
+    42
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    11,
     87
    ],
    "to": [
@@ -5517,7 +5528,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    10,
+    11,
     89
    ],
    "to": [
@@ -5530,7 +5541,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    10,
+    11,
     91
    ],
    "to": [
@@ -5543,7 +5554,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    10,
+    11,
     91
    ],
    "to": [
@@ -5556,7 +5567,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    10,
+    11,
     93
    ],
    "to": [
@@ -5569,7 +5580,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    10,
+    11,
     94
    ],
    "to": [
@@ -5925,7 +5936,7 @@
    "to": [
     "an-informator-and-its-tour",
     17,
-    801
+    808
    ]
   },
   {
@@ -5957,7 +5968,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    881
+    889
    ],
    "to": [
     "the-user-sends-a-message"
@@ -5968,7 +5979,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    885
+    893
    ],
    "to": [
     "names-and-room",
@@ -5981,12 +5992,12 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    887
+    895
    ],
    "to": [
     "opening-the-editor",
     1,
-    654
+    661
    ]
   },
   {
@@ -5994,7 +6005,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    890
+    898
    ],
    "to": [
     "building-blocks",
@@ -6042,7 +6053,7 @@
    "from": [
     "the-user-sends-a-message",
     7,
-    686
+    693
    ],
    "to": [
     "the-user-sends-a-message"
@@ -6088,7 +6099,7 @@
    "from": [
     "opening-the-editor",
     1,
-    654
+    661
    ],
    "to": [
     "opening-the-editor"
@@ -6099,7 +6110,7 @@
    "from": [
     "opening-the-editor",
     2,
-    642
+    649
    ],
    "to": [
     "opening-the-editor"
@@ -6110,7 +6121,7 @@
    "from": [
     "opening-the-editor",
     2,
-    647
+    654
    ],
    "to": [
     "names-and-room",
@@ -6123,12 +6134,12 @@
    "from": [
     "opening-the-editor",
     2,
-    652
+    659
    ],
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -6211,7 +6222,7 @@
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -6354,7 +6365,7 @@
    "from": [
     "closing-the-editor",
     1,
-    661
+    668
    ],
    "to": [
     "closing-the-editor"
@@ -6398,7 +6409,7 @@
    "from": [
     "closing-the-editor",
     5,
-    664
+    671
    ],
    "to": [
     "closing-the-editor"
@@ -6409,12 +6420,12 @@
    "from": [
     "closing-the-editor",
     5,
-    670
+    677
    ],
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -6422,7 +6433,7 @@
    "from": [
     "closing-the-editor",
     5,
-    677
+    684
    ],
    "to": [
     "the-ontology-networks",
@@ -6435,12 +6446,12 @@
    "from": [
     "closing-the-editor",
     5,
-    677
+    684
    ],
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -6448,7 +6459,7 @@
    "from": [
     "closing-the-editor",
     6,
-    679
+    686
    ],
    "to": [
     "closing-the-editor"
@@ -6459,7 +6470,7 @@
    "from": [
     "closing-the-editor",
     6,
-    683
+    690
    ],
    "to": [
     "building-blocks",
@@ -6472,7 +6483,7 @@
    "from": [
     "closing-the-editor",
     6,
-    684
+    691
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -6485,7 +6496,7 @@
    "from": [
     "window-events",
     0,
-    573
+    580
    ],
    "to": [
     "window-events"
@@ -6496,12 +6507,12 @@
    "from": [
     "window-events",
     0,
-    576
+    583
    ],
    "to": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ]
   },
   {
@@ -6509,12 +6520,12 @@
    "from": [
     "window-events",
     0,
-    581
+    588
    ],
    "to": [
     "measuring",
     10,
-    457
+    464
    ]
   },
   {
@@ -6522,12 +6533,12 @@
    "from": [
     "window-events",
     0,
-    582
+    589
    ],
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -6535,12 +6546,12 @@
    "from": [
     "window-events",
     0,
-    583
+    590
    ],
    "to": [
     "arranging-the-views",
     11,
-    726
+    733
    ]
   },
   {
@@ -6548,7 +6559,7 @@
    "from": [
     "window-events",
     1,
-    383
+    390
    ],
    "to": [
     "window-events"
@@ -6632,7 +6643,7 @@
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -6645,7 +6656,7 @@
    "to": [
     "an-informator-and-its-tour",
     23,
-    811
+    818
    ]
   },
   {
@@ -6767,7 +6778,7 @@
    "to": [
     "the-layout",
     0,
-    462
+    469
    ]
   },
   {
@@ -6873,7 +6884,7 @@
    "from": [
     "primary-g",
     1,
-    704
+    711
    ],
    "to": [
     "primary-g"
@@ -6908,7 +6919,7 @@
    "from": [
     "primary-g",
     3,
-    142
+    149
    ],
    "to": [
     "primary-g"
@@ -6919,7 +6930,7 @@
    "from": [
     "primary-g",
     4,
-    148
+    155
    ],
    "to": [
     "primary-g"
@@ -6930,7 +6941,7 @@
    "from": [
     "primary-g",
     4,
-    151
+    158
    ],
    "to": [
     "window-events",
@@ -6943,7 +6954,7 @@
    "from": [
     "primary-g",
     4,
-    151
+    158
    ],
    "to": [
     "window-events",
@@ -6956,12 +6967,12 @@
    "from": [
     "primary-g",
     4,
-    155
+    162
    ],
    "to": [
     "the-tools-pane-s-tabs",
     7,
-    744
+    751
    ]
   },
   {
@@ -6969,7 +6980,7 @@
    "from": [
     "primary-g",
     4,
-    159
+    166
    ],
    "to": [
     "the-layout",
@@ -6982,12 +6993,12 @@
    "from": [
     "primary-g",
     4,
-    166
+    173
    ],
    "to": [
     "the-agent-says-something",
     7,
-    693
+    700
    ]
   },
   {
@@ -6995,7 +7006,7 @@
    "from": [
     "primary-g",
     5,
-    169
+    176
    ],
    "to": [
     "primary-g"
@@ -7041,7 +7052,7 @@
    "from": [
     "primary-g",
     8,
-    176
+    183
    ],
    "to": [
     "primary-g"
@@ -7052,12 +7063,12 @@
    "from": [
     "primary-g",
     8,
-    182
+    189
    ],
    "to": [
     "measuring",
     1,
-    44
+    51
    ]
   },
   {
@@ -7065,7 +7076,7 @@
    "from": [
     "primary-g",
     8,
-    184
+    191
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -7078,7 +7089,7 @@
    "from": [
     "primary-g",
     8,
-    184
+    191
    ],
    "to": [
     "the-ontology-networks",
@@ -7091,12 +7102,12 @@
    "from": [
     "primary-g",
     8,
-    184
+    191
    ],
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -7792,7 +7803,7 @@
    "to": [
     "names-and-room",
     9,
-    864
+    872
    ]
   },
   {
@@ -7805,7 +7816,7 @@
    "to": [
     "names-and-room",
     10,
-    846
+    854
    ]
   },
   {
@@ -7942,7 +7953,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     1,
-    716
+    723
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -7953,12 +7964,12 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     1,
-    718
+    725
    ],
    "to": [
     "opening-the-editor",
     1,
-    654
+    661
    ]
   },
   {
@@ -7995,7 +8006,7 @@
    "to": [
     "the-agent-says-something",
     6,
-    871
+    879
    ]
   },
   {
@@ -8065,7 +8076,7 @@
    "to": [
     "the-layout",
     3,
-    423
+    430
    ]
   },
   {
@@ -8078,7 +8089,7 @@
    "to": [
     "an-informator-and-its-tour",
     23,
-    811
+    818
    ]
   },
   {
@@ -8340,7 +8351,7 @@
    "from": [
     "endings",
     11,
-    721
+    728
    ],
    "to": [
     "endings"
@@ -8351,12 +8362,12 @@
    "from": [
     "endings",
     11,
-    724
+    731
    ],
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -8590,7 +8601,7 @@
    "to": [
     "the-user-sends-a-message",
     4,
-    881
+    889
    ]
   },
   {
@@ -8598,7 +8609,7 @@
    "from": [
     "names-and-room",
     9,
-    864
+    872
    ],
    "to": [
     "names-and-room"
@@ -8609,7 +8620,7 @@
    "from": [
     "names-and-room",
     10,
-    846
+    854
    ],
    "to": [
     "names-and-room"
@@ -8620,12 +8631,12 @@
    "from": [
     "names-and-room",
     10,
-    848
+    856
    ],
    "to": [
     "the-agent-says-something",
     7,
-    693
+    700
    ]
   },
   {
@@ -9429,7 +9440,7 @@
    "from": [
     "an-informator-and-its-tour",
     7,
-    771
+    778
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9440,7 +9451,7 @@
    "from": [
     "an-informator-and-its-tour",
     7,
-    776
+    783
    ],
    "to": [
     "names-and-room",
@@ -9453,7 +9464,7 @@
    "from": [
     "an-informator-and-its-tour",
     7,
-    781
+    788
    ],
    "to": [
     "words-in-two-languages",
@@ -9466,7 +9477,7 @@
    "from": [
     "an-informator-and-its-tour",
     8,
-    911
+    919
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9671,7 +9682,7 @@
    "from": [
     "an-informator-and-its-tour",
     16,
-    787
+    794
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9682,7 +9693,7 @@
    "from": [
     "an-informator-and-its-tour",
     16,
-    795
+    802
    ],
    "to": [
     "the-ontology-networks",
@@ -9695,12 +9706,12 @@
    "from": [
     "an-informator-and-its-tour",
     16,
-    795
+    802
    ],
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -9708,7 +9719,7 @@
    "from": [
     "an-informator-and-its-tour",
     17,
-    801
+    808
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9719,7 +9730,7 @@
    "from": [
     "an-informator-and-its-tour",
     18,
-    898
+    906
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9730,7 +9741,7 @@
    "from": [
     "an-informator-and-its-tour",
     19,
-    903
+    911
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9774,7 +9785,7 @@
    "from": [
     "an-informator-and-its-tour",
     23,
-    811
+    818
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -9929,7 +9940,7 @@
    "to": [
     "loading-the-sights",
     0,
-    130
+    137
    ]
   },
   {
@@ -10109,7 +10120,7 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    198
+    205
    ],
    "to": [
     "loading-the-sights"
@@ -10120,7 +10131,7 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    201
+    208
    ],
    "to": [
     "names-and-room",
@@ -10133,7 +10144,7 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    201
+    208
    ],
    "to": [
     "loading-the-sights",
@@ -10146,12 +10157,12 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    202
+    209
    ],
    "to": [
     "arranging-the-views",
     14,
-    632
+    639
    ]
   },
   {
@@ -10159,7 +10170,7 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    202
+    209
    ],
    "to": [
     "loading-the-sights",
@@ -10172,64 +10183,12 @@
    "from": [
     "questions-the-code-already-asks",
     0,
-    204
+    211
    ],
    "to": [
     "loading-the-sights",
     6,
-    214
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "questions-the-code-already-asks",
-    0,
-    205
-   ],
-   "to": [
-    "colours",
-    0,
-    269
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "questions-the-code-already-asks",
-    0,
-    206
-   ],
-   "to": [
-    "measuring",
-    0,
-    276
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "questions-the-code-already-asks",
-    0,
-    208
-   ],
-   "to": [
-    "measuring",
-    3,
-    295
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "questions-the-code-already-asks",
-    0,
-    210
-   ],
-   "to": [
-    "measuring",
-    6,
-    322
+    221
    ]
   },
   {
@@ -10240,9 +10199,61 @@
     212
    ],
    "to": [
+    "colours",
+    0,
+    276
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    213
+   ],
+   "to": [
+    "measuring",
+    0,
+    283
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    215
+   ],
+   "to": [
+    "measuring",
+    3,
+    302
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    217
+   ],
+   "to": [
+    "measuring",
+    6,
+    329
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "questions-the-code-already-asks",
+    0,
+    219
+   ],
+   "to": [
     "measuring",
     9,
-    342
+    349
    ]
   },
   {

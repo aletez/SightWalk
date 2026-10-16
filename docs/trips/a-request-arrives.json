@@ -1,14 +1,17 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "01cd14a68dc76ecdccb327c4def85b6bd2fb4069",
+ "commit": "d368e9bc355914641b21b9ffcfb21e36a711bff4",
  "sights": [
-  "sw/subl_executor.py:166-173",
-  "sw/subl_executor.py:176-192",
-  "sw/subl_executor.py:122-135",
-  "sw/subl_executor.py:138-147",
+  "sw/subl_executor.py:179-186",
+  "sw/subl_executor.py:189-205",
+  "sw/subl_executor.py:122-136",
+  "sw/subl_executor.py:139-148",
+  "sw/subl_executor.py:151-160",
+  "sw/spec.py:118-131",
   "sw/validator.py:24-29",
-  "sw/validator.py:83-86",
+  "sw/validator.py:93-97",
+  "sw/validator.py:83-90",
   "sw/subl_executor.py:49-55",
   "sw/subl_executor.py:58-60",
   "sw/validator.py:51-54",
@@ -24,93 +27,113 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 169],
+   "from": [0, 182],
    "to": [2, 122]
   },
   {
    "type": "calls",
-   "from": [0, 169],
-   "to": [1, 176]
+   "from": [0, 182],
+   "to": [1, 189]
   },
   {
    "type": "calls",
-   "from": [0, 170],
-   "to": [4, 24]
+   "from": [0, 183],
+   "to": [6, 24]
   },
   {
    "type": "calls",
-   "from": [0, 173],
-   "to": [6, 49]
+   "from": [0, 186],
+   "to": [9, 49]
   },
   {
    "type": "calls",
-   "from": [0, 173],
-   "to": [1, 176]
+   "from": [0, 186],
+   "to": [1, 189]
   },
   {
    "type": "calls",
-   "from": [1, 181],
-   "to": [6, 49]
+   "from": [1, 194],
+   "to": [9, 49]
   },
   {
    "type": "calls",
    "from": [2, 130],
-   "to": [3, 138]
+   "to": [3, 139]
   },
   {
    "type": "calls",
-   "from": [3, 143],
-   "to": [15, 10]
+   "from": [2, 131],
+   "to": [4, 151]
   },
   {
    "type": "calls",
-   "from": [3, 146],
-   "to": [16, 31]
+   "from": [3, 144],
+   "to": [18, 10]
   },
   {
    "type": "calls",
-   "from": [5, 84],
-   "to": [8, 51]
+   "from": [3, 147],
+   "to": [19, 31]
   },
   {
    "type": "calls",
-   "from": [5, 85],
-   "to": [9, 32]
+   "from": [4, 159],
+   "to": [5, 118]
   },
   {
    "type": "calls",
-   "from": [5, 86],
-   "to": [14, 68]
+   "from": [4, 159],
+   "to": [18, 10]
   },
   {
    "type": "calls",
-   "from": [6, 50],
-   "to": [9, 32]
+   "from": [7, 94],
+   "to": [11, 51]
   },
   {
    "type": "calls",
-   "from": [6, 55],
-   "to": [7, 58]
+   "from": [7, 95],
+   "to": [12, 32]
   },
   {
    "type": "calls",
-   "from": [9, 46],
-   "to": [10, 127]
+   "from": [7, 96],
+   "to": [17, 68]
   },
   {
    "type": "calls",
-   "from": [9, 46],
-   "to": [11, 154]
+   "from": [7, 97],
+   "to": [8, 83]
   },
   {
    "type": "calls",
-   "from": [11, 158],
-   "to": [12, 90]
+   "from": [9, 50],
+   "to": [12, 32]
   },
   {
    "type": "calls",
-   "from": [12, 94],
-   "to": [13, 106]
+   "from": [9, 55],
+   "to": [10, 58]
+  },
+  {
+   "type": "calls",
+   "from": [12, 46],
+   "to": [13, 127]
+  },
+  {
+   "type": "calls",
+   "from": [12, 46],
+   "to": [14, 154]
+  },
+  {
+   "type": "calls",
+   "from": [14, 158],
+   "to": [15, 90]
+  },
+  {
+   "type": "calls",
+   "from": [15, 94],
+   "to": [16, 106]
   }
  ]
 }

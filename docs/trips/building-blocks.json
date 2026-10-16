@@ -1,16 +1,16 @@
 {
  "name": "Building blocks",
  "kind": "survey",
- "commit": "01cd14a68dc76ecdccb327c4def85b6bd2fb4069",
+ "commit": "d368e9bc355914641b21b9ffcfb21e36a711bff4",
  "sights": [
   "sw/plan.py:8-15",
   "sw/plan.py:22-35",
   "sw/plan.py:37-39",
   "sw/plan.py:41-43",
   "sw/plan.py:45-47",
-  "sw/subl_views.py:43-44",
-  "sw/subl_views.py:47-52",
-  "sw/subl_views.py:55-56",
+  "sw/subl_views.py:45-46",
+  "sw/subl_views.py:49-54",
+  "sw/subl_views.py:57-58",
   "sw/subl_chat.py:49-51",
   "sw/subl_commands.py:85-87",
   "sw/subl_commands.py:106-108"
@@ -18,8 +18,8 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [6, 49],
-   "to": [5, 43]
+   "from": [6, 51],
+   "to": [5, 45]
   }
  ]
 }

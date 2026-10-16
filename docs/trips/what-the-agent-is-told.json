@@ -1,16 +1,16 @@
 {
  "name": "What the agent is told",
  "kind": "survey",
- "commit": "01cd14a68dc76ecdccb327c4def85b6bd2fb4069",
+ "commit": "d368e9bc355914641b21b9ffcfb21e36a711bff4",
  "sights": [
   "sw/manual.py:4-17",
-  "sw/manual.py:19-43",
-  "sw/manual.py:45-48",
-  "sw/manual.py:50-81",
-  "sw/manual.py:83-112",
-  "sw/manual.py:115-118",
-  "sw/manual.py:121-125",
-  "sw/manual.py:127-165",
+  "sw/manual.py:19-45",
+  "sw/manual.py:47-50",
+  "sw/manual.py:52-83",
+  "sw/manual.py:85-114",
+  "sw/manual.py:117-120",
+  "sw/manual.py:123-127",
+  "sw/manual.py:129-167",
   "sw/validator.py:10-11",
   "sw/subl_guide.py:19-24",
   "sw/subl_guide.py:25-25"
@@ -18,48 +18,48 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [7, 128],
-   "to": [5, 115]
+   "from": [7, 130],
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 137],
-   "to": [5, 115]
+   "from": [7, 139],
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 141],
-   "to": [5, 115]
+   "from": [7, 143],
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 144],
-   "to": [5, 115]
-  },
-  {
-   "type": "calls",
-   "from": [7, 150],
-   "to": [5, 115]
+   "from": [7, 146],
+   "to": [5, 117]
   },
   {
    "type": "calls",
    "from": [7, 152],
-   "to": [5, 115]
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 153],
-   "to": [5, 115]
+   "from": [7, 154],
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 157],
-   "to": [5, 115]
+   "from": [7, 155],
+   "to": [5, 117]
   },
   {
    "type": "calls",
-   "from": [7, 162],
-   "to": [5, 115]
+   "from": [7, 159],
+   "to": [5, 117]
+  },
+  {
+   "type": "calls",
+   "from": [7, 164],
+   "to": [5, 117]
   }
  ]
 }

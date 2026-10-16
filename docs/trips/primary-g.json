@@ -1,19 +1,19 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "sights": [
-  "sw/commands.py:294-305",
-  "sw/reader.py:699-709",
-  "sw/commands.py:307-312",
-  "sw/reader.py:142-146",
-  "sw/reader.py:148-167",
-  "sw/reader.py:169-174",
-  "sw/commands.py:149-153",
-  "sw/commands.py:127-128",
-  "sw/reader.py:176-184",
-  "sw/bridge.py:153-164",
-  "sw/views.py:122-133"
+  "sw/subl_commands.py:294-305",
+  "sw/subl_reader.py:699-709",
+  "sw/subl_commands.py:307-312",
+  "sw/subl_reader.py:142-146",
+  "sw/subl_reader.py:148-167",
+  "sw/subl_reader.py:169-174",
+  "sw/subl_commands.py:149-153",
+  "sw/subl_commands.py:127-128",
+  "sw/subl_reader.py:176-184",
+  "sw/subl_executor.py:89-97",
+  "sw/subl_views.py:122-133"
  ],
  "transitions": [
   {
@@ -53,7 +53,7 @@
   },
   {
    "type": "calls",
-   "from": [9, 162],
+   "from": [9, 95],
    "to": [3, 142]
   }
  ]

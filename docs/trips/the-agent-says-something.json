@@ -1,47 +1,37 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "sights": [
-  "sw/bridge.py:114-130",
+  "sw/subl_executor.py:67-70",
   "sw/marks.py:197-212",
   "sw/marks.py:226-228",
-  "sw/bridge.py:104-107",
+  "sw/validator.py:12-15",
   "sw/marks.py:160-162",
   "sw/marks.py:157-157",
-  "sw/reader.py:866-874",
-  "sw/reader.py:688-697",
-  "sw/chat.py:94-113",
+  "sw/subl_reader.py:866-874",
+  "sw/subl_reader.py:688-697",
+  "sw/subl_chat.py:94-113",
   "sw/header.py:12-22",
-  "sw/chat.py:131-140",
-  "sw/chat.py:150-157",
-  "sw/commands.py:28-29",
-  "sw/chat.py:53-70",
-  "sw/chat.py:35-43",
-  "sw/commands.py:110-113",
-  "sw/commands.py:115-119",
+  "sw/subl_chat.py:131-140",
+  "sw/subl_chat.py:150-157",
+  "sw/subl_commands.py:28-29",
+  "sw/subl_chat.py:53-70",
+  "sw/subl_chat.py:35-43",
+  "sw/subl_commands.py:110-113",
+  "sw/subl_commands.py:115-119",
   "sw/marks.py:215-217",
-  "sw/chat.py:237-242"
+  "sw/subl_chat.py:237-242"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 122],
+   "from": [0, 68],
    "to": [1, 197]
   },
   {
    "type": "calls",
-   "from": [0, 123],
-   "to": [2, 226]
-  },
-  {
-   "type": "calls",
-   "from": [0, 126],
-   "to": [4, 160]
-  },
-  {
-   "type": "calls",
-   "from": [0, 128],
+   "from": [0, 68],
    "to": [6, 866]
   },
   {

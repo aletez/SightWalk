@@ -1,55 +1,55 @@
 {
  "name": "Plugin start and stop",
  "kind": "run",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "sights": [
   "sight_walk.py:39-45",
-  "sw/mcp_http.py:140-143",
-  "sw/bridge.py:259-263",
-  "sw/mcp_http.py:116-120",
-  "sw/mcp_http.py:131-137",
-  "sw/mcp_http.py:123-128",
+  "sw/subl_mcp_http.py:142-145",
+  "sw/subl_executor.py:225-229",
+  "sw/subl_mcp_http.py:118-122",
+  "sw/subl_mcp_http.py:133-139",
+  "sw/subl_mcp_http.py:125-130",
   "sight_walk.py:54-59",
-  "sw/scrollbars.py:13-25",
-  "sw/state.py:53-60",
-  "sw/mcp_http.py:146-148",
-  "sw/setup.py:70-72"
+  "sw/subl_scrollbars.py:13-25",
+  "sw/state.py:44-51",
+  "sw/subl_mcp_http.py:148-150",
+  "sw/subl_setup.py:70-72"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 40],
-   "to": [1, 140]
-  },
-  {
-   "type": "calls",
-   "from": [1, 141],
-   "to": [4, 131]
-  },
-  {
-   "type": "calls",
-   "from": [1, 142],
-   "to": [2, 259]
+   "to": [1, 142]
   },
   {
    "type": "calls",
    "from": [1, 143],
-   "to": [3, 116]
+   "to": [4, 133]
   },
   {
    "type": "calls",
-   "from": [4, 134],
-   "to": [2, 259]
+   "from": [1, 144],
+   "to": [2, 225]
+  },
+  {
+   "type": "calls",
+   "from": [1, 145],
+   "to": [3, 118]
   },
   {
    "type": "calls",
    "from": [4, 136],
-   "to": [5, 123]
+   "to": [2, 225]
   },
   {
    "type": "calls",
-   "from": [4, 137],
-   "to": [3, 116]
+   "from": [4, 138],
+   "to": [5, 125]
+  },
+  {
+   "type": "calls",
+   "from": [4, 139],
+   "to": [3, 118]
   },
   {
    "type": "calls",
@@ -59,17 +59,17 @@
   {
    "type": "calls",
    "from": [6, 57],
-   "to": [8, 53]
+   "to": [8, 44]
   },
   {
    "type": "calls",
    "from": [6, 59],
-   "to": [9, 146]
+   "to": [9, 148]
   },
   {
    "type": "calls",
-   "from": [9, 148],
-   "to": [5, 123]
+   "from": [9, 150],
+   "to": [5, 125]
   }
  ]
 }

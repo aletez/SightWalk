@@ -1,82 +1,77 @@
 {
  "name": "One tool call over HTTP",
  "kind": "run",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "sights": [
-  "sw/mcp_http.py:92-103",
-  "sw/mcp_http.py:76-79",
-  "sw/mcp_http.py:63-72",
-  "sw/mcp_http.py:48-60",
+  "sw/subl_mcp_http.py:94-105",
+  "sw/subl_mcp_http.py:78-81",
+  "sw/subl_mcp_http.py:65-74",
+  "sw/subl_mcp_http.py:50-62",
   "sw/manual.py:115-118",
-  "sw/mcp_http.py:36-45",
-  "sw/mcp_http.py:23-33",
-  "sw/bridge.py:227-235",
-  "sw/bridge.py:208-224",
-  "sw/mcp_http.py:81-90",
-  "sw/mcp_http.py:105-106",
-  "sw/mcp_http.py:108-110",
-  "sw/mcp_http.py:112-113"
+  "sw/subl_mcp_http.py:38-47",
+  "sw/subl_mcp_http.py:23-35",
+  "sw/subl_executor.py:195-203",
+  "sw/subl_executor.py:176-192",
+  "sw/subl_mcp_http.py:83-92",
+  "sw/subl_mcp_http.py:107-108",
+  "sw/subl_mcp_http.py:110-112",
+  "sw/subl_mcp_http.py:114-115"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 93],
-   "to": [1, 76]
+   "from": [0, 95],
+   "to": [1, 78]
   },
   {
    "type": "calls",
-   "from": [0, 94],
-   "to": [9, 81]
+   "from": [0, 96],
+   "to": [9, 83]
   },
   {
    "type": "calls",
-   "from": [0, 102],
-   "to": [2, 63]
+   "from": [0, 104],
+   "to": [2, 65]
   },
   {
    "type": "calls",
-   "from": [0, 103],
-   "to": [9, 81]
+   "from": [0, 105],
+   "to": [9, 83]
   },
   {
    "type": "calls",
-   "from": [2, 68],
-   "to": [3, 48]
+   "from": [2, 70],
+   "to": [3, 50]
   },
   {
    "type": "calls",
-   "from": [3, 57],
-   "to": [5, 36]
+   "from": [3, 59],
+   "to": [5, 38]
   },
   {
    "type": "calls",
-   "from": [5, 38],
+   "from": [5, 40],
    "to": [6, 23]
   },
   {
    "type": "calls",
-   "from": [6, 29],
-   "to": [7, 227]
+   "from": [6, 31],
+   "to": [7, 195]
   },
   {
    "type": "calls",
-   "from": [6, 33],
-   "to": [8, 208]
+   "from": [7, 200],
+   "to": [8, 176]
   },
   {
    "type": "calls",
-   "from": [7, 232],
-   "to": [8, 208]
+   "from": [10, 108],
+   "to": [9, 83]
   },
   {
    "type": "calls",
-   "from": [10, 106],
-   "to": [9, 81]
-  },
-  {
-   "type": "calls",
-   "from": [11, 110],
-   "to": [9, 81]
+   "from": [11, 112],
+   "to": [9, 83]
   }
  ]
 }

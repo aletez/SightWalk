@@ -1,13 +1,13 @@
 {
  "name": "Setting up the agent bridge",
  "kind": "run",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "sights": [
-  "sw/setup.py:32-38",
-  "sw/setup.py:41-48",
-  "sw/setup.py:51-57",
-  "sw/setup.py:60-63",
-  "sw/commands.py:17-24"
+  "sw/subl_setup.py:32-38",
+  "sw/subl_setup.py:41-48",
+  "sw/subl_setup.py:51-57",
+  "sw/subl_setup.py:60-63",
+  "sw/subl_commands.py:17-24"
  ],
  "transitions": [
   {

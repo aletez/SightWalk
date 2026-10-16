@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
+ "commit": "1c4a35803502c08db3287ef8ceb1c230f165f73a",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -25,6 +25,7 @@
   "../trips/window-events.json",
   "../trips/primary-g.json",
   "../trips/what-the-agent-is-told.json",
+  "../trips/what-the-validator-refuses.json",
   "../trips/one-tool-call-over-http.json",
   "../trips/how-claude-comes-to-listen-to-sublime.json",
   "../trips/here-and-asking-by-a-shortcut.json",
@@ -84,6 +85,15 @@
    ],
    "to": [
     "a-request-arrives"
+   ]
+  },
+  {
+   "type": "leads_to",
+   "from": [
+    "a-request-arrives"
+   ],
+   "to": [
+    "what-the-validator-refuses"
    ]
   },
   {
@@ -420,7 +430,7 @@
    "from": [
     "plugin-start-and-stop",
     1,
-    140
+    142
    ],
    "to": [
     "plugin-start-and-stop"
@@ -431,7 +441,7 @@
    "from": [
     "plugin-start-and-stop",
     2,
-    259
+    225
    ],
    "to": [
     "plugin-start-and-stop"
@@ -442,7 +452,7 @@
    "from": [
     "plugin-start-and-stop",
     3,
-    116
+    118
    ],
    "to": [
     "plugin-start-and-stop"
@@ -453,7 +463,7 @@
    "from": [
     "plugin-start-and-stop",
     4,
-    131
+    133
    ],
    "to": [
     "plugin-start-and-stop"
@@ -464,7 +474,7 @@
    "from": [
     "plugin-start-and-stop",
     5,
-    123
+    125
    ],
    "to": [
     "plugin-start-and-stop"
@@ -510,7 +520,7 @@
    "from": [
     "plugin-start-and-stop",
     8,
-    53
+    44
    ],
    "to": [
     "plugin-start-and-stop"
@@ -521,7 +531,7 @@
    "from": [
     "plugin-start-and-stop",
     9,
-    146
+    148
    ],
    "to": [
     "plugin-start-and-stop"
@@ -598,18 +608,7 @@
    "from": [
     "a-request-arrives",
     0,
-    208
-   ],
-   "to": [
-    "one-tool-call-over-http"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "a-request-arrives",
-    1,
-    88
+    166
    ],
    "to": [
     "a-request-arrives"
@@ -619,34 +618,134 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    1,
-    91
-   ],
-   "to": [
-    "the-ontology-collections-and-sights",
-    13,
-    137
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "a-request-arrives",
-    1,
-    92
-   ],
-   "to": [
-    "a-new-reader-window",
     0,
-    69
+    172
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    8,
+    206
    ]
   },
   {
    "type": "calls",
    "from": [
     "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "primary-g",
+    9,
+    89
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "endings",
+    14,
+    84
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "trip-files",
+    0,
+    110
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "pointing",
+    0,
+    73
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "the-agent-says-something",
+    0,
+    67
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "window-events",
+    7,
+    100
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    0,
+    173
+   ],
+   "to": [
+    "names-and-room",
+    8,
+    79
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
     1,
-    92
+    176
+   ],
+   "to": [
+    "one-tool-call-over-http"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    2,
+    122
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    2,
+    124
    ],
    "to": [
     "endings",
@@ -658,8 +757,91 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    1,
-    93
+    2,
+    132
+   ],
+   "to": [
+    "what-the-validator-refuses",
+    7,
+    150
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    3,
+    138
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    4,
+    24
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    5,
+    83
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    6,
+    49
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    6,
+    51
+   ],
+   "to": [
+    "endings",
+    15,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    6,
+    51
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    6,
+    52
    ],
    "to": [
     "loading-the-sights",
@@ -671,8 +853,8 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    1,
-    95
+    6,
+    54
    ],
    "to": [
     "plugin-start-and-stop",
@@ -684,21 +866,21 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    1,
-    96
+    6,
+    55
    ],
    "to": [
-    "building-blocks",
-    2,
-    38
+    "the-ontology-collections-and-sights",
+    13,
+    137
    ]
   },
   {
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    2,
-    99
+    7,
+    58
    ],
    "to": [
     "a-request-arrives"
@@ -708,12 +890,12 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    2,
-    101
+    7,
+    60
    ],
    "to": [
     "pointing",
-    14,
+    13,
     50
    ]
   },
@@ -721,8 +903,8 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    3,
-    82
+    8,
+    51
    ],
    "to": [
     "a-request-arrives"
@@ -732,8 +914,8 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    4,
-    54
+    9,
+    32
    ],
    "to": [
     "a-request-arrives"
@@ -743,8 +925,8 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    4,
-    65
+    9,
+    45
    ],
    "to": [
     "the-ontology-networks",
@@ -756,7 +938,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    5,
+    10,
     127
    ],
    "to": [
@@ -767,7 +949,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    6,
+    11,
     154
    ],
    "to": [
@@ -778,7 +960,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    7,
+    12,
     90
    ],
    "to": [
@@ -789,7 +971,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    7,
+    12,
     91
    ],
    "to": [
@@ -802,7 +984,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    7,
+    12,
     92
    ],
    "to": [
@@ -815,7 +997,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    8,
+    13,
     106
    ],
    "to": [
@@ -826,7 +1008,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    8,
+    13,
     112
    ],
    "to": [
@@ -839,8 +1021,8 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    9,
-    33
+    14,
+    68
    ],
    "to": [
     "a-request-arrives"
@@ -850,7 +1032,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    10,
+    15,
     10
    ],
    "to": [
@@ -861,8 +1043,8 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    11,
-    28
+    16,
+    31
    ],
    "to": [
     "a-request-arrives"
@@ -873,7 +1055,7 @@
    "from": [
     "a-new-reader-window",
     0,
-    69
+    36
    ],
    "to": [
     "a-new-reader-window"
@@ -884,7 +1066,7 @@
    "from": [
     "a-new-reader-window",
     0,
-    73
+    40
    ],
    "to": [
     "arranging-the-views",
@@ -897,7 +1079,7 @@
    "from": [
     "a-new-reader-window",
     0,
-    76
+    43
    ],
    "to": [
     "primary-g",
@@ -910,7 +1092,7 @@
    "from": [
     "a-new-reader-window",
     0,
-    77
+    44
    ],
    "to": [
     "polling-and-the-wheel",
@@ -923,7 +1105,7 @@
    "from": [
     "a-new-reader-window",
     0,
-    78
+    45
    ],
    "to": [
     "polling-and-the-wheel",
@@ -1241,7 +1423,7 @@
    ],
    "to": [
     "a-request-arrives",
-    10,
+    15,
     10
    ]
   },
@@ -3220,7 +3402,7 @@
    ],
    "to": [
     "pointing",
-    14,
+    13,
     50
    ]
   },
@@ -3636,7 +3818,7 @@
    "from": [
     "pointing",
     0,
-    133
+    73
    ],
    "to": [
     "pointing"
@@ -3647,31 +3829,7 @@
    "from": [
     "pointing",
     0,
-    134
-   ],
-   "to": [
-    "a-request-arrives",
-    3,
-    82
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "pointing",
-    1,
-    44
-   ],
-   "to": [
-    "pointing"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "pointing",
-    1,
-    45
+    74
    ],
    "to": [
     "endings",
@@ -3683,7 +3841,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    2,
+    1,
     582
    ],
    "to": [
@@ -3694,7 +3852,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    2,
+    1,
     587
    ],
    "to": [
@@ -3707,7 +3865,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    2,
+    1,
     589
    ],
    "to": [
@@ -3720,7 +3878,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    2,
+    1,
     589
    ],
    "to": [
@@ -3733,7 +3891,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    2,
+    1,
     591
    ],
    "to": [
@@ -3746,7 +3904,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    3,
+    2,
     91
    ],
    "to": [
@@ -3757,7 +3915,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    4,
+    3,
     80
    ],
    "to": [
@@ -3768,7 +3926,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    5,
+    4,
     18
    ],
    "to": [
@@ -3779,7 +3937,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    5,
+    4,
     31
    ],
    "to": [
@@ -3792,7 +3950,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    6,
+    5,
     46
    ],
    "to": [
@@ -3803,7 +3961,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    6,
+    5,
     52
    ],
    "to": [
@@ -3816,7 +3974,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    7,
+    6,
     56
    ],
    "to": [
@@ -3827,7 +3985,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    8,
+    7,
     14
    ],
    "to": [
@@ -3838,7 +3996,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    9,
+    8,
     219
    ],
    "to": [
@@ -3849,7 +4007,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    9,
+    8,
     224
    ],
    "to": [
@@ -3862,7 +4020,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    9,
+    8,
     226
    ],
    "to": [
@@ -3875,7 +4033,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    9,
+    8,
     227
    ],
    "to": [
@@ -3888,7 +4046,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    9,
+    8,
     231
    ],
    "to": [
@@ -3901,7 +4059,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    9,
+    8,
     232
    ],
    "to": [
@@ -3914,7 +4072,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    10,
+    9,
     178
    ],
    "to": [
@@ -3925,7 +4083,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    11,
+    10,
     172
    ],
    "to": [
@@ -3936,7 +4094,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    12,
+    11,
     40
    ],
    "to": [
@@ -3947,7 +4105,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    13,
+    12,
     58
    ],
    "to": [
@@ -3958,7 +4116,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    14,
+    13,
     50
    ],
    "to": [
@@ -4020,7 +4178,7 @@
    ],
    "to": [
     "pointing",
-    8,
+    7,
     14
    ]
   },
@@ -4119,7 +4277,7 @@
    "from": [
     "the-agent-says-something",
     0,
-    114
+    67
    ],
    "to": [
     "the-agent-says-something"
@@ -4130,20 +4288,7 @@
    "from": [
     "the-agent-says-something",
     0,
-    115
-   ],
-   "to": [
-    "a-request-arrives",
-    3,
-    82
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-agent-says-something",
-    0,
-    116
+    68
    ],
    "to": [
     "endings",
@@ -4178,7 +4323,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    104
+    12
    ],
    "to": [
     "the-agent-says-something"
@@ -4226,7 +4371,7 @@
    ],
    "to": [
     "pointing",
-    9,
+    8,
     219
    ]
   },
@@ -5184,7 +5329,7 @@
    ],
    "to": [
     "pointing",
-    14,
+    13,
     50
    ]
   },
@@ -5816,23 +5961,10 @@
    "from": [
     "the-user-sends-a-message",
     8,
-    238
+    206
    ],
    "to": [
     "the-user-sends-a-message"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-user-sends-a-message",
-    8,
-    239
-   ],
-   "to": [
-    "endings",
-    15,
-    40
    ]
   },
   {
@@ -6392,7 +6524,7 @@
    "from": [
     "window-events",
     6,
-    63
+    54
    ],
    "to": [
     "window-events"
@@ -6403,7 +6535,7 @@
    "from": [
     "window-events",
     6,
-    67
+    58
    ],
    "to": [
     "the-layout",
@@ -6416,7 +6548,7 @@
    "from": [
     "window-events",
     6,
-    68
+    59
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -6429,7 +6561,7 @@
    "from": [
     "window-events",
     7,
-    177
+    100
    ],
    "to": [
     "window-events"
@@ -6440,7 +6572,7 @@
    "from": [
     "window-events",
     8,
-    167
+    138
    ],
    "to": [
     "window-events"
@@ -6465,9 +6597,9 @@
     124
    ],
    "to": [
-    "plugin-start-and-stop",
-    7,
-    13
+    "the-user-sends-a-message",
+    3,
+    36
    ]
   },
   {
@@ -6478,9 +6610,9 @@
     124
    ],
    "to": [
-    "the-user-sends-a-message",
-    3,
-    36
+    "plugin-start-and-stop",
+    7,
+    13
    ]
   },
   {
@@ -6628,7 +6760,7 @@
    "to": [
     "a-new-reader-window",
     0,
-    69
+    36
    ]
   },
   {
@@ -6880,7 +7012,7 @@
    "from": [
     "primary-g",
     9,
-    153
+    89
    ],
    "to": [
     "primary-g"
@@ -6891,7 +7023,7 @@
    "from": [
     "primary-g",
     9,
-    159
+    92
    ],
    "to": [
     "endings",
@@ -6904,12 +7036,12 @@
    "from": [
     "primary-g",
     9,
-    162
+    95
    ],
    "to": [
     "a-new-reader-window",
     0,
-    69
+    36
    ]
   },
   {
@@ -6917,7 +7049,7 @@
    "from": [
     "primary-g",
     9,
-    163
+    96
    ],
    "to": [
     "plugin-start-and-stop",
@@ -7029,7 +7161,7 @@
    "from": [
     "what-the-agent-is-told",
     8,
-    50
+    10
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7060,9 +7192,291 @@
   {
    "type": "own_trip",
    "from": [
+    "what-the-validator-refuses",
+    0,
+    24
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    1,
+    51
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    2,
+    57
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    3,
+    62
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    4,
+    68
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    5,
+    83
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    5,
+    85
+   ],
+   "to": [
+    "a-request-arrives",
+    9,
+    32
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    6,
+    89
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    7,
+    150
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    7,
+    154
+   ],
+   "to": [
+    "trip-files",
+    1,
+    251
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    7,
+    157
+   ],
+   "to": [
+    "names-and-room",
+    2,
+    26
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    7,
+    159
+   ],
+   "to": [
+    "building-blocks",
+    2,
+    38
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    7,
+    159
+   ],
+   "to": [
+    "a-request-arrives",
+    3,
+    138
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    8,
+    96
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    8,
+    104
+   ],
+   "to": [
+    "the-agent-says-something",
+    1,
+    197
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    8,
+    107
+   ],
+   "to": [
+    "the-agent-says-something",
+    2,
+    226
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    8,
+    110
+   ],
+   "to": [
+    "the-agent-says-something",
+    4,
+    160
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    9,
+    114
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    9,
+    118
+   ],
+   "to": [
+    "pointing",
+    2,
+    91
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    10,
+    123
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    11,
+    127
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    12,
+    132
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    13,
+    138
+   ],
+   "to": [
+    "window-events"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    14,
+    149
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
     "one-tool-call-over-http",
     0,
-    92
+    94
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7073,7 +7487,7 @@
    "from": [
     "one-tool-call-over-http",
     1,
-    76
+    78
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7084,7 +7498,7 @@
    "from": [
     "one-tool-call-over-http",
     2,
-    63
+    65
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7095,7 +7509,7 @@
    "from": [
     "one-tool-call-over-http",
     3,
-    48
+    50
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7117,7 +7531,7 @@
    "from": [
     "one-tool-call-over-http",
     5,
-    36
+    38
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7139,116 +7553,12 @@
    "from": [
     "one-tool-call-over-http",
     6,
-    25
-   ],
-   "to": [
-    "the-user-sends-a-message",
-    8,
-    238
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "primary-g",
-    9,
-    153
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "endings",
-    14,
-    145
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "trip-files",
-    0,
-    187
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "pointing",
-    0,
-    133
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "the-agent-says-something",
-    0,
-    114
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "window-events",
-    7,
-    177
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
+    35
    ],
    "to": [
     "a-request-arrives",
-    1,
-    88
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "one-tool-call-over-http",
-    6,
-    33
-   ],
-   "to": [
-    "names-and-room",
-    8,
-    140
+    0,
+    166
    ]
   },
   {
@@ -7256,7 +7566,7 @@
    "from": [
     "one-tool-call-over-http",
     7,
-    227
+    195
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7267,7 +7577,7 @@
    "from": [
     "one-tool-call-over-http",
     7,
-    232
+    200
    ],
    "to": [
     "endings",
@@ -7280,7 +7590,7 @@
    "from": [
     "one-tool-call-over-http",
     8,
-    208
+    176
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7291,7 +7601,7 @@
    "from": [
     "one-tool-call-over-http",
     9,
-    81
+    83
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7302,7 +7612,7 @@
    "from": [
     "one-tool-call-over-http",
     10,
-    105
+    107
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7313,7 +7623,7 @@
    "from": [
     "one-tool-call-over-http",
     11,
-    108
+    110
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7324,7 +7634,7 @@
    "from": [
     "one-tool-call-over-http",
     12,
-    112
+    114
    ],
    "to": [
     "one-tool-call-over-http"
@@ -7466,23 +7776,10 @@
    "from": [
     "how-claude-comes-to-listen-to-sublime",
     6,
-    238
+    206
    ],
    "to": [
     "the-user-sends-a-message"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "how-claude-comes-to-listen-to-sublime",
-    6,
-    239
-   ],
-   "to": [
-    "endings",
-    15,
-    40
    ]
   },
   {
@@ -7621,7 +7918,7 @@
    "from": [
     "words-in-two-languages",
     3,
-    63
+    54
    ],
    "to": [
     "window-events"
@@ -7632,7 +7929,7 @@
    "from": [
     "words-in-two-languages",
     3,
-    67
+    58
    ],
    "to": [
     "the-layout",
@@ -7645,7 +7942,7 @@
    "from": [
     "words-in-two-languages",
     3,
-    68
+    59
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -7971,7 +8268,7 @@
    "from": [
     "endings",
     14,
-    145
+    84
    ],
    "to": [
     "endings"
@@ -8008,7 +8305,7 @@
    ],
    "to": [
     "pointing",
-    14,
+    13,
     50
    ]
   },
@@ -8107,7 +8404,7 @@
    "from": [
     "names-and-room",
     8,
-    140
+    79
    ],
    "to": [
     "names-and-room"
@@ -8118,12 +8415,12 @@
    "from": [
     "names-and-room",
     8,
-    141
+    80
    ],
    "to": [
-    "pointing",
-    1,
-    44
+    "endings",
+    15,
+    40
    ]
   },
   {
@@ -8131,20 +8428,7 @@
    "from": [
     "names-and-room",
     8,
-    142
-   ],
-   "to": [
-    "a-request-arrives",
-    2,
-    99
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "names-and-room",
-    8,
-    142
+    81
    ],
    "to": [
     "building-blocks",
@@ -8157,7 +8441,20 @@
    "from": [
     "names-and-room",
     8,
-    142
+    81
+   ],
+   "to": [
+    "a-request-arrives",
+    7,
+    58
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "names-and-room",
+    8,
+    81
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8954,9 +9251,9 @@
     207
    ],
    "to": [
-    "a-new-reader-window",
-    0,
-    69
+    "endings",
+    15,
+    40
    ]
   },
   {
@@ -8967,9 +9264,9 @@
     207
    ],
    "to": [
-    "endings",
-    15,
-    40
+    "a-new-reader-window",
+    0,
+    36
    ]
   },
   {
@@ -9433,7 +9730,7 @@
    "from": [
     "trip-files",
     0,
-    187
+    110
    ],
    "to": [
     "trip-files"
@@ -9444,25 +9741,12 @@
    "from": [
     "trip-files",
     0,
-    190
+    113
    ],
    "to": [
     "a-request-arrives",
-    3,
-    82
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "trip-files",
-    0,
-    196
-   ],
-   "to": [
-    "names-and-room",
     2,
-    26
+    122
    ]
   },
   {
@@ -9470,59 +9754,7 @@
    "from": [
     "trip-files",
     0,
-    197
-   ],
-   "to": [
-    "a-request-arrives",
-    9,
-    33
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "trip-files",
-    0,
-    197
-   ],
-   "to": [
-    "the-ontology-collections-and-sights",
-    13,
-    137
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "trip-files",
-    0,
-    198
-   ],
-   "to": [
-    "a-new-reader-window",
-    0,
-    69
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "trip-files",
-    0,
-    198
-   ],
-   "to": [
-    "loading-the-sights",
-    0,
-    130
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "trip-files",
-    0,
-    198
+    114
    ],
    "to": [
     "endings",
@@ -9535,7 +9767,46 @@
    "from": [
     "trip-files",
     0,
-    200
+    114
+   ],
+   "to": [
+    "a-request-arrives",
+    2,
+    122
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    114
+   ],
+   "to": [
+    "a-new-reader-window",
+    0,
+    36
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    114
+   ],
+   "to": [
+    "loading-the-sights",
+    0,
+    130
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "trip-files",
+    0,
+    116
    ],
    "to": [
     "plugin-start-and-stop",
@@ -9548,12 +9819,12 @@
    "from": [
     "trip-files",
     0,
-    201
+    117
    ],
    "to": [
-    "a-request-arrives",
-    2,
-    99
+    "the-ontology-collections-and-sights",
+    13,
+    137
    ]
   },
   {
@@ -9561,12 +9832,12 @@
    "from": [
     "trip-files",
     0,
-    201
+    117
    ],
    "to": [
-    "building-blocks",
-    2,
-    38
+    "a-request-arrives",
+    7,
+    58
    ]
   },
   {

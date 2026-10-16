@@ -16,15 +16,15 @@ import sublime
 
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
-                     OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
+                     MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
 from .subl_editor import Editor
 from .subl_geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
-from .words import word
-from .spec import (ancestors, breathing, display_path, elided, parse_spec, repo_root, sight_name,
-                   sight_title)
+from .words import lines_of, word
+from .spec import (ancestors, block_name, body_indent, breathing, display_path, elided,
+                   parse_spec, repo_root, sight_name, sight_title)
 from .subl_tint import apply_grey, apply_tint, hue_for, tint_color
 from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
                     draw_icons,
@@ -220,46 +220,51 @@ class Reader(Geometry):
             view = make_copy(self.window, copy, display_path(sight.path))
             draw_gap(view, line, line)
             sight.frozen.append((line, view))
-        above, below = elided(lines, sight.begin, sight.end, [line for line, _ in sight.frozen])
-        begin, end = breathing(lines, sight.begin, sight.end)
-        sight.pad = (sight.begin - begin, end - sight.end)
+        frozen = [line for line, _ in sight.frozen]
+        above, below = elided(lines, sight.begin, sight.end, frozen)
+        given = sight.begin, sight.end
+        # A few lines left out are shown instead: a "⋮" is worth it only for more (Jakub).
+        shown = (sight.begin - (above if above < MIN_ELIDED else 0),
+                 sight.end + (below if below < MIN_ELIDED else 0))
+        begin, end = breathing(lines, *shown)
+        sight.pad = (given[0] - begin, end - given[1])
         sight.begin, sight.end = begin, end
-        self.ellipses(sight, above, below)
+        notes = {key: lines_of(n, block_name(lines, frozen))
+                 for key, n in (("above", above), ("below", below)) if n >= MIN_ELIDED}
+        self.ellipses(sight, notes, body_indent(lines, frozen))
 
-    def ellipses(self, sight, above, below):
-        """"…" above and below a fragment of a function (Jakub), on the blank line shown there, or
-        as a line of its own when there is none, exactly one line of code tall."""
-        spots = {}
-        if above:
-            spots["above"] = (sight.begin, False) if sight.pad[0] else (sight.begin - 1, True)
-        if below:
-            spots["below"] = (sight.end, False) if sight.pad[1] else (sight.end, True)
-        sight.room = (int(above and not sight.pad[0]), int(below and not sight.pad[1]))
+    def ellipses(self, sight, notes, indent):
+        """"⋮ 14 lines of run" above and below a fragment of a function (Jakub), each a block of
+        its own two lines of code tall, so it never hides a change of indentation."""
+        spots = {"above": sight.begin - 1, "below": sight.end}
+        sight.room = (int("above" in notes), int("below" in notes))
         sight.ellipses = {}
-        for key, (line, block) in spots.items():
-            self.draw_ellipsis(sight, key, line, block, 0.0)
+        for key, note in notes.items():
+            self.draw_ellipsis(sight, key, spots[key], 0.0, note, indent)
 
-    def draw_ellipsis(self, sight, key, line, block, more):
-        """One "…", more px taller than a line of code (the stack's slack, see grow_ellipses).
+    def draw_ellipsis(self, sight, key, line, more, note=None, indent=None):
+        """One "⋮", two lines of code tall and more px (the stack's slack, see grow_ellipses).
         Sublime adds room of its own around a block phantom: drawn, measured and drawn again
         that much smaller."""
         view, lh = sight.view, sight.view.line_height()
-        draw_ellipsis(view, key, line, block, round(lh + more))
-        if block:
-            extra = line_top(view, line + 1) - line_top(view, line) - 2 * lh - more
-            if extra > 0.5:
-                draw_ellipsis(view, key, line, block, max(round(lh + more - extra), 1))
-        sight.ellipses[key] = (line, block)
+        note, indent = (note, indent) if note is not None else sight.ellipses[key][1:]
+        indent_px = indent * view.em_width()
+        draw_ellipsis(view, key, line, round(2 * lh + more), note, indent_px)
+        extra = line_top(view, line + 1) - line_top(view, line) - 3 * lh - more
+        if extra > 0.5:
+            draw_ellipsis(view, key, line, max(round(2 * lh + more - extra), 1), note, indent_px)
+        sight.ellipses[key] = (line, note, indent)
 
     def grow_ellipses(self):
         """The slack the stack leaves at the bottom of a sight's code (plan.stack) would show the
-        line after a fragment: its "…" below takes the slack instead (Jakub)."""
+        line after a fragment: its "⋮" below takes the slack instead (Jakub)."""
         for sight in self.sights:
-            line, block = sight.ellipses.get("below", (None, False))
-            lines = (sight.end - sight.begin + 1 + sum(sight.room)) * self.lh
+            if "below" not in sight.ellipses:
+                continue
+            lines = (sight.end - sight.begin + 1) * self.lh + sum(self.room_px(sight))
             slack = sight.code_item.content - lines
-            if block and slack > 0.5:
-                self.draw_ellipsis(sight, "below", line, block, slack)
+            if slack > 0.5:
+                self.draw_ellipsis(sight, "below", sight.ellipses["below"][0], slack)
 
     def tint(self, paths):
         """Every file in its own hue (see tint)."""
@@ -305,7 +310,7 @@ class Reader(Geometry):
             self.items += sight.items()
 
     def room_px(self, sight):
-        """The height of the "…" lines of their own above and below the range, as Sublime lays
+        """The height of the "⋮" blocks above and below the range, as Sublime lays
         block phantoms out (it adds room of its own around them)."""
         view, above, below = sight.view, 0.0, 0.0
         if sight.room[0]:

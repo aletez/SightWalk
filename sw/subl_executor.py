@@ -17,7 +17,7 @@ from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PO
 from .marks import untag
 from .ontology import trip_from
 from .subl_reader import Reader
-from .spec import parse_spec, repo_root, sight_name
+from .spec import functions_in, parse_spec, repo_root, sight_name
 from .validator import check, trip_of
 from .subl_views import hide_chrome
 
@@ -128,6 +128,7 @@ def facts(tool, args):
     if tool == "show":
         sights = args.get("sights")
         found["files"] = sight_files(sights if isinstance(sights, list) else [], args.get("root"))
+        found["functions"] = sight_functions(found["files"])
     elif tool == "open_trip":
         found.update(trip_file(args.get("file") or "", args.get("root")))
     elif tool == "browse":
@@ -147,6 +148,18 @@ def sight_files(specs, root):
     return found
 
 
+def sight_functions(found):
+    """[(spec, the functions defined in its lines)] of the sights whose files exist."""
+    result = []
+    for spec, path, lines, end in found:
+        if lines is None or end > lines:
+            continue
+        with open(path, encoding="utf-8", errors="replace") as f:
+            text = f.read().split("\n")
+        result.append((spec, functions_in(text, parse_spec(spec)[1], end)))
+    return result
+
+
 def trip_file(file, root):
     path = os.path.expanduser(file)
     try:
@@ -155,8 +168,8 @@ def trip_file(file, root):
     except (OSError, ValueError, KeyError) as e:
         return {"trip_error": str(e)}
     root = root or repo_root(path)
-    return {"trip": trip, "root": root,
-            "files": sight_files([sight.spec for sight in trip], root)}
+    found = sight_files([sight.spec for sight in trip], root)
+    return {"trip": trip, "root": root, "files": found, "functions": sight_functions(found)}
 
 
 OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,

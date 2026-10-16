@@ -21,10 +21,12 @@ Showing code
 - In a run, show the entry point first, then each function as control reaches it. When the
   user asks about another branch (an error, a different input, another caller), call show
   again with the sequence for that branch.
-- A sight holds one function, whole or a fragment of it: the lines that carry the trip's story
-  at that step. Do not count on functions being short, and never shorten code to fit a sight.
-  The plugin itself shows the def line (and the class line) above a fragment, frozen under
-  the sight's header, and "…" where the function's code is left out above or below. A
+- A sight holds one function at most, whole or a fragment of it: the lines that carry the
+  trip's story at that step. show refuses a sight with two functions in it. Do not count on
+  functions being short, and never shorten code to fit a sight. The plugin itself shows the
+  def line (and the class line) above a fragment, frozen under the sight's header, and a note
+  like "⋮ 14 lines of run" where the function's code is left out above or below (a few lines
+  left out it shows instead). A
   script's top-level code, which is no function, goes in sights of about the same length,
   each a step that reads as one.
 - Name the transitions between the trip's sights (show's transitions, required; [] when there

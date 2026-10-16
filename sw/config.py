@@ -22,6 +22,7 @@ STRIP_STEP = 0.15  # how far ▲ and ▼ on the strip move the trip, as a share 
 STRIP_PX = 32  # the scroll strip between the bench and the Sights: twice a scroll bar (Jakub)
 STRIP_ICON_SHIFT = 6  # a strip icon's push right: it mirrors the gutter's icon across the border
 GUTTER_PX = 26  # about a sight's gutter, for the editor's setback (see Reader.editor_geometry)
+MIN_ELIDED = 6  # fewer lines of a function left out are shown instead of a "⋮" (Jakub)
 GAP_PX = 16  # room between the gutter and the code, a phantom at each line's start (Jakub)
 OVERLAP = 2  # border between sights, half taken by each neighbour (Jakub)
 INSET = 10  # between the sights' header and gutter and the editor laid over them

@@ -233,12 +233,20 @@ class AncestorsTest(unittest.TestCase):
         self.assertEqual(spec.ancestors(self.LINES, 9, {"class", "def"}), [])
 
     def test_elided(self):
-        # run is 4-6 inside class A at 1: whole, no ellipsis; its line 6 alone leaves 5 above.
-        self.assertEqual(spec.elided(self.LINES, 4, 6, [1]), (True, False))
-        self.assertEqual(spec.elided(self.LINES, 5, 6, [1, 4]), (False, False))
-        self.assertEqual(spec.elided(self.LINES, 6, 6, [1, 4]), (True, False))
-        self.assertEqual(spec.elided(self.LINES, 5, 5, [1, 4]), (False, True))
-        self.assertEqual(spec.elided(self.LINES, 9, 10, []), (False, False))
+        # Lines of the innermost frozen block left out above and below the range.
+        self.assertEqual(spec.elided(self.LINES, 4, 6, [1]), (2, 0))
+        self.assertEqual(spec.elided(self.LINES, 5, 6, [1, 4]), (0, 0))
+        self.assertEqual(spec.elided(self.LINES, 6, 6, [1, 4]), (1, 0))
+        self.assertEqual(spec.elided(self.LINES, 5, 5, [1, 4]), (0, 1))
+        self.assertEqual(spec.elided(self.LINES, 9, 10, []), (0, 0))
+        self.assertEqual((spec.block_name(self.LINES, [1, 4]), spec.body_indent(self.LINES, [1, 4])),
+                         ("run", 8))
+
+    def test_one_function(self):
+        self.assertEqual(spec.functions_in(self.LINES, 1, 10), ["run", "f"])  # a method counts
+        self.assertEqual(spec.functions_in(self.LINES, 4, 6), ["run"])
+        self.assertEqual(spec.functions_in(["def a():", "    def b():", "        pass"], 1, 3),
+                         ["a"])
 
     def test_breathing(self):
         self.assertEqual(spec.breathing(self.LINES, 4, 6), (3, 7))

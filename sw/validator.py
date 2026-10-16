@@ -80,10 +80,21 @@ def files(facts, root):
         raise Refusal("; ".join(problems) + ".")
 
 
+def one_function(facts):
+    """A sight holds one function at most, whole or a fragment (Jakub). facts["functions"]:
+    [(spec, the functions defined in it)]."""
+    crowded = ["%s holds %s" % (spec, ", ".join(names))
+               for spec, names in facts.get("functions") or [] if len(names) > 1]
+    if crowded:
+        raise Refusal("A sight holds one function at most, whole or a fragment: split %s into "
+                      "one sight per function." % "; ".join(crowded))
+
+
 def check_show(args, facts):
     not_stopped(facts)
     trip_of(args)
     files(facts, args.get("root"))
+    one_function(facts)
 
 
 def check_open_trip(args, facts):
@@ -91,6 +102,7 @@ def check_open_trip(args, facts):
     if facts.get("trip_error"):
         raise Refusal("Cannot read a trip from %s: %s" % (args.get("file"), facts["trip_error"]))
     files(facts, facts.get("root"))
+    one_function(facts)
 
 
 def check_say(args, facts):

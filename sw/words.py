@@ -59,6 +59,14 @@ def set_language(language):
     LANGUAGE = language if language in LANGUAGES else "en"
 
 
+def lines_of(n, name):
+    """"14 lines of run", "14 linii run": what a fragment leaves out (Jakub), no "more"."""
+    if LANGUAGE != "pl":
+        return "%d line%s of %s" % (n, "" if n == 1 else "s", name)
+    few = n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14)
+    return "%d %s %s" % (n, "linia" if n == 1 else "linie" if few else "linii", name)
+
+
 def trips_count(n):
     """"35 trips", "35 wycieczek": Polish has three plural forms."""
     if LANGUAGE != "pl":

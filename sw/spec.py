@@ -112,20 +112,58 @@ def ancestors(lines, begin, keywords):
     return found[::-1]
 
 
+FUNCTION = re.compile(r"^\s*(?:async\s+)?def\s+(\w+)")
+
+
+def functions_in(lines, begin, end):
+    """The functions whose definitions stand in lines begin..end, not counting those defined
+    inside another of them: a sight holds one at most (Jakub)."""
+    found, open_indent = [], None
+    for text in lines[begin - 1:end]:
+        if not text.strip():
+            continue
+        if open_indent is not None and indent(text) <= open_indent:
+            open_indent = None
+        match = FUNCTION.match(text)
+        if match and open_indent is None:
+            found.append(match.group(1))
+            open_indent = indent(text)
+    return found
+
+
 def elided(lines, begin, end, frozen):
-    """(above, below): whether code of the innermost frozen block is left out between its opening
-    line and the range, and after the range (Jakub: a sight may be a fragment of a function; an
-    ellipsis then says so and gives room)."""
+    """(above, below): how many lines of the innermost frozen block are left out between its
+    opening line and the range, and after the range up to the block's last line (Jakub: a sight
+    may be a fragment of a function)."""
     if not frozen:
-        return False, False
+        return 0, 0
     opening = frozen[-1]
-    above = any(text.strip() for text in lines[opening:begin - 1])
-    below = False
-    for text in lines[end:]:
+    above = begin - 1 - opening
+    last = end
+    for number in range(end + 1, len(lines) + 1):
+        text = lines[number - 1]
         if text.strip():
-            below = indent(text) > indent(lines[opening - 1])
-            break
-    return above, below
+            if indent(text) <= indent(lines[opening - 1]):
+                break
+            last = number
+    return max(above, 0), last - end
+
+
+def body_indent(lines, frozen):
+    """The indentation of the innermost frozen block's body, in characters, or 0."""
+    if not frozen:
+        return 0
+    for text in lines[frozen[-1]:]:
+        if text.strip():
+            return indent(text)
+    return 0
+
+
+def block_name(lines, frozen):
+    """The name the innermost frozen block defines ("run", "Reader"), or ""."""
+    found = re.match(r"^\s*(?:async\s+)?(?:def|class)\s+(\w+)", lines[frozen[-1] - 1]) \
+        if frozen else None
+    return found.group(1) if found else ""
 
 
 def breathing(lines, begin, end):

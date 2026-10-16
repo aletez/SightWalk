@@ -36,7 +36,8 @@ TRIPS = [
      "From the HTTP server's thread to the show operation on Sublime's, with every check on the "
      "way.",
      ["subl_executor.execute", "subl_executor.run_on_main", "subl_executor.facts",
-      "subl_executor.sight_files", "validator.check", "validator.check_show",
+      "subl_executor.sight_files", "subl_executor.sight_functions", "spec.functions_in",
+      "validator.check", "validator.check_show", "validator.one_function",
       "subl_executor.op_show", "subl_executor.named", "validator.not_stopped", "validator.trip_of", "ontology.Sight.parse",
       "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem",
       "validator.files", "spec.parse_spec", "subl_executor.file_lines"]),
@@ -48,7 +49,7 @@ TRIPS = [
     ("Loading the sights",
      "Files read, each sight's copy, header and frozen lines made.",
      ["subl_reader.Reader.load", "subl_chat.catch_up", "subl_reader.Reader.close_sights",
-      "subl_reader.Reader.build", "subl_views.FileCopy.__init__", "subl_views.make_copy", "subl_reader.Reader.surround", "spec.elided",
+      "subl_reader.Reader.build", "subl_views.FileCopy.__init__", "subl_views.make_copy", "subl_reader.Reader.surround", "spec.elided", "spec.block_name", "spec.body_indent", "words.lines_of",
       "subl_reader.Reader.ellipses", "subl_reader.Reader.draw_ellipsis", "subl_views.draw_ellipsis",
       "subl_reader.Reader.room_px", "subl_reader.Reader.grow_ellipses",
       "spec.ancestors", "spec.indent", "spec.opens_block", "spec.breathing", "subl_views.make_header",

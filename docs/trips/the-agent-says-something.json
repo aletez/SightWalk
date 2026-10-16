@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "05fa8f15692fa3c307c9b0a3fbbef0a4399be653",
+ "commit": "196d74a2c02520a122f06b076293ab4324b36c22",
  "sights": [
   "sw/bridge.py:114-130",
   "sw/marks.py:188-203",

@@ -118,7 +118,7 @@ TRIPS = [
     ("Drawing the Map",
      "The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.",
      ["vetting.draw_map", "vetting.find_dot", "callmap.dot_source", "callmap.file_block",
-      "callmap.cluster", "callmap.node_line", "callmap.node_id", "callmap.quote",
+      "callmap.cluster", "callmap.node_line", "callmap.node_label", "callmap.html", "callmap.node_id", "callmap.quote",
       "callmap.arrow", "callmap.legend",
       "vetting.render", "vetting.png_size", "vetting.show_image", "vetting.zoom",
       "commands.SightWalkZoomMapCommand.run", "vetting.show_note"]),

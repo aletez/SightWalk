@@ -1,18 +1,20 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "0187bd229cad2c46e3280e2d961d418903fdc7d7",
+ "commit": "710191b04ef44ddb7dcffdc5a0d9801bf07f65c0",
  "sights": [
   "sw/vetting.py:87-94",
   "sw/vetting.py:80-84",
-  "sw/callmap.py:105-119",
-  "sw/callmap.py:80-86",
-  "sw/callmap.py:69-72",
-  "sw/callmap.py:75-77",
-  "sw/callmap.py:61-62",
-  "sw/callmap.py:65-66",
-  "sw/callmap.py:89-91",
-  "sw/callmap.py:94-102",
+  "sw/callmap.py:118-132",
+  "sw/callmap.py:93-99",
+  "sw/callmap.py:70-73",
+  "sw/callmap.py:76-78",
+  "sw/callmap.py:81-86",
+  "sw/callmap.py:89-90",
+  "sw/callmap.py:62-63",
+  "sw/callmap.py:66-67",
+  "sw/callmap.py:102-104",
+  "sw/callmap.py:107-115",
   "sw/vetting.py:97-109",
   "sw/vetting.py:112-114",
   "sw/vetting.py:123-138",
@@ -29,137 +31,147 @@
   {
    "type": "calls",
    "from": [0, 91],
-   "to": [15, 149]
+   "to": [17, 149]
   },
   {
    "type": "calls",
    "from": [0, 93],
-   "to": [2, 105]
+   "to": [2, 118]
   },
   {
    "type": "calls",
    "from": [0, 94],
-   "to": [10, 97]
+   "to": [12, 97]
   },
   {
    "type": "calls",
-   "from": [2, 111],
-   "to": [7, 65]
+   "from": [2, 124],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [2, 113],
-   "to": [7, 65]
+   "from": [2, 126],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [2, 116],
-   "to": [3, 80]
+   "from": [2, 129],
+   "to": [3, 93]
   },
   {
    "type": "calls",
-   "from": [2, 117],
-   "to": [8, 89]
+   "from": [2, 130],
+   "to": [10, 102]
   },
   {
    "type": "calls",
-   "from": [2, 118],
-   "to": [9, 94]
+   "from": [2, 131],
+   "to": [11, 107]
   },
   {
    "type": "calls",
-   "from": [3, 82],
-   "to": [5, 75]
+   "from": [3, 95],
+   "to": [5, 76]
   },
   {
    "type": "calls",
-   "from": [3, 84],
-   "to": [5, 75]
+   "from": [3, 97],
+   "to": [5, 76]
   },
   {
    "type": "calls",
-   "from": [3, 85],
-   "to": [4, 69]
+   "from": [3, 98],
+   "to": [4, 70]
   },
   {
    "type": "calls",
-   "from": [3, 86],
-   "to": [4, 69]
-  },
-  {
-   "type": "calls",
-   "from": [4, 71],
-   "to": [7, 65]
+   "from": [3, 99],
+   "to": [4, 70]
   },
   {
    "type": "calls",
    "from": [4, 72],
-   "to": [7, 65]
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [5, 76],
-   "to": [6, 61]
+   "from": [4, 73],
+   "to": [9, 66]
   },
   {
    "type": "calls",
    "from": [5, 77],
-   "to": [7, 65]
+   "to": [8, 62]
   },
   {
    "type": "calls",
-   "from": [6, 62],
-   "to": [7, 65]
+   "from": [5, 78],
+   "to": [6, 81]
   },
   {
    "type": "calls",
-   "from": [8, 91],
-   "to": [6, 61]
+   "from": [6, 84],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [9, 98],
-   "to": [7, 65]
+   "from": [6, 86],
+   "to": [7, 89]
   },
   {
    "type": "calls",
-   "from": [9, 99],
-   "to": [7, 65]
+   "from": [8, 63],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [9, 102],
-   "to": [4, 69]
+   "from": [10, 104],
+   "to": [8, 62]
   },
   {
    "type": "calls",
-   "from": [10, 107],
-   "to": [15, 149]
+   "from": [11, 111],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [10, 109],
-   "to": [12, 123]
+   "from": [11, 112],
+   "to": [9, 66]
   },
   {
    "type": "calls",
-   "from": [12, 131],
-   "to": [11, 112]
+   "from": [11, 115],
+   "to": [4, 70]
   },
   {
    "type": "calls",
-   "from": [12, 138],
-   "to": [13, 141]
+   "from": [12, 107],
+   "to": [17, 149]
   },
   {
    "type": "calls",
-   "from": [13, 146],
-   "to": [12, 123]
+   "from": [12, 109],
+   "to": [14, 123]
   },
   {
    "type": "calls",
-   "from": [14, 267],
-   "to": [13, 141]
+   "from": [14, 131],
+   "to": [13, 112]
+  },
+  {
+   "type": "calls",
+   "from": [14, 138],
+   "to": [15, 141]
+  },
+  {
+   "type": "calls",
+   "from": [15, 146],
+   "to": [14, 123]
+  },
+  {
+   "type": "calls",
+   "from": [16, 267],
+   "to": [15, 141]
   }
  ]
 }

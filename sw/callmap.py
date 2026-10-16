@@ -21,12 +21,13 @@ STYLES = {
 
 
 class Node:
-    """A definition on the map: its key (sight index, line), the function's name, the class
-    around it (or ""), its file as shown and its colour."""
+    """A definition on the map: its key (sight index, line), the function's name (or the sight's
+    lines, for top-level code), the class around it (or ""), its file as shown, its colour, and
+    the sight's name ("beta") on the sight's main node only."""
 
-    def __init__(self, key, function, owner, file, colour):
+    def __init__(self, key, function, owner, file, colour, name=""):
         self.key, self.function, self.owner, self.file = key, function, owner, file
-        self.colour = colour
+        self.colour, self.name = colour, name
 
 
 def first_definition(lines, begin, end):
@@ -72,16 +73,28 @@ def cluster(name, label, body, indent):
             "%s  label=%s;" % (pad, quote(label))] + body + ["%s}" % pad]
 
 
-def node_line(node, indent):
+def node_line(node, indent, faded):
     return '%s%s [label=%s, fillcolor="%s"];' % ("  " * indent, node_id(node.key),
-                                                 quote(node.function), node.colour)
+                                                 node_label(node, faded), node.colour)
 
 
-def file_block(file, nodes):
+def node_label(node, faded):
+    """The function, under the sight's name small and faded (Jakub), as an HTML-like label."""
+    if not node.name:
+        return quote(node.function)
+    return '<<font point-size="10" color="%s">%s</font><br/>%s>' % (
+        faded, html(node.name), html(node.function))
+
+
+def html(text):
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def file_block(file, nodes, faded):
     """A file's cluster, with a nested cluster per class."""
-    body = [node_line(n, 2) for n in nodes if not n.owner]
+    body = [node_line(n, 2, faded) for n in nodes if not n.owner]
     for owner in sorted({n.owner for n in nodes if n.owner}):
-        mine = [node_line(n, 3) for n in nodes if n.owner == owner]
+        mine = [node_line(n, 3, faded) for n in nodes if n.owner == owner]
         body += cluster(file + "/" + owner, "class " + owner, mine, 2)
     return cluster(file, file, body, 1)
 
@@ -113,7 +126,7 @@ def dot_source(nodes, arrows, style):
              'color="%s"];' % (quote(font), text, line),
              '  edge [color="%s"];' % line]
     for file in sorted({n.file for n in nodes}):
-        lines += file_block(file, [n for n in nodes if n.file == file])
+        lines += file_block(file, [n for n in nodes if n.file == file], line)
     lines += [arrow(a, b, kind) for a, b, kind in arrows]
     lines += legend([k for k in STYLES if any(kind == k for _, _, kind in arrows)])
     return "\n".join(lines + ["}"])

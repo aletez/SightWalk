@@ -771,14 +771,15 @@ class Reader(Geometry):
         points at, with the class around them, the file and its hue."""
         sight = self.sights[index]
         lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
-        # A sight without a function (a script's top-level code) is named by its range (Jakub).
+        # A sight without a function (a script's top-level code) is named by its lines (Jakub).
         main = callmap.first_definition(lines, sight.begin, sight.end) or (
-            sight.begin, sight_title(sight).rsplit("/", 1)[-1])
+            sight.begin, sight_title(sight).rsplit(":", 1)[-1].replace("-", "–"))
         targets = {t.target[1] for t in self.trip.transitions
                    if t.type == "calls" and len(t.target) == 2 and t.target[0] == index}
         colour = tint_color(map_style()[3], hue_for(sight.path), map_style()[4])
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
-                             display_path(sight.path), colour)
+                             display_path(sight.path), colour,
+                             sight_name(index) if line == main[0] else "")
                 for line in sorted({main[0]} | targets)]
 
     def owner(self, sight):

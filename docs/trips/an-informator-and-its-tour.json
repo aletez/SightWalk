@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "0187bd229cad2c46e3280e2d961d418903fdc7d7",
+ "commit": "710191b04ef44ddb7dcffdc5a0d9801bf07f65c0",
  "sights": [
   "sw/commands.py:198-204",
   "sw/commands.py:213-226",
@@ -11,7 +11,7 @@
   "sw/commands.py:206-210",
   "sw/words.py:62-69",
   "sw/reader.py:715-729",
-  "sw/reader.py:855-857",
+  "sw/reader.py:856-858",
   "sw/ontology.py:288-294",
   "sw/ontology.py:267-271",
   "sw/ontology.py:251-254",
@@ -21,8 +21,8 @@
   "sw/vetting.py:176-182",
   "sw/reader.py:731-743",
   "sw/reader.py:745-753",
-  "sw/reader.py:842-844",
-  "sw/reader.py:847-852",
+  "sw/reader.py:843-845",
+  "sw/reader.py:848-853",
   "sw/chat.py:202-205",
   "sw/ontology.py:274-278",
   "sw/vetting.py:185-194",
@@ -98,12 +98,12 @@
   {
    "type": "calls",
    "from": [7, 718],
-   "to": [8, 855]
+   "to": [8, 856]
   },
   {
    "type": "calls",
    "from": [7, 721],
-   "to": [19, 847]
+   "to": [19, 848]
   },
   {
    "type": "calls",
@@ -113,7 +113,7 @@
   {
    "type": "calls",
    "from": [7, 722],
-   "to": [8, 855]
+   "to": [8, 856]
   },
   {
    "type": "calls",
@@ -173,12 +173,12 @@
   {
    "type": "calls",
    "from": [17, 752],
-   "to": [18, 842]
+   "to": [18, 843]
   },
   {
    "type": "calls",
-   "from": [19, 849],
-   "to": [18, 842]
+   "from": [19, 850],
+   "to": [18, 843]
   },
   {
    "type": "calls",

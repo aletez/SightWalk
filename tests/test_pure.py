@@ -266,3 +266,6 @@ class CallMapTest(unittest.TestCase):
         self.assertIn('label="class A";', source)
         self.assertIn('label="returns"', source)
         self.assertNotIn('label="leads_to"', source)
+        named = callmap.Node((2, 1), "123–161", "", "a.py", "#ffffff", "theta")
+        self.assertEqual(callmap.node_label(named, "#888888"),
+                         '<<font point-size="10" color="#888888">theta</font><br/>123–161>')

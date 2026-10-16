@@ -85,15 +85,15 @@ Files read, each sight's copy, header and frozen lines made.
 Every file in its own hue, schemes written and set once Sublime has indexed them.
 
 - `sw/reader.py:226-231` Reader.tint
-- `sw/tint.py:166-169` apply_tint
-- `sw/tint.py:146-152` schemes_for
+- `sw/tint.py:169-172` apply_tint
+- `sw/tint.py:149-155` schemes_for
 - `sw/tint.py:22-26` hue_for
-- `sw/tint.py:107-131` tinted_schemes
+- `sw/tint.py:107-134` tinted_schemes
 - `sw/tint.py:41-53` load_base_scheme
 - `sw/tint.py:33-38` tint_color
 - `sw/tint.py:76-81` write_scheme
-- `sw/tint.py:155-163` set_schemes
-- `sw/tint.py:134-143` when_indexed
+- `sw/tint.py:158-166` set_schemes
+- `sw/tint.py:137-146` when_indexed
 
 ## 7. Measuring (16 views)
 
@@ -212,7 +212,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/bridge.py:104-107` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
-- `sw/reader.py:815-823` Reader.say
+- `sw/reader.py:816-824` Reader.say
 - `sw/reader.py:637-646` Reader.show_headers
 - `sw/chat.py:94-113` show_header
 - `sw/header.py:12-22` title_lines
@@ -231,8 +231,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
 - `sw/commands.py:181-184` SightWalkStopAnswerCommand.run
-- `sw/reader.py:794-801` Reader.stop_answer
-- `sw/reader.py:803-806` Reader.withdraw_unread_messages
+- `sw/reader.py:795-802` Reader.stop_answer
+- `sw/reader.py:804-807` Reader.withdraw_unread_messages
 
 ## 15. The Tools pane's tabs (10 views, survey)
 
@@ -254,31 +254,33 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 The trip's definitions and the calls its author named, as nodes for the graph.
 
 - `sw/reader.py:759-767` Reader.draw_map
-- `sw/reader.py:864-871` map_style
-- `sw/reader.py:769-782` Reader.map_nodes
-- `sw/reader.py:784-788` Reader.owner
+- `sw/reader.py:865-872` map_style
+- `sw/reader.py:769-783` Reader.map_nodes
+- `sw/reader.py:785-789` Reader.owner
 - `sw/reader.py:47-52` defined_name
-- `sw/callmap.py:32-38` first_definition
-- `sw/callmap.py:41-48` node_at
-- `sw/callmap.py:27-29` Node.__init__
-- `sw/callmap.py:51-58` edges
-- `sw/callmap.py:41-48` node_at
+- `sw/callmap.py:33-39` first_definition
+- `sw/callmap.py:42-49` node_at
+- `sw/callmap.py:28-30` Node.__init__
+- `sw/callmap.py:52-59` edges
+- `sw/callmap.py:42-49` node_at
 - `sw/vetting.py:87-94` draw_map
 
-## 17. Drawing the Map (16 views)
+## 17. Drawing the Map (18 views)
 
 The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.
 
 - `sw/vetting.py:87-94` draw_map
 - `sw/vetting.py:80-84` find_dot
-- `sw/callmap.py:105-119` dot_source
-- `sw/callmap.py:80-86` file_block
-- `sw/callmap.py:69-72` cluster
-- `sw/callmap.py:75-77` node_line
-- `sw/callmap.py:61-62` node_id
-- `sw/callmap.py:65-66` quote
-- `sw/callmap.py:89-91` arrow
-- `sw/callmap.py:94-102` legend
+- `sw/callmap.py:118-132` dot_source
+- `sw/callmap.py:93-99` file_block
+- `sw/callmap.py:70-73` cluster
+- `sw/callmap.py:76-78` node_line
+- `sw/callmap.py:81-86` node_label
+- `sw/callmap.py:89-90` html
+- `sw/callmap.py:62-63` node_id
+- `sw/callmap.py:66-67` quote
+- `sw/callmap.py:102-104` arrow
+- `sw/callmap.py:107-115` legend
 - `sw/vetting.py:97-109` render
 - `sw/vetting.py:112-114` png_size
 - `sw/vetting.py:123-138` show_image
@@ -294,7 +296,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/chat.py:160-174` take_draft
 - `sw/commands.py:32-36` send
 - `sw/state.py:36-37` reader_for
-- `sw/reader.py:825-839` Reader.context
+- `sw/reader.py:826-840` Reader.context
 - `sw/views.py:292-296` selected_text
 - `sw/plan.py:101-104` visible_specs
 - `sw/reader.py:630-633` Reader.take_edits
@@ -439,7 +441,7 @@ The guide is stopped, windows close.
 - `sw/guide.py:71-80` stop_when_idle
 - `sw/commands.py:155-157` SightWalkWindowListener.on_pre_close_window
 - `sw/commands.py:160-162` clear_schemes_if_unused
-- `sw/tint.py:180-206` clear_schemes
+- `sw/tint.py:183-209` clear_schemes
 - `sw/tint.py:72-73` scheme_folder
 - `sw/commands.py:130-135` SightWalkWindowListener.on_window_command
 - `sw/commands.py:188-190` SightWalkCloseTripCommand.run
@@ -463,8 +465,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/geometry.py:56-58` Geometry.head
 - `sw/geometry.py:65-67` Geometry.room
 - `sw/bridge.py:140-142` op_state
-- `sw/reader.py:808-813` Reader.folder
-- `sw/reader.py:790-792` Reader.note_waiting
+- `sw/reader.py:809-814` Reader.folder
+- `sw/reader.py:791-793` Reader.note_waiting
 
 ## 30. Building blocks (11 views, survey)
 
@@ -492,7 +494,7 @@ The agent's view of the settings, and colour helpers.
 - `sw/tint.py:96-104` resolved_scheme
 - `sw/tint.py:89-93` scheme_stem
 - `sw/tint.py:29-30` hex_rgb
-- `sw/tint.py:172-177` apply_grey
+- `sw/tint.py:175-180` apply_grey
 
 ## 32. The ontology: collections and sights (15 views, survey)
 
@@ -548,7 +550,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/commands.py:206-210` SightWalkOpenTourCommand.open
 - `sw/words.py:62-69` trips_count
 - `sw/reader.py:715-729` Reader.open_tour
-- `sw/reader.py:855-857` read_json
+- `sw/reader.py:856-858` read_json
 - `sw/ontology.py:288-294` tour_from
 - `sw/ontology.py:267-271` informator_from
 - `sw/ontology.py:251-254` trip_from
@@ -558,8 +560,8 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/vetting.py:176-182` read_walked
 - `sw/reader.py:731-743` Reader.tour_link
 - `sw/reader.py:745-753` Reader.keep_transcript
-- `sw/reader.py:842-844` transcripts_path
-- `sw/reader.py:847-852` read_transcripts
+- `sw/reader.py:843-845` transcripts_path
+- `sw/reader.py:848-853` read_transcripts
 - `sw/chat.py:202-205` set_transcript
 - `sw/ontology.py:274-278` dumps
 - `sw/vetting.py:185-194` save_walked

@@ -1,7 +1,7 @@
 {
  "name": "Names and room",
  "kind": "survey",
- "commit": "0187bd229cad2c46e3280e2d961d418903fdc7d7",
+ "commit": "710191b04ef44ddb7dcffdc5a0d9801bf07f65c0",
  "sights": [
   "sw/spec.py:68-74",
   "sw/spec.py:36-43",
@@ -12,8 +12,8 @@
   "sw/geometry.py:56-58",
   "sw/geometry.py:65-67",
   "sw/bridge.py:140-142",
-  "sw/reader.py:808-813",
-  "sw/reader.py:790-792"
+  "sw/reader.py:809-814",
+  "sw/reader.py:791-793"
  ],
  "transitions": [
   {
@@ -38,7 +38,7 @@
   },
   {
    "type": "calls",
-   "from": [9, 813],
+   "from": [9, 814],
    "to": [2, 25]
   }
  ]

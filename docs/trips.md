@@ -62,7 +62,7 @@ The window and every view but the sights.
 - `sw/vetting.py:26-33` make_tool
 - `sw/state.py:23-26` register
 
-## 5. Loading the sights (13 views)
+## 5. Loading the sights (19 views)
 
 Files read, each sight's copy, header and frozen lines made.
 
@@ -73,6 +73,12 @@ Files read, each sight's copy, header and frozen lines made.
 - `sw/views.py:154-158` FileCopy.__init__
 - `sw/views.py:161-173` make_copy
 - `sw/reader.py:214-227` Reader.surround
+- `sw/spec.py:115-128` elided
+- `sw/reader.py:229-240` Reader.ellipses
+- `sw/reader.py:242-252` Reader.draw_ellipsis
+- `sw/views.py:287-294` draw_ellipsis
+- `sw/reader.py:307-315` Reader.room_px
+- `sw/reader.py:254-262` Reader.grow_ellipses
 - `sw/spec.py:97-112` ancestors
 - `sw/spec.py:84-85` indent
 - `sw/spec.py:88-94` opens_block

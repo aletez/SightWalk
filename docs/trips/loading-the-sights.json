@@ -1,7 +1,7 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "14c4ed27a06a237c863c34eb8a0ec44ce92b90b0",
+ "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
  "sights": [
   "sw/reader.py:130-140",
   "sw/chat.py:208-216",
@@ -10,6 +10,12 @@
   "sw/views.py:154-158",
   "sw/views.py:161-173",
   "sw/reader.py:214-227",
+  "sw/spec.py:115-128",
+  "sw/reader.py:229-240",
+  "sw/reader.py:242-252",
+  "sw/views.py:287-294",
+  "sw/reader.py:307-315",
+  "sw/reader.py:254-262",
   "sw/spec.py:97-112",
   "sw/spec.py:84-85",
   "sw/spec.py:88-94",
@@ -46,7 +52,7 @@
   {
    "type": "calls",
    "from": [3, 202],
-   "to": [11, 197]
+   "to": [17, 197]
   },
   {
    "type": "calls",
@@ -56,7 +62,7 @@
   {
    "type": "calls",
    "from": [6, 219],
-   "to": [7, 97]
+   "to": [13, 97]
   },
   {
    "type": "calls",
@@ -65,33 +71,68 @@
   },
   {
    "type": "calls",
+   "from": [6, 223],
+   "to": [7, 115]
+  },
+  {
+   "type": "calls",
    "from": [6, 224],
-   "to": [10, 131]
+   "to": [16, 131]
   },
   {
    "type": "calls",
-   "from": [7, 101],
-   "to": [8, 84]
+   "from": [6, 227],
+   "to": [8, 229]
   },
   {
    "type": "calls",
-   "from": [7, 105],
-   "to": [8, 84]
+   "from": [7, 126],
+   "to": [14, 84]
   },
   {
    "type": "calls",
-   "from": [7, 107],
-   "to": [8, 84]
+   "from": [8, 240],
+   "to": [9, 242]
   },
   {
    "type": "calls",
-   "from": [7, 108],
-   "to": [9, 88]
+   "from": [9, 247],
+   "to": [10, 287]
   },
   {
    "type": "calls",
-   "from": [11, 201],
-   "to": [12, 206]
+   "from": [9, 251],
+   "to": [10, 287]
+  },
+  {
+   "type": "calls",
+   "from": [12, 262],
+   "to": [9, 242]
+  },
+  {
+   "type": "calls",
+   "from": [13, 101],
+   "to": [14, 84]
+  },
+  {
+   "type": "calls",
+   "from": [13, 105],
+   "to": [14, 84]
+  },
+  {
+   "type": "calls",
+   "from": [13, 107],
+   "to": [14, 84]
+  },
+  {
+   "type": "calls",
+   "from": [13, 108],
+   "to": [15, 88]
+  },
+  {
+   "type": "calls",
+   "from": [17, 201],
+   "to": [18, 206]
   }
  ]
 }

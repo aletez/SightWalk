@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "14c4ed27a06a237c863c34eb8a0ec44ce92b90b0",
+ "commit": "f6c4c6822b614ea892d78111a463dad3db208474",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1498,7 +1498,7 @@
    "from": [
     "loading-the-sights",
     7,
-    97
+    115
    ],
    "to": [
     "loading-the-sights"
@@ -1509,7 +1509,7 @@
    "from": [
     "loading-the-sights",
     8,
-    84
+    229
    ],
    "to": [
     "loading-the-sights"
@@ -1520,10 +1520,23 @@
    "from": [
     "loading-the-sights",
     9,
-    88
+    242
    ],
    "to": [
     "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    9,
+    249
+   ],
+   "to": [
+    "measuring",
+    4,
+    214
    ]
   },
   {
@@ -1531,10 +1544,23 @@
    "from": [
     "loading-the-sights",
     10,
-    131
+    287
    ],
    "to": [
     "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    10,
+    292
+   ],
+   "to": [
+    "building-blocks",
+    6,
+    47
    ]
   },
   {
@@ -1542,7 +1568,7 @@
    "from": [
     "loading-the-sights",
     11,
-    197
+    307
    ],
    "to": [
     "loading-the-sights"
@@ -1553,6 +1579,98 @@
    "from": [
     "loading-the-sights",
     11,
+    312
+   ],
+   "to": [
+    "measuring",
+    4,
+    214
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    11,
+    314
+   ],
+   "to": [
+    "measuring",
+    4,
+    214
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    12,
+    254
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    13,
+    97
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    14,
+    84
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    15,
+    88
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    16,
+    131
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "loading-the-sights",
+    17,
+    197
+   ],
+   "to": [
+    "loading-the-sights"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "loading-the-sights",
+    17,
     199
    ],
    "to": [
@@ -1565,7 +1683,7 @@
    "type": "calls",
    "from": [
     "loading-the-sights",
-    11,
+    17,
     200
    ],
    "to": [
@@ -1578,7 +1696,7 @@
    "type": "own_trip",
    "from": [
     "loading-the-sights",
-    12,
+    18,
     206
    ],
    "to": [
@@ -1589,7 +1707,7 @@
    "type": "calls",
    "from": [
     "loading-the-sights",
-    12,
+    18,
     209
    ],
    "to": [
@@ -1913,6 +2031,19 @@
    "from": [
     "measuring",
     3,
+    300
+   ],
+   "to": [
+    "loading-the-sights",
+    11,
+    307
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    3,
     302
    ],
    "to": [
@@ -2050,6 +2181,19 @@
    ],
    "to": [
     "measuring"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "measuring",
+    9,
+    339
+   ],
+   "to": [
+    "loading-the-sights",
+    12,
+    254
    ]
   },
   {
@@ -3152,7 +3296,7 @@
    ],
    "to": [
     "loading-the-sights",
-    12,
+    18,
     206
    ]
   },
@@ -5796,7 +5940,7 @@
    ],
    "to": [
     "loading-the-sights",
-    11,
+    17,
     197
    ]
   },
@@ -9617,7 +9761,7 @@
    ],
    "to": [
     "loading-the-sights",
-    11,
+    17,
     197
    ]
   },

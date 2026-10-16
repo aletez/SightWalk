@@ -41,6 +41,13 @@ STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--fo
 HEADER_SYNTAX = "Packages/%s/SightWalkHeader.sublime-syntax" % __package__.split(".")[0]
 
 
+def fragment_of(lines, sight):
+    """The function a fragment belongs to, from its frozen lines ("make_items"), or ""."""
+    frozen = [line for line, _ in sight.frozen]
+    found = frozen and callmap.DEF.match(lines[frozen[-1] - 1])
+    return found.group(1) if found else ""
+
+
 def line_count(view):
     return view.rowcol(view.size())[0] + 1
 
@@ -829,7 +836,8 @@ class Reader(Geometry):
         lines = sight.view.substr(sublime.Region(0, sight.view.size())).split("\n")
         # A sight without a function (a script's top-level code) is named by its lines (Jakub).
         main = callmap.first_definition(lines, sight.begin, sight.end) or (
-            sight.begin, sight_title(sight).rsplit(":", 1)[-1].replace("-", "–"))
+            sight.begin, fragment_of(lines, sight) or
+            sight_title(sight).rsplit(":", 1)[-1].replace("-", "–"))
         targets = {t.target[1] for t in self.trip.transitions
                    if t.type == "calls" and len(t.target) == 2 and t.target[0] == index}
         colour = tint_color(map_style()[3], hue_for(sight.path), map_style()[4])

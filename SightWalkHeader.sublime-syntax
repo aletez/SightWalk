@@ -7,7 +7,6 @@ scope: text.sight-walk.header
 hidden: true
 contexts:
   main:
-    - match: '^\s*([a-z]+(?: \d+)?)(\s*·)'
+    - match: '^\s*(\([a-z]\d*\))'
       captures:
         1: meta.sight-name.sight-walk
-        2: meta.sight-name.sight-walk

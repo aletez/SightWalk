@@ -8,11 +8,11 @@ from .spec import matches, sight_index, sight_name
 
 
 BAD_LINE = ('Write a line as "file:line" or {"sight": index or name, "line": line}, such as '
-            '{"sight": "gamma", "line": 12}, not %r.')
+            '{"sight": "(c)", "line": 12}, not %r.')
 
 
 def line_y(sight, line, lh):
-    return sight.code_item.y + (line - sight.begin) * lh
+    return sight.code_item.y + sight.code_item.lead + (line - sight.begin) * lh
 
 
 def resolve_target(sights, target):
@@ -38,7 +38,7 @@ def resolve_target(sights, target):
 
 
 def sight_number(sight):
-    """A sight given by its index or its name ("gamma")."""
+    """A sight given by its index or its name ("(c)", "c")."""
     index = sight_index(sight) if isinstance(sight, str) and not sight.isdigit() else None
     return int(sight) if index is None else index
 
@@ -114,7 +114,7 @@ def visible_lines(sights, offset, height, lh):
     for index, sight in enumerate(sights):
         if offset - 0.5 <= sight.header_item.y <= offset + height - lh + 0.5:
             seen.append((index, 0))
-        y0 = sight.code_item.y
+        y0 = sight.code_item.y + sight.code_item.lead
         lo = max(sight.begin, sight.begin + math.ceil((offset - y0) / lh - 0.01))
         hi = min(sight.end, sight.begin + math.floor((offset + height - lh - y0) / lh + 0.01))
         if lo <= hi:
@@ -164,6 +164,15 @@ def speaks_of_code(text):
 
 ICON_REF = re.compile(r"(?<![\w.'’-])([1-9]|[A-Z])(?![\w'’-])")
 REF_SCOPES = {"digit": "region.orangish", "letter": "region.bluish"}
+
+
+SIGHT_REF = re.compile(r"\([a-z]\d*\)")
+
+
+def sight_refs(text, count):
+    """[(start, end)]: the sights' names in text, "(c)", of the count sights in the trip."""
+    return [m.span() for m in SIGHT_REF.finditer(text)
+            if (sight_index(m.group(0)) or 0) < count and sight_index(m.group(0)) is not None]
 
 
 def icon_refs(text, indicators):

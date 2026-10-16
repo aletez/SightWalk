@@ -279,6 +279,21 @@ def draw_outlines(view, lines):
                          "sight_walk.outline." + colour, "", sublime.DRAW_NO_FILL)
 
 
+ELLIPSIS_HTML = ('<body style="margin: 0; padding: 0"><div style="margin: 0; padding: 0 0 0 %dpx; '
+                 'height: %%dpx; line-height: %%dpx; font-size: 1rem; color: %s">…</div></body>'
+                 % (GAP_PX, FADED))
+
+
+def draw_ellipsis(view, key, line, block, height):
+    """"…" where a fragment of a function leaves code out (Jakub), key "above" or "below": on
+    a blank line shown around the range (inline, no room added), or as a line of its own below
+    line (block), height px tall before the room Sublime adds around it."""
+    point = view.line(view.text_point(line - 1, 0)).b if block else view.text_point(line - 1, 0)
+    phantoms(view, "sight_walk_ellipsis_" + key).update([sublime.Phantom(
+        sublime.Region(point), ELLIPSIS_HTML % (height, height),
+        sublime.LAYOUT_BLOCK if block else sublime.LAYOUT_INLINE)])
+
+
 def draw_gap(view, first, last):
     """An inline phantom at the start of lines first..last (1-based): room between the gutter and
     the code, which the margin setting cannot give, as Sublime paints the margin in the gutter's

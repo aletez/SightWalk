@@ -2,6 +2,7 @@
 API."""
 
 import os
+import re
 
 BAD_SPEC = 'Bad sight %r: write "file:begin-end" with 1 <= begin <= end, like "app.py:12-30".'
 
@@ -43,26 +44,24 @@ def display_path(path):
     return "~" + path[len(home):] if path.startswith(home + os.sep) else path
 
 
-GREEK = ("alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa",
-         "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "sigma", "tau", "upsilon", "phi",
-         "chi", "psi", "omega")
+LETTERS = "abcdefghijklmnopqrstuvwxyz"
 
 
 def sight_name(index):
-    """A sight's name in its trip (Jakub): a Greek letter spelled out, in Latin letters, so the
-    user can copy or type it; after omega the letters again with a number, "alpha 2"."""
-    turn, letter = divmod(index, len(GREEK))
-    return GREEK[letter] + (" %d" % (turn + 1) if turn else "")
+    """A sight's name in its trip (Jakub): a small letter in parentheses, "(c)", which the user
+    finds by the alphabet and quotes easily ("and (c)?"); after (z) the letters again with a
+    number, "(a2)". Icons in the gutter use capitals, so the two never meet."""
+    turn, letter = divmod(index, len(LETTERS))
+    return "(%s%s)" % (LETTERS[letter], turn + 1 if turn else "")
 
 
 def sight_index(name):
-    """The index a sight's name stands for, or None."""
-    parts = str(name).strip().lower().split()
-    if not parts or parts[0] not in GREEK or len(parts) > 2:
+    """The index a sight's name stands for, "(c)", "c)" or "c", or None."""
+    found = re.match(r"^\(?([a-z])(\d*)\)?$", str(name).strip())
+    if not found or found.group(2) in ("0", "1") or found.group(2).startswith("0"):
         return None
-    turn = int(parts[1]) - 1 if len(parts) == 2 and parts[1].isdigit() else 0
-    return None if turn < 0 or (len(parts) == 2 and turn == 0) else \
-        turn * len(GREEK) + GREEK.index(parts[0])
+    turn = int(found.group(2)) - 1 if found.group(2) else 0
+    return turn * len(LETTERS) + LETTERS.index(found.group(1))
 
 
 def sight_title(sight, index=None, width=0):
@@ -71,7 +70,7 @@ def sight_title(sight, index=None, width=0):
     begin, end = sight.begin + sight.pad[0], sight.end - sight.pad[1]
     lines = str(begin) if begin == end else "%d-%d" % (begin, end)
     title = "%s:%s" % (display_path(sight.path), lines)
-    return title if index is None else "%s · %s" % (sight_name(index).ljust(width), title)
+    return title if index is None else "%s %s" % (sight_name(index).ljust(width), title)
 
 
 def matches(sight, name):
@@ -111,6 +110,22 @@ def ancestors(lines, begin, keywords):
         if limit == 0:
             break
     return found[::-1]
+
+
+def elided(lines, begin, end, frozen):
+    """(above, below): whether code of the innermost frozen block is left out between its opening
+    line and the range, and after the range (Jakub: a sight may be a fragment of a function; an
+    ellipsis then says so and gives room)."""
+    if not frozen:
+        return False, False
+    opening = frozen[-1]
+    above = any(text.strip() for text in lines[opening:begin - 1])
+    below = False
+    for text in lines[end:]:
+        if text.strip():
+            below = indent(text) > indent(lines[opening - 1])
+            break
+    return above, below
 
 
 def breathing(lines, begin, end):

@@ -21,9 +21,12 @@ Showing code
 - In a run, show the entry point first, then each function as control reaches it. When the
   user asks about another branch (an error, a different input, another caller), call show
   again with the sequence for that branch.
-- Each sight holds exactly one whole function, from its signature to its last line. The one
-  exception is a script's top-level code, which is no function: show it in sights of about the
-  same length, each a step that reads as one.
+- A sight holds one function, whole or a fragment of it: the lines that carry the trip's story
+  at that step. Do not count on functions being short, and never shorten code to fit a sight.
+  The plugin itself shows the def line (and the class line) above a fragment, frozen under
+  the sight's header, and "…" where the function's code is left out above or below. A
+  script's top-level code, which is no function, goes in sights of about the same length,
+  each a step that reads as one.
 - Name the transitions between the trip's sights (show's transitions, required; [] when there
   are none). Each is {"type": t, "from": place, "to": place}; a place is [sight] or
   [sight, line], sights numbered from 0, lines of the file. It reads as a sentence true of its
@@ -86,10 +89,11 @@ Indicators
   in any language. The user reads lines by their icons, so name a line by its icon: "1 takes
   the token", "at A the port is read". say refuses line numbers. Line numbers belong only in
   the arguments of point and show.
-- Every sight has a name, a Greek letter spelled out in its header: alpha, beta, gamma, … in
-  the trip's order (show, open_trip and state list them). Name sights only so, as the user
-  does ("in gamma"), never by number or file. A line is "file:line" (absolute file line) or
-  {"sight": name or index, "line": line}, such as {"sight": "gamma", "line": 12}.
+- Every sight has a name, a small letter in parentheses at the start of its header: (a), (b),
+  (c), … in the trip's order (show, open_trip and state list them). Name sights only so,
+  always with the parentheses: "(c) calls (d)". The user may write c, c) or (c). Never name a
+  sight by number or file. A line is "file:line" (absolute file line) or
+  {"sight": name or index, "line": line}, such as {"sight": "(c)", "line": 12}.
 - Jumps of control: {"from": line, "to": line}. Call site and the callee's first line, return
   and the call site it goes back to, raise and its handler. The arrows bend towards each other.
   Say in the conversation which jump it is. There and back are two separate point calls.
@@ -139,7 +143,7 @@ TOOLS = [
          {"text": {"type": "string"}, "status": {"type": "string"}}, ["text"]),
     tool("point", 'Place marks. A jump of control is {"from": "app.py:57", "to": "app.py:12"}; '
          'any other mark is {"at": "app.py:30", "mark": "1"} with a digit 1-9 or a letter A-Z '
-         '(default "A"). A line is "file:line" or {"sight": "gamma", "line": 12} (a sight\'s '
+         '(default "A"). A line is "file:line" or {"sight": "(c)", "line": 12} (a sight\'s '
          "name or index). reveal scrolls the marks into view. clear removes earlier marks first.",
          {"marks": {"type": "array", "items": {"type": "object"}},
           "reveal": {"type": "boolean"}, "clear": {"type": "boolean"}}, ["marks"]),

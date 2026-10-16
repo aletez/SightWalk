@@ -216,9 +216,10 @@ def catch_up(view):
                                             "end": len(protected)})
 
 
-def outline_refs(view, indicators):
+def outline_refs(view, indicators, sights=0):
     """The digits and letters naming icons, outlined in their colours, in what the guide said
-    since the user last spoke: earlier answers named icons no longer there."""
+    since the user last spoke: earlier answers named icons no longer there. The sights' names,
+    "(c)", in a frame of the text's colour (a scope no scheme names)."""
     protected = PROTECTED.get(view.buffer_id(), "")
     start = protected.rfind("\nU: ") + 1
     by_scope = {}
@@ -227,6 +228,10 @@ def outline_refs(view, indicators):
     for scope in marks.REF_SCOPES.values():
         view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",
                          sublime.DRAW_NO_FILL)
+    names = [sublime.Region(start + a, start + b)
+             for a, b in marks.sight_refs(protected[start:], sights)]
+    view.add_regions("sight_walk_sight_refs", names, "sight_walk.sight_ref", "",
+                     sublime.DRAW_NO_FILL)
 
 
 def shade_variables(view):

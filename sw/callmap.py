@@ -23,7 +23,7 @@ STYLES = {
 class Node:
     """A definition on the map: its key (sight index, line), the function's name (or the sight's
     lines, for top-level code), the class around it (or ""), its file as shown, its colour, and
-    the sight's name ("beta") on the sight's main node only."""
+    the name of the sight it is in, "(b)"."""
 
     def __init__(self, key, function, owner, file, colour, name=""):
         self.key, self.function, self.owner, self.file = key, function, owner, file
@@ -67,34 +67,34 @@ def quote(text):
     return '"%s"' % text.replace("\\", "\\\\").replace('"', '\\"')
 
 
-def cluster(name, label, body, indent):
+def cluster(name, label, body, indent, extra=""):
     pad = "  " * indent
     return ["%ssubgraph %s {" % (pad, quote("cluster_" + name)),
-            "%s  label=%s;" % (pad, quote(label))] + body + ["%s}" % pad]
+            "%s  label=%s;%s" % (pad, quote(label), extra)] + body + ["%s}" % pad]
 
 
-def node_line(node, indent, faded):
+def node_line(node, indent):
     return '%s%s [label=%s, fillcolor="%s"];' % ("  " * indent, node_id(node.key),
-                                                 node_label(node, faded), node.colour)
+                                                 quote(node.function), node.colour)
 
 
-def node_label(node, faded):
-    """The function, under the sight's name small and faded (Jakub), as an HTML-like label."""
-    if not node.name:
-        return quote(node.function)
-    return '<<font point-size="10" color="%s">%s</font><br/>%s>' % (
-        faded, html(node.name), html(node.function))
-
-
-def html(text):
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+def sight_blocks(nodes, indent, faded):
+    """Each sight's nodes in a dashed frame titled with its name, "(b)" (Jakub): a sight may hold
+    several definitions the trip's calls reach."""
+    body = []
+    for name in sorted({n.name for n in nodes}, key=lambda name: min(n.key for n in nodes
+                                                                      if n.name == name)):
+        mine = [node_line(n, indent + 1) for n in nodes if n.name == name]
+        body += cluster("sight" + name, name, mine, indent,
+                        " style=dashed; fontcolor=%s;" % quote(faded))
+    return body
 
 
 def file_block(file, nodes, faded):
-    """A file's cluster, with a nested cluster per class."""
-    body = [node_line(n, 2, faded) for n in nodes if not n.owner]
+    """A file's cluster, with a nested cluster per class, and in either one per sight."""
+    body = sight_blocks([n for n in nodes if not n.owner], 2, faded)
     for owner in sorted({n.owner for n in nodes if n.owner}):
-        mine = [node_line(n, 3, faded) for n in nodes if n.owner == owner]
+        mine = sight_blocks([n for n in nodes if n.owner == owner], 3, faded)
         body += cluster(file + "/" + owner, "class " + owner, mine, 2)
     return cluster(file, file, body, 1)
 

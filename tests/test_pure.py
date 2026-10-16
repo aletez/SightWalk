@@ -78,18 +78,23 @@ class CodeTalkTest(unittest.TestCase):
 
 class SightNamesTest(unittest.TestCase):
     def test_names_and_back(self):
-        self.assertEqual([spec.sight_name(i) for i in (0, 2, 23, 24, 25)],
-                         ["alpha", "gamma", "omega", "alpha 2", "beta 2"])
-        for i in (0, 2, 23, 24, 25):
+        self.assertEqual([spec.sight_name(i) for i in (0, 2, 25, 26, 27)],
+                         ["(a)", "(c)", "(z)", "(a2)", "(b2)"])
+        for i in (0, 2, 25, 26, 27):
             self.assertEqual(spec.sight_index(spec.sight_name(i)), i)
-        for bad in ("gama", "alpha 1", "alpha x", ""):
+        self.assertEqual([spec.sight_index(x) for x in ("c", "c)", "(c)")], [2, 2, 2])
+        for bad in ("(A)", "a1", "gamma", ""):
             self.assertIsNone(spec.sight_index(bad))
+
+    def test_refs_in_text(self):
+        self.assertEqual(marks.sight_refs("No a (a)? (c) calls (b), (q) is none.", 3),
+                         [(5, 8), (10, 13), (20, 23)])
 
     def test_marks_by_name(self):
         sights, _ = stacked((1, 3), (10, 11))
-        self.assertEqual(marks.resolve_target(sights, {"sight": "beta", "line": 11}), (1, 11))
+        self.assertEqual(marks.resolve_target(sights, {"sight": "(b)", "line": 11}), (1, 11))
         with self.assertRaises(ValueError):
-            marks.resolve_target(sights, {"sight": "gama", "line": 11})
+            marks.resolve_target(sights, {"sight": "(q)", "line": 11})
 
 
 class LineRefsTest(unittest.TestCase):
@@ -227,6 +232,14 @@ class AncestorsTest(unittest.TestCase):
         self.assertEqual(spec.ancestors(self.LINES, 6, {"class", "def", "if"}), [1, 4, 5])
         self.assertEqual(spec.ancestors(self.LINES, 9, {"class", "def"}), [])
 
+    def test_elided(self):
+        # run is 4-6 inside class A at 1: whole, no ellipsis; its line 6 alone leaves 5 above.
+        self.assertEqual(spec.elided(self.LINES, 4, 6, [1]), (True, False))
+        self.assertEqual(spec.elided(self.LINES, 5, 6, [1, 4]), (False, False))
+        self.assertEqual(spec.elided(self.LINES, 6, 6, [1, 4]), (True, False))
+        self.assertEqual(spec.elided(self.LINES, 5, 5, [1, 4]), (False, True))
+        self.assertEqual(spec.elided(self.LINES, 9, 10, []), (False, False))
+
     def test_breathing(self):
         self.assertEqual(spec.breathing(self.LINES, 4, 6), (3, 7))
         self.assertEqual(spec.breathing(self.LINES, 9, 10), (8, 11))
@@ -266,6 +279,6 @@ class CallMapTest(unittest.TestCase):
         self.assertIn('label="class A";', source)
         self.assertIn('label="returns"', source)
         self.assertNotIn('label="leads_to"', source)
-        named = callmap.Node((2, 1), "123–161", "", "a.py", "#ffffff", "theta")
-        self.assertEqual(callmap.node_label(named, "#888888"),
-                         '<<font point-size="10" color="#888888">theta</font><br/>123–161>')
+        framed = callmap.dot_source([callmap.Node((0, 1), "run", "", "a.py", "#fff", "(a)")], [],
+                                    ("Helvetica", "#000000", "#888888", "#ffffff"))
+        self.assertIn('label="(a)"; style=dashed;', framed)

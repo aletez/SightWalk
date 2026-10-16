@@ -23,10 +23,11 @@ from .geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
 from .words import word
-from .spec import (ancestors, breathing, display_path, parse_spec, repo_root, sight_name,
+from .spec import (ancestors, breathing, display_path, elided, parse_spec, repo_root, sight_name,
                    sight_title)
 from .tint import apply_grey, apply_tint, hue_for, tint_color
-from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_gap, draw_icons,
+from .views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
+                    draw_icons,
                     draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
                     make_blank_view, make_browser, make_copy, make_header, make_side_view,
                     match_font, phantoms, reader_layout, selected_text, to_layout)
@@ -55,7 +56,7 @@ def defined_name(lines, line, main):
 def item_top(item):
     """The layout y of a cell's top line. A code line is measured afresh: a fresh copy is laid out
     late."""
-    return line_top(item.view, item.line) if item.line else item.top_layout
+    return line_top(item.view, item.line) - item.lead if item.line else item.top_layout
 
 
 class Reader(Geometry):
@@ -219,9 +220,46 @@ class Reader(Geometry):
             view = make_copy(self.window, copy, display_path(sight.path))
             draw_gap(view, line, line)
             sight.frozen.append((line, view))
+        above, below = elided(lines, sight.begin, sight.end, [line for line, _ in sight.frozen])
         begin, end = breathing(lines, sight.begin, sight.end)
         sight.pad = (sight.begin - begin, end - sight.end)
         sight.begin, sight.end = begin, end
+        self.ellipses(sight, above, below)
+
+    def ellipses(self, sight, above, below):
+        """"…" above and below a fragment of a function (Jakub), on the blank line shown there, or
+        as a line of its own when there is none, exactly one line of code tall."""
+        spots = {}
+        if above:
+            spots["above"] = (sight.begin, False) if sight.pad[0] else (sight.begin - 1, True)
+        if below:
+            spots["below"] = (sight.end, False) if sight.pad[1] else (sight.end, True)
+        sight.room = (int(above and not sight.pad[0]), int(below and not sight.pad[1]))
+        sight.ellipses = {}
+        for key, (line, block) in spots.items():
+            self.draw_ellipsis(sight, key, line, block, 0.0)
+
+    def draw_ellipsis(self, sight, key, line, block, more):
+        """One "…", more px taller than a line of code (the stack's slack, see grow_ellipses).
+        Sublime adds room of its own around a block phantom: drawn, measured and drawn again
+        that much smaller."""
+        view, lh = sight.view, sight.view.line_height()
+        draw_ellipsis(view, key, line, block, round(lh + more))
+        if block:
+            extra = line_top(view, line + 1) - line_top(view, line) - 2 * lh - more
+            if extra > 0.5:
+                draw_ellipsis(view, key, line, block, max(round(lh + more - extra), 1))
+        sight.ellipses[key] = (line, block)
+
+    def grow_ellipses(self):
+        """The slack the stack leaves at the bottom of a sight's code (plan.stack) would show the
+        line after a fragment: its "…" below takes the slack instead (Jakub)."""
+        for sight in self.sights:
+            line, block = sight.ellipses.get("below", (None, False))
+            lines = (sight.end - sight.begin + 1 + sum(sight.room)) * self.lh
+            slack = sight.code_item.content - lines
+            if block and slack > 0.5:
+                self.draw_ellipsis(sight, "below", line, block, slack)
 
     def tint(self, paths):
         """Every file in its own hue (see tint)."""
@@ -259,10 +297,22 @@ class Reader(Geometry):
             sight.header_item = plan.Item(sight.header, header_top(sight.header), self.lh, True)
             sight.frozen_items = [plan.Item(view, line_top(view, line), self.lh, line=line)
                                   for line, view in sight.frozen]
-            content = (sight.end - sight.begin + 1) * self.lh
+            above, below = self.room_px(sight)
+            content = (sight.end - sight.begin + 1) * self.lh + above + below
             sight.code_item = plan.Item(sight.view, line_top(sight.view, sight.begin), content,
                                         line=sight.begin)
+            sight.code_item.lead = above
             self.items += sight.items()
+
+    def room_px(self, sight):
+        """The height of the "…" lines of their own above and below the range, as Sublime lays
+        block phantoms out (it adds room of its own around them)."""
+        view, above, below = sight.view, 0.0, 0.0
+        if sight.room[0]:
+            above = line_top(view, sight.begin) - line_top(view, sight.begin - 1) - self.lh
+        if sight.room[1]:
+            below = line_top(view, sight.end + 1) - line_top(view, sight.end) - self.lh
+        return max(above, 0.0), max(below, 0.0)
 
     def calibrate(self):
         """Measures the window's height H and the height o a cell adds to its content: a cell over
@@ -286,6 +336,7 @@ class Reader(Geometry):
 
     def start(self):
         plan.stack(self.items, self.overhead, self.lh)
+        self.grow_ellipses()
         self.lead = self.centred_lead()
         self.write_strip()
         self.ready = True
@@ -531,7 +582,7 @@ class Reader(Geometry):
     def point(self, new_marks, reveal=True, clear=True):
         resolved = marks.resolve_marks(self.sights, new_marks)
         self.indicators = resolved if clear else self.indicators + resolved
-        chat.outline_refs(self.chat, self.indicators)
+        chat.outline_refs(self.chat, self.indicators, len(self.sights))
         ys = [marks.line_y(self.sights[m["sight"]], m["line"], self.lh) for m in resolved]
         bottom = self.offset + self.room() - 2 * self.lh
         if reveal and ys and not all(self.offset <= y <= bottom for y in ys):
@@ -778,8 +829,7 @@ class Reader(Geometry):
                    if t.type == "calls" and len(t.target) == 2 and t.target[0] == index}
         colour = tint_color(map_style()[3], hue_for(sight.path), map_style()[4])
         return [callmap.Node((index, line), defined_name(lines, line, main), self.owner(sight),
-                             display_path(sight.path), colour,
-                             sight_name(index) if line == main[0] else "")
+                             display_path(sight.path), colour, sight_name(index))
                 for line in sorted({main[0]} | targets)]
 
     def owner(self, sight):
@@ -820,7 +870,7 @@ class Reader(Geometry):
             self.status = status
         self.show_headers()
         chat.say(self.chat, text, prefix)
-        chat.outline_refs(self.chat, self.indicators)
+        chat.outline_refs(self.chat, self.indicators, len(self.sights))
         self.keep_transcript()
 
     def context(self):

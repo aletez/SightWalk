@@ -11,6 +11,7 @@ class Item:
         self.line = line  # the file line at the cell's top, for a code cell (measured afresh)
         self.top_layout = top_layout
         self.content = content
+        self.lead = 0.0  # room above line (a "…" of its own), part of the cell
         self.y = 0.0
 
 
@@ -26,6 +27,8 @@ class Pane:
         self.frozen = []  # (line, view): the lines that open the blocks around the range (Jakub)
         self.frozen_items = []
         self.pad = (0, 0)  # blank lines shown above and below the range as given (spec.breathing)
+        self.room = (0, 0)  # lines of "…" added above and below the range (spec.elided)
+        self.ellipses = {}  # "above"/"below": (line, block) of each "…" drawn
         self.code_item = None
         self.header_icons = {}
         self.icons = {}

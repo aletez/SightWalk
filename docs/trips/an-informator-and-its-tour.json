@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "b66022052962c16101adde9735d8a13a13adf45a",
+ "commit": "2d29e5ac2327879b81f9ceeb565b417824739a13",
  "sights": [
   "sw/subl_commands.py:198-204",
   "sw/subl_commands.py:213-226",
@@ -12,19 +12,19 @@
   "sw/words.py:70-77",
   "sw/subl_reader.py:778-792",
   "sw/subl_reader.py:919-921",
-  "sw/ontology.py:290-296",
-  "sw/ontology.py:269-273",
-  "sw/ontology.py:253-256",
-  "sw/ontology.py:243-244",
-  "sw/ontology.py:208-221",
-  "sw/ontology.py:224-232",
+  "sw/ontology.py:291-297",
+  "sw/ontology.py:270-274",
+  "sw/ontology.py:254-257",
+  "sw/ontology.py:244-245",
+  "sw/ontology.py:209-222",
+  "sw/ontology.py:225-233",
   "sw/subl_vetting.py:176-182",
   "sw/subl_reader.py:794-806",
   "sw/subl_reader.py:808-816",
   "sw/subl_reader.py:906-908",
   "sw/subl_reader.py:911-916",
   "sw/subl_chat.py:202-205",
-  "sw/ontology.py:276-280",
+  "sw/ontology.py:277-281",
   "sw/subl_vetting.py:185-194",
   "sw/subl_reader.py:818-820",
   "sw/subl_vetting.py:157-173"
@@ -93,7 +93,7 @@
   {
    "type": "calls",
    "from": [7, 781],
-   "to": [10, 269]
+   "to": [10, 270]
   },
   {
    "type": "calls",
@@ -108,7 +108,7 @@
   {
    "type": "calls",
    "from": [7, 785],
-   "to": [9, 290]
+   "to": [9, 291]
   },
   {
    "type": "calls",
@@ -118,7 +118,7 @@
   {
    "type": "calls",
    "from": [7, 786],
-   "to": [13, 208]
+   "to": [13, 209]
   },
   {
    "type": "calls",
@@ -132,23 +132,23 @@
   },
   {
    "type": "calls",
-   "from": [10, 271],
-   "to": [11, 253]
-  },
-  {
-   "type": "calls",
    "from": [10, 272],
-   "to": [12, 243]
+   "to": [11, 254]
   },
   {
    "type": "calls",
-   "from": [11, 255],
-   "to": [12, 243]
+   "from": [10, 273],
+   "to": [12, 244]
   },
   {
    "type": "calls",
-   "from": [13, 220],
-   "to": [14, 224]
+   "from": [11, 256],
+   "to": [12, 244]
+  },
+  {
+   "type": "calls",
+   "from": [13, 221],
+   "to": [14, 225]
   },
   {
    "type": "calls",

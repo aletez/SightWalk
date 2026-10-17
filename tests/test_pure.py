@@ -119,6 +119,13 @@ class AnswerMarksTest(unittest.TestCase):
         self.assertEqual(frames, [(3, 4, "icon"), (8, 13, 0)])
         self.assertEqual(marks.frame_scopes(frames, text), ["region.orangish", "region.greenish"])
 
+    def test_same_tag_again(self):
+        jump = '<jump from="(a):3" to="(b):10">%s</jump>'
+        text, found, frames = marks.read_marks(
+            (jump % "calls") + ', <jump from="(a):2" to="(b):11">x</jump>, then ' + (jump % "it"))
+        self.assertEqual(len(found), 2)  # one mark per jump
+        self.assertEqual([kind for _, _, kind in frames], [0, 1, 0])  # the first jump's colour
+
 
 class TagsTest(unittest.TestCase):
     def test_tags_become_invisible(self):

@@ -224,17 +224,22 @@ def place(text):
 def read_marks(text):
     """(text without <icon> and <jump>, marks for resolve_marks, frames): frames are
     (start, end, kind) in the text returned, kind "icon" or the jump's index among the jumps
-    (Jakub: the answer places its own marks, so where they stand is kept with it)."""
-    out, found, frames, jumps, last = [], [], [], 0, 0
+    (Jakub: the answer places its own marks, so where they stand is kept with it). The same tag
+    again (same place and character, or same ends) makes no second mark: it frames its words in
+    the same colour, so the answer can come back to a jump or a line (Jakub)."""
+    out, found, frames, jumps, last = [], [], [], {}, 0
     for match in MARK_TAG.finditer(text):
         out.append(text[last:match.start()])
         start = sum(len(part) for part in out)
         if match.group(1) is not None:
-            found.append({"at": place(match.group(1)), "mark": match.group(2).strip()})
+            mark = {"at": place(match.group(1)), "mark": match.group(2).strip()}
             words, kind = match.group(2), "icon"
         else:
-            found.append({"from": place(match.group(3)), "to": place(match.group(4))})
-            words, kind, jumps = match.group(5), jumps, jumps + 1
+            mark = {"from": place(match.group(3)), "to": place(match.group(4))}
+            key = repr(mark)
+            words, kind = match.group(5), jumps.setdefault(key, len(jumps))
+        if mark not in found:
+            found.append(mark)
         out.append(words)
         frames.append((start, start + len(words), kind))
         last = match.end()

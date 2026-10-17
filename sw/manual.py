@@ -93,6 +93,9 @@ Indicators
   did not ask. say refuses an answer that names code (a tagged name) and marks no line, unless
   an earlier answer to the same message did. The first answer with marks after the user spoke
   replaces the marks before; later ones add to them.
+- To come back to a line or a jump, write the same tag again (same place and character, or
+  same ends): it makes no second mark, it frames those words in the same colour, so "the call"
+  and "it" later read as one jump.
 - Never write a line number in what you say: no "line 33", "(l. 42)", "(35)", "setup.py:32",
   in any language. The user reads lines by their icons, so name a line by its icon: "1 takes
   the token", "at A the port is read". say refuses line numbers. Line numbers belong only in

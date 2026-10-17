@@ -6,7 +6,11 @@ The guide gets the phrase as <here at="(c):34-36 (d):12">the phrase</here>."""
 
 import sublime
 
+from .spec import sight_name
+from .subl_chat import PROTECTED
 
+SCOPE = "sight_walk.link"  # no scheme names it: frames in the text's colour
+FLAGS = sublime.DRAW_NO_FILL
 
 
 class Links:

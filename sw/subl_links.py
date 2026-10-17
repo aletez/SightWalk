@@ -6,11 +6,7 @@ The guide gets the phrase as <here at="(c):34-36 (d):12">the phrase</here>."""
 
 import sublime
 
-from .spec import sight_name
-from .subl_chat import PROTECTED
 
-SCOPE = "sight_walk.link"  # no scheme names it: frames in the text's colour
-FLAGS = sublime.DRAW_NO_FILL
 
 
 class Links:
@@ -30,17 +26,18 @@ class Links:
             self.phrase, self.picks = sel[0], []
 
     def note_code(self, view, index):
-        """A selection in a sight: one more pick (a drag in the same place replaces the last)."""
+        """Selections in a sight, all of them (several at once with primary+click): each is one
+        more pick, or replaces a pick it overlaps (a drag growing it)."""
         if not len(view.sel()):
             return
-        region = view.sel()[0]
+        region = view.sel()[-1]
         self.last = (index, region if not region.empty() else view.line(region))
-        if region.empty():
-            return
-        if self.picks and self.picks[-1][0] == index and self.picks[-1][1].intersects(region):
-            self.picks[-1] = (index, region)
-        else:
-            self.picks.append((index, region))
+        for region in [r for r in view.sel() if not r.empty()]:
+            same = [k for k, (i, r) in enumerate(self.picks) if i == index and r.intersects(region)]
+            if same:
+                self.picks[same[0]] = (index, region)
+            else:
+                self.picks.append((index, region))
 
     def link_from_code(self):
         """primary+p in the sights: the phrase selected on the bench joins every pick since."""

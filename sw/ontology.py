@@ -148,8 +148,10 @@ class Sight(Sequence):
 
 
 class Trip(Sequence, Network):
-    """A sequence of sights chosen for one question, and a network of transitions between them:
-    a place is ⟨⟩, ⟨sight⟩ or ⟨sight, line⟩, a sight by its index."""
+    """A sequence of sights chosen for one question, of a kind (a run, the default; a
+    comparison; a survey), each sight one function at most, whole or a fragment; and a network
+    of transitions between them: a place is ⟨⟩, ⟨sight⟩ or ⟨sight, line⟩, a sight by its index
+    (the user reads it by its name, (a), (b), see spec.sight_name)."""
 
     def __init__(self, name, sights, transitions=(), commit=None, kind="run"):
         if kind not in KINDS:

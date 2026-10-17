@@ -45,10 +45,10 @@ From the HTTP server's thread to the show operation on Sublime's, with every che
 - `sw/subl_executor.py:58-60` named
 - `sw/validator.py:51-54` not_stopped
 - `sw/validator.py:32-48` trip_of
-- `sw/ontology.py:126-134` Sight.parse
-- `sw/ontology.py:157-161` Trip.__init__
-- `sw/ontology.py:90-97` Network.__init__
-- `sw/ontology.py:106-116` Network.problem
+- `sw/ontology.py:129-137` Sight.parse
+- `sw/ontology.py:160-164` Trip.__init__
+- `sw/ontology.py:93-100` Network.__init__
+- `sw/ontology.py:109-119` Network.problem
 - `sw/validator.py:68-80` files
 - `sw/spec.py:10-23` parse_spec
 - `sw/subl_executor.py:31-33` file_lines
@@ -384,14 +384,14 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 
 The guide's manual, the tools' descriptions and schemas it gets at its start, and the prompt a guide started from Sublime is given.
 
-- `sw/manual.py:4-17` MANUAL: opening
-- `sw/manual.py:19-45` MANUAL: Showing code
-- `sw/manual.py:47-50` MANUAL: Writing code that fits the reader
-- `sw/manual.py:52-83` MANUAL: Conversation
-- `sw/manual.py:85-114` MANUAL: Indicators
-- `sw/manual.py:117-120` tool
-- `sw/manual.py:123-127` TRANSITION
-- `sw/manual.py:129-167` TOOLS
+- `sw/manual.py:6-19` MANUAL: opening
+- `sw/manual.py:21-47` MANUAL: Showing code
+- `sw/manual.py:49-52` MANUAL: Writing code that fits the reader
+- `sw/manual.py:54-85` MANUAL: Conversation
+- `sw/manual.py:87-116` MANUAL: Indicators
+- `sw/manual.py:119-122` tool
+- `sw/manual.py:125-128` TRANSITION
+- `sw/manual.py:130-168` TOOLS
 - `sw/validator.py:10-11` TRANSITION_FORM
 - `sw/subl_guide.py:19-24` PROMPT
 - `sw/subl_guide.py:25-25` TOOLS
@@ -424,7 +424,7 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/subl_mcp_http.py:78-81` Handler.authorized
 - `sw/subl_mcp_http.py:65-74` reply
 - `sw/subl_mcp_http.py:50-62` answer
-- `sw/manual.py:117-120` tool
+- `sw/manual.py:119-122` tool
 - `sw/subl_mcp_http.py:38-47` tool_result
 - `sw/subl_mcp_http.py:23-35` call_tool
 - `sw/subl_executor.py:208-216` wait_until_ready
@@ -537,43 +537,43 @@ The agent's view of the settings, and colour helpers.
 
 Members without order, sequences one can walk, places as paths into them, and the sight.
 
-- `sw/ontology.py:22-23` Collection.__init__
-- `sw/ontology.py:25-27` Collection.member
-- `sw/ontology.py:29-30` Collection.has_place
-- `sw/ontology.py:32-44` Collection.place_problem
-- `sw/ontology.py:46-48` Collection.label
-- `sw/ontology.py:50-51` Collection.member_label
-- `sw/ontology.py:143-144` Sight.label
-- `sw/ontology.py:146-147` Sight.member_label
-- `sw/ontology.py:58-59` Sequence.__iter__
-- `sw/ontology.py:61-62` Sequence.__len__
-- `sw/ontology.py:64-66` Sequence.member
-- `sw/ontology.py:122-124` Sight.__init__
-- `sw/ontology.py:126-134` Sight.parse
-- `sw/ontology.py:136-138` Sight.spec
-- `sw/ontology.py:140-141` Sight.member
+- `sw/ontology.py:25-26` Collection.__init__
+- `sw/ontology.py:28-30` Collection.member
+- `sw/ontology.py:32-33` Collection.has_place
+- `sw/ontology.py:35-47` Collection.place_problem
+- `sw/ontology.py:49-51` Collection.label
+- `sw/ontology.py:53-54` Collection.member_label
+- `sw/ontology.py:146-147` Sight.label
+- `sw/ontology.py:149-150` Sight.member_label
+- `sw/ontology.py:61-62` Sequence.__iter__
+- `sw/ontology.py:64-65` Sequence.__len__
+- `sw/ontology.py:67-69` Sequence.member
+- `sw/ontology.py:125-127` Sight.__init__
+- `sw/ontology.py:129-137` Sight.parse
+- `sw/ontology.py:139-141` Sight.spec
+- `sw/ontology.py:143-144` Sight.member
 
 ## 34. The ontology: networks (17 views, survey)
 
 Transitions between places, checked; the trip, the informator and the tour.
 
-- `sw/ontology.py:90-97` Network.__init__
-- `sw/ontology.py:13-15` slug
-- `sw/ontology.py:99-104` Network.add
-- `sw/ontology.py:106-116` Network.problem
-- `sw/ontology.py:73-74` Transition.__init__
-- `sw/ontology.py:76-77` Transition.__eq__
-- `sw/ontology.py:79-80` Transition.__repr__
-- `sw/ontology.py:82-83` Transition.parts
-- `sw/ontology.py:157-161` Trip.__init__
-- `sw/ontology.py:163-164` Trip.label
-- `sw/ontology.py:166-167` Trip.member_label
-- `sw/ontology.py:169-174` Trip.moved
-- `sw/ontology.py:182-184` Informator.__init__
-- `sw/ontology.py:186-187` Informator.member
-- `sw/ontology.py:189-190` Informator.label
-- `sw/ontology.py:192-193` Informator.member_label
-- `sw/ontology.py:200-206` Tour.__init__
+- `sw/ontology.py:93-100` Network.__init__
+- `sw/ontology.py:16-18` slug
+- `sw/ontology.py:102-107` Network.add
+- `sw/ontology.py:109-119` Network.problem
+- `sw/ontology.py:76-77` Transition.__init__
+- `sw/ontology.py:79-80` Transition.__eq__
+- `sw/ontology.py:82-83` Transition.__repr__
+- `sw/ontology.py:85-86` Transition.parts
+- `sw/ontology.py:160-164` Trip.__init__
+- `sw/ontology.py:166-167` Trip.label
+- `sw/ontology.py:169-170` Trip.member_label
+- `sw/ontology.py:172-177` Trip.moved
+- `sw/ontology.py:185-187` Informator.__init__
+- `sw/ontology.py:189-190` Informator.member
+- `sw/ontology.py:192-193` Informator.label
+- `sw/ontology.py:195-196` Informator.member_label
+- `sw/ontology.py:203-209` Tour.__init__
 
 ## 35. An informator and its tour (25 views)
 
@@ -588,19 +588,19 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/words.py:70-77` trips_count
 - `sw/subl_reader.py:778-792` Reader.open_tour
 - `sw/subl_reader.py:919-921` read_json
-- `sw/ontology.py:291-297` tour_from
-- `sw/ontology.py:270-274` informator_from
-- `sw/ontology.py:254-257` trip_from
-- `sw/ontology.py:244-245` transition_from
-- `sw/ontology.py:209-222` tour
-- `sw/ontology.py:225-233` visit
+- `sw/ontology.py:294-300` tour_from
+- `sw/ontology.py:273-277` informator_from
+- `sw/ontology.py:257-260` trip_from
+- `sw/ontology.py:247-248` transition_from
+- `sw/ontology.py:212-225` tour
+- `sw/ontology.py:228-236` visit
 - `sw/subl_vetting.py:176-182` read_walked
 - `sw/subl_reader.py:794-806` Reader.tour_link
 - `sw/subl_reader.py:808-816` Reader.keep_transcript
 - `sw/subl_reader.py:906-908` transcripts_path
 - `sw/subl_reader.py:911-916` read_transcripts
 - `sw/subl_chat.py:202-205` set_transcript
-- `sw/ontology.py:277-281` dumps
+- `sw/ontology.py:280-284` dumps
 - `sw/subl_vetting.py:185-194` save_walked
 - `sw/subl_reader.py:818-820` Reader.draw_tour
 - `sw/subl_vetting.py:157-173` show_tour
@@ -610,11 +610,11 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 A trip opened from its file by the guide, and the files written for an informator.
 
 - `sw/subl_executor.py:110-117` op_open_trip
-- `sw/ontology.py:254-257` trip_from
-- `sw/ontology.py:248-251` trip_data
-- `sw/ontology.py:239-241` transition_data
-- `sw/ontology.py:260-267` informator_data
-- `sw/ontology.py:284-288` tour_data
+- `sw/ontology.py:257-260` trip_from
+- `sw/ontology.py:251-254` trip_data
+- `sw/ontology.py:242-244` transition_data
+- `sw/ontology.py:263-270` informator_data
+- `sw/ontology.py:287-291` tour_data
 
 ## 37. Questions the code already asks (10 views)
 

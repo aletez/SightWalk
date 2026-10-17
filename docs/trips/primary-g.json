@@ -1,7 +1,7 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "0cd3810ef1a2fea0e1427466860feed3ea1b447e",
+ "commit": "ff3b26adbc43e4e53894ad5e9a60054d7e4cbace",
  "sights": [
   "sw/subl_commands.py:294-305",
   "sw/subl_reader.py:711-721",

@@ -118,6 +118,9 @@ class Links:
                     selected = code.sel()
                     selected.clear()
                     selected.add_all([r for i, r in places if i == index])
+                    # Its own place again: Sublime then draws the selection at once, where a view
+                    # without the focus could show it a second late (Jakub).
+                    code.set_viewport_position(code.viewport_position(), False)
                 index, region = places[0]
                 self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
                 return

@@ -30,7 +30,7 @@ class Links:
         more pick, or replaces a pick it overlaps (a drag growing it)."""
         if not len(view.sel()):
             return
-        region = view.sel()[-1]
+        region = view.sel()[len(view.sel()) - 1]  # a Selection takes no negative index
         self.last = (index, region if not region.empty() else view.line(region))
         for region in [r for r in view.sel() if not r.empty()]:
             same = [k for k, (i, r) in enumerate(self.picks) if i == index and r.intersects(region)]

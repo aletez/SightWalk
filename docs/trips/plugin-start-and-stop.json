@@ -1,7 +1,7 @@
 {
  "name": "Plugin start and stop",
  "kind": "run",
- "commit": "2d29e5ac2327879b81f9ceeb565b417824739a13",
+ "commit": "0cd3810ef1a2fea0e1427466860feed3ea1b447e",
  "sights": [
   "sight_walk.py:39-45",
   "sw/subl_mcp_http.py:142-145",

@@ -212,6 +212,37 @@ MARK_FORM = ('<icon at="(c):34">1</icon> for a line (a sight\'s name and a file 
              'of control (the words framed in its colour)')
 
 
+def span_relation(one, other):
+    """How two phrases (start, end) stand, as constituents do (Jakub): "same", "inside" (one
+    within other), "around" (other within one), "apart", or "crossing", which no constituents
+    are."""
+    (a, b), (c, d) = one, other
+    if (a, b) == (c, d):
+        return "same"
+    if b <= c or d <= a:
+        return "apart"
+    if c <= a and b <= d:
+        return "inside"
+    if a <= c and d <= b:
+        return "around"
+    return "crossing"
+
+
+def here_tags(text, spans):
+    """text with each span (start, end, at) wrapped as <here at="...">…</here>, nested where
+    phrases nest: at one position closings come first, inner before outer, then openings, outer
+    before inner."""
+    inserts = []
+    for start, end, at in spans:
+        inserts.append((start, 1, start - end, '<here at="%s">' % at))
+        inserts.append((end, 0, end - start, "</here>"))
+    out, last = [], 0
+    for pos, _, _, tag in sorted(inserts):
+        out += [text[last:pos], tag]
+        last = pos
+    return "".join(out) + text[last:]
+
+
 def trip_place(value):
     """A transition's place in a trip, as the guide writes it everywhere (Jakub): "(c):34" or
     "(c)" becomes (2, 34) or (2,); a list [2, 34] (a trip file's form) passes as it is."""

@@ -7,6 +7,7 @@ The guide gets the phrase as <here at="(c):34-36 (d):12">the phrase</here>."""
 
 import sublime
 
+from .marks import here_tags, span_relation
 from .spec import sight_name
 from .subl_chat import PROTECTED
 
@@ -20,13 +21,17 @@ class Links:
         self.phrase = None  # the draft's last selection (a Region of the bench)
         self.picks = []  # [(sight index, Region)]: the code's selections since then
         self.last = None  # the selections of the sight touched last, [(sight index, Region)]
-        self.links = []  # [(bench key, [(sight index, Region)])]
-        self.sent = 0  # links before this one went out with a message
+        self.links = {}  # bench key: [(sight index, Region)], in the order made
+        self.sent = set()  # the keys of links that went out with a message, fixed since
+        self.count = 0  # for the next key
+        self.shown = None  # the link a click showed, so a second click hides it (Jakub)
+        self.ours = None  # the bench selection this module set itself, no phrase to link
 
     def note_bench(self, view):
         """A selection in the draft is the phrase to link; the code's selections count anew."""
         sel = view.sel()
-        if len(sel) == 1 and not sel[0].empty() and sel[0].a >= self.draft_start(view):
+        if len(sel) == 1 and not sel[0].empty() and sel[0].a >= self.draft_start(view) \
+                and sel[0] != self.ours:
             self.phrase, self.picks = sel[0], []
 
     def note_code(self, view, index):
@@ -38,7 +43,7 @@ class Links:
         # line when nothing is selected there.
         chosen = [(index, r) for r in view.sel() if not r.empty()]
         self.last = chosen or [(index, view.line(view.sel()[len(view.sel()) - 1]))]
-        for region in [r for r in view.sel() if not r.empty()]:
+        for region in [r for _, r in chosen]:
             same = [k for k, (i, r) in enumerate(self.picks) if i == index and r.intersects(region)]
             if same:
                 self.picks[same[0]] = (index, region)
@@ -67,32 +72,69 @@ class Links:
         self.add(region, list(self.last))
 
     def add(self, phrase, places):
-        """A link drawn: its words and its places framed, each link under keys of its own (one
-        key for all would merge the frames of links that touch). The selections give way to a
-        caret at each region's end, so the user sees it took (Jakub)."""
-        key = "sight_walk_link_%d" % len(self.links)
+        """A link drawn, if its words are a constituent among the draft's links (Jakub): the same
+        words linked anew replace the old link, words within or around linked ones add a nested
+        link, crossing words are refused. The selections give way to carets (see show_made)."""
+        for key in self.draft_keys():
+            relation = span_relation(tuple(phrase), tuple(self.bench_region(key)))
+            if relation == "crossing":
+                sublime.status_message("SightWalk: these words cross linked words; link a phrase "
+                                       "within or around them.")
+                return
+            if relation == "same":
+                self.remove(key)
+        key = "sight_walk_link_%d" % self.count
+        self.count += 1
+        self.links[key] = places
         self.reader.chat.add_regions(key, [phrase], SCOPE, "", FLAGS)
-        self.links.append((key, places))
-        for index in set(i for i, _ in places):
-            mine = [r for i, r in places if i == index]
+        for index, mine in self.by_sight(places).items():
             self.reader.sights[index].view.add_regions(key, mine, SCOPE, "", FLAGS)
+        self.show_made(phrase, places)
+
+    def show_made(self, phrase, places):
+        """The selections replaced by a caret at each linked region's end, so the user sees the
+        link took (Jakub)."""
         carets(self.reader.chat, [phrase])
-        for index in set(i for i, _ in places):
-            carets(self.reader.sights[index].view, [r for i, r in places if i == index])
+        for index, mine in self.by_sight(places).items():
+            carets(self.reader.sights[index].view, mine)
+
+    def remove(self, key):
+        self.reader.chat.erase_regions(key)
+        for sight in self.reader.sights:
+            sight.view.erase_regions(key)
+        self.links.pop(key, None)
+        self.shown = None if self.shown == key else self.shown
+
+    def prune(self, view):
+        """Linked words deleted from the draft: their region stays, of length zero, until erased
+        (Jakub), so a link goes when its length does."""
+        for key in self.draft_keys():
+            if self.bench_region(key).empty():
+                self.remove(key)
+
+    def draft_keys(self):
+        return [key for key in self.links if key not in self.sent]
+
+    def bench_region(self, key):
+        found = self.reader.chat.get_regions(key)
+        return found[0] if found else sublime.Region(0)
+
+    def by_sight(self, places):
+        found = {}
+        for index, region in places:
+            found.setdefault(index, []).append(region)
+        return found
 
     def tagged(self, view):
-        """The draft with its links not yet sent as <here> tags, stripped as the bench sends it."""
+        """The draft with its links as <here> tags, nested where the words nest, stripped as the
+        bench sends it; those links are fixed from now on."""
         start = self.draft_start(view)
         text = view.substr(sublime.Region(start, view.size()))
-        spans = []
-        for key, places in self.links[self.sent:]:
-            found = view.get_regions(key)
-            if found and found[0].a >= start:
-                spans.append((found[0].a - start, found[0].b - start, self.places(places)))
-        for a, b, at in sorted(spans, reverse=True):
-            text = text[:a] + '<here at="%s">%s</here>' % (at, text[a:b]) + text[b:]
-        self.sent = len(self.links)
-        return text.strip()
+        spans = [(r.a - start, r.b - start, self.places(self.links[key]))
+                 for key, r in ((k, self.bench_region(k)) for k in self.draft_keys())
+                 if r.a >= start and not r.empty()]
+        self.sent.update(self.links)
+        return here_tags(text, spans).strip()
 
     def places(self, places):
         """'(c):34-36 (d):12' for the guide."""
@@ -107,24 +149,51 @@ class Links:
 
     def follow(self, view):
         """A click into linked words on the bench selects their places in the code and shows the
-        first. Called on the click itself (drag_select), not on a change of the selection: a
-        second click on the same words leaves the caret where it was, and Sublime reports no
-        change (Jakub found the rule)."""
+        first; a second click on them takes the selection off again, as many schemes leave
+        selected code uncoloured (Jakub). Called on the click itself (drag_select): a second
+        click leaves the caret where it was, and Sublime reports no change of selection."""
         sel = view.sel()
         if len(sel) != 1 or not sel[0].empty():
             return
-        for key, places in self.links:
-            found = view.get_regions(key)
-            if found and found[0].contains(sel[0].b) and places:
-                for index in set(i for i, _ in places):  # the linked code selected (Jakub)
-                    code = self.reader.sights[index].view
-                    selected = code.sel()
-                    selected.clear()
-                    selected.add_all([r for i, r in places if i == index])
-                    repaint(code)
-                index, region = places[0]
-                self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
-                return
+        key = next((k for k in self.links if self.bench_region(k).contains(sel[0].b)
+                    and not self.bench_region(k).empty()), None)
+        if key is None:
+            self.shown = None
+            return
+        places = self.links[key]
+        for index, mine in self.by_sight(places).items():
+            code = self.reader.sights[index].view
+            if key == self.shown:
+                carets(code, mine)
+            else:
+                code.sel().clear()
+                code.sel().add_all(mine)
+            repaint(code)
+        self.shown = None if key == self.shown else key
+        if self.shown:
+            index, region = places[0]
+            self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
+
+    def follow_code(self, view, index):
+        """A click into a linked place in the code selects every phrase on the bench that refers
+        to it (Jakub); a second click takes the selection off."""
+        sel = view.sel()
+        if len(sel) != 1 or not sel[0].empty():
+            return
+        keys = [k for k, places in self.links.items()
+                if any(i == index and r.contains(sel[0].b) for i, r in places)]
+        phrases = [self.bench_region(k) for k in keys]
+        if not phrases or ("code", tuple(keys)) == self.shown:
+            self.shown = None
+            if phrases:
+                carets(self.reader.chat, phrases)
+            return
+        self.shown = ("code", tuple(keys))
+        self.ours = phrases[0] if len(phrases) == 1 else None
+        self.reader.chat.sel().clear()
+        self.reader.chat.sel().add_all(phrases)
+        # No scrolling nor repainting the bench here: while it takes the wheel, a move of it
+        # would move the whole trip (see Reader.read_wheel).
 
     def draft_start(self, view):
         """The draft starts after the protected transcript (see subl_chat)."""
@@ -132,10 +201,8 @@ class Links:
 
     def clear(self):
         """Another trip: the links were to other sights."""
-        for key, _ in self.links:
-            self.reader.chat.erase_regions(key)
-            for sight in self.reader.sights:
-                sight.view.erase_regions(key)
+        for key in list(self.links):
+            self.remove(key)
 
 
 def carets(view, regions):

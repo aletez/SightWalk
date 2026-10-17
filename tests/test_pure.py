@@ -127,6 +127,19 @@ class AnswerMarksTest(unittest.TestCase):
         self.assertEqual([kind for _, _, kind in frames], [0, 1, 0])  # the first jump's colour
 
 
+class HereTest(unittest.TestCase):
+    def test_relations(self):
+        self.assertEqual([marks.span_relation((2, 5), other) for other in
+                          ((2, 5), (0, 9), (3, 4), (6, 8), (4, 9))],
+                         ["same", "inside", "around", "apart", "crossing"])
+
+    def test_nested_tags(self):
+        text = "is this check in that function ok"
+        tagged = marks.here_tags(text, [(8, 30, "(a):3"), (17, 30, "(b):1")])
+        self.assertEqual(tagged, 'is this <here at="(a):3">check in <here at="(b):1">that '
+                                 'function</here></here> ok')
+
+
 class TagsTest(unittest.TestCase):
     def test_tags_become_invisible(self):
         text = marks.untag("<func>run</func> takes <var>token</var> from <class>Reader</class>")

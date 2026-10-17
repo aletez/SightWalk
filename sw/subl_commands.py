@@ -127,6 +127,9 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
         sublime.set_timeout(lambda: subl_chat.shade_variables(self.view), 50)  # after highlighting
+        reader = state.reader_for(self.view.window())
+        if reader is not None:
+            reader.links.prune(self.view)  # linked words deleted
 
     def on_selection_modified(self):
         """Words selected in the draft wait for code to link to (see subl_links)."""
@@ -170,6 +173,14 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
         reader = state.reader_for(view.window())
         if reader is not None:
             reader.note_selection(view)
+
+    def on_post_text_command(self, view, command_name, args):
+        """A click into a linked place in a sight selects the words that refer to it (see
+        subl_links)."""
+        reader = state.reader_for(view.window())
+        index = None if reader is None else reader.sight_of(view)
+        if command_name == "drag_select" and index is not None:
+            reader.links.follow_code(view, index)
 
     def offer_to_browser(self, view):
         """A file opened from a trip's file browser becomes its sight (see Reader.take_file)."""

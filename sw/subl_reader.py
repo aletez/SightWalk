@@ -742,6 +742,9 @@ class Reader(Geometry):
     def show_place(self, index, line):
         """The sight's line brought into view as Sublime's show does, not show_at_center (Jakub):
         not at all while it is visible, else just far enough, with two lines to spare."""
+        view = self.sights[index].view
+        if not view.visible_region().contains(view.text_point(line - 1, 0)):
+            self.scroll_views()  # a sight scrolled on its own goes back to its place first
         y = marks.line_y(self.sights[index], line, self.lh)
         spare = 2 * self.lh
         if y < self.offset:

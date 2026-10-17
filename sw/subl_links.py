@@ -118,9 +118,14 @@ class Links:
             found = view.get_regions(key)
             if found and found[0].contains(sel[0].b) and places:
                 for index in set(i for i, _ in places):  # the linked code selected (Jakub)
-                    selected = self.reader.sights[index].view.sel()
+                    code = self.reader.sights[index].view
+                    selected = code.sel()
                     selected.clear()
                     selected.add_all([r for i, r in places if i == index])
+                    # A view that had the focus a moment ago does not repaint a selection set
+                    # from code (Jakub's tests): the focus there and back makes it.
+                    self.reader.window.focus_view(code)
+                self.reader.window.focus_view(self.reader.chat)
                 index, region = places[0]
                 self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
                 return

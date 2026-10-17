@@ -1,68 +1,68 @@
 {
  "name": "What the validator refuses",
  "kind": "survey",
- "commit": "60d7bf23696ef1fe240b19aa6a11d98ea16fc0d4",
+ "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
  "sights": [
-  "sw/validator.py:24-29",
-  "sw/validator.py:51-54",
-  "sw/validator.py:57-59",
-  "sw/validator.py:62-65",
-  "sw/validator.py:68-80",
-  "sw/validator.py:93-97",
-  "sw/validator.py:100-105",
+  "sw/validator.py:25-30",
+  "sw/validator.py:53-56",
+  "sw/validator.py:59-61",
+  "sw/validator.py:64-67",
+  "sw/validator.py:70-82",
+  "sw/validator.py:95-99",
+  "sw/validator.py:102-107",
   "sw/subl_executor.py:162-171",
-  "sw/validator.py:108-125",
-  "sw/validator.py:128-129",
-  "sw/validator.py:132-134",
-  "sw/validator.py:137-140",
-  "sw/validator.py:143-151",
-  "sw/validator.py:154-155"
+  "sw/validator.py:110-127",
+  "sw/validator.py:130-131",
+  "sw/validator.py:134-136",
+  "sw/validator.py:139-142",
+  "sw/validator.py:145-153",
+  "sw/validator.py:156-157"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [3, 63],
-   "to": [2, 57]
-  },
-  {
-   "type": "calls",
-   "from": [5, 94],
-   "to": [1, 51]
+   "from": [3, 65],
+   "to": [2, 59]
   },
   {
    "type": "calls",
    "from": [5, 96],
-   "to": [4, 68]
+   "to": [1, 53]
   },
   {
    "type": "calls",
-   "from": [6, 101],
-   "to": [1, 51]
+   "from": [5, 98],
+   "to": [4, 70]
   },
   {
    "type": "calls",
-   "from": [6, 104],
-   "to": [4, 68]
+   "from": [6, 103],
+   "to": [1, 53]
   },
   {
    "type": "calls",
-   "from": [8, 111],
-   "to": [1, 51]
+   "from": [6, 106],
+   "to": [4, 70]
   },
   {
    "type": "calls",
-   "from": [8, 112],
-   "to": [2, 57]
+   "from": [8, 113],
+   "to": [1, 53]
   },
   {
    "type": "calls",
-   "from": [9, 129],
-   "to": [3, 62]
+   "from": [8, 114],
+   "to": [2, 59]
   },
   {
    "type": "calls",
-   "from": [13, 155],
-   "to": [2, 57]
+   "from": [9, 131],
+   "to": [3, 64]
+  },
+  {
+   "type": "calls",
+   "from": [13, 157],
+   "to": [2, 59]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "60d7bf23696ef1fe240b19aa6a11d98ea16fc0d4",
+ "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
  "sights": [
   "sw/subl_reader.py:593-603",
   "sw/subl_reader.py:403-410",
@@ -11,7 +11,7 @@
   "sw/subl_geometry.py:37-38",
   "sw/state.py:54-59",
   "sw/subl_executor.py:99-106",
-  "sw/validator.py:143-151",
+  "sw/validator.py:145-153",
   "sw/subl_commands.py:148-150",
   "sw/subl_commands.py:111-115",
   "sw/subl_commands.py:105-107",

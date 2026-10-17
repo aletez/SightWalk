@@ -28,7 +28,7 @@ The setup command keeps a token, writes it for poke, and puts Claude Code's regi
 - `sw/subl_setup.py:60-63` show_instructions
 - `sw/subl_commands.py:17-24` SightWalkReplaceCommand.run
 
-## 3. A request arrives (20 views)
+## 3. A request arrives (21 views)
 
 From the HTTP server's thread to the show operation on Sublime's, with every check on the way.
 
@@ -38,18 +38,19 @@ From the HTTP server's thread to the show operation on Sublime's, with every che
 - `sw/subl_executor.py:138-147` sight_files
 - `sw/subl_executor.py:150-159` sight_functions
 - `sw/spec.py:118-131` functions_in
-- `sw/validator.py:24-29` check
-- `sw/validator.py:93-97` check_show
-- `sw/validator.py:83-90` one_function
+- `sw/validator.py:25-30` check
+- `sw/validator.py:95-99` check_show
+- `sw/validator.py:85-92` one_function
 - `sw/subl_executor.py:49-55` op_show
 - `sw/subl_executor.py:58-60` named
-- `sw/validator.py:51-54` not_stopped
-- `sw/validator.py:32-48` trip_of
+- `sw/validator.py:53-56` not_stopped
+- `sw/validator.py:33-50` trip_of
+- `sw/marks.py:215-227` trip_place
 - `sw/ontology.py:129-137` Sight.parse
 - `sw/ontology.py:160-164` Trip.__init__
 - `sw/ontology.py:93-100` Network.__init__
 - `sw/ontology.py:109-119` Network.problem
-- `sw/validator.py:68-80` files
+- `sw/validator.py:70-82` files
 - `sw/spec.py:10-23` parse_spec
 - `sw/subl_executor.py:31-33` file_lines
 
@@ -185,14 +186,14 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 - `sw/subl_reader.py:514-518` Reader.pinned_places
 - `sw/subl_reader.py:65-68` item_top
 
-## 11. Pointing (16 views)
+## 11. Pointing (17 views)
 
 The marks an answer places with its own tags, resolved to sights and lines, framed in its words, the reader scrolled to show them.
 
 - `sw/subl_executor.py:67-75` op_say
-- `sw/marks.py:224-250` read_marks
-- `sw/marks.py:215-221` place
-- `sw/marks.py:253-262` frame_scopes
+- `sw/marks.py:239-265` read_marks
+- `sw/marks.py:230-236` place
+- `sw/marks.py:268-277` frame_scopes
 - `sw/subl_reader.py:607-615` Reader.point
 - `sw/marks.py:91-107` resolve_marks
 - `sw/marks.py:80-88` jump
@@ -205,6 +206,7 @@ The marks an answer places with its own tags, resolved to sights and lines, fram
 - `sw/marks.py:40-43` sight_number
 - `sw/spec.py:58-64` sight_index
 - `sw/spec.py:50-55` sight_name
+- `sw/marks.py:215-227` trip_place
 
 ## 12. Drawing the marks (10 views)
 
@@ -227,8 +229,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 
 - `sw/subl_executor.py:67-75` op_say
 - `sw/marks.py:189-204` untag
-- `sw/marks.py:276-278` line_refs
-- `sw/validator.py:12-15` MARK_FIRST
+- `sw/marks.py:291-293` line_refs
+- `sw/validator.py:13-16` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
 - `sw/subl_reader.py:934-950` Reader.say
@@ -242,7 +244,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/subl_chat.py:35-43` protected_end
 - `sw/subl_commands.py:126-129` SightWalkChatListener.on_modified
 - `sw/subl_commands.py:137-144` SightWalkChatListener.on_post_text_command
-- `sw/marks.py:265-267` clean
+- `sw/marks.py:280-282` clean
 - `sw/subl_chat.py:241-246` shade_variables
 
 ## 14. Stopping an answer (3 views)
@@ -381,7 +383,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/subl_geometry.py:37-38` Geometry.bench_side
 - `sw/state.py:54-59` render_all
 - `sw/subl_executor.py:99-106` op_settings
-- `sw/validator.py:143-151` check_settings
+- `sw/validator.py:145-153` check_settings
 - `sw/subl_commands.py:148-150` SightWalkWindowListener.on_activated
 - `sw/subl_commands.py:111-115` SightWalkScrollCommand.run
 - `sw/subl_commands.py:105-107` SightWalkHeaderListener.on_hover
@@ -415,7 +417,7 @@ The guide's manual, the tools' descriptions and schemas it gets at its start, an
 - `sw/manual.py:128-131` tool
 - `sw/manual.py:134-137` TRANSITION
 - `sw/manual.py:139-171` TOOLS
-- `sw/validator.py:10-11` TRANSITION_FORM
+- `sw/validator.py:10-12` TRANSITION_FORM
 - `sw/subl_guide.py:19-24` PROMPT
 - `sw/subl_guide.py:25-25` TOOLS
 
@@ -423,20 +425,20 @@ The guide's manual, the tools' descriptions and schemas it gets at its start, an
 
 Every refusal of the guide's calls, judged before the executor acts, with the facts it is given; each message says what to do instead.
 
-- `sw/validator.py:24-29` check
-- `sw/validator.py:51-54` not_stopped
-- `sw/validator.py:57-59` trip_open
-- `sw/validator.py:62-65` ready
-- `sw/validator.py:68-80` files
-- `sw/validator.py:93-97` check_show
-- `sw/validator.py:100-105` check_open_trip
+- `sw/validator.py:25-30` check
+- `sw/validator.py:53-56` not_stopped
+- `sw/validator.py:59-61` trip_open
+- `sw/validator.py:64-67` ready
+- `sw/validator.py:70-82` files
+- `sw/validator.py:95-99` check_show
+- `sw/validator.py:102-107` check_open_trip
 - `sw/subl_executor.py:162-171` trip_file
-- `sw/validator.py:108-125` check_say
-- `sw/validator.py:128-129` check_state
-- `sw/validator.py:132-134` check_close
-- `sw/validator.py:137-140` check_browse
-- `sw/validator.py:143-151` check_settings
-- `sw/validator.py:154-155` check_wait
+- `sw/validator.py:110-127` check_say
+- `sw/validator.py:130-131` check_state
+- `sw/validator.py:134-136` check_close
+- `sw/validator.py:139-142` check_browse
+- `sw/validator.py:145-153` check_settings
+- `sw/validator.py:156-157` check_wait
 
 ## 26. One tool call over HTTP (13 views)
 

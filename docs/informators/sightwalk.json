@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "60d7bf23696ef1fe240b19aa6a11d98ea16fc0d4",
+ "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -827,7 +827,7 @@
    "from": [
     "a-request-arrives",
     6,
-    24
+    25
    ],
    "to": [
     "a-request-arrives"
@@ -838,7 +838,7 @@
    "from": [
     "a-request-arrives",
     7,
-    93
+    95
    ],
    "to": [
     "a-request-arrives"
@@ -849,7 +849,7 @@
    "from": [
     "a-request-arrives",
     8,
-    83
+    85
    ],
    "to": [
     "a-request-arrives"
@@ -960,7 +960,7 @@
    "from": [
     "a-request-arrives",
     11,
-    51
+    53
    ],
    "to": [
     "a-request-arrives"
@@ -971,7 +971,7 @@
    "from": [
     "a-request-arrives",
     12,
-    32
+    33
    ],
    "to": [
     "a-request-arrives"
@@ -982,7 +982,7 @@
    "from": [
     "a-request-arrives",
     12,
-    45
+    46
    ],
    "to": [
     "the-ontology-networks",
@@ -995,6 +995,30 @@
    "from": [
     "a-request-arrives",
     13,
+    215
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "a-request-arrives",
+    13,
+    223
+   ],
+   "to": [
+    "pointing",
+    14,
+    58
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    14,
     130
    ],
    "to": [
@@ -1005,7 +1029,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    14,
+    15,
     160
    ],
    "to": [
@@ -1016,7 +1040,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    15,
+    16,
     93
    ],
    "to": [
@@ -1027,7 +1051,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    15,
+    16,
     94
    ],
    "to": [
@@ -1040,7 +1064,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    15,
+    16,
     95
    ],
    "to": [
@@ -1053,7 +1077,7 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    16,
+    17,
     109
    ],
    "to": [
@@ -1064,7 +1088,7 @@
    "type": "calls",
    "from": [
     "a-request-arrives",
-    16,
+    17,
     115
    ],
    "to": [
@@ -1077,19 +1101,8 @@
    "type": "own_trip",
    "from": [
     "a-request-arrives",
-    17,
-    68
-   ],
-   "to": [
-    "a-request-arrives"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "a-request-arrives",
     18,
-    10
+    70
    ],
    "to": [
     "a-request-arrives"
@@ -1100,6 +1113,17 @@
    "from": [
     "a-request-arrives",
     19,
+    10
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "a-request-arrives",
+    20,
     31
    ],
    "to": [
@@ -1505,7 +1529,7 @@
    ],
    "to": [
     "a-request-arrives",
-    18,
+    19,
     10
    ]
   },
@@ -3996,7 +4020,7 @@
    "from": [
     "pointing",
     1,
-    224
+    239
    ],
    "to": [
     "pointing"
@@ -4007,7 +4031,7 @@
    "from": [
     "pointing",
     2,
-    215
+    230
    ],
    "to": [
     "pointing"
@@ -4018,7 +4042,7 @@
    "from": [
     "pointing",
     3,
-    253
+    268
    ],
    "to": [
     "pointing"
@@ -4276,6 +4300,17 @@
   {
    "type": "own_trip",
    "from": [
+    "pointing",
+    16,
+    215
+   ],
+   "to": [
+    "a-request-arrives"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
     "drawing-the-marks",
     0,
     617
@@ -4443,7 +4478,7 @@
    "to": [
     "pointing",
     1,
-    224
+    239
    ]
   },
   {
@@ -4475,7 +4510,7 @@
    "from": [
     "the-agent-says-something",
     2,
-    276
+    291
    ],
    "to": [
     "the-agent-says-something"
@@ -4486,7 +4521,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    12
+    13
    ],
    "to": [
     "the-agent-says-something"
@@ -4535,7 +4570,7 @@
    "to": [
     "pointing",
     3,
-    253
+    268
    ]
   },
   {
@@ -4991,7 +5026,7 @@
    "from": [
     "the-agent-says-something",
     17,
-    265
+    280
    ],
    "to": [
     "the-agent-says-something"
@@ -7117,7 +7152,7 @@
    "from": [
     "window-events",
     8,
-    143
+    145
    ],
    "to": [
     "window-events"
@@ -7739,7 +7774,7 @@
    "from": [
     "what-the-validator-refuses",
     0,
-    24
+    25
    ],
    "to": [
     "a-request-arrives"
@@ -7750,7 +7785,7 @@
    "from": [
     "what-the-validator-refuses",
     1,
-    51
+    53
    ],
    "to": [
     "a-request-arrives"
@@ -7761,7 +7796,7 @@
    "from": [
     "what-the-validator-refuses",
     2,
-    57
+    59
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7772,7 +7807,7 @@
    "from": [
     "what-the-validator-refuses",
     3,
-    62
+    64
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7783,7 +7818,7 @@
    "from": [
     "what-the-validator-refuses",
     4,
-    68
+    70
    ],
    "to": [
     "a-request-arrives"
@@ -7794,23 +7829,10 @@
    "from": [
     "what-the-validator-refuses",
     5,
-    93
-   ],
-   "to": [
-    "a-request-arrives"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "what-the-validator-refuses",
-    5,
     95
    ],
    "to": [
-    "a-request-arrives",
-    12,
-    32
+    "a-request-arrives"
    ]
   },
   {
@@ -7822,8 +7844,21 @@
    ],
    "to": [
     "a-request-arrives",
+    12,
+    33
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    5,
+    99
+   ],
+   "to": [
+    "a-request-arrives",
     8,
-    83
+    85
    ]
   },
   {
@@ -7831,7 +7866,7 @@
    "from": [
     "what-the-validator-refuses",
     6,
-    100
+    102
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7842,12 +7877,12 @@
    "from": [
     "what-the-validator-refuses",
     6,
-    105
+    107
    ],
    "to": [
     "a-request-arrives",
     8,
-    83
+    85
    ]
   },
   {
@@ -7931,7 +7966,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    108
+    110
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7942,12 +7977,12 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    117
+    119
    ],
    "to": [
     "pointing",
     1,
-    224
+    239
    ]
   },
   {
@@ -7955,7 +7990,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    117
+    119
    ],
    "to": [
     "the-agent-says-something",
@@ -7968,7 +8003,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    118
+    120
    ],
    "to": [
     "pointing",
@@ -7981,12 +8016,12 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    121
+    123
    ],
    "to": [
     "the-agent-says-something",
     2,
-    276
+    291
    ]
   },
   {
@@ -7994,7 +8029,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    124
+    126
    ],
    "to": [
     "the-agent-says-something",
@@ -8007,7 +8042,7 @@
    "from": [
     "what-the-validator-refuses",
     9,
-    128
+    130
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8018,7 +8053,7 @@
    "from": [
     "what-the-validator-refuses",
     10,
-    132
+    134
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8029,7 +8064,7 @@
    "from": [
     "what-the-validator-refuses",
     11,
-    137
+    139
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8040,7 +8075,7 @@
    "from": [
     "what-the-validator-refuses",
     12,
-    143
+    145
    ],
    "to": [
     "window-events"
@@ -8051,7 +8086,7 @@
    "from": [
     "what-the-validator-refuses",
     13,
-    154
+    156
    ],
    "to": [
     "what-the-validator-refuses"

@@ -1,7 +1,7 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "60d7bf23696ef1fe240b19aa6a11d98ea16fc0d4",
+ "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
  "sights": [
   "sw/subl_executor.py:178-185",
   "sw/subl_executor.py:188-204",
@@ -9,18 +9,19 @@
   "sw/subl_executor.py:138-147",
   "sw/subl_executor.py:150-159",
   "sw/spec.py:118-131",
-  "sw/validator.py:24-29",
-  "sw/validator.py:93-97",
-  "sw/validator.py:83-90",
+  "sw/validator.py:25-30",
+  "sw/validator.py:95-99",
+  "sw/validator.py:85-92",
   "sw/subl_executor.py:49-55",
   "sw/subl_executor.py:58-60",
-  "sw/validator.py:51-54",
-  "sw/validator.py:32-48",
+  "sw/validator.py:53-56",
+  "sw/validator.py:33-50",
+  "sw/marks.py:215-227",
   "sw/ontology.py:129-137",
   "sw/ontology.py:160-164",
   "sw/ontology.py:93-100",
   "sw/ontology.py:109-119",
-  "sw/validator.py:68-80",
+  "sw/validator.py:70-82",
   "sw/spec.py:10-23",
   "sw/subl_executor.py:31-33"
  ],
@@ -38,7 +39,7 @@
   {
    "type": "calls",
    "from": [0, 182],
-   "to": [6, 24]
+   "to": [6, 25]
   },
   {
    "type": "calls",
@@ -68,12 +69,12 @@
   {
    "type": "calls",
    "from": [3, 143],
-   "to": [18, 10]
+   "to": [19, 10]
   },
   {
    "type": "calls",
    "from": [3, 146],
-   "to": [19, 31]
+   "to": [20, 31]
   },
   {
    "type": "calls",
@@ -83,32 +84,32 @@
   {
    "type": "calls",
    "from": [4, 158],
-   "to": [18, 10]
-  },
-  {
-   "type": "calls",
-   "from": [7, 94],
-   "to": [11, 51]
-  },
-  {
-   "type": "calls",
-   "from": [7, 95],
-   "to": [12, 32]
+   "to": [19, 10]
   },
   {
    "type": "calls",
    "from": [7, 96],
-   "to": [17, 68]
+   "to": [11, 53]
   },
   {
    "type": "calls",
    "from": [7, 97],
-   "to": [8, 83]
+   "to": [12, 33]
+  },
+  {
+   "type": "calls",
+   "from": [7, 98],
+   "to": [18, 70]
+  },
+  {
+   "type": "calls",
+   "from": [7, 99],
+   "to": [8, 85]
   },
   {
    "type": "calls",
    "from": [9, 50],
-   "to": [12, 32]
+   "to": [12, 33]
   },
   {
    "type": "calls",
@@ -118,22 +119,27 @@
   {
    "type": "calls",
    "from": [12, 46],
-   "to": [13, 130]
+   "to": [13, 215]
   },
   {
    "type": "calls",
-   "from": [12, 46],
-   "to": [14, 160]
+   "from": [12, 48],
+   "to": [14, 130]
   },
   {
    "type": "calls",
-   "from": [14, 164],
-   "to": [15, 93]
+   "from": [12, 48],
+   "to": [15, 160]
   },
   {
    "type": "calls",
-   "from": [15, 97],
-   "to": [16, 109]
+   "from": [15, 164],
+   "to": [16, 93]
+  },
+  {
+   "type": "calls",
+   "from": [16, 97],
+   "to": [17, 109]
   }
  ]
 }

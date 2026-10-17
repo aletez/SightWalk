@@ -118,9 +118,7 @@ class Links:
                     selected = code.sel()
                     selected.clear()
                     selected.add_all([r for i, r in places if i == index])
-                    # Its own place again: Sublime then draws the selection at once, where a view
-                    # without the focus could show it a second late (Jakub).
-                    code.set_viewport_position(code.viewport_position(), False)
+                    repaint(code)
                 index, region = places[0]
                 self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
                 return
@@ -142,3 +140,12 @@ def carets(view, regions):
     selected = view.sel()
     selected.clear()
     selected.add_all([sublime.Region(r.end()) for r in regions])
+
+
+def repaint(view):
+    """A view without the focus may draw a selection set from code only when the mouse passes
+    over it (Jakub): a pixel's move and back makes Sublime draw it now; the same place again is
+    skipped as no change."""
+    x, y = view.viewport_position()
+    view.set_viewport_position((x, y + 1), False)
+    sublime.set_timeout(lambda: view.set_viewport_position((x, y), False), 0)

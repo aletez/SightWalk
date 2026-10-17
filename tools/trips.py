@@ -142,7 +142,7 @@ TRIPS = [
       "subl_links.Links.note_code", "subl_links.Links.link_from_code",
       "subl_links.Links.link_from_bench", "subl_links.Links.add", "subl_links.carets",
       "subl_links.Links.tagged", "subl_links.Links.places", "subl_links.Links.draft_start",
-      "subl_links.Links.follow", "subl_reader.Reader.show_place", "subl_links.Links.clear"]),
+      "subl_links.Links.follow", "subl_links.repaint", "subl_reader.Reader.show_place", "subl_links.Links.clear"]),
     ("Opening the editor",
      "Enter or the header's button: the editor laid over the sights, ranges and marks held.",
      ["subl_commands.SightWalkEditCommand.run", "subl_reader.Reader.sight_of",

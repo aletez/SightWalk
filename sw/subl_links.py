@@ -1,7 +1,8 @@
 """The user's links between words on the bench and places in the code (Jakub): primary+p joins a
 phrase of the draft to one or more selections in the sights, both framed in the text's colour.
 Two ways: the phrase selected first, then the code (every selection since), primary+p in the
-sights; or the code first, then the phrase, primary+p on the bench (the code's last selection).
+sights; or the code first, then the phrase, primary+p on the bench (every selection of the sight
+touched last).
 The guide gets the phrase as <here at="(c):34-36 (d):12">the phrase</here>."""
 
 import sublime
@@ -18,7 +19,7 @@ class Links:
         self.reader = reader
         self.phrase = None  # the draft's last selection (a Region of the bench)
         self.picks = []  # [(sight index, Region)]: the code's selections since then
-        self.last = None  # the code's last selection or caret, (sight index, Region)
+        self.last = None  # the selections of the sight touched last, [(sight index, Region)]
         self.links = []  # [(bench key, [(sight index, Region)])]
         self.sent = 0  # links before this one went out with a message
 
@@ -33,8 +34,10 @@ class Links:
         more pick, or replaces a pick it overlaps (a drag growing it)."""
         if not len(view.sel()):
             return
-        region = view.sel()[len(view.sel()) - 1]  # a Selection takes no negative index
-        self.last = (index, region if not region.empty() else view.line(region))
+        # The second way joins every selection of the sight touched last (Jakub), or the caret's
+        # line when nothing is selected there.
+        chosen = [(index, r) for r in view.sel() if not r.empty()]
+        self.last = chosen or [(index, view.line(view.sel()[len(view.sel()) - 1]))]
         for region in [r for r in view.sel() if not r.empty()]:
             same = [k for k, (i, r) in enumerate(self.picks) if i == index and r.intersects(region)]
             if same:
@@ -51,8 +54,8 @@ class Links:
         self.phrase, self.picks = None, []
 
     def link_from_bench(self, view):
-        """primary+p on the bench: the selected words (or the word at the caret) join the code's
-        last selection."""
+        """primary+p on the bench: the selected words (or the word at the caret) join every
+        selection of the sight touched last, as the first way joins every pick (Jakub)."""
         if self.last is None:
             sublime.status_message("SightWalk: select code in the sights first.")
             return
@@ -61,7 +64,7 @@ class Links:
             region = view.word(region)
         if region is None or region.empty() or region.a < self.draft_start(view):
             return
-        self.add(region, [self.last])
+        self.add(region, list(self.last))
 
     def add(self, phrase, places):
         """A link drawn: its words and its places framed, each link under keys of its own (one

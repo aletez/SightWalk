@@ -1,68 +1,68 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "c2602b72a1e2d9e5e93f248928dd0f8fba76d0f4",
+ "commit": "9116f96ee52924116c4bb5c3b28eb6499782d0e0",
  "sights": [
   "sw/subl_commands.py:55-62",
-  "sw/subl_links.py:17-24",
-  "sw/subl_commands.py:131-137",
-  "sw/subl_links.py:26-30",
-  "sw/subl_links.py:32-44",
-  "sw/subl_links.py:46-52",
-  "sw/subl_links.py:54-65",
-  "sw/subl_links.py:67-82",
-  "sw/subl_links.py:145-149",
-  "sw/subl_links.py:84-96",
-  "sw/subl_links.py:98-107",
-  "sw/subl_links.py:133-135",
-  "sw/subl_links.py:109-131",
+  "sw/subl_links.py:17-23",
+  "sw/subl_commands.py:131-135",
+  "sw/subl_links.py:25-29",
+  "sw/subl_links.py:31-43",
+  "sw/subl_links.py:45-51",
+  "sw/subl_links.py:53-64",
+  "sw/subl_links.py:66-78",
+  "sw/subl_links.py:137-141",
+  "sw/subl_links.py:80-92",
+  "sw/subl_links.py:94-103",
+  "sw/subl_links.py:125-127",
+  "sw/subl_links.py:105-123",
   "sw/subl_reader.py:742-753",
-  "sw/subl_links.py:137-142"
+  "sw/subl_links.py:129-134"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [3, 29],
-   "to": [11, 133]
+   "from": [3, 28],
+   "to": [11, 125]
   },
   {
    "type": "calls",
-   "from": [5, 51],
-   "to": [7, 67]
+   "from": [5, 50],
+   "to": [7, 66]
   },
   {
    "type": "calls",
-   "from": [6, 63],
-   "to": [11, 133]
+   "from": [6, 62],
+   "to": [11, 125]
   },
   {
    "type": "calls",
-   "from": [6, 65],
-   "to": [7, 67]
+   "from": [6, 64],
+   "to": [7, 66]
   },
   {
    "type": "calls",
-   "from": [7, 80],
-   "to": [8, 145]
+   "from": [7, 76],
+   "to": [8, 137]
   },
   {
    "type": "calls",
-   "from": [7, 82],
-   "to": [8, 145]
+   "from": [7, 78],
+   "to": [8, 137]
   },
   {
    "type": "calls",
-   "from": [9, 86],
-   "to": [11, 133]
+   "from": [9, 82],
+   "to": [11, 125]
   },
   {
    "type": "calls",
-   "from": [9, 92],
-   "to": [10, 98]
+   "from": [9, 88],
+   "to": [10, 94]
   },
   {
    "type": "calls",
-   "from": [12, 130],
+   "from": [12, 122],
    "to": [13, 742]
   }
  ]

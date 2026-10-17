@@ -1,14 +1,14 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "c2602b72a1e2d9e5e93f248928dd0f8fba76d0f4",
+ "commit": "9116f96ee52924116c4bb5c3b28eb6499782d0e0",
  "sights": [
-  "sw/subl_commands.py:222-228",
-  "sw/subl_commands.py:237-250",
-  "sw/subl_commands.py:253-263",
-  "sw/subl_commands.py:266-267",
-  "sw/subl_commands.py:270-275",
-  "sw/subl_commands.py:230-234",
+  "sw/subl_commands.py:223-229",
+  "sw/subl_commands.py:238-251",
+  "sw/subl_commands.py:254-264",
+  "sw/subl_commands.py:267-268",
+  "sw/subl_commands.py:271-276",
+  "sw/subl_commands.py:231-235",
   "sw/words.py:70-77",
   "sw/subl_reader.py:805-819",
   "sw/subl_reader.py:982-984",
@@ -35,62 +35,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 223],
-   "to": [1, 237]
-  },
-  {
-   "type": "calls",
-   "from": [0, 227],
-   "to": [6, 70]
+   "from": [0, 224],
+   "to": [1, 238]
   },
   {
    "type": "calls",
    "from": [0, 228],
-   "to": [5, 230]
+   "to": [6, 70]
   },
   {
    "type": "calls",
-   "from": [1, 241],
-   "to": [2, 253]
-  },
-  {
-   "type": "calls",
-   "from": [1, 242],
-   "to": [4, 270]
+   "from": [0, 229],
+   "to": [5, 231]
   },
   {
    "type": "calls",
    "from": [1, 242],
-   "to": [3, 266]
+   "to": [2, 254]
   },
   {
    "type": "calls",
-   "from": [1, 244],
-   "to": [2, 253]
+   "from": [1, 243],
+   "to": [4, 271]
   },
   {
    "type": "calls",
-   "from": [1, 246],
-   "to": [4, 270]
+   "from": [1, 243],
+   "to": [3, 267]
   },
   {
    "type": "calls",
-   "from": [1, 248],
-   "to": [3, 266]
+   "from": [1, 245],
+   "to": [2, 254]
+  },
+  {
+   "type": "calls",
+   "from": [1, 247],
+   "to": [4, 271]
   },
   {
    "type": "calls",
    "from": [1, 249],
-   "to": [4, 270]
+   "to": [3, 267]
   },
   {
    "type": "calls",
-   "from": [3, 267],
-   "to": [4, 270]
+   "from": [1, 250],
+   "to": [4, 271]
   },
   {
    "type": "calls",
-   "from": [5, 232],
+   "from": [3, 268],
+   "to": [4, 271]
+  },
+  {
+   "type": "calls",
+   "from": [5, 233],
    "to": [7, 805]
   },
   {

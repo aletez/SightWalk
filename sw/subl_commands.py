@@ -41,9 +41,25 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         owner = state.reader_for(self.view.window())
-        draft = None if owner is None else subl_chat.take_draft(self.view, edit)
-        if draft:
-            send(owner, draft)
+        if owner is None:
+            return
+        tagged = owner.links.tagged(self.view)  # the guide gets the links as <here> tags
+        if subl_chat.take_draft(self.view, edit):
+            send(owner, tagged)
+
+
+class SightWalkLinkCommand(sublime_plugin.TextCommand):
+    """primary+p (Jakub): links words on the bench to places in the code, from either side (see
+    subl_links)."""
+
+    def run(self, edit):
+        reader = state.reader_for(self.view.window())
+        if reader is None:
+            return
+        if self.view == reader.chat:
+            reader.links.link_from_bench(self.view)
+        elif reader.sight_of(self.view) is not None:
+            reader.links.link_from_code()
 
 
 class SightWalkAskCommand(sublime_plugin.TextCommand):
@@ -111,6 +127,14 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         # Typing and inserted replies keep the prompt line at the bottom of the pane.
         self.view.show(self.view.size())
         sublime.set_timeout(lambda: subl_chat.shade_variables(self.view), 50)  # after highlighting
+
+    def on_selection_modified(self):
+        """Words selected in the draft wait for code to link to; a click into linked words shows
+        their place (see subl_links)."""
+        reader = state.reader_for(self.view.window())
+        if reader is not None:
+            reader.links.note_bench(self.view)
+            reader.links.follow(self.view)
 
     def on_post_text_command(self, command_name, args):
         """What leaves the bench by copying leaves without the invisible operators around names

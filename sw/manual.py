@@ -60,6 +60,9 @@ Conversation
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.
+- The user links words of a message to code: <here at="(c):34-36 (d):12">this check</here>
+  means those words are about exactly those lines (one place or several, in one or more
+  sights). Answer about them; the user sees the words framed, not the tag.
 - When a message comes with selected, the user selected that text: "this", "what is this"
   mean exactly it (an expression, a name, a line), not the whole function around it.
 - Otherwise resolve indexicals such as "here", "this", "it" or "this line" against here and

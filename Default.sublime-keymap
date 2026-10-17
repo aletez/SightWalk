@@ -16,6 +16,9 @@
     {"keys": ["primary+plus"], "command": "sight_walk_zoom_map", "args": {"how": "in"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
     {"keys": ["primary+minus"], "command": "sight_walk_zoom_map", "args": {"how": "out"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
     {"keys": ["primary+0"], "command": "sight_walk_zoom_map", "args": {"how": "fit"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
+    // primary+p links words on the bench to places in the code, from either side (Jakub).
+    {"keys": ["primary+p"], "command": "sight_walk_link", "context": [{"key": "setting.sight_walk_chat"}]},
+    {"keys": ["primary+p"], "command": "sight_walk_link", "context": [{"key": "setting.sight_walk_code"}]},
     {"keys": ["primary+s"], "command": "sight_walk_toggle_panning", "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]}
     // A proposal: primary+g moves the focus between a trip's bench and its sights. It would take the place of Find Next
     // (macOS) and Go to Line (Windows, Linux), so it is left for the user to turn on.

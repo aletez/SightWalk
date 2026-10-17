@@ -14,6 +14,7 @@ import time
 
 import sublime
 
+from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
@@ -73,6 +74,7 @@ class Reader(Geometry):
         self.sights, self.items, self.indicators, self.edits = [], [], [], []
         self.frames, self.last_marks = [], []  # the last answer's frames and marks (see say)
         self.pending_marks = None  # a tour trip's kept marks, back once it is laid out
+        self.links = Links(self)  # the user's links from bench words to code (primary+p)
         self.offset = self.lead = 0.0  # lead: room above a short trip (see plan.lead)
         # px: the window's height, the height a cell adds to its content, a code line's height.
         self.height = self.overhead = self.lh = None
@@ -143,6 +145,9 @@ class Reader(Geometry):
         self.ready = False
         self.trip = trip
         subl_chat.catch_up(self.chat)  # what was said in another trip meanwhile
+        if marks is None:
+            self.links.clear()
+            self.links = Links(self)
         self.close_sights()
         self.sights = [plan.Pane(sight, *parse_spec(sight.spec, root)) for sight in trip]
         self.indicators = marks or []
@@ -729,8 +734,15 @@ class Reader(Geometry):
 
     def note_selection(self, view):
         """The user put the caret or a selection in view: "here" is there now (Jakub)."""
-        if self.sight_of(view) is not None:
+        index = self.sight_of(view)
+        if index is not None:
             self.touched = view
+            self.links.note_code(view, index)
+
+    def show_place(self, index, line):
+        """The panorama scrolled so the sight's line stands in the middle."""
+        y = marks.line_y(self.sights[index], line, self.lh)
+        self.scroll_to(y - self.room() / 2)
 
     def reset_sights(self):
         """[Reset positions] in the Sights' header (alpha, Jakub): the trip shown again as given."""

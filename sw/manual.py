@@ -1,6 +1,8 @@
 """What the agent is told: the manual (MCP instructions) and the tools it can call, with the
 schemas their arguments must fit. Text only, no Sublime API."""
 
+from .ontology import TRIP_TYPES
+
 MANUAL = """You review code with the user in a Sublime Text reader window. The right column, Sights,
 shows a vertical sequence of sights, each a line range of a file, with a header above
 each. Your marks appear as icons in the gutter. The conversation, the Vetting Bench, is on the
@@ -121,8 +123,7 @@ def tool(name, description, properties=None, required=()):
 
 
 TRANSITION = {"type": "object", "required": ["type", "from", "to"], "properties": {
-    "type": {"type": "string", "enum": ["calls", "returns", "leads_to", "101s", "passes_data",
-                                        "comparable"]},
+    "type": {"type": "string", "enum": list(TRIP_TYPES)},
     "from": {"type": "array", "items": {"type": "integer"}},
     "to": {"type": "array", "items": {"type": "integer"}}}}
 

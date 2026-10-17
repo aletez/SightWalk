@@ -5,8 +5,11 @@ these objects (composition), it does not inherit from them."""
 import json
 import re
 
-TYPES = ("calls", "returns", "leads_to", "101s", "passes_data", "comparable", "own_trip")
-INFORMATOR_ONLY = ("own_trip",)
+# The transition types, each with the networks it may stand in (Jakub: the feature in the type,
+# not a second list): a trip's types stand in informators too.
+TYPES = {"calls": "trip", "returns": "trip", "leads_to": "trip", "101s": "trip",
+         "passes_data": "trip", "comparable": "trip", "own_trip": "informator"}
+TRIP_TYPES = tuple(name for name, network in TYPES.items() if network == "trip")
 KINDS = ("run", "comparison", "survey")
 
 
@@ -106,7 +109,7 @@ class Network(Collection):
     def problem(self, transition):
         if transition.type not in TYPES:
             return "unknown transition type %r (types: %s)" % (transition.type, ", ".join(TYPES))
-        if transition.type in INFORMATOR_ONLY and not isinstance(self, Informator):
+        if TYPES[transition.type] == "informator" and not isinstance(self, Informator):
             return "%s belongs to an informator, not a trip" % transition.type
         for end in ("source", "target"):
             why = self.place_problem(getattr(transition, end))

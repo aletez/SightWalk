@@ -1,11 +1,11 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "ff3b26adbc43e4e53894ad5e9a60054d7e4cbace",
+ "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
  "sights": [
   "sw/subl_commands.py:62-72",
-  "sw/subl_reader.py:661-666",
-  "sw/subl_reader.py:649-659",
+  "sw/subl_reader.py:668-673",
+  "sw/subl_reader.py:656-666",
   "sw/subl_editor.py:24-32",
   "sw/subl_views.py:69-73",
   "sw/subl_editor.py:16-20",
@@ -18,16 +18,16 @@
   {
    "type": "calls",
    "from": [0, 64],
-   "to": [1, 661]
+   "to": [1, 668]
   },
   {
    "type": "calls",
    "from": [0, 72],
-   "to": [2, 649]
+   "to": [2, 656]
   },
   {
    "type": "calls",
-   "from": [2, 658],
+   "from": [2, 665],
    "to": [3, 24]
   },
   {

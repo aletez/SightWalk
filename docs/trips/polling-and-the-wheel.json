@@ -1,74 +1,74 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "ff3b26adbc43e4e53894ad5e9a60054d7e4cbace",
+ "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
  "sights": [
-  "sw/subl_reader.py:561-569",
-  "sw/subl_chat.py:177-187",
-  "sw/subl_chat.py:196-199",
-  "sw/subl_chat.py:190-193",
-  "sw/subl_reader.py:571-578",
-  "sw/subl_reader.py:558-559",
-  "sw/subl_reader.py:520-540",
-  "sw/subl_reader.py:487-499",
-  "sw/subl_reader.py:501-505",
-  "sw/subl_reader.py:63-66"
+  "sw/subl_reader.py:569-577",
+  "sw/subl_chat.py:180-190",
+  "sw/subl_chat.py:199-202",
+  "sw/subl_chat.py:193-196",
+  "sw/subl_reader.py:579-586",
+  "sw/subl_reader.py:566-567",
+  "sw/subl_reader.py:528-548",
+  "sw/subl_reader.py:495-507",
+  "sw/subl_reader.py:509-513",
+  "sw/subl_reader.py:64-67"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 563],
-   "to": [5, 558]
+   "from": [0, 571],
+   "to": [5, 566]
   },
   {
    "type": "calls",
-   "from": [0, 565],
-   "to": [1, 177]
+   "from": [0, 573],
+   "to": [1, 180]
   },
   {
    "type": "calls",
-   "from": [1, 186],
-   "to": [2, 196]
+   "from": [1, 189],
+   "to": [2, 199]
   },
   {
    "type": "calls",
-   "from": [3, 193],
-   "to": [2, 196]
+   "from": [3, 196],
+   "to": [2, 199]
   },
   {
    "type": "calls",
-   "from": [4, 574],
-   "to": [5, 558]
+   "from": [4, 582],
+   "to": [5, 566]
   },
   {
    "type": "calls",
-   "from": [4, 577],
-   "to": [6, 520]
+   "from": [4, 585],
+   "to": [6, 528]
   },
   {
    "type": "calls",
-   "from": [6, 527],
-   "to": [1, 177]
+   "from": [6, 535],
+   "to": [1, 180]
   },
   {
    "type": "calls",
-   "from": [6, 528],
-   "to": [8, 501]
+   "from": [6, 536],
+   "to": [8, 509]
   },
   {
    "type": "calls",
-   "from": [6, 532],
-   "to": [7, 487]
+   "from": [6, 540],
+   "to": [7, 495]
   },
   {
    "type": "calls",
-   "from": [7, 498],
-   "to": [3, 190]
+   "from": [7, 506],
+   "to": [3, 193]
   },
   {
    "type": "calls",
-   "from": [8, 505],
-   "to": [9, 63]
+   "from": [8, 513],
+   "to": [9, 64]
   }
  ]
 }

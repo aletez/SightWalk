@@ -1,13 +1,13 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "ff3b26adbc43e4e53894ad5e9a60054d7e4cbace",
+ "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
  "sights": [
-  "sw/subl_executor.py:179-186",
-  "sw/subl_executor.py:189-205",
-  "sw/subl_executor.py:122-136",
-  "sw/subl_executor.py:139-148",
-  "sw/subl_executor.py:151-160",
+  "sw/subl_executor.py:178-185",
+  "sw/subl_executor.py:188-204",
+  "sw/subl_executor.py:121-135",
+  "sw/subl_executor.py:138-147",
+  "sw/subl_executor.py:150-159",
   "sw/spec.py:118-131",
   "sw/validator.py:24-29",
   "sw/validator.py:93-97",
@@ -27,62 +27,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 182],
-   "to": [2, 122]
+   "from": [0, 181],
+   "to": [2, 121]
+  },
+  {
+   "type": "calls",
+   "from": [0, 181],
+   "to": [1, 188]
   },
   {
    "type": "calls",
    "from": [0, 182],
-   "to": [1, 189]
-  },
-  {
-   "type": "calls",
-   "from": [0, 183],
    "to": [6, 24]
   },
   {
    "type": "calls",
-   "from": [0, 186],
+   "from": [0, 185],
    "to": [9, 49]
   },
   {
    "type": "calls",
-   "from": [0, 186],
-   "to": [1, 189]
+   "from": [0, 185],
+   "to": [1, 188]
   },
   {
    "type": "calls",
-   "from": [1, 194],
+   "from": [1, 193],
    "to": [9, 49]
+  },
+  {
+   "type": "calls",
+   "from": [2, 129],
+   "to": [3, 138]
   },
   {
    "type": "calls",
    "from": [2, 130],
-   "to": [3, 139]
+   "to": [4, 150]
   },
   {
    "type": "calls",
-   "from": [2, 131],
-   "to": [4, 151]
-  },
-  {
-   "type": "calls",
-   "from": [3, 144],
+   "from": [3, 143],
    "to": [18, 10]
   },
   {
    "type": "calls",
-   "from": [3, 147],
+   "from": [3, 146],
    "to": [19, 31]
   },
   {
    "type": "calls",
-   "from": [4, 159],
+   "from": [4, 158],
    "to": [5, 118]
   },
   {
    "type": "calls",
-   "from": [4, 159],
+   "from": [4, 158],
    "to": [18, 10]
   },
   {

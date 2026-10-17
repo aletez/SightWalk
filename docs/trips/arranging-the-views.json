@@ -1,89 +1,89 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "ff3b26adbc43e4e53894ad5e9a60054d7e4cbace",
+ "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
  "sights": [
-  "sw/subl_reader.py:442-460",
-  "sw/subl_reader.py:399-404",
-  "sw/subl_reader.py:373-388",
+  "sw/subl_reader.py:450-468",
+  "sw/subl_reader.py:407-412",
+  "sw/subl_reader.py:381-396",
   "sw/subl_geometry.py:112-121",
-  "sw/subl_reader.py:289-300",
-  "sw/subl_reader.py:406-428",
+  "sw/subl_reader.py:294-305",
+  "sw/subl_reader.py:414-436",
   "sw/subl_views.py:63-66",
-  "sw/subl_reader.py:507-518",
-  "sw/subl_reader.py:477-485",
-  "sw/subl_reader.py:542-546",
+  "sw/subl_reader.py:515-526",
+  "sw/subl_reader.py:485-493",
+  "sw/subl_reader.py:550-554",
   "sw/subl_views.py:148-150",
-  "sw/subl_reader.py:733-740",
-  "sw/subl_reader.py:742-744",
-  "sw/subl_reader.py:644-647",
-  "sw/subl_reader.py:639-642",
+  "sw/subl_reader.py:740-747",
+  "sw/subl_reader.py:749-751",
+  "sw/subl_reader.py:651-654",
+  "sw/subl_reader.py:646-649",
   "sw/subl_views.py:224-236"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 447],
-   "to": [1, 399]
+   "from": [0, 455],
+   "to": [1, 407]
   },
   {
    "type": "calls",
-   "from": [0, 456],
-   "to": [13, 644]
+   "from": [0, 464],
+   "to": [13, 651]
   },
   {
    "type": "calls",
-   "from": [0, 457],
-   "to": [11, 733]
+   "from": [0, 465],
+   "to": [11, 740]
   },
   {
    "type": "calls",
-   "from": [0, 458],
-   "to": [11, 733]
+   "from": [0, 466],
+   "to": [11, 740]
   },
   {
    "type": "calls",
-   "from": [0, 459],
-   "to": [7, 507]
+   "from": [0, 467],
+   "to": [7, 515]
   },
   {
    "type": "calls",
-   "from": [0, 460],
-   "to": [7, 507]
+   "from": [0, 468],
+   "to": [7, 515]
   },
   {
    "type": "calls",
-   "from": [1, 401],
-   "to": [2, 373]
+   "from": [1, 409],
+   "to": [2, 381]
   },
   {
    "type": "calls",
-   "from": [1, 403],
-   "to": [5, 406]
+   "from": [1, 411],
+   "to": [5, 414]
   },
   {
    "type": "calls",
-   "from": [1, 404],
+   "from": [1, 412],
    "to": [6, 63]
   },
   {
    "type": "calls",
-   "from": [7, 512],
-   "to": [8, 477]
+   "from": [7, 520],
+   "to": [8, 485]
   },
   {
    "type": "calls",
-   "from": [11, 740],
-   "to": [12, 742]
+   "from": [11, 747],
+   "to": [12, 749]
   },
   {
    "type": "calls",
-   "from": [13, 646],
-   "to": [14, 639]
+   "from": [13, 653],
+   "to": [14, 646]
   },
   {
    "type": "calls",
-   "from": [13, 646],
+   "from": [13, 653],
    "to": [15, 224]
   }
  ]

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "a80a59c58ef9e1c4c3ef1988eace1f522d1f34ee",
+ "commit": "9114e8b17d9a13854e0eee4560ccde58c615644a",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -6338,7 +6338,7 @@
    "from": [
     "linking-words-to-code",
     8,
-    140
+    138
    ],
    "to": [
     "linking-words-to-code"
@@ -6384,7 +6384,7 @@
    "from": [
     "linking-words-to-code",
     11,
-    128
+    126
    ],
    "to": [
     "linking-words-to-code"
@@ -6406,6 +6406,17 @@
    "from": [
     "linking-words-to-code",
     13,
+    145
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    14,
     742
    ],
    "to": [
@@ -6416,7 +6427,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     747
    ],
    "to": [
@@ -6429,7 +6440,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     748
    ],
    "to": [
@@ -6442,7 +6453,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     751
    ],
    "to": [
@@ -6455,7 +6466,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     752
    ],
    "to": [
@@ -6468,7 +6479,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     753
    ],
    "to": [
@@ -6481,7 +6492,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    13,
+    14,
     753
    ],
    "to": [
@@ -6494,8 +6505,8 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    14,
-    132
+    15,
+    130
    ],
    "to": [
     "linking-words-to-code"

@@ -21,7 +21,7 @@ class Links:
         self.last = None  # the code's last selection or caret, (sight index, Region)
         self.links = []  # [(bench key, [(sight index, Region)])]
         self.sent = 0  # links before this one went out with a message
-        self.quiet = False  # while it sets carets itself
+        self.own_caret = None  # the bench's caret this module set itself, not a click
 
     def note_bench(self, view):
         """A selection in the draft is the phrase to link; the code's selections count anew."""
@@ -74,13 +74,12 @@ class Links:
         for index in set(i for i, _ in places):
             mine = [r for i, r in places if i == index]
             self.reader.sights[index].view.add_regions(key, mine, SCOPE, "", FLAGS)
-        self.quiet = True  # the carets set here are no click into the link
-        try:
-            carets(self.reader.chat, [phrase])
-            for index in set(i for i, _ in places):
-                carets(self.reader.sights[index].view, [r for i, r in places if i == index])
-        finally:
-            self.quiet = False
+        # Sublime reports these carets later, after this command: known by where they stand,
+        # they are no click into the link.
+        self.own_caret = phrase.end()
+        carets(self.reader.chat, [phrase])
+        for index in set(i for i, _ in places):
+            carets(self.reader.sights[index].view, [r for i, r in places if i == index])
 
     def tagged(self, view):
         """The draft with its links not yet sent as <here> tags, stripped as the bench sends it."""
@@ -110,7 +109,10 @@ class Links:
     def follow(self, view):
         """A click into linked words on the bench shows their first place in the code."""
         sel = view.sel()
-        if self.quiet or len(sel) != 1 or not sel[0].empty():
+        if len(sel) != 1 or not sel[0].empty():
+            return
+        if sel[0].b == self.own_caret:
+            self.own_caret = None
             return
         for key, places in self.links:
             found = view.get_regions(key)

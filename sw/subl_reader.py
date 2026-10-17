@@ -740,9 +740,14 @@ class Reader(Geometry):
             self.links.note_code(view, index)
 
     def show_place(self, index, line):
-        """The panorama scrolled so the sight's line stands in the middle."""
+        """The sight's line brought into view as Sublime's show does, not show_at_center (Jakub):
+        not at all while it is visible, else just far enough, with two lines to spare."""
         y = marks.line_y(self.sights[index], line, self.lh)
-        self.scroll_to(y - self.room() / 2)
+        spare = 2 * self.lh
+        if y < self.offset:
+            self.scroll_to(y - spare)
+        elif y + self.lh > self.offset + self.room():
+            self.scroll_to(y + self.lh + spare - self.room())
 
     def reset_sights(self):
         """[Reset positions] in the Sights' header (alpha, Jakub): the trip shown again as given."""

@@ -3,7 +3,8 @@ schemas their arguments must fit. Text only, no Sublime API."""
 
 from .ontology import TRIP_TYPES
 
-MANUAL = """You review code with the user in a Sublime Text reader window. The right column, Sights,
+MANUAL = """You walk the user through code in a Sublime Text reader window: you explain it, help
+them understand it, and vet it with them. The right column, Sights,
 shows a vertical sequence of sights, each a line range of a file, with a header above
 each. Your marks appear as icons in the gutter. The conversation, the Vetting Bench, is on the
 left. Whatever one show call opens is a trip, however long. A trip is a sequence of sights you

@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "45f70dc4cd51101cc38a72d54bfb1050f1d683bb",
+ "commit": "f0d9998a69e03bf27c146686d95087eae905050d",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:189-204",

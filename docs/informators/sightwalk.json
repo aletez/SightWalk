@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "45f70dc4cd51101cc38a72d54bfb1050f1d683bb",
+ "commit": "f0d9998a69e03bf27c146686d95087eae905050d",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1190,7 +1190,7 @@
    "to": [
     "linking-words-to-code",
     1,
-    17
+    13
    ]
   },
   {
@@ -1467,7 +1467,7 @@
    "to": [
     "linking-words-to-code",
     1,
-    17
+    13
    ]
   },
   {
@@ -6235,7 +6235,7 @@
    "from": [
     "linking-words-to-code",
     1,
-    17
+    13
    ],
    "to": [
     "linking-words-to-code"
@@ -6270,7 +6270,7 @@
    "from": [
     "linking-words-to-code",
     3,
-    26
+    22
    ],
    "to": [
     "linking-words-to-code"
@@ -6281,7 +6281,7 @@
    "from": [
     "linking-words-to-code",
     4,
-    32
+    28
    ],
    "to": [
     "linking-words-to-code"
@@ -6292,7 +6292,7 @@
    "from": [
     "linking-words-to-code",
     5,
-    45
+    42
    ],
    "to": [
     "linking-words-to-code"
@@ -6303,7 +6303,7 @@
    "from": [
     "linking-words-to-code",
     6,
-    53
+    50
    ],
    "to": [
     "linking-words-to-code"
@@ -6314,7 +6314,7 @@
    "from": [
     "linking-words-to-code",
     7,
-    66
+    63
    ],
    "to": [
     "linking-words-to-code"
@@ -6325,7 +6325,7 @@
    "from": [
     "linking-words-to-code",
     8,
-    137
+    134
    ],
    "to": [
     "linking-words-to-code"
@@ -6336,7 +6336,7 @@
    "from": [
     "linking-words-to-code",
     9,
-    84
+    81
    ],
    "to": [
     "linking-words-to-code"
@@ -6347,23 +6347,10 @@
    "from": [
     "linking-words-to-code",
     10,
-    98
+    95
    ],
    "to": [
     "linking-words-to-code"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "linking-words-to-code",
-    10,
-    106
-   ],
-   "to": [
-    "pointing",
-    15,
-    50
    ]
   },
   {
@@ -6371,7 +6358,7 @@
    "from": [
     "linking-words-to-code",
     11,
-    125
+    122
    ],
    "to": [
     "linking-words-to-code"
@@ -6382,7 +6369,7 @@
    "from": [
     "linking-words-to-code",
     12,
-    109
+    106
    ],
    "to": [
     "linking-words-to-code"
@@ -6443,7 +6430,7 @@
    "from": [
     "linking-words-to-code",
     14,
-    129
+    126
    ],
    "to": [
     "linking-words-to-code"

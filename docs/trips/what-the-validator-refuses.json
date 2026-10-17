@@ -1,7 +1,7 @@
 {
  "name": "What the validator refuses",
  "kind": "survey",
- "commit": "45f70dc4cd51101cc38a72d54bfb1050f1d683bb",
+ "commit": "f0d9998a69e03bf27c146686d95087eae905050d",
  "sights": [
   "sw/validator.py:24-29",
   "sw/validator.py:51-54",

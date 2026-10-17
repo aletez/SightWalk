@@ -1,68 +1,68 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "45f70dc4cd51101cc38a72d54bfb1050f1d683bb",
+ "commit": "f0d9998a69e03bf27c146686d95087eae905050d",
  "sights": [
   "sw/subl_commands.py:55-62",
-  "sw/subl_links.py:17-24",
+  "sw/subl_links.py:13-20",
   "sw/subl_commands.py:131-137",
-  "sw/subl_links.py:26-30",
-  "sw/subl_links.py:32-43",
-  "sw/subl_links.py:45-51",
-  "sw/subl_links.py:53-64",
-  "sw/subl_links.py:66-82",
-  "sw/subl_links.py:137-141",
-  "sw/subl_links.py:84-96",
-  "sw/subl_links.py:98-107",
-  "sw/subl_links.py:125-127",
-  "sw/subl_links.py:109-123",
+  "sw/subl_links.py:22-26",
+  "sw/subl_links.py:28-40",
+  "sw/subl_links.py:42-48",
+  "sw/subl_links.py:50-61",
+  "sw/subl_links.py:63-79",
+  "sw/subl_links.py:134-138",
+  "sw/subl_links.py:81-93",
+  "sw/subl_links.py:95-104",
+  "sw/subl_links.py:122-124",
+  "sw/subl_links.py:106-120",
   "sw/subl_reader.py:742-745",
-  "sw/subl_links.py:129-134"
+  "sw/subl_links.py:126-131"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [3, 29],
-   "to": [11, 125]
+   "from": [3, 25],
+   "to": [11, 122]
   },
   {
    "type": "calls",
-   "from": [5, 50],
-   "to": [7, 66]
+   "from": [5, 47],
+   "to": [7, 63]
   },
   {
    "type": "calls",
-   "from": [6, 62],
-   "to": [11, 125]
+   "from": [6, 59],
+   "to": [11, 122]
   },
   {
    "type": "calls",
-   "from": [6, 64],
-   "to": [7, 66]
+   "from": [6, 61],
+   "to": [7, 63]
   },
   {
    "type": "calls",
-   "from": [7, 78],
-   "to": [8, 137]
+   "from": [7, 75],
+   "to": [8, 134]
   },
   {
    "type": "calls",
-   "from": [7, 80],
-   "to": [8, 137]
+   "from": [7, 77],
+   "to": [8, 134]
   },
   {
    "type": "calls",
-   "from": [9, 86],
-   "to": [11, 125]
+   "from": [9, 83],
+   "to": [11, 122]
   },
   {
    "type": "calls",
-   "from": [9, 92],
-   "to": [10, 98]
+   "from": [9, 89],
+   "to": [10, 95]
   },
   {
    "type": "calls",
-   "from": [12, 122],
+   "from": [12, 119],
    "to": [13, 742]
   }
  ]

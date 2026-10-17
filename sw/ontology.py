@@ -148,7 +148,8 @@ class Sight(Sequence):
 
 
 class Trip(Sequence, Network):
-    """A sequence of sights chosen for one question, of a kind (a run, the default; a
+    """A sequence of sights, read in order: whatever one show opens, or a trip prepared in
+    an informator. Of a kind (a run, the default; a
     comparison; a survey), each sight one function at most, whole or a fragment; and a network
     of transitions between them: a place is ⟨⟩, ⟨sight⟩ or ⟨sight, line⟩, a sight by its index
     (the user reads it by its name, (a), (b), see spec.sight_name)."""

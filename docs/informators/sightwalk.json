@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "58e816727f29a7a679a55256a760ed457fd9b086",
+ "commit": "45f70dc4cd51101cc38a72d54bfb1050f1d683bb",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -6270,7 +6270,7 @@
    "from": [
     "linking-words-to-code",
     3,
-    25
+    26
    ],
    "to": [
     "linking-words-to-code"
@@ -6281,7 +6281,7 @@
    "from": [
     "linking-words-to-code",
     4,
-    31
+    32
    ],
    "to": [
     "linking-words-to-code"
@@ -6292,7 +6292,7 @@
    "from": [
     "linking-words-to-code",
     5,
-    44
+    45
    ],
    "to": [
     "linking-words-to-code"
@@ -6303,7 +6303,7 @@
    "from": [
     "linking-words-to-code",
     6,
-    52
+    53
    ],
    "to": [
     "linking-words-to-code"
@@ -6314,7 +6314,7 @@
    "from": [
     "linking-words-to-code",
     7,
-    65
+    66
    ],
    "to": [
     "linking-words-to-code"
@@ -6325,7 +6325,7 @@
    "from": [
     "linking-words-to-code",
     8,
-    71
+    137
    ],
    "to": [
     "linking-words-to-code"
@@ -6336,7 +6336,7 @@
    "from": [
     "linking-words-to-code",
     9,
-    77
+    84
    ],
    "to": [
     "linking-words-to-code"
@@ -6347,7 +6347,7 @@
    "from": [
     "linking-words-to-code",
     10,
-    91
+    98
    ],
    "to": [
     "linking-words-to-code"
@@ -6358,7 +6358,7 @@
    "from": [
     "linking-words-to-code",
     10,
-    99
+    106
    ],
    "to": [
     "pointing",
@@ -6371,7 +6371,7 @@
    "from": [
     "linking-words-to-code",
     11,
-    114
+    125
    ],
    "to": [
     "linking-words-to-code"
@@ -6382,7 +6382,7 @@
    "from": [
     "linking-words-to-code",
     12,
-    102
+    109
    ],
    "to": [
     "linking-words-to-code"
@@ -6443,7 +6443,7 @@
    "from": [
     "linking-words-to-code",
     14,
-    118
+    129
    ],
    "to": [
     "linking-words-to-code"

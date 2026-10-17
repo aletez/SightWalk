@@ -27,7 +27,7 @@ def call_tool(name, args):
         args = dict(args, timeout_s=min(int(args.get("timeout_s") or WAIT_S), WAIT_S))
     if name == "say" and "message" in args:  # an agent may name text so
         args = dict(args, text=args.get("text") or args.pop("message"))
-    if name in ("point", "state"):
+    if name in ("say", "state"):  # say places marks in the sights
         subl_executor.wait_until_ready()
     if name not in subl_executor.OPS and name != "wait_for_user":
         names = ", ".join(t["name"] for t in TOOLS)

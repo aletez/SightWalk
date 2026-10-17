@@ -14,7 +14,7 @@ import sublime
 from . import subl_scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
-from .marks import untag
+from .marks import read_marks, untag
 from .ontology import trip_from
 from .subl_reader import Reader
 from .spec import functions_in, parse_spec, repo_root, sight_name
@@ -65,14 +65,13 @@ UNANSWERED = ("This message is still unanswered (a guide before you may have tak
 
 
 def op_say(args, facts):
-    state.current_reader().say(untag(args["text"]), args.get("status"))
+    """The answer on the bench, its marks placed from its own tags: the first answer with marks
+    since the user spoke replaces the marks before, a later one adds to them."""
+    text, marks, frames = read_marks(untag(args["text"].strip()))
+    state.current_reader().say(text, args.get("status"), placed=marks, frames=frames,
+                               clear=not state.POINTED)
     state.ANSWERED = True
-    return {"ok": True}
-
-
-def op_point(args, facts):
-    state.current_reader().point(args["marks"], args.get("reveal", True), args.get("clear", True))
-    state.POINTED = True
+    state.POINTED = state.POINTED or bool(marks)
     return {"ok": True}
 
 
@@ -172,7 +171,7 @@ def trip_file(file, root):
     return {"trip": trip, "root": root, "files": found, "functions": sight_functions(found)}
 
 
-OPS = {"show": op_show, "say": op_say, "point": op_point, "state": op_state,
+OPS = {"show": op_show, "say": op_say, "state": op_state,
        "close": op_close, "settings": op_settings, "browse": op_browse, "open_trip": op_open_trip}
 
 

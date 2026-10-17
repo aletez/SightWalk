@@ -35,6 +35,7 @@ from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_el
 CLASS = re.compile(r"^\s*class\s+(\w+)")
 EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (nothing measured)
 ARROWS = {"up": "▲", "down": "▼"}
+MARKS_KEY = "#marks"  # a tour trip's last marks, kept beside its conversation
 STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--foreground); '
                      'font-size: 1.6rem">%s</a>')
 
@@ -70,6 +71,8 @@ class Reader(Geometry):
     def __init__(self, window):
         self.window = window
         self.sights, self.items, self.indicators, self.edits = [], [], [], []
+        self.frames, self.last_marks = [], []  # the last answer's frames and marks (see say)
+        self.pending_marks = None  # a tour trip's kept marks, back once it is laid out
         self.offset = self.lead = 0.0  # lead: room above a short trip (see plan.lead)
         # px: the window's height, the height a cell adds to its content, a code line's height.
         self.height = self.overhead = self.lh = None
@@ -143,6 +146,8 @@ class Reader(Geometry):
         self.close_sights()
         self.sights = [plan.Pane(sight, *parse_spec(sight.spec, root)) for sight in trip]
         self.indicators = marks or []
+        if marks is None:  # another trip: the last answer's frames were about other sights
+            self.frames, self.last_marks = [], []
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
 
@@ -353,6 +358,9 @@ class Reader(Geometry):
         self.write_strip()
         self.ready = True
         self.scroll_to(0)
+        kept, self.pending_marks = self.pending_marks, None
+        if kept:
+            self.restore_marks(kept)
         self.draw_map()
         self.draw_tour()
         # Widths are shares measured from the bench (see share), which Sublime reports right only
@@ -594,7 +602,6 @@ class Reader(Geometry):
     def point(self, new_marks, reveal=True, clear=True):
         resolved = marks.resolve_marks(self.sights, new_marks)
         self.indicators = resolved if clear else self.indicators + resolved
-        subl_chat.outline_refs(self.chat, self.indicators, len(self.sights))
         ys = [marks.line_y(self.sights[m["sight"]], m["line"], self.lh) for m in resolved]
         bottom = self.offset + self.room() - 2 * self.lh
         if reveal and ys and not all(self.offset <= y <= bottom for y in ys):
@@ -800,6 +807,7 @@ class Reader(Geometry):
             subl_chat.set_transcript(self.informator.transcripts.get(key, ""))
             self.tour_trip = key
             self.load(self.informator.member(key), self.informator_root)
+            self.pending_marks = self.informator.transcripts.get(key + MARKS_KEY)
         elif what == "tick":
             self.walked ^= {key}
             subl_vetting.save_walked(self.informator.id, self.walked)
@@ -812,8 +820,35 @@ class Reader(Geometry):
         if self.informator is None or self.trip is None or self.trip.id != self.tour_trip:
             return
         self.informator.transcripts[self.tour_trip] = subl_chat.TRANSCRIPT
+        self.informator.transcripts[self.tour_trip + MARKS_KEY] = self.kept_marks()
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
+
+    def kept_marks(self):
+        """The last answer's marks and frames, with the text of every marked line, so they come
+        back only while the code is the same (Jakub)."""
+        texts = {"%d:%d" % (m["sight"], m["line"]): self.line_text(m["sight"], m["line"])
+                 for m in self.indicators}
+        return {"marks": self.last_marks, "frames": self.frames, "lines": texts}
+
+    def line_text(self, index, line):
+        view = self.sights[index].view
+        return view.substr(view.line(view.text_point(line - 1, 0)))
+
+    def restore_marks(self, kept):
+        """The kept marks of a tour's trip back, when every marked line reads as it did."""
+        try:
+            resolved = marks.resolve_marks(self.sights, kept.get("marks") or [])
+        except ValueError:
+            return
+        lines = kept.get("lines") or {}
+        if any(lines.get("%d:%d" % (m["sight"], m["line"])) != self.line_text(m["sight"], m["line"])
+               for m in resolved):
+            return
+        self.last_marks, self.frames = kept["marks"], [tuple(f) for f in kept.get("frames", [])]
+        self.indicators = resolved
+        subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
+        self.render()
 
     def draw_tour(self):
         subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
@@ -876,14 +911,22 @@ class Reader(Geometry):
         path = self.sights[0].path
         return repo_root(path) or os.path.dirname(path)
 
-    def say(self, text, status=None, prefix="A: "):
+    def say(self, text, status=None, prefix="A: ", placed=(), frames=(), clear=True):
+        """A message on the bench; an answer's marks (placed) placed and framed in its words (see
+        marks.read_marks): clear, the first answer with marks since the user spoke."""
         if prefix == "A: ":
             self.note = ""  # the answer has come
         if status is not None:
             self.status = status
         self.show_headers()
-        subl_chat.say(self.chat, text, prefix)
-        subl_chat.outline_refs(self.chat, self.indicators, len(self.sights))
+        start = subl_chat.say(self.chat, text, prefix)
+        if placed:
+            framed = [(start + a, start + b, scope) for (a, b, _), scope
+                      in zip(frames, marks.frame_scopes(frames, text.strip()))]
+            self.frames = framed if clear else self.frames + framed
+            self.last_marks = list(placed) if clear else self.last_marks + list(placed)
+            self.point(placed, clear=clear)
+        subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.keep_transcript()
 
     def context(self):

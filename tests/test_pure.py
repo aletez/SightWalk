@@ -108,6 +108,18 @@ class LineRefsTest(unittest.TestCase):
         self.assertEqual(marks.line_refs("Kroki 1 i 2, potem A (3). 32 znaki, port 8765, token_hex(16), \u2061f\u2061(10)."), [])
 
 
+class AnswerMarksTest(unittest.TestCase):
+    def test_read(self):
+        text, found, frames = marks.read_marks(
+            'At <icon at="(a):3">1</icon> it <jump from="(a):3" to="(b):10">calls</jump>.')
+        self.assertEqual(text, "At 1 it calls.")
+        self.assertEqual(found, [{"at": {"sight": "(a)", "line": 3}, "mark": "1"},
+                                 {"from": {"sight": "(a)", "line": 3},
+                                  "to": {"sight": "(b)", "line": 10}}])
+        self.assertEqual(frames, [(3, 4, "icon"), (8, 13, 0)])
+        self.assertEqual(marks.frame_scopes(frames, text), ["region.orangish", "region.greenish"])
+
+
 class TagsTest(unittest.TestCase):
     def test_tags_become_invisible(self):
         text = marks.untag("<func>run</func> takes <var>token</var> from <class>Reader</class>")
@@ -127,12 +139,6 @@ class MarksTest(unittest.TestCase):
         self.assertEqual([marks.icon_colour(i) for i in
                           ("digit_3", "letter_a", "pass_up", "take_below_red", "pass_down_brown")],
                          ["digit", "letter", "green", "red", "brown"])
-
-    def test_icon_refs(self):
-        shown = [{"icon": "digit_1"}, {"icon": "letter_b"}]
-        text = "1. Here B calls it; 2 is not shown, A neither, B's and v1.2 are no names."
-        self.assertEqual(marks.icon_refs(text, shown),
-                         [(0, 1, "region.orangish"), (8, 9, "region.bluish")])
 
     def test_targets(self):
         sights, _ = stacked((1, 3), (10, 11))

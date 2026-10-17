@@ -3,16 +3,16 @@ Pure, no Sublime API: it judges a call by its arguments and the facts subl_execu
 (see facts there), and changes nothing. A refusal is a Refusal whose message tells the guide how
 to correct the call; the server returns it as the tool's error."""
 
-from .marks import line_refs, resolve_marks, speaks_of_code, untag
+from .marks import MARK_FORM, line_refs, read_marks, resolve_marks, speaks_of_code, untag
 from .ontology import Sight, Transition, Trip
 
 EDITABLE = ("tint", "default_conversation_height", "bench_side")
 TRANSITION_FORM = ('{"type": "calls", "from": [0, 15], "to": [3, 42]}: line 15 of sight 0 '
                    'calls the definition at line 42 of sight 3 (sights from 0, file lines)')
-MARK_FIRST = ("This answer names code, and nothing is marked yet: call point first with the lines "
-              "it speaks of (each gets an outline and an icon), then say it again. The user "
-              "asked that every answer about code comes with its marks. Do not call wait_for_user "
-              "before you have answered.")
+MARK_FIRST = ("This answer names code and marks no line: tag the lines it speaks of in the text "
+              "itself, " + MARK_FORM + ". Each gets an icon and an outline. The user asked that "
+              "every answer about code comes with its marks. Do not call wait_for_user before "
+              "you have answered.")
 NO_LINE_NUMBERS = ("Line numbers obscure the answer (the user asked): point at the lines and name "
                    "them by their icons, 1, 2, A, B, never by numbers or file:line. Found: %s.")
 
@@ -106,30 +106,23 @@ def check_open_trip(args, facts):
 
 
 def check_say(args, facts):
-    """An answer only to a message, its names tagged, no line numbers, its lines marked first."""
+    """An answer only to a message, its names tagged, no line numbers, its lines marked by its
+    own <icon> and <jump> tags (Jakub), each at a line of a sight."""
     not_stopped(facts)
     trip_open(facts)
     if not facts.get("addressed"):
         raise Refusal("Nothing to answer: the user has said nothing since you last waited. Say "
                       "nothing; call wait_for_user.")
     try:
-        text = untag(args.get("text") or "")
+        text, marks, _ = read_marks(untag(args.get("text") or ""))
+        resolve_marks(facts.get("sights") or [], marks)
     except ValueError as e:
         raise Refusal(str(e)) from None
     numbers = line_refs(text)
     if numbers:
         raise Refusal(NO_LINE_NUMBERS % ", ".join(numbers))
-    if not facts.get("pointed") and speaks_of_code(text):
+    if not marks and not facts.get("pointed") and speaks_of_code(text):
         raise Refusal(MARK_FIRST)
-
-
-def check_point(args, facts):
-    not_stopped(facts)
-    ready(facts)
-    try:
-        resolve_marks(facts.get("sights") or [], args.get("marks") or [])
-    except ValueError as e:
-        raise Refusal(str(e)) from None
 
 
 def check_state(args, facts):
@@ -163,5 +156,5 @@ def check_wait(args, facts):
 
 
 CHECKS = {"show": check_show, "open_trip": check_open_trip, "say": check_say,
-          "point": check_point, "state": check_state, "close": check_close,
-          "browse": check_browse, "settings": check_settings, "wait_for_user": check_wait}
+          "state": check_state, "close": check_close, "browse": check_browse,
+          "settings": check_settings, "wait_for_user": check_wait}

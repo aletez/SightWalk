@@ -36,15 +36,18 @@ class ShowTest(unittest.TestCase):
                 validator.trip_of(args)
 
 
-class PointAndSettingsTest(unittest.TestCase):
-    def test_point(self):
+class MarksAndSettingsTest(unittest.TestCase):
+    def test_marks_in_the_answer(self):
         sights, _ = stacked((1, 3), (10, 11))
         facts = dict(OPEN, sights=sights)
-        check("point", {"marks": [{"at": {"sight": "(b)", "line": 11}, "mark": "1"}]}, facts)
-        with self.assertRaises(Refusal):
-            check("point", {"marks": [{"at": "a.py:5"}]}, facts)
-        with self.assertRaises(Refusal):
-            check("point", {"marks": []}, dict(facts, ready=False))
+        check("say", {"text": '<func>run</func> starts at <icon at="(a):2">1</icon>, then '
+                              '<jump from="(a):3" to="(b):10">calls</jump>.'}, facts)
+        for text in ['<func>run</func> at <icon at="(a):9">1</icon>.',  # outside the sight
+                     '<func>run</func> at <icon at="a.py:2">1</icon>.',  # no sight's name
+                     '<func>run</func> at <icon at="(a):2">7a</icon>.',  # no icon
+                     '<func>run</func> <jump to="(b):10">calls</jump>.']:
+            with self.assertRaises(Refusal, msg=text):
+                check("say", {"text": text}, facts)
 
     def test_settings(self):
         check("settings", {"values": {"tint": 0.3, "bench_side": "left"}}, {})

@@ -86,10 +86,12 @@ TRIPS = [
       "subl_reader.Reader.read_wheel", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
       "subl_reader.item_top"]),
     ("Pointing",
-     "The agent's marks resolved to sights and lines, the reader scrolled to show them.",
-     ["subl_executor.op_point", "subl_reader.Reader.point",
+     "The marks an answer places with its own tags, resolved to sights and lines, framed in its "
+     "words, the reader scrolled to show them.",
+     ["subl_executor.op_say", "marks.read_marks", "marks.place", "marks.frame_scopes",
+      "subl_reader.Reader.point",
       "marks.resolve_marks", "marks.jump", "marks.resolve_target", "marks.sight_target",
-      "marks.icon_for", "marks.line_y", "subl_chat.outline_refs", "marks.icon_refs", "marks.sight_refs",
+      "marks.icon_for", "marks.line_y", "subl_chat.outline_refs", "marks.sight_refs",
       "marks.sight_number", "spec.sight_index", "spec.sight_name"]),
     ("Drawing the marks",
      "Icons on screen, eyes for marks off it, outlines on marked lines.",
@@ -169,7 +171,7 @@ TRIPS = [
      "given; each message says what to do instead.",
      ["validator.check", "validator.not_stopped", "validator.trip_open",
       "validator.ready", "validator.files", "validator.check_show", "validator.check_open_trip",
-      "subl_executor.trip_file", "validator.check_say", "validator.check_point",
+      "subl_executor.trip_file", "validator.check_say",
       "validator.check_state", "validator.check_close", "validator.check_browse",
       "validator.check_settings", "validator.check_wait"]),
     ("One tool call over HTTP",
@@ -242,7 +244,7 @@ TRIPS = [
       "ontology.tour_from",
       "ontology.informator_from", "ontology.trip_from", "ontology.transition_from",
       "ontology.tour", "ontology.visit", "subl_vetting.read_walked",
-      "subl_reader.Reader.tour_link", "subl_reader.Reader.keep_transcript", "subl_reader.transcripts_path",
+      "subl_reader.Reader.tour_link", "subl_reader.Reader.keep_transcript", "subl_reader.Reader.kept_marks", "subl_reader.Reader.line_text", "subl_reader.Reader.restore_marks", "subl_reader.transcripts_path",
       "subl_reader.read_transcripts", "subl_chat.set_transcript",
       "ontology.dumps", "subl_vetting.save_walked", "subl_reader.Reader.draw_tour",
       "subl_vetting.show_tour"]),
@@ -347,7 +349,7 @@ RECEIVERS = {"informator": "ontology.Informator", "trip": "ontology.Trip",
 # Jumps the code makes through data or by a name the rules below cannot follow, written and
 # checked by hand: (caller, a piece of the calling line, callee). TRIP_JUMPS hold only in one
 # trip's story (run_on_main runs whatever it is given).
-OPS = ["show", "say", "point", "state", "close", "settings", "browse", "open_trip"]
+OPS = ["show", "say", "state", "close", "settings", "browse", "open_trip"]
 JUMPS = [("subl_executor.execute", "OPS[tool]", "subl_executor.op_" + op) for op in OPS] + [
     ("plan.Pane.spec", "self.sight.spec", "ontology.Sight.spec"),
     ("subl_reader.Reader.context", "self.sights[index].spec", "plan.Pane.spec"),

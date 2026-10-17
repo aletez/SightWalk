@@ -162,8 +162,11 @@ def speaks_of_code(text):
     return bool(CODE_TALK.search(text))
 
 
-ICON_REF = re.compile(r"(?<![\w.'’-])([1-9]|[A-Z])(?![\w'’-])")
 REF_SCOPES = {"digit": "region.orangish", "letter": "region.bluish"}
+# The jumps' frames, as their arrows: green, red, yellow, purple, brown (no scheme names a brown
+# region, so it takes the text's colour).
+JUMP_SCOPES = ("region.greenish", "region.redish", "region.yellowish", "region.purplish",
+               "sight_walk.brown")
 
 
 SIGHT_REF = re.compile(r"\([a-z]\d*\)")
@@ -175,41 +178,83 @@ def sight_refs(text, count):
             if (sight_index(m.group(0)) or 0) < count and sight_index(m.group(0)) is not None]
 
 
-def icon_refs(text, indicators):
-    """[(start, end, scope)]: the digits and capital letters in text that stand alone and name an
-    icon now in the trip, to be outlined in the icon's colour (Jakub)."""
-    icons = set(m["icon"] for m in indicators)
-    found = []
-    for match in ICON_REF.finditer(text):
-        kind = "digit" if match.group(1).isdigit() else "letter"
-        if "%s_%s" % (kind, match.group(1).lower()) in icons:
-            found.append((match.start(), match.end(), REF_SCOPES[kind]))
-    return found
-
-
 # The guide's names: tags it writes, invisible operators the bench shows (Jakub, 2026-10-15).
 TAGS = {"func": "\u2061", "class": "\u2062", "var": "\u2063", "str": "\u2064"}
+MARK_TAGS = ("icon", "jump")  # the marks, placed by the answer itself (Jakub, 2026-10-17)
 INVISIBLE = re.compile("[\u2061-\u2064]")
-TAG = re.compile(r"<(/?)([a-z]+)>")
+TAG = re.compile(r"<(/?)([a-z]+)(?:\s[^<>\n]*)?>")
 OLD_MARKUP = re.compile(r"`|\*\*")
 
 
 def untag(text):
     """The guide's text with <func>name</func> and the like turned into invisible operators
-    around the name; ValueError says what is wrong."""
+    around the name; <icon> and <jump> stay for read_marks. ValueError says what is wrong."""
     if OLD_MARKUP.search(text):
         raise ValueError("Mark names with tags, not backticks or asterisks: <func>run</func>, "
                          "<class>Reader</class>, <var>token</var>, <str>sight_walk_setup</str>.")
-    unknown = sorted(set(m.group(2) for m in TAG.finditer(text)) - set(TAGS))
+    unknown = sorted(set(m.group(2) for m in TAG.finditer(text)) - set(TAGS) - set(MARK_TAGS))
     if unknown:
-        raise ValueError("Unknown tags: %s; the tags are %s." % (", ".join(unknown),
-                                                                  ", ".join(TAGS)))
+        raise ValueError("Unknown tags: %s; the tags are %s." % (
+            ", ".join(unknown), ", ".join(tuple(TAGS) + MARK_TAGS)))
     out = re.sub(r"<(func|class|var|str)>([^<>\n]+)</\1>",
                  lambda m: TAGS[m.group(1)] + m.group(2) + TAGS[m.group(1)], text)
-    if TAG.search(out):
-        raise ValueError("A tag is not closed on its line, or holds another: %s"
-                         % TAG.search(out).group(0))
+    left = [m.group(0) for m in TAG.finditer(out) if m.group(2) not in MARK_TAGS]
+    if left:
+        raise ValueError("A tag is not closed on its line, or holds another: %s" % left[0])
     return out
+
+
+ICON_TAG = r'<icon at="([^"<>]+)">([^<>\n]+)</icon>'
+JUMP_TAG = r'<jump from="([^"<>]+)" to="([^"<>]+)">([^<>\n]+)</jump>'
+MARK_TAG = re.compile(ICON_TAG + "|" + JUMP_TAG)
+MARK_FORM = ('<icon at="(c):34">1</icon> for a line (a sight\'s name and a file line; a digit '
+             '1-9 or a capital A-Z), <jump from="(a):33" to="(b):41">the call</jump> for a jump '
+             'of control (the words framed in its colour)')
+
+
+def place(text):
+    """{"sight": "(c)", "line": 34} from "(c):34"."""
+    sight, _, line = text.rpartition(":")
+    if not sight or not line.strip().isdigit():
+        raise ValueError("%r is no place: write a sight's name and a file line, \"(c):34\"."
+                         % text)
+    return {"sight": sight.strip(), "line": int(line)}
+
+
+def read_marks(text):
+    """(text without <icon> and <jump>, marks for resolve_marks, frames): frames are
+    (start, end, kind) in the text returned, kind "icon" or the jump's index among the jumps
+    (Jakub: the answer places its own marks, so where they stand is kept with it)."""
+    out, found, frames, jumps, last = [], [], [], 0, 0
+    for match in MARK_TAG.finditer(text):
+        out.append(text[last:match.start()])
+        start = sum(len(part) for part in out)
+        if match.group(1) is not None:
+            found.append({"at": place(match.group(1)), "mark": match.group(2).strip()})
+            words, kind = match.group(2), "icon"
+        else:
+            found.append({"from": place(match.group(3)), "to": place(match.group(4))})
+            words, kind, jumps = match.group(5), jumps, jumps + 1
+        out.append(words)
+        frames.append((start, start + len(words), kind))
+        last = match.end()
+    out = "".join(out) + text[last:]
+    left = [m.group(0) for m in TAG.finditer(out) if m.group(2) in MARK_TAGS]
+    if left:
+        raise ValueError("Write marks as %s; not %s." % (MARK_FORM, left[0]))
+    return out, found, frames
+
+
+def frame_scopes(frames, text):
+    """The scope each frame is drawn in: an icon's by its kind, digits orange, letters blue; a
+    jump's by its colour, as its arrows (see JUMP_COLOURS)."""
+    scopes = []
+    for start, end, kind in frames:
+        if kind == "icon":
+            scopes.append(REF_SCOPES["digit" if text[start:end].strip().isdigit() else "letter"])
+        else:
+            scopes.append(JUMP_SCOPES[kind % len(JUMP_SCOPES)])
+    return scopes
 
 
 def clean(text):

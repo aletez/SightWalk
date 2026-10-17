@@ -148,13 +148,16 @@ def show_help(view, point):
 
 
 def say(view, text, prefix="A: "):
+    """A message on the bench; returns where its text starts in the transcript."""
     global TRANSCRIPT
     protected = PROTECTED[view.buffer_id()]
     point = len(protected) - len(PROMPT)
     message = prefix + text.strip() + "\n\n"
+    start = len(TRANSCRIPT) + len(prefix)
     TRANSCRIPT += message
     PROTECTED[view.buffer_id()] = protected[:point] + message + PROMPT
     view.run_command("sight_walk_insert", {"point": point, "text": message})
+    return start
 
 
 def take_draft(view, edit):
@@ -216,18 +219,19 @@ def catch_up(view):
                                             "end": len(protected)})
 
 
-def outline_refs(view, indicators, sights=0):
-    """The digits and letters naming icons, outlined in their colours, in what the guide said
-    since the user last spoke: earlier answers named icons no longer there. The sights' names,
-    "(c)", in a frame of the text's colour (a scope no scheme names)."""
+def outline_refs(view, frames, sights=0):
+    """The guide's marks in its words, framed in their colours (frames: (start, end, scope) in
+    the transcript, see marks.read_marks), and the sights' names, "(c)", in a frame of the
+    text's colour (a scope no scheme names), in what the guide said since the user last spoke."""
     protected = PROTECTED.get(view.buffer_id(), "")
-    start = protected.rfind("\nU: ") + 1
+    blanks = len(protected) - len(protected.lstrip("\n"))
     by_scope = {}
-    for begin, end, scope in marks.icon_refs(protected[start:], indicators):
-        by_scope.setdefault(scope, []).append(sublime.Region(start + begin, start + end))
-    for scope in marks.REF_SCOPES.values():
+    for begin, end, scope in frames:
+        by_scope.setdefault(scope, []).append(sublime.Region(blanks + begin, blanks + end))
+    for scope in tuple(marks.REF_SCOPES.values()) + marks.JUMP_SCOPES:
         view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",
                          sublime.DRAW_NO_FILL)
+    start = protected.rfind("\nU: ") + 1
     names = [sublime.Region(start + a, start + b)
              for a, b in marks.sight_refs(protected[start:], sights)]
     view.add_regions("sight_walk_sight_refs", names, "sight_walk.sight_ref", "",

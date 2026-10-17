@@ -1,6 +1,6 @@
 """Talks to the running plugin without an agent, one tool call per run, over MCP's HTTP.
 
-Usage: python3 tools/poke.py show|say|point|double|state|close|settings|badtoken [file1 file2]
+Usage: python3 tools/poke.py show|say|marks|double|state|close|settings|badtoken [file1 file2]
 
 Without files it shows two of the plugin's own modules, so it works from any checkout.
 """
@@ -36,15 +36,13 @@ def main():
         call(config, "show", sights=[first + ":1-30", second + ":31-60"], transitions=[])
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
-    elif op == "point":
-        jump = {"from": {"sight": 0, "line": 5}, "to": {"sight": 1, "line": 40}}
-        call(config, "point", marks=[jump, {"at": {"sight": 0, "line": 8}, "mark": "1"},
-                                     {"at": {"sight": 0, "line": 12}, "mark": "A"}])
+    elif op == "marks":  # an answer placing its own marks (after a message from the user)
+        call(config, "say", text='<icon at="(a):8">1</icon> and <icon at="(a):12">A</icon>, '
+                                 'then <jump from="(a):5" to="(b):40">the jump</jump>.')
     elif op == "double":  # two marks on line 8, and a jump that starts on line 12 beside a mark
-        jump = {"from": {"sight": 0, "line": 12}, "to": {"sight": 1, "line": 40}}
-        call(config, "point", marks=[{"at": {"sight": 0, "line": 8}, "mark": "1"},
-                                     {"at": {"sight": 0, "line": 8}, "mark": "A"},
-                                     {"at": {"sight": 0, "line": 12}, "mark": "2"}, jump])
+        call(config, "say", text='<icon at="(a):8">1</icon>, <icon at="(a):8">A</icon>, '
+                                 '<icon at="(a):12">2</icon>, <jump from="(a):12" to="(b):40">'
+                                 'the jump</jump>.')
     elif op == "state":
         call(config, "state")
     elif op == "close":

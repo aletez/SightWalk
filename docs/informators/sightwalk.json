@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
+ "commit": "ec86283de74599f41a3b91e3767d54d417916213",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -3982,7 +3982,7 @@
    "from": [
     "pointing",
     3,
-    248
+    253
    ],
    "to": [
     "pointing"
@@ -4439,7 +4439,7 @@
    "from": [
     "the-agent-says-something",
     2,
-    271
+    276
    ],
    "to": [
     "the-agent-says-something"
@@ -4499,7 +4499,7 @@
    "to": [
     "pointing",
     3,
-    248
+    253
    ]
   },
   {
@@ -4942,7 +4942,7 @@
    "from": [
     "the-agent-says-something",
     17,
-    260
+    265
    ],
    "to": [
     "the-agent-says-something"
@@ -7318,7 +7318,7 @@
    "from": [
     "what-the-agent-is-told",
     5,
-    121
+    124
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7329,7 +7329,7 @@
    "from": [
     "what-the-agent-is-told",
     6,
-    127
+    130
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7340,7 +7340,7 @@
    "from": [
     "what-the-agent-is-told",
     7,
-    132
+    135
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7631,7 +7631,7 @@
    "to": [
     "the-agent-says-something",
     2,
-    271
+    276
    ]
   },
   {
@@ -7751,7 +7751,7 @@
    "from": [
     "one-tool-call-over-http",
     4,
-    121
+    124
    ],
    "to": [
     "what-the-agent-is-told"

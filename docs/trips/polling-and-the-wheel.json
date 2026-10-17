@@ -1,7 +1,7 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "40da1dfdab829ede930902e7356ff9e418fa0ee4",
+ "commit": "ec86283de74599f41a3b91e3767d54d417916213",
  "sights": [
   "sw/subl_reader.py:569-577",
   "sw/subl_chat.py:180-190",

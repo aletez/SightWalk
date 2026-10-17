@@ -190,9 +190,9 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 The marks an answer places with its own tags, resolved to sights and lines, framed in its words, the reader scrolled to show them.
 
 - `sw/subl_executor.py:67-75` op_say
-- `sw/marks.py:224-245` read_marks
+- `sw/marks.py:224-250` read_marks
 - `sw/marks.py:215-221` place
-- `sw/marks.py:248-257` frame_scopes
+- `sw/marks.py:253-262` frame_scopes
 - `sw/subl_reader.py:602-610` Reader.point
 - `sw/marks.py:91-107` resolve_marks
 - `sw/marks.py:80-88` jump
@@ -227,7 +227,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 
 - `sw/subl_executor.py:67-75` op_say
 - `sw/marks.py:189-204` untag
-- `sw/marks.py:271-273` line_refs
+- `sw/marks.py:276-278` line_refs
 - `sw/validator.py:12-15` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
@@ -242,7 +242,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/subl_chat.py:35-43` protected_end
 - `sw/subl_commands.py:110-113` SightWalkChatListener.on_modified
 - `sw/subl_commands.py:115-119` SightWalkChatListener.on_post_text_command
-- `sw/marks.py:260-262` clean
+- `sw/marks.py:265-267` clean
 - `sw/subl_chat.py:241-246` shade_variables
 
 ## 14. Stopping an answer (3 views)
@@ -390,10 +390,10 @@ The guide's manual, the tools' descriptions and schemas it gets at its start, an
 - `sw/manual.py:21-47` MANUAL: Showing code
 - `sw/manual.py:49-52` MANUAL: Writing code that fits the reader
 - `sw/manual.py:54-85` MANUAL: Conversation
-- `sw/manual.py:87-118` MANUAL: Indicators
-- `sw/manual.py:121-124` tool
-- `sw/manual.py:127-130` TRANSITION
-- `sw/manual.py:132-164` TOOLS
+- `sw/manual.py:87-121` MANUAL: Indicators
+- `sw/manual.py:124-127` tool
+- `sw/manual.py:130-133` TRANSITION
+- `sw/manual.py:135-167` TOOLS
 - `sw/validator.py:10-11` TRANSITION_FORM
 - `sw/subl_guide.py:19-24` PROMPT
 - `sw/subl_guide.py:25-25` TOOLS
@@ -425,7 +425,7 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/subl_mcp_http.py:78-81` Handler.authorized
 - `sw/subl_mcp_http.py:65-74` reply
 - `sw/subl_mcp_http.py:50-62` answer
-- `sw/manual.py:121-124` tool
+- `sw/manual.py:124-127` tool
 - `sw/subl_mcp_http.py:38-47` tool_result
 - `sw/subl_mcp_http.py:23-35` call_tool
 - `sw/subl_executor.py:207-215` wait_until_ready

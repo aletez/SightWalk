@@ -129,18 +129,19 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         sublime.set_timeout(lambda: subl_chat.shade_variables(self.view), 50)  # after highlighting
 
     def on_selection_modified(self):
-        """Words selected in the draft wait for code to link to; a click into linked words shows
-        their place (see subl_links)."""
+        """Words selected in the draft wait for code to link to (see subl_links)."""
         reader = state.reader_for(self.view.window())
         if reader is not None:
             reader.links.note_bench(self.view)
-            reader.links.follow(self.view)
 
     def on_post_text_command(self, command_name, args):
         """What leaves the bench by copying leaves without the invisible operators around names
-        (see marks.untag)."""
+        (see marks.untag). A click into linked words shows their places (see subl_links)."""
         if command_name in ("copy", "cut"):
             sublime.set_clipboard(marks.clean(sublime.get_clipboard()))
+        reader = state.reader_for(self.view.window())
+        if command_name == "drag_select" and reader is not None:
+            reader.links.follow(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

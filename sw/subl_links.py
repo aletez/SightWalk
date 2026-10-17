@@ -21,7 +21,6 @@ class Links:
         self.last = None  # the code's last selection or caret, (sight index, Region)
         self.links = []  # [(bench key, [(sight index, Region)])]
         self.sent = 0  # links before this one went out with a message
-        self.own_caret = None  # the bench's caret this module set itself, not a click
 
     def note_bench(self, view):
         """A selection in the draft is the phrase to link; the code's selections count anew."""
@@ -74,9 +73,6 @@ class Links:
         for index in set(i for i, _ in places):
             mine = [r for i, r in places if i == index]
             self.reader.sights[index].view.add_regions(key, mine, SCOPE, "", FLAGS)
-        # Sublime reports these carets later, after this command: known by where they stand,
-        # they are no click into the link.
-        self.own_caret = phrase.end()
         carets(self.reader.chat, [phrase])
         for index in set(i for i, _ in places):
             carets(self.reader.sights[index].view, [r for i, r in places if i == index])
@@ -107,12 +103,12 @@ class Links:
         return " ".join(found)
 
     def follow(self, view):
-        """A click into linked words on the bench shows their first place in the code."""
+        """A click into linked words on the bench selects their places in the code and shows the
+        first. Called on the click itself (drag_select), not on a change of the selection: a
+        second click on the same words leaves the caret where it was, and Sublime reports no
+        change (Jakub found the rule)."""
         sel = view.sel()
         if len(sel) != 1 or not sel[0].empty():
-            return
-        if sel[0].b == self.own_caret:
-            self.own_caret = None
             return
         for key, places in self.links:
             found = view.get_regions(key)
@@ -122,10 +118,6 @@ class Links:
                     selected = code.sel()
                     selected.clear()
                     selected.add_all([r for i, r in places if i == index])
-                    # A view that had the focus a moment ago does not repaint a selection set
-                    # from code (Jakub's tests): the focus there and back makes it.
-                    self.reader.window.focus_view(code)
-                self.reader.window.focus_view(self.reader.chat)
                 index, region = places[0]
                 self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
                 return

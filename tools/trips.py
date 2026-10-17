@@ -140,7 +140,7 @@ TRIPS = [
      ["subl_commands.SightWalkLinkCommand.run", "subl_links.Links.__init__",
       "subl_commands.SightWalkChatListener.on_selection_modified", "subl_links.Links.note_bench",
       "subl_links.Links.note_code", "subl_links.Links.link_from_code",
-      "subl_links.Links.link_from_bench", "subl_links.Links.add", "subl_links.Links.draw_code",
+      "subl_links.Links.link_from_bench", "subl_links.Links.add", "subl_links.carets",
       "subl_links.Links.tagged", "subl_links.Links.places", "subl_links.Links.draft_start",
       "subl_links.Links.follow", "subl_reader.Reader.show_place", "subl_links.Links.clear"]),
     ("Opening the editor",

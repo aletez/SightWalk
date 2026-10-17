@@ -21,6 +21,7 @@ class Links:
         self.last = None  # the code's last selection or caret, (sight index, Region)
         self.links = []  # [(bench key, [(sight index, Region)])]
         self.sent = 0  # links before this one went out with a message
+        self.quiet = False  # while it sets carets itself
 
     def note_bench(self, view):
         """A selection in the draft is the phrase to link; the code's selections count anew."""
@@ -63,16 +64,22 @@ class Links:
         self.add(region, [self.last])
 
     def add(self, phrase, places):
+        """A link drawn: its words and its places framed, each link under keys of its own (one
+        key for all would merge the frames of links that touch). The selections give way to a
+        caret at each region's end, so the user sees it took (Jakub)."""
         key = "sight_walk_link_%d" % len(self.links)
         self.reader.chat.add_regions(key, [phrase], SCOPE, "", FLAGS)
         self.links.append((key, places))
-        self.draw_code()
-
-    def draw_code(self):
-        """Every linked place framed in its sight."""
-        for index, sight in enumerate(self.reader.sights):
-            regions = [r for _, places in self.links for i, r in places if i == index]
-            sight.view.add_regions("sight_walk_links", regions, SCOPE, "", FLAGS)
+        for index in set(i for i, _ in places):
+            mine = [r for i, r in places if i == index]
+            self.reader.sights[index].view.add_regions(key, mine, SCOPE, "", FLAGS)
+        self.quiet = True  # the carets set here are no click into the link
+        try:
+            carets(self.reader.chat, [phrase])
+            for index in set(i for i, _ in places):
+                carets(self.reader.sights[index].view, [r for i, r in places if i == index])
+        finally:
+            self.quiet = False
 
     def tagged(self, view):
         """The draft with its links not yet sent as <here> tags, stripped as the bench sends it."""
@@ -102,11 +109,15 @@ class Links:
     def follow(self, view):
         """A click into linked words on the bench shows their first place in the code."""
         sel = view.sel()
-        if len(sel) != 1 or not sel[0].empty():
+        if self.quiet or len(sel) != 1 or not sel[0].empty():
             return
         for key, places in self.links:
             found = view.get_regions(key)
             if found and found[0].contains(sel[0].b) and places:
+                for index in set(i for i, _ in places):  # the linked code selected (Jakub)
+                    selected = self.reader.sights[index].view.sel()
+                    selected.clear()
+                    selected.add_all([r for i, r in places if i == index])
                 index, region = places[0]
                 self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
                 return
@@ -119,5 +130,12 @@ class Links:
         """Another trip: the links were to other sights."""
         for key, _ in self.links:
             self.reader.chat.erase_regions(key)
-        for sight in self.reader.sights:
-            sight.view.erase_regions("sight_walk_links")
+            for sight in self.reader.sights:
+                sight.view.erase_regions(key)
+
+
+def carets(view, regions):
+    """The selections replaced by a caret at the end of each region."""
+    selected = view.sel()
+    selected.clear()
+    selected.add_all([sublime.Region(r.end()) for r in regions])

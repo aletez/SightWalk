@@ -36,6 +36,7 @@ from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_el
 CLASS = re.compile(r"^\s*class\s+(\w+)")
 EMPTY_HEADER = 0.05  # a header's height in a trip with no sights, as a share (nothing measured)
 ARROWS = {"up": "▲", "down": "▼"}
+BENCH_EDIT_S = 0.3  # a move of the bench this soon after its text changed is no wheel step
 MARKS_KEY = "#marks"  # a tour trip's last marks, kept beside its conversation
 STRIP_BUTTON_HTML = ('<a href="%s" style="text-decoration: none; color: var(--foreground); '
                      'font-size: 1.6rem">%s</a>')
@@ -74,6 +75,7 @@ class Reader(Geometry):
         self.sights, self.items, self.indicators, self.edits = [], [], [], []
         self.frames, self.last_marks = [], []  # the last answer's frames and marks (see say)
         self.pending_marks = None  # a tour trip's kept marks, back once it is laid out
+        self.chat_edited = 0.0  # when the bench's text last changed (see bench_edited)
         self.links = Links(self)  # the user's links from bench words to code (primary+p)
         self.offset = self.lead = 0.0  # lead: room above a short trip (see plan.lead)
         # px: the window's height, the height a cell adds to its content, a code line's height.
@@ -546,11 +548,17 @@ class Reader(Geometry):
             x, y = view.viewport_position()
             if abs(y - place) <= 0.5 and x == 0:
                 continue
-            if settling or abs(y - place) >= self.height:
+            edited = view == self.chat and time.time() - self.chat_edited < BENCH_EDIT_S
+            if settling or edited or abs(y - place) >= self.height:
                 view.set_viewport_position((0.0, place), False)
                 continue
             self.scroll_to(self.offset + y - place, wheel=True)
             return
+
+    def bench_edited(self):
+        """The bench's text changed: Sublime may move it a line (a Backspace into the transcript,
+        which the guard puts back), and that move is no wheel step (Jakub)."""
+        self.chat_edited = time.time()
 
     def strip_place(self):
         """Where the strip stands, so its lines are level with the code's: line BLANK_LINES is the

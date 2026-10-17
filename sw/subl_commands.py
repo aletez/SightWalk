@@ -129,6 +129,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
         sublime.set_timeout(lambda: subl_chat.shade_variables(self.view), 50)  # after highlighting
         reader = state.reader_for(self.view.window())
         if reader is not None:
+            reader.bench_edited()  # a move it causes is no wheel step
             reader.links.prune(self.view)  # linked words deleted
 
     def on_selection_modified(self):

@@ -83,7 +83,7 @@ TRIPS = [
      "The two loops: the gutter measured once, the reader opening at the top; the wheel read "
      "and taken over.",
      ["subl_reader.Reader.poll", "subl_chat.keep_at_bottom", "subl_chat.bottom_place", "subl_chat.kept_place", "subl_reader.Reader.poll_wheel", "subl_reader.Reader.alive",
-      "subl_reader.Reader.read_wheel", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
+      "subl_reader.Reader.read_wheel", "subl_reader.Reader.bench_edited", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
       "subl_reader.item_top"]),
     ("Pointing",
      "The marks an answer places with its own tags, resolved to sights and lines, framed in its "

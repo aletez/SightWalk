@@ -1,11 +1,11 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
+ "commit": "056429d4ba2c32a3f3f8f761e4d019999be3d5e2",
  "sights": [
   "sw/subl_reader.py:784-789",
   "sw/subl_vetting.py:56-75",
-  "sw/subl_commands.py:298-301",
+  "sw/subl_commands.py:309-312",
   "sw/subl_reader.py:791-801",
   "sw/subl_vetting.py:36-44",
   "sw/subl_vetting.py:47-49",
@@ -22,7 +22,7 @@
   },
   {
    "type": "calls",
-   "from": [2, 301],
+   "from": [2, 312],
    "to": [3, 791]
   },
   {

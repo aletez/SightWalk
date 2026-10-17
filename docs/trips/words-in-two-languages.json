@@ -1,17 +1,17 @@
 {
  "name": "Words in two languages",
  "kind": "run",
- "commit": "aea471c8652d3c90cad3e30610a665433737ebce",
+ "commit": "056429d4ba2c32a3f3f8f761e4d019999be3d5e2",
  "sights": [
-  "sw/subl_commands.py:282-285",
+  "sw/subl_commands.py:293-296",
   "sight_walk.py:49-52",
   "sw/words.py:57-59",
   "sw/state.py:54-59",
   "sw/words.py:53-54",
   "sw/subl_chat.py:28-32",
   "sw/subl_views.py:33-35",
-  "sw/subl_commands.py:367-379",
-  "sw/subl_commands.py:382-390"
+  "sw/subl_commands.py:378-390",
+  "sw/subl_commands.py:393-401"
  ],
  "transitions": [
   {
@@ -31,8 +31,8 @@
   },
   {
    "type": "calls",
-   "from": [7, 368],
-   "to": [8, 382]
+   "from": [7, 379],
+   "to": [8, 393]
   }
  ]
 }

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "9116f96ee52924116c4bb5c3b28eb6499782d0e0",
+ "commit": "a80a59c58ef9e1c4c3ef1988eace1f522d1f34ee",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -6338,7 +6338,7 @@
    "from": [
     "linking-words-to-code",
     8,
-    137
+    140
    ],
    "to": [
     "linking-words-to-code"
@@ -6384,7 +6384,7 @@
    "from": [
     "linking-words-to-code",
     11,
-    125
+    128
    ],
    "to": [
     "linking-words-to-code"
@@ -6495,7 +6495,7 @@
    "from": [
     "linking-words-to-code",
     14,
-    129
+    132
    ],
    "to": [
     "linking-words-to-code"

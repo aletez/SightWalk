@@ -333,13 +333,13 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:45-51` Links.link_from_code
 - `sw/subl_links.py:53-64` Links.link_from_bench
 - `sw/subl_links.py:66-78` Links.add
-- `sw/subl_links.py:137-141` carets
+- `sw/subl_links.py:140-144` carets
 - `sw/subl_links.py:80-92` Links.tagged
 - `sw/subl_links.py:94-103` Links.places
-- `sw/subl_links.py:125-127` Links.draft_start
-- `sw/subl_links.py:105-123` Links.follow
+- `sw/subl_links.py:128-130` Links.draft_start
+- `sw/subl_links.py:105-126` Links.follow
 - `sw/subl_reader.py:742-753` Reader.show_place
-- `sw/subl_links.py:129-134` Links.clear
+- `sw/subl_links.py:132-137` Links.clear
 
 ## 20. Opening the editor (10 views)
 

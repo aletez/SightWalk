@@ -1,7 +1,7 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "9116f96ee52924116c4bb5c3b28eb6499782d0e0",
+ "commit": "a80a59c58ef9e1c4c3ef1988eace1f522d1f34ee",
  "sights": [
   "sw/subl_commands.py:307-308",
   "sw/subl_commands.py:310-311",

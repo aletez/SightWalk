@@ -29,6 +29,17 @@ class ShowTest(unittest.TestCase):
             with self.assertRaises(Refusal):
                 check("show", args, {"files": files})
 
+    def test_places_by_name(self):
+        trip = validator.trip_of({"sights": ["a.py:1-5", "b.py:1-9"], "transitions": [
+            {"type": "calls", "from": "(a):3", "to": "(b):1"},
+            {"type": "leads_to", "from": "(a)", "to": [1, 2]}]})
+        self.assertEqual([(t.source, t.target) for t in trip.transitions],
+                         [((0, 3), (1, 1)), ((0,), (1, 2))])
+        for bad in ("x1:3", "(q):1", "(a):x"):
+            with self.assertRaises(Refusal, msg=bad):
+                validator.trip_of({"sights": ["a.py:1-5"], "transitions": [
+                    {"type": "calls", "from": bad, "to": "(a):1"}]})
+
     def test_shape(self):
         for args in ({"sights": "a.py:1-5", "transitions": []}, {"sights": ["a.py:1-5"]},
                      {"sights": ["a.py"], "transitions": []}):

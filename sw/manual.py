@@ -33,9 +33,9 @@ Showing code
   script's top-level code, which is no function, goes in sights of about the same length,
   each a step that reads as one.
 - Name the transitions between the trip's sights (show's transitions, required; [] when there
-  are none). Each is {"type": t, "from": place, "to": place}; a place is [sight] or
-  [sight, line], sights numbered from 0, lines of the file. It reads as a sentence true of its
-  source: "from calls to". Types:
+  are none). Each is {"type": t, "from": place, "to": place}; a place is written as in the
+  marks, "(c):34" (a sight's name and a file line) or "(c)" (the sight alone). It reads as a
+  sentence true of its source: "from calls to". Types:
   calls        the calling line → the line of the definition it reaches. Name every one.
   returns      a line giving control back → the line of the call it returns to.
   leads_to     where the story goes on, though no code calls it (an event handled later).
@@ -133,14 +133,14 @@ def tool(name, description, properties=None, required=()):
 
 TRANSITION = {"type": "object", "required": ["type", "from", "to"], "properties": {
     "type": {"type": "string", "enum": list(TRIP_TYPES)},
-    "from": {"type": "array", "items": {"type": "integer"}},
-    "to": {"type": "array", "items": {"type": "integer"}}}}
+    "from": {"type": "string"},
+    "to": {"type": "string"}}}
 
 TOOLS = [
     tool("show", "Open or replace the reader, scrolled to the top. sights: specs in the trip's "
          'order, like ["src/app.py:12-30", "src/db.py:5-20"]. transitions (required, [] when '
-         'none): {"type": "calls", "from": [0, 15], "to": [1, 7]} says line 15 of sight 0 '
-         "calls the definition at line 7 of sight 1 (sights from 0, file lines); see the manual "
+         'none): {"type": "calls", "from": "(a):15", "to": "(b):7"} says line 15 of sight (a) '
+         "calls the definition at line 7 of sight (b) (file lines); see the manual "
          "for the other types. root: base folder for relative paths. trip: the trip's name, a "
          "few words, shown in the header over the Sights.",
          {"sights": {"type": "array", "items": {"type": "string"}},

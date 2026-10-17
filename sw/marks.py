@@ -212,6 +212,21 @@ MARK_FORM = ('<icon at="(c):34">1</icon> for a line (a sight\'s name and a file 
              'of control (the words framed in its colour)')
 
 
+def trip_place(value):
+    """A transition's place in a trip, as the guide writes it everywhere (Jakub): "(c):34" or
+    "(c)" becomes (2, 34) or (2,); a list [2, 34] (a trip file's form) passes as it is."""
+    if isinstance(value, list):
+        return tuple(value)
+    if not isinstance(value, str):
+        raise ValueError("%r is no place: write \"(c):34\" or \"(c)\"." % (value,))
+    sight, _, line = value.partition(":")
+    index = sight_index(sight)
+    if index is None or (line and not line.strip().isdigit()):
+        raise ValueError("%r is no place: write a sight's name and a file line, \"(c):34\", or "
+                         "the sight alone, \"(c)\"." % value)
+    return (index, int(line)) if line else (index,)
+
+
 def place(text):
     """{"sight": "(c)", "line": 34} from "(c):34"."""
     sight, _, line = text.rpartition(":")

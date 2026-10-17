@@ -3,12 +3,13 @@ Pure, no Sublime API: it judges a call by its arguments and the facts subl_execu
 (see facts there), and changes nothing. A refusal is a Refusal whose message tells the guide how
 to correct the call; the server returns it as the tool's error."""
 
-from .marks import MARK_FORM, line_refs, read_marks, resolve_marks, speaks_of_code, untag
+from .marks import MARK_FORM, line_refs, trip_place, read_marks, resolve_marks, speaks_of_code, untag
 from .ontology import Sight, Transition, Trip
 
 EDITABLE = ("tint", "default_conversation_height", "bench_side")
-TRANSITION_FORM = ('{"type": "calls", "from": [0, 15], "to": [3, 42]}: line 15 of sight 0 '
-                   'calls the definition at line 42 of sight 3 (sights from 0, file lines)')
+TRANSITION_FORM = ('{"type": "calls", "from": "(a):15", "to": "(d):42"}: line 15 of sight (a) '
+                   'calls the definition at line 42 of sight (d) (file lines; a sight alone is '
+                   '"(d)")')
 MARK_FIRST = ("This answer names code and marks no line: tag the lines it speaks of in the text "
               "itself, " + MARK_FORM + ". Each gets an icon and an outline. The user asked that "
               "every answer about code comes with its marks. Do not call wait_for_user before "
@@ -36,13 +37,14 @@ def trip_of(args):
     if not isinstance(sights, list) or not all(isinstance(s, str) for s in sights):
         raise Refusal('sights: a list like ["app.py:12-30", "app.py:40-52"].')
     if not isinstance(transitions, list) or not all(
-            isinstance(t, dict) and all(isinstance(t.get(end), list) for end in ("from", "to"))
+            isinstance(t, dict) and all(isinstance(t.get(end), (str, list)) for end in ("from", "to"))
             for t in transitions):
         raise Refusal("transitions: name every call (and other transition) between the trip's "
                       "sights, each as %s; [] when there are none. The Map draws them."
                       % TRANSITION_FORM)
     try:
-        made = [Transition(t.get("type"), t["from"], t["to"]) for t in transitions]
+        made = [Transition(t.get("type"), trip_place(t["from"]), trip_place(t["to"]))
+                for t in transitions]
         return Trip(args.get("trip") or "", [Sight.parse(spec) for spec in sights], made)
     except ValueError as e:
         raise Refusal(str(e)) from None

@@ -46,7 +46,7 @@ From the HTTP server's thread to the show operation on Sublime's, with every che
 - `sw/validator.py:51-54` not_stopped
 - `sw/validator.py:32-48` trip_of
 - `sw/ontology.py:126-134` Sight.parse
-- `sw/ontology.py:154-158` Trip.__init__
+- `sw/ontology.py:156-160` Trip.__init__
 - `sw/ontology.py:90-97` Network.__init__
 - `sw/ontology.py:106-116` Network.problem
 - `sw/validator.py:68-80` files
@@ -565,15 +565,15 @@ Transitions between places, checked; the trip, the informator and the tour.
 - `sw/ontology.py:76-77` Transition.__eq__
 - `sw/ontology.py:79-80` Transition.__repr__
 - `sw/ontology.py:82-83` Transition.parts
-- `sw/ontology.py:154-158` Trip.__init__
-- `sw/ontology.py:160-161` Trip.label
-- `sw/ontology.py:163-164` Trip.member_label
-- `sw/ontology.py:166-171` Trip.moved
-- `sw/ontology.py:179-181` Informator.__init__
-- `sw/ontology.py:183-184` Informator.member
-- `sw/ontology.py:186-187` Informator.label
-- `sw/ontology.py:189-190` Informator.member_label
-- `sw/ontology.py:197-203` Tour.__init__
+- `sw/ontology.py:156-160` Trip.__init__
+- `sw/ontology.py:162-163` Trip.label
+- `sw/ontology.py:165-166` Trip.member_label
+- `sw/ontology.py:168-173` Trip.moved
+- `sw/ontology.py:181-183` Informator.__init__
+- `sw/ontology.py:185-186` Informator.member
+- `sw/ontology.py:188-189` Informator.label
+- `sw/ontology.py:191-192` Informator.member_label
+- `sw/ontology.py:199-205` Tour.__init__
 
 ## 35. An informator and its tour (25 views)
 
@@ -588,19 +588,19 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/words.py:70-77` trips_count
 - `sw/subl_reader.py:778-792` Reader.open_tour
 - `sw/subl_reader.py:919-921` read_json
-- `sw/ontology.py:288-294` tour_from
-- `sw/ontology.py:267-271` informator_from
-- `sw/ontology.py:251-254` trip_from
-- `sw/ontology.py:241-242` transition_from
-- `sw/ontology.py:206-219` tour
-- `sw/ontology.py:222-230` visit
+- `sw/ontology.py:290-296` tour_from
+- `sw/ontology.py:269-273` informator_from
+- `sw/ontology.py:253-256` trip_from
+- `sw/ontology.py:243-244` transition_from
+- `sw/ontology.py:208-221` tour
+- `sw/ontology.py:224-232` visit
 - `sw/subl_vetting.py:176-182` read_walked
 - `sw/subl_reader.py:794-806` Reader.tour_link
 - `sw/subl_reader.py:808-816` Reader.keep_transcript
 - `sw/subl_reader.py:906-908` transcripts_path
 - `sw/subl_reader.py:911-916` read_transcripts
 - `sw/subl_chat.py:202-205` set_transcript
-- `sw/ontology.py:274-278` dumps
+- `sw/ontology.py:276-280` dumps
 - `sw/subl_vetting.py:185-194` save_walked
 - `sw/subl_reader.py:818-820` Reader.draw_tour
 - `sw/subl_vetting.py:157-173` show_tour
@@ -610,11 +610,11 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 A trip opened from its file by the guide, and the files written for an informator.
 
 - `sw/subl_executor.py:110-117` op_open_trip
-- `sw/ontology.py:251-254` trip_from
-- `sw/ontology.py:245-248` trip_data
-- `sw/ontology.py:236-238` transition_data
-- `sw/ontology.py:257-264` informator_data
-- `sw/ontology.py:281-285` tour_data
+- `sw/ontology.py:253-256` trip_from
+- `sw/ontology.py:247-250` trip_data
+- `sw/ontology.py:238-240` transition_data
+- `sw/ontology.py:259-266` informator_data
+- `sw/ontology.py:283-287` tour_data
 
 ## 37. Questions the code already asks (10 views)
 

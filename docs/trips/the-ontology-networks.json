@@ -1,7 +1,7 @@
 {
  "name": "The ontology: networks",
  "kind": "survey",
- "commit": "a65696987550b67fcb2c09c6b565ec1a4ed5cd7e",
+ "commit": "b66022052962c16101adde9735d8a13a13adf45a",
  "sights": [
   "sw/ontology.py:90-97",
   "sw/ontology.py:13-15",
@@ -11,15 +11,15 @@
   "sw/ontology.py:76-77",
   "sw/ontology.py:79-80",
   "sw/ontology.py:82-83",
-  "sw/ontology.py:154-158",
-  "sw/ontology.py:160-161",
-  "sw/ontology.py:163-164",
-  "sw/ontology.py:166-171",
-  "sw/ontology.py:179-181",
-  "sw/ontology.py:183-184",
-  "sw/ontology.py:186-187",
-  "sw/ontology.py:189-190",
-  "sw/ontology.py:197-203"
+  "sw/ontology.py:156-160",
+  "sw/ontology.py:162-163",
+  "sw/ontology.py:165-166",
+  "sw/ontology.py:168-173",
+  "sw/ontology.py:181-183",
+  "sw/ontology.py:185-186",
+  "sw/ontology.py:188-189",
+  "sw/ontology.py:191-192",
+  "sw/ontology.py:199-205"
  ],
  "transitions": [
   {
@@ -49,28 +49,28 @@
   },
   {
    "type": "calls",
-   "from": [8, 158],
+   "from": [8, 160],
    "to": [0, 90]
   },
   {
    "type": "calls",
-   "from": [11, 169],
-   "to": [8, 154]
+   "from": [11, 171],
+   "to": [8, 156]
   },
   {
    "type": "calls",
-   "from": [11, 170],
+   "from": [11, 172],
    "to": [3, 106]
   },
   {
    "type": "calls",
-   "from": [12, 180],
+   "from": [12, 182],
    "to": [0, 90]
   },
   {
    "type": "calls",
-   "from": [16, 198],
-   "to": [13, 183]
+   "from": [16, 200],
+   "to": [13, 185]
   }
  ]
 }

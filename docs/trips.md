@@ -326,20 +326,20 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 primary+p joins words of the draft to selections in the sights, from either side; the words go out as a <here> tag, and a click on them shows their place.
 
 - `sw/subl_commands.py:55-62` SightWalkLinkCommand.run
-- `sw/subl_links.py:13-20` Links.__init__
+- `sw/subl_links.py:17-24` Links.__init__
 - `sw/subl_commands.py:131-137` SightWalkChatListener.on_selection_modified
-- `sw/subl_links.py:22-26` Links.note_bench
-- `sw/subl_links.py:28-40` Links.note_code
-- `sw/subl_links.py:42-48` Links.link_from_code
-- `sw/subl_links.py:50-61` Links.link_from_bench
-- `sw/subl_links.py:63-79` Links.add
-- `sw/subl_links.py:134-138` carets
-- `sw/subl_links.py:81-93` Links.tagged
-- `sw/subl_links.py:95-104` Links.places
-- `sw/subl_links.py:122-124` Links.draft_start
-- `sw/subl_links.py:106-120` Links.follow
+- `sw/subl_links.py:26-30` Links.note_bench
+- `sw/subl_links.py:32-44` Links.note_code
+- `sw/subl_links.py:46-52` Links.link_from_code
+- `sw/subl_links.py:54-65` Links.link_from_bench
+- `sw/subl_links.py:67-83` Links.add
+- `sw/subl_links.py:138-142` carets
+- `sw/subl_links.py:85-97` Links.tagged
+- `sw/subl_links.py:99-108` Links.places
+- `sw/subl_links.py:126-128` Links.draft_start
+- `sw/subl_links.py:110-124` Links.follow
 - `sw/subl_reader.py:742-745` Reader.show_place
-- `sw/subl_links.py:126-131` Links.clear
+- `sw/subl_links.py:130-135` Links.clear
 
 ## 20. Opening the editor (10 views)
 

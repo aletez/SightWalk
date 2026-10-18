@@ -834,8 +834,9 @@ class Reader(Geometry):
             self.keep_transcript()
             subl_chat.set_transcript(self.informator.transcripts.get(key, ""))
             self.tour_trip = key
-            self.load(self.informator.member(key), self.informator_root)
+            # Before load: the trip may be laid out within it, and start takes them then.
             self.pending_marks = self.informator.transcripts.get(key + MARKS_KEY)
+            self.load(self.informator.member(key), self.informator_root)
         elif what == "tick":
             self.walked ^= {key}
             subl_vetting.save_walked(self.informator.id, self.walked)
@@ -845,10 +846,16 @@ class Reader(Geometry):
         """The bench's conversation kept under the tour's trip shown (Jakub), so after Sublime
         closes it goes on from there. After every message, in a file beside the informator's that
         git ignores (Jakub: conversations stay out of git)."""
-        if self.informator is None or self.trip is None or self.trip.id != self.tour_trip:
+        if self.informator is None or self.tour_trip is None:
             return
+        # The conversation goes on when the guide shows another trip (Jakub): it stays kept
+        # under the tour's trip it began in; marks only while that trip is shown, as only its
+        # sights come back.
         self.informator.transcripts[self.tour_trip] = subl_chat.TRANSCRIPT
-        self.informator.transcripts[self.tour_trip + MARKS_KEY] = self.kept_marks()
+        if self.trip is not None and self.trip.id == self.tour_trip:
+            self.informator.transcripts[self.tour_trip + MARKS_KEY] = self.kept_marks()
+        else:
+            self.informator.transcripts.pop(self.tour_trip + MARKS_KEY, None)
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 

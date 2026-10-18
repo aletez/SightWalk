@@ -1,7 +1,7 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "3e1ae597846c8f09751b56287365a5e64d974b48",
+ "commit": "68d6bb33a36396361b298533df692e9cefbb8cc5",
  "sights": [
   "sw/subl_commands.py:55-62",
   "sw/subl_links.py:19-28",
@@ -11,14 +11,14 @@
   "sw/subl_links.py:53-59",
   "sw/subl_links.py:61-72",
   "sw/subl_links.py:74-92",
-  "sw/subl_links.py:208-212",
+  "sw/subl_links.py:215-219",
   "sw/subl_links.py:128-137",
   "sw/subl_links.py:139-148",
-  "sw/subl_links.py:198-200",
+  "sw/subl_links.py:205-207",
   "sw/subl_links.py:150-175",
-  "sw/subl_links.py:215-221",
+  "sw/subl_links.py:222-228",
   "sw/subl_reader.py:750-761",
-  "sw/subl_links.py:202-205",
+  "sw/subl_links.py:209-212",
   "sw/subl_links.py:94-99",
   "sw/subl_links.py:101-106",
   "sw/subl_links.py:108-113",
@@ -27,14 +27,14 @@
   "sw/subl_links.py:122-126",
   "sw/marks.py:215-228",
   "sw/marks.py:231-243",
-  "sw/subl_links.py:177-194",
+  "sw/subl_links.py:177-196",
   "sw/subl_commands.py:178-184"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [3, 33],
-   "to": [11, 198]
+   "to": [11, 205]
   },
   {
    "type": "calls",
@@ -44,7 +44,7 @@
   {
    "type": "calls",
    "from": [6, 70],
-   "to": [11, 198]
+   "to": [11, 205]
   },
   {
    "type": "calls",
@@ -84,7 +84,7 @@
   {
    "type": "calls",
    "from": [9, 131],
-   "to": [11, 198]
+   "to": [11, 205]
   },
   {
    "type": "calls",
@@ -124,12 +124,12 @@
   {
    "type": "calls",
    "from": [12, 167],
-   "to": [8, 208]
+   "to": [8, 215]
   },
   {
    "type": "calls",
    "from": [12, 171],
-   "to": [13, 215]
+   "to": [13, 222]
   },
   {
    "type": "calls",
@@ -138,13 +138,13 @@
   },
   {
    "type": "calls",
-   "from": [15, 205],
+   "from": [15, 212],
    "to": [17, 101]
   },
   {
    "type": "calls",
    "from": [16, 97],
-   "to": [8, 208]
+   "to": [8, 215]
   },
   {
    "type": "calls",
@@ -154,7 +154,7 @@
   {
    "type": "calls",
    "from": [16, 99],
-   "to": [8, 208]
+   "to": [8, 215]
   },
   {
    "type": "calls",
@@ -179,7 +179,7 @@
   {
    "type": "calls",
    "from": [24, 189],
-   "to": [8, 208]
+   "to": [8, 215]
   }
  ]
 }

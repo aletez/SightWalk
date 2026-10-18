@@ -336,14 +336,14 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:53-59` Links.link_from_code
 - `sw/subl_links.py:61-72` Links.link_from_bench
 - `sw/subl_links.py:74-92` Links.add
-- `sw/subl_links.py:208-212` carets
+- `sw/subl_links.py:215-219` carets
 - `sw/subl_links.py:128-137` Links.tagged
 - `sw/subl_links.py:139-148` Links.places
-- `sw/subl_links.py:198-200` Links.draft_start
+- `sw/subl_links.py:205-207` Links.draft_start
 - `sw/subl_links.py:150-175` Links.follow
-- `sw/subl_links.py:215-221` repaint
+- `sw/subl_links.py:222-228` repaint
 - `sw/subl_reader.py:750-761` Reader.show_place
-- `sw/subl_links.py:202-205` Links.clear
+- `sw/subl_links.py:209-212` Links.clear
 - `sw/subl_links.py:94-99` Links.show_made
 - `sw/subl_links.py:101-106` Links.remove
 - `sw/subl_links.py:108-113` Links.prune
@@ -352,7 +352,7 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:122-126` Links.by_sight
 - `sw/marks.py:215-228` span_relation
 - `sw/marks.py:231-243` here_tags
-- `sw/subl_links.py:177-194` Links.follow_code
+- `sw/subl_links.py:177-196` Links.follow_code
 - `sw/subl_commands.py:178-184` SightWalkWindowListener.on_post_text_command
 
 ## 20. Opening the editor (10 views)

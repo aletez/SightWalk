@@ -74,7 +74,9 @@ class Reader(Geometry):
     def __init__(self, window):
         self.window = window
         self.sights, self.items, self.indicators, self.edits = [], [], [], []
-        self.frames, self.last_marks = [], []  # the last answer's frames and marks (see say)
+        self.frames, self.last_marks = [], []  # the shown answer's frames and marks (see say)
+        self.answers, self.shown_answer = [], None  # every answer with marks, and the one shown
+        self.kept_lines = {}  # the marked lines' text when a tour trip's answers were kept
         self.pending_marks = None  # a tour trip's kept marks, back once it is laid out
         self.chat_edited = 0.0  # when the bench's text last changed (see bench_edited)
         self.shown_frame = None  # the guide's frame a click showed, so a second hides it
@@ -157,6 +159,7 @@ class Reader(Geometry):
         self.indicators = marks or []
         if marks is None:  # another trip: the last answer's frames were about other sights
             self.frames, self.last_marks = [], []
+            self.answers, self.shown_answer, self.kept_lines = [], None, {}
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
 
@@ -862,31 +865,57 @@ class Reader(Geometry):
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 
     def kept_marks(self):
-        """The last answer's marks and frames, with the text of every marked line, so they come
-        back only while the code is the same (Jakub)."""
-        texts = {"%d:%d" % (m["sight"], m["line"]): self.line_text(m["sight"], m["line"])
-                 for m in self.indicators}
-        return {"marks": self.last_marks, "frames": self.frames, "lines": texts}
+        """Every answer's marks, frames and labels, with the text of every marked line, so they
+        come back only while the code is the same (Jakub)."""
+        texts = {}
+        for answer in self.answers:
+            for m in marks.resolve_marks(self.sights, answer["marks"]):
+                texts["%d:%d" % (m["sight"], m["line"])] = self.line_text(m["sight"], m["line"])
+        return {"answers": self.answers, "shown": self.shown_answer, "lines": texts}
 
     def line_text(self, index, line):
         view = self.sights[index].view
         return view.substr(view.line(view.text_point(line - 1, 0)))
 
     def restore_marks(self, kept):
-        """The kept marks of a tour's trip back, when every marked line reads as it did."""
+        """The kept answers of a tour's trip back, the one shown then shown again."""
+        if "answers" not in kept:  # kept before answers were (one answer, no labels)
+            kept = {"answers": [{"labels": [], "marks": kept.get("marks") or [],
+                                 "frames": kept.get("frames") or []}], "shown": 0,
+                    "lines": kept.get("lines")}
+        self.answers = [dict(a, frames=[tuple(f) for f in a["frames"]])
+                        for a in kept.get("answers") or []]
+        self.kept_lines = kept.get("lines") or {}
+        if kept.get("shown") is not None and kept["shown"] < len(self.answers):
+            self.show_answer(kept["shown"])
+
+    def show_answer(self, k):
+        """Answer k's frames on the bench and its icons in the code, instead of the shown ones
+        (Jakub), when every line it marks reads as when it was kept."""
+        answer = self.answers[k]
         try:
-            resolved = marks.resolve_marks(self.sights, kept.get("marks") or [])
+            resolved = marks.resolve_marks(self.sights, answer["marks"])
         except ValueError:
             return
-        lines = kept.get("lines") or {}
-        if any(lines.get("%d:%d" % (m["sight"], m["line"])) != self.line_text(m["sight"], m["line"])
-               for m in resolved):
+        lines = self.kept_lines
+        if any(lines.get("%d:%d" % (m["sight"], m["line"]), self.line_text(m["sight"], m["line"]))
+               != self.line_text(m["sight"], m["line"]) for m in resolved):
             return
-        self.last_marks, self.frames = kept["marks"], [tuple(f) for f in kept.get("frames", [])]
-        self.shown_frame = None
-        self.indicators = resolved
+        self.shown_answer, self.shown_frame = k, None
+        self.frames, self.last_marks, self.indicators = answer["frames"], answer["marks"], resolved
         subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.render()
+
+    def follow_label(self, view):
+        """A click on an answer's "A:" shows that answer's frames and icons (Jakub)."""
+        point = view.sel()[0].b if len(view.sel()) == 1 and view.sel()[0].empty() else None
+        blanks = subl_chat.blanks(view)
+        for k, answer in enumerate(self.answers):
+            if point is not None and any(blanks + l <= point <= blanks + l + 2
+                                         for l in answer["labels"]):
+                self.show_answer(k)
+                return True
+        return False
 
     def draw_tour(self):
         subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
@@ -1002,14 +1031,27 @@ class Reader(Geometry):
             self.status = status
         self.show_headers()
         start = subl_chat.say(self.chat, text, prefix)
-        if placed:
-            framed = [(start + a, start + b, scope, placed[m]) for (a, b, _, m), scope
-                      in zip(frames, marks.frame_scopes(frames, text.strip()))]
-            self.frames = framed if clear else self.frames + framed
-            self.last_marks = list(placed) if clear else self.last_marks + list(placed)
-            self.point(placed, clear=clear)
+        if placed or (not clear and self.answers):
+            self.add_to_answer(start, text, placed, frames, clear)
         subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.keep_transcript()
+
+    def add_to_answer(self, start, text, placed, frames, clear):
+        """The answer's marks placed, its words framed, and kept with its "A:" labels, so a click
+        on a label shows that answer's frames and icons again (Jakub). clear: a new answer."""
+        framed = [(start + a, start + b, scope, placed[m]) for (a, b, _, m), scope
+                  in zip(frames, marks.frame_scopes(frames, text.strip()))]
+        label = start - len("A: ")
+        if clear:
+            self.answers.append({"labels": [], "marks": [], "frames": []})
+        answer = self.answers[-1]
+        answer["labels"].append(label)
+        answer["marks"] += list(placed)
+        answer["frames"] += framed
+        self.shown_answer = len(self.answers) - 1
+        self.frames, self.last_marks = answer["frames"], answer["marks"]
+        if placed:
+            self.point(placed, clear=clear)
 
     def context(self):
         if not self.ready:

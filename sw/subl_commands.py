@@ -145,7 +145,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
             sublime.set_clipboard(marks.clean(sublime.get_clipboard()))
         reader = state.reader_for(self.view.window())
         if command_name == "drag_select" and reader is not None:
-            reader.links.follow(self.view) or reader.follow_frame(self.view)
+            reader.links.follow(self.view) or reader.follow_frame(self.view) or reader.follow_label(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

@@ -1,7 +1,7 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "68d6bb33a36396361b298533df692e9cefbb8cc5",
+ "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
  "sights": [
   "sw/subl_executor.py:178-185",
   "sw/subl_executor.py:188-204",
@@ -9,19 +9,19 @@
   "sw/subl_executor.py:138-147",
   "sw/subl_executor.py:150-159",
   "sw/spec.py:118-131",
-  "sw/validator.py:25-30",
-  "sw/validator.py:95-99",
-  "sw/validator.py:85-92",
+  "sw/validator.py:26-31",
+  "sw/validator.py:96-100",
+  "sw/validator.py:86-93",
   "sw/subl_executor.py:49-55",
   "sw/subl_executor.py:58-60",
-  "sw/validator.py:53-56",
-  "sw/validator.py:33-50",
+  "sw/validator.py:54-57",
+  "sw/validator.py:34-51",
   "sw/marks.py:246-258",
   "sw/ontology.py:129-137",
   "sw/ontology.py:160-164",
   "sw/ontology.py:93-100",
   "sw/ontology.py:109-119",
-  "sw/validator.py:70-82",
+  "sw/validator.py:71-83",
   "sw/spec.py:10-23",
   "sw/subl_executor.py:31-33"
  ],
@@ -39,7 +39,7 @@
   {
    "type": "calls",
    "from": [0, 182],
-   "to": [6, 25]
+   "to": [6, 26]
   },
   {
    "type": "calls",
@@ -88,28 +88,28 @@
   },
   {
    "type": "calls",
-   "from": [7, 96],
-   "to": [11, 53]
-  },
-  {
-   "type": "calls",
    "from": [7, 97],
-   "to": [12, 33]
+   "to": [11, 54]
   },
   {
    "type": "calls",
    "from": [7, 98],
-   "to": [18, 70]
+   "to": [12, 34]
   },
   {
    "type": "calls",
    "from": [7, 99],
-   "to": [8, 85]
+   "to": [18, 71]
+  },
+  {
+   "type": "calls",
+   "from": [7, 100],
+   "to": [8, 86]
   },
   {
    "type": "calls",
    "from": [9, 50],
-   "to": [12, 33]
+   "to": [12, 34]
   },
   {
    "type": "calls",
@@ -118,17 +118,17 @@
   },
   {
    "type": "calls",
-   "from": [12, 46],
+   "from": [12, 47],
    "to": [13, 246]
   },
   {
    "type": "calls",
-   "from": [12, 48],
+   "from": [12, 49],
    "to": [14, 130]
   },
   {
    "type": "calls",
-   "from": [12, 48],
+   "from": [12, 49],
    "to": [15, 160]
   },
   {

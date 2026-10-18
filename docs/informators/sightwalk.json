@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "68d6bb33a36396361b298533df692e9cefbb8cc5",
+ "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -827,7 +827,7 @@
    "from": [
     "a-request-arrives",
     6,
-    25
+    26
    ],
    "to": [
     "a-request-arrives"
@@ -838,7 +838,7 @@
    "from": [
     "a-request-arrives",
     7,
-    95
+    96
    ],
    "to": [
     "a-request-arrives"
@@ -849,7 +849,7 @@
    "from": [
     "a-request-arrives",
     8,
-    85
+    86
    ],
    "to": [
     "a-request-arrives"
@@ -960,7 +960,7 @@
    "from": [
     "a-request-arrives",
     11,
-    53
+    54
    ],
    "to": [
     "a-request-arrives"
@@ -971,7 +971,7 @@
    "from": [
     "a-request-arrives",
     12,
-    33
+    34
    ],
    "to": [
     "a-request-arrives"
@@ -982,7 +982,7 @@
    "from": [
     "a-request-arrives",
     12,
-    46
+    47
    ],
    "to": [
     "the-ontology-networks",
@@ -1102,7 +1102,7 @@
    "from": [
     "a-request-arrives",
     18,
-    70
+    71
    ],
    "to": [
     "a-request-arrives"
@@ -4532,7 +4532,7 @@
    "from": [
     "the-agent-says-something",
     3,
-    13
+    14
    ],
    "to": [
     "the-agent-says-something"
@@ -7325,7 +7325,7 @@
    "from": [
     "window-events",
     8,
-    145
+    158
    ],
    "to": [
     "window-events"
@@ -7881,7 +7881,7 @@
    "from": [
     "what-the-agent-is-told",
     5,
-    128
+    129
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7892,7 +7892,7 @@
    "from": [
     "what-the-agent-is-told",
     6,
-    134
+    135
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7903,7 +7903,7 @@
    "from": [
     "what-the-agent-is-told",
     7,
-    139
+    140
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7914,7 +7914,7 @@
    "from": [
     "what-the-agent-is-told",
     8,
-    10
+    11
    ],
    "to": [
     "what-the-agent-is-told"
@@ -7947,7 +7947,7 @@
    "from": [
     "what-the-validator-refuses",
     0,
-    25
+    26
    ],
    "to": [
     "a-request-arrives"
@@ -7958,7 +7958,7 @@
    "from": [
     "what-the-validator-refuses",
     1,
-    53
+    54
    ],
    "to": [
     "a-request-arrives"
@@ -7969,7 +7969,7 @@
    "from": [
     "what-the-validator-refuses",
     2,
-    59
+    60
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7980,7 +7980,7 @@
    "from": [
     "what-the-validator-refuses",
     3,
-    64
+    65
    ],
    "to": [
     "what-the-validator-refuses"
@@ -7991,7 +7991,7 @@
    "from": [
     "what-the-validator-refuses",
     4,
-    70
+    71
    ],
    "to": [
     "a-request-arrives"
@@ -8002,7 +8002,7 @@
    "from": [
     "what-the-validator-refuses",
     5,
-    95
+    96
    ],
    "to": [
     "a-request-arrives"
@@ -8013,12 +8013,12 @@
    "from": [
     "what-the-validator-refuses",
     5,
-    97
+    98
    ],
    "to": [
     "a-request-arrives",
     12,
-    33
+    34
    ]
   },
   {
@@ -8026,12 +8026,12 @@
    "from": [
     "what-the-validator-refuses",
     5,
-    99
+    100
    ],
    "to": [
     "a-request-arrives",
     8,
-    85
+    86
    ]
   },
   {
@@ -8039,7 +8039,7 @@
    "from": [
     "what-the-validator-refuses",
     6,
-    102
+    103
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8050,12 +8050,12 @@
    "from": [
     "what-the-validator-refuses",
     6,
-    107
+    108
    ],
    "to": [
     "a-request-arrives",
     8,
-    85
+    86
    ]
   },
   {
@@ -8139,7 +8139,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    110
+    111
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8150,7 +8150,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    119
+    120
    ],
    "to": [
     "pointing",
@@ -8163,7 +8163,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    119
+    120
    ],
    "to": [
     "the-agent-says-something",
@@ -8176,7 +8176,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    120
+    121
    ],
    "to": [
     "pointing",
@@ -8189,7 +8189,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    123
+    127
    ],
    "to": [
     "the-agent-says-something",
@@ -8202,7 +8202,7 @@
    "from": [
     "what-the-validator-refuses",
     8,
-    126
+    130
    ],
    "to": [
     "the-agent-says-something",
@@ -8215,10 +8215,23 @@
    "from": [
     "what-the-validator-refuses",
     9,
-    130
+    134
    ],
    "to": [
     "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "what-the-validator-refuses",
+    9,
+    139
+   ],
+   "to": [
+    "pointing",
+    15,
+    50
    ]
   },
   {
@@ -8226,7 +8239,7 @@
    "from": [
     "what-the-validator-refuses",
     10,
-    134
+    143
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8237,7 +8250,7 @@
    "from": [
     "what-the-validator-refuses",
     11,
-    139
+    147
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8248,7 +8261,18 @@
    "from": [
     "what-the-validator-refuses",
     12,
-    145
+    152
+   ],
+   "to": [
+    "what-the-validator-refuses"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "what-the-validator-refuses",
+    13,
+    158
    ],
    "to": [
     "window-events"
@@ -8258,8 +8282,8 @@
    "type": "own_trip",
    "from": [
     "what-the-validator-refuses",
-    13,
-    156
+    14,
+    169
    ],
    "to": [
     "what-the-validator-refuses"
@@ -8314,7 +8338,7 @@
    "from": [
     "one-tool-call-over-http",
     4,
-    128
+    129
    ],
    "to": [
     "what-the-agent-is-told"

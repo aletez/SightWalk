@@ -1,68 +1,74 @@
 {
  "name": "What the validator refuses",
  "kind": "survey",
- "commit": "68d6bb33a36396361b298533df692e9cefbb8cc5",
+ "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
  "sights": [
-  "sw/validator.py:25-30",
-  "sw/validator.py:53-56",
-  "sw/validator.py:59-61",
-  "sw/validator.py:64-67",
-  "sw/validator.py:70-82",
-  "sw/validator.py:95-99",
-  "sw/validator.py:102-107",
+  "sw/validator.py:26-31",
+  "sw/validator.py:54-57",
+  "sw/validator.py:60-62",
+  "sw/validator.py:65-68",
+  "sw/validator.py:71-83",
+  "sw/validator.py:96-100",
+  "sw/validator.py:103-108",
   "sw/subl_executor.py:162-171",
-  "sw/validator.py:110-127",
-  "sw/validator.py:130-131",
-  "sw/validator.py:134-136",
-  "sw/validator.py:139-142",
-  "sw/validator.py:145-153",
-  "sw/validator.py:156-157"
+  "sw/validator.py:111-131",
+  "sw/validator.py:134-140",
+  "sw/validator.py:143-144",
+  "sw/validator.py:147-149",
+  "sw/validator.py:152-155",
+  "sw/validator.py:158-166",
+  "sw/validator.py:169-170"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [3, 65],
-   "to": [2, 59]
+   "from": [3, 66],
+   "to": [2, 60]
   },
   {
    "type": "calls",
-   "from": [5, 96],
-   "to": [1, 53]
+   "from": [5, 97],
+   "to": [1, 54]
   },
   {
    "type": "calls",
-   "from": [5, 98],
-   "to": [4, 70]
+   "from": [5, 99],
+   "to": [4, 71]
   },
   {
    "type": "calls",
-   "from": [6, 103],
-   "to": [1, 53]
+   "from": [6, 104],
+   "to": [1, 54]
   },
   {
    "type": "calls",
-   "from": [6, 106],
-   "to": [4, 70]
-  },
-  {
-   "type": "calls",
-   "from": [8, 113],
-   "to": [1, 53]
+   "from": [6, 107],
+   "to": [4, 71]
   },
   {
    "type": "calls",
    "from": [8, 114],
-   "to": [2, 59]
+   "to": [1, 54]
   },
   {
    "type": "calls",
-   "from": [9, 131],
-   "to": [3, 64]
+   "from": [8, 115],
+   "to": [2, 60]
   },
   {
    "type": "calls",
-   "from": [13, 157],
-   "to": [2, 59]
+   "from": [8, 121],
+   "to": [9, 134]
+  },
+  {
+   "type": "calls",
+   "from": [10, 144],
+   "to": [3, 65]
+  },
+  {
+   "type": "calls",
+   "from": [14, 170],
+   "to": [2, 60]
   }
  ]
 }

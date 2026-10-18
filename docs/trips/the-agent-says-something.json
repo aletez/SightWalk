@@ -1,12 +1,12 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "68d6bb33a36396361b298533df692e9cefbb8cc5",
+ "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:189-204",
   "sw/marks.py:322-324",
-  "sw/validator.py:13-16",
+  "sw/validator.py:14-17",
   "sw/marks.py:160-162",
   "sw/marks.py:157-157",
   "sw/subl_reader.py:942-958",

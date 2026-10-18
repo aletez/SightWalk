@@ -1,7 +1,7 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
+ "commit": "48b492ec5078394199168bbac4f63d7e1d222c7c",
  "sights": [
   "sw/subl_commands.py:42-48",
   "sw/subl_chat.py:163-177",

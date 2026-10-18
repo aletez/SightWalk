@@ -145,7 +145,7 @@ TRIPS = [
       "subl_links.Links.follow", "subl_links.repaint", "subl_reader.Reader.show_place", "subl_links.Links.clear",
       "subl_links.Links.show_made", "subl_links.Links.remove", "subl_links.Links.prune",
       "subl_links.Links.draft_keys", "subl_links.Links.bench_region", "subl_links.Links.by_sight",
-      "marks.span_relation", "marks.here_tags", "subl_links.Links.follow_code",
+      "marks.span_relation", "marks.here_tags", "subl_links.Links.follow_code", "subl_links.Links.repaint_bench",
       "subl_commands.SightWalkWindowListener.on_post_text_command"]),
     ("Opening the editor",
      "Enter or the header's button: the editor laid over the sights, ranges and marks held.",

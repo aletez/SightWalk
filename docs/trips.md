@@ -324,7 +324,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/subl_reader.py:713-716` Reader.take_edits
 - `sw/subl_executor.py:218-232` wait_for_user
 
-## 19. Linking words to code (26 views)
+## 19. Linking words to code (27 views)
 
 primary+p joins words of the draft to selections in the sights, from either side; the words go out as a <here> tag, and a click on them shows their place.
 
@@ -353,6 +353,7 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/marks.py:215-228` span_relation
 - `sw/marks.py:231-243` here_tags
 - `sw/subl_links.py:177-196` Links.follow_code
+- `sw/subl_links.py:198-203` Links.repaint_bench
 - `sw/subl_commands.py:178-184` SightWalkWindowListener.on_post_text_command
 
 ## 20. Opening the editor (10 views)

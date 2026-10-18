@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
+ "commit": "48b492ec5078394199168bbac4f63d7e1d222c7c",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -6688,7 +6688,7 @@
    "from": [
     "linking-words-to-code",
     25,
-    178
+    198
    ],
    "to": [
     "linking-words-to-code"
@@ -6699,6 +6699,30 @@
    "from": [
     "linking-words-to-code",
     25,
+    202
+   ],
+   "to": [
+    "polling-and-the-wheel",
+    7,
+    558
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    26,
+    178
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "linking-words-to-code",
+    26,
     181
    ],
    "to": [
@@ -6711,7 +6735,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    25,
+    26,
     182
    ],
    "to": [

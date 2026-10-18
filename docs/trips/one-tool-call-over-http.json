@@ -1,7 +1,7 @@
 {
  "name": "One tool call over HTTP",
  "kind": "run",
- "commit": "cd266d104252f0d1a8e9ab653417037009f273d5",
+ "commit": "48b492ec5078394199168bbac4f63d7e1d222c7c",
  "sights": [
   "sw/subl_mcp_http.py:94-105",
   "sw/subl_mcp_http.py:78-81",

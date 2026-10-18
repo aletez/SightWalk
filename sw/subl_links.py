@@ -53,7 +53,7 @@ class Links:
     def link_from_code(self):
         """primary+p in the sights: the phrase selected on the bench joins every pick since."""
         if self.phrase is None or not self.picks:
-            sublime.status_message("SightWalk: select words on the bench first, then code here.")
+            print("SightWalk: select words on the bench first, then code here.")
             return
         self.add(self.phrase, list(self.picks))
         self.phrase, self.picks = None, []
@@ -62,7 +62,7 @@ class Links:
         """primary+p on the bench: the selected words (or the word at the caret) join every
         selection of the sight touched last, as the first way joins every pick (Jakub)."""
         if self.last is None:
-            sublime.status_message("SightWalk: select code in the sights first.")
+            print("SightWalk: select code in the sights first.")
             return
         region = view.sel()[0] if len(view.sel()) else None
         if region is not None and region.empty():
@@ -78,8 +78,8 @@ class Links:
         for key in self.draft_keys():
             relation = span_relation(tuple(phrase), tuple(self.bench_region(key)))
             if relation == "crossing":
-                sublime.status_message("SightWalk: these words cross linked words; link a phrase "
-                                       "within or around them.")
+                print("SightWalk: these words cross linked words; link a phrase within or around "
+                      "them.")  # the console, where someone looks (Jakub)
                 return
             if relation == "same":
                 self.remove(key)
@@ -187,13 +187,20 @@ class Links:
             self.shown = None
             if phrases:
                 carets(self.reader.chat, phrases)
+                self.repaint_bench()
             return
         self.shown = ("code", tuple(keys))
         self.ours = phrases[0] if len(phrases) == 1 else None
         self.reader.chat.sel().clear()
         self.reader.chat.sel().add_all(phrases)
-        # No scrolling nor repainting the bench here: while it takes the wheel, a move of it
-        # would move the whole trip (see Reader.read_wheel).
+        self.repaint_bench()
+
+    def repaint_bench(self):
+        """The bench drawn now, as a sight is (see repaint): its pixel's move marked as an edit
+        of it, so it is not read as the wheel moving the trip (see Reader.bench_edited). Not
+        scrolled to the phrases: that move would be the wheel's."""
+        self.reader.bench_edited()
+        repaint(self.reader.chat)
 
     def draft_start(self, view):
         """The draft starts after the protected transcript (see subl_chat)."""

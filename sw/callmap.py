@@ -99,8 +99,10 @@ def file_block(file, nodes, faded):
     return cluster(file, file, body, 1)
 
 
-def arrow(a, b, kind):
-    attributes = STYLES[kind]
+def arrow(a, b, kind, lit=None):
+    """An arrow drawn its type's way; lit, a colour: the arrow the user clicked a jump of (Jakub),
+    in the jump's colour and thicker."""
+    attributes = ", ".join(x for x in (STYLES[kind], lit and 'color="%s", penwidth=3' % lit) if x)
     return "  %s -> %s%s;" % (node_id(a), node_id(b), " [%s]" % attributes if attributes else "")
 
 
@@ -115,9 +117,11 @@ def legend(kinds):
     return cluster("legend", "", body, 1) if body else []
 
 
-def dot_source(nodes, arrows, style):
+def dot_source(nodes, arrows, style, lit=None):
     """The graph in Graphviz's dot language. arrows: (from key, to key, type).
-    style: (font, text colour, line colour, background)."""
+    style: (font, text colour, line colour, background). lit: (from key, to key, colour), a
+    jump the user clicked: its arrow lit, or, with no arrow between those nodes, the two nodes'
+    borders (Jakub)."""
     font, text, line, background = style
     lines = ["digraph map {", "  rankdir=LR;",
              '  graph [fontname=%s, fontcolor="%s", color="%s", bgcolor="%s"];'
@@ -127,7 +131,12 @@ def dot_source(nodes, arrows, style):
              '  edge [color="%s"];' % line]
     for file in sorted({n.file for n in nodes}):
         lines += file_block(file, [n for n in nodes if n.file == file], line)
-    lines += [arrow(a, b, kind) for a, b, kind in arrows]
+    lit_arrow = lit and any((a, b) == lit[:2] for a, b, _ in arrows)
+    lines += [arrow(a, b, kind, lit[2] if lit_arrow and (a, b) == lit[:2] else None)
+              for a, b, kind in arrows]
+    if lit and not lit_arrow:
+        lines += ['  %s [color="%s", penwidth=3];' % (node_id(key), lit[2])
+                  for key in lit[:2] if key]
     lines += legend([k for k in STYLES if any(kind == k for _, _, kind in arrows)])
     return "\n".join(lines + ["}"])
 

@@ -84,13 +84,14 @@ def find_dot():
     return shutil.which("dot", path=os.pathsep.join(PLACES + [os.environ.get("PATH", "")]))
 
 
-def draw_map(view, nodes, arrows, style):
-    """Draws the map off the main thread (a subprocess would block the executor), then shows it."""
+def draw_map(view, nodes, arrows, style, lit=None):
+    """Draws the map off the main thread (a subprocess would block the executor), then shows it.
+    lit: a jump the user clicked (see callmap.dot_source)."""
     dot = find_dot()
     if dot is None:
         show_note(view, word("no_dot"))
         return
-    source = dot_source(nodes, arrows, style)
+    source = dot_source(nodes, arrows, style, lit)
     sublime.set_timeout_async(lambda: render(view, dot, source), 0)
 
 

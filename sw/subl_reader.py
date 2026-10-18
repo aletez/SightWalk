@@ -14,6 +14,7 @@ import time
 
 import sublime
 
+from . import subl_links
 from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
@@ -76,6 +77,7 @@ class Reader(Geometry):
         self.frames, self.last_marks = [], []  # the last answer's frames and marks (see say)
         self.pending_marks = None  # a tour trip's kept marks, back once it is laid out
         self.chat_edited = 0.0  # when the bench's text last changed (see bench_edited)
+        self.shown_frame = None  # the guide's frame a click showed, so a second hides it
         self.links = Links(self)  # the user's links from bench words to code (primary+p)
         self.offset = self.lead = 0.0  # lead: room above a short trip (see plan.lead)
         # px: the window's height, the height a cell adds to its content, a code line's height.
@@ -881,6 +883,7 @@ class Reader(Geometry):
                for m in resolved):
             return
         self.last_marks, self.frames = kept["marks"], [tuple(f) for f in kept.get("frames", [])]
+        self.shown_frame = None
         self.indicators = resolved
         subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.render()
@@ -889,7 +892,8 @@ class Reader(Geometry):
         subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
                              self.trip.id if self.trip else None, self.tour_link)
 
-    def draw_map(self):
+    def draw_map(self, jump=None):
+        """The Map; jump: ((sight, line), (sight, line), colour), a jump the user clicked, lit."""
         if self.sights:
             nodes = [n for i in range(len(self.sights)) for n in self.map_nodes(i)]
             definitions = {}
@@ -897,7 +901,50 @@ class Reader(Geometry):
                 definitions.setdefault(node.key[0], []).append(node.key[1])
             arrows = callmap.edges(definitions, [(t.type, t.source, t.target)
                                                  for t in self.trip.transitions])
-            subl_vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4])
+            lit = jump and (callmap.node_at(definitions, jump[0]),
+                            callmap.node_at(definitions, jump[1]), jump[2])
+            subl_vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4], lit)
+
+    def follow_frame(self, view):
+        """A click into a frame of the guide's answer (Jakub): its line, or a jump's two ends,
+        selected in the code and brought into view, a jump's arrow lit on the Map; a second
+        click on it takes that off. True if the click was in a frame."""
+        point = view.sel()[0].b if len(view.sel()) == 1 and view.sel()[0].empty() else None
+        blanks = subl_chat.blanks(view)
+        frame = next((f for f in self.frames if point is not None
+                      and blanks + f[0] <= point <= blanks + f[1] and len(f) > 3), None)
+        if frame is None:
+            return False
+        resolved = marks.resolve_marks(self.sights, [frame[3]])
+        places = [(m["sight"], m["line"]) for m in resolved]
+        again = frame[:2] == self.shown_frame
+        for index in set(i for i, _ in places):
+            code = self.sights[index].view
+            lines = [code.line(code.text_point(line - 1, 0)) for i, line in places if i == index]
+            code.sel().clear()
+            code.sel().add_all([sublime.Region(r.b) for r in lines] if again else lines)
+            subl_links.repaint(code)
+        self.shown_frame = None if again else frame[:2]
+        jump = "from" in frame[3]
+        if not again:
+            self.show_places(places)
+        if jump:
+            colour = marks.ICON_COLOURS[marks.icon_colour(resolved[0]["icon"])]
+            self.draw_map(None if again else (places[0], places[1], colour))
+        return True
+
+    def show_places(self, places):
+        """Places brought into view as show does: not at all while all are visible; all at once
+        if they fit, with two lines to spare; else the first (see show_place)."""
+        ys = [marks.line_y(self.sights[i], line, self.lh) for i, line in places]
+        spare = 2 * self.lh
+        if all(self.offset <= y and y + self.lh <= self.offset + self.room() for y in ys):
+            return
+        if max(ys) - min(ys) + self.lh + 2 * spare <= self.room():
+            top = min(ys) - spare if min(ys) < self.offset else max(ys) + self.lh + spare - self.room()
+            self.scroll_to(top)
+        else:
+            self.show_place(*places[0])
 
     def map_nodes(self, index):
         """The map's nodes for a sight: its first definition and every line a call in the trip
@@ -956,7 +1003,7 @@ class Reader(Geometry):
         self.show_headers()
         start = subl_chat.say(self.chat, text, prefix)
         if placed:
-            framed = [(start + a, start + b, scope) for (a, b, _), scope
+            framed = [(start + a, start + b, scope, placed[m]) for (a, b, _, m), scope
                       in zip(frames, marks.frame_scopes(frames, text.strip()))]
             self.frames = framed if clear else self.frames + framed
             self.last_marks = list(placed) if clear else self.last_marks + list(placed)

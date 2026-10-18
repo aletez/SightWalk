@@ -219,6 +219,12 @@ def catch_up(view):
                                             "end": len(protected)})
 
 
+def blanks(view):
+    """The blank lines above the transcript on the bench, in characters (see start)."""
+    protected = PROTECTED.get(view.buffer_id(), "")
+    return len(protected) - len(protected.lstrip("\n"))
+
+
 def outline_refs(view, frames, sights=0):
     """The guide's marks in its words, framed in their colours (frames: (start, end, scope) in
     the transcript, see marks.read_marks), and the sights' names, "(c)", in a frame of the
@@ -226,7 +232,7 @@ def outline_refs(view, frames, sights=0):
     protected = PROTECTED.get(view.buffer_id(), "")
     blanks = len(protected) - len(protected.lstrip("\n"))
     by_scope = {}
-    for begin, end, scope in frames:
+    for begin, end, scope, *_ in frames:
         by_scope.setdefault(scope, []).append(sublime.Region(blanks + begin, blanks + end))
     for scope in tuple(marks.REF_SCOPES.values()) + marks.JUMP_SCOPES:
         view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",

@@ -154,12 +154,12 @@ class Links:
         click leaves the caret where it was, and Sublime reports no change of selection."""
         sel = view.sel()
         if len(sel) != 1 or not sel[0].empty():
-            return
+            return False
         key = next((k for k in self.links if self.bench_region(k).contains(sel[0].b)
                     and not self.bench_region(k).empty()), None)
         if key is None:
             self.shown = None
-            return
+            return False
         places = self.links[key]
         for index, mine in self.by_sight(places).items():
             code = self.reader.sights[index].view
@@ -173,6 +173,7 @@ class Links:
         if self.shown:
             index, region = places[0]
             self.reader.show_place(index, self.reader.sights[index].view.rowcol(region.a)[0] + 1)
+        return True
 
     def follow_code(self, view, index):
         """A click into a linked place in the code selects every phrase on the bench that refers

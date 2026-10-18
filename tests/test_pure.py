@@ -116,7 +116,7 @@ class AnswerMarksTest(unittest.TestCase):
         self.assertEqual(found, [{"at": {"sight": "(a)", "line": 3}, "mark": "1"},
                                  {"from": {"sight": "(a)", "line": 3},
                                   "to": {"sight": "(b)", "line": 10}}])
-        self.assertEqual(frames, [(3, 4, "icon"), (8, 13, 0)])
+        self.assertEqual(frames, [(3, 4, "icon", 0), (8, 13, 0, 1)])
         self.assertEqual(marks.frame_scopes(frames, text), ["region.orangish", "region.greenish"])
 
     def test_same_tag_again(self):
@@ -124,7 +124,8 @@ class AnswerMarksTest(unittest.TestCase):
         text, found, frames = marks.read_marks(
             (jump % "calls") + ', <jump from="(a):2" to="(b):11">x</jump>, then ' + (jump % "it"))
         self.assertEqual(len(found), 2)  # one mark per jump
-        self.assertEqual([kind for _, _, kind in frames], [0, 1, 0])  # the first jump's colour
+        self.assertEqual([kind for _, _, kind, _ in frames], [0, 1, 0])  # the first jump's colour
+        self.assertEqual([mark for *_, mark in frames], [0, 1, 0])  # one mark for both
 
 
 class HereTest(unittest.TestCase):
@@ -316,3 +317,10 @@ class CallMapTest(unittest.TestCase):
         framed = callmap.dot_source([callmap.Node((0, 1), "run", "", "a.py", "#fff", "(a)")], [],
                                     ("Helvetica", "#000000", "#888888", "#ffffff"))
         self.assertIn('label="(a)"; style=dashed;', framed)
+        two = [callmap.Node((0, 1), "run", "", "a.py", "#fff", "(a)"),
+               callmap.Node((1, 1), "go", "", "a.py", "#fff", "(b)")]
+        lit = callmap.dot_source(two, [((0, 1), (1, 1), "calls")], ("H", "#0", "#8", "#f"),
+                                 ((0, 1), (1, 1), "#C8372D"))
+        self.assertIn('"s0_1" -> "s1_1" [color="#C8372D", penwidth=3];', lit)
+        alone = callmap.dot_source(two, [], ("H", "#0", "#8", "#f"), ((0, 1), (1, 1), "#C8372D"))
+        self.assertIn('"s1_1" [color="#C8372D", penwidth=3];', alone)

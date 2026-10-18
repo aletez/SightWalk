@@ -269,7 +269,8 @@ def place(text):
 
 def read_marks(text):
     """(text without <icon> and <jump>, marks for resolve_marks, frames): frames are
-    (start, end, kind) in the text returned, kind "icon" or the jump's index among the jumps
+    (start, end, kind, mark) in the text returned, kind "icon" or the jump's index among the
+    jumps, mark the index of its mark in marks
     (Jakub: the answer places its own marks, so where they stand is kept with it). The same tag
     again (same place and character, or same ends) makes no second mark: it frames its words in
     the same colour, so the answer can come back to a jump or a line (Jakub)."""
@@ -287,7 +288,7 @@ def read_marks(text):
         if mark not in found:
             found.append(mark)
         out.append(words)
-        frames.append((start, start + len(words), kind))
+        frames.append((start, start + len(words), kind, found.index(mark)))
         last = match.end()
     out = "".join(out) + text[last:]
     left = [m.group(0) for m in TAG.finditer(out) if m.group(2) in MARK_TAGS]
@@ -300,7 +301,7 @@ def frame_scopes(frames, text):
     """The scope each frame is drawn in: an icon's by its kind, digits orange, letters blue; a
     jump's by its colour, as its arrows (see JUMP_COLOURS)."""
     scopes = []
-    for start, end, kind in frames:
+    for start, end, kind, *_ in frames:
         if kind == "icon":
             scopes.append(REF_SCOPES["digit" if text[start:end].strip().isdigit() else "letter"])
         else:

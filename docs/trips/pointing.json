@@ -1,25 +1,28 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "8cd822d0a5fe94e5c1965927c6cfc54f5614cf44",
+ "commit": "b28e1ee39e83866dbc8090f0e87c24ae3ba2cf2e",
  "sights": [
   "sw/subl_executor.py:67-75",
-  "sw/marks.py:270-296",
+  "sw/marks.py:270-297",
   "sw/marks.py:261-267",
-  "sw/marks.py:299-308",
-  "sw/subl_reader.py:615-623",
+  "sw/marks.py:300-309",
+  "sw/subl_reader.py:617-625",
   "sw/marks.py:91-107",
   "sw/marks.py:80-88",
   "sw/marks.py:18-37",
   "sw/marks.py:46-53",
   "sw/marks.py:56-62",
   "sw/marks.py:14-15",
-  "sw/subl_chat.py:222-238",
+  "sw/subl_chat.py:228-244",
   "sw/marks.py:175-178",
   "sw/marks.py:40-43",
   "sw/spec.py:58-64",
   "sw/spec.py:50-55",
-  "sw/marks.py:246-258"
+  "sw/marks.py:246-258",
+  "sw/subl_reader.py:908-934",
+  "sw/subl_chat.py:222-225",
+  "sw/subl_reader.py:936-947"
  ],
  "transitions": [
   {
@@ -29,22 +32,22 @@
   },
   {
    "type": "calls",
-   "from": [1, 281],
+   "from": [1, 282],
    "to": [2, 261]
   },
   {
    "type": "calls",
-   "from": [1, 284],
+   "from": [1, 285],
    "to": [2, 261]
-  },
-  {
-   "type": "calls",
-   "from": [4, 616],
-   "to": [5, 91]
   },
   {
    "type": "calls",
    "from": [4, 618],
+   "to": [5, 91]
+  },
+  {
+   "type": "calls",
+   "from": [4, 620],
    "to": [10, 14]
   },
   {
@@ -89,7 +92,17 @@
   },
   {
    "type": "calls",
+   "from": [11, 233],
+   "to": [18, 222]
+  },
+  {
+   "type": "calls",
    "from": [11, 236],
+   "to": [18, 222]
+  },
+  {
+   "type": "calls",
+   "from": [11, 242],
    "to": [12, 175]
   },
   {
@@ -106,6 +119,26 @@
    "type": "calls",
    "from": [16, 254],
    "to": [14, 58]
+  },
+  {
+   "type": "calls",
+   "from": [17, 913],
+   "to": [18, 222]
+  },
+  {
+   "type": "calls",
+   "from": [17, 918],
+   "to": [5, 91]
+  },
+  {
+   "type": "calls",
+   "from": [17, 930],
+   "to": [19, 936]
+  },
+  {
+   "type": "calls",
+   "from": [19, 939],
+   "to": [10, 14]
   }
  ]
 }

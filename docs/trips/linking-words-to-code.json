@@ -1,7 +1,7 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "8cd822d0a5fe94e5c1965927c6cfc54f5614cf44",
+ "commit": "b28e1ee39e83866dbc8090f0e87c24ae3ba2cf2e",
  "sights": [
   "sw/subl_commands.py:55-62",
   "sw/subl_links.py:19-28",
@@ -11,14 +11,14 @@
   "sw/subl_links.py:53-59",
   "sw/subl_links.py:61-72",
   "sw/subl_links.py:74-92",
-  "sw/subl_links.py:215-219",
+  "sw/subl_links.py:216-220",
   "sw/subl_links.py:128-137",
   "sw/subl_links.py:139-148",
-  "sw/subl_links.py:205-207",
-  "sw/subl_links.py:150-175",
-  "sw/subl_links.py:222-228",
-  "sw/subl_reader.py:750-761",
-  "sw/subl_links.py:209-212",
+  "sw/subl_links.py:206-208",
+  "sw/subl_links.py:150-176",
+  "sw/subl_links.py:223-229",
+  "sw/subl_reader.py:752-763",
+  "sw/subl_links.py:210-213",
   "sw/subl_links.py:94-99",
   "sw/subl_links.py:101-106",
   "sw/subl_links.py:108-113",
@@ -27,15 +27,15 @@
   "sw/subl_links.py:122-126",
   "sw/marks.py:215-228",
   "sw/marks.py:231-243",
-  "sw/subl_links.py:177-196",
-  "sw/subl_links.py:198-203",
+  "sw/subl_links.py:178-197",
+  "sw/subl_links.py:199-204",
   "sw/subl_commands.py:178-184"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [3, 33],
-   "to": [11, 205]
+   "to": [11, 206]
   },
   {
    "type": "calls",
@@ -45,7 +45,7 @@
   {
    "type": "calls",
    "from": [6, 70],
-   "to": [11, 205]
+   "to": [11, 206]
   },
   {
    "type": "calls",
@@ -85,7 +85,7 @@
   {
    "type": "calls",
    "from": [9, 131],
-   "to": [11, 205]
+   "to": [11, 206]
   },
   {
    "type": "calls",
@@ -125,27 +125,27 @@
   {
    "type": "calls",
    "from": [12, 167],
-   "to": [8, 215]
+   "to": [8, 216]
   },
   {
    "type": "calls",
    "from": [12, 171],
-   "to": [13, 222]
+   "to": [13, 223]
   },
   {
    "type": "calls",
    "from": [12, 175],
-   "to": [14, 750]
+   "to": [14, 752]
   },
   {
    "type": "calls",
-   "from": [15, 212],
+   "from": [15, 213],
    "to": [17, 101]
   },
   {
    "type": "calls",
    "from": [16, 97],
-   "to": [8, 215]
+   "to": [8, 216]
   },
   {
    "type": "calls",
@@ -155,7 +155,7 @@
   {
    "type": "calls",
    "from": [16, 99],
-   "to": [8, 215]
+   "to": [8, 216]
   },
   {
    "type": "calls",
@@ -174,28 +174,28 @@
   },
   {
    "type": "calls",
-   "from": [24, 185],
+   "from": [24, 186],
    "to": [20, 118]
   },
   {
    "type": "calls",
-   "from": [24, 189],
-   "to": [8, 215]
-  },
-  {
-   "type": "calls",
    "from": [24, 190],
-   "to": [25, 198]
+   "to": [8, 216]
   },
   {
    "type": "calls",
-   "from": [24, 196],
-   "to": [25, 198]
+   "from": [24, 191],
+   "to": [25, 199]
   },
   {
    "type": "calls",
-   "from": [25, 203],
-   "to": [13, 222]
+   "from": [24, 197],
+   "to": [25, 199]
+  },
+  {
+   "type": "calls",
+   "from": [25, 204],
+   "to": [13, 223]
   }
  ]
 }

@@ -1,71 +1,76 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "8cd822d0a5fe94e5c1965927c6cfc54f5614cf44",
+ "commit": "b28e1ee39e83866dbc8090f0e87c24ae3ba2cf2e",
  "sights": [
-  "sw/subl_vetting.py:87-94",
+  "sw/subl_vetting.py:87-95",
   "sw/subl_vetting.py:80-84",
-  "sw/callmap.py:118-132",
+  "sw/callmap.py:120-141",
   "sw/callmap.py:93-99",
   "sw/callmap.py:70-73",
   "sw/callmap.py:76-78",
   "sw/callmap.py:81-90",
   "sw/callmap.py:62-63",
   "sw/callmap.py:66-67",
-  "sw/callmap.py:102-104",
-  "sw/callmap.py:107-115",
-  "sw/subl_vetting.py:97-109",
-  "sw/subl_vetting.py:112-114",
-  "sw/subl_vetting.py:123-138",
-  "sw/subl_vetting.py:141-146",
+  "sw/callmap.py:102-106",
+  "sw/callmap.py:109-117",
+  "sw/subl_vetting.py:98-110",
+  "sw/subl_vetting.py:113-115",
+  "sw/subl_vetting.py:124-139",
+  "sw/subl_vetting.py:142-147",
   "sw/subl_commands.py:303-304",
-  "sw/subl_vetting.py:149-152"
+  "sw/subl_vetting.py:150-153"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 89],
+   "from": [0, 90],
    "to": [1, 80]
   },
   {
    "type": "calls",
-   "from": [0, 91],
-   "to": [16, 149]
-  },
-  {
-   "type": "calls",
-   "from": [0, 93],
-   "to": [2, 118]
+   "from": [0, 92],
+   "to": [16, 150]
   },
   {
    "type": "calls",
    "from": [0, 94],
-   "to": [11, 97]
+   "to": [2, 120]
   },
   {
    "type": "calls",
-   "from": [2, 124],
+   "from": [0, 95],
+   "to": [11, 98]
+  },
+  {
+   "type": "calls",
+   "from": [2, 128],
    "to": [8, 66]
-  },
-  {
-   "type": "calls",
-   "from": [2, 126],
-   "to": [8, 66]
-  },
-  {
-   "type": "calls",
-   "from": [2, 129],
-   "to": [3, 93]
   },
   {
    "type": "calls",
    "from": [2, 130],
+   "to": [8, 66]
+  },
+  {
+   "type": "calls",
+   "from": [2, 133],
+   "to": [3, 93]
+  },
+  {
+   "type": "calls",
+   "from": [2, 135],
    "to": [9, 102]
   },
   {
    "type": "calls",
-   "from": [2, 131],
-   "to": [10, 107]
+   "from": [2, 138],
+   "to": [7, 62]
+  },
+  {
+   "type": "calls",
+   "from": [2, 140],
+   "to": [10, 109]
   },
   {
    "type": "calls",
@@ -129,53 +134,53 @@
   },
   {
    "type": "calls",
-   "from": [9, 104],
+   "from": [9, 106],
    "to": [7, 62]
   },
   {
    "type": "calls",
-   "from": [10, 111],
+   "from": [10, 113],
    "to": [8, 66]
   },
   {
    "type": "calls",
-   "from": [10, 112],
+   "from": [10, 114],
    "to": [8, 66]
   },
   {
    "type": "calls",
-   "from": [10, 115],
+   "from": [10, 117],
    "to": [4, 70]
   },
   {
    "type": "calls",
-   "from": [11, 107],
-   "to": [16, 149]
+   "from": [11, 108],
+   "to": [16, 150]
   },
   {
    "type": "calls",
-   "from": [11, 109],
-   "to": [13, 123]
+   "from": [11, 110],
+   "to": [13, 124]
   },
   {
    "type": "calls",
-   "from": [13, 131],
-   "to": [12, 112]
+   "from": [13, 132],
+   "to": [12, 113]
   },
   {
    "type": "calls",
-   "from": [13, 138],
-   "to": [14, 141]
+   "from": [13, 139],
+   "to": [14, 142]
   },
   {
    "type": "calls",
-   "from": [14, 146],
-   "to": [13, 123]
+   "from": [14, 147],
+   "to": [13, 124]
   },
   {
    "type": "calls",
    "from": [15, 304],
-   "to": [14, 141]
+   "to": [14, 142]
   }
  ]
 }

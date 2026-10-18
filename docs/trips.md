@@ -234,7 +234,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/validator.py:14-17` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
-- `sw/subl_reader.py:942-958` Reader.say
+- `sw/subl_reader.py:949-965` Reader.say
 - `sw/subl_reader.py:720-729` Reader.show_headers
 - `sw/subl_chat.py:94-113` show_header
 - `sw/header.py:12-22` title_lines
@@ -253,8 +253,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
 - `sw/subl_commands.py:218-221` SightWalkStopAnswerCommand.run
-- `sw/subl_reader.py:921-928` Reader.stop_answer
-- `sw/subl_reader.py:930-933` Reader.withdraw_unread_messages
+- `sw/subl_reader.py:928-935` Reader.stop_answer
+- `sw/subl_reader.py:937-940` Reader.withdraw_unread_messages
 
 ## 15. The Tools pane's tabs (10 views, survey)
 
@@ -269,17 +269,17 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 - `sw/subl_reader.py:783-784` Reader.tools
 - `sw/subl_reader.py:786-787` Reader.tool_view
 - `sw/subl_reader.py:789-790` Reader.hidden_tools
-- `sw/subl_reader.py:885-893` Reader.draw_map
+- `sw/subl_reader.py:892-900` Reader.draw_map
 
 ## 16. The Map's nodes (12 views)
 
 The trip's definitions and the calls its author named, as nodes for the graph.
 
-- `sw/subl_reader.py:885-893` Reader.draw_map
-- `sw/subl_reader.py:999-1006` map_style
-- `sw/subl_reader.py:895-909` Reader.map_nodes
+- `sw/subl_reader.py:892-900` Reader.draw_map
+- `sw/subl_reader.py:1006-1013` map_style
+- `sw/subl_reader.py:902-916` Reader.map_nodes
 - `sw/subl_reader.py:47-51` fragment_of
-- `sw/subl_reader.py:911-915` Reader.owner
+- `sw/subl_reader.py:918-922` Reader.owner
 - `sw/subl_reader.py:58-63` defined_name
 - `sw/callmap.py:33-39` first_definition
 - `sw/callmap.py:42-49` node_at
@@ -318,7 +318,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/subl_chat.py:163-177` take_draft
 - `sw/subl_commands.py:32-36` send
 - `sw/state.py:36-37` reader_for
-- `sw/subl_reader.py:960-974` Reader.context
+- `sw/subl_reader.py:967-981` Reader.context
 - `sw/subl_views.py:309-313` selected_text
 - `sw/plan.py:104-107` visible_specs
 - `sw/subl_reader.py:713-716` Reader.take_edits
@@ -539,8 +539,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/subl_geometry.py:56-58` Geometry.head
 - `sw/subl_geometry.py:65-67` Geometry.room
 - `sw/subl_executor.py:78-80` op_state
-- `sw/subl_reader.py:935-940` Reader.folder
-- `sw/subl_reader.py:917-919` Reader.note_waiting
+- `sw/subl_reader.py:942-947` Reader.folder
+- `sw/subl_reader.py:924-926` Reader.note_waiting
 
 ## 32. Building blocks (11 views, survey)
 
@@ -624,7 +624,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_commands.py:243-247` SightWalkOpenTourCommand.open
 - `sw/words.py:70-77` trips_count
 - `sw/subl_reader.py:813-827` Reader.open_tour
-- `sw/subl_reader.py:990-992` read_json
+- `sw/subl_reader.py:997-999` read_json
 - `sw/ontology.py:294-300` tour_from
 - `sw/ontology.py:273-277` informator_from
 - `sw/ontology.py:257-260` trip_from
@@ -632,17 +632,17 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/ontology.py:212-225` tour
 - `sw/ontology.py:228-236` visit
 - `sw/subl_vetting.py:176-182` read_walked
-- `sw/subl_reader.py:829-842` Reader.tour_link
-- `sw/subl_reader.py:844-853` Reader.keep_transcript
-- `sw/subl_reader.py:855-860` Reader.kept_marks
-- `sw/subl_reader.py:862-864` Reader.line_text
-- `sw/subl_reader.py:866-879` Reader.restore_marks
-- `sw/subl_reader.py:977-979` transcripts_path
-- `sw/subl_reader.py:982-987` read_transcripts
+- `sw/subl_reader.py:829-843` Reader.tour_link
+- `sw/subl_reader.py:845-860` Reader.keep_transcript
+- `sw/subl_reader.py:862-867` Reader.kept_marks
+- `sw/subl_reader.py:869-871` Reader.line_text
+- `sw/subl_reader.py:873-886` Reader.restore_marks
+- `sw/subl_reader.py:984-986` transcripts_path
+- `sw/subl_reader.py:989-994` read_transcripts
 - `sw/subl_chat.py:205-208` set_transcript
 - `sw/ontology.py:280-284` dumps
 - `sw/subl_vetting.py:185-194` save_walked
-- `sw/subl_reader.py:881-883` Reader.draw_tour
+- `sw/subl_reader.py:888-890` Reader.draw_tour
 - `sw/subl_vetting.py:157-173` show_tour
 
 ## 37. Trip files (6 views)

@@ -56,7 +56,10 @@ class MarksAndSettingsTest(unittest.TestCase):
         for text in ['<func>run</func> at <icon at="(a):9">1</icon>.',  # outside the sight
                      '<func>run</func> at <icon at="a.py:2">1</icon>.',  # no sight's name
                      '<func>run</func> at <icon at="(a):2">7a</icon>.',  # no icon
-                     '<func>run</func> <jump to="(b):10">calls</jump>.']:
+                     '<func>run</func> <jump to="(b):10">calls</jump>.',
+                     # three marks on line 3: an icon, a jump's start and another's end
+                     '<icon at="(a):3">1</icon> <jump from="(a):3" to="(b):10">calls</jump> '
+                     '<jump from="(b):11" to="(a):3">back</jump>']:
             with self.assertRaises(Refusal, msg=text):
                 check("say", {"text": text}, facts)
 

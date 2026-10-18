@@ -184,7 +184,7 @@ TRIPS = [
      "given; each message says what to do instead.",
      ["validator.check", "validator.not_stopped", "validator.trip_open",
       "validator.ready", "validator.files", "validator.check_show", "validator.check_open_trip",
-      "subl_executor.trip_file", "validator.check_say",
+      "subl_executor.trip_file", "validator.check_say", "validator.crowded_lines",
       "validator.check_state", "validator.check_close", "validator.check_browse",
       "validator.check_settings", "validator.check_wait"]),
     ("One tool call over HTTP",

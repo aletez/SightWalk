@@ -4,6 +4,7 @@ Pure, no Sublime API: it judges a call by its arguments and the facts subl_execu
 to correct the call; the server returns it as the tool's error."""
 
 from .marks import MARK_FORM, line_refs, trip_place, read_marks, resolve_marks, speaks_of_code, untag
+from .spec import sight_name
 from .ontology import Sight, Transition, Trip
 
 EDITABLE = ("tint", "default_conversation_height", "bench_side")
@@ -117,14 +118,26 @@ def check_say(args, facts):
                       "nothing; call wait_for_user.")
     try:
         text, marks, _ = read_marks(untag(args.get("text") or ""))
-        resolve_marks(facts.get("sights") or [], marks)
+        crowded = crowded_lines(resolve_marks(facts.get("sights") or [], marks))
     except ValueError as e:
         raise Refusal(str(e)) from None
+    if crowded:
+        raise Refusal("A line holds two marks at most (the gutter and the strip beside it): %s. "
+                      "Drop a mark, or name the line's third role in words." % ", ".join(crowded))
     numbers = line_refs(text)
     if numbers:
         raise Refusal(NO_LINE_NUMBERS % ", ".join(numbers))
     if not marks and not facts.get("pointed") and speaks_of_code(text):
         raise Refusal(MARK_FIRST)
+
+
+def crowded_lines(resolved):
+    """The lines given more than two marks: "(a):33 (3 marks)"."""
+    counts = {}
+    for mark in resolved:
+        counts[(mark["sight"], mark["line"])] = counts.get((mark["sight"], mark["line"]), 0) + 1
+    return ["%s:%d (%d marks)" % (sight_name(i), line, n)
+            for (i, line), n in sorted(counts.items()) if n > 2]
 
 
 def check_state(args, facts):

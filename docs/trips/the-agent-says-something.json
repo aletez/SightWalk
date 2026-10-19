@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "09ef9a650bb58d839052b01f2a56388766ce6da9",
+ "commit": "e8c72dde4e3c7b67c4282c912128d05c8353a050",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:189-204",
@@ -18,8 +18,8 @@
   "sw/subl_commands.py:28-29",
   "sw/subl_chat.py:53-70",
   "sw/subl_chat.py:35-43",
-  "sw/subl_commands.py:129-136",
-  "sw/subl_commands.py:144-151",
+  "sw/subl_commands.py:131-138",
+  "sw/subl_commands.py:146-156",
   "sw/marks.py:312-314",
   "sw/subl_chat.py:247-252"
  ],
@@ -86,12 +86,12 @@
   },
   {
    "type": "calls",
-   "from": [15, 132],
+   "from": [15, 134],
    "to": [18, 247]
   },
   {
    "type": "calls",
-   "from": [16, 148],
+   "from": [16, 150],
    "to": [17, 312]
   }
  ]

@@ -1,0 +1,28 @@
+{
+ "name": "ctrl+tab",
+ "kind": "run",
+ "commit": "dd6f5cb0932de7f4c3d1247acd01aa07d4ecc707",
+ "sights": [
+  "sw/subl_commands.py:59-62",
+  "sw/subl_reader.py:766-781",
+  "sw/plan.py:104-108",
+  "sw/plan.py:111-118"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 62],
+   "to": [1, 766]
+  },
+  {
+   "type": "calls",
+   "from": [1, 771],
+   "to": [3, 111]
+  },
+  {
+   "type": "calls",
+   "from": [1, 771],
+   "to": [2, 104]
+  }
+ ]
+}

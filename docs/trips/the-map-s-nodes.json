@@ -1,13 +1,13 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "527f6b1e401c94e6c09583a062ea9899cddf0c3d",
+ "commit": "dd6f5cb0932de7f4c3d1247acd01aa07d4ecc707",
  "sights": [
-  "sw/subl_reader.py:937-948",
-  "sw/subl_reader.py:1108-1115",
-  "sw/subl_reader.py:991-1005",
+  "sw/subl_reader.py:954-965",
+  "sw/subl_reader.py:1125-1132",
+  "sw/subl_reader.py:1008-1022",
   "sw/subl_reader.py:48-52",
-  "sw/subl_reader.py:1007-1011",
+  "sw/subl_reader.py:1024-1028",
   "sw/subl_reader.py:59-64",
   "sw/callmap.py:33-39",
   "sw/callmap.py:42-49",
@@ -19,62 +19,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 940],
-   "to": [2, 991]
+   "from": [0, 957],
+   "to": [2, 1008]
   },
   {
    "type": "calls",
-   "from": [0, 944],
+   "from": [0, 961],
    "to": [9, 52]
   },
   {
    "type": "calls",
-   "from": [0, 946],
+   "from": [0, 963],
    "to": [10, 42]
   },
   {
    "type": "calls",
-   "from": [0, 947],
+   "from": [0, 964],
    "to": [10, 42]
   },
   {
    "type": "calls",
-   "from": [0, 948],
-   "to": [1, 1108]
+   "from": [0, 965],
+   "to": [1, 1125]
   },
   {
    "type": "calls",
-   "from": [0, 948],
+   "from": [0, 965],
    "to": [11, 87]
   },
   {
    "type": "calls",
-   "from": [2, 997],
+   "from": [2, 1014],
    "to": [6, 33]
   },
   {
    "type": "calls",
-   "from": [2, 998],
+   "from": [2, 1015],
    "to": [3, 48]
   },
   {
    "type": "calls",
-   "from": [2, 1002],
-   "to": [1, 1108]
+   "from": [2, 1019],
+   "to": [1, 1125]
   },
   {
    "type": "calls",
-   "from": [2, 1003],
+   "from": [2, 1020],
    "to": [8, 28]
   },
   {
    "type": "calls",
-   "from": [2, 1003],
-   "to": [4, 1007]
+   "from": [2, 1020],
+   "to": [4, 1024]
   },
   {
    "type": "calls",
-   "from": [2, 1003],
+   "from": [2, 1020],
    "to": [5, 59]
   },
   {

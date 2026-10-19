@@ -252,8 +252,7 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
         index = None if reader is None else reader.sight_of(view)
         if command_name == "drag_select" and index is not None:
             reader.links.follow_code(view, index)
-        elif command_name == "drag_select" and reader is not None:
-            reader.editor_header_clicked(view)
+
 
     def offer_to_browser(self, view):
         """A file opened from a trip's file browser becomes its sight (see Reader.take_file)."""

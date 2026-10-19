@@ -72,19 +72,21 @@ class Geometry:
         if self.editor is None:  # its cells off screen, below it (see Reader.editor_slot)
             return self.lh, 0.0, 1.0, (self.height or 0.0) + 100.0
         header = self.editor.header.line_height() + self.overhead
-        left, _, right, _ = self.column()
+        _, gutter, right, _ = self.column()
         top = self.head() + self.lh + self.overhead + INSET
-        return header, left + self.share(self.gutter_px() + INSET), right, top
+        text = self.text_left()
+        return header, max(gutter, text or 0.0) + self.share(INSET), right, top
 
-    def gutter_px(self):
-        """A sight's gutter as drawn, measured where its text starts (line numbers, icons and the
-        gap widen it past GUTTER_PX, and the editor then lay over it, Jakub)."""
+    def text_left(self):
+        """Where a sight's text starts, as a share of the window's width, measured: its window x
+        over the window's width, the text reaching the window's right edge. None if it cannot be
+        measured. (A fixed GUTTER_PX was narrower than the gutter, so the editor lay over it.)"""
         if not self.sights:
-            return GUTTER_PX
-        left, _, right, _ = self.column()
-        cell = (right - left) / max(self.share(1.0), 1e-9)  # the column's width in px
-        gutter = cell - self.sights[0].view.viewport_extent()[0]
-        return gutter if GUTTER_PX <= gutter <= 4 * GUTTER_PX else GUTTER_PX
+            return None
+        view = self.sights[0].view
+        x = view.text_to_window(view.text_point(self.sights[0].begin - 1, 0))[0]
+        width = x + view.viewport_extent()[0]
+        return x / width if x > 0 and width > 0 else None
 
     def column_rects(self):
         """The Sights' header, every sight's cells below it, then the filler below the last sight:

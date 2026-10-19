@@ -453,6 +453,10 @@ class Reader(Geometry):
         hidden = self.hidden_tools() + [v for v in self.strip_parts if v not in ordered]
         for view in hidden:  # behind the conversation
             self.window.set_view_index(view, ordered.index(self.chat), 1)
+        # A view moved into a group becomes the one it shows: the bench in front again, or with
+        # the editor open, which takes the focus last, the bench showed the Map or Tour (Jakub).
+        if hidden and self.window.active_view_in_group(ordered.index(self.chat)) != self.chat:
+            self.window.focus_view(self.chat)
 
     def render(self, settle=True):
         """A wheel step only shifts the layout's rows (see column_rects); anything else lays every

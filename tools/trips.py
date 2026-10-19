@@ -173,7 +173,7 @@ TRIPS = [
      ["subl_commands.SightWalkSelectColourSchemeCommand.run",
       "subl_commands.SightWalkSelectColourSchemeCommand.pick_kind", "subl_commands.all_schemes",
       "subl_tint.is_dark", "subl_commands.scheme_item",
-      "subl_commands.SightWalkSelectColourSchemeCommand.preview", "state.refresh_schemes_all",
+      "subl_commands.SightWalkSelectColourSchemeCommand.preview", "subl_tint.refresh_all",
       "subl_reader.Reader.refresh_schemes", "subl_tint.chosen_scheme", "subl_tint.scheme_colours",
       "subl_tint.resolve_colour", "subl_tint.plain_colour", "subl_tint.luminance", "subl_reader.Reader.plain_views", "subl_tint.apply_plain",
       "subl_commands.SightWalkSelectColourSchemeCommand.done"]),

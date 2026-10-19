@@ -11,7 +11,7 @@ import time
 
 import sublime
 
-from . import marks
+from . import marks, state
 from .config import OUTLINE_TINT, SETTINGS_FILE, SETTLE_MS, TINT
 
 HUE_START = random.random()
@@ -239,9 +239,27 @@ def schemes_for(key, view, hue):
     return SCHEMES[(key, amount, base)]
 
 
+GENERATION = [0]  # bumped by every change of the chosen scheme (see refresh_all)
+
+
+def refresh_all():
+    """A chosen colour scheme shows in every trip at once; schemes still waiting to be indexed
+    for an earlier choice are dropped (see set_schemes)."""
+    GENERATION[0] += 1
+    for reader in list(state.READERS.values()):
+        if reader.ready and reader.window.is_valid():
+            reader.refresh_schemes()
+
+
 def set_schemes(pairs):
-    """pairs: (views, scheme resource). Set once Sublime has indexed the schemes."""
+    """pairs: (views, scheme resource). Set once Sublime has indexed the schemes, unless the
+    chosen scheme changed meanwhile: a preview's schemes, indexed late, overwrote the scheme
+    chosen back after them."""
+    generation = GENERATION[0]
+
     def apply():
+        if generation != GENERATION[0]:
+            return
         for views, resource in pairs:
             for view in views:
                 if view.is_valid():

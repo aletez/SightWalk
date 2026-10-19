@@ -51,13 +51,6 @@ def close_all():
     ACTIVE = None
 
 
-def refresh_schemes_all():
-    """A chosen colour scheme shows in every trip at once."""
-    for reader in list(READERS.values()):
-        if reader.ready and reader.window.is_valid():
-            reader.refresh_schemes()
-
-
 def render_all():
     # A changed setting (such as the conversation's height) shows at once.
     for reader in list(READERS.values()):

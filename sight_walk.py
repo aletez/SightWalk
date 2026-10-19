@@ -8,7 +8,7 @@ import sublime
 for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
     del sys.modules[_name]
 
-from .sw import subl_commands, subl_guide, subl_mcp_http, subl_scrollbars, state, words  # noqa: E402
+from .sw import subl_commands, subl_guide, subl_mcp_http, subl_scrollbars, subl_tint, state, words  # noqa: E402
 from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkAskCommand,
     SightWalkChatListener,
@@ -52,7 +52,7 @@ def settings_changed():
     """A changed setting shows at once, the language included."""
     words.set_language(sublime.load_settings("SightWalk.sublime-settings").get("language"))
     state.render_all()
-    state.refresh_schemes_all()
+    subl_tint.refresh_all()
 
 
 def plugin_unloaded():

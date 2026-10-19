@@ -77,7 +77,7 @@ class SightWalkSelectColourSchemeCommand(sublime_plugin.WindowCommand):
 
     def preview(self, index):
         subl_tint.PREVIEW = self.schemes[index]
-        state.refresh_schemes_all()
+        subl_tint.refresh_all()
 
     def done(self, index):
         subl_tint.PREVIEW = None
@@ -85,7 +85,7 @@ class SightWalkSelectColourSchemeCommand(sublime_plugin.WindowCommand):
             settings = sublime.load_settings(SETTINGS_FILE)
             settings.set(self.key, self.schemes[index])
             sublime.save_settings(SETTINGS_FILE)
-        state.refresh_schemes_all()
+        subl_tint.refresh_all()
 
 
 def all_schemes():

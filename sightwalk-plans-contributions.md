@@ -1,4 +1,4 @@
-# SightWalk: plans and Jakub's contributions (export, 2026-10-18)
+# SightWalk: plans and Jakub's contributions (export, 2026-10-19)
 
 Concept and design: Jakub Kozakoszczak. Code: written by Claude. Source: DECISIONS.md and Claude's memory of the project.
 
@@ -88,6 +88,10 @@ Entities:
 
 Ideas and catches that changed the design or prevented a real defect, beyond everyday direction. Claude adds to this list when one happens; newest first.
 
+- 2026-10-19, the editor's cells ready in front, off screen: rather than putting groups in front when the editor opens and juggling the order of the rest, its cells stand there all the time, hidden below the window. This cured the empty-frame editor in a trip of many clones, left open since 2026-10-15, and led to the real cause of the bench showing the Map or Tour.
+- 2026-10-19, the selection is a message's context: no guessing at referring words ("tu", "to"); a message sent without links keeps what was selected then, its "U:" framed and clickable to see it again. The hand-made links and the rule that the selection is the context of indexicals make one effortless whole.
+- 2026-10-19, one class per sight too: asked whether the double-def holes had a class counterpart, which found two passing cases (a method's tail with the next class, two classes without methods) and widened the rule.
+- 2026-10-18, the guide's critical findings kept and acted on: the walk through show turned up holes in the one-function rule and smaller defects, recorded first, then fixed.
 - 2026-10-18, earlier answers by their "A:": rather than keeping old answers framed, where an old frame could be taken for a new icon, a click on an answer's label shows that answer's frames and icons instead of the current ones, one answer at a time.
 - 2026-10-17/18, the user's words linked to code (primary+p): two ways, the phrase first for certainty about which selections join, the code first for vetting on the go; deleted words drop their link, as a region shrinks to zero rather than vanishing; the same words relinked replace, while a code place may serve many words ("ten" many times, one place); and, from constituency grammar, nested phrases make nested links while crossing ones are refused. A second click takes a selection off (schemes leave selected code uncoloured), a click in the code selects the words that refer to it.
 - 2026-10-17, the answer places its own marks: after tagging names, the marks too go into the text as tags (<icon at="(c):34">1</icon>, <jump …>calls</jump>), so point is gone, frames are exact rather than guessed, the same tag again frames words in the same colour to come back to a jump, and a tour trip's marks come back with its conversation. Then the guide's frames became links to the code and to the Map's arrows.

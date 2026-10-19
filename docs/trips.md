@@ -8,7 +8,7 @@ Sublime loads the plugin, which starts its MCP server; a new port restarts it; o
 
 - `sight_walk.py:40-46` plugin_loaded
 - `sw/subl_mcp_http.py:142-145` start
-- `sw/subl_executor.py:237-241` load_config
+- `sw/subl_executor.py:239-243` load_config
 - `sw/subl_mcp_http.py:118-122` start_server
 - `sw/subl_mcp_http.py:133-139` settings_changed
 - `sw/subl_mcp_http.py:125-130` stop_server
@@ -28,20 +28,22 @@ The setup command keeps a token, writes it for poke, and puts Claude Code's regi
 - `sw/subl_setup.py:60-63` show_instructions
 - `sw/subl_commands.py:17-24` SightWalkReplaceCommand.run
 
-## 3. A request arrives (22 views)
+## 3. A request arrives (24 views)
 
 From the HTTP server's thread to the show operation on Sublime's, with every check on the way.
 
-- `sw/subl_executor.py:178-185` execute
-- `sw/subl_executor.py:188-204` run_on_main
+- `sw/subl_executor.py:180-187` execute
+- `sw/subl_executor.py:190-206` run_on_main
 - `sw/subl_executor.py:121-135` facts
 - `sw/subl_executor.py:138-147` sight_files
-- `sw/subl_executor.py:150-159` sight_functions
-- `sw/spec.py:118-133` functions_in
-- `sw/spec.py:136-145` open_above
+- `sw/subl_executor.py:150-161` sight_functions
+- `sw/spec.py:118-123` functions_in
+- `sw/spec.py:126-130` units_in
+- `sw/spec.py:136-149` blocks_in
+- `sw/spec.py:152-159` open_above
 - `sw/validator.py:26-31` check
-- `sw/validator.py:99-103` check_show
-- `sw/validator.py:89-96` one_function
+- `sw/validator.py:104-108` check_show
+- `sw/validator.py:89-101` one_function
 - `sw/subl_executor.py:49-55` op_show
 - `sw/subl_executor.py:58-60` named
 - `sw/validator.py:56-59` not_stopped
@@ -83,9 +85,9 @@ Files read, each sight's copy, header and frozen lines made.
 - `sw/subl_views.py:156-160` FileCopy.__init__
 - `sw/subl_views.py:163-175` make_copy
 - `sw/subl_reader.py:238-258` Reader.surround
-- `sw/spec.py:148-163` elided
-- `sw/spec.py:176-180` block_name
-- `sw/spec.py:166-173` body_indent
+- `sw/spec.py:162-177` elided
+- `sw/spec.py:190-194` block_name
+- `sw/spec.py:180-187` body_indent
 - `sw/words.py:62-67` lines_of
 - `sw/subl_reader.py:260-267` Reader.ellipses
 - `sw/subl_reader.py:269-280` Reader.draw_ellipsis
@@ -95,7 +97,7 @@ Files read, each sight's copy, header and frozen lines made.
 - `sw/spec.py:97-112` ancestors
 - `sw/spec.py:84-85` indent
 - `sw/spec.py:88-94` opens_block
-- `sw/spec.py:183-190` breathing
+- `sw/spec.py:197-204` breathing
 - `sw/subl_views.py:199-205` make_header
 - `sw/subl_views.py:208-213` write_header
 
@@ -329,7 +331,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/subl_views.py:309-313` selected_text
 - `sw/plan.py:104-107` visible_specs
 - `sw/subl_reader.py:718-721` Reader.take_edits
-- `sw/subl_executor.py:218-232` wait_for_user
+- `sw/subl_executor.py:220-234` wait_for_user
 
 ## 19. Linking words to code (27 views)
 
@@ -402,7 +404,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/subl_geometry.py:37-38` Geometry.bench_side
 - `sw/state.py:54-59` render_all
 - `sw/subl_executor.py:99-106` op_settings
-- `sw/validator.py:161-169` check_settings
+- `sw/validator.py:166-174` check_settings
 - `sw/subl_commands.py:152-154` SightWalkWindowListener.on_activated
 - `sw/subl_commands.py:111-115` SightWalkScrollCommand.run
 - `sw/subl_commands.py:105-107` SightWalkHeaderListener.on_hover
@@ -449,16 +451,16 @@ Every refusal of the guide's calls, judged before the executor acts, with the fa
 - `sw/validator.py:62-64` trip_open
 - `sw/validator.py:67-70` ready
 - `sw/validator.py:73-86` files
-- `sw/validator.py:99-103` check_show
-- `sw/validator.py:106-111` check_open_trip
-- `sw/subl_executor.py:162-171` trip_file
-- `sw/validator.py:114-134` check_say
-- `sw/validator.py:137-143` crowded_lines
-- `sw/validator.py:146-147` check_state
-- `sw/validator.py:150-152` check_close
-- `sw/validator.py:155-158` check_browse
-- `sw/validator.py:161-169` check_settings
-- `sw/validator.py:172-173` check_wait
+- `sw/validator.py:104-108` check_show
+- `sw/validator.py:111-116` check_open_trip
+- `sw/subl_executor.py:164-173` trip_file
+- `sw/validator.py:119-139` check_say
+- `sw/validator.py:142-148` crowded_lines
+- `sw/validator.py:151-152` check_state
+- `sw/validator.py:155-157` check_close
+- `sw/validator.py:160-163` check_browse
+- `sw/validator.py:166-174` check_settings
+- `sw/validator.py:177-178` check_wait
 
 ## 26. One tool call over HTTP (13 views)
 
@@ -471,8 +473,8 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/manual.py:129-132` tool
 - `sw/subl_mcp_http.py:38-47` tool_result
 - `sw/subl_mcp_http.py:23-35` call_tool
-- `sw/subl_executor.py:207-215` wait_until_ready
-- `sw/subl_executor.py:188-204` run_on_main
+- `sw/subl_executor.py:209-217` wait_until_ready
+- `sw/subl_executor.py:190-206` run_on_main
 - `sw/subl_mcp_http.py:83-92` Handler.send
 - `sw/subl_mcp_http.py:107-108` Handler.do_GET
 - `sw/subl_mcp_http.py:110-112` Handler.do_DELETE
@@ -488,7 +490,7 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 - `sw/subl_guide.py:35-36` running
 - `sw/subl_guide.py:39-44` find_claude
 - `sw/subl_guide.py:59-68` start
-- `sw/subl_executor.py:218-232` wait_for_user
+- `sw/subl_executor.py:220-234` wait_for_user
 
 ## 28. Here, and asking by a shortcut (3 views)
 

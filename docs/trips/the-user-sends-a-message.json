@@ -1,7 +1,7 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "f1aa06d30a4d1c5544c962df5569ac0f9ca942d2",
+ "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
  "sights": [
   "sw/subl_commands.py:42-48",
   "sw/subl_chat.py:163-177",
@@ -11,7 +11,7 @@
   "sw/subl_views.py:309-313",
   "sw/plan.py:104-107",
   "sw/subl_reader.py:718-721",
-  "sw/subl_executor.py:218-232"
+  "sw/subl_executor.py:220-234"
  ],
  "transitions": [
   {

@@ -1,7 +1,7 @@
 {
  "name": "One tool call over HTTP",
  "kind": "run",
- "commit": "f1aa06d30a4d1c5544c962df5569ac0f9ca942d2",
+ "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
  "sights": [
   "sw/subl_mcp_http.py:94-105",
   "sw/subl_mcp_http.py:78-81",
@@ -10,8 +10,8 @@
   "sw/manual.py:129-132",
   "sw/subl_mcp_http.py:38-47",
   "sw/subl_mcp_http.py:23-35",
-  "sw/subl_executor.py:207-215",
-  "sw/subl_executor.py:188-204",
+  "sw/subl_executor.py:209-217",
+  "sw/subl_executor.py:190-206",
   "sw/subl_mcp_http.py:83-92",
   "sw/subl_mcp_http.py:107-108",
   "sw/subl_mcp_http.py:110-112",
@@ -56,12 +56,12 @@
   {
    "type": "calls",
    "from": [6, 31],
-   "to": [7, 207]
+   "to": [7, 209]
   },
   {
    "type": "calls",
-   "from": [7, 212],
-   "to": [8, 188]
+   "from": [7, 214],
+   "to": [8, 190]
   },
   {
    "type": "calls",

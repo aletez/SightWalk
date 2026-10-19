@@ -1,11 +1,11 @@
 {
  "name": "Plugin start and stop",
  "kind": "run",
- "commit": "f1aa06d30a4d1c5544c962df5569ac0f9ca942d2",
+ "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
  "sights": [
   "sight_walk.py:40-46",
   "sw/subl_mcp_http.py:142-145",
-  "sw/subl_executor.py:237-241",
+  "sw/subl_executor.py:239-243",
   "sw/subl_mcp_http.py:118-122",
   "sw/subl_mcp_http.py:133-139",
   "sw/subl_mcp_http.py:125-130",
@@ -29,7 +29,7 @@
   {
    "type": "calls",
    "from": [1, 144],
-   "to": [2, 237]
+   "to": [2, 239]
   },
   {
    "type": "calls",
@@ -39,7 +39,7 @@
   {
    "type": "calls",
    "from": [4, 136],
-   "to": [2, 237]
+   "to": [2, 239]
   },
   {
    "type": "calls",

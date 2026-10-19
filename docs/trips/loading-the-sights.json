@@ -1,7 +1,7 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "f1aa06d30a4d1c5544c962df5569ac0f9ca942d2",
+ "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
  "sights": [
   "sw/subl_reader.py:148-164",
   "sw/subl_chat.py:211-219",
@@ -10,9 +10,9 @@
   "sw/subl_views.py:156-160",
   "sw/subl_views.py:163-175",
   "sw/subl_reader.py:238-258",
-  "sw/spec.py:148-163",
-  "sw/spec.py:176-180",
-  "sw/spec.py:166-173",
+  "sw/spec.py:162-177",
+  "sw/spec.py:190-194",
+  "sw/spec.py:180-187",
   "sw/words.py:62-67",
   "sw/subl_reader.py:260-267",
   "sw/subl_reader.py:269-280",
@@ -22,7 +22,7 @@
   "sw/spec.py:97-112",
   "sw/spec.py:84-85",
   "sw/spec.py:88-94",
-  "sw/spec.py:183-190",
+  "sw/spec.py:197-204",
   "sw/subl_views.py:199-205",
   "sw/subl_views.py:208-213"
  ],
@@ -75,17 +75,17 @@
   {
    "type": "calls",
    "from": [6, 248],
-   "to": [7, 148]
+   "to": [7, 162]
   },
   {
    "type": "calls",
    "from": [6, 253],
-   "to": [19, 183]
+   "to": [19, 197]
   },
   {
    "type": "calls",
    "from": [6, 256],
-   "to": [8, 176]
+   "to": [8, 190]
   },
   {
    "type": "calls",
@@ -95,7 +95,7 @@
   {
    "type": "calls",
    "from": [6, 258],
-   "to": [9, 166]
+   "to": [9, 180]
   },
   {
    "type": "calls",
@@ -104,12 +104,12 @@
   },
   {
    "type": "calls",
-   "from": [7, 160],
+   "from": [7, 174],
    "to": [17, 84]
   },
   {
    "type": "calls",
-   "from": [9, 172],
+   "from": [9, 186],
    "to": [17, 84]
   },
   {

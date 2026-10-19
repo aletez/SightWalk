@@ -1,7 +1,7 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "f1aa06d30a4d1c5544c962df5569ac0f9ca942d2",
+ "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
  "sights": [
   "sw/subl_executor.py:109-116",
   "sw/ontology.py:257-260",

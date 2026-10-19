@@ -59,10 +59,13 @@ def show_tabs(header, active, on_select, panning):
     help mark, as on the bench's header: what primary+s does (Jakub)."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
     if kept(header).get("tabs") == (active, panning, columns, word("Map")):
+        align_mark(header)  # cheap when in place; laid out late, it may need it now
         return
     kept(header)["tabs"] = (active, panning, columns, word("Map"))
     # The tabs, an inline phantom at the start, take about TABS_ROOM columns of the line.
-    header.run_command("sight_walk_replace", {"text": " " * max(columns - 6 - TABS_ROOM, 1)})
+    extra = kept(header).get("extra", 0)  # learned by align_mark
+    header.run_command("sight_walk_replace",
+                       {"text": " " * max(columns - 6 - TABS_ROOM + extra, 1)})
     state = word("pan_on" if panning else "pan_off")
     point = header.line(0).b
     phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
@@ -85,11 +88,13 @@ def align_mark(header):
         return
     em = max(header.em_width(), 1)
     end = header.line(0).b
-    spare = header.viewport_extent()[0] - header.text_to_layout(end)[0] - MARK_ROOM * em
-    more = int(spare / em)
-    if more:
-        spaces = max(len(header.substr(header.line(0))) + more, 1)
-        header.run_command("sight_walk_replace", {"text": " " * spaces})
+    width = header.viewport_extent()[0]
+    if width <= 0:  # not laid out yet
+        return
+    more = int((width - header.text_to_layout(end)[0] - MARK_ROOM * em) / em)
+    if more:  # drawn again with that many more spaces before the mark (see show_tabs)
+        kept(header)["extra"] = kept(header).get("extra", 0) + more
+        kept(header)["tabs"] = None
 
 
 # The map

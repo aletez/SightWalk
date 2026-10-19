@@ -271,7 +271,7 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 
 - `sw/subl_reader.py:849-854` Reader.select_tool
 - `sw/subl_vetting.py:57-80` show_tabs
-- `sw/subl_vetting.py:83-97` align_mark
+- `sw/subl_vetting.py:83-99` align_mark
 - `sw/subl_commands.py:380-383` SightWalkTogglePanningCommand.run
 - `sw/subl_reader.py:856-866` Reader.toggle_panning
 - `sw/subl_vetting.py:37-45` set_panning
@@ -296,14 +296,14 @@ The trip's definitions and the calls its author named, as nodes for the graph.
 - `sw/callmap.py:28-30` Node.__init__
 - `sw/callmap.py:52-59` edges
 - `sw/callmap.py:42-49` node_at
-- `sw/subl_vetting.py:109-117` draw_map
+- `sw/subl_vetting.py:111-119` draw_map
 
 ## 17. Drawing the Map (17 views)
 
 The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.
 
-- `sw/subl_vetting.py:109-117` draw_map
-- `sw/subl_vetting.py:102-106` find_dot
+- `sw/subl_vetting.py:111-119` draw_map
+- `sw/subl_vetting.py:104-108` find_dot
 - `sw/callmap.py:120-141` dot_source
 - `sw/callmap.py:93-99` file_block
 - `sw/callmap.py:70-73` cluster
@@ -313,12 +313,12 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 - `sw/callmap.py:66-67` quote
 - `sw/callmap.py:102-106` arrow
 - `sw/callmap.py:109-117` legend
-- `sw/subl_vetting.py:120-132` render
-- `sw/subl_vetting.py:135-137` png_size
-- `sw/subl_vetting.py:146-161` show_image
-- `sw/subl_vetting.py:164-169` zoom
+- `sw/subl_vetting.py:122-134` render
+- `sw/subl_vetting.py:137-139` png_size
+- `sw/subl_vetting.py:148-163` show_image
+- `sw/subl_vetting.py:166-171` zoom
 - `sw/subl_commands.py:373-374` SightWalkZoomMapCommand.run
-- `sw/subl_vetting.py:172-175` show_note
+- `sw/subl_vetting.py:174-177` show_note
 
 ## 18. The user sends a message (9 views)
 
@@ -680,7 +680,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/ontology.py:247-248` transition_from
 - `sw/ontology.py:212-225` tour
 - `sw/ontology.py:228-236` visit
-- `sw/subl_vetting.py:199-205` read_walked
+- `sw/subl_vetting.py:201-207` read_walked
 - `sw/subl_reader.py:886-900` Reader.tour_link
 - `sw/subl_reader.py:902-917` Reader.keep_transcript
 - `sw/subl_reader.py:919-927` Reader.kept_marks
@@ -690,9 +690,9 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_reader.py:1132-1137` read_transcripts
 - `sw/subl_chat.py:205-208` set_transcript
 - `sw/ontology.py:280-284` dumps
-- `sw/subl_vetting.py:208-217` save_walked
+- `sw/subl_vetting.py:210-219` save_walked
 - `sw/subl_reader.py:974-976` Reader.draw_tour
-- `sw/subl_vetting.py:180-196` show_tour
+- `sw/subl_vetting.py:182-198` show_tour
 
 ## 39. Trip files (6 views)
 

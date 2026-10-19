@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "de04049ce13e6f84763d8e50a7200fa3c3b6aea9",
+ "commit": "f2ad3c1de762cb2b14c0fdec4df0799896fb3ed3",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -5764,7 +5764,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     2,
-    96
+    98
    ],
    "to": [
     "building-blocks",
@@ -5777,7 +5777,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     2,
-    97
+    99
    ],
    "to": [
     "building-blocks",
@@ -6000,7 +6000,7 @@
    "to": [
     "drawing-the-map",
     0,
-    109
+    111
    ]
   },
   {
@@ -6194,7 +6194,7 @@
    "from": [
     "the-map-s-nodes",
     11,
-    109
+    111
    ],
    "to": [
     "drawing-the-map"
@@ -6205,12 +6205,12 @@
    "from": [
     "the-map-s-nodes",
     11,
-    112
+    114
    ],
    "to": [
     "drawing-the-map",
     1,
-    102
+    104
    ]
   },
   {
@@ -6218,12 +6218,12 @@
    "from": [
     "the-map-s-nodes",
     11,
-    114
+    116
    ],
    "to": [
     "drawing-the-map",
     16,
-    172
+    174
    ]
   },
   {
@@ -6231,7 +6231,7 @@
    "from": [
     "the-map-s-nodes",
     11,
-    114
+    116
    ],
    "to": [
     "words-in-two-languages",
@@ -6244,7 +6244,7 @@
    "from": [
     "the-map-s-nodes",
     11,
-    116
+    118
    ],
    "to": [
     "drawing-the-map",
@@ -6257,12 +6257,12 @@
    "from": [
     "the-map-s-nodes",
     11,
-    117
+    119
    ],
    "to": [
     "drawing-the-map",
     11,
-    120
+    122
    ]
   },
   {
@@ -6270,7 +6270,7 @@
    "from": [
     "drawing-the-map",
     0,
-    109
+    111
    ],
    "to": [
     "drawing-the-map"
@@ -6281,7 +6281,7 @@
    "from": [
     "drawing-the-map",
     0,
-    114
+    116
    ],
    "to": [
     "words-in-two-languages",
@@ -6294,7 +6294,7 @@
    "from": [
     "drawing-the-map",
     1,
-    102
+    104
    ],
    "to": [
     "drawing-the-map"
@@ -6404,7 +6404,7 @@
    "from": [
     "drawing-the-map",
     11,
-    120
+    122
    ],
    "to": [
     "drawing-the-map"
@@ -6415,7 +6415,7 @@
    "from": [
     "drawing-the-map",
     11,
-    130
+    132
    ],
    "to": [
     "words-in-two-languages",
@@ -6428,7 +6428,7 @@
    "from": [
     "drawing-the-map",
     12,
-    135
+    137
    ],
    "to": [
     "drawing-the-map"
@@ -6439,7 +6439,7 @@
    "from": [
     "drawing-the-map",
     13,
-    146
+    148
    ],
    "to": [
     "drawing-the-map"
@@ -6450,7 +6450,7 @@
    "from": [
     "drawing-the-map",
     13,
-    150
+    152
    ],
    "to": [
     "building-blocks",
@@ -6463,7 +6463,7 @@
    "from": [
     "drawing-the-map",
     13,
-    153
+    155
    ],
    "to": [
     "building-blocks",
@@ -6476,7 +6476,7 @@
    "from": [
     "drawing-the-map",
     13,
-    157
+    159
    ],
    "to": [
     "words-in-two-languages",
@@ -6489,7 +6489,7 @@
    "from": [
     "drawing-the-map",
     13,
-    159
+    161
    ],
    "to": [
     "building-blocks",
@@ -6502,7 +6502,7 @@
    "from": [
     "drawing-the-map",
     13,
-    160
+    162
    ],
    "to": [
     "the-tools-pane-s-tabs",
@@ -6515,7 +6515,7 @@
    "from": [
     "drawing-the-map",
     14,
-    164
+    166
    ],
    "to": [
     "drawing-the-map"
@@ -6537,7 +6537,7 @@
    "from": [
     "drawing-the-map",
     16,
-    172
+    174
    ],
    "to": [
     "drawing-the-map"
@@ -6548,7 +6548,7 @@
    "from": [
     "drawing-the-map",
     16,
-    174
+    176
    ],
    "to": [
     "building-blocks",
@@ -6561,7 +6561,7 @@
    "from": [
     "drawing-the-map",
     16,
-    175
+    177
    ],
    "to": [
     "the-tools-pane-s-tabs",
@@ -11340,7 +11340,7 @@
    "from": [
     "an-informator-and-its-tour",
     15,
-    199
+    201
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11502,7 +11502,7 @@
    "from": [
     "an-informator-and-its-tour",
     25,
-    208
+    210
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11524,7 +11524,7 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    180
+    182
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11535,12 +11535,12 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    184
+    186
    ],
    "to": [
     "drawing-the-map",
     16,
-    172
+    174
    ]
   },
   {
@@ -11548,7 +11548,7 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    184
+    186
    ],
    "to": [
     "words-in-two-languages",
@@ -11561,7 +11561,7 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    189
+    191
    ],
    "to": [
     "words-in-two-languages",
@@ -11574,7 +11574,7 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    195
+    197
    ],
    "to": [
     "building-blocks",
@@ -11587,7 +11587,7 @@
    "from": [
     "an-informator-and-its-tour",
     27,
-    196
+    198
    ],
    "to": [
     "the-tools-pane-s-tabs",

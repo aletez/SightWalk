@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "1edad43ed909b11720c1bc836f0775969eaf437b",
+ "commit": "b54c4119091b97cc44396256f05c5efddaf9067d",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:189-204",
@@ -9,19 +9,19 @@
   "sw/validator.py:14-17",
   "sw/marks.py:160-162",
   "sw/marks.py:157-157",
-  "sw/subl_reader.py:1193-1206",
-  "sw/subl_reader.py:775-787",
-  "sw/subl_chat.py:94-113",
+  "sw/subl_reader.py:1194-1207",
+  "sw/subl_reader.py:776-788",
+  "sw/subl_chat.py:95-114",
   "sw/header.py:12-20",
-  "sw/subl_chat.py:131-140",
-  "sw/subl_chat.py:150-160",
+  "sw/subl_chat.py:132-141",
+  "sw/subl_chat.py:151-161",
   "sw/subl_commands.py:28-29",
   "sw/subl_chat.py:53-70",
   "sw/subl_chat.py:35-43",
   "sw/subl_commands.py:186-193",
   "sw/subl_commands.py:201-211",
   "sw/marks.py:312-314",
-  "sw/subl_chat.py:247-252"
+  "sw/subl_chat.py:248-253"
  ],
  "transitions": [
   {
@@ -32,46 +32,46 @@
   {
    "type": "calls",
    "from": [0, 71],
-   "to": [6, 1193]
-  },
-  {
-   "type": "calls",
-   "from": [6, 1200],
-   "to": [7, 775]
+   "to": [6, 1194]
   },
   {
    "type": "calls",
    "from": [6, 1201],
-   "to": [11, 150]
+   "to": [7, 776]
   },
   {
    "type": "calls",
-   "from": [7, 777],
-   "to": [8, 94]
+   "from": [6, 1202],
+   "to": [11, 151]
   },
   {
    "type": "calls",
-   "from": [7, 780],
-   "to": [10, 131]
+   "from": [7, 778],
+   "to": [8, 95]
   },
   {
    "type": "calls",
-   "from": [7, 784],
-   "to": [8, 94]
+   "from": [7, 781],
+   "to": [10, 132]
   },
   {
    "type": "calls",
-   "from": [7, 787],
-   "to": [8, 94]
+   "from": [7, 785],
+   "to": [8, 95]
   },
   {
    "type": "calls",
-   "from": [8, 99],
+   "from": [7, 788],
+   "to": [8, 95]
+  },
+  {
+   "type": "calls",
+   "from": [8, 100],
    "to": [9, 12]
   },
   {
    "type": "calls",
-   "from": [11, 159],
+   "from": [11, 160],
    "to": [12, 28]
   },
   {
@@ -87,7 +87,7 @@
   {
    "type": "calls",
    "from": [15, 189],
-   "to": [18, 247]
+   "to": [18, 248]
   },
   {
    "type": "calls",

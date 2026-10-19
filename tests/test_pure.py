@@ -354,3 +354,15 @@ class PlaceText(unittest.TestCase):
         tagged = marks.here_tags("this and that", [(0, 4, "(a):3:5-9", 'token"'), (9, 13, "(a):4")])
         self.assertEqual(tagged, '<here at="(a):3:5-9" code="token&quot;">this</here> and '
                                  '<here at="(a):4">that</here>')
+
+
+class ParsePlace(unittest.TestCase):
+    def test_round_trip(self):
+        for text in ("(c):34", "(c):34-36", "(c):34:12", "(c):34:12-16", "(c):34:12-36:5"):
+            index, first, last = marks.parse_place(text)
+            self.assertEqual(index, 2)
+            self.assertEqual(marks.place_text("(c)", first, last), text)
+
+    def test_refused(self):
+        with self.assertRaises(ValueError):
+            marks.parse_place("c:34")

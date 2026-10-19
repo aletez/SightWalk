@@ -108,6 +108,68 @@ class SightWalkCycleSightsCommand(sublime_plugin.WindowCommand):
             reader.cycle(step)
 
 
+class SightWalkSelectCommand(sublime_plugin.WindowCommand):
+    """For tests from a terminal, without mouse or keys (Jakub): subl --command 'sight_walk_select
+    {"bench": "to", "at": "(a):27:55-63", "link": true}'. bench: the first occurrence of a
+    string in the draft, selected as by hand; bench_at: columns of the draft instead, "10-11"
+    (from 1, the end included), for another occurrence; at: a place in a sight, selected
+    likewise; add: keep what is selected there; link: as [⛓]; type: text appended to the
+    draft; send: send the draft."""
+
+    def run(self, at=None, bench=None, bench_at=None, add=False, link=False, type=None,
+            send=False):
+        reader = state.current_reader()
+        if reader is None:
+            return
+        if type:
+            chat = reader.chat
+            chat.sel().clear()
+            chat.sel().add(sublime.Region(chat.size()))
+            chat.run_command("insert", {"characters": type})
+        if bench or bench_at:
+            select_words(reader, bench, bench_at, add)
+        if at:
+            select_place(reader, at, add)
+        if link:
+            reader.links.link_either()
+        if send:
+            reader.chat.run_command("sight_walk_send")
+
+
+def select_words(reader, words, columns, add):
+    """The first occurrence of words in the draft, or its columns "10-11", selected as the user
+    would."""
+    chat, start = reader.chat, reader.links.draft_start(reader.chat)
+    draft = chat.substr(sublime.Region(start, chat.size()))
+    if columns:
+        first, _, last = str(columns).partition("-")
+        at, end = int(first) - 1, int(last or first)
+    else:
+        at = draft.find(words)
+        end = at + len(words)
+    if at < 0 or end > len(draft):
+        return print("SightWalk: no %r in the draft." % (columns or words))
+    select(chat, sublime.Region(start + at, start + end), add)
+    reader.links.note_bench(chat)
+
+
+def select_place(reader, at, add):
+    """A place, "(a):27:55-63" or "(a):27", selected in its sight, as the user would."""
+    index, (l1, c1), (l2, c2) = marks.parse_place(at)
+    view = reader.sights[index].view
+    begin = view.text_point(l1 - 1, (c1 or 1) - 1)
+    end = view.text_point(l2 - 1, c2) if c2 else view.line(view.text_point(l2 - 1, 0)).b
+    select(view, sublime.Region(begin, end), add)
+    reader.touched = view
+    reader.links.note_code(view, index)
+
+
+def select(view, region, add):
+    if not add:
+        view.sel().clear()
+    view.sel().add(region)
+
+
 class SightWalkLinkCommand(sublime_plugin.TextCommand):
     """primary+p (Jakub): links words on the bench to places in the code, from either side (see
     subl_links)."""

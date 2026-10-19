@@ -39,6 +39,19 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 | `python3 tools/poke.py state` | JSON with `sights` and `visible`, and `here` (`"(a):12:5"`) once a sight has the caret. |
 | `python3 tools/poke.py badtoken` | `Unauthorized…` |
 
+### Selecting, linking and sending without mouse or keys
+
+`sight_walk_select` acts in the open trip as the user would, so a test can be driven from a terminal:
+
+```bash
+subl --command 'sight_walk_select {"type": "to a nie to"}'
+subl --command 'sight_walk_select {"bench": "to", "at": "(a):27:55-63", "link": true}'
+subl --command 'sight_walk_select {"bench_at": "10-11", "at": "(a):27:70-75", "link": true}'
+subl --command 'sight_walk_select {"send": true}'
+```
+
+`type` appends to the draft; `bench` selects the first occurrence of a string in the draft, `bench_at` its columns instead (`"10-11"`, from 1, the end included) for another occurrence; `at` selects a place in a sight (`"(a):27"` whole lines, `"(a):27:55-63"` characters); `add` keeps what is selected there; `link` links as [⛓] does; `send` sends the draft. Send only while an agent listens (`wait_for_user`), or SightWalk starts a guide of its own.
+
 ## 4. Geometry and editing, by hand
 
 - The wheel moves the whole trip only over the scroll strip, the empty fillers and ▼'s cell, and over the bench and the Tools pane while ⌘S lets them take it ([⇕] in the Tools header). Over a sight's code it scrolls that sight alone; over a header or a frozen line it does nothing. ▲▼ on the strip, Alt+↓/↑ (3 lines) and PageDown/PageUp (about a screen) move the trip too.

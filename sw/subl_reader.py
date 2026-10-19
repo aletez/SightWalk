@@ -776,7 +776,8 @@ class Reader(Geometry):
     def show_headers(self):
         may = [word("perm_" + k) for k in permissions.reminders(subl_guide.chosen())]
         subl_chat.show_header(self.chat_header, word("bench"),
-                              word("guide_may") % ", ".join(may) if may else "")
+                              word("guide_may") % ", ".join(may) if may else "",
+                              on_link=lambda: self.links.link_either())  # links change per trip
         self.chat.set_name(word("bench_view"))
         subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)

@@ -240,6 +240,24 @@ def place_text(name, first, last):
     return "%s:%d:%s" % (name, l1, c1 if c1 == c2 else "%d-%d" % (c1, c2))
 
 
+PLACE = re.compile(r"^(\(\w+\)):(\d+)(?::(\d+))?(?:-(\d+)(?::(\d+))?)?$")
+
+
+def parse_place(text):
+    """The inverse of place_text: (sight index, (line, column), (line, column)), the columns None
+    for whole lines; "(c):34-36", "(c):34:12-16", "(c):34:12-36:5". ValueError if it is none."""
+    found = PLACE.match(text.strip())
+    index = sight_index(found.group(1)) if found else None
+    if index is None:
+        raise ValueError("%r is no place: write \"(c):34\" or \"(c):34:12-16\"." % text)
+    line, column, to, to_column = (int(g) if g else None for g in found.group(2, 3, 4, 5))
+    if column is None:
+        return index, (line, None), (to or line, None)
+    if to_column is not None:
+        return index, (line, column), (to, to_column)
+    return index, (line, column), (line, to or column)
+
+
 def here_tags(text, spans):
     """text with each span (start, end, at) or (start, end, at, code) wrapped as
     <here at="..." code="...">…</here>, code being the code pointed at when it is part of one

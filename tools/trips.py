@@ -143,7 +143,7 @@ TRIPS = [
      ["subl_commands.SightWalkLinkCommand.run", "subl_links.Links.__init__",
       "subl_commands.SightWalkChatListener.on_selection_modified", "subl_links.Links.note_bench",
       "subl_links.Links.note_code", "subl_links.Links.link_from_code",
-      "subl_links.Links.link_from_bench", "subl_links.Links.add", "subl_links.carets",
+      "subl_links.Links.link_from_bench", "subl_links.Links.link_either", "subl_links.Links.add", "subl_links.carets",
       "subl_links.Links.tagged", "subl_links.Links.places", "subl_links.ends", "marks.place_text",
       "subl_links.Links.code", "subl_links.Links.draft_start",
       "subl_links.Links.follow", "subl_links.repaint", "subl_reader.Reader.show_place", "subl_links.Links.clear",
@@ -304,6 +304,11 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("Driving a trip from the terminal",
+     "Tests without mouse or keys: subl --command 'sight_walk_select …' types in the draft, "
+     "selects words there and places in the sights as by hand, links them and sends.",
+     ["subl_commands.SightWalkSelectCommand.run", "subl_commands.select_words",
+      "subl_commands.select_place", "marks.parse_place", "subl_commands.select"]),
     ("The bench's answers listed",
      "The Answers tab: the bench's questions and answers by their first words; a click shows "
      "one's icons or places and brings it into the bench, a second click hides them.",
@@ -355,6 +360,7 @@ LEADS = [
     ("The Tools pane's tabs", "The Map's nodes"),
     ("The Tools pane's tabs", "The guide's permissions"),
     ("The Tools pane's tabs", "The bench's answers listed"),
+    ("Linking words to code", "Driving a trip from the terminal"),
     ("The Map's nodes", "Drawing the Map"),
     ("How Claude comes to listen to Sublime", "The user sends a message"),
     ("The user sends a message", "Here, and asking by a shortcut"),

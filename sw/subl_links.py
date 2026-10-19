@@ -60,6 +60,15 @@ class Links:
         self.add(self.phrase, list(self.picks))
         self.phrase, self.picks = None, []
 
+    def link_either(self):
+        """[⛓] on the bench's header (Jakub): primary+p without the focus, the way the order of
+        the selections tells. Words selected first and code since: the first way; else the
+        second, the selected words with the sight touched last."""
+        if self.phrase is not None and self.picks:
+            self.link_from_code()
+        else:
+            self.link_from_bench(self.reader.chat)
+
     def link_from_bench(self, view):
         """primary+p on the bench: the selected words (or the word at the caret) join every
         selection of the sight touched last, as the first way joins every pick (Jakub)."""

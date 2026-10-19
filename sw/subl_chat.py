@@ -92,11 +92,16 @@ def make_header(window, conversation, name):
     return view
 
 
-def show_header(view, title, status, help_mark=True, button=None):
+LINK_HTML = MARK_HTML.replace('href="help"', 'href="link"').replace(">?<", ">⛓<") + "&nbsp;"
+LINK_ROOM = 3  # columns the link button takes before the help mark
+
+
+def show_header(view, title, status, help_mark=True, button=None, on_link=None):
     """button: (label, on_click), drawn at the right end of the first line instead of the help
-    mark, like a sight's Edit button."""
+    mark, like a sight's Edit button. on_link: a [⛓] before the help mark calls it, as primary+p
+    does (Jakub)."""
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
-    room = len(button[0]) + 3 - MARK_ROOM if button is not None else 0
+    room = len(button[0]) + 3 - MARK_ROOM if button is not None else LINK_ROOM if on_link else 0
     text = title_lines(title, status, columns - room)  # the first line ends where the mark goes
     mark = kept(view)["mark"]
     if text == mark[1]:
@@ -109,8 +114,13 @@ def show_header(view, title, status, help_mark=True, button=None):
         mark[0].update([sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
                                         lambda _: button[1]())])
         return
-    phantom = sublime.Phantom(sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
-                              lambda _: view.show_popup(help_html(), location=point))
+    def clicked(href):
+        if href == "link":
+            on_link()
+        else:
+            view.show_popup(help_html(), location=point)
+    html = (LINK_HTML if on_link else "") + MARK_HTML
+    phantom = sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE, clicked)
     mark[0].update([phantom] if help_mark else [])
 
 

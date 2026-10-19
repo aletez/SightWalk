@@ -239,26 +239,23 @@ def schemes_for(key, view, hue):
     return SCHEMES[(key, amount, base)]
 
 
-GENERATION = [0]  # bumped by every change of the chosen scheme (see refresh_all)
-
-
 def refresh_all():
     """A chosen colour scheme shows in every trip at once; schemes still waiting to be indexed
     for an earlier choice are dropped (see set_schemes)."""
-    GENERATION[0] += 1
     for reader in list(state.READERS.values()):
         if reader.ready and reader.window.is_valid():
             reader.refresh_schemes()
 
 
 def set_schemes(pairs):
-    """pairs: (views, scheme resource). Set once Sublime has indexed the schemes, unless the
-    chosen scheme changed meanwhile: a preview's schemes, indexed late, overwrote the scheme
-    chosen back after them."""
-    generation = GENERATION[0]
+    """pairs: (views, scheme resource). Set once Sublime has indexed the schemes, unless they
+    were derived from a scheme no longer the base: a preview's schemes, indexed late, overwrote
+    the scheme chosen back after them. (A counter of changes dropped a new trip's own schemes
+    too, any change of a setting counting.)"""
+    base = base_name(pairs[0][0][0]) if pairs and pairs[0][0] else None
 
     def apply():
-        if generation != GENERATION[0]:
+        if base is not None and pairs[0][0][0].is_valid() and base_name(pairs[0][0][0]) != base:
             return
         for views, resource in pairs:
             for view in views:
@@ -266,6 +263,11 @@ def set_schemes(pairs):
                     view.settings().set("color_scheme", resource)
 
     when_indexed([resource for _, resource in pairs], apply)
+
+
+def base_name(view):
+    """The name of the scheme a view's tints are derived from now ("Mariana")."""
+    return os.path.splitext(os.path.basename(resolved_scheme(view)))[0]
 
 
 def apply_tint(code_views, headers, path):

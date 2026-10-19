@@ -771,7 +771,8 @@ class Reader(Geometry):
         self.chat.set_name(word("bench_view"))
         subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
-        subl_vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan)
+        subl_vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan,
+                               self.toggle_panning)
         subl_chat.show_header(self.sights_header, word("sights"), self.trip.name if self.trip else "",
                          button=(word("reset"), self.reset_sights))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.

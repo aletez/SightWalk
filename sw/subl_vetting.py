@@ -54,9 +54,19 @@ TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
 
-def show_tabs(header, active, on_select, panning):
+TOGGLE_ROOM = 3  # columns the wheel toggle takes before the help mark
+
+
+def toggle_html(panning):
+    """[⇕]: the wheel moves the whole trip; [↕]: it scrolls the tool or the bench itself (Jakub),
+    drawn as the help mark is."""
+    return MARK_HTML.replace('href="help"', 'href="pan"').replace(">?<", ">%s<" % (
+        "⇕" if panning else "↕")) + "&nbsp;"
+
+
+def show_tabs(header, active, on_select, panning, on_toggle=None):
     """The tabs as links in the Tools pane's header, the shown one in bold, and at the right the
-    help mark, as on the bench's header: what primary+s does (Jakub)."""
+    wheel toggle and the help mark, as on the bench's header: what primary+s does (Jakub)."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
     if kept(header).get("tabs") == (active, panning, columns, word("Map")):
         align_mark(header)  # cheap when in place; laid out late, it may need it now
@@ -68,9 +78,14 @@ def show_tabs(header, active, on_select, panning):
                        {"text": " " * max(columns - 6 - TABS_ROOM + extra, 1)})
     state = word("pan_on" if panning else "pan_off")
     point = header.line(0).b
+    def clicked(href):
+        if href == "pan" and on_toggle is not None:
+            on_toggle()
+        else:
+            header.show_popup(PAN_HELP % (word("pan") % state), location=point)
+
     phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
-        sublime.Region(point), MARK_HTML, sublime.LAYOUT_INLINE,
-        lambda _: header.show_popup(PAN_HELP % (word("pan") % state), location=point))])
+        sublime.Region(point), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])
     links = ["<b>%s</b>" % word(t) if t == active else
              '<a href="%s" style="text-decoration: none">%s</a>' % (t, word(t)) for t in TABS]
     html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
@@ -93,7 +108,7 @@ def align_mark(header):
         return
     # A space of the header's font, proportional, is no em wide: measured between two of them.
     space = max(header.text_to_layout(end)[0] - header.text_to_layout(end - 1)[0], 1)
-    more = int((width - header.text_to_layout(end)[0] - MARK_ROOM * em) / space)
+    more = int((width - header.text_to_layout(end)[0] - (MARK_ROOM + TOGGLE_ROOM) * em) / space)
     if more:  # drawn again with that many more spaces before the mark (see show_tabs)
         kept(header)["extra"] = kept(header).get("extra", 0) + more
         kept(header)["tabs"] = None

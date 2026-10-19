@@ -1225,17 +1225,20 @@ class Reader(Geometry):
             self.point(placed, clear=clear)
 
     def context(self):
+        """What the user sees, and here: the caret in the sight touched last, "(c):105:9", in
+        the notation of every place the guide reads and writes (Jakub, 2026-10-19: no focus,
+        which here gives)."""
         if not self.ready:
-            return {"focus": None, "visible": []}
-        context = {"focus": None, "visible": plan.visible_specs(
+            return {"visible": []}
+        context = {"visible": plan.visible_specs(
             self.sights, self.offset - self.lead, self.room())}
         view = self.touched
         index = self.sight_of(view) if view is not None and view.is_valid() else None
-        if index is None:
+        if index is None or not len(view.sel()):
             return context
-        spec = self.sights[index].spec
-        line = view.rowcol(view.sel()[0].b)[0] + 1 if len(view.sel()) else None
-        context.update(focus=spec, here="%s:%s" % (spec.rsplit(":", 1)[0], line))
+        line, column = view.rowcol(view.sel()[0].b)
+        context["here"] = marks.place_text(sight_name(index), (line + 1, column + 1),
+                                           (line + 1, column + 1))
         if selected_text(view):
             context["selected"] = selected_text(view)
         return context

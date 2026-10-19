@@ -7,7 +7,7 @@ The guide gets the phrase as <here at="(c):34-36 (d):12">the phrase</here>."""
 
 import sublime
 
-from .marks import here_tags, span_relation
+from .marks import here_tags, place_text, span_relation
 from .spec import sight_name
 from .subl_chat import PROTECTED, blanks
 
@@ -132,7 +132,7 @@ class Links:
         bench sends it; those links are fixed from now on."""
         start = self.draft_start(view)
         text = view.substr(sublime.Region(start, view.size()))
-        spans = [(r.a - start, r.b - start, self.places(self.links[key]))
+        spans = [(r.a - start, r.b - start, self.places(self.links[key]), self.code(self.links[key]))
                  for key, r in ((k, self.bench_region(k)) for k in self.draft_keys())
                  if r.a >= start and not r.empty()]
         self.sent.update(self.links)
@@ -194,15 +194,18 @@ class Links:
                                      for i, r in places])
 
     def places(self, places):
-        """'(c):34-36 (d):12' for the guide."""
-        found = []
-        for index, region in places:
-            view = self.reader.sights[index].view
-            first, last = (view.rowcol(p)[0] + 1 for p in (region.begin(), max(region.begin(),
-                                                                               region.end() - 1)))
-            lines = str(first) if first == last else "%d-%d" % (first, last)
-            found.append("%s:%s" % (sight_name(index), lines))
-        return " ".join(found)
+        """'(c):34-36 (d):12:5-9' for the guide: whole lines by their lines, parts of lines by
+        their characters too (Jakub)."""
+        return " ".join(place_text(sight_name(i), *ends(self.reader.sights[i].view, r))
+                        for i, r in places)
+
+    def code(self, places):
+        """The code pointed at, for <here code=...>: only for one place within one line."""
+        if len(places) != 1:
+            return None
+        index, region = places[0]
+        (l1, c1), (l2, _) = ends(self.reader.sights[index].view, region)
+        return self.reader.sights[index].view.substr(region) if c1 and l1 == l2 else None
 
     def follow(self, view):
         """A click into linked words on the bench selects their places in the code and shows the
@@ -273,6 +276,19 @@ class Links:
             self.remove(key)
         for k in range(len(self.questions)):
             self.reader.chat.erase_regions("sight_walk_asked_%d" % k)
+
+
+def ends(view, region):
+    """The first and last (line, column) of region, 1-based and inclusive; the columns None
+    when it covers whole lines (Jakub: a caret or a line counts as its line)."""
+    begin, end = region.begin(), region.end()
+    last = max(begin, end - 1)
+    whole = view.line(begin).a == begin and (end == begin or end == view.line(last).b
+                                               or end == view.line(last).b + 1)
+    (r1, c1), (r2, c2) = view.rowcol(begin), view.rowcol(last)
+    if whole or region.empty():
+        return (r1 + 1, None), (r2 + 1, None)
+    return (r1 + 1, c1 + 1), (r2 + 1, c2 + 1)
 
 
 def carets(view, regions):

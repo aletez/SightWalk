@@ -132,7 +132,7 @@ TRIPS = [
       "subl_vetting.render", "subl_vetting.png_size", "subl_vetting.show_image", "subl_vetting.zoom",
       "subl_commands.SightWalkZoomMapCommand.run", "subl_vetting.show_note"]),
     ("The user sends a message",
-     "The draft becomes a message, with the focus, the visible sights and the edits, and the "
+     "The draft becomes a message, with here, the visible sights and the edits, and the "
      "agent receives it.",
      ["subl_commands.SightWalkSendCommand.run", "subl_chat.take_draft", "subl_commands.send", "state.reader_for",
       "subl_reader.Reader.context", "subl_views.selected_text", "plan.visible_specs", "subl_reader.Reader.take_edits",
@@ -144,7 +144,8 @@ TRIPS = [
       "subl_commands.SightWalkChatListener.on_selection_modified", "subl_links.Links.note_bench",
       "subl_links.Links.note_code", "subl_links.Links.link_from_code",
       "subl_links.Links.link_from_bench", "subl_links.Links.add", "subl_links.carets",
-      "subl_links.Links.tagged", "subl_links.Links.places", "subl_links.Links.draft_start",
+      "subl_links.Links.tagged", "subl_links.Links.places", "subl_links.ends", "marks.place_text",
+      "subl_links.Links.code", "subl_links.Links.draft_start",
       "subl_links.Links.follow", "subl_links.repaint", "subl_reader.Reader.show_place", "subl_links.Links.clear",
       "subl_links.Links.show_made", "subl_links.Links.remove", "subl_links.Links.prune",
       "subl_links.Links.draft_keys", "subl_links.Links.bench_region", "subl_links.Links.by_sight",
@@ -403,7 +404,7 @@ RECEIVERS = {"informator": "ontology.Informator", "trip": "ontology.Trip",
 OPS = ["show", "say", "state", "close", "settings", "browse", "open_trip"]
 JUMPS = [("subl_executor.execute", "OPS[tool]", "subl_executor.op_" + op) for op in OPS] + [
     ("plan.Pane.spec", "self.sight.spec", "ontology.Sight.spec"),
-    ("subl_reader.Reader.context", "self.sights[index].spec", "plan.Pane.spec"),
+    ("subl_reader.Reader.context", "marks.place_text(", "marks.place_text"),
     ("subl_reader.Reader.tint", "s.all_views()", "plan.Pane.all_views"),
 ]
 # Where a receiver's name misleads the rules (RECEIVERS): there `sight` is an ontology.Sight,

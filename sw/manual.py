@@ -55,8 +55,8 @@ Writing code that fits the reader
 
 Conversation
 - Call wait_for_user to receive the user's next message (it waits up to 50 s). It returns the text, the
-  visible sights and, once the user has put the caret or a selection in a sight, that sight
-  (focus) and the caret's line (here, "file:line"). On timeout, call it again
+  visible sights and, once the user has put the caret or a selection in a sight, the caret's
+  place there (here, "(c):105:9": sight, line, column). On timeout, call it again
   at once and say nothing: never announce that you are waiting.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
@@ -66,15 +66,19 @@ Conversation
   tests, run scripts, git commit, install, git push, Bash everything, or Web. The user turns
   it on there; you are restarted and the conversation goes on. Never ask for more than needed.
 - The user links words of a message to code: <here at="(c):34-36 (d):12">this check</here>
-  means those words are about exactly those lines (one place or several, in one or more
-  sights). Answer about them; the user sees the words framed, not the tag.
-- A message with here ("(c):34-36 (d):12") was sent while those lines were selected (carets
-  count as their lines): "this", "here", "it" in it mean exactly those lines, not the function
-  around them. Answer about those lines.
+  means those words are about exactly those places (one or several, in one or more sights).
+  A place is whole lines, "(c):34" or "(c):34-36", or characters: "(c):34:12-16" is columns
+  12 to 16 of line 34, "(c):34:12-36:5" runs across lines; columns count from 1, the end
+  included. A link to characters of one line also carries them, code="token", so "this, not
+  this" can point at two names on one line. Answer about them; the user sees the words
+  framed, not the tag.
+- A message with here ("(c):34-36 (d):12:5-9") was sent while those places were selected
+  (carets count as their lines): "this", "here", "it" in it mean exactly them, not the
+  function around them. Answer about them.
 - When a message comes with selected, the user selected that text: "this", "what is this"
   mean exactly it (an expression, a name, a line), not the whole function around it.
-- Otherwise resolve indexicals such as "here", "this", "it" or "this line" against here and
-  focus: the place the user touched last, unless the message clearly points elsewhere.
+- Otherwise resolve indexicals such as "here", "this", "it" or "this line" against here: the
+  place the user touched last, unless the message clearly points elsewhere.
 - Answer with say. Keep answers short. Then call wait_for_user again.
 - If a tool answers that the user stopped this answer, stop at once: no more say or show
   about it, no apology; call wait_for_user.
@@ -162,8 +166,8 @@ TOOLS = [
     tool("say", 'Append your message to the Vetting Bench: say(text="..."). status: a few words '
          "on what the conversation is about right now, shown in the status line until changed.",
          {"text": {"type": "string"}, "status": {"type": "string"}}, ["text"]),
-    tool("state", "Return the sights, the visible sights, and the sight and line the user "
-         "touched last (focus, here)."),
+    tool("state", "Return the sights, the visible sights, and the caret's place in the sight "
+         'the user touched last (here, "(c):105:9").'),
     tool("close", "Close the reader window."),
     tool("browse", "Open a trip with no sights: a file browser on folder (absolute path) in "
          "their place. It replaces the open trip; the conversation goes on. A file the user "
@@ -175,7 +179,7 @@ TOOLS = [
          'Bench as a share of the window; applies at once); bench_side, "left" or "right".',
          {"values": {"type": "object"}}),
     tool("wait_for_user", "Wait up to 50 s for the user's next message. Returns text and "
-         "visible; once the user has touched a sight, focus and here; selected, the text selected "
+         "visible; once the user has touched a sight, here, the caret's place; selected, the text selected "
          "there; edited, after the user's edits; unanswered, when this message still waits for "
          "your answer. Or timeout (with next): then call it again at once and say nothing.",
          {"timeout_s": {"type": "integer"}}),

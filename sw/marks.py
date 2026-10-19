@@ -228,13 +228,27 @@ def span_relation(one, other):
     return "crossing"
 
 
+def place_text(name, first, last):
+    """A place the user pointed at, in the guide's notation (Jakub): first and last are (line,
+    column), 1-based and inclusive, the column None for whole lines. "(c):34", "(c):34-36",
+    "(c):34:12" (a caret), "(c):34:12-16" (characters of a line), "(c):34:12-36:5"."""
+    (l1, c1), (l2, c2) = first, last
+    if c1 is None:
+        return "%s:%s" % (name, l1 if l1 == l2 else "%d-%d" % (l1, l2))
+    if l1 != l2:
+        return "%s:%d:%d-%d:%d" % (name, l1, c1, l2, c2)
+    return "%s:%d:%s" % (name, l1, c1 if c1 == c2 else "%d-%d" % (c1, c2))
+
+
 def here_tags(text, spans):
-    """text with each span (start, end, at) wrapped as <here at="...">…</here>, nested where
-    phrases nest: at one position closings come first, inner before outer, then openings, outer
-    before inner."""
+    """text with each span (start, end, at) or (start, end, at, code) wrapped as
+    <here at="..." code="...">…</here>, code being the code pointed at when it is part of one
+    line (Jakub: the guide checks the place by it); nested where phrases nest: at one position
+    closings come first, inner before outer, then openings, outer before inner."""
     inserts = []
-    for start, end, at in spans:
-        inserts.append((start, 1, start - end, '<here at="%s">' % at))
+    for start, end, at, *code in spans:
+        quoted = ' code="%s"' % code[0].replace('"', "&quot;") if code and code[0] else ""
+        inserts.append((start, 1, start - end, '<here at="%s"%s>' % (at, quoted)))
         inserts.append((end, 0, end - start, "</here>"))
     out, last = [], 0
     for pos, _, _, tag in sorted(inserts):

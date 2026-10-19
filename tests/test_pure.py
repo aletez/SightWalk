@@ -340,3 +340,17 @@ class CallMapTest(unittest.TestCase):
         self.assertIn('"s0_1" -> "s1_1" [color="#C8372D", penwidth=3];', lit)
         alone = callmap.dot_source(two, [], ("H", "#0", "#8", "#f"), ((0, 1), (1, 1), "#C8372D"))
         self.assertIn('"s1_1" [color="#C8372D", penwidth=3];', alone)
+
+
+class PlaceText(unittest.TestCase):
+    def test_forms(self):
+        self.assertEqual(marks.place_text("(c)", (34, None), (34, None)), "(c):34")
+        self.assertEqual(marks.place_text("(c)", (34, None), (36, None)), "(c):34-36")
+        self.assertEqual(marks.place_text("(c)", (34, 12), (34, 12)), "(c):34:12")
+        self.assertEqual(marks.place_text("(c)", (34, 12), (34, 16)), "(c):34:12-16")
+        self.assertEqual(marks.place_text("(c)", (34, 12), (36, 5)), "(c):34:12-36:5")
+
+    def test_code_attribute(self):
+        tagged = marks.here_tags("this and that", [(0, 4, "(a):3:5-9", 'token"'), (9, 13, "(a):4")])
+        self.assertEqual(tagged, '<here at="(a):3:5-9" code="token&quot;">this</here> and '
+                                 '<here at="(a):4">that</here>')

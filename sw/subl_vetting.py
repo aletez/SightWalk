@@ -89,9 +89,11 @@ def align_mark(header):
     em = max(header.em_width(), 1)
     end = header.line(0).b
     width = header.viewport_extent()[0]
-    if width <= 0:  # not laid out yet
+    if width <= 0 or end < 2:  # not laid out yet
         return
-    more = int((width - header.text_to_layout(end)[0] - MARK_ROOM * em) / em)
+    # A space of the header's font, proportional, is no em wide: measured between two of them.
+    space = max(header.text_to_layout(end)[0] - header.text_to_layout(end - 1)[0], 1)
+    more = int((width - header.text_to_layout(end)[0] - MARK_ROOM * em) / space)
     if more:  # drawn again with that many more spaces before the mark (see show_tabs)
         kept(header)["extra"] = kept(header).get("extra", 0) + more
         kept(header)["tabs"] = None

@@ -1,22 +1,22 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
+ "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
  "sights": [
-  "sw/subl_commands.py:289-292",
-  "sw/subl_reader.py:1174-1181",
-  "sw/subl_reader.py:1183-1186"
+  "sw/subl_commands.py:351-354",
+  "sw/subl_reader.py:1175-1182",
+  "sw/subl_reader.py:1184-1187"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 292],
-   "to": [1, 1174]
+   "from": [0, 354],
+   "to": [1, 1175]
   },
   {
    "type": "calls",
-   "from": [1, 1180],
-   "to": [2, 1183]
+   "from": [1, 1181],
+   "to": [2, 1184]
   }
  ]
 }

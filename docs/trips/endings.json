@@ -1,21 +1,21 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
+ "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
  "sights": [
-  "sw/subl_commands.py:390-391",
-  "sw/subl_commands.py:393-394",
+  "sw/subl_commands.py:452-453",
+  "sw/subl_commands.py:455-456",
   "sw/subl_guide.py:90-94",
   "sw/subl_guide.py:78-87",
-  "sw/subl_commands.py:263-265",
-  "sw/subl_commands.py:268-270",
+  "sw/subl_commands.py:325-327",
+  "sw/subl_commands.py:330-332",
   "sw/subl_tint.py:287-313",
   "sw/subl_tint.py:72-73",
-  "sw/subl_commands.py:222-234",
-  "sw/subl_commands.py:296-298",
-  "sw/subl_commands.py:276-279",
-  "sw/subl_reader.py:841-848",
-  "sw/subl_commands.py:281-283",
+  "sw/subl_commands.py:284-296",
+  "sw/subl_commands.py:358-360",
+  "sw/subl_commands.py:338-341",
+  "sw/subl_reader.py:842-849",
+  "sw/subl_commands.py:343-345",
   "sw/state.py:29-33",
   "sw/subl_executor.py:83-85",
   "sw/state.py:40-41"
@@ -23,7 +23,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 391],
+   "from": [0, 453],
    "to": [2, 90]
   },
   {
@@ -33,17 +33,17 @@
   },
   {
    "type": "calls",
-   "from": [4, 264],
+   "from": [4, 326],
    "to": [13, 29]
   },
   {
    "type": "calls",
-   "from": [4, 265],
-   "to": [5, 268]
+   "from": [4, 327],
+   "to": [5, 330]
   },
   {
    "type": "calls",
-   "from": [5, 270],
+   "from": [5, 332],
    "to": [6, 287]
   },
   {
@@ -53,17 +53,17 @@
   },
   {
    "type": "calls",
-   "from": [10, 277],
+   "from": [10, 339],
    "to": [15, 40]
   },
   {
    "type": "calls",
-   "from": [10, 279],
-   "to": [11, 841]
+   "from": [10, 341],
+   "to": [11, 842]
   },
   {
    "type": "calls",
-   "from": [12, 282],
+   "from": [12, 344],
    "to": [15, 40]
   },
   {

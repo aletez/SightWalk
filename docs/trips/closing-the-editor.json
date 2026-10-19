@@ -1,9 +1,9 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
+ "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
  "sights": [
-  "sw/subl_commands.py:154-157",
+  "sw/subl_commands.py:216-219",
   "sw/subl_reader.py:743-744",
   "sw/subl_editor.py:81-92",
   "sw/subl_editor.py:74-79",
@@ -14,7 +14,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 157],
+   "from": [0, 219],
    "to": [1, 743]
   },
   {

@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
+ "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
  "sights": [
   "sw/subl_executor.py:36-46",
   "sw/subl_reader.py:74-102",
@@ -12,7 +12,7 @@
   "sw/subl_views.py:115-122",
   "sw/subl_chat.py:73-79",
   "sw/subl_chat.py:82-92",
-  "sw/subl_chat.py:120-129",
+  "sw/subl_chat.py:130-139",
   "sw/subl_vetting.py:29-36",
   "sw/state.py:23-26"
  ],
@@ -120,7 +120,7 @@
   {
    "type": "calls",
    "from": [2, 150],
-   "to": [9, 120]
+   "to": [9, 130]
   },
   {
    "type": "calls",
@@ -144,7 +144,7 @@
   },
   {
    "type": "calls",
-   "from": [9, 124],
+   "from": [9, 134],
    "to": [6, 115]
   },
   {

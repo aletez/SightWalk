@@ -1,261 +1,272 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
+ "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
  "sights": [
-  "sw/subl_commands.py:115-122",
+  "sw/subl_commands.py:177-184",
   "sw/subl_links.py:19-30",
-  "sw/subl_commands.py:195-199",
+  "sw/subl_commands.py:257-261",
   "sw/subl_links.py:32-37",
   "sw/subl_links.py:39-53",
   "sw/subl_links.py:55-61",
-  "sw/subl_links.py:63-74",
-  "sw/subl_links.py:76-94",
-  "sw/subl_links.py:294-298",
-  "sw/subl_links.py:130-140",
-  "sw/subl_links.py:196-200",
-  "sw/subl_links.py:281-291",
+  "sw/subl_links.py:72-83",
+  "sw/subl_links.py:63-70",
+  "sw/subl_links.py:85-103",
+  "sw/subl_links.py:303-307",
+  "sw/subl_links.py:139-149",
+  "sw/subl_links.py:205-209",
+  "sw/subl_links.py:290-300",
   "sw/marks.py:231-240",
-  "sw/subl_links.py:202-208",
-  "sw/subl_links.py:269-271",
-  "sw/subl_links.py:210-235",
-  "sw/subl_links.py:301-307",
-  "sw/subl_reader.py:828-839",
-  "sw/subl_links.py:273-278",
-  "sw/subl_links.py:96-101",
-  "sw/subl_links.py:103-108",
-  "sw/subl_links.py:110-115",
-  "sw/subl_links.py:117-118",
-  "sw/subl_links.py:120-122",
-  "sw/subl_links.py:124-128",
+  "sw/subl_links.py:211-217",
+  "sw/subl_links.py:278-280",
+  "sw/subl_links.py:219-244",
+  "sw/subl_links.py:310-316",
+  "sw/subl_reader.py:829-840",
+  "sw/subl_links.py:282-287",
+  "sw/subl_links.py:105-110",
+  "sw/subl_links.py:112-117",
+  "sw/subl_links.py:119-124",
+  "sw/subl_links.py:126-127",
+  "sw/subl_links.py:129-131",
+  "sw/subl_links.py:133-137",
   "sw/marks.py:215-228",
-  "sw/marks.py:243-257",
-  "sw/subl_links.py:237-256",
-  "sw/subl_links.py:258-263",
-  "sw/subl_links.py:142-151",
-  "sw/subl_links.py:153-156",
-  "sw/subl_links.py:170-181",
-  "sw/subl_links.py:183-194",
-  "sw/subl_links.py:158-161",
-  "sw/subl_links.py:163-168",
-  "sw/subl_links.py:265-267",
-  "sw/subl_commands.py:248-254"
+  "sw/marks.py:261-275",
+  "sw/subl_links.py:246-265",
+  "sw/subl_links.py:267-272",
+  "sw/subl_links.py:151-160",
+  "sw/subl_links.py:162-165",
+  "sw/subl_links.py:179-190",
+  "sw/subl_links.py:192-203",
+  "sw/subl_links.py:167-170",
+  "sw/subl_links.py:172-177",
+  "sw/subl_links.py:274-276",
+  "sw/subl_commands.py:310-316"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [3, 35],
-   "to": [14, 269]
+   "to": [15, 278]
   },
   {
    "type": "calls",
    "from": [5, 60],
-   "to": [7, 76]
+   "to": [8, 85]
   },
   {
    "type": "calls",
-   "from": [6, 72],
-   "to": [14, 269]
+   "from": [6, 81],
+   "to": [15, 278]
   },
   {
    "type": "calls",
-   "from": [6, 74],
-   "to": [7, 76]
+   "from": [6, 83],
+   "to": [8, 85]
   },
   {
    "type": "calls",
-   "from": [7, 80],
-   "to": [22, 117]
+   "from": [7, 68],
+   "to": [5, 55]
   },
   {
    "type": "calls",
-   "from": [7, 81],
-   "to": [25, 215]
+   "from": [7, 70],
+   "to": [6, 72]
   },
   {
    "type": "calls",
-   "from": [7, 81],
-   "to": [23, 120]
+   "from": [8, 89],
+   "to": [23, 126]
   },
   {
    "type": "calls",
-   "from": [7, 87],
-   "to": [20, 103]
+   "from": [8, 90],
+   "to": [26, 215]
   },
   {
    "type": "calls",
-   "from": [7, 92],
-   "to": [24, 124]
+   "from": [8, 90],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [7, 94],
-   "to": [19, 96]
+   "from": [8, 96],
+   "to": [21, 112]
   },
   {
    "type": "calls",
-   "from": [9, 133],
-   "to": [14, 269]
+   "from": [8, 101],
+   "to": [25, 133]
   },
   {
    "type": "calls",
-   "from": [9, 135],
-   "to": [13, 202]
+   "from": [8, 103],
+   "to": [20, 105]
   },
   {
    "type": "calls",
-   "from": [9, 135],
-   "to": [10, 196]
+   "from": [10, 142],
+   "to": [15, 278]
   },
   {
    "type": "calls",
-   "from": [9, 136],
-   "to": [23, 120]
+   "from": [10, 144],
+   "to": [14, 211]
   },
   {
    "type": "calls",
-   "from": [9, 136],
-   "to": [22, 117]
+   "from": [10, 144],
+   "to": [11, 205]
   },
   {
    "type": "calls",
-   "from": [9, 140],
-   "to": [26, 243]
+   "from": [10, 145],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [10, 199],
-   "to": [12, 231]
+   "from": [10, 145],
+   "to": [23, 126]
   },
   {
    "type": "calls",
-   "from": [10, 199],
-   "to": [11, 281]
+   "from": [10, 149],
+   "to": [27, 261]
   },
   {
    "type": "calls",
-   "from": [13, 207],
-   "to": [11, 281]
+   "from": [11, 208],
+   "to": [13, 231]
   },
   {
    "type": "calls",
-   "from": [15, 218],
-   "to": [23, 120]
+   "from": [11, 208],
+   "to": [12, 290]
   },
   {
    "type": "calls",
-   "from": [15, 219],
-   "to": [23, 120]
+   "from": [14, 216],
+   "to": [12, 290]
   },
   {
    "type": "calls",
-   "from": [15, 223],
-   "to": [24, 124]
+   "from": [16, 227],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [15, 226],
-   "to": [8, 294]
+   "from": [16, 228],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [15, 230],
-   "to": [16, 301]
+   "from": [16, 232],
+   "to": [25, 133]
   },
   {
    "type": "calls",
-   "from": [15, 234],
-   "to": [17, 828]
+   "from": [16, 235],
+   "to": [9, 303]
   },
   {
    "type": "calls",
-   "from": [18, 276],
-   "to": [20, 103]
+   "from": [16, 239],
+   "to": [17, 310]
   },
   {
    "type": "calls",
-   "from": [19, 99],
-   "to": [8, 294]
+   "from": [16, 243],
+   "to": [18, 829]
   },
   {
    "type": "calls",
-   "from": [19, 100],
-   "to": [24, 124]
+   "from": [19, 285],
+   "to": [21, 112]
   },
   {
    "type": "calls",
-   "from": [19, 101],
-   "to": [8, 294]
+   "from": [20, 108],
+   "to": [9, 303]
   },
   {
    "type": "calls",
-   "from": [21, 113],
-   "to": [22, 117]
+   "from": [20, 109],
+   "to": [25, 133]
   },
   {
    "type": "calls",
-   "from": [21, 114],
-   "to": [23, 120]
+   "from": [20, 110],
+   "to": [9, 303]
   },
   {
    "type": "calls",
-   "from": [21, 115],
-   "to": [20, 103]
+   "from": [22, 122],
+   "to": [23, 126]
   },
   {
    "type": "calls",
-   "from": [27, 245],
-   "to": [23, 120]
+   "from": [22, 123],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [27, 249],
-   "to": [8, 294]
+   "from": [22, 124],
+   "to": [21, 112]
   },
   {
    "type": "calls",
-   "from": [27, 250],
-   "to": [28, 258]
+   "from": [28, 254],
+   "to": [24, 129]
   },
   {
    "type": "calls",
-   "from": [27, 256],
-   "to": [28, 258]
+   "from": [28, 258],
+   "to": [9, 303]
   },
   {
    "type": "calls",
-   "from": [28, 263],
-   "to": [16, 301]
+   "from": [28, 259],
+   "to": [29, 267]
   },
   {
    "type": "calls",
-   "from": [29, 150],
-   "to": [30, 153]
+   "from": [28, 265],
+   "to": [29, 267]
   },
   {
    "type": "calls",
-   "from": [29, 151],
-   "to": [10, 196]
+   "from": [29, 272],
+   "to": [17, 310]
   },
   {
    "type": "calls",
-   "from": [31, 179],
-   "to": [32, 183]
+   "from": [30, 159],
+   "to": [31, 162]
   },
   {
    "type": "calls",
-   "from": [32, 186],
-   "to": [24, 124]
+   "from": [30, 160],
+   "to": [11, 205]
   },
   {
    "type": "calls",
-   "from": [32, 190],
-   "to": [16, 301]
+   "from": [32, 188],
+   "to": [33, 192]
   },
   {
    "type": "calls",
-   "from": [34, 168],
-   "to": [30, 153]
+   "from": [33, 195],
+   "to": [25, 133]
+  },
+  {
+   "type": "calls",
+   "from": [33, 199],
+   "to": [17, 310]
+  },
+  {
+   "type": "calls",
+   "from": [35, 177],
+   "to": [31, 162]
   }
  ]
 }

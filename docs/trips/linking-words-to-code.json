@@ -1,201 +1,237 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "ed5285bd299c190113b8e257619270f459068030",
+ "commit": "09ef9a650bb58d839052b01f2a56388766ce6da9",
  "sights": [
-  "sw/subl_commands.py:55-62",
-  "sw/subl_links.py:19-28",
-  "sw/subl_commands.py:135-139",
-  "sw/subl_links.py:30-35",
-  "sw/subl_links.py:37-51",
-  "sw/subl_links.py:53-59",
-  "sw/subl_links.py:61-72",
-  "sw/subl_links.py:74-92",
-  "sw/subl_links.py:216-220",
-  "sw/subl_links.py:128-137",
-  "sw/subl_links.py:139-148",
-  "sw/subl_links.py:206-208",
-  "sw/subl_links.py:150-176",
-  "sw/subl_links.py:223-229",
+  "sw/subl_commands.py:58-65",
+  "sw/subl_links.py:19-30",
+  "sw/subl_commands.py:138-142",
+  "sw/subl_links.py:32-37",
+  "sw/subl_links.py:39-53",
+  "sw/subl_links.py:55-61",
+  "sw/subl_links.py:63-74",
+  "sw/subl_links.py:76-94",
+  "sw/subl_links.py:275-279",
+  "sw/subl_links.py:130-140",
+  "sw/subl_links.py:196-205",
+  "sw/subl_links.py:263-265",
+  "sw/subl_links.py:207-233",
+  "sw/subl_links.py:282-288",
   "sw/subl_reader.py:755-766",
-  "sw/subl_links.py:210-213",
-  "sw/subl_links.py:94-99",
-  "sw/subl_links.py:101-106",
-  "sw/subl_links.py:108-113",
-  "sw/subl_links.py:115-116",
-  "sw/subl_links.py:118-120",
-  "sw/subl_links.py:122-126",
+  "sw/subl_links.py:267-272",
+  "sw/subl_links.py:96-101",
+  "sw/subl_links.py:103-108",
+  "sw/subl_links.py:110-115",
+  "sw/subl_links.py:117-118",
+  "sw/subl_links.py:120-122",
+  "sw/subl_links.py:124-128",
   "sw/marks.py:215-228",
   "sw/marks.py:231-243",
-  "sw/subl_links.py:178-197",
-  "sw/subl_links.py:199-204",
-  "sw/subl_commands.py:178-184"
+  "sw/subl_links.py:235-254",
+  "sw/subl_links.py:256-261",
+  "sw/subl_links.py:142-151",
+  "sw/subl_links.py:153-156",
+  "sw/subl_links.py:170-181",
+  "sw/subl_links.py:183-194",
+  "sw/subl_links.py:158-161",
+  "sw/subl_links.py:163-168",
+  "sw/subl_commands.py:181-187"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [3, 33],
-   "to": [11, 206]
+   "from": [3, 35],
+   "to": [11, 263]
   },
   {
    "type": "calls",
-   "from": [5, 58],
-   "to": [7, 74]
-  },
-  {
-   "type": "calls",
-   "from": [6, 70],
-   "to": [11, 206]
+   "from": [5, 60],
+   "to": [7, 76]
   },
   {
    "type": "calls",
    "from": [6, 72],
-   "to": [7, 74]
+   "to": [11, 263]
   },
   {
    "type": "calls",
-   "from": [7, 78],
-   "to": [19, 115]
+   "from": [6, 74],
+   "to": [7, 76]
   },
   {
    "type": "calls",
-   "from": [7, 79],
+   "from": [7, 80],
+   "to": [19, 117]
+  },
+  {
+   "type": "calls",
+   "from": [7, 81],
    "to": [22, 215]
   },
   {
    "type": "calls",
-   "from": [7, 79],
-   "to": [20, 118]
+   "from": [7, 81],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [7, 85],
-   "to": [17, 101]
-  },
-  {
-   "type": "calls",
-   "from": [7, 90],
-   "to": [21, 122]
+   "from": [7, 87],
+   "to": [17, 103]
   },
   {
    "type": "calls",
    "from": [7, 92],
-   "to": [16, 94]
+   "to": [21, 124]
   },
   {
    "type": "calls",
-   "from": [9, 131],
-   "to": [11, 206]
+   "from": [7, 94],
+   "to": [16, 96]
   },
   {
    "type": "calls",
    "from": [9, 133],
-   "to": [10, 139]
+   "to": [11, 263]
   },
   {
    "type": "calls",
-   "from": [9, 134],
-   "to": [20, 118]
+   "from": [9, 135],
+   "to": [10, 196]
   },
   {
    "type": "calls",
-   "from": [9, 134],
-   "to": [19, 115]
+   "from": [9, 136],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [9, 137],
+   "from": [9, 136],
+   "to": [19, 117]
+  },
+  {
+   "type": "calls",
+   "from": [9, 140],
    "to": [23, 231]
   },
   {
    "type": "calls",
-   "from": [12, 158],
-   "to": [20, 118]
+   "from": [12, 215],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [12, 159],
-   "to": [20, 118]
+   "from": [12, 216],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [12, 164],
-   "to": [21, 122]
+   "from": [12, 221],
+   "to": [21, 124]
   },
   {
    "type": "calls",
-   "from": [12, 167],
-   "to": [8, 216]
+   "from": [12, 224],
+   "to": [8, 275]
   },
   {
    "type": "calls",
-   "from": [12, 171],
-   "to": [13, 223]
+   "from": [12, 228],
+   "to": [13, 282]
   },
   {
    "type": "calls",
-   "from": [12, 175],
+   "from": [12, 232],
    "to": [14, 755]
   },
   {
    "type": "calls",
-   "from": [15, 213],
-   "to": [17, 101]
-  },
-  {
-   "type": "calls",
-   "from": [16, 97],
-   "to": [8, 216]
-  },
-  {
-   "type": "calls",
-   "from": [16, 98],
-   "to": [21, 122]
+   "from": [15, 270],
+   "to": [17, 103]
   },
   {
    "type": "calls",
    "from": [16, 99],
-   "to": [8, 216]
+   "to": [8, 275]
   },
   {
    "type": "calls",
-   "from": [18, 111],
-   "to": [19, 115]
+   "from": [16, 100],
+   "to": [21, 124]
   },
   {
    "type": "calls",
-   "from": [18, 112],
-   "to": [20, 118]
+   "from": [16, 101],
+   "to": [8, 275]
   },
   {
    "type": "calls",
    "from": [18, 113],
-   "to": [17, 101]
+   "to": [19, 117]
   },
   {
    "type": "calls",
-   "from": [24, 186],
-   "to": [20, 118]
+   "from": [18, 114],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [24, 190],
-   "to": [8, 216]
+   "from": [18, 115],
+   "to": [17, 103]
   },
   {
    "type": "calls",
-   "from": [24, 191],
-   "to": [25, 199]
+   "from": [24, 243],
+   "to": [20, 120]
   },
   {
    "type": "calls",
-   "from": [24, 197],
-   "to": [25, 199]
+   "from": [24, 247],
+   "to": [8, 275]
   },
   {
    "type": "calls",
-   "from": [25, 204],
-   "to": [13, 223]
+   "from": [24, 248],
+   "to": [25, 256]
+  },
+  {
+   "type": "calls",
+   "from": [24, 254],
+   "to": [25, 256]
+  },
+  {
+   "type": "calls",
+   "from": [25, 261],
+   "to": [13, 282]
+  },
+  {
+   "type": "calls",
+   "from": [26, 150],
+   "to": [27, 153]
+  },
+  {
+   "type": "calls",
+   "from": [26, 151],
+   "to": [10, 196]
+  },
+  {
+   "type": "calls",
+   "from": [28, 179],
+   "to": [29, 183]
+  },
+  {
+   "type": "calls",
+   "from": [29, 186],
+   "to": [21, 124]
+  },
+  {
+   "type": "calls",
+   "from": [29, 190],
+   "to": [13, 282]
+  },
+  {
+   "type": "calls",
+   "from": [31, 168],
+   "to": [27, 153]
   }
  ]
 }

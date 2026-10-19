@@ -1,7 +1,7 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "ed5285bd299c190113b8e257619270f459068030",
+ "commit": "09ef9a650bb58d839052b01f2a56388766ce6da9",
  "sights": [
   "sw/subl_vetting.py:87-95",
   "sw/subl_vetting.py:80-84",
@@ -18,7 +18,7 @@
   "sw/subl_vetting.py:113-115",
   "sw/subl_vetting.py:124-139",
   "sw/subl_vetting.py:142-147",
-  "sw/subl_commands.py:303-304",
+  "sw/subl_commands.py:306-307",
   "sw/subl_vetting.py:150-153"
  ],
  "transitions": [
@@ -179,7 +179,7 @@
   },
   {
    "type": "calls",
-   "from": [15, 304],
+   "from": [15, 307],
    "to": [14, 142]
   }
  ]

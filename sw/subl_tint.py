@@ -113,7 +113,10 @@ def chosen_scheme():
 def resolved_scheme(view):
     """The view's scheme file: the one chosen for SightWalk, else the view's; "auto" (light or
     dark by the system) as Sublime resolved it."""
-    base = chosen_scheme() or view.settings().get("color_scheme") or "auto"
+    own = view.settings().get("color_scheme") or ""
+    if own.startswith("Packages/User/SightWalk/"):  # a hue of ours, never a base
+        own = ""
+    base = chosen_scheme() or own or "auto"
     if base == "auto":
         try:
             base = sublime.ui_info()["color_scheme"]["resolved_value"]

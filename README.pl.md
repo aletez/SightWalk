@@ -1,13 +1,17 @@
 # SightWalk
 
-**Sprawdzaj kod napisany przez AI, oprowadzany po nim przez AI, które go napisało.**
+**Sprawdzaj kod napisany przez AI na wycieczkach, które układa dla Ciebie przewodnik AI.**
 
 *In English: [README.md](README.md).*
 
-SightWalk to wtyczka do Sublime Text. Agent AI (Claude Code, przez MCP) otwiera okno wycieczki
-i układa w nim kod, który odpowiada na jedno Twoje pytanie: najczęściej jedno wykonanie
-programu, funkcja po funkcji, w kolejności, w jakiej przechodzi przez nie sterowanie. Potem
-objaśnia to wykonanie, zaznacza linie na marginesie, a Ty rozmawiasz z nim w ławce obok kodu.
+SightWalk to wtyczka do Sublime Text. Zadajesz pytanie o swój kod, a agent AI, **przewodnik**,
+układa **wycieczkę**, która na nie odpowiada: wybiera potrzebne funkcje i ustawia je w jednej
+kolumnie, najczęściej jako jedno wykonanie programu, funkcja po funkcji, w kolejności, w jakiej
+przechodzi przez nie sterowanie. Potem oprowadza Cię po wycieczce, objaśnia ją i zaznacza linie,
+a Ty rozmawiasz z nim w ławce obok kodu.
+
+Przewodnikiem może być każdy agent, który mówi przez MCP: Claude Code, którego SightWalk umie
+uruchomić sam, albo inny agent, także lokalny model. Nie musi to być agent, który napisał kod.
 
 ![Wycieczka przez jedno żądanie MCP w kodzie samej wtyczki. Użytkownik pyta, czemu klient
 dostaje 202 „here”, a to słowo jest połączone z linią 105; przewodnik odpowiada numerowanymi
@@ -31,8 +35,8 @@ W zwykłym edytorze kod leży tak, jak jest *przechowywany*: plik po pliku, w ka
 dół. Pytanie „co się dzieje, gdy przychodzi żądanie?” oznacza skakanie po pięciu plikach,
 gubienie miejsca i trzymanie całej ścieżki w głowie.
 
-SightWalk układa kod tak, jak się *wykonuje*, albo tak, jak potrzebuje go pytanie, i stawia
-obok Ciebie agenta, który go napisał, żeby za niego odpowiadał.
+W SightWalk przewodnik układa kod tak, jak się *wykonuje*, albo tak, jak potrzebuje go Twoje
+pytanie, i zostaje obok, żeby odpowiadać za każdą linię.
 
 ## Pomysł w kilku słowach
 
@@ -63,8 +67,8 @@ i przejść w zaplanowanej kolejności jako **turnus**. Tak opisany jest kod sam
 Po prawej **panorama**: jedna kolumna widoków, przewijana jak jeden dokument. Każdy widok ma
 nagłówek z nazwą, (a), (b), (c)…, i plikiem, zabarwiony kolorem swojego pliku. Linie `def`
 i `class`, do których należy fragment, stoją zamrożone pod nagłówkiem, a „⋮ 10 linii Handler”
-mówi, co zostało pominięte. Kółko przesuwa całą wycieczkę, ławka i mapa przesuwają się z nią,
-a wszystkie panele zostają wyrównane.
+mówi, co zostało pominięte. Widoki przewijają się razem, jak jeden dokument: kółko nad
+którymkolwiek z nich przesuwa całą wycieczkę, a każdy nagłówek zostaje przy swoim kodzie.
 
 Po lewej **ławka**. Na górze strony użytkownik pyta, czemu klient dostaje 202 **here**, a nie
 200, z „here” połączonym z linią 105. Przewodnik odpowiada znacznikami: ikony **1** i **2** na
@@ -77,8 +81,9 @@ kolory takie jak w kodzie.
 
 Przewodnik umieszcza znaczniki we własnych słowach: oznacza cyfrę, `<icon at="(c):34">1</icon>`,
 albo słowa opisujące skok, `<jump from="(a):33" to="(b):41">wywołuje</jump>`. Widzisz cyfrę
-lub słowa w ramce koloru znacznika, a linia dostaje tę samą ikonę na marginesie i na pasku obok
-paska przewijania, więc znacznika poza ekranem nie da się przeoczyć. Kliknięcie obramowanego
+lub słowa w ramce koloru znacznika, a linia dostaje tę samą ikonę na marginesie (drugi znacznik
+tej samej linii stoi na wąskim pasku na lewo od panoramy). Znacznik przewinięty poza ekran
+zostawia oko na najbliższej widocznej linii, więc nie da się go przeoczyć. Kliknięcie obramowanego
 słowa zaznacza to, do czego się odnosi (oba końce skoku), i zapala tę samą strzałkę na mapie;
 drugie kliknięcie zdejmuje zaznaczenie.
 
@@ -113,7 +118,7 @@ rozmowę i znaczniki przewodnika, więc spacer trwa dalej tam, gdzie się urwał
 ![Edytor otwarty nad panoramą: cały plik w liniach widoku, „End editing (Esc)” w nagłówku
 widoku](docs/images/editor.jpg)
 
-`Enter` w widoku (albo **Edytuj**) otwiera prawdziwy plik wprost nad wycieczką, w tych samych
+`Enter` w widoku otwiera prawdziwy plik wprost nad wycieczką, w tych samych
 liniach. Zapisz, a wycieczka się przeładuje: każdy widok w nowym zakresie, każdy znacznik w
 nowej linii. Następna wiadomość powie przewodnikowi, które zakresy się zmieniły. `Esc` chowa
 edytor, a panele wracają tam, gdzie były.
@@ -143,7 +148,7 @@ zaznaczone, gdy je wysłałeś). Drugie kliknięcie je chowa i przywraca ławkę
 ## Jak to jest zbudowane
 
 ```
-Claude Code ──MCP przez HTTP──▶ subl_mcp_http ──▶ validator (czysty) ──▶ subl_executor ──▶ Sublime
+Przewodnik ──MCP przez HTTP──▶ subl_mcp_http ──▶ validator (czysty) ──▶ subl_executor ──▶ Sublime
                                   sama wtyczka                              wycieczka, ławka, mapa
 ```
 
@@ -207,7 +212,7 @@ Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.c
 | `⌘P` | połącz zaznaczone słowa z zaznaczonym kodem |
 | `Enter`, `Esc` | otwórz edytor widoku, zamknij go |
 | `Alt+R` | przywróć położenia |
-| `⌘S` | kółko nad ławką i narzędziami: przesuwa całą wycieczkę albo tylko je |
+| `⌘S` | przełącza, co robi kółko nad ławką i panelem Narzędzi: przewija całą wycieczkę albo tylko ten panel |
 | `Ctrl+Tab` | fokus na następny widok na ekranie |
 | `Alt+↑↓`, `PgUp`/`PgDn` | przewiń wycieczkę |
 
@@ -217,8 +222,8 @@ Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.c
 ## Stan i ograniczenia
 
 - Alfa, budowana i używana na macOS; Windows i Linux nie były testowane.
-- Przewodnikiem jest Claude Code. Narzędzia może wywołać każdy klient MCP, ale podręcznik jest
-  napisany dla niego.
+- SightWalk sam uruchamia Claude Code jako przewodnika. Zamiast niego może się połączyć każdy
+  inny agent MCP i dostaje ten sam podręcznik przez MCP; sprawdzony jest tylko Claude Code.
 - Granice funkcji są rozpoznawane w Pythonie. W innych językach widok nigdy nie jest odrzucany
   za dwie funkcje.
 - W planach: notatki linkowane do rozmowy, legenda znaczników na ekranie i lista sprawdzeń, które

@@ -1,13 +1,17 @@
 # SightWalk
 
-**Vet AI-generated code by walking through it with the AI that wrote it.**
+**Vet AI-generated code on trips that an AI guide lays out for you.**
 
 *Po polsku: [README.pl.md](README.pl.md).*
 
-SightWalk is a Sublime Text plugin. An AI agent (Claude Code, over MCP) opens a reader window
-and lays out the code that answers one question of yours: most often one run of the program,
-function after function, in the order control passes through them. Then it explains that run
-and marks lines in the gutter, while you talk with it in a conversation pane next to the code.
+SightWalk is a Sublime Text plugin. You ask a question about your code; an AI agent, the
+**guide**, composes a **trip** that answers it: it picks the functions involved and lays them
+out in one column, most often one run of the program, function after function, in the order
+control passes through them. Then it walks you through the trip, explains it and marks lines,
+while you talk with it in a conversation pane next to the code.
+
+The guide is any agent that speaks MCP: Claude Code, which SightWalk can start by itself, or
+another agent, a local model included. It need not be the agent that wrote the code.
 
 ![A trip through one MCP request in SightWalk's own code. The user asks why the client gets
 202 "here", the word linked to line 105; the guide answers with numbered icons and two jumps,
@@ -30,8 +34,8 @@ is *stored*: by file, and in each file top to bottom. A question like "what happ
 request arrives?" means jumping between five files, losing your place each time, and holding
 the whole path in your head.
 
-SightWalk lays the code out the way it is *executed*, or the way a question needs it, and
-puts the agent that wrote it beside you to answer for it.
+In SightWalk a guide lays the code out the way it is *executed*, or the way your question
+needs it, and stays beside you to answer for every line.
 
 ## The idea in four words
 
@@ -61,8 +65,8 @@ them) and walked in a planned order as a **tour**. The plugin's own code is docu
 On the right, the **Sights**: one column of panes, scrolled as one document. Each sight has a
 header with its name, (a), (b), (c)…, and its file, tinted in a hue per file. The `def` and
 `class` lines a fragment belongs to stay frozen under its header, and "⋮ 10 lines of Handler"
-says what was left out. The wheel moves the whole trip, the bench and the Map scroll with it,
-and every pane stays aligned.
+says what was left out. The sights scroll together, as one document: the wheel over any of
+them moves the whole trip, and every header stays with its code.
 
 On the left, the **Vetting Bench**. At the top of this page the user asks *why does the client
 get 202 **here** and not 200?*, with "here" linked to line 105. The guide answers with marks:
@@ -75,8 +79,9 @@ separate?*. Names of functions on the bench are coloured as in the code.
 
 The guide places its marks in its own words: it tags a digit, `<icon at="(c):34">1</icon>`, or
 the words telling a jump, `<jump from="(a):33" to="(b):41">calls</jump>`. You see the digit or
-the words framed in the mark's colour, and the line gets the same icon in the gutter and on a
-strip beside the scroll bar, so a mark off screen is never lost. Clicking a framed word selects
+the words framed in the mark's colour, and the line gets the same icon in the gutter (a second
+mark on the same line stands on the narrow strip left of the sights). A mark scrolled off screen
+leaves an eye on the nearest visible line, so it is never lost. Clicking a framed word selects
 what it refers to (both ends of a jump) and lights the same arrow on the Map; clicking again
 takes the selection off.
 
@@ -110,7 +115,7 @@ guide's marks, so a walk goes on where it stopped.
 ![The editor open over the sights: the whole file, at the sight's lines, with End editing (Esc)
 on the sight's header](docs/images/editor.jpg)
 
-`Enter` in a sight (or **Edit**) opens the real file right over the trip, at the same lines.
+`Enter` in a sight opens the real file right over the trip, at the same lines.
 Save, and the trip reloads: every sight at its new range, every mark on its new line, and the
 guide's next message tells it which ranges changed. `Esc` puts the editor away and the panes
 return to where they were.
@@ -140,7 +145,7 @@ it); a second click hides them and puts the bench back where it was.
 ## How it is built
 
 ```
-Claude Code ──MCP over HTTP──▶ subl_mcp_http ──▶ validator (pure) ──▶ subl_executor ──▶ Sublime
+Guide agent ──MCP over HTTP──▶ subl_mcp_http ──▶ validator (pure) ──▶ subl_executor ──▶ Sublime
                                  the plugin itself                       reader, bench, map
 ```
 
@@ -203,7 +208,7 @@ Requirements: macOS, Linux or Windows; [Sublime Text 4](https://www.sublimetext.
 | `⌘P` | link selected words to selected code |
 | `Enter`, `Esc` | open the editor on a sight, close it |
 | `Alt+R` | reset positions |
-| `⌘S` | wheel over the bench and tools: move the whole trip, or only them |
+| `⌘S` | switch what the wheel over the bench and the Tools pane does: scroll the whole trip, or only that pane |
 | `Ctrl+Tab` | focus the next sight on screen |
 | `Alt+↑↓`, `PgUp`/`PgDn` | scroll the trip |
 
@@ -213,7 +218,8 @@ Requirements: macOS, Linux or Windows; [Sublime Text 4](https://www.sublimetext.
 ## Status and limits
 
 - Alpha, built and used on macOS; Windows and Linux are untested.
-- The guide is Claude Code. Any MCP client can call the tools, but the manual is written for it.
+- SightWalk starts Claude Code as its guide by itself. Any other MCP agent can connect instead
+  and gets the same manual through MCP; only Claude Code has been tried.
 - Function boundaries are recognised for Python; in other languages a sight is never refused
   for holding two functions.
 - Planned: notes linkable to the conversation, a legend of the marks on screen, and a list of

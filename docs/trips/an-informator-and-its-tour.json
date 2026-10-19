@@ -1,14 +1,14 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "dd6f5cb0932de7f4c3d1247acd01aa07d4ecc707",
+ "commit": "d3cc5a3330634a240b39f0b31a4e27ff38b7287f",
  "sights": [
-  "sw/subl_commands.py:252-258",
-  "sw/subl_commands.py:267-280",
-  "sw/subl_commands.py:283-293",
-  "sw/subl_commands.py:296-297",
-  "sw/subl_commands.py:300-305",
-  "sw/subl_commands.py:260-264",
+  "sw/subl_commands.py:259-265",
+  "sw/subl_commands.py:274-287",
+  "sw/subl_commands.py:290-300",
+  "sw/subl_commands.py:303-304",
+  "sw/subl_commands.py:307-312",
+  "sw/subl_commands.py:267-271",
   "sw/words.py:70-77",
   "sw/subl_reader.py:846-860",
   "sw/subl_reader.py:1116-1118",
@@ -35,62 +35,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 253],
-   "to": [1, 267]
+   "from": [0, 260],
+   "to": [1, 274]
   },
   {
    "type": "calls",
-   "from": [0, 257],
+   "from": [0, 264],
    "to": [6, 70]
   },
   {
    "type": "calls",
-   "from": [0, 258],
-   "to": [5, 260]
-  },
-  {
-   "type": "calls",
-   "from": [1, 271],
-   "to": [2, 283]
-  },
-  {
-   "type": "calls",
-   "from": [1, 272],
-   "to": [4, 300]
-  },
-  {
-   "type": "calls",
-   "from": [1, 272],
-   "to": [3, 296]
-  },
-  {
-   "type": "calls",
-   "from": [1, 274],
-   "to": [2, 283]
-  },
-  {
-   "type": "calls",
-   "from": [1, 276],
-   "to": [4, 300]
+   "from": [0, 265],
+   "to": [5, 267]
   },
   {
    "type": "calls",
    "from": [1, 278],
-   "to": [3, 296]
+   "to": [2, 290]
   },
   {
    "type": "calls",
    "from": [1, 279],
-   "to": [4, 300]
+   "to": [4, 307]
   },
   {
    "type": "calls",
-   "from": [3, 297],
-   "to": [4, 300]
+   "from": [1, 279],
+   "to": [3, 303]
   },
   {
    "type": "calls",
-   "from": [5, 262],
+   "from": [1, 281],
+   "to": [2, 290]
+  },
+  {
+   "type": "calls",
+   "from": [1, 283],
+   "to": [4, 307]
+  },
+  {
+   "type": "calls",
+   "from": [1, 285],
+   "to": [3, 303]
+  },
+  {
+   "type": "calls",
+   "from": [1, 286],
+   "to": [4, 307]
+  },
+  {
+   "type": "calls",
+   "from": [3, 304],
+   "to": [4, 307]
+  },
+  {
+   "type": "calls",
+   "from": [5, 269],
    "to": [7, 846]
   },
   {

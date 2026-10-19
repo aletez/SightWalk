@@ -226,7 +226,7 @@ def draw_edit_button(header, text, on_click):
     """The header's text, padded so the edit button sits at its right edge."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
     label = word("edit")
-    padded = text.ljust(max(columns - len(label) - 2, len(text) + 1))  # close to the edge
+    padded = text.ljust(max(columns - len(label) - 3, len(text) + 1))  # close to the edge
     if kept(header).get("edit_text") == (padded, label):
         return
     kept(header)["edit_text"] = (padded, label)

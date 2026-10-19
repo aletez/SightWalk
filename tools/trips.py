@@ -303,6 +303,13 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("The bench's answers listed",
+     "The Answers tab: the bench's questions and answers by their first words; a click shows "
+     "one's icons or places and brings it into the bench, a second click hides them.",
+     ["subl_reader.Reader.draw_answers", "subl_reader.Reader.bench_rows", "answers.entries",
+      "subl_reader.Reader.answer_marks", "subl_vetting.show_answers", "subl_vetting.html_escape",
+      "subl_reader.Reader.answer_link", "subl_reader.Reader.hide_answer",
+      "subl_reader.Reader.scroll_bench"]),
 ]
 
 
@@ -346,6 +353,7 @@ LEADS = [
     ("The agent says something", "The Tools pane's tabs"),
     ("The Tools pane's tabs", "The Map's nodes"),
     ("The Tools pane's tabs", "The guide's permissions"),
+    ("The Tools pane's tabs", "The bench's answers listed"),
     ("The Map's nodes", "Drawing the Map"),
     ("How Claude comes to listen to Sublime", "The user sends a message"),
     ("The user sends a message", "Here, and asking by a shortcut"),

@@ -14,6 +14,7 @@ from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkChatListener,
     SightWalkCloseEditorCommand,
     SightWalkCompareFontsCommand,
+    SightWalkCycleSightsCommand,
     SightWalkCloseTripCommand,
     SightWalkEditCommand,
     SightWalkHeaderListener,

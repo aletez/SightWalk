@@ -101,6 +101,23 @@ def offset_range(items, height, overhead, lead_px, floor_px):
     return low, max(lead_px + end - floor_px, lead_px if free > 0 else 0.0)
 
 
+def visible_indices(sights, offset, height):
+    """The sights on screen, top to bottom, by index."""
+    end = offset + height
+    return [k for k, sight in enumerate(sights)
+            if sight.code_item.y < end and sight.code_item.y + sight.code_item.content > offset]
+
+
+def cycled(visible, current, step):
+    """The sight ctrl+tab goes to (Jakub): the next on screen, from the last round to the first;
+    from no sight on screen, the first (step 1) or the last (step -1)."""
+    if not visible:
+        return None
+    if current not in visible:
+        return visible[0] if step > 0 else visible[-1]
+    return visible[(visible.index(current) + step) % len(visible)]
+
+
 def visible_specs(sights, offset, height):
     end = offset + height
     return [sight.spec for sight in sights

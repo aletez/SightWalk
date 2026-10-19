@@ -53,6 +53,15 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
             send(owner, tagged, owner.links.ask(label))
 
 
+class SightWalkCycleSightsCommand(sublime_plugin.WindowCommand):
+    """ctrl+tab and ctrl+shift+tab in a trip: the focus round the sights on screen (Jakub)."""
+
+    def run(self, step=1):
+        reader = state.reader_for(self.window)
+        if reader is not None and reader.ready:
+            reader.cycle(step)
+
+
 class SightWalkLinkCommand(sublime_plugin.TextCommand):
     """primary+p (Jakub): links words on the bench to places in the code, from either side (see
     subl_links)."""

@@ -62,6 +62,11 @@ class PlanTest(unittest.TestCase):
         # Its end already above that floor: no further up than where it starts.
         self.assertEqual(plan.offset_range(items, 186.0, OVERHEAD, 50.0, 120.0), (-50.0, 50.0))
 
+    def test_cycle(self):
+        self.assertEqual([plan.cycled([2, 3, 4], c, 1) for c in (None, 2, 4, 7)], [2, 3, 2, 2])
+        self.assertEqual([plan.cycled([2, 3, 4], c, -1) for c in (None, 2, 3)], [4, 4, 2])
+        self.assertIsNone(plan.cycled([], 1, 1))
+
     def test_visible(self):
         sights, _ = stacked((1, 3), (10, 11))
         self.assertEqual(plan.visible_specs(sights, 0.0, 20.0), [sights[0].spec])

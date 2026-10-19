@@ -16,6 +16,9 @@
     {"keys": ["primary+plus"], "command": "sight_walk_zoom_map", "args": {"how": "in"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
     {"keys": ["primary+minus"], "command": "sight_walk_zoom_map", "args": {"how": "out"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
     {"keys": ["primary+0"], "command": "sight_walk_zoom_map", "args": {"how": "fit"}, "context": [{"key": "setting.sight_walk_tool", "operand": "Map"}]},
+    // ctrl+tab and ctrl+shift+tab move the focus round the sights on screen (Jakub).
+    {"keys": ["ctrl+tab"], "command": "sight_walk_cycle_sights", "args": {"step": 1}, "context": [{"key": "setting.sight_walk"}]},
+    {"keys": ["ctrl+shift+tab"], "command": "sight_walk_cycle_sights", "args": {"step": -1}, "context": [{"key": "setting.sight_walk"}]},
     // primary+p links words on the bench to places in the code, from either side (Jakub).
     {"keys": ["primary+p"], "command": "sight_walk_link", "context": [{"key": "setting.sight_walk_chat"}]},
     {"keys": ["primary+p"], "command": "sight_walk_link", "context": [{"key": "setting.sight_walk_code"}]},

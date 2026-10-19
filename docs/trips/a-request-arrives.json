@@ -1,7 +1,7 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "ce2a42345f6df3d47cdebc7edcc17ae036570475",
+ "commit": "f7929339969088538091566bb344b651b59bf8a7",
  "sights": [
   "sw/subl_executor.py:180-187",
   "sw/subl_executor.py:190-206",

@@ -106,14 +106,14 @@ Files read, each sight's copy, header and frozen lines made.
 Every file in its own hue, schemes written and set once Sublime has indexed them.
 
 - `sw/subl_reader.py:315-320` Reader.tint
-- `sw/subl_tint.py:253-256` apply_tint
+- `sw/subl_tint.py:271-274` apply_tint
 - `sw/subl_tint.py:233-239` schemes_for
 - `sw/subl_tint.py:22-26` hue_for
 - `sw/subl_tint.py:128-155` tinted_schemes
 - `sw/subl_tint.py:41-53` load_base_scheme
 - `sw/subl_tint.py:33-38` tint_color
 - `sw/subl_tint.py:76-81` write_scheme
-- `sw/subl_tint.py:242-250` set_schemes
+- `sw/subl_tint.py:254-268` set_schemes
 - `sw/subl_tint.py:221-230` when_indexed
 
 ## 7. Measuring (16 views)
@@ -409,7 +409,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/subl_geometry.py:27-31` Geometry.strip_span
 - `sw/subl_geometry.py:33-35` Geometry.strip_share
 - `sw/subl_geometry.py:37-38` Geometry.bench_side
-- `sw/state.py:61-66` render_all
+- `sw/state.py:54-59` render_all
 - `sw/subl_executor.py:99-106` op_settings
 - `sw/validator.py:174-182` check_settings
 - `sw/subl_commands.py:215-217` SightWalkWindowListener.on_activated
@@ -427,7 +427,7 @@ SightWalk: Select Colour Scheme: general, light or dark, only schemes of that ki
 - `sw/subl_tint.py:203-207` is_dark
 - `sw/subl_commands.py:97-99` scheme_item
 - `sw/subl_commands.py:78-80` SightWalkSelectColourSchemeCommand.preview
-- `sw/state.py:54-58` refresh_schemes_all
+- `sw/subl_tint.py:245-251` refresh_all
 - `sw/subl_reader.py:298-304` Reader.refresh_schemes
 - `sw/subl_tint.py:100-110` chosen_scheme
 - `sw/subl_tint.py:158-168` scheme_colours
@@ -546,7 +546,7 @@ Switch Language: the setting changes, the words follow at once, in every open tr
 - `sw/subl_commands.py:364-367` SightWalkSwitchLanguageCommand.run
 - `sight_walk.py:51-55` settings_changed
 - `sw/words.py:63-65` set_language
-- `sw/state.py:61-66` render_all
+- `sw/state.py:54-59` render_all
 - `sw/words.py:59-60` word
 - `sw/subl_chat.py:28-32` help_html
 - `sw/subl_views.py:33-35` button_html
@@ -563,7 +563,7 @@ The guide is stopped, windows close.
 - `sw/subl_guide.py:71-80` stop_when_idle
 - `sw/subl_commands.py:262-264` SightWalkWindowListener.on_pre_close_window
 - `sw/subl_commands.py:267-269` clear_schemes_if_unused
-- `sw/subl_tint.py:267-293` clear_schemes
+- `sw/subl_tint.py:285-311` clear_schemes
 - `sw/subl_tint.py:72-73` scheme_folder
 - `sw/subl_commands.py:222-234` SightWalkWindowListener.on_window_command
 - `sw/subl_commands.py:295-297` SightWalkCloseTripCommand.run
@@ -616,7 +616,7 @@ The agent's view of the settings, and colour helpers.
 - `sw/subl_tint.py:113-125` resolved_scheme
 - `sw/subl_tint.py:89-93` scheme_stem
 - `sw/subl_tint.py:29-30` hex_rgb
-- `sw/subl_tint.py:259-264` apply_grey
+- `sw/subl_tint.py:277-282` apply_grey
 
 ## 36. The ontology: collections and sights (15 views, survey)
 

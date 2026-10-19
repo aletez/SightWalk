@@ -175,9 +175,16 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 
     def on_window_command(self, window, command_name, args):
         """primary+w (close) in a trip closes no single view: it asks to close the window
-        (Jakub). The editor keeps its own primary+w, bound in the keymap."""
-        if command_name in ("close", "close_file") and state.reader_for(window) is not None:
+        (Jakub). The editor keeps its own primary+w, bound in the keymap. next_view and
+        prev_view go round the sights on screen."""
+        reader = state.reader_for(window)
+        if command_name in ("close", "close_file") and reader is not None:
             return ("sight_walk_close_trip", None)
+        # ctrl+tab goes round the sights on screen, whatever keymap binds it to next_view (a
+        # user's keymap wins over the plugin's, Jakub's binds ctrl+tab so).
+        steps = {"next_view": 1, "prev_view": -1}
+        if command_name in steps and reader is not None and reader.editor is None:
+            return ("sight_walk_cycle_sights", {"step": steps[command_name]})
         return None
 
     def on_selection_modified(self, view):

@@ -169,7 +169,7 @@ TRIPS = [
       "subl_commands.SightWalkHeaderListener.on_hover", "subl_chat.show_help"]),
     ("ctrl+tab",
      "The focus round the sights on screen, top to bottom, ctrl+shift+tab the other way.",
-     ["subl_commands.SightWalkCycleSightsCommand.run", "subl_reader.Reader.cycle",
+     ["subl_commands.SightWalkCycleSightsCommand.run", "subl_commands.SightWalkWindowListener.on_window_command", "subl_reader.Reader.cycle",
       "plan.visible_indices", "plan.cycled"]),
     ("primary+g",
      "In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new "

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "9c3c6511ed198c981c38788406842677c7b1336d",
+ "commit": "a78c03601289ac08931a08ac60bf4e9f3cc8de49",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1094,7 +1094,7 @@
    "from": [
     "a-request-arrives",
     16,
-    246
+    260
    ],
    "to": [
     "a-request-arrives"
@@ -1105,7 +1105,7 @@
    "from": [
     "a-request-arrives",
     16,
-    254
+    268
    ],
    "to": [
     "pointing",
@@ -4312,7 +4312,7 @@
    "from": [
     "pointing",
     1,
-    270
+    284
    ],
    "to": [
     "pointing"
@@ -4323,7 +4323,7 @@
    "from": [
     "pointing",
     2,
-    261
+    275
    ],
    "to": [
     "pointing"
@@ -4334,7 +4334,7 @@
    "from": [
     "pointing",
     3,
-    300
+    314
    ],
    "to": [
     "pointing"
@@ -4594,7 +4594,7 @@
    "from": [
     "pointing",
     16,
-    246
+    260
    ],
    "to": [
     "a-request-arrives"
@@ -4620,8 +4620,8 @@
    ],
    "to": [
     "linking-words-to-code",
-    13,
-    285
+    16,
+    301
    ]
   },
   {
@@ -4733,7 +4733,7 @@
    ],
    "to": [
     "linking-words-to-code",
-    14,
+    17,
     828
    ]
   },
@@ -4966,7 +4966,7 @@
    "to": [
     "pointing",
     1,
-    270
+    284
    ]
   },
   {
@@ -4998,7 +4998,7 @@
    "from": [
     "the-agent-says-something",
     2,
-    323
+    337
    ],
    "to": [
     "the-agent-says-something"
@@ -5631,7 +5631,7 @@
    "from": [
     "the-agent-says-something",
     17,
-    312
+    326
    ],
    "to": [
     "the-agent-says-something"
@@ -6200,7 +6200,7 @@
    "to": [
     "the-map-s-nodes",
     1,
-    1266
+    1269
    ]
   },
   {
@@ -6232,7 +6232,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    1266
+    1269
    ],
    "to": [
     "the-map-s-nodes"
@@ -6868,7 +6868,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1231
+    1234
    ],
    "to": [
     "names-and-room",
@@ -6881,7 +6881,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1233
+    1236
    ],
    "to": [
     "opening-the-editor",
@@ -6894,12 +6894,25 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1236
+    1240
    ],
    "to": [
-    "building-blocks",
-    2,
-    38
+    "linking-words-to-code",
+    12,
+    231
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-user-sends-a-message",
+    4,
+    1240
+   ],
+   "to": [
+    "pointing",
+    15,
+    50
    ]
   },
   {
@@ -7091,7 +7104,7 @@
    "from": [
     "linking-words-to-code",
     8,
-    278
+    294
    ],
    "to": [
     "linking-words-to-code"
@@ -7124,7 +7137,7 @@
    "from": [
     "linking-words-to-code",
     10,
-    204
+    199
    ],
    "to": [
     "pointing",
@@ -7137,7 +7150,7 @@
    "from": [
     "linking-words-to-code",
     11,
-    266
+    281
    ],
    "to": [
     "linking-words-to-code"
@@ -7148,7 +7161,7 @@
    "from": [
     "linking-words-to-code",
     12,
-    207
+    231
    ],
    "to": [
     "linking-words-to-code"
@@ -7159,7 +7172,7 @@
    "from": [
     "linking-words-to-code",
     13,
-    285
+    202
    ],
    "to": [
     "linking-words-to-code"
@@ -7170,6 +7183,39 @@
    "from": [
     "linking-words-to-code",
     14,
+    269
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    15,
+    210
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    16,
+    301
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    17,
     828
    ],
    "to": [
@@ -7180,7 +7226,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     833
    ],
    "to": [
@@ -7193,7 +7239,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     834
    ],
    "to": [
@@ -7206,7 +7252,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     837
    ],
    "to": [
@@ -7219,7 +7265,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     838
    ],
    "to": [
@@ -7232,7 +7278,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     839
    ],
    "to": [
@@ -7245,7 +7291,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    14,
+    17,
     839
    ],
    "to": [
@@ -7258,41 +7304,8 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    15,
-    270
-   ],
-   "to": [
-    "linking-words-to-code"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "linking-words-to-code",
-    16,
-    96
-   ],
-   "to": [
-    "linking-words-to-code"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "linking-words-to-code",
-    17,
-    103
-   ],
-   "to": [
-    "linking-words-to-code"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "linking-words-to-code",
     18,
-    110
+    273
    ],
    "to": [
     "linking-words-to-code"
@@ -7303,7 +7316,7 @@
    "from": [
     "linking-words-to-code",
     19,
-    117
+    96
    ],
    "to": [
     "linking-words-to-code"
@@ -7314,7 +7327,7 @@
    "from": [
     "linking-words-to-code",
     20,
-    120
+    103
    ],
    "to": [
     "linking-words-to-code"
@@ -7325,7 +7338,7 @@
    "from": [
     "linking-words-to-code",
     21,
-    124
+    110
    ],
    "to": [
     "linking-words-to-code"
@@ -7336,7 +7349,7 @@
    "from": [
     "linking-words-to-code",
     22,
-    215
+    117
    ],
    "to": [
     "linking-words-to-code"
@@ -7347,7 +7360,7 @@
    "from": [
     "linking-words-to-code",
     23,
-    231
+    120
    ],
    "to": [
     "linking-words-to-code"
@@ -7358,7 +7371,7 @@
    "from": [
     "linking-words-to-code",
     24,
-    234
+    124
    ],
    "to": [
     "linking-words-to-code"
@@ -7369,7 +7382,40 @@
    "from": [
     "linking-words-to-code",
     25,
-    255
+    215
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    26,
+    243
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    27,
+    237
+   ],
+   "to": [
+    "linking-words-to-code"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "linking-words-to-code",
+    28,
+    258
    ],
    "to": [
     "linking-words-to-code"
@@ -7379,8 +7425,8 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    25,
-    259
+    28,
+    262
    ],
    "to": [
     "polling-and-the-wheel",
@@ -7392,7 +7438,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    26,
+    29,
     142
    ],
    "to": [
@@ -7403,7 +7449,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    27,
+    30,
     153
    ],
    "to": [
@@ -7414,7 +7460,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    27,
+    30,
     154
    ],
    "to": [
@@ -7427,7 +7473,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    28,
+    31,
     170
    ],
    "to": [
@@ -7438,7 +7484,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    28,
+    31,
     177
    ],
    "to": [
@@ -7451,7 +7497,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    29,
+    32,
     183
    ],
    "to": [
@@ -7462,7 +7508,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    29,
+    32,
     193
    ],
    "to": [
@@ -7475,7 +7521,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    30,
+    33,
     158
    ],
    "to": [
@@ -7486,7 +7532,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    31,
+    34,
     163
    ],
    "to": [
@@ -7497,8 +7543,8 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    32,
-    262
+    35,
+    265
    ],
    "to": [
     "linking-words-to-code"
@@ -7508,7 +7554,7 @@
    "type": "own_trip",
    "from": [
     "linking-words-to-code",
-    33,
+    36,
     248
    ],
    "to": [
@@ -7519,7 +7565,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    33,
+    36,
     251
    ],
    "to": [
@@ -7532,7 +7578,7 @@
    "type": "calls",
    "from": [
     "linking-words-to-code",
-    33,
+    36,
     252
    ],
    "to": [
@@ -9087,7 +9133,7 @@
    "from": [
     "what-the-agent-is-told",
     4,
-    99
+    103
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9098,7 +9144,7 @@
    "from": [
     "what-the-agent-is-told",
     5,
-    137
+    141
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9109,7 +9155,7 @@
    "from": [
     "what-the-agent-is-told",
     6,
-    143
+    147
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9120,7 +9166,7 @@
    "from": [
     "what-the-agent-is-told",
     7,
-    148
+    152
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9372,7 +9418,7 @@
    "to": [
     "pointing",
     1,
-    270
+    284
    ]
   },
   {
@@ -9411,7 +9457,7 @@
    "to": [
     "the-agent-says-something",
     2,
-    323
+    337
    ]
   },
   {
@@ -9566,7 +9612,7 @@
    "from": [
     "one-tool-call-over-http",
     4,
-    137
+    141
    ],
    "to": [
     "what-the-agent-is-told"
@@ -11470,7 +11516,7 @@
    "from": [
     "an-informator-and-its-tour",
     8,
-    1257
+    1260
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11782,7 +11828,7 @@
    "from": [
     "an-informator-and-its-tour",
     21,
-    1244
+    1247
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11793,7 +11839,7 @@
    "from": [
     "an-informator-and-its-tour",
     22,
-    1249
+    1252
    ],
    "to": [
     "an-informator-and-its-tour"

@@ -48,7 +48,7 @@ From the HTTP server's thread to the show operation on Sublime's, with every che
 - `sw/subl_executor.py:58-60` named
 - `sw/validator.py:56-59` not_stopped
 - `sw/validator.py:34-53` trip_of
-- `sw/marks.py:246-258` trip_place
+- `sw/marks.py:260-272` trip_place
 - `sw/ontology.py:129-137` Sight.parse
 - `sw/ontology.py:160-164` Trip.__init__
 - `sw/ontology.py:93-100` Network.__init__
@@ -195,9 +195,9 @@ The two loops: the gutter measured once, the reader opening at the top; the whee
 The marks an answer places with its own tags, resolved to sights and lines, framed in its words, the reader scrolled to show them.
 
 - `sw/subl_executor.py:67-75` op_say
-- `sw/marks.py:270-297` read_marks
-- `sw/marks.py:261-267` place
-- `sw/marks.py:300-309` frame_scopes
+- `sw/marks.py:284-311` read_marks
+- `sw/marks.py:275-281` place
+- `sw/marks.py:314-323` frame_scopes
 - `sw/subl_reader.py:655-664` Reader.point
 - `sw/marks.py:91-107` resolve_marks
 - `sw/marks.py:80-88` jump
@@ -210,7 +210,7 @@ The marks an answer places with its own tags, resolved to sights and lines, fram
 - `sw/marks.py:40-43` sight_number
 - `sw/spec.py:58-64` sight_index
 - `sw/spec.py:50-55` sight_name
-- `sw/marks.py:246-258` trip_place
+- `sw/marks.py:260-272` trip_place
 - `sw/subl_reader.py:1107-1133` Reader.follow_frame
 - `sw/subl_chat.py:223-226` blanks
 - `sw/subl_reader.py:1135-1146` Reader.show_places
@@ -239,7 +239,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 
 - `sw/subl_executor.py:67-75` op_say
 - `sw/marks.py:189-204` untag
-- `sw/marks.py:323-325` line_refs
+- `sw/marks.py:337-339` line_refs
 - `sw/validator.py:14-17` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
@@ -254,7 +254,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/subl_chat.py:35-43` protected_end
 - `sw/subl_commands.py:186-193` SightWalkChatListener.on_modified
 - `sw/subl_commands.py:201-211` SightWalkChatListener.on_post_text_command
-- `sw/marks.py:312-314` clean
+- `sw/marks.py:326-328` clean
 - `sw/subl_chat.py:248-253` shade_variables
 
 ## 14. Stopping an answer (3 views)
@@ -287,7 +287,7 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 The trip's definitions and the calls its author named, as nodes for the graph.
 
 - `sw/subl_reader.py:1094-1105` Reader.draw_map
-- `sw/subl_reader.py:1266-1273` map_style
+- `sw/subl_reader.py:1269-1276` map_style
 - `sw/subl_reader.py:1148-1162` Reader.map_nodes
 - `sw/subl_reader.py:48-52` fragment_of
 - `sw/subl_reader.py:1164-1168` Reader.owner
@@ -323,19 +323,19 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 
 ## 18. The user sends a message (9 views)
 
-The draft becomes a message, with the focus, the visible sights and the edits, and the agent receives it.
+The draft becomes a message, with here, the visible sights and the edits, and the agent receives it.
 
 - `sw/subl_commands.py:46-53` SightWalkSendCommand.run
 - `sw/subl_chat.py:164-178` take_draft
 - `sw/subl_commands.py:32-40` send
 - `sw/state.py:36-37` reader_for
-- `sw/subl_reader.py:1227-1241` Reader.context
+- `sw/subl_reader.py:1227-1244` Reader.context
 - `sw/subl_views.py:324-328` selected_text
 - `sw/plan.py:121-124` visible_specs
 - `sw/subl_reader.py:769-772` Reader.take_edits
 - `sw/subl_executor.py:220-234` wait_for_user
 
-## 19. Linking words to code (34 views)
+## 19. Linking words to code (37 views)
 
 primary+p joins words of the draft to selections in the sights, from either side; the words go out as a <here> tag, and a click on them shows their place.
 
@@ -347,14 +347,17 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:55-61` Links.link_from_code
 - `sw/subl_links.py:63-74` Links.link_from_bench
 - `sw/subl_links.py:76-94` Links.add
-- `sw/subl_links.py:278-282` carets
+- `sw/subl_links.py:294-298` carets
 - `sw/subl_links.py:130-140` Links.tagged
-- `sw/subl_links.py:196-205` Links.places
-- `sw/subl_links.py:266-268` Links.draft_start
-- `sw/subl_links.py:207-232` Links.follow
-- `sw/subl_links.py:285-291` repaint
+- `sw/subl_links.py:196-200` Links.places
+- `sw/subl_links.py:281-291` ends
+- `sw/marks.py:231-240` place_text
+- `sw/subl_links.py:202-208` Links.code
+- `sw/subl_links.py:269-271` Links.draft_start
+- `sw/subl_links.py:210-235` Links.follow
+- `sw/subl_links.py:301-307` repaint
 - `sw/subl_reader.py:828-839` Reader.show_place
-- `sw/subl_links.py:270-275` Links.clear
+- `sw/subl_links.py:273-278` Links.clear
 - `sw/subl_links.py:96-101` Links.show_made
 - `sw/subl_links.py:103-108` Links.remove
 - `sw/subl_links.py:110-115` Links.prune
@@ -362,16 +365,16 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:120-122` Links.bench_region
 - `sw/subl_links.py:124-128` Links.by_sight
 - `sw/marks.py:215-228` span_relation
-- `sw/marks.py:231-243` here_tags
-- `sw/subl_links.py:234-253` Links.follow_code
-- `sw/subl_links.py:255-260` Links.repaint_bench
+- `sw/marks.py:243-257` here_tags
+- `sw/subl_links.py:237-256` Links.follow_code
+- `sw/subl_links.py:258-263` Links.repaint_bench
 - `sw/subl_links.py:142-151` Links.ask
 - `sw/subl_links.py:153-156` Links.frame_question
 - `sw/subl_links.py:170-181` Links.follow_question
 - `sw/subl_links.py:183-194` Links.select
 - `sw/subl_links.py:158-161` Links.kept_questions
 - `sw/subl_links.py:163-168` Links.restore_questions
-- `sw/subl_links.py:262-264` Links.forget_shown
+- `sw/subl_links.py:265-267` Links.forget_shown
 - `sw/subl_commands.py:248-254` SightWalkWindowListener.on_post_text_command
 
 ## 20. Opening the editor (11 views)
@@ -475,11 +478,11 @@ The guide's manual, the tools' descriptions and schemas it gets at its start, an
 - `sw/manual.py:6-20` MANUAL: opening
 - `sw/manual.py:22-49` MANUAL: Showing code
 - `sw/manual.py:51-54` MANUAL: Writing code that fits the reader
-- `sw/manual.py:56-97` MANUAL: Conversation
-- `sw/manual.py:99-134` MANUAL: Indicators
-- `sw/manual.py:137-140` tool
-- `sw/manual.py:143-146` TRANSITION
-- `sw/manual.py:148-180` TOOLS
+- `sw/manual.py:56-101` MANUAL: Conversation
+- `sw/manual.py:103-138` MANUAL: Indicators
+- `sw/manual.py:141-144` tool
+- `sw/manual.py:147-150` TRANSITION
+- `sw/manual.py:152-186` TOOLS
 - `sw/validator.py:11-13` TRANSITION_FORM
 - `sw/subl_guide.py:20-25` PROMPT
 - `sw/permissions.py:8-19` FIELDS
@@ -513,7 +516,7 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/subl_mcp_http.py:78-81` Handler.authorized
 - `sw/subl_mcp_http.py:65-74` reply
 - `sw/subl_mcp_http.py:50-62` answer
-- `sw/manual.py:137-140` tool
+- `sw/manual.py:141-144` tool
 - `sw/subl_mcp_http.py:38-47` tool_result
 - `sw/subl_mcp_http.py:23-35` call_tool
 - `sw/subl_executor.py:209-217` wait_until_ready
@@ -677,7 +680,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_commands.py:314-318` SightWalkOpenTourCommand.open
 - `sw/words.py:141-148` trips_count
 - `sw/subl_reader.py:898-912` Reader.open_tour
-- `sw/subl_reader.py:1257-1259` read_json
+- `sw/subl_reader.py:1260-1262` read_json
 - `sw/ontology.py:294-300` tour_from
 - `sw/ontology.py:273-277` informator_from
 - `sw/ontology.py:257-260` trip_from
@@ -690,8 +693,8 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_reader.py:948-956` Reader.kept_marks
 - `sw/subl_reader.py:958-960` Reader.line_text
 - `sw/subl_reader.py:962-973` Reader.restore_marks
-- `sw/subl_reader.py:1244-1246` transcripts_path
-- `sw/subl_reader.py:1249-1254` read_transcripts
+- `sw/subl_reader.py:1247-1249` transcripts_path
+- `sw/subl_reader.py:1252-1257` read_transcripts
 - `sw/subl_chat.py:206-209` set_transcript
 - `sw/ontology.py:280-284` dumps
 - `sw/subl_vetting.py:227-236` save_walked

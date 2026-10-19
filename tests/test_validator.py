@@ -48,6 +48,13 @@ class ShowTest(unittest.TestCase):
                   {"files": [("/r/a.py:1-5", "/r/a.py", None, 5)]})
         self.assertNotIn("root", str(caught.exception))
 
+    def test_one_unit(self):
+        args = {"sights": ["a.py:1-9"], "transitions": [], "trip": "T"}
+        files = [("a.py:1-9", "/r/a.py", 20, 9)]
+        check("show", args, {"files": files, "functions": [("a.py:1-9", ["m"], ["A"])]})
+        with self.assertRaises(Refusal):
+            check("show", args, {"files": files, "functions": [("a.py:1-9", ["m"], ["A", "B"])]})
+
     def test_shape(self):
         for args in ({"sights": "a.py:1-5", "transitions": []}, {"sights": ["a.py:1-5"]},
                      {"sights": ["a.py"], "transitions": []}):

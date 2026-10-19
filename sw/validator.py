@@ -87,13 +87,18 @@ def files(facts, root):
 
 
 def one_function(facts):
-    """A sight holds one function at most, whole or a fragment (Jakub). facts["functions"]:
-    [(spec, the functions defined in it)]."""
-    crowded = ["%s holds %s" % (spec, " and ".join(names))
-               for spec, names in facts.get("functions") or [] if len(names) > 1]
+    """A sight holds one function at most, whole or a fragment, and one class at most, the one
+    its function is part of (Jakub). facts["functions"]: [(spec, functions, outermost functions
+    and classes)]."""
+    crowded = []
+    for spec, functions, units in facts.get("functions") or []:
+        if len(functions) > 1 or len(units) > 1:
+            many = functions if len(functions) > 1 else units
+            crowded.append("%s holds %s" % (spec, " and ".join(many)))
     if crowded:
-        raise Refusal("A sight holds one function at most, whole or a fragment; %s: give each "
-                      "function a sight of its own." % "; ".join(crowded))
+        raise Refusal("A sight holds one function at most, whole or a fragment, and no more of a "
+                      "class than the one that function is part of; %s: give each a sight of "
+                      "its own." % "; ".join(crowded))
 
 
 def check_show(args, facts):

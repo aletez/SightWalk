@@ -120,29 +120,43 @@ def functions_in(lines, begin, end):
     another of them: a sight holds one at most (Jakub). A function whose def stands above the
     range counts when the range starts in its body, and defs nested in it are its own (the
     guide's findings, 2026-10-18: a tail of f with def g passed, nested defs were refused)."""
-    found, open_indent = open_above(lines, begin, end)
+    return blocks_in(lines, begin, end, ("def",))
+
+
+def units_in(lines, begin, end):
+    """The outermost functions and classes lines begin..end hold, whole or in part: a sight
+    holds one at most, a function and the class it is part of being one (Jakub, 2026-10-19: a
+    method's tail with the next class's head, or two classes without methods, passed)."""
+    return blocks_in(lines, begin, end, ("def", "class"))
+
+
+BLOCK = re.compile(r"^\s*(?:async\s+)?(def|class)\s+(\w+)")
+
+
+def blocks_in(lines, begin, end, keywords):
+    """The outermost blocks of keywords the range holds: one open above it when the range
+    starts in its body, then each one whose opening line stands in it, outside the last."""
+    found, open_indent = open_above(lines, begin, end, keywords)
     for text in lines[begin - 1:end]:
         if not text.strip():
             continue
         if open_indent is not None and indent(text) <= open_indent:
             open_indent = None
-        match = FUNCTION.match(text)
-        if match and open_indent is None:
-            found.append(match.group(1))
+        match = BLOCK.match(text)
+        if match and match.group(1) in keywords and open_indent is None:
+            found.append(match.group(2))
             open_indent = indent(text)
     return found
 
 
-def open_above(lines, begin, end):
-    """([name], its def's indentation) of the outermost function whose body the range starts
+def open_above(lines, begin, end, keywords=("def",)):
+    """([name], its indentation) of the outermost block of keywords whose body the range starts
     in, or ([], None)."""
     first = next((n for n in range(begin, end + 1) if lines[n - 1].strip()), None)
-    if first is None:
+    opening = ancestors(lines, first, set(keywords)) if first is not None else []
+    if not opening:
         return [], None
-    defs = [n for n in ancestors(lines, first, {"def"})]
-    if not defs:
-        return [], None
-    return [FUNCTION.match(lines[defs[0] - 1]).group(1)], indent(lines[defs[0] - 1])
+    return [BLOCK.match(lines[opening[0] - 1]).group(2)], indent(lines[opening[0] - 1])
 
 
 def elided(lines, begin, end, frozen):

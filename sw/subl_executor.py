@@ -17,7 +17,7 @@ from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PO
 from .marks import read_marks, untag
 from .ontology import trip_from
 from .subl_reader import Reader
-from .spec import functions_in, parse_spec, repo_root, sight_name
+from .spec import functions_in, units_in, parse_spec, repo_root, sight_name
 from .validator import check, trip_of
 from .subl_views import hide_chrome
 
@@ -148,14 +148,16 @@ def sight_files(specs, root):
 
 
 def sight_functions(found):
-    """[(spec, the functions defined in its lines)] of the sights whose files exist."""
+    """[(spec, its functions, its outermost functions and classes)] of the sights whose files
+    exist (see spec.functions_in, spec.units_in)."""
     result = []
     for spec, path, lines, end in found:
         if lines is None or end > lines:
             continue
         with open(path, encoding="utf-8", errors="replace") as f:
             text = f.read().split("\n")
-        result.append((spec, functions_in(text, parse_spec(spec)[1], end)))
+        begin = parse_spec(spec)[1]
+        result.append((spec, functions_in(text, begin, end), units_in(text, begin, end)))
     return result
 
 

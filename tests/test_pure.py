@@ -280,6 +280,13 @@ class AncestorsTest(unittest.TestCase):
                   "        pass", "    return a"]
         self.assertEqual(spec.functions_in(nested, 2, 7), ["f"])  # a and b are f's own
 
+    def test_one_class(self):
+        code = ["class A:", "    def m(self):", "        return 1", "", "class B:", "    x = 1",
+                "", "class C:", "    y = 2"]
+        self.assertEqual(spec.units_in(code, 2, 6), ["A", "B"])  # a method's tail, the next class
+        self.assertEqual(spec.units_in(code, 5, 9), ["B", "C"])  # two classes without methods
+        self.assertEqual(spec.units_in(code, 1, 3), ["A"])  # a class with its method is one
+
     def test_breathing(self):
         self.assertEqual(spec.breathing(self.LINES, 4, 6), (3, 7))
         self.assertEqual(spec.breathing(self.LINES, 9, 10), (8, 11))

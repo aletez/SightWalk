@@ -25,7 +25,7 @@ Showing code
   user asks about another branch (an error, a different input, another caller), call show
   again with the sequence for that branch.
 - A sight holds one function at most, whole or a fragment of it: the lines that carry the
-  trip's story at that step. show refuses a sight with two functions in it. Do not count on
+  trip's story at that step, and of a class no more than the one that function is part of. show refuses a sight with two functions or two classes in it. Do not count on
   functions being short, and never shorten code to fit a sight. The plugin itself shows the
   def line (and the class line) above a fragment, frozen under the sight's header, and a note
   like "⋮ 14 lines of run" where the function's code is left out above or below (a few lines

@@ -36,7 +36,7 @@ TRIPS = [
      "From the HTTP server's thread to the show operation on Sublime's, with every check on the "
      "way.",
      ["subl_executor.execute", "subl_executor.run_on_main", "subl_executor.facts",
-      "subl_executor.sight_files", "subl_executor.sight_functions", "spec.functions_in", "spec.open_above",
+      "subl_executor.sight_files", "subl_executor.sight_functions", "spec.functions_in", "spec.units_in", "spec.blocks_in", "spec.open_above",
       "validator.check", "validator.check_show", "validator.one_function",
       "subl_executor.op_show", "subl_executor.named", "validator.not_stopped", "validator.trip_of", "marks.trip_place", "ontology.Sight.parse",
       "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem",

@@ -1,31 +1,31 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "5fe792195bd90327b813249f1b65fd9acaae6f11",
+ "commit": "815fe67ba96e02850bc9dedbd250a7b17501092b",
  "sights": [
   "sw/subl_commands.py:154-157",
-  "sw/subl_reader.py:727-728",
+  "sw/subl_reader.py:737-738",
   "sw/subl_editor.py:81-92",
   "sw/subl_editor.py:74-79",
   "sw/subl_editor.py:67-72",
-  "sw/subl_reader.py:730-743",
-  "sw/subl_reader.py:745-750"
+  "sw/subl_reader.py:740-753",
+  "sw/subl_reader.py:755-760"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 157],
-   "to": [1, 727]
+   "to": [1, 737]
   },
   {
    "type": "calls",
-   "from": [1, 728],
+   "from": [1, 738],
    "to": [2, 81]
   },
   {
    "type": "calls",
-   "from": [1, 728],
-   "to": [5, 730]
+   "from": [1, 738],
+   "to": [5, 740]
   },
   {
    "type": "calls",
@@ -44,8 +44,8 @@
   },
   {
    "type": "calls",
-   "from": [5, 742],
-   "to": [6, 745]
+   "from": [5, 752],
+   "to": [6, 755]
   }
  ]
 }

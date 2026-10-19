@@ -1,7 +1,7 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "d3cc5a3330634a240b39f0b31a4e27ff38b7287f",
+ "commit": "449873736b654911a32989a01c97c7784f467694",
  "sights": [
   "sw/subl_reader.py:226-240",
   "sw/subl_asked.py:33-44",

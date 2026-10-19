@@ -1,7 +1,7 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "d3cc5a3330634a240b39f0b31a4e27ff38b7287f",
+ "commit": "449873736b654911a32989a01c97c7784f467694",
  "sights": [
   "sw/subl_commands.py:92-102",
   "sw/subl_reader.py:697-702",

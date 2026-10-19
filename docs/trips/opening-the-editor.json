@@ -1,7 +1,7 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "adb438e3c05e5ad4223abad10cd9705ba96970b7",
+ "commit": "635ac0d0fd5d471e4dbcb9fdaf7b607447bbb404",
  "sights": [
   "sw/subl_commands.py:138-148",
   "sw/subl_reader.py:735-740",
@@ -12,8 +12,8 @@
   "sw/subl_editor.py:34-44",
   "sw/subl_editor.py:46-58",
   "sw/subl_editor.py:60-65",
-  "sw/subl_geometry.py:69-77",
-  "sw/subl_geometry.py:79-87",
+  "sw/subl_geometry.py:69-78",
+  "sw/subl_geometry.py:80-89",
   "sw/subl_reader.py:711-721"
  ],
  "transitions": [
@@ -65,7 +65,7 @@
   {
    "type": "calls",
    "from": [9, 77],
-   "to": [10, 79]
+   "to": [10, 80]
   }
  ]
 }

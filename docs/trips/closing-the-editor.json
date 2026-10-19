@@ -1,7 +1,7 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "adb438e3c05e5ad4223abad10cd9705ba96970b7",
+ "commit": "635ac0d0fd5d471e4dbcb9fdaf7b607447bbb404",
  "sights": [
   "sw/subl_commands.py:154-157",
   "sw/subl_reader.py:742-743",

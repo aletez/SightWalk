@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "adb438e3c05e5ad4223abad10cd9705ba96970b7",
+ "commit": "635ac0d0fd5d471e4dbcb9fdaf7b607447bbb404",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -3010,36 +3010,10 @@
    "from": [
     "the-layout",
     4,
-    89
+    91
    ],
    "to": [
     "the-layout"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-layout",
-    4,
-    96
-   ],
-   "to": [
-    "names-and-room",
-    6,
-    56
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "the-layout",
-    4,
-    97
-   ],
-   "to": [
-    "names-and-room",
-    6,
-    56
    ]
   },
   {
@@ -3073,7 +3047,33 @@
    "from": [
     "the-layout",
     4,
-    109
+    100
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    101
+   ],
+   "to": [
+    "names-and-room",
+    6,
+    56
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-layout",
+    4,
+    111
    ],
    "to": [
     "window-events",
@@ -3086,12 +3086,12 @@
    "from": [
     "the-layout",
     4,
-    111
+    113
    ],
    "to": [
     "arranging-the-views",
     3,
-    122
+    124
    ]
   },
   {
@@ -3099,7 +3099,7 @@
    "from": [
     "the-layout",
     4,
-    112
+    114
    ],
    "to": [
     "names-and-room",
@@ -3149,7 +3149,7 @@
    "from": [
     "the-layout",
     6,
-    137
+    139
    ],
    "to": [
     "the-layout"
@@ -3160,7 +3160,7 @@
    "from": [
     "the-layout",
     6,
-    142
+    144
    ],
    "to": [
     "building-blocks",
@@ -3173,7 +3173,7 @@
    "from": [
     "the-layout",
     6,
-    143
+    145
    ],
    "to": [
     "names-and-room",
@@ -3186,7 +3186,7 @@
    "from": [
     "the-layout",
     7,
-    133
+    135
    ],
    "to": [
     "the-layout"
@@ -3380,7 +3380,7 @@
    "from": [
     "arranging-the-views",
     3,
-    122
+    124
    ],
    "to": [
     "arranging-the-views"
@@ -3391,7 +3391,7 @@
    "from": [
     "arranging-the-views",
     3,
-    126
+    128
    ],
    "to": [
     "names-and-room",
@@ -3404,12 +3404,12 @@
    "from": [
     "arranging-the-views",
     3,
-    127
+    129
    ],
    "to": [
     "the-layout",
     7,
-    133
+    135
    ]
   },
   {
@@ -3417,7 +3417,7 @@
    "from": [
     "arranging-the-views",
     3,
-    129
+    131
    ],
    "to": [
     "names-and-room",
@@ -3430,7 +3430,7 @@
    "from": [
     "arranging-the-views",
     3,
-    131
+    133
    ],
    "to": [
     "names-and-room",
@@ -4121,7 +4121,7 @@
    "to": [
     "arranging-the-views",
     3,
-    122
+    124
    ]
   },
   {
@@ -7638,7 +7638,7 @@
    "from": [
     "opening-the-editor",
     9,
-    77
+    78
    ],
    "to": [
     "names-and-room",
@@ -7651,36 +7651,10 @@
    "from": [
     "opening-the-editor",
     10,
-    79
+    80
    ],
    "to": [
     "opening-the-editor"
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "opening-the-editor",
-    10,
-    84
-   ],
-   "to": [
-    "the-layout",
-    5,
-    40
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "opening-the-editor",
-    10,
-    85
-   ],
-   "to": [
-    "names-and-room",
-    4,
-    12
    ]
   },
   {

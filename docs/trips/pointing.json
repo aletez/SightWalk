@@ -1,7 +1,7 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "87c0a990ec9d487a970fc77a84fdc4d9b25c63cd",
+ "commit": "cfd45b59dfb2c84f2ffd55d0519fff71c3bb72d7",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:270-297",
@@ -20,12 +20,12 @@
   "sw/spec.py:58-64",
   "sw/spec.py:50-55",
   "sw/marks.py:246-258",
-  "sw/subl_reader.py:995-1021",
+  "sw/subl_reader.py:1007-1033",
   "sw/subl_chat.py:222-225",
-  "sw/subl_reader.py:1023-1034",
-  "sw/subl_reader.py:1097-1112",
-  "sw/subl_reader.py:967-976",
-  "sw/subl_reader.py:950-965"
+  "sw/subl_reader.py:1035-1046",
+  "sw/subl_reader.py:1109-1124",
+  "sw/subl_reader.py:979-988",
+  "sw/subl_reader.py:962-977"
  ],
  "transitions": [
   {
@@ -125,52 +125,52 @@
   },
   {
    "type": "calls",
-   "from": [17, 1000],
+   "from": [17, 1012],
    "to": [18, 222]
-  },
-  {
-   "type": "calls",
-   "from": [17, 1005],
-   "to": [5, 91]
   },
   {
    "type": "calls",
    "from": [17, 1017],
-   "to": [19, 1023]
-  },
-  {
-   "type": "calls",
-   "from": [19, 1026],
-   "to": [10, 14]
-  },
-  {
-   "type": "calls",
-   "from": [20, 1101],
-   "to": [3, 300]
-  },
-  {
-   "type": "calls",
-   "from": [20, 1112],
-   "to": [4, 650]
-  },
-  {
-   "type": "calls",
-   "from": [21, 970],
-   "to": [18, 222]
-  },
-  {
-   "type": "calls",
-   "from": [21, 974],
-   "to": [22, 950]
-  },
-  {
-   "type": "calls",
-   "from": [22, 955],
    "to": [5, 91]
   },
   {
    "type": "calls",
-   "from": [22, 964],
+   "from": [17, 1029],
+   "to": [19, 1035]
+  },
+  {
+   "type": "calls",
+   "from": [19, 1038],
+   "to": [10, 14]
+  },
+  {
+   "type": "calls",
+   "from": [20, 1113],
+   "to": [3, 300]
+  },
+  {
+   "type": "calls",
+   "from": [20, 1124],
+   "to": [4, 650]
+  },
+  {
+   "type": "calls",
+   "from": [21, 982],
+   "to": [18, 222]
+  },
+  {
+   "type": "calls",
+   "from": [21, 986],
+   "to": [22, 962]
+  },
+  {
+   "type": "calls",
+   "from": [22, 967],
+   "to": [5, 91]
+  },
+  {
+   "type": "calls",
+   "from": [22, 976],
    "to": [11, 228]
   }
  ]

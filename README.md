@@ -1,6 +1,6 @@
 # SightWalk
 
-**Vet generated code on a trip that an AI guide lays out for you.**
+**Vet generated code on a trip an AI guide lays out just for you.**
 
 *Po polsku: [README.pl.md](README.pl.md).*
 

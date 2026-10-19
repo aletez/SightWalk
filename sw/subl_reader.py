@@ -1213,7 +1213,7 @@ class Reader(Geometry):
         framed = [(start + a, start + b, scope, placed[m]) for (a, b, _, m), scope
                   in zip(frames, marks.frame_scopes(frames, text.strip()))]
         label = start - len("A: ")
-        if clear:
+        if clear or not self.answers:  # a new trip since the last marks starts a new answer
             self.answers.append({"labels": [], "marks": [], "frames": []})
         answer = self.answers[-1]
         answer["labels"].append(label)

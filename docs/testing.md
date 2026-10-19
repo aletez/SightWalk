@@ -32,10 +32,10 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two sights with a plain background and a gutter in the header's hue, the conversation on the left under a one-line grey header "Bench" with a faded `[?]` at its right; hovering it lists the shortcuts. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two sights, one whole function each, with a plain background and a gutter in the header's hue, the conversation on the left under a one-line grey header "Bench" with a faded `[?]` at its right; hovering it lists the shortcuts. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
-| `python3 tools/poke.py marks` | An answer placing its own marks (send a message on the bench first): `1` framed in the text and as an icon on line 8 of (a), `A` on line 12, "the jump" framed, with its ends on (a):5 and (b):40. A mark off screen shows an eye on the first or last visible line instead. |
-| `python3 tools/poke.py double` | Two marks on line 8: the first in the gutter, the second on the strip between the bench and the Sights. |
+| `python3 tools/poke.py marks` | An answer placing its own marks, counted from each sight's `def` line d: `1` framed in the text and as an icon on line d+3 of (a), `A` on d+7, "the jump" framed, from (a) d+1 to (b) d+2. A mark off screen shows an eye on the first or last visible line instead. |
+| `python3 tools/poke.py double` | Two marks on line d+3 of (a): the first in the gutter, the second on the strip between the bench and the Sights. |
 | `python3 tools/poke.py state` | JSON with `sights`, `focus` and `visible`. |
 | `python3 tools/poke.py badtoken` | `Unauthorized…` |
 

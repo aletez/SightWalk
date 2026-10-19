@@ -1,7 +1,7 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "5ffbca85ce776ee41c1f26f53348921da0c12038",
+ "commit": "527f6b1e401c94e6c09583a062ea9899cddf0c3d",
  "sights": [
   "sw/subl_reader.py:304-308",
   "sw/subl_reader.py:55-56",
@@ -13,12 +13,12 @@
   "sw/subl_reader.py:357-362",
   "sw/subl_reader.py:364-368",
   "sw/subl_reader.py:370-384",
-  "sw/subl_reader.py:491-494",
+  "sw/subl_reader.py:495-498",
   "sw/plan.py:85-90",
   "sw/plan.py:79-82",
   "sw/plan.py:50-66",
   "sw/plan.py:69-76",
-  "sw/subl_reader.py:581-587"
+  "sw/subl_reader.py:585-591"
  ],
  "transitions": [
   {
@@ -69,16 +69,16 @@
   {
    "type": "calls",
    "from": [9, 373],
-   "to": [10, 491]
+   "to": [10, 495]
   },
   {
    "type": "calls",
    "from": [9, 374],
-   "to": [15, 581]
+   "to": [15, 585]
   },
   {
    "type": "calls",
-   "from": [10, 494],
+   "from": [10, 498],
    "to": [11, 85]
   },
   {

@@ -89,11 +89,11 @@ def files(facts, root):
 def one_function(facts):
     """A sight holds one function at most, whole or a fragment (Jakub). facts["functions"]:
     [(spec, the functions defined in it)]."""
-    crowded = ["%s holds %s" % (spec, ", ".join(names))
+    crowded = ["%s holds %s" % (spec, " and ".join(names))
                for spec, names in facts.get("functions") or [] if len(names) > 1]
     if crowded:
-        raise Refusal("A sight holds one function at most, whole or a fragment: split %s into "
-                      "one sight per function." % "; ".join(crowded))
+        raise Refusal("A sight holds one function at most, whole or a fragment; %s: give each "
+                      "function a sight of its own." % "; ".join(crowded))
 
 
 def check_show(args, facts):

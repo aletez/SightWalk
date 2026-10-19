@@ -145,10 +145,10 @@ From an offset to Sublime's layout: every sight's cells at its place, shifted.
 - `sw/plan.py:93-101` offset_range
 - `sw/subl_geometry.py:60-63` Geometry.bench_floor
 - `sw/subl_reader.py:480-490` Reader.render
-- `sw/subl_geometry.py:87-118` Geometry.column_rects
+- `sw/subl_geometry.py:89-120` Geometry.column_rects
 - `sw/subl_geometry.py:40-44` Geometry.column
-- `sw/subl_geometry.py:135-146` Geometry.sight_cells
-- `sw/subl_geometry.py:131-133` Geometry.floor_height
+- `sw/subl_geometry.py:137-148` Geometry.sight_cells
+- `sw/subl_geometry.py:133-135` Geometry.floor_height
 - `sw/subl_reader.py:407-414` Reader.layout
 - `sw/subl_views.py:86-110` reader_layout
 - `sw/subl_views.py:76-83` to_layout
@@ -160,7 +160,7 @@ After a new layout: every view into its group, then back at its place.
 - `sw/subl_reader.py:492-510` Reader.arrange
 - `sw/subl_reader.py:442-447` Reader.place
 - `sw/subl_reader.py:416-431` Reader.strip_in_front
-- `sw/subl_geometry.py:120-129` Geometry.strip_rows
+- `sw/subl_geometry.py:122-131` Geometry.strip_rows
 - `sw/subl_reader.py:329-340` Reader.clone
 - `sw/subl_reader.py:449-478` Reader.assign_groups
 - `sw/subl_views.py:63-66` hide_chrome
@@ -387,7 +387,7 @@ Enter or the header's button: the editor laid over the sights, ranges and marks 
 - `sw/subl_editor.py:46-58` Editor.track
 - `sw/subl_editor.py:60-65` Editor.hold
 - `sw/subl_geometry.py:69-77` Geometry.editor_geometry
-- `sw/subl_geometry.py:79-85` Geometry.gutter_px
+- `sw/subl_geometry.py:79-87` Geometry.gutter_px
 - `sw/subl_reader.py:711-721` Reader.editor_header_clicked
 
 ## 21. Closing the editor (7 views)

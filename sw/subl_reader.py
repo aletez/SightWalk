@@ -143,6 +143,7 @@ class Reader(Geometry):
         self.chat.settings().set("scroll_past_end", self.pan)
         self.tool = "Map"  # the Tools pane's tab shown
         self.below_header = subl_chat.make_header(self.window, self.chat, "Tools")
+        match_font(self.below_header, self.chat_header)  # the headers' font, not the bench's
         self.status_view = subl_chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
         apply_grey(self.below_header)

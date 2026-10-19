@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
+ "commit": "2dc402a4afa9d6c046069bbf9b2da76dc854b496",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -440,7 +440,7 @@
    "from": [
     "plugin-start-and-stop",
     0,
-    43
+    45
    ],
    "to": [
     "plugin-start-and-stop"
@@ -451,12 +451,12 @@
    "from": [
     "plugin-start-and-stop",
     0,
-    46
+    48
    ],
    "to": [
     "endings",
     5,
-    330
+    344
    ]
   },
   {
@@ -464,7 +464,7 @@
    "from": [
     "plugin-start-and-stop",
     0,
-    48
+    50
    ],
    "to": [
     "words-in-two-languages",
@@ -477,12 +477,12 @@
    "from": [
     "plugin-start-and-stop",
     0,
-    49
+    51
    ],
    "to": [
     "words-in-two-languages",
     1,
-    52
+    54
    ]
   },
   {
@@ -545,7 +545,7 @@
    "from": [
     "plugin-start-and-stop",
     6,
-    59
+    61
    ],
    "to": [
     "plugin-start-and-stop"
@@ -556,7 +556,7 @@
    "from": [
     "plugin-start-and-stop",
     6,
-    63
+    65
    ],
    "to": [
     "endings",
@@ -1104,7 +1104,7 @@
    "from": [
     "a-request-arrives",
     16,
-    278
+    302
    ],
    "to": [
     "a-request-arrives"
@@ -1115,7 +1115,7 @@
    "from": [
     "a-request-arrives",
     16,
-    286
+    310
    ],
    "to": [
     "pointing",
@@ -4322,7 +4322,7 @@
    "from": [
     "pointing",
     1,
-    302
+    326
    ],
    "to": [
     "pointing"
@@ -4333,7 +4333,7 @@
    "from": [
     "pointing",
     2,
-    293
+    317
    ],
    "to": [
     "pointing"
@@ -4344,7 +4344,7 @@
    "from": [
     "pointing",
     3,
-    332
+    356
    ],
    "to": [
     "pointing"
@@ -4604,7 +4604,7 @@
    "from": [
     "pointing",
     16,
-    278
+    302
    ],
    "to": [
     "a-request-arrives"
@@ -4976,7 +4976,7 @@
    "to": [
     "pointing",
     1,
-    302
+    326
    ]
   },
   {
@@ -5008,7 +5008,7 @@
    "from": [
     "the-agent-says-something",
     2,
-    355
+    379
    ],
    "to": [
     "the-agent-says-something"
@@ -5554,7 +5554,7 @@
    "from": [
     "the-agent-says-something",
     15,
-    248
+    262
    ],
    "to": [
     "the-agent-says-something"
@@ -5565,7 +5565,7 @@
    "from": [
     "the-agent-says-something",
     15,
-    252
+    266
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5578,7 +5578,7 @@
    "from": [
     "the-agent-says-something",
     15,
-    254
+    268
    ],
    "to": [
     "polling-and-the-wheel",
@@ -5591,7 +5591,7 @@
    "from": [
     "the-agent-says-something",
     16,
-    263
+    277
    ],
    "to": [
     "the-agent-says-something"
@@ -5602,7 +5602,7 @@
    "from": [
     "the-agent-says-something",
     16,
-    268
+    282
    ],
    "to": [
     "the-user-sends-a-message",
@@ -5615,7 +5615,7 @@
    "from": [
     "the-agent-says-something",
     16,
-    271
+    285
    ],
    "to": [
     "pointing",
@@ -5628,7 +5628,7 @@
    "from": [
     "the-agent-says-something",
     16,
-    271
+    285
    ],
    "to": [
     "pointing",
@@ -5641,7 +5641,7 @@
    "from": [
     "the-agent-says-something",
     17,
-    344
+    368
    ],
    "to": [
     "the-agent-says-something"
@@ -5663,7 +5663,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    351
+    365
    ],
    "to": [
     "stopping-an-answer"
@@ -5674,7 +5674,7 @@
    "from": [
     "stopping-an-answer",
     0,
-    352
+    366
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6013,7 +6013,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     4,
-    443
+    457
    ],
    "to": [
     "the-tools-pane-s-tabs"
@@ -6024,7 +6024,7 @@
    "from": [
     "the-tools-pane-s-tabs",
     4,
-    444
+    458
    ],
    "to": [
     "the-user-sends-a-message",
@@ -6749,7 +6749,7 @@
    "from": [
     "drawing-the-map",
     15,
-    436
+    450
    ],
    "to": [
     "drawing-the-map"
@@ -6987,7 +6987,7 @@
    "from": [
     "linking-words-to-code",
     0,
-    177
+    191
    ],
    "to": [
     "linking-words-to-code"
@@ -6998,7 +6998,7 @@
    "from": [
     "linking-words-to-code",
     0,
-    178
+    192
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7011,7 +7011,7 @@
    "from": [
     "linking-words-to-code",
     0,
-    183
+    197
    ],
    "to": [
     "opening-the-editor",
@@ -7035,7 +7035,7 @@
    "from": [
     "linking-words-to-code",
     2,
-    257
+    271
    ],
    "to": [
     "linking-words-to-code"
@@ -7046,7 +7046,7 @@
    "from": [
     "linking-words-to-code",
     2,
-    259
+    273
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7414,7 +7414,7 @@
    "from": [
     "linking-words-to-code",
     27,
-    261
+    285
    ],
    "to": [
     "linking-words-to-code"
@@ -7576,7 +7576,7 @@
    "from": [
     "linking-words-to-code",
     37,
-    310
+    324
    ],
    "to": [
     "linking-words-to-code"
@@ -7587,7 +7587,7 @@
    "from": [
     "linking-words-to-code",
     37,
-    313
+    327
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7600,7 +7600,7 @@
    "from": [
     "linking-words-to-code",
     37,
-    314
+    328
    ],
    "to": [
     "opening-the-editor",
@@ -7613,7 +7613,7 @@
    "from": [
     "opening-the-editor",
     0,
-    200
+    214
    ],
    "to": [
     "opening-the-editor"
@@ -7624,7 +7624,7 @@
    "from": [
     "opening-the-editor",
     0,
-    201
+    215
    ],
    "to": [
     "the-user-sends-a-message",
@@ -7890,7 +7890,7 @@
    "from": [
     "closing-the-editor",
     0,
-    216
+    230
    ],
    "to": [
     "closing-the-editor"
@@ -7901,7 +7901,7 @@
    "from": [
     "closing-the-editor",
     0,
-    217
+    231
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8248,7 +8248,7 @@
    "from": [
     "window-events",
     9,
-    277
+    291
    ],
    "to": [
     "window-events"
@@ -8259,7 +8259,7 @@
    "from": [
     "window-events",
     9,
-    278
+    292
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8272,7 +8272,7 @@
    "from": [
     "window-events",
     9,
-    278
+    292
    ],
    "to": [
     "plugin-start-and-stop",
@@ -8285,12 +8285,12 @@
    "from": [
     "window-events",
     9,
-    279
+    293
    ],
    "to": [
     "primary-g",
     6,
-    319
+    333
    ]
   },
   {
@@ -8298,7 +8298,7 @@
    "from": [
     "window-events",
     10,
-    233
+    247
    ],
    "to": [
     "window-events"
@@ -8309,7 +8309,7 @@
    "from": [
     "window-events",
     10,
-    234
+    248
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8322,7 +8322,7 @@
    "from": [
     "window-events",
     10,
-    237
+    251
    ],
    "to": [
     "names-and-room",
@@ -8335,7 +8335,7 @@
    "from": [
     "window-events",
     10,
-    237
+    251
    ],
    "to": [
     "the-layout",
@@ -8348,7 +8348,7 @@
    "from": [
     "window-events",
     11,
-    227
+    241
    ],
    "to": [
     "window-events"
@@ -8672,7 +8672,7 @@
    "from": [
     "ctrl-tab",
     1,
-    284
+    298
    ],
    "to": [
     "ctrl-tab"
@@ -8683,7 +8683,7 @@
    "from": [
     "ctrl-tab",
     1,
-    288
+    302
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8755,7 +8755,7 @@
    "from": [
     "primary-g",
     0,
-    464
+    478
    ],
    "to": [
     "primary-g"
@@ -8766,7 +8766,7 @@
    "from": [
     "primary-g",
     0,
-    465
+    479
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8779,7 +8779,7 @@
    "from": [
     "primary-g",
     0,
-    469
+    483
    ],
    "to": [
     "endings",
@@ -8792,7 +8792,7 @@
    "from": [
     "primary-g",
     0,
-    474
+    488
    ],
    "to": [
     "a-new-reader-window",
@@ -8805,7 +8805,7 @@
    "from": [
     "primary-g",
     0,
-    475
+    489
    ],
    "to": [
     "plugin-start-and-stop",
@@ -8829,7 +8829,7 @@
    "from": [
     "primary-g",
     2,
-    477
+    491
    ],
    "to": [
     "primary-g"
@@ -8840,7 +8840,7 @@
    "from": [
     "primary-g",
     2,
-    480
+    494
    ],
    "to": [
     "names-and-room",
@@ -8951,7 +8951,7 @@
    "from": [
     "primary-g",
     6,
-    319
+    333
    ],
    "to": [
     "primary-g"
@@ -8962,7 +8962,7 @@
    "from": [
     "primary-g",
     6,
-    321
+    335
    ],
    "to": [
     "the-user-sends-a-message",
@@ -8975,7 +8975,7 @@
    "from": [
     "primary-g",
     7,
-    281
+    295
    ],
    "to": [
     "primary-g"
@@ -9439,7 +9439,7 @@
    "to": [
     "pointing",
     1,
-    302
+    326
    ]
   },
   {
@@ -9478,7 +9478,7 @@
    "to": [
     "the-agent-says-something",
     2,
-    355
+    379
    ]
   },
   {
@@ -9939,7 +9939,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    298
+    312
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -9950,7 +9950,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     0,
-    306
+    320
    ],
    "to": [
     "the-user-sends-a-message",
@@ -9987,7 +9987,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    190
+    204
    ],
    "to": [
     "here-and-asking-by-a-shortcut"
@@ -9998,7 +9998,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    191
+    205
    ],
    "to": [
     "the-user-sends-a-message",
@@ -10011,7 +10011,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    193
+    207
    ],
    "to": [
     "the-agent-says-something",
@@ -10024,7 +10024,7 @@
    "from": [
     "here-and-asking-by-a-shortcut",
     2,
-    194
+    208
    ],
    "to": [
     "the-user-sends-a-message",
@@ -10037,7 +10037,7 @@
    "from": [
     "words-in-two-languages",
     0,
-    427
+    441
    ],
    "to": [
     "words-in-two-languages"
@@ -10048,7 +10048,7 @@
    "from": [
     "words-in-two-languages",
     1,
-    52
+    54
    ],
    "to": [
     "words-in-two-languages"
@@ -10059,7 +10059,7 @@
    "from": [
     "words-in-two-languages",
     1,
-    56
+    58
    ],
    "to": [
     "one-colour-scheme-for-the-trips",
@@ -10153,7 +10153,7 @@
    "from": [
     "words-in-two-languages",
     7,
-    512
+    526
    ],
    "to": [
     "words-in-two-languages"
@@ -10164,7 +10164,7 @@
    "from": [
     "words-in-two-languages",
     8,
-    527
+    541
    ],
    "to": [
     "words-in-two-languages"
@@ -10175,7 +10175,7 @@
    "from": [
     "endings",
     0,
-    452
+    466
    ],
    "to": [
     "endings"
@@ -10186,7 +10186,7 @@
    "from": [
     "endings",
     1,
-    455
+    469
    ],
    "to": [
     "endings"
@@ -10197,7 +10197,7 @@
    "from": [
     "endings",
     1,
-    456
+    470
    ],
    "to": [
     "how-claude-comes-to-listen-to-sublime",
@@ -10258,7 +10258,7 @@
    "from": [
     "endings",
     4,
-    325
+    339
    ],
    "to": [
     "endings"
@@ -10269,7 +10269,7 @@
    "from": [
     "endings",
     5,
-    330
+    344
    ],
    "to": [
     "endings"
@@ -10302,7 +10302,7 @@
    "from": [
     "endings",
     8,
-    284
+    298
    ],
    "to": [
     "ctrl-tab"
@@ -10313,7 +10313,7 @@
    "from": [
     "endings",
     8,
-    288
+    302
    ],
    "to": [
     "the-user-sends-a-message",
@@ -10326,7 +10326,7 @@
    "from": [
     "endings",
     9,
-    358
+    372
    ],
    "to": [
     "endings"
@@ -10337,7 +10337,7 @@
    "from": [
     "endings",
     9,
-    359
+    373
    ],
    "to": [
     "words-in-two-languages",
@@ -10350,7 +10350,7 @@
    "from": [
     "endings",
     10,
-    338
+    352
    ],
    "to": [
     "endings"
@@ -10361,7 +10361,7 @@
    "from": [
     "endings",
     10,
-    339
+    353
    ],
    "to": [
     "the-user-sends-a-message",
@@ -10411,7 +10411,7 @@
    "from": [
     "endings",
     12,
-    343
+    357
    ],
    "to": [
     "endings"
@@ -10422,7 +10422,7 @@
    "from": [
     "endings",
     12,
-    344
+    358
    ],
    "to": [
     "the-user-sends-a-message",
@@ -10803,7 +10803,7 @@
    "from": [
     "building-blocks",
     9,
-    224
+    238
    ],
    "to": [
     "building-blocks"
@@ -10814,7 +10814,7 @@
    "from": [
     "building-blocks",
     10,
-    245
+    259
    ],
    "to": [
     "building-blocks"
@@ -10825,7 +10825,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     0,
-    239
+    253
    ],
    "to": [
     "settings-and-the-rest-of-the-colours"
@@ -10836,7 +10836,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     0,
-    240
+    254
    ],
    "to": [
     "the-user-sends-a-message",
@@ -11345,7 +11345,7 @@
    "from": [
     "an-informator-and-its-tour",
     0,
-    368
+    382
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11356,7 +11356,7 @@
    "from": [
     "an-informator-and-its-tour",
     0,
-    371
+    385
    ],
    "to": [
     "words-in-two-languages",
@@ -11369,7 +11369,7 @@
    "from": [
     "an-informator-and-its-tour",
     1,
-    383
+    397
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11380,7 +11380,7 @@
    "from": [
     "an-informator-and-its-tour",
     1,
-    388
+    402
    ],
    "to": [
     "words-in-two-languages",
@@ -11393,7 +11393,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    399
+    413
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11404,7 +11404,7 @@
    "from": [
     "an-informator-and-its-tour",
     2,
-    405
+    419
    ],
    "to": [
     "names-and-room",
@@ -11417,7 +11417,7 @@
    "from": [
     "an-informator-and-its-tour",
     3,
-    412
+    426
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11428,7 +11428,7 @@
    "from": [
     "an-informator-and-its-tour",
     4,
-    416
+    430
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11439,7 +11439,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    376
+    390
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11450,7 +11450,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    377
+    391
    ],
    "to": [
     "endings",
@@ -11463,7 +11463,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    377
+    391
    ],
    "to": [
     "a-new-reader-window",
@@ -11476,7 +11476,7 @@
    "from": [
     "an-informator-and-its-tour",
     5,
-    380
+    394
    ],
    "to": [
     "plugin-start-and-stop",
@@ -12590,7 +12590,7 @@
    "from": [
     "seeing-where-the-code-asks",
     3,
-    489
+    503
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -12601,7 +12601,7 @@
    "from": [
     "seeing-where-the-code-asks",
     4,
-    492
+    506
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -12684,7 +12684,7 @@
    "from": [
     "seeing-where-the-code-asks",
     8,
-    500
+    514
    ],
    "to": [
     "seeing-where-the-code-asks"
@@ -13122,7 +13122,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     0,
-    119
+    120
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13146,25 +13146,12 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     0,
-    135
+    132
    ],
    "to": [
-    "the-user-sends-a-message",
-    2,
-    32
-   ]
-  },
-  {
-   "type": "calls",
-   "from": [
-    "driving-a-trip-from-the-terminal",
-    0,
-    136
-   ],
-   "to": [
-    "the-user-sends-a-message",
-    0,
-    46
+    "opening-the-editor",
+    1,
+    736
    ]
   },
   {
@@ -13172,7 +13159,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     1,
-    139
+    264
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13183,7 +13170,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     2,
-    156
+    162
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13194,7 +13181,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     3,
-    246
+    248
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13205,7 +13192,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     3,
-    250
+    253
    ],
    "to": [
     "pointing",
@@ -13218,10 +13205,84 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     4,
-    167
+    139
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    4,
+    140
+   ],
+   "to": [
+    "endings",
+    15,
+    40
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    5,
+    177
+   ],
+   "to": [
+    "driving-a-trip-from-the-terminal"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    5,
+    179
+   ],
+   "to": [
+    "opening-the-editor",
+    1,
+    736
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    6,
+    156
+   ],
+   "to": [
+    "driving-a-trip-from-the-terminal"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    6,
+    157
+   ],
+   "to": [
+    "endings",
+    15,
+    40
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "driving-a-trip-from-the-terminal",
+    6,
+    159
+   ],
+   "to": [
+    "the-user-sends-a-message",
+    0,
+    46
    ]
   },
   {

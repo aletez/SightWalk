@@ -1,39 +1,41 @@
 {
  "name": "Driving a trip from the terminal",
  "kind": "run",
- "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
+ "commit": "2dc402a4afa9d6c046069bbf9b2da76dc854b496",
  "sights": [
-  "sw/subl_commands.py:119-136",
-  "sw/subl_commands.py:139-153",
-  "sw/subl_commands.py:156-164",
-  "sw/marks.py:246-258",
-  "sw/subl_commands.py:167-170"
+  "sw/subl_commands.py:120-132",
+  "sw/marks.py:264-282",
+  "sw/subl_commands.py:162-174",
+  "sw/marks.py:248-261",
+  "sw/subl_commands.py:139-150",
+  "sw/subl_commands.py:177-184",
+  "sw/subl_commands.py:156-159"
  ],
  "transitions": [
   {
    "type": "calls",
+   "from": [0, 124],
+   "to": [1, 264]
+  },
+  {
+   "type": "calls",
    "from": [0, 130],
-   "to": [1, 139]
+   "to": [2, 162]
   },
   {
    "type": "calls",
-   "from": [0, 132],
-   "to": [2, 156]
+   "from": [2, 164],
+   "to": [3, 248]
   },
   {
    "type": "calls",
-   "from": [1, 152],
-   "to": [4, 167]
+   "from": [4, 145],
+   "to": [2, 162]
   },
   {
    "type": "calls",
-   "from": [2, 158],
-   "to": [3, 246]
-  },
-  {
-   "type": "calls",
-   "from": [2, 162],
-   "to": [4, 167]
+   "from": [4, 150],
+   "to": [5, 177]
   }
  ]
 }

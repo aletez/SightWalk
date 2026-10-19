@@ -1,14 +1,14 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "104649de85ba2b859a2edba9ded8992107b912a8",
+ "commit": "2dc402a4afa9d6c046069bbf9b2da76dc854b496",
  "sights": [
-  "sw/subl_commands.py:368-374",
-  "sw/subl_commands.py:383-396",
-  "sw/subl_commands.py:399-409",
-  "sw/subl_commands.py:412-413",
-  "sw/subl_commands.py:416-421",
-  "sw/subl_commands.py:376-380",
+  "sw/subl_commands.py:382-388",
+  "sw/subl_commands.py:397-410",
+  "sw/subl_commands.py:413-423",
+  "sw/subl_commands.py:426-427",
+  "sw/subl_commands.py:430-435",
+  "sw/subl_commands.py:390-394",
   "sw/words.py:141-148",
   "sw/subl_reader.py:899-913",
   "sw/subl_reader.py:1261-1263",
@@ -35,62 +35,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 369],
-   "to": [1, 383]
+   "from": [0, 383],
+   "to": [1, 397]
   },
   {
    "type": "calls",
-   "from": [0, 373],
+   "from": [0, 387],
    "to": [6, 141]
   },
   {
    "type": "calls",
-   "from": [0, 374],
-   "to": [5, 376]
+   "from": [0, 388],
+   "to": [5, 390]
   },
   {
    "type": "calls",
-   "from": [1, 387],
-   "to": [2, 399]
+   "from": [1, 401],
+   "to": [2, 413]
   },
   {
    "type": "calls",
-   "from": [1, 388],
-   "to": [4, 416]
+   "from": [1, 402],
+   "to": [4, 430]
   },
   {
    "type": "calls",
-   "from": [1, 388],
-   "to": [3, 412]
+   "from": [1, 402],
+   "to": [3, 426]
   },
   {
    "type": "calls",
-   "from": [1, 390],
-   "to": [2, 399]
+   "from": [1, 404],
+   "to": [2, 413]
   },
   {
    "type": "calls",
-   "from": [1, 392],
-   "to": [4, 416]
+   "from": [1, 406],
+   "to": [4, 430]
   },
   {
    "type": "calls",
-   "from": [1, 394],
-   "to": [3, 412]
+   "from": [1, 408],
+   "to": [3, 426]
   },
   {
    "type": "calls",
-   "from": [1, 395],
-   "to": [4, 416]
+   "from": [1, 409],
+   "to": [4, 430]
   },
   {
    "type": "calls",
-   "from": [3, 413],
-   "to": [4, 416]
+   "from": [3, 427],
+   "to": [4, 430]
   },
   {
    "type": "calls",
-   "from": [5, 378],
+   "from": [5, 392],
    "to": [7, 899]
   },
   {

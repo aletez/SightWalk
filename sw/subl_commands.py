@@ -108,66 +108,80 @@ class SightWalkCycleSightsCommand(sublime_plugin.WindowCommand):
             reader.cycle(step)
 
 
-class SightWalkSelectCommand(sublime_plugin.WindowCommand):
-    """For tests from a terminal, without mouse or keys (Jakub): subl --command 'sight_walk_select
-    {"bench": "to", "at": "(a):27:55-63", "link": true}'. bench: the first occurrence of a
-    string in the draft, selected as by hand; bench_at: columns of the draft instead, "10-11"
-    (from 1, the end included), for another occurrence; at: a place in a sight, selected
-    likewise; add: keep what is selected there; link: as [⛓]; type: text appended to the
-    draft; send: send the draft."""
+# For tests from a terminal, without mouse or keys (Jakub), in the guide's own notation:
+#   subl --command 'sight_walk_type {"text": "<here at=\\"(a):27:55-63\\">to</here> a nie to"}'
+#   subl --command 'sight_walk_select {"at": "(a):27:55-63 (>):1:10-11"}'
+#   subl --command 'sight_walk_send_draft'
 
-    def run(self, at=None, bench=None, bench_at=None, add=False, link=False, type=None,
-            send=False):
+class SightWalkTypeCommand(sublime_plugin.WindowCommand):
+    """Text appended to the bench's draft, each <here at="..."> in it a link made as by
+    primary+p, so the guide gets the text back as it was typed."""
+
+    def run(self, text):
         reader = state.current_reader()
         if reader is None:
             return
-        if type:
-            chat = reader.chat
-            chat.sel().clear()
-            chat.sel().add(sublime.Region(chat.size()))
-            chat.run_command("insert", {"characters": type})
-        if bench or bench_at:
-            select_words(reader, bench, bench_at, add)
-        if at:
-            select_place(reader, at, add)
-        if link:
-            reader.links.link_either()
-        if send:
+        plain, spans = marks.read_here(text)
+        chat, offset = reader.chat, reader.chat.size()
+        chat.sel().clear()
+        chat.sel().add(sublime.Region(offset))
+        chat.run_command("insert", {"characters": plain})
+        for start, end, at in spans:
+            places = [place_region(reader, place) for place in at.split()]
+            reader.links.add(sublime.Region(offset + start, offset + end),
+                             [(reader.sight_of(view), region) for view, region in places])
+
+
+class SightWalkSelectCommand(sublime_plugin.WindowCommand):
+    """Places selected as the user would select them, "(a):27:55-63 (>):1:10-11", each view's
+    selections replaced; (>) is the bench's draft."""
+
+    def run(self, at):
+        reader = state.current_reader()
+        if reader is None:
+            return
+        chosen = {}
+        for place in at.split():
+            view, region = place_region(reader, place)
+            chosen.setdefault(view.id(), (view, []))[1].append(region)
+        for view, regions in chosen.values():
+            view.sel().clear()
+            view.sel().add_all(regions)
+            note_selection(reader, view)
+
+
+class SightWalkSendDraftCommand(sublime_plugin.WindowCommand):
+    """The draft sent, as Enter on the bench sends it."""
+
+    def run(self):
+        reader = state.current_reader()
+        if reader is not None:
             reader.chat.run_command("sight_walk_send")
 
 
-def select_words(reader, words, columns, add):
-    """The first occurrence of words in the draft, or its columns "10-11", selected as the user
-    would."""
-    chat, start = reader.chat, reader.links.draft_start(reader.chat)
-    draft = chat.substr(sublime.Region(start, chat.size()))
-    if columns:
-        first, _, last = str(columns).partition("-")
-        at, end = int(first) - 1, int(last or first)
+def place_region(reader, place):
+    """(view, Region) of a place: a sight's lines or characters, or the draft's with (>)."""
+    index, (l1, c1), (l2, c2) = marks.parse_place(place)
+    if index == marks.BENCH:
+        view, base = reader.chat, reader.links.draft_start(reader.chat)
+        row = view.rowcol(base)[0]
+        point = lambda line, col: (base if line == 1 else view.text_point(row + line - 1, 0)) + col
     else:
-        at = draft.find(words)
-        end = at + len(words)
-    if at < 0 or end > len(draft):
-        return print("SightWalk: no %r in the draft." % (columns or words))
-    select(chat, sublime.Region(start + at, start + end), add)
-    reader.links.note_bench(chat)
+        view = reader.sights[index].view
+        point = lambda line, col: view.text_point(line - 1, 0) + col
+    begin = point(l1, (c1 or 1) - 1)
+    end = point(l2, c2) if c2 else view.line(point(l2, 0)).b
+    return view, sublime.Region(begin, end)
 
 
-def select_place(reader, at, add):
-    """A place, "(a):27:55-63" or "(a):27", selected in its sight, as the user would."""
-    index, (l1, c1), (l2, c2) = marks.parse_place(at)
-    view = reader.sights[index].view
-    begin = view.text_point(l1 - 1, (c1 or 1) - 1)
-    end = view.text_point(l2 - 1, c2) if c2 else view.line(view.text_point(l2 - 1, 0)).b
-    select(view, sublime.Region(begin, end), add)
-    reader.touched = view
-    reader.links.note_code(view, index)
-
-
-def select(view, region, add):
-    if not add:
-        view.sel().clear()
-    view.sel().add(region)
+def note_selection(reader, view):
+    """What the user's own selection would tell the links: the draft's words, or a sight's."""
+    index = reader.sight_of(view)
+    if index is None:
+        reader.links.note_bench(view)
+    else:
+        reader.touched = view
+        reader.links.note_code(view, index)
 
 
 class SightWalkLinkCommand(sublime_plugin.TextCommand):

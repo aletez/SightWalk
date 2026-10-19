@@ -366,3 +366,18 @@ class ParsePlace(unittest.TestCase):
     def test_refused(self):
         with self.assertRaises(ValueError):
             marks.parse_place("c:34")
+
+
+class ReadHere(unittest.TestCase):
+    def test_round_trip(self):
+        tagged = marks.here_tags("this and that", [(0, 13, "(b):1"), (0, 4, "(a):3:5-9", "x")])
+        plain, spans = marks.read_here(tagged)
+        self.assertEqual(plain, "this and that")
+        self.assertEqual(spans, [(0, 4, "(a):3:5-9"), (0, 13, "(b):1")])
+
+    def test_bench_place(self):
+        self.assertEqual(marks.parse_place("(>):1:10-11"), (marks.BENCH, (1, 10), (1, 11)))
+
+    def test_unbalanced(self):
+        with self.assertRaises(ValueError):
+            marks.read_here('<here at="(a):1">open')

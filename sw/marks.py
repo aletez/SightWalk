@@ -240,14 +240,17 @@ def place_text(name, first, last):
     return "%s:%d:%s" % (name, l1, c1 if c1 == c2 else "%d-%d" % (c1, c2))
 
 
-PLACE = re.compile(r"^(\(\w+\)):(\d+)(?::(\d+))?(?:-(\d+)(?::(\d+))?)?$")
+BENCH = "(>)"  # the bench's draft as a place (Jakub: its prompt is >>>), its lines from 1
+PLACE = re.compile(r"^(\(\w+\)|\(>\)):(\d+)(?::(\d+))?(?:-(\d+)(?::(\d+))?)?$")
+HERE = re.compile(r'<here at="([^"]*)"(?: code="[^"]*")?>|</here>')
 
 
 def parse_place(text):
-    """The inverse of place_text: (sight index, (line, column), (line, column)), the columns None
-    for whole lines; "(c):34-36", "(c):34:12-16", "(c):34:12-36:5". ValueError if it is none."""
+    """The inverse of place_text: (sight index, or BENCH, (line, column), (line, column)), the
+    columns None for whole lines; "(c):34-36", "(c):34:12-16", "(c):34:12-36:5", "(>):1:10-11".
+    ValueError if it is none."""
     found = PLACE.match(text.strip())
-    index = sight_index(found.group(1)) if found else None
+    index = (BENCH if found.group(1) == BENCH else sight_index(found.group(1))) if found else None
     if index is None:
         raise ValueError("%r is no place: write \"(c):34\" or \"(c):34:12-16\"." % text)
     line, column, to, to_column = (int(g) if g else None for g in found.group(2, 3, 4, 5))
@@ -256,6 +259,27 @@ def parse_place(text):
     if to_column is not None:
         return index, (line, column), (to, to_column)
     return index, (line, column), (line, to or column)
+
+
+def read_here(text):
+    """The inverse of here_tags: (the text without tags, [(start, end, at)]), nested tags
+    included, code attributes dropped. ValueError for a tag left open or closed twice."""
+    plain, spans, open_ = [], [], []
+    last = length = 0
+    for match in HERE.finditer(text):
+        plain.append(text[last:match.start()])
+        length += match.start() - last
+        last = match.end()
+        if match.group(1) is not None:
+            open_.append((length, match.group(1)))
+        elif open_:
+            start, at = open_.pop()
+            spans.append((start, length, at))
+        else:
+            raise ValueError("</here> without <here>")
+    if open_:
+        raise ValueError("<here> left open")
+    return "".join(plain) + text[last:], sorted(spans)
 
 
 def here_tags(text, spans):

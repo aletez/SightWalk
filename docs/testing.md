@@ -39,18 +39,17 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 | `python3 tools/poke.py state` | JSON with `sights` and `visible`, and `here` (`"(a):12:5"`) once a sight has the caret. |
 | `python3 tools/poke.py badtoken` | `Unauthorized…` |
 
-### Selecting, linking and sending without mouse or keys
+### Typing, selecting and sending without mouse or keys
 
-`sight_walk_select` acts in the open trip as the user would, so a test can be driven from a terminal:
+Three commands act in the open trip as the user would, in the guide's own notation, so a test can be driven from a terminal:
 
 ```bash
-subl --command 'sight_walk_select {"type": "to a nie to"}'
-subl --command 'sight_walk_select {"bench": "to", "at": "(a):27:55-63", "link": true}'
-subl --command 'sight_walk_select {"bench_at": "10-11", "at": "(a):27:70-75", "link": true}'
-subl --command 'sight_walk_select {"send": true}'
+subl --command 'sight_walk_type {"text": "<here at=\"(a):27:55-63\">to</here> a nie <here at=\"(b):38:5-11\">to</here>"}'
+subl --command 'sight_walk_select {"at": "(a):26 (>):1:10-11"}'
+subl --command 'sight_walk_send_draft'
 ```
 
-`type` appends to the draft; `bench` selects the first occurrence of a string in the draft, `bench_at` its columns instead (`"10-11"`, from 1, the end included) for another occurrence; `at` selects a place in a sight (`"(a):27"` whole lines, `"(a):27:55-63"` characters); `add` keeps what is selected there; `link` links as [⛓] does; `send` sends the draft. Send only while an agent listens (`wait_for_user`), or SightWalk starts a guide of its own.
+`sight_walk_type` appends the text to the draft and makes each `<here>` a link, as primary+p would; the guide then gets the text back as typed, with `code="…"` added. `sight_walk_select` selects places: a sight's lines (`"(a):26"`) or characters (`"(a):27:55-63"`), and `(>)`, the bench's draft (its lines from 1). `sight_walk_send_draft` sends the draft: only while an agent listens (`wait_for_user`), or SightWalk starts a guide of its own.
 
 ## 4. Geometry and editing, by hand
 

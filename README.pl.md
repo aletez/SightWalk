@@ -1,6 +1,6 @@
 # SightWalk
 
-**Sprawdzaj kod napisany przez AI na wycieczkach, które układa dla Ciebie przewodnik AI.**
+**Sprawdzaj wygenerowany kod na wycieczce, którą ułoży dla Ciebie przewodnik AI.**
 
 *In English: [README.md](README.md).*
 
@@ -67,8 +67,9 @@ i przejść w zaplanowanej kolejności jako **turnus**. Tak opisany jest kod sam
 Po prawej **panorama**: jedna kolumna widoków, przewijana jak jeden dokument. Każdy widok ma
 nagłówek z nazwą, (a), (b), (c)…, i plikiem, zabarwiony kolorem swojego pliku. Linie `def`
 i `class`, do których należy fragment, stoją zamrożone pod nagłówkiem, a „⋮ 10 linii Handler”
-mówi, co zostało pominięte. Widoki przewijają się razem, jak jeden dokument: kółko nad
-którymkolwiek z nich przesuwa całą wycieczkę, a każdy nagłówek zostaje przy swoim kodzie.
+mówi, co zostało pominięte. Widoki przewijają się razem, jak jeden dokument, a każdy nagłówek
+zostaje przy swoim kodzie. Wycieczkę przesuwa kółko nad paskiem przewijania, a nad ławką i panelem
+Narzędzi wtedy, gdy `⌘S` tak ustawi.
 
 Po lewej **ławka**. Na górze strony użytkownik pyta, czemu klient dostaje 202 **here**, a nie
 200, z „here” połączonym z linią 105. Przewodnik odpowiada znacznikami: ikony **1** i **2** na
@@ -212,7 +213,7 @@ Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.c
 | `⌘P` | połącz zaznaczone słowa z zaznaczonym kodem |
 | `Enter`, `Esc` | otwórz edytor widoku, zamknij go |
 | `Alt+R` | przywróć położenia |
-| `⌘S` | przełącza, co robi kółko nad ławką i panelem Narzędzi: przewija całą wycieczkę albo tylko ten panel |
+| `⌘S` | przełącza, co robi kółko nad ławką i panelem Narzędzi: przewija wycieczkę albo ten panel |
 | `Ctrl+Tab` | fokus na następny widok na ekranie |
 | `Alt+↑↓`, `PgUp`/`PgDn` | przewiń wycieczkę |
 

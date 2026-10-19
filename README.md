@@ -1,6 +1,6 @@
 # SightWalk
 
-**Vet AI-generated code on trips that an AI guide lays out for you.**
+**Vet generated code on a trip that an AI guide lays out for you.**
 
 *Po polsku: [README.pl.md](README.pl.md).*
 
@@ -65,8 +65,9 @@ them) and walked in a planned order as a **tour**. The plugin's own code is docu
 On the right, the **Sights**: one column of panes, scrolled as one document. Each sight has a
 header with its name, (a), (b), (c)…, and its file, tinted in a hue per file. The `def` and
 `class` lines a fragment belongs to stay frozen under its header, and "⋮ 10 lines of Handler"
-says what was left out. The sights scroll together, as one document: the wheel over any of
-them moves the whole trip, and every header stays with its code.
+says what was left out. The sights scroll together, as one document, and every header
+stays with its code. The wheel moves the trip over the scroll strip, and over the bench and the
+Tools pane when `⌘S` sets it so.
 
 On the left, the **Vetting Bench**. At the top of this page the user asks *why does the client
 get 202 **here** and not 200?*, with "here" linked to line 105. The guide answers with marks:
@@ -208,7 +209,7 @@ Requirements: macOS, Linux or Windows; [Sublime Text 4](https://www.sublimetext.
 | `⌘P` | link selected words to selected code |
 | `Enter`, `Esc` | open the editor on a sight, close it |
 | `Alt+R` | reset positions |
-| `⌘S` | switch what the wheel over the bench and the Tools pane does: scroll the whole trip, or only that pane |
+| `⌘S` | switch what the wheel over the bench and the Tools pane does: scroll the trip, or that pane |
 | `Ctrl+Tab` | focus the next sight on screen |
 | `Alt+↑↓`, `PgUp`/`PgDn` | scroll the trip |
 

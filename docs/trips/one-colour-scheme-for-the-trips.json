@@ -1,7 +1,7 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "2be2c7cb72b27d56249a269c55480414d8d713f4",
+ "commit": "6ae6bcefd77f2aca9aa9aa3b48e55adfa24d34ce",
  "sights": [
   "sw/subl_commands.py:61-63",
   "sw/subl_commands.py:65-76",

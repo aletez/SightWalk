@@ -1,7 +1,7 @@
 {
  "name": "The ontology: collections and sights",
  "kind": "survey",
- "commit": "c79a9192c165af1031b8144f7d6d15ece359974e",
+ "commit": "2be2c7cb72b27d56249a269c55480414d8d713f4",
  "sights": [
   "sw/ontology.py:25-26",
   "sw/ontology.py:28-30",

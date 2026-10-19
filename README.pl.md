@@ -1,0 +1,246 @@
+# SightWalk
+
+**Sprawdzaj kod napisany przez AI, oprowadzany po nim przez AI, które go napisało.**
+
+*In English: [README.md](README.md).*
+
+SightWalk to wtyczka do Sublime Text. Agent AI (Claude Code, przez MCP) otwiera okno wycieczki
+i układa w nim kod, który odpowiada na jedno Twoje pytanie: najczęściej jedno wykonanie
+programu, funkcja po funkcji, w kolejności, w jakiej przechodzi przez nie sterowanie. Potem
+objaśnia to wykonanie, zaznacza linie na marginesie, a Ty rozmawiasz z nim w ławce obok kodu.
+
+![Wycieczka przez jedno żądanie MCP w kodzie samej wtyczki. Użytkownik pyta, czemu klient
+dostaje 202 „here”, a to słowo jest połączone z linią 105; przewodnik odpowiada numerowanymi
+ikonami i dwoma skokami, w ramkach w swoich słowach i na marginesie; mapa wywołań
+poniżej](docs/images/trip.jpg)
+
+*Wszystkie zrzuty pochodzą z prawdziwych sesji: wtyczka sprawdza własny kod. Ta rozmowa jest po
+angielsku, pozostałe po polsku, tak jak się odbyły; interfejs na zrzutach jest angielski.*
+
+*Stan: publiczna alfa (październik 2026). Na co dzień działa na własnym kodzie; zdarzają się
+szorstkie miejsca.*
+
+---
+
+## Po co
+
+AI pisze kod szybciej, niż ludzie go czytają. Wąskie gardło przesunęło się z pisania na
+**sprawdzanie**: pewność, że wygenerowany kod robi to, o co prosiłeś, i nic więcej.
+
+W zwykłym edytorze kod leży tak, jak jest *przechowywany*: plik po pliku, w każdym z góry na
+dół. Pytanie „co się dzieje, gdy przychodzi żądanie?” oznacza skakanie po pięciu plikach,
+gubienie miejsca i trzymanie całej ścieżki w głowie.
+
+SightWalk układa kod tak, jak się *wykonuje*, albo tak, jak potrzebuje go pytanie, i stawia
+obok Ciebie agenta, który go napisał, żeby za niego odpowiadał.
+
+## Pomysł w kilku słowach
+
+Wtyczka mówi językiem zwiedzania:
+
+| Nazwa | Co to jest |
+|---|---|
+| **Panorama** | Prawa kolumna z kodem. |
+| **Widok** | Jeden panel panoramy: zakres linii pliku, najwyżej jedna funkcja, cała albo fragment. |
+| **Wycieczka** | Ciąg widoków dobranych do jednego pytania, czytany z góry na dół; tak nazywa się też samo okno. |
+| **Przewodnik** | Agent AI: dobiera wycieczkę, objaśnia ją, zaznacza linie i odpowiada. |
+| **Ławka** | Panel rozmowy z przewodnikiem. |
+
+Wycieczka bywa jednego z trzech rodzajów:
+
+- **wykonanie**: jedno wykonanie programu, widoki w kolejności, w jakiej przechodzi przez nie sterowanie;
+- **porównanie**: fragmenty obok siebie, np. dwie implementacje albo kod przed zmianą i po niej;
+- **przegląd**: wszystkie miejsca dotyczące jednej rzeczy, np. każda obsługa jednego błędu.
+
+Wycieczki można zapisać, połączyć w **informator** (sieć wycieczek z przejściami między nimi)
+i przejść w zaplanowanej kolejności jako **turnus**. Tak opisany jest kod samej wtyczki:
+[docs/trips.md](docs/trips.md) dzieli go na 43 wycieczki, każdą funkcję w co najmniej jednej.
+
+## Spacer po interfejsie
+
+### Wycieczka
+
+Po prawej **panorama**: jedna kolumna widoków, przewijana jak jeden dokument. Każdy widok ma
+nagłówek z nazwą, (a), (b), (c)…, i plikiem, zabarwiony kolorem swojego pliku. Linie `def`
+i `class`, do których należy fragment, stoją zamrożone pod nagłówkiem, a „⋮ 10 linii Handler”
+mówi, co zostało pominięte. Kółko przesuwa całą wycieczkę, ławka i mapa przesuwają się z nią,
+a wszystkie panele zostają wyrównane.
+
+Po lewej **ławka**. Na górze strony użytkownik pyta, czemu klient dostaje 202 **here**, a nie
+200, z „here” połączonym z linią 105. Przewodnik odpowiada znacznikami: ikony **1** i **2** na
+dwóch liniach `reply`, które odrzucają powiadomienie, skok **comes back** z `return None` do
+linii 105, ikona **3** na tej linii i skok **asks answer** dla drugiej gałęzi. Na zrzucie
+Turnusu niżej użytkownik pyta *po co reply i answer są oddzielnie?*. Nazwy funkcji w ławce mają
+kolory takie jak w kodzie.
+
+### Każde odniesienie to link
+
+Przewodnik umieszcza znaczniki we własnych słowach: oznacza cyfrę, `<icon at="(c):34">1</icon>`,
+albo słowa opisujące skok, `<jump from="(a):33" to="(b):41">wywołuje</jump>`. Widzisz cyfrę
+lub słowa w ramce koloru znacznika, a linia dostaje tę samą ikonę na marginesie i na pasku obok
+paska przewijania, więc znacznika poza ekranem nie da się przeoczyć. Kliknięcie obramowanego
+słowa zaznacza to, do czego się odnosi (oba końce skoku), i zapala tę samą strzałkę na mapie;
+drugie kliknięcie zdejmuje zaznaczenie.
+
+Można też linkować w drugą stronę. Zaznacz słowa w swojej wiadomości, zaznacz kod, naciśnij
+`⌘P` (`Ctrl+P`), a przewodnik dostanie wiadomość z tym linkiem jako
+`<here at="(c):34-36">to sprawdzenie</here>`. Wiadomość bez linków niesie to, co masz
+zaznaczone w kodzie, więc „czemu *to* tu jest?” zawsze znaczy to, na co patrzysz, nigdy zgadywanie.
+
+### Mapa
+
+![Mapa: trzynaście funkcji jako prostokąty w swojej klasie i dwóch plikach, przejścia nazwane
+przez przewodnika jako strzałki](docs/images/map.jpg)
+
+Panel Narzędzi pod ławką rysuje wycieczkę jako graf wywołań (przez Graphviz). Każdy widok to
+prostokąt w swojej klasie i pliku, a każde przejście nazwane przez przewodnika to strzałka.
+Każdy typ ma własny wygląd: `calls`, `returns`, `leads_to`, `passes_data`, `101s` (trzeba
+najpierw zrozumieć), `comparable`. Mapa pokazuje dokładnie to, co zadeklarował przewodnik, i
+niczego nie zgaduje. Gdy rysunek jest zły, zła jest relacja przewodnika, a to już samo w sobie
+jest znaleziskiem.
+
+### Turnusy
+
+![Turnus dziesięciu wycieczek w zakładce Turnus, trzy odhaczone jako przebyte; ławka trzyma
+rozmowę prowadzoną w tej wycieczce](docs/images/tour.jpg)
+
+**SightWalk: Open Tour** wylicza turnusy znalezione w otwartych folderach. Zakładka Turnus
+pokazuje wycieczki po kolei, a przebytą wycieczkę odhaczasz sam. Każda wycieczka pamięta swoją
+rozmowę i znaczniki przewodnika, więc spacer trwa dalej tam, gdzie się urwał.
+
+### Edycja na miejscu
+
+![Edytor otwarty nad panoramą: cały plik w liniach widoku, „End editing (Esc)” w nagłówku
+widoku](docs/images/editor.jpg)
+
+`Enter` w widoku (albo **Edytuj**) otwiera prawdziwy plik wprost nad wycieczką, w tych samych
+liniach. Zapisz, a wycieczka się przeładuje: każdy widok w nowym zakresie, każdy znacznik w
+nowej linii. Następna wiadomość powie przewodnikowi, które zakresy się zmieniły. `Esc` chowa
+edytor, a panele wracają tam, gdzie były.
+
+### Co wolno przewodnikowi
+
+![Zakładka Uprawnienia: pole przy każdym uprawnieniu, każde z wyjaśnieniem](docs/images/permissions.jpg)
+
+Gdy zadasz pytanie w ławce, a żaden przewodnik nie jest połączony, SightWalk go uruchamia:
+sesję Claude Code w tle, w repozytorium wycieczki. Domyślnie może tylko czytać kod. Zakładka
+Uprawnienia podnosi to według celu. Każde pole ma `[?]`, które mówi dokładnie, na co pozwala:
+edycja plików (w folderach, które wskażesz), zestawy poleceń powłoki (podgląd gita, testy,
+skrypty, commit, instalowanie, push) i szukanie w sieci. Wybory nieodwracalne, jak `git push` i
+nieograniczona powłoka, obowiązują tylko przez jedną sesję i nie są zapamiętywane. Zmiana
+restartuje przewodnika, a rozmowa zostaje. Gdy przewodnikowi czegoś brakuje, mówi o tym w ławce
+i nazywa pole. Uzasadnienie zestawów jest w
+[docs/guide-permissions.md](docs/guide-permissions.md) (po angielsku).
+
+### Odpowiedzi
+
+<img src="docs/images/answers.jpg" alt="Zakładka Odpowiedzi: każde pytanie i odpowiedź rozmowy po pierwszych słowach; kliknięcie przeniosło jedno pytanie na górę ławki" width="420">
+
+Zakładka Odpowiedzi wylicza wszystkie pytania i odpowiedzi z ławki po pierwszych słowach.
+Kliknięcie przenosi jedno z nich na górę ławki razem ze znacznikami (przy pytaniu: z tym, co było
+zaznaczone, gdy je wysłałeś). Drugie kliknięcie je chowa i przywraca ławkę tam, gdzie była.
+
+## Jak to jest zbudowane
+
+```
+Claude Code ──MCP przez HTTP──▶ subl_mcp_http ──▶ validator (czysty) ──▶ subl_executor ──▶ Sublime
+                                  sama wtyczka                              wycieczka, ławka, mapa
+```
+
+- **Wtyczka jest serwerem MCP.** Nie ma osobnego procesu: serwer HTTP z tokenem działa w
+  Pythonie 3.8 samego Sublime, na samej bibliotece standardowej.
+- **Każde wywołanie jest oceniane, zanim zadziała.** Czysty moduł `validator` odrzuca wywołanie
+  łamiące regułę, a jego komunikat mówi, co zrobić zamiast tego. Na przykład `show` odrzuca widok
+  z dwiema funkcjami, a `say` linię z trzema znacznikami. Wykonawca zbiera fakty, walidator tylko
+  je ocenia. Agenci uczą się z tych odmów jeszcze w tej samej sesji.
+- **Czysty rdzeń, cienka warstwa Sublime.** Moduły bez API Sublime (`spec`, `plan`, `marks`,
+  `ontology`, `callmap`, `validator`, `manual`, `permissions`…) trzymają logikę i są testowane
+  zwykłym Pythonem. Moduły z przedrostkiem `subl_` robią tylko to, czego trzeba od edytora, więc
+  przeniesienie do innego edytora zaczyna się od tego samego rdzenia.
+- **Ontologia zamiast doraźnych list.** Widoki, wycieczki, informatory i turnusy to jedna
+  hierarchia kolekcji z typowanymi przejściami między miejscami (`sw/ontology.py`); pliki
+  wycieczek to jej postać w JSON.
+- **Sprawdzana sobą.** Funkcje mają około 25 linii, żeby każda mieściła się w jednym widoku.
+  Skrypt `tools/trips.py` zapisuje kod wtyczki jako wycieczki i wymienia każdą funkcję, której
+  żadna wycieczka nie obejmuje, więc dokumentacja nie zostanie po cichu w tyle za kodem.
+
+Około 6200 linii Pythona w 31 modułach, 341 commitów od 4 października 2026.
+
+## Jak powstała
+
+**Koncepcja i projekt: Jakub Kozakoszczak. Kod: napisany przez Claude'a** (model Anthropic, w
+Claude Code).
+
+Ten podział to metoda, nie przypis. Jakub projektuje każde zachowanie, decyduje i sprawdza każdą
+zmianę w Sublime. Claude implementuje, testuje i proponuje alternatywy z uzasadnieniem. Zasady
+współpracy są w [CLAUDE.md](CLAUDE.md). Każda decyzja projektowa, jej powód i obecny stan są w
+[DECISIONS.md](DECISIONS.md): najnowsze na górze, każda oznaczona jako sprawdzona, zmieniona
+bez sprawdzenia albo otwarta. Nic nie jest uznane za działające, dopóki projektant nie zobaczy,
+że działa.
+
+SightWalk jest też narzędziem, którego ten sposób pracy potrzebował: kodem pisanym przez AI, za
+którym da się nadążyć, który da się przepytać i któremu można zaufać.
+
+## Instalacja (alfa)
+
+Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.com/);
+[Claude Code](https://claude.com/claude-code); do mapy [Graphviz](https://graphviz.org/)
+(`brew install graphviz`).
+
+1. Umieść repozytorium w pakietach Sublime, np. dowiązaniem (przykład dla macOS):
+   ```bash
+   ln -s "$PWD" ~/Library/Application\ Support/Sublime\ Text/Packages/SightWalk
+   ```
+2. W Sublime uruchom z palety poleceń **SightWalk: Set Up Agent Bridge**. Utworzy token i
+   położy polecenie rejestracji w schowku.
+3. Wklej to polecenie w terminalu i je uruchom (`claude mcp add … sight-walk …`).
+4. Otwórz sesję Claude Code w swoim projekcie i poproś na przykład: *„Użyj sight-walk, żeby
+   oprowadzić mnie po tym, co się dzieje, gdy przychodzi żądanie, a potem czekaj na moje
+   pytania.”* Możesz też napisać pytanie w ławce pustej wycieczki (`⌘G` / `Ctrl+G`, gdy ten skrót
+   jest włączony), a SightWalk sam uruchomi przewodnika.
+
+### Klawisze
+
+| Klawisz | W wycieczce |
+|---|---|
+| `⌘Enter` / `Enter` | wyślij wiadomość z ławki |
+| `⌘P` | połącz zaznaczone słowa z zaznaczonym kodem |
+| `Enter`, `Esc` | otwórz edytor widoku, zamknij go |
+| `Alt+R` | przywróć położenia |
+| `⌘S` | kółko nad ławką i narzędziami: przesuwa całą wycieczkę albo tylko je |
+| `Ctrl+Tab` | fokus na następny widok na ekranie |
+| `Alt+↑↓`, `PgUp`/`PgDn` | przewiń wycieczkę |
+
+`⌘` to `Ctrl` w Windows i Linuksie. Interfejs mówi po angielsku i po polsku
+(**SightWalk: Switch Language**).
+
+## Stan i ograniczenia
+
+- Alfa, budowana i używana na macOS; Windows i Linux nie były testowane.
+- Przewodnikiem jest Claude Code. Narzędzia może wywołać każdy klient MCP, ale podręcznik jest
+  napisany dla niego.
+- Granice funkcji są rozpoznawane w Pythonie. W innych językach widok nigdy nie jest odrzucany
+  za dwie funkcje.
+- W planach: notatki linkowane do rozmowy, legenda znaczników na ekranie i lista sprawdzeń, które
+  kod robi gdzie indziej, a tu nie.
+
+## Mapa repozytorium
+
+| Ścieżka | Co |
+|---|---|
+| `sight_walk.py` | punkt wejścia ładowany przez Sublime |
+| `sw/` | wtyczka: moduły czyste i moduły `subl_*`, które używają Sublime |
+| `tests/` | testy jednostkowe czystych modułów (`python3 -m unittest discover tests`) |
+| `tools/poke.py` | steruje wtyczką przez MCP bez agenta |
+| `tools/trips.py` | zapisuje kod wtyczki jako wycieczki w `docs/` |
+| `docs/` | wycieczki, informator i turnusy samej wtyczki; testowanie; uprawnienia |
+| `DECISIONS.md` | decyzje projektowe, powody i stan |
+| `CLAUDE.md` | jak projektant i AI pracują nad tym repozytorium |
+
+## Autor
+
+Jakub Kozakoszczak, koncepcja i projekt: [LinkedIn](https://www.linkedin.com/in/jakub-kozakoszczak/)
+
+## Licencja
+
+[MIT](LICENSE)

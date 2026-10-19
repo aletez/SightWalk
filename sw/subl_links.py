@@ -215,7 +215,6 @@ class Links:
         key = next((k for k in self.links if self.bench_region(k).contains(sel[0].b)
                     and not self.bench_region(k).empty()), None)
         if key is None:
-            self.shown = None
             return False
         places = self.links[key]
         for index, mine in self.by_sight(places).items():
@@ -259,6 +258,10 @@ class Links:
         scrolled to the phrases: that move would be the wheel's."""
         self.reader.bench_edited()
         repaint(self.reader.chat)
+
+    def forget_shown(self):
+        """A click that showed nothing: the next click on a link shows it again."""
+        self.shown = None
 
     def draft_start(self, view):
         """The draft starts after the protected transcript (see subl_chat)."""

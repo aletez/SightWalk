@@ -32,8 +32,10 @@ class SightWalkInsertCommand(sublime_plugin.TextCommand):
 def send(owner, text, here=None):
     """A message from the trip to the agent, with what the user sees and any edited ranges, and
     here: the places selected when it was sent, if the user linked no words (see subl_links)."""
-    extra = {"here": here} if here else {}
-    state.INBOX.put(dict(owner.context(), text=text, **extra, **owner.take_edits()))
+    context = owner.context()
+    if here:  # the selection is what "this" means: the sight in focus would only blur it
+        context = {"here": here, "visible": context.get("visible", [])}
+    state.INBOX.put(dict(context, text=text, **owner.take_edits()))
     owner.keep_transcript()
     subl_guide.await_answer(owner)
 
@@ -148,7 +150,10 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
             sublime.set_clipboard(marks.clean(sublime.get_clipboard()))
         reader = state.reader_for(self.view.window())
         if command_name == "drag_select" and reader is not None:
-            reader.links.follow(self.view) or reader.links.follow_question(self.view) or reader.follow_frame(self.view) or reader.follow_label(self.view)
+            shown = (reader.links.follow(self.view) or reader.links.follow_question(self.view)
+                     or reader.follow_frame(self.view) or reader.follow_label(self.view))
+            if not shown:
+                reader.links.forget_shown()
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

@@ -125,18 +125,26 @@ def check_say(args, facts):
         raise Refusal("Nothing to answer: the user has said nothing since you last waited. Say "
                       "nothing; call wait_for_user.")
     try:
-        text, marks, _ = read_marks(untag(args.get("text") or ""))
+        text, marks, frames = read_marks(untag(args.get("text") or ""))
         crowded = crowded_lines(resolve_marks(facts.get("sights") or [], marks))
     except ValueError as e:
         raise Refusal(str(e)) from None
     if crowded:
         raise Refusal("A line holds two marks at most (the gutter and the strip beside it): %s. "
                       "Drop a mark, or name the line's third role in words." % ", ".join(crowded))
-    numbers = line_refs(text)
+    # An icon's digit is no line number: "the line <icon …>1</icon>" reads "the line 1".
+    numbers = line_refs(mask(text, frames))
     if numbers:
         raise Refusal(NO_LINE_NUMBERS % ", ".join(numbers))
     if not marks and not facts.get("pointed") and speaks_of_code(text):
         raise Refusal(MARK_FIRST)
+
+
+def mask(text, frames):
+    """text with the framed words of marks blanked, so they are not read as line numbers."""
+    for start, end, *_ in frames:
+        text = text[:start] + "§" * (end - start) + text[end:]
+    return text
 
 
 def crowded_lines(resolved):

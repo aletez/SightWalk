@@ -63,6 +63,11 @@ class ShowTest(unittest.TestCase):
 
 
 class MarksAndSettingsTest(unittest.TestCase):
+    def test_icon_after_the_word_line(self):
+        sights, _ = stacked((1, 3), (10, 11))
+        check("say", {"text": 'Ta linia <icon at="(a):2">1</icon> czyta token.'},
+              dict(OPEN, sights=sights))
+
     def test_marks_in_the_answer(self):
         sights, _ = stacked((1, 3), (10, 11))
         facts = dict(OPEN, sights=sights)

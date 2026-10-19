@@ -1,10 +1,10 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "f7929339969088538091566bb344b651b59bf8a7",
+ "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
  "sights": [
-  "sw/subl_vetting.py:87-95",
-  "sw/subl_vetting.py:80-84",
+  "sw/subl_vetting.py:104-112",
+  "sw/subl_vetting.py:97-101",
   "sw/callmap.py:120-141",
   "sw/callmap.py:93-99",
   "sw/callmap.py:70-73",
@@ -14,33 +14,33 @@
   "sw/callmap.py:66-67",
   "sw/callmap.py:102-106",
   "sw/callmap.py:109-117",
-  "sw/subl_vetting.py:98-110",
-  "sw/subl_vetting.py:113-115",
-  "sw/subl_vetting.py:124-139",
-  "sw/subl_vetting.py:142-147",
+  "sw/subl_vetting.py:115-127",
+  "sw/subl_vetting.py:130-132",
+  "sw/subl_vetting.py:141-156",
+  "sw/subl_vetting.py:159-164",
   "sw/subl_commands.py:373-374",
-  "sw/subl_vetting.py:150-153"
+  "sw/subl_vetting.py:167-170"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 90],
-   "to": [1, 80]
+   "from": [0, 107],
+   "to": [1, 97]
   },
   {
    "type": "calls",
-   "from": [0, 92],
-   "to": [16, 150]
+   "from": [0, 109],
+   "to": [16, 167]
   },
   {
    "type": "calls",
-   "from": [0, 94],
+   "from": [0, 111],
    "to": [2, 120]
   },
   {
    "type": "calls",
-   "from": [0, 95],
-   "to": [11, 98]
+   "from": [0, 112],
+   "to": [11, 115]
   },
   {
    "type": "calls",
@@ -154,33 +154,33 @@
   },
   {
    "type": "calls",
-   "from": [11, 108],
-   "to": [16, 150]
+   "from": [11, 125],
+   "to": [16, 167]
   },
   {
    "type": "calls",
-   "from": [11, 110],
-   "to": [13, 124]
+   "from": [11, 127],
+   "to": [13, 141]
   },
   {
    "type": "calls",
-   "from": [13, 132],
-   "to": [12, 113]
+   "from": [13, 149],
+   "to": [12, 130]
   },
   {
    "type": "calls",
-   "from": [13, 139],
-   "to": [14, 142]
+   "from": [13, 156],
+   "to": [14, 159]
   },
   {
    "type": "calls",
-   "from": [14, 147],
-   "to": [13, 124]
+   "from": [14, 164],
+   "to": [13, 141]
   },
   {
    "type": "calls",
    "from": [15, 374],
-   "to": [14, 142]
+   "to": [14, 159]
   }
  ]
 }

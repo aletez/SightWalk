@@ -1,16 +1,16 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "f7929339969088538091566bb344b651b59bf8a7",
+ "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
  "sights": [
   "sw/subl_commands.py:46-53",
   "sw/subl_chat.py:163-177",
   "sw/subl_commands.py:32-40",
   "sw/state.py:36-37",
-  "sw/subl_reader.py:1105-1119",
+  "sw/subl_reader.py:1110-1124",
   "sw/subl_views.py:310-314",
   "sw/plan.py:121-124",
-  "sw/subl_reader.py:747-750",
+  "sw/subl_reader.py:751-754",
   "sw/subl_executor.py:220-234"
  ],
  "transitions": [
@@ -32,26 +32,26 @@
   {
    "type": "calls",
    "from": [2, 35],
-   "to": [4, 1105]
+   "to": [4, 1110]
   },
   {
    "type": "calls",
    "from": [2, 38],
-   "to": [7, 747]
+   "to": [7, 751]
   },
   {
    "type": "calls",
-   "from": [4, 1108],
+   "from": [4, 1113],
    "to": [6, 121]
   },
   {
    "type": "calls",
-   "from": [4, 1117],
+   "from": [4, 1122],
    "to": [5, 310]
   },
   {
    "type": "calls",
-   "from": [4, 1118],
+   "from": [4, 1123],
    "to": [5, 310]
   }
  ]

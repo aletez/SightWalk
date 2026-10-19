@@ -1,49 +1,55 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "f7929339969088538091566bb344b651b59bf8a7",
+ "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
  "sights": [
-  "sw/subl_reader.py:844-849",
-  "sw/subl_vetting.py:56-75",
+  "sw/subl_reader.py:849-854",
+  "sw/subl_vetting.py:57-77",
+  "sw/subl_vetting.py:80-92",
   "sw/subl_commands.py:380-383",
-  "sw/subl_reader.py:851-861",
-  "sw/subl_vetting.py:36-44",
-  "sw/subl_vetting.py:47-49",
-  "sw/subl_reader.py:835-836",
-  "sw/subl_reader.py:838-839",
-  "sw/subl_reader.py:841-842",
-  "sw/subl_reader.py:973-984"
+  "sw/subl_reader.py:856-866",
+  "sw/subl_vetting.py:37-45",
+  "sw/subl_vetting.py:48-50",
+  "sw/subl_reader.py:840-841",
+  "sw/subl_reader.py:843-844",
+  "sw/subl_reader.py:846-847",
+  "sw/subl_reader.py:978-989"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 848],
-   "to": [9, 973]
+   "from": [0, 853],
+   "to": [10, 978]
   },
   {
    "type": "calls",
-   "from": [2, 383],
-   "to": [3, 851]
+   "from": [1, 77],
+   "to": [2, 80]
   },
   {
    "type": "calls",
-   "from": [3, 858],
-   "to": [4, 36]
+   "from": [3, 383],
+   "to": [4, 856]
   },
   {
    "type": "calls",
-   "from": [3, 861],
-   "to": [0, 844]
+   "from": [4, 863],
+   "to": [5, 37]
   },
   {
    "type": "calls",
-   "from": [7, 839],
-   "to": [6, 835]
+   "from": [4, 866],
+   "to": [0, 849]
   },
   {
    "type": "calls",
-   "from": [8, 842],
-   "to": [6, 835]
+   "from": [8, 844],
+   "to": [7, 840]
+  },
+  {
+   "type": "calls",
+   "from": [9, 847],
+   "to": [7, 840]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "f7929339969088538091566bb344b651b59bf8a7",
+ "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
  "sights": [
   "sw/subl_reader.py:491-509",
   "sw/subl_reader.py:441-446",
@@ -14,10 +14,10 @@
   "sw/subl_reader.py:526-534",
   "sw/subl_reader.py:597-601",
   "sw/subl_views.py:149-151",
-  "sw/subl_reader.py:820-827",
-  "sw/subl_reader.py:829-831",
-  "sw/subl_reader.py:698-701",
-  "sw/subl_reader.py:693-696",
+  "sw/subl_reader.py:825-832",
+  "sw/subl_reader.py:834-836",
+  "sw/subl_reader.py:702-705",
+  "sw/subl_reader.py:697-700",
   "sw/subl_views.py:225-237"
  ],
  "transitions": [
@@ -29,17 +29,17 @@
   {
    "type": "calls",
    "from": [0, 505],
-   "to": [13, 698]
+   "to": [13, 702]
   },
   {
    "type": "calls",
    "from": [0, 506],
-   "to": [11, 820]
+   "to": [11, 825]
   },
   {
    "type": "calls",
    "from": [0, 507],
-   "to": [11, 820]
+   "to": [11, 825]
   },
   {
    "type": "calls",
@@ -73,17 +73,17 @@
   },
   {
    "type": "calls",
-   "from": [11, 827],
-   "to": [12, 829]
+   "from": [11, 832],
+   "to": [12, 834]
   },
   {
    "type": "calls",
-   "from": [13, 700],
-   "to": [14, 693]
+   "from": [13, 704],
+   "to": [14, 697]
   },
   {
    "type": "calls",
-   "from": [13, 700],
+   "from": [13, 704],
    "to": [15, 225]
   }
  ]

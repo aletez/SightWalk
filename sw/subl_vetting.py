@@ -7,6 +7,7 @@ import os
 import shutil
 import struct
 import subprocess
+import textwrap
 
 import sublime
 
@@ -14,10 +15,11 @@ from .callmap import dot_source
 from .subl_chat import MARK_HTML, SYNTAX
 from .config import BLANK_LINES, SETTINGS_FILE, SETTLE_MS
 from .header import MARK_ROOM
+from .permissions import KEYS
 from .subl_views import FADED, kept, make_side_view, phantoms
 from .words import word
 
-TABS = ("Map", "Tour")
+TABS = ("Map", "Tour", "Permissions")
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
@@ -50,7 +52,7 @@ def content_point(view):
     return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
 
 PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
-TABS_ROOM = 14  # in the header's columns, wider than the tabs' font
+TABS_ROOM = 28  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
 
@@ -232,3 +234,36 @@ def save_walked(informator, walked):
     os.makedirs(os.path.dirname(WALKED), exist_ok=True)
     with open(WALKED, "w", encoding="utf-8") as f:
         json.dump(data, f)
+
+
+# The guide's permissions (Jakub, see docs/guide-permissions.md)
+
+LINK = '<a href="%s" style="text-decoration: none">%s</a>'
+
+
+def show_permissions(view, chosen, folders, ours, on_click):
+    """A box per field, ticked by a click, and a [?] that explains it; under Editing, its
+    folders, each with × to drop it, and + folder."""
+    columns = int(view.viewport_extent()[0] / view.em_width()) - 4
+    columns = columns if columns > 20 else 40  # the pane does not wrap, minihtml ignores width
+    if not ours:
+        return show_note(view, "<br>".join(textwrap.wrap(word("perm_not_ours"), columns)),
+                         "sight_walk_permissions")
+    rows = ["☑ %s %s" % (word("perm_read"), LINK % ("tip:read", "[?]"))]
+    for key in KEYS:
+        box = "☑" if key in chosen else "☐"
+        rows.append("%s %s" % (LINK % ("tick:" + key, box + " " + word("perm_" + key)),
+                               LINK % ("tip:" + key, "[?]")))
+        if key == "edit":
+            rows += ["&nbsp;&nbsp;&nbsp;&nbsp;%s %s" % (LINK % ("drop:%d" % i, "×"), folder)
+                     for i, folder in enumerate(folders)]
+            rows.append("&nbsp;&nbsp;&nbsp;&nbsp;" + LINK % ("add", word("perm_add_folder")))
+    intro = "<br>".join(textwrap.wrap(word("perm_intro"), columns))
+    html = '<div style="color: %s">%s</div><br>%s' % (FADED, intro, "<br>".join(rows))
+    phantoms(view, "sight_walk_permissions").update([sublime.Phantom(
+        sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_click)])
+
+
+def show_tip(view, key):
+    view.show_popup("<div>%s</div>" % word("perm_%s_tip" % key), sublime.HIDE_ON_MOUSE_MOVE_AWAY,
+                    content_point(view), 500)

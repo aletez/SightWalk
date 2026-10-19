@@ -14,7 +14,7 @@ import time
 
 import sublime
 
-from . import subl_links
+from . import permissions, subl_guide, subl_links
 from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
@@ -136,9 +136,10 @@ class Reader(Geometry):
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.map_view = subl_vetting.make_tool(self.window, "Map")
         self.tour_view = subl_vetting.make_tool(self.window, "Tour")
+        self.perm_view = subl_vetting.make_tool(self.window, "Permissions")
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         self.tool_offsets = {}  # {view id: px down its content}, kept while a tool takes the wheel
-        for view in (self.map_view, self.tour_view):
+        for view in self.tools().values():
             subl_vetting.set_panning(view, self.pan)
         self.chat.settings().set("scroll_past_end", self.pan)
         self.tool = "Map"  # the Tools pane's tab shown
@@ -721,6 +722,7 @@ class Reader(Geometry):
                                        "them there first." % path)
                 return
             self.editor = Editor(self, index, line)
+            self.before_edit = self.offset  # where closing it returns (Jakub)
             # The sight to the very top, past the scroll's usual limit if need be: its header
             # stands above the editor, its Edit button now End editing (Jakub; the editor's
             # own header got no clicks). Closing the editor scrolls back within the limits.
@@ -743,7 +745,7 @@ class Reader(Geometry):
         lines, and the agent's next message carries the changed ranges."""
         self.editor = None
         if not saved:
-            self.scroll_to(self.offset)  # back within the scroll's limits
+            self.scroll_to(self.before_edit)  # the panes as they were before the edit
             return
         for k, line in lines.items():
             self.indicators[k]["line"] = line
@@ -751,6 +753,7 @@ class Reader(Geometry):
             begin, end = ranges.get(i, (sight.begin, sight.end))
             self.move_range(sight, begin + sight.pad[0], end - sight.pad[1])
         self.load(self.trip.moved([s.sight for s in self.sights]), self.shown[1], self.indicators)
+        self.scroll_to(self.before_edit)
 
     def move_range(self, sight, begin, end):
         """The range as given (without the blank lines shown around it) moved to begin-end."""
@@ -767,7 +770,9 @@ class Reader(Geometry):
     # Conversation
 
     def show_headers(self):
-        subl_chat.show_header(self.chat_header, word("bench"), "")
+        may = [word("perm_" + k) for k in permissions.reminders(subl_guide.chosen())]
+        subl_chat.show_header(self.chat_header, word("bench"),
+                              word("guide_may") % ", ".join(may) if may else "")
         self.chat.set_name(word("bench_view"))
         subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
@@ -854,7 +859,7 @@ class Reader(Geometry):
     # Tools
 
     def tools(self):
-        return {"Map": self.map_view, "Tour": self.tour_view}
+        return {"Map": self.map_view, "Tour": self.tour_view, "Permissions": self.perm_view}
 
     def tool_view(self):
         return self.tools()[self.tool]
@@ -868,11 +873,12 @@ class Reader(Geometry):
             self.render()
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
         self.draw_tour()
+        sublime.set_timeout(self.draw_permissions, SETTLE_MS)  # its intro wraps to the width
 
     def toggle_panning(self):
         """primary+s: the wheel over the bench, Map and Tour moves the whole trip, or them."""
         self.pan = not self.pan
-        for view in (self.map_view, self.tour_view):
+        for view in self.tools().values():
             # How far down its content the tool is scrolled stays across the switch (Jakub).
             y = view.viewport_position()[1]
             self.tool_offsets[view.id()] = max(y - anchor(view) if not self.pan else y, 0.0)
@@ -990,6 +996,34 @@ class Reader(Geometry):
     def draw_tour(self):
         subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
                              self.trip.id if self.trip else None, self.tour_link)
+
+    def draw_permissions(self):
+        subl_vetting.show_permissions(self.perm_view, subl_guide.chosen(),
+                                      subl_guide.folders(self.folder()), subl_guide.ours(),
+                                      self.permission_link)
+
+    def permission_link(self, href):
+        """tick:<field> turns it on or off, tip:<field> explains it, drop:<n> and add change
+        the folders the guide may edit in (Jakub)."""
+        what, _, key = href.partition(":")
+        found = list(subl_guide.folders(self.folder()))
+        if what == "tip":
+            return subl_vetting.show_tip(self.perm_view, key)
+        if what == "tick":
+            subl_guide.toggle(key)
+        elif what == "drop":
+            subl_guide.set_folders(found[:int(key)] + found[int(key) + 1:])
+        elif what == "add":
+            return self.window.show_input_panel(word("perm_folder_prompt"), self.folder(),
+                                                lambda f: self.add_folder(found, f), None, None)
+        self.draw_permissions()
+        self.show_headers()
+
+    def add_folder(self, found, folder):
+        folder = os.path.abspath(os.path.expanduser(folder.strip()))
+        if os.path.isdir(folder) and folder not in found:
+            subl_guide.set_folders(found + [folder])
+        self.draw_permissions()
 
     def draw_map(self, jump=None):
         """The Map; jump: ((sight, line), (sight, line), colour), a jump the user clicked, lit."""

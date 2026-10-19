@@ -61,6 +61,10 @@ Conversation
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.
+- When a tool you need is refused, say on the bench what you need and why, naming the field
+  of the Tools pane's Permissions tab that allows it: Editing files (and the folder), git look,
+  tests, run scripts, git commit, install, git push, Bash everything, or Web. The user turns
+  it on there; you are restarted and the conversation goes on. Never ask for more than needed.
 - The user links words of a message to code: <here at="(c):34-36 (d):12">this check</here>
   means those words are about exactly those lines (one place or several, in one or more
   sights). Answer about them; the user sees the words framed, not the tag.

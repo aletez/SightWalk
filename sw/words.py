@@ -12,6 +12,64 @@ WORDS = {
     "tools": ("Tools", "Narzędzia"),
     "Map": ("Map", "Mapa"),
     "Tour": ("Tour", "Turnus"),
+    "Permissions": ("Permissions", "Uprawnienia"),
+    "perm_intro": ("What the guide SightWalk starts may do. A change restarts it while it waits; "
+                   "the conversation goes on.",
+                   "Co może przewodnik uruchamiany przez SightWalk. Zmiana restartuje go, gdy "
+                   "czeka; rozmowa trwa dalej."),
+    "perm_not_ours": ("The guide now listening was not started by SightWalk (a terminal session): "
+                      "it has that session's permissions, which this tab does not change.",
+                      "Teraz słucha przewodnik nieuruchomiony przez SightWalk (sesja z terminala): "
+                      "ma uprawnienia tamtej sesji, których ta zakładka nie zmienia."),
+    "perm_read": ("Reading (always)", "Czytanie (zawsze)"),
+    "perm_read_tip": ("Read, Grep, Glob: any file your account can read, secrets too if asked to. "
+                      "Nothing changes on disk.",
+                      "Read, Grep, Glob: każdy plik, który może czytać Twoje konto, także sekrety, "
+                      "jeśli o nie poprosisz. Nic się nie zmienia na dysku."),
+    "perm_edit": ("Editing files in:", "Edycja plików w:"),
+    "perm_edit_tip": ("Edit and Write, only inside these folders. Changes code; git can undo it. "
+                      "The edited sights reload, so you see each change.",
+                      "Edit i Write, tylko w tych folderach. Zmienia kod; git to odwróci. "
+                      "Zmienione widoki się przeładowują, więc widzisz każdą zmianę."),
+    "perm_add_folder": ("+ folder", "+ folder"),
+    "perm_folder_prompt": ("Folder the guide may edit:", "Folder, który przewodnik może edytować:"),
+    "perm_git_look": ("Bash: git, look", "Bash: git, podgląd"),
+    "perm_git_look_tip": ("git status, log, diff, show, blame. Changes nothing.",
+                          "git status, log, diff, show, blame. Niczego nie zmienia."),
+    "perm_tests": ("Bash: tests", "Bash: testy"),
+    "perm_tests_tip": ("python3 -m unittest, pytest, npm test. Runs the project's code.",
+                       "python3 -m unittest, pytest, npm test. Uruchamia kod projektu."),
+    "perm_web": ("Web", "Sieć"),
+    "perm_web_tip": ("WebFetch, WebSearch: library docs, error messages. Sends queries and URLs "
+                     "out; cannot change the code.",
+                     "WebFetch, WebSearch: dokumentacja bibliotek, komunikaty błędów. Wysyła "
+                     "zapytania i adresy na zewnątrz; nie zmienia kodu."),
+    "perm_scripts": ("Bash: run scripts", "Bash: uruchamianie skryptów"),
+    "perm_scripts_tip": ("python3 …, node …: runs any code, also code the guide writes. "
+                         "Remembered, shown on the bench's header while on.",
+                         "python3 …, node …: uruchamia dowolny kod, także napisany przez "
+                         "przewodnika. Pamiętane, widoczne w nagłówku ławki, póki włączone."),
+    "perm_git_commit": ("Bash: git, commit", "Bash: git, commit"),
+    "perm_git_commit_tip": ("git add, git commit: local history only, never push. Remembered, "
+                            "shown on the bench's header while on.",
+                            "git add, git commit: tylko lokalna historia, bez push. Pamiętane, "
+                            "widoczne w nagłówku ławki, póki włączone."),
+    "perm_install": ("Bash: install", "Bash: instalowanie"),
+    "perm_install_tip": ("pip, npm, brew install: downloads and runs third-party code. "
+                         "Remembered, shown on the bench's header while on.",
+                         "pip, npm, brew install: pobiera i uruchamia cudzy kod. Pamiętane, "
+                         "widoczne w nagłówku ławki, póki włączone."),
+    "perm_git_push": ("Bash: git, push", "Bash: git, push"),
+    "perm_git_push_tip": ("git push: publishes, cannot be taken back. One guide session only, "
+                          "never remembered.",
+                          "git push: publikuje, nie da się cofnąć. Tylko na jedną sesję "
+                          "przewodnika, nigdy niepamiętane."),
+    "perm_bash_all": ("Bash: everything", "Bash: wszystko"),
+    "perm_bash_all_tip": ("Any command you could type in a terminal. One guide session only, "
+                          "never remembered.",
+                          "Każde polecenie, które mógłbyś wpisać w terminalu. Tylko na jedną "
+                          "sesję przewodnika, nigdy niepamiętane."),
+    "guide_may": ("guide may: %s", "przewodnik może: %s"),
     "fit": ("fit", "dopasuj"),
     "edit": ("Edit (Enter)", "Edytuj (Enter)"),
     "end_edit": ("End editing (Esc)", "Zakończ edycję (Esc)"),

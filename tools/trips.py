@@ -237,7 +237,7 @@ TRIPS = [
      "How files and sights are named, and how much room the Sights and the bench get.",
      ["spec.sight_title", "spec.display_path", "spec.repo_root", "spec.matches",
       "subl_geometry.Geometry.share", "subl_geometry.Geometry.conversation_rows", "subl_geometry.Geometry.head",
-      "subl_geometry.Geometry.room", "subl_executor.op_state",
+      "subl_geometry.Geometry.room", "subl_views.smaller", "subl_executor.op_state",
       "subl_reader.Reader.folder", "subl_reader.Reader.note_waiting"]),
     ("Building blocks",
      "The small classes and hooks the trips above stand on.",

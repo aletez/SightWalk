@@ -578,7 +578,7 @@ The guide is stopped, windows close.
 - `sw/subl_executor.py:83-85` op_close
 - `sw/state.py:40-41` current_reader
 
-## 33. Names and room (11 views, survey)
+## 33. Names and room (12 views, survey)
 
 How files and sights are named, and how much room the Sights and the bench get.
 
@@ -590,6 +590,7 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/subl_geometry.py:46-54` Geometry.conversation_rows
 - `sw/subl_geometry.py:56-58` Geometry.head
 - `sw/subl_geometry.py:65-67` Geometry.room
+- `sw/subl_views.py:204-209` smaller
 - `sw/subl_executor.py:78-80` op_state
 - `sw/subl_reader.py:1187-1192` Reader.folder
 - `sw/subl_reader.py:1169-1171` Reader.note_waiting

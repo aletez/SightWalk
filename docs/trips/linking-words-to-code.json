@@ -1,11 +1,11 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "449873736b654911a32989a01c97c7784f467694",
+ "commit": "cd692a54fd6f4ae4ffd52a58cb26c2760c6b5189",
  "sights": [
-  "sw/subl_commands.py:69-76",
+  "sw/subl_commands.py:115-122",
   "sw/subl_links.py:19-30",
-  "sw/subl_commands.py:149-153",
+  "sw/subl_commands.py:195-199",
   "sw/subl_links.py:32-37",
   "sw/subl_links.py:39-53",
   "sw/subl_links.py:55-61",
@@ -17,7 +17,7 @@
   "sw/subl_links.py:266-268",
   "sw/subl_links.py:207-232",
   "sw/subl_links.py:285-291",
-  "sw/subl_reader.py:784-795",
+  "sw/subl_reader.py:802-813",
   "sw/subl_links.py:270-275",
   "sw/subl_links.py:96-101",
   "sw/subl_links.py:103-108",
@@ -36,7 +36,7 @@
   "sw/subl_links.py:158-161",
   "sw/subl_links.py:163-168",
   "sw/subl_links.py:262-264",
-  "sw/subl_commands.py:202-208"
+  "sw/subl_commands.py:248-254"
  ],
  "transitions": [
   {
@@ -142,7 +142,7 @@
   {
    "type": "calls",
    "from": [12, 231],
-   "to": [14, 784]
+   "to": [14, 802]
   },
   {
    "type": "calls",

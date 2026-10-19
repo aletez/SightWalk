@@ -1,20 +1,20 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "449873736b654911a32989a01c97c7784f467694",
+ "commit": "cd692a54fd6f4ae4ffd52a58cb26c2760c6b5189",
  "sights": [
-  "sw/subl_reader.py:617-627",
-  "sw/subl_reader.py:414-421",
+  "sw/subl_reader.py:635-645",
+  "sw/subl_reader.py:432-439",
   "sw/subl_geometry.py:18-25",
   "sw/subl_geometry.py:27-31",
   "sw/subl_geometry.py:33-35",
   "sw/subl_geometry.py:37-38",
-  "sw/state.py:54-59",
+  "sw/state.py:61-66",
   "sw/subl_executor.py:99-106",
   "sw/validator.py:174-182",
-  "sw/subl_commands.py:169-171",
-  "sw/subl_commands.py:125-129",
-  "sw/subl_commands.py:119-121",
+  "sw/subl_commands.py:215-217",
+  "sw/subl_commands.py:171-175",
+  "sw/subl_commands.py:165-167",
   "sw/subl_chat.py:143-147"
  ],
  "transitions": [
@@ -40,7 +40,7 @@
   },
   {
    "type": "calls",
-   "from": [11, 121],
+   "from": [11, 167],
    "to": [12, 143]
   }
  ]

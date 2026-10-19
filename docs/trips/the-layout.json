@@ -1,45 +1,45 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "449873736b654911a32989a01c97c7784f467694",
+ "commit": "cd692a54fd6f4ae4ffd52a58cb26c2760c6b5189",
  "sights": [
-  "sw/subl_reader.py:500-506",
+  "sw/subl_reader.py:518-524",
   "sw/plan.py:93-101",
   "sw/subl_geometry.py:60-63",
-  "sw/subl_reader.py:461-471",
+  "sw/subl_reader.py:479-489",
   "sw/subl_geometry.py:79-110",
   "sw/subl_geometry.py:40-44",
   "sw/subl_geometry.py:127-138",
   "sw/subl_geometry.py:123-125",
-  "sw/subl_reader.py:388-395",
+  "sw/subl_reader.py:406-413",
   "sw/subl_views.py:86-110",
   "sw/subl_views.py:76-83"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 503],
+   "from": [0, 521],
    "to": [1, 93]
   },
   {
    "type": "calls",
-   "from": [0, 504],
+   "from": [0, 522],
    "to": [2, 60]
   },
   {
    "type": "calls",
-   "from": [0, 506],
-   "to": [3, 461]
+   "from": [0, 524],
+   "to": [3, 479]
   },
   {
    "type": "calls",
-   "from": [3, 464],
+   "from": [3, 482],
    "to": [4, 79]
   },
   {
    "type": "calls",
-   "from": [3, 469],
-   "to": [8, 388]
+   "from": [3, 487],
+   "to": [8, 406]
   },
   {
    "type": "calls",
@@ -58,7 +58,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 393],
+   "from": [8, 411],
    "to": [9, 86]
   },
   {

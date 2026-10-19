@@ -704,6 +704,9 @@ class Reader(Geometry):
         for index, sight in enumerate(self.sights):
             draw_edit_button(sight.header, self.title(index),
                              lambda _, i=index: self.open_editor(i, self.sights[i].begin))
+        if self.editor is not None:  # Exit (Esc) on the editor's header (Jakub)
+            draw_edit_button(self.editor.header, display_path(self.editor.path),
+                             lambda _: self.close_editor(), word("exit"))
 
     def open_editor(self, index, line):
         if self.editor is None:

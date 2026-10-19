@@ -14,7 +14,7 @@ import time
 
 import sublime
 
-from . import permissions, subl_guide, subl_links
+from . import answers, permissions, subl_guide, subl_links
 from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
@@ -136,7 +136,9 @@ class Reader(Geometry):
         bench_font(self.chat)  # after the headers, which keep the font of code
         self.map_view = subl_vetting.make_tool(self.window, "Map")
         self.tour_view = subl_vetting.make_tool(self.window, "Tour")
+        self.answers_view = subl_vetting.make_tool(self.window, "Answers")
         self.perm_view = subl_vetting.make_tool(self.window, "Permissions")
+        self.listed, self.bench_before, self.trip_start = None, 0.0, 0  # the Answers row clicked, the bench's y before
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         self.tool_offsets = {}  # {view id: px down its content}, kept while a tool takes the wheel
         for view in self.tools().values():
@@ -166,6 +168,7 @@ class Reader(Geometry):
         if marks is None:  # another trip: the last answer's frames were about other sights
             self.frames, self.last_marks = [], []
             self.answers, self.shown_answer, self.kept_lines = [], None, {}
+            self.trip_start = len(subl_chat.TRANSCRIPT)  # what was said before was about others
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
 
@@ -859,7 +862,8 @@ class Reader(Geometry):
     # Tools
 
     def tools(self):
-        return {"Map": self.map_view, "Tour": self.tour_view, "Permissions": self.perm_view}
+        return {"Map": self.map_view, "Tour": self.tour_view, "Answers": self.answers_view,
+                "Permissions": self.perm_view}
 
     def tool_view(self):
         return self.tools()[self.tool]
@@ -873,6 +877,7 @@ class Reader(Geometry):
             self.render()
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
         self.draw_tour()
+        self.draw_answers()
         sublime.set_timeout(self.draw_permissions, SETTLE_MS)  # its intro wraps to the width
 
     def toggle_panning(self):
@@ -968,19 +973,78 @@ class Reader(Geometry):
     def show_answer(self, k):
         """Answer k's frames on the bench and its icons in the code, instead of the shown ones
         (Jakub), when every line it marks reads as when it was kept."""
-        answer = self.answers[k]
-        try:
-            resolved = marks.resolve_marks(self.sights, answer["marks"])
-        except ValueError:
-            return
-        lines = self.kept_lines
-        if any(lines.get("%d:%d" % (m["sight"], m["line"]), self.line_text(m["sight"], m["line"]))
-               != self.line_text(m["sight"], m["line"]) for m in resolved):
+        answer, resolved = self.answers[k], self.answer_marks(k)
+        if resolved is None:
             return
         self.shown_answer, self.shown_frame = k, None
         self.frames, self.last_marks, self.indicators = answer["frames"], answer["marks"], resolved
         subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.render()
+
+    def answer_marks(self, k):
+        """Answer k's marks resolved, or None when a line it marks reads otherwise now."""
+        try:
+            resolved = marks.resolve_marks(self.sights, self.answers[k]["marks"])
+        except ValueError:
+            return None
+        lines = self.kept_lines
+        if any(lines.get("%d:%d" % (m["sight"], m["line"]), self.line_text(m["sight"], m["line"]))
+               != self.line_text(m["sight"], m["line"]) for m in resolved):
+            return None
+        return resolved
+
+    def hide_answer(self):
+        self.shown_answer, self.frames, self.last_marks, self.indicators = None, [], [], []
+        subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
+        self.render()
+
+    # The Answers tab (Jakub)
+
+    def bench_rows(self):
+        """The bench's questions and answers: (kind, offset, words, note, what a click shows:
+        an answer's index, a question's index, or None)."""
+        rows = []
+        for kind, offset, words in answers.entries(subl_chat.TRANSCRIPT):
+            if kind == "A":
+                k = next((i for i, a in enumerate(self.answers) if offset in a["labels"]), None)
+                note = "" if k is None else word("stale") if self.answer_marks(k) is None \
+                    else word("icons_n") % len(self.answers[k]["marks"])
+            else:
+                k = next((i for i, q in enumerate(self.links.questions) if q["label"] == offset),
+                         None)
+                note = ""
+            note = word("earlier_trip") if offset < self.trip_start else note
+            rows.append((kind, offset, words, note, k))
+        return rows
+
+    def draw_answers(self):
+        subl_vetting.show_answers(self.answers_view, [r[:4] for r in self.bench_rows()],
+                                  self.listed, self.answer_link)
+
+    def answer_link(self, href):
+        """A row clicked: its icons shown (an answer) or its places selected (a question), the
+        bench at its start; clicked again, hidden and the bench back where it was (Jakub)."""
+        kind, offset, _, _, k = next(r for r in self.bench_rows() if r[1] == int(href))
+        again = offset == self.listed
+        if not again and self.listed is None:
+            self.bench_before = subl_chat.kept_place(self.chat) if self.pan \
+                else self.chat.viewport_position()[1]
+        if kind == "A" and k is not None:
+            self.hide_answer() if again else self.show_answer(k)
+        elif kind == "U" and k is not None:
+            self.links.select(("question", k), self.links.questions[k]["places"])
+        self.listed = None if again else offset
+        point = subl_chat.blanks(self.chat) + offset
+        top = self.chat.text_to_layout(point)[1] - 1.5 * self.chat.line_height()  # under the header
+        self.scroll_bench(self.bench_before if again else max(top, 0.0))
+        self.draw_answers()
+
+    def scroll_bench(self, y):
+        """The bench to y; while it takes the wheel, its kept place too, which it is held at."""
+        self.bench_edited()  # not the wheel moving the trip
+        if self.pan:
+            subl_chat.kept(self.chat)["place"] = y
+        self.chat.set_viewport_position((self.chat.viewport_position()[0], y), False)
 
     def follow_label(self, view):
         """A click on an answer's "A:" shows that answer's frames and icons (Jakub)."""
@@ -1139,6 +1203,7 @@ class Reader(Geometry):
             self.add_to_answer(start, text, placed, frames, clear)
         subl_chat.outline_refs(self.chat, self.frames, len(self.sights))
         self.keep_transcript()
+        self.draw_answers()
 
     def add_to_answer(self, start, text, placed, frames, clear):
         """The answer's marks placed, its words framed, and kept with its "A:" labels, so a click

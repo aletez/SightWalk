@@ -13,6 +13,12 @@ WORDS = {
     "Map": ("Map", "Mapa"),
     "Tour": ("Tour", "Turnus"),
     "Permissions": ("Permissions", "Uprawnienia"),
+    "Answers": ("Answers", "Odpowiedzi"),
+    "no_answers": ("No questions or answers on the bench yet.",
+                   "Na ławce nie ma jeszcze pytań ani odpowiedzi."),
+    "icons_n": ("(icons: %d)", "(ikony: %d)"),
+    "stale": ("(stale)", "(nieaktualne)"),
+    "earlier_trip": ("(an earlier trip)", "(wcześniejsza wycieczka)"),
     "perm_intro": ("What the guide SightWalk starts may do. A change restarts it while it waits; "
                    "the conversation goes on.",
                    "Co może przewodnik uruchamiany przez SightWalk. Zmiana restartuje go, gdy "

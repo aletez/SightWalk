@@ -19,7 +19,7 @@ from .permissions import KEYS
 from .subl_views import FADED, kept, make_side_view, phantoms
 from .words import word
 
-TABS = ("Map", "Tour", "Permissions")
+TABS = ("Map", "Tour", "Answers", "Permissions")
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
@@ -52,7 +52,7 @@ def content_point(view):
     return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
 
 PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
-TABS_ROOM = 28  # in the header's columns, wider than the tabs' font
+TABS_ROOM = 40  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
 
@@ -267,3 +267,27 @@ def show_permissions(view, chosen, folders, ours, on_click):
 def show_tip(view, key):
     view.show_popup("<div>%s</div>" % word("perm_%s_tip" % key), sublime.HIDE_ON_MOUSE_MOVE_AWAY,
                     content_point(view), 500)
+
+
+# The bench's questions and answers (Jakub)
+
+def show_answers(view, rows, shown, on_click):
+    """rows: [(kind, offset, words, note)], each a link by its offset; the shown one in bold, a
+    note (the answer's icons, or stale) in grey."""
+    if not rows:
+        return show_note(view, word("no_answers"), "sight_walk_answers")
+    lines, columns = [], int(view.viewport_extent()[0] / view.em_width()) - 2
+    for kind, offset, words, note in rows:
+        room = max(columns - len(kind) - 3 - len(note), 10)  # the pane does not wrap
+        words = words if len(words) <= room else words[:room - 1].rstrip(" …") + "…"
+        text = html_escape(words)
+        text = "<b>%s</b>" % text if offset == shown else text
+        grey = ' <span style="color: %s">%s</span>' % (FADED, note) if note else ""
+        lines.append('%s: <a href="%d" style="text-decoration: none">%s</a>%s'
+                     % (kind, offset, text, grey))
+    phantoms(view, "sight_walk_answers").update([sublime.Phantom(
+        sublime.Region(content_point(view)), "<br>".join(lines), sublime.LAYOUT_BLOCK, on_click)])
+
+
+def html_escape(text):
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")

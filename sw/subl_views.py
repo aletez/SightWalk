@@ -222,10 +222,10 @@ def header_top(view):
     return view.text_to_layout(view.text_point(ROOM_LINES, 0))[1]
 
 
-def draw_edit_button(header, text, on_click):
-    """The header's text, padded so the edit button sits at its right edge."""
+def draw_edit_button(header, text, on_click, label=None):
+    """The header's text, padded so the button (Edit by default) sits at its right edge."""
     columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
-    label = word("edit")
+    label = label or word("edit")
     padded = text.ljust(max(columns - len(label) - 3, len(text) + 1))  # close to the edge
     if kept(header).get("edit_text") == (padded, label):
         return

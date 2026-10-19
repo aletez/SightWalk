@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Verified in Sublime:
+- The edited sight's header over the editor (Jakub, 2026-10-19): opening the editor of a sight scrolls that sight to the very top, past the scroll's usual limit if need be, so its header stands above the editor, and its Edit (Enter) becomes End editing (Esc), which closes the editor as Esc does; closing scrolls back within the limits. Reuses the header's space, and the button sits on a header that gets clicks. Tried by Claude with clicks. (Changed, unverified.)
 - No Exit button for the editor (Jakub, 2026-10-19: the editor's header, lying over the sights, got no clicks at all, neither its link nor a click in its text); instead [Reset positions] first puts an open editor away, as Esc does, and resets only when clicked again. The editor is set back past a sight's text start as measured in the window (its x over its x plus the text's width, the text reaching the window's right edge), as the fixed GUTTER_PX was narrower than the gutter and the editor lay over it and blended in (Jakub). (Changed, unverified.)
 - The eye no longer comes too early in a short trip (Jakub, 2026-10-19, with two sights): such a trip stands lead lower on screen (plan.lead), which seeing which lines are on screen left out; now the screen is taken lead higher in the items' terms, for the eyes, the sights on screen (ctrl+tab, the guide's visible) and bringing places into view. (Changed, unverified.)
 - The grey headers are one line high (Jakub, 2026-10-19: the status line took over the second line), title and status cut with "…". The Tools header's help mark stands at the right like the bench's: the spaces before it are measured once the tabs are drawn, as the tabs' width was only guessed. The Tools header takes the other headers' font, not the bench's (Jakub, 2026-10-19). The headers' faded hints (the help marks, Reset positions, Edit) stand closer to the right edge: two columns less before a help mark, one before a button (two cut Reset positions) (Jakub, 2026-10-19). (Changed, unverified.)
@@ -183,7 +184,7 @@ Open:
 ## Plans (Jakub)
 
 - Next, in this order (Jakub, 2026-10-19):
-  1. The edited sight's header over the editor: opening the editor of sight x scrolls x to the very top, so its header stands above the editor; while editing, its Edit button becomes End editing (or Exit (Esc)), always fitting. Reuses the space, and the button sits on a header that gets clicks (the editor's own got none).
+  1. Done 2026-10-19: the edited sight's header over the editor (see the status above).
   2. A wheel toggle in the Tools header beside [?]: [⇕] the wheel moves the whole trip, [↕] it scrolls the tool or the bench itself; a click switches it, as primary+s does.
   3. Tools, built in this order: (7) the guide's permissions, a panel to raise them (the guide often wanted to fix something for Jakub and could not); (3) answers, the guide's answers listed by their first words, a click going back to one and its icons; (6) notes in the style of PlainNotes, linkable to the conversation with primary+p; (2) a legend, a line per icon on screen saying what it means now; (5) the code's questions, the places the code checks elsewhere but not here, gathered.
 

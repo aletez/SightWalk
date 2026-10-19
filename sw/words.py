@@ -14,6 +14,7 @@ WORDS = {
     "Tour": ("Tour", "Turnus"),
     "fit": ("fit", "dopasuj"),
     "edit": ("Edit (Enter)", "Edytuj (Enter)"),
+    "end_edit": ("End editing (Esc)", "Zakończ edycję (Esc)"),
     "reset": ("Reset positions", "Przywróć położenia"),
     "stop": ("Stop (Esc)", "Zatrzymaj (Esc)"),
     "stopped": ("(stopped)", "(zatrzymano)"),

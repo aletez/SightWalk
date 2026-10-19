@@ -701,9 +701,15 @@ class Reader(Geometry):
         return sight_title(self.sights[index], index, width)
 
     def draw_edit_buttons(self):
+        """Edit (Enter) on every sight's header; End editing on the edited one's."""
+        editing = self.editor.index if self.editor is not None else None
         for index, sight in enumerate(self.sights):
-            draw_edit_button(sight.header, self.title(index),
-                             lambda _, i=index: self.open_editor(i, self.sights[i].begin))
+            if index == editing:
+                draw_edit_button(sight.header, self.title(index), lambda _: self.close_editor(),
+                                 word("end_edit"))
+            else:
+                draw_edit_button(sight.header, self.title(index),
+                                 lambda _, i=index: self.open_editor(i, self.sights[i].begin))
 
     def open_editor(self, index, line):
         if self.editor is None:
@@ -715,6 +721,10 @@ class Reader(Geometry):
                                        "them there first." % path)
                 return
             self.editor = Editor(self, index, line)
+            # The sight to the very top, past the scroll's usual limit if need be: its header
+            # stands above the editor, its Edit button now End editing (Jakub; the editor's
+            # own header got no clicks). Closing the editor scrolls back within the limits.
+            self.offset = self.lead + self.sights[index].header_item.y
         self.render()
 
     def sight_of(self, view):
@@ -733,7 +743,7 @@ class Reader(Geometry):
         lines, and the agent's next message carries the changed ranges."""
         self.editor = None
         if not saved:
-            self.render()
+            self.scroll_to(self.offset)  # back within the scroll's limits
             return
         for k, line in lines.items():
             self.indicators[k]["line"] = line

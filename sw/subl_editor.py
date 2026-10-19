@@ -23,7 +23,7 @@ def open_live(window, path):
 class Editor:
     def __init__(self, reader, index, line):
         sight = reader.sights[index]
-        self.reader, self.path = reader, sight.path
+        self.reader, self.path, self.index = reader, sight.path, index
         self.mtime = os.path.getmtime(sight.path)
         self.view = open_live(reader.window, sight.path)
         self.header = make_header(reader.window, display_path(sight.path), sight.view)

@@ -1,39 +1,39 @@
 {
  "name": "Colours",
  "kind": "run",
- "commit": "815fe67ba96e02850bc9dedbd250a7b17501092b",
+ "commit": "0b95211fae26d66e26d62732239f6586be6f50c1",
  "sights": [
   "sw/subl_reader.py:316-321",
-  "sw/subl_tint.py:271-274",
+  "sw/subl_tint.py:273-276",
   "sw/subl_tint.py:233-239",
   "sw/subl_tint.py:22-26",
   "sw/subl_tint.py:128-155",
   "sw/subl_tint.py:41-53",
   "sw/subl_tint.py:33-38",
   "sw/subl_tint.py:76-81",
-  "sw/subl_tint.py:254-268",
+  "sw/subl_tint.py:250-265",
   "sw/subl_tint.py:221-230"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 321],
-   "to": [1, 271]
-  },
-  {
-   "type": "calls",
-   "from": [1, 272],
-   "to": [3, 22]
-  },
-  {
-   "type": "calls",
-   "from": [1, 272],
-   "to": [2, 233]
+   "to": [1, 273]
   },
   {
    "type": "calls",
    "from": [1, 274],
-   "to": [8, 254]
+   "to": [3, 22]
+  },
+  {
+   "type": "calls",
+   "from": [1, 274],
+   "to": [2, 233]
+  },
+  {
+   "type": "calls",
+   "from": [1, 276],
+   "to": [8, 250]
   },
   {
    "type": "calls",
@@ -72,7 +72,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 268],
+   "from": [8, 265],
    "to": [9, 221]
   }
  ]

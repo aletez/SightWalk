@@ -1,7 +1,7 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "815fe67ba96e02850bc9dedbd250a7b17501092b",
+ "commit": "0b95211fae26d66e26d62732239f6586be6f50c1",
  "sights": [
   "sw/subl_commands.py:61-63",
   "sw/subl_commands.py:65-76",
@@ -9,11 +9,12 @@
   "sw/subl_tint.py:203-207",
   "sw/subl_commands.py:97-99",
   "sw/subl_commands.py:78-80",
-  "sw/subl_tint.py:245-251",
+  "sw/subl_tint.py:242-247",
   "sw/subl_reader.py:299-305",
   "sw/subl_tint.py:100-110",
   "sw/subl_tint.py:158-168",
   "sw/subl_tint.py:176-185",
+  "sw/subl_tint.py:268-270",
   "sw/subl_tint.py:188-200",
   "sw/subl_tint.py:171-173",
   "sw/subl_reader.py:307-314",
@@ -39,7 +40,7 @@
   {
    "type": "calls",
    "from": [1, 75],
-   "to": [15, 82]
+   "to": [16, 82]
   },
   {
    "type": "calls",
@@ -59,27 +60,27 @@
   {
    "type": "calls",
    "from": [3, 207],
-   "to": [12, 171]
+   "to": [13, 171]
   },
   {
    "type": "calls",
    "from": [5, 80],
-   "to": [6, 245]
+   "to": [6, 242]
   },
   {
    "type": "calls",
-   "from": [6, 251],
+   "from": [6, 247],
    "to": [7, 299]
   },
   {
    "type": "calls",
    "from": [7, 305],
-   "to": [13, 307]
+   "to": [14, 307]
   },
   {
    "type": "calls",
    "from": [7, 305],
-   "to": [14, 210]
+   "to": [15, 210]
   },
   {
    "type": "calls",
@@ -89,27 +90,27 @@
   {
    "type": "calls",
    "from": [9, 165],
-   "to": [12, 171]
+   "to": [13, 171]
   },
   {
    "type": "calls",
    "from": [9, 167],
-   "to": [12, 171]
+   "to": [13, 171]
   },
   {
    "type": "calls",
    "from": [10, 185],
-   "to": [11, 188]
+   "to": [12, 188]
   },
   {
    "type": "calls",
-   "from": [14, 213],
+   "from": [15, 213],
    "to": [8, 100]
   },
   {
    "type": "calls",
-   "from": [15, 88],
-   "to": [6, 245]
+   "from": [16, 88],
+   "to": [6, 242]
   }
  ]
 }

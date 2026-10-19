@@ -1,7 +1,7 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "815fe67ba96e02850bc9dedbd250a7b17501092b",
+ "commit": "0b95211fae26d66e26d62732239f6586be6f50c1",
  "sights": [
   "sw/subl_commands.py:390-391",
   "sw/subl_commands.py:393-394",
@@ -9,12 +9,12 @@
   "sw/subl_guide.py:71-80",
   "sw/subl_commands.py:263-265",
   "sw/subl_commands.py:268-270",
-  "sw/subl_tint.py:285-311",
+  "sw/subl_tint.py:287-313",
   "sw/subl_tint.py:72-73",
   "sw/subl_commands.py:222-234",
   "sw/subl_commands.py:296-298",
   "sw/subl_commands.py:276-279",
-  "sw/subl_reader.py:831-838",
+  "sw/subl_reader.py:832-839",
   "sw/subl_commands.py:281-283",
   "sw/state.py:29-33",
   "sw/subl_executor.py:83-85",
@@ -44,11 +44,11 @@
   {
    "type": "calls",
    "from": [5, 270],
-   "to": [6, 285]
+   "to": [6, 287]
   },
   {
    "type": "calls",
-   "from": [6, 301],
+   "from": [6, 303],
    "to": [7, 72]
   },
   {
@@ -59,7 +59,7 @@
   {
    "type": "calls",
    "from": [10, 279],
-   "to": [11, 831]
+   "to": [11, 832]
   },
   {
    "type": "calls",

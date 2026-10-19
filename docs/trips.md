@@ -431,13 +431,13 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 The guide's manual, the tools' descriptions and schemas it gets at its start, and the prompt a guide started from Sublime is given.
 
 - `sw/manual.py:6-20` MANUAL: opening
-- `sw/manual.py:22-48` MANUAL: Showing code
-- `sw/manual.py:50-53` MANUAL: Writing code that fits the reader
-- `sw/manual.py:55-89` MANUAL: Conversation
-- `sw/manual.py:91-126` MANUAL: Indicators
-- `sw/manual.py:129-132` tool
-- `sw/manual.py:135-138` TRANSITION
-- `sw/manual.py:140-172` TOOLS
+- `sw/manual.py:22-49` MANUAL: Showing code
+- `sw/manual.py:51-54` MANUAL: Writing code that fits the reader
+- `sw/manual.py:56-90` MANUAL: Conversation
+- `sw/manual.py:92-127` MANUAL: Indicators
+- `sw/manual.py:130-133` tool
+- `sw/manual.py:136-139` TRANSITION
+- `sw/manual.py:141-173` TOOLS
 - `sw/validator.py:11-13` TRANSITION_FORM
 - `sw/subl_guide.py:19-24` PROMPT
 - `sw/subl_guide.py:25-25` TOOLS
@@ -470,7 +470,7 @@ From the request to the reply: the token checked, the JSON-RPC message answered,
 - `sw/subl_mcp_http.py:78-81` Handler.authorized
 - `sw/subl_mcp_http.py:65-74` reply
 - `sw/subl_mcp_http.py:50-62` answer
-- `sw/manual.py:129-132` tool
+- `sw/manual.py:130-133` tool
 - `sw/subl_mcp_http.py:38-47` tool_result
 - `sw/subl_mcp_http.py:23-35` call_tool
 - `sw/subl_executor.py:209-217` wait_until_ready

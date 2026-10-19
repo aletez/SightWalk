@@ -1,7 +1,7 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "0212da39142562fc3721c9636c85cc55f0677f71",
+ "commit": "ed5285bd299c190113b8e257619270f459068030",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:270-297",

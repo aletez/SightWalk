@@ -156,34 +156,55 @@ def tinted_schemes(view, hue, amount):
 
 
 def scheme_colours(scheme, view=None):
-    """(background, foreground) of a scheme dict, its variables resolved; the view's own for
-    what cannot be read (a color() function, say)."""
-    found = []
-    for key, fallback in (("background", "#000000"), ("foreground", "#808080")):
-        value = resolve_colour(scheme, (scheme.get("globals") or {}).get(key, ""))
-        if value is None and view is not None:
-            value = view.style().get(key)
-        found.append(value or fallback)
+    """(background, foreground) of a scheme dict, its variables resolved. What cannot be read
+    is guessed from the other, not taken from the view, which may still show another scheme
+    (a preview's dark background stayed in the bands of the light one chosen back)."""
+    found = [resolve_colour(scheme, (scheme.get("globals") or {}).get(key, ""))
+             for key in ("background", "foreground")]
+    if found[0] is None:
+        found[0] = "#ffffff" if found[1] and luminance(found[1]) < 0.5 else "#1e1e1e"
+    if found[1] is None:
+        found[1] = "#1e1e1e" if luminance(found[0]) >= 0.5 else "#dddddd"
     return tuple(found)
 
 
+def luminance(colour):
+    r, g, b = hex_rgb(colour)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
 def resolve_colour(scheme, value, depth=5):
-    """A "#rrggbb" from a scheme's value, through var(name); None if it is no plain colour."""
-    found = re.match(r"^var\((\w[\w-]*)\)$", str(value).strip())
+    """A "#rrggbb" from a scheme's value: #rgb, #rrggbb, rgb(), hsl(), var(name), and color(x
+    ...) by its base colour x (its adjusters left out); None if it cannot be read."""
+    value = str(value).strip()
+    found = re.match(r"^(?:var\((\w[\w-]*)\)|color\(\s*(.+?)\s+\w+\(.*\)\s*\))$", value)
     if found and depth:
-        return resolve_colour(scheme, (scheme.get("variables") or {}).get(found.group(1), ""),
-                              depth - 1)
-    return value if re.match(r"^#[0-9a-fA-F]{6}", str(value)) else None
+        inner = (scheme.get("variables") or {}).get(found.group(1), "") if found.group(1) \
+            else found.group(2)
+        return resolve_colour(scheme, inner, depth - 1)
+    return plain_colour(value)
+
+
+def plain_colour(value):
+    """#rgb, #rrggbb(aa), rgb(a)() or hsl(a)() as "#rrggbb", or None."""
+    if re.match(r"^#[0-9a-fA-F]{6}", value):
+        return value[:7]
+    if re.match(r"^#[0-9a-fA-F]{3}$", value):
+        return "#" + "".join(c * 2 for c in value[1:])
+    numbers = [float(n) for n in re.findall(r"[\d.]+", value)[:3]]
+    if len(numbers) == 3 and value.startswith("rgb"):
+        return "#%02x%02x%02x" % tuple(int(round(n)) for n in numbers)
+    if len(numbers) == 3 and value.startswith("hsl"):
+        r, g, b = colorsys.hls_to_rgb(numbers[0] / 360, numbers[2] / 100, numbers[1] / 100)
+        return "#%02x%02x%02x" % tuple(int(round(c * 255)) for c in (r, g, b))
+    return None
 
 
 def is_dark(path):
     """Whether a scheme's background is dark, by its luminance; None if it cannot be read."""
     scheme = load_base_scheme(path)
-    background = scheme and scheme_colours(scheme)[0]
-    if not scheme or not resolve_colour(scheme, (scheme.get("globals") or {}).get("background", "")):
-        return None
-    r, g, b = hex_rgb(background)
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.5
+    background = scheme and resolve_colour(scheme, (scheme.get("globals") or {}).get("background"))
+    return None if not background else luminance(background) < 0.5
 
 
 def apply_plain(views):

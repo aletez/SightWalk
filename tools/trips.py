@@ -175,7 +175,7 @@ TRIPS = [
       "subl_tint.is_dark", "subl_commands.scheme_item",
       "subl_commands.SightWalkSelectColourSchemeCommand.preview", "state.refresh_schemes_all",
       "subl_reader.Reader.refresh_schemes", "subl_tint.chosen_scheme", "subl_tint.scheme_colours",
-      "subl_tint.resolve_colour", "subl_reader.Reader.plain_views", "subl_tint.apply_plain",
+      "subl_tint.resolve_colour", "subl_tint.plain_colour", "subl_tint.luminance", "subl_reader.Reader.plain_views", "subl_tint.apply_plain",
       "subl_commands.SightWalkSelectColourSchemeCommand.done"]),
     ("ctrl+tab",
      "The focus round the sights on screen, top to bottom, ctrl+shift+tab the other way.",

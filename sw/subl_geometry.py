@@ -48,7 +48,7 @@ class Geometry:
         calibrated. The Tools pane takes the rest of the column."""
         if self.overhead is None:
             return 0, 0
-        top = 2 * self.chat_header.line_height() + self.overhead  # its font may differ
+        top = self.chat_header.line_height() + self.overhead  # one line; its font may differ
         settings = sublime.load_settings(SETTINGS_FILE)
         share = settings.get("default_conversation_height", DEFAULT_CONVERSATION_HEIGHT)
         return top, max(self.height * share, top + 2 * self.lh)

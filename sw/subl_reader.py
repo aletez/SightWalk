@@ -649,7 +649,8 @@ class Reader(Geometry):
     def point(self, new_marks, reveal=True, clear=True):
         resolved = marks.resolve_marks(self.sights, new_marks)
         self.indicators = resolved if clear else self.indicators + resolved
-        ys = [marks.line_y(self.sights[m["sight"]], m["line"], self.lh) for m in resolved]
+        ys = [self.lead + marks.line_y(self.sights[m["sight"]], m["line"], self.lh)
+              for m in resolved]
         bottom = self.offset + self.room() - 2 * self.lh
         if reveal and ys and not all(self.offset <= y <= bottom for y in ys):
             self.scroll_to((min(ys) + max(ys)) / 2 - self.room() / 2)
@@ -660,7 +661,10 @@ class Reader(Geometry):
         """A line's first mark in the gutter, with an eye for marks off screen (see
         marks.gutter_icons); its second on the strip (Jakub)."""
         self.draw_strip_marks()
-        first, last = marks.visible_lines(self.sights, self.offset, self.room(), self.lh)
+        # The trip stands lead lower on screen (a short one, see plan.lead): seen from its items,
+        # the screen starts lead higher (the eye came too early, Jakub).
+        first, last = marks.visible_lines(self.sights, self.offset - self.lead, self.room(),
+                                          self.lh)
         icons = marks.gutter_icons(self.indicators, first, last)
         for index, sight in enumerate(self.sights):
             mine = {line: icon for (i, line), icon in icons.items() if i == index and line}
@@ -787,7 +791,8 @@ class Reader(Geometry):
         so Sublime does not scroll the sight to it: to the middle of the part on screen, as the
         first line may be cut in half or under the frozen lines (Jakub)."""
         active = self.window.active_view()
-        index = plan.cycled(plan.visible_indices(self.sights, self.offset, self.room()),
+        index = plan.cycled(plan.visible_indices(self.sights, self.offset - self.lead,
+                                                 self.room()),
                             self.sight_of(active) if active else None, step)
         if index is None:
             return
@@ -805,7 +810,7 @@ class Reader(Geometry):
         view = self.sights[index].view
         if not view.visible_region().contains(view.text_point(line - 1, 0)):
             self.scroll_views()  # a sight scrolled on its own goes back to its place first
-        y = marks.line_y(self.sights[index], line, self.lh)
+        y = self.lead + marks.line_y(self.sights[index], line, self.lh)
         spare = 2 * self.lh
         if y < self.offset:
             self.scroll_to(y - spare)
@@ -1014,7 +1019,7 @@ class Reader(Geometry):
     def show_places(self, places):
         """Places brought into view as show does: not at all while all are visible; all at once
         if they fit, with two lines to spare; else the first (see show_place)."""
-        ys = [marks.line_y(self.sights[i], line, self.lh) for i, line in places]
+        ys = [self.lead + marks.line_y(self.sights[i], line, self.lh) for i, line in places]
         spare = 2 * self.lh
         if all(self.offset <= y and y + self.lh <= self.offset + self.room() for y in ys):
             return
@@ -1105,8 +1110,8 @@ class Reader(Geometry):
     def context(self):
         if not self.ready:
             return {"focus": None, "visible": []}
-        context = {"focus": None, "visible": plan.visible_specs(self.sights, self.offset,
-                                                                self.room())}
+        context = {"focus": None, "visible": plan.visible_specs(
+            self.sights, self.offset - self.lead, self.room())}
         view = self.touched
         index = self.sight_of(view) if view is not None and view.is_valid() else None
         if index is None:

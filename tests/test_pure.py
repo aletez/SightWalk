@@ -246,12 +246,11 @@ class SpecTest(unittest.TestCase):
 
 
 class HeaderTest(unittest.TestCase):
-    def test_two_lines(self):
+    def test_one_line(self):
         text = header.title_lines("Vetting Bench", "a status " * 20, 40)
-        first, second = text.split("\n")
-        self.assertEqual(len(first), 34)
-        self.assertTrue(second.endswith("…"))
-
+        self.assertNotIn("\n", text)
+        self.assertEqual(len(text), 34)
+        self.assertTrue(text.endswith("…"))
 
 
 class AncestorsTest(unittest.TestCase):

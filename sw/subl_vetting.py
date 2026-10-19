@@ -12,7 +12,8 @@ import sublime
 
 from .callmap import dot_source
 from .subl_chat import MARK_HTML, SYNTAX
-from .config import BLANK_LINES, SETTINGS_FILE
+from .config import BLANK_LINES, SETTINGS_FILE, SETTLE_MS
+from .header import MARK_ROOM
 from .subl_views import FADED, kept, make_side_view, phantoms
 from .words import word
 
@@ -73,6 +74,22 @@ def show_tabs(header, active, on_select, panning):
     html = html.join(links)
     phantoms(header, "sight_walk_tabs").update(
         [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_INLINE, on_select)])
+    sublime.set_timeout(lambda: align_mark(header), SETTLE_MS)
+
+
+def align_mark(header):
+    """The help mark to the right edge, where the bench's stands (MARK_ROOM columns from it;
+    Jakub: it stood mid-way): the tabs' phantom is wider or narrower than guessed in the
+    header's font, so the spaces before the mark are measured again once drawn."""
+    if not header.is_valid():
+        return
+    em = max(header.em_width(), 1)
+    end = header.line(0).b
+    spare = header.viewport_extent()[0] - header.text_to_layout(end)[0] - MARK_ROOM * em
+    more = int(spare / em)
+    if more:
+        spaces = max(len(header.substr(header.line(0))) + more, 1)
+        header.run_command("sight_walk_replace", {"text": " " * spaces})
 
 
 # The map

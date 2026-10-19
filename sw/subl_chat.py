@@ -1,5 +1,5 @@
 """The conversation pane: the transcript, which a guard keeps read-only, the draft after the
-prompt, kept at the bottom of the pane, and the two-line header in place of a tab."""
+prompt, kept at the bottom of the pane, and the one-line header in place of a tab."""
 
 
 import sublime
@@ -80,7 +80,7 @@ def start(view):
 
 
 def make_header(window, conversation, name):
-    """A two-line read-only header in place of a tab, over the Vetting Bench (with the help mark
+    """A one-line read-only header in place of a tab, over the Vetting Bench (with the help mark
     on the right of the first line) or over the Sights. Both use the conversation's font."""
     view = make_side_view(window, name, {
         "word_wrap": False, "gutter": True, "line_numbers": False, "scroll_past_end": False,

@@ -1,17 +1,17 @@
 {
  "name": "Here, and asking by a shortcut",
  "kind": "run",
- "commit": "f2ad3c1de762cb2b14c0fdec4df0799896fb3ed3",
+ "commit": "c79a9192c165af1031b8144f7d6d15ece359974e",
  "sights": [
   "sw/subl_commands.py:236-246",
-  "sw/subl_reader.py:781-786",
+  "sw/subl_reader.py:782-787",
   "sw/subl_commands.py:128-132"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 246],
-   "to": [1, 781]
+   "to": [1, 782]
   }
  ]
 }

@@ -116,9 +116,11 @@ FUNCTION = re.compile(r"^\s*(?:async\s+)?def\s+(\w+)")
 
 
 def functions_in(lines, begin, end):
-    """The functions whose definitions stand in lines begin..end, not counting those defined
-    inside another of them: a sight holds one at most (Jakub)."""
-    found, open_indent = [], None
+    """The functions lines begin..end hold, whole or in part, not counting those defined inside
+    another of them: a sight holds one at most (Jakub). A function whose def stands above the
+    range counts when the range starts in its body, and defs nested in it are its own (the
+    guide's findings, 2026-10-18: a tail of f with def g passed, nested defs were refused)."""
+    found, open_indent = open_above(lines, begin, end)
     for text in lines[begin - 1:end]:
         if not text.strip():
             continue
@@ -129,6 +131,18 @@ def functions_in(lines, begin, end):
             found.append(match.group(1))
             open_indent = indent(text)
     return found
+
+
+def open_above(lines, begin, end):
+    """([name], its def's indentation) of the outermost function whose body the range starts
+    in, or ([], None)."""
+    first = next((n for n in range(begin, end + 1) if lines[n - 1].strip()), None)
+    if first is None:
+        return [], None
+    defs = [n for n in ancestors(lines, first, {"def"})]
+    if not defs:
+        return [], None
+    return [FUNCTION.match(lines[defs[0] - 1]).group(1)], indent(lines[defs[0] - 1])
 
 
 def elided(lines, begin, end, frozen):

@@ -23,22 +23,30 @@ class SayTest(unittest.TestCase):
 
 class ShowTest(unittest.TestCase):
     def test_files(self):
-        args = {"sights": ["a.py:1-5"], "transitions": []}
+        args = {"sights": ["a.py:1-5"], "transitions": [], "trip": "T"}
         check("show", args, {"files": [("a.py:1-5", "/r/a.py", 10, 5)]})
         for files in ([("a.py:1-5", "/r/a.py", None, 5)], [("a.py:1-5", "/r/a.py", 3, 5)], []):
             with self.assertRaises(Refusal):
                 check("show", args, {"files": files})
 
     def test_places_by_name(self):
-        trip = validator.trip_of({"sights": ["a.py:1-5", "b.py:1-9"], "transitions": [
+        trip = validator.trip_of({"trip": "T", "sights": ["a.py:1-5", "b.py:1-9"], "transitions": [
             {"type": "calls", "from": "(a):3", "to": "(b):1"},
             {"type": "leads_to", "from": "(a)", "to": [1, 2]}]})
         self.assertEqual([(t.source, t.target) for t in trip.transitions],
                          [((0, 3), (1, 1)), ((0,), (1, 2))])
         for bad in ("x1:3", "(q):1", "(a):x"):
             with self.assertRaises(Refusal, msg=bad):
-                validator.trip_of({"sights": ["a.py:1-5"], "transitions": [
+                validator.trip_of({"trip": "T", "sights": ["a.py:1-5"], "transitions": [
                     {"type": "calls", "from": bad, "to": "(a):1"}]})
+
+    def test_name_and_hint(self):
+        with self.assertRaises(Refusal):  # no name
+            validator.trip_of({"sights": ["a.py:1-5"], "transitions": []})
+        with self.assertRaises(Refusal) as caught:  # an absolute path: no hint about root
+            check("show", {"sights": ["/r/a.py:1-5"], "transitions": [], "trip": "T"},
+                  {"files": [("/r/a.py:1-5", "/r/a.py", None, 5)]})
+        self.assertNotIn("root", str(caught.exception))
 
     def test_shape(self):
         for args in ({"sights": "a.py:1-5", "transitions": []}, {"sights": ["a.py:1-5"]},

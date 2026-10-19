@@ -27,7 +27,7 @@ def check(tool, args, facts):
     """Refuses the call (raises Refusal) or lets it through. facts: what the executor knows,
     a dict (see subl_executor.facts)."""
     judge = CHECKS.get(tool)
-    if judge is not None:
+    if judge is not None:  # a tool with no checks (none so far) passes; the server names unknown ones
         judge(args, facts)
 
 
@@ -35,6 +35,8 @@ def trip_of(args):
     """The trip show was given, its transitions checked by the ontology. transitions is required,
     an empty list included: the map never guesses (Jakub)."""
     sights, transitions = args.get("sights"), args.get("transitions")
+    if not isinstance(args.get("trip"), str) or not args["trip"].strip():
+        raise Refusal("trip: give the trip a name, a few words, shown over the Sights.")
     if not isinstance(sights, list) or not all(isinstance(s, str) for s in sights):
         raise Refusal('sights: a list like ["app.py:12-30", "app.py:40-52"].')
     if not isinstance(transitions, list) or not all(
@@ -74,10 +76,11 @@ def files(facts, root):
     found = facts.get("files") or []
     if not found:
         raise Refusal('Give at least one sight, like "app.py:12-30".')
-    problems = ["%s: no file at %s" % (spec, path) if lines is None else
-                "%s: the file has %d lines" % (spec, lines)
-                for spec, path, lines, end in found if lines is None or end > lines]
-    if problems and not root and any("no file" in p for p in problems):
+    missing = [(spec, path) for spec, path, lines, _ in found if lines is None]
+    problems = ["%s: no file at %s" % pair for pair in missing] + [
+        "%s: the file has %d lines" % (spec, lines)
+        for spec, _, lines, end in found if lines is not None and end > lines]
+    if not root and any(not spec.startswith(("/", "~")) for spec, _ in missing):
         problems.append("relative paths need root, or give absolute paths")
     if problems:
         raise Refusal("; ".join(problems) + ".")

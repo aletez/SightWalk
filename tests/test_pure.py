@@ -274,6 +274,11 @@ class AncestorsTest(unittest.TestCase):
         self.assertEqual(spec.functions_in(self.LINES, 4, 6), ["run"])
         self.assertEqual(spec.functions_in(["def a():", "    def b():", "        pass"], 1, 3),
                          ["a"])
+        tail_and_next = ["def f():", "    x = 1", "    return x", "", "def g():", "    pass"]
+        self.assertEqual(spec.functions_in(tail_and_next, 2, 6), ["f", "g"])  # f's tail counts
+        nested = ["def f():", "    y = 0", "    def a():", "        pass", "    def b():",
+                  "        pass", "    return a"]
+        self.assertEqual(spec.functions_in(nested, 2, 7), ["f"])  # a and b are f's own
 
     def test_breathing(self):
         self.assertEqual(spec.breathing(self.LINES, 4, 6), (3, 7))

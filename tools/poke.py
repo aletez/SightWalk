@@ -33,7 +33,7 @@ def main():
     op = sys.argv[1]
     first, second = [os.path.normpath(f) for f in (sys.argv[2:4] or DEFAULT_FILES)]
     if op == "show":
-        call(config, "show", sights=[first + ":1-30", second + ":31-60"], transitions=[])
+        call(config, "show", sights=[first + ":1-30", second + ":31-60"], transitions=[], trip="Poke")
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
     elif op == "marks":  # an answer placing its own marks (after a message from the user)

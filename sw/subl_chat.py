@@ -8,7 +8,7 @@ import sublime_plugin
 from . import marks
 from .config import BLANK_LINES, PROMPT
 from .header import MARK_ROOM, title_lines
-from .subl_views import FADED, button_html, kept, make_side_view, match_font, phantoms
+from .subl_views import FADED, button_html, kept, make_side_view, match_font, phantoms, smaller
 from .words import word
 
 SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
@@ -86,6 +86,7 @@ def make_header(window, conversation, name):
         "word_wrap": False, "gutter": True, "line_numbers": False, "scroll_past_end": False,
         "sight_walk_header": True})
     match_font(view, conversation)  # Plain Text has its own font
+    smaller(view)
     view.set_read_only(True)
     kept(view)["mark"] = [phantoms(view, "sight_walk_mark"), None]
     return view

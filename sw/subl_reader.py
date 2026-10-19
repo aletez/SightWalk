@@ -350,7 +350,8 @@ class Reader(Geometry):
             match_font(part, self.sights[0].view)  # the strip's lines level with the code's
         self.items = []
         for sight in self.sights:
-            sight.header_item = plan.Item(sight.header, header_top(sight.header), self.lh, True)
+            sight.header_item = plan.Item(sight.header, header_top(sight.header),
+                                           sight.header.line_height(), True)
             sight.frozen_items = [plan.Item(view, line_top(view, line), self.lh, line=line)
                                   for line, view in sight.frozen]
             above, below = self.room_px(sight)

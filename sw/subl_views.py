@@ -197,10 +197,24 @@ def match_font(view, code_view):
 
 # Headers
 
+HEADER_SCALE = 0.85  # the headers' font against the bench's or the code's
+HEADER_PAD_TOP = 3  # px over the letters (Jakub: none was too little)
+
+
+def smaller(view):
+    """The headers lower and in a smaller font than the bench's (Jakub, 2026-10-19)."""
+    size = view.settings().get("font_size") or 12
+    view.settings().set("font_size", round(size * HEADER_SCALE, 1))
+    view.settings().set("line_padding_top", HEADER_PAD_TOP)
+    view.settings().set("line_padding_bottom", 0)
+
+
+
 def make_header(window, text, code_view):
     # A gutter without line numbers, so an eye can sit on the header.
     view = make_side_view(window, text, {"word_wrap": False, "gutter": True, "line_numbers": False})
     match_font(view, code_view)
+    smaller(view)
     write_header(view, text)
     view.set_read_only(True)
     return view

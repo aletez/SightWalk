@@ -337,8 +337,10 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
             reader.take_file(view)
 
     def on_pre_close_window(self, window):
-        state.forget(window)
-        sublime.set_timeout(clear_schemes_if_unused, 2000)  # once the window's views are gone
+        # A trip window this module never knew is one a reload closes: its schemes stay (see
+        # subl_tint.clear_schemes).
+        if state.forget(window) is not None:
+            sublime.set_timeout(clear_schemes_if_unused, 2000)  # once the window's views are gone
 
 
 def clear_schemes_if_unused():

@@ -232,7 +232,7 @@ TRIPS = [
     ("Endings",
      "The guide is stopped, windows close.",
      ["subl_commands.SightWalkStopGuideCommand.run", "subl_commands.SightWalkStopGuideCommand.is_enabled",
-      "subl_guide.stop", "subl_guide.stop_when_idle", "subl_commands.SightWalkWindowListener.on_pre_close_window", "subl_commands.clear_schemes_if_unused",
+      "subl_guide.stop", "subl_guide.stop_when_idle", "subl_commands.SightWalkWindowListener.on_pre_close_window", "subl_commands.clear_schemes_if_unused", "subl_tint.first_load",
       "subl_tint.clear_schemes", "subl_tint.scheme_folder", "subl_commands.SightWalkWindowListener.on_window_command", "subl_commands.SightWalkCloseTripCommand.run", "subl_commands.SightWalkResetSightsCommand.run", "subl_reader.Reader.reset_sights", "subl_commands.SightWalkResetSightsCommand.is_enabled", "state.forget", "subl_executor.op_close", "state.current_reader"]),
     ("Names and room",
      "How files and sights are named, and how much room the Sights and the bench get.",

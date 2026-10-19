@@ -284,8 +284,22 @@ def apply_grey(header):
         set_schemes([([header], schemes[1])])
 
 
+RELOADING = False  # set as the module unloads: its timers then delete nothing
+LOADED_KEY = "SIGHT_WALK_LOADED"  # in the plugin host's environment, which a reload keeps
+
+
+def first_load():
+    """Whether the plugin loads for the first time since Sublime started, not after a reload."""
+    first = LOADED_KEY not in os.environ
+    os.environ[LOADED_KEY] = "1"
+    return first
+
+
 def clear_schemes():
-    """Deletes the schemes SightWalk wrote that no trip's view uses (Jakub: left behind, they
+    """Nothing while a reload is under way (2026-10-20: Sublime keeps the schemes of the
+    trip windows a reload closes loaded for a while, and deleting them then opened its error
+    dialog "Unable to find"); the next start of Sublime deletes them.
+    Deletes the schemes SightWalk wrote that no trip's view uses (Jakub: left behind, they
     crowd Sublime's list of colour schemes), with the backups Sublime may have made. Asks the
     views (a timer of a module reloaded since knows no trips): a view of SightWalk's keeps its
     scheme; any other that kept one (a file opened in a trip and moved out) gets its own back,

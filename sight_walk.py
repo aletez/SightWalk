@@ -44,8 +44,9 @@ from .sw.subl_setup import SightWalkRestartCommand, SightWalkSetupCommand  # noq
 
 def plugin_loaded():
     subl_mcp_http.start()
-    # Schemes left by an earlier session or reload, once its trip windows have closed.
-    sublime.set_timeout(subl_commands.clear_schemes_if_unused, 2000)
+    # Schemes left by an earlier session; never after a reload (see subl_tint.clear_schemes).
+    if subl_tint.first_load():
+        sublime.set_timeout(subl_commands.clear_schemes_if_unused, 2000)
     settings = sublime.load_settings("SightWalk.sublime-settings")
     words.set_language(settings.get("language"))
     settings.add_on_change("sight_walk_layout", settings_changed)
@@ -59,6 +60,7 @@ def settings_changed():
 
 
 def plugin_unloaded():
+    subl_tint.RELOADING = True
     subl_scrollbars.reader_focused(False)
     sublime.load_settings("SightWalk.sublime-settings").clear_on_change("sight_walk_layout")
     state.close_all()

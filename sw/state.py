@@ -31,6 +31,7 @@ def forget(window):
     reader = READERS.pop(window.id(), None)
     if reader is not None and ACTIVE is reader:
         ACTIVE = None
+    return reader
 
 
 def reader_for(window):

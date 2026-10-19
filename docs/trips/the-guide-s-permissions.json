@@ -1,0 +1,113 @@
+{
+ "name": "The guide's permissions",
+ "kind": "run",
+ "commit": "1bca7ee407a33f6ce8e650b5761b4a4fa7f9154b",
+ "sights": [
+  "sw/subl_reader.py:1000-1003",
+  "sw/subl_vetting.py:244-264",
+  "sw/subl_reader.py:1005-1020",
+  "sw/subl_vetting.py:267-269",
+  "sw/subl_guide.py:126-132",
+  "sw/permissions.py:37-39",
+  "sw/subl_guide.py:135-146",
+  "sw/subl_guide.py:107-111",
+  "sw/subl_guide.py:114-116",
+  "sw/permissions.py:23-34",
+  "sw/permissions.py:42-44",
+  "sw/subl_guide.py:149-151",
+  "sw/subl_reader.py:1022-1026",
+  "sw/subl_guide.py:119-123"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 1001],
+   "to": [7, 107]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1001],
+   "to": [1, 244]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1002],
+   "to": [8, 114]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1002],
+   "to": [11, 149]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1003],
+   "to": [2, 1005]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1009],
+   "to": [8, 114]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1011],
+   "to": [3, 267]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1013],
+   "to": [4, 126]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1015],
+   "to": [13, 119]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1018],
+   "to": [12, 1022]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1019],
+   "to": [0, 1000]
+  },
+  {
+   "type": "calls",
+   "from": [4, 128],
+   "to": [7, 107]
+  },
+  {
+   "type": "calls",
+   "from": [4, 130],
+   "to": [5, 37]
+  },
+  {
+   "type": "calls",
+   "from": [4, 130],
+   "to": [7, 107]
+  },
+  {
+   "type": "calls",
+   "from": [4, 132],
+   "to": [6, 135]
+  },
+  {
+   "type": "calls",
+   "from": [12, 1025],
+   "to": [13, 119]
+  },
+  {
+   "type": "calls",
+   "from": [12, 1026],
+   "to": [0, 1000]
+  },
+  {
+   "type": "calls",
+   "from": [13, 123],
+   "to": [6, 135]
+  }
+ ]
+}

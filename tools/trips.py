@@ -196,7 +196,7 @@ TRIPS = [
      ["manual.MANUAL: opening", "manual.MANUAL: Showing code",
       "manual.MANUAL: Writing code that fits the reader", "manual.MANUAL: Conversation",
       "manual.MANUAL: Indicators", "manual.tool", "manual.TRANSITION", "manual.TOOLS",
-      "validator.TRANSITION_FORM", "subl_guide.PROMPT", "subl_guide.TOOLS"]),
+      "validator.TRANSITION_FORM", "subl_guide.PROMPT", "permissions.FIELDS"]),
     ("What the validator refuses",
      "Every refusal of the guide's calls, judged before the executor acts, with the facts it is "
      "given; each message says what to do instead.",
@@ -295,6 +295,14 @@ TRIPS = [
       "subl_commands.SightWalkSightListener.is_applicable", "subl_commands.SightWalkSightListener.on_hover",
       "subl_asked.show_popup", "subl_asked.paint", "subl_asked.toggle",
       "subl_commands.SightWalkToggleSentinelsCommand.run"]),
+    ("The guide's permissions",
+     "The Permissions tab: a field ticked, remembered or not, and the guide SightWalk started "
+     "restarted while it waits with the tools allowed now.",
+     ["subl_reader.Reader.draw_permissions", "subl_vetting.show_permissions",
+      "subl_reader.Reader.permission_link", "subl_vetting.show_tip", "subl_guide.toggle",
+      "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
+      "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
+      "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
 ]
 
 
@@ -337,6 +345,7 @@ LEADS = [
     ("The agent says something", "Stopping an answer"),
     ("The agent says something", "The Tools pane's tabs"),
     ("The Tools pane's tabs", "The Map's nodes"),
+    ("The Tools pane's tabs", "The guide's permissions"),
     ("The Map's nodes", "Drawing the Map"),
     ("How Claude comes to listen to Sublime", "The user sends a message"),
     ("The user sends a message", "Here, and asking by a shortcut"),
@@ -402,7 +411,7 @@ CLASSES = {}  # "module.Class": ["module.Base", ...], filled by definitions
 
 # Texts that are no function but worth a sight of their own (Jakub): what the agent is told.
 SECTIONED = ["manual.MANUAL"]
-TEXTS = ["manual.MANUAL", "manual.TRANSITION", "manual.TOOLS", "subl_guide.PROMPT", "subl_guide.TOOLS",
+TEXTS = ["manual.MANUAL", "manual.TRANSITION", "manual.TOOLS", "subl_guide.PROMPT", "permissions.FIELDS",
          "validator.TRANSITION_FORM", "validator.MARK_FIRST", "marks.CODE_TALK"]
 
 

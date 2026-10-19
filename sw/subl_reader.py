@@ -704,21 +704,6 @@ class Reader(Geometry):
         for index, sight in enumerate(self.sights):
             draw_edit_button(sight.header, self.title(index),
                              lambda _, i=index: self.open_editor(i, self.sights[i].begin))
-        if self.editor is not None:  # Exit (Esc) on the editor's header (Jakub)
-            draw_edit_button(self.editor.header, display_path(self.editor.path),
-                             lambda _: self.close_editor(), word("exit"))
-
-    def editor_header_clicked(self, view):
-        """A click on the editor's header at its button closes the editor: the button's own link
-        gets no click there, the header lying over a sight's (see Editor)."""
-        if self.editor is None or view != self.editor.header or not len(view.sel()):
-            return False
-        point = view.sel()[0].b
-        line = view.line(point)
-        if line.b - point <= len(word("exit")) + 2:
-            self.close_editor()
-            return True
-        return False
 
     def open_editor(self, index, line):
         if self.editor is None:
@@ -834,8 +819,12 @@ class Reader(Geometry):
             self.scroll_to(y + self.lh + spare - self.room())
 
     def reset_sights(self):
-        """[Reset positions] in the Sights' header (alpha, Jakub): the trip shown again as given."""
-        if self.sights:
+        """[Reset positions] in the Sights' header (alpha, Jakub): the trip shown again as given;
+        with the editor open, the first click only puts the editor away, as Esc does (Jakub,
+        2026-10-19: an Exit button on the editor's own header got no clicks)."""
+        if self.editor is not None:
+            self.close_editor()
+        elif self.sights:
             self.load(*self.shown)
 
     def draw_strip_buttons(self):

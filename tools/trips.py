@@ -155,7 +155,7 @@ TRIPS = [
      ["subl_commands.SightWalkEditCommand.run", "subl_reader.Reader.sight_of",
       "subl_reader.Reader.open_editor", "subl_editor.Editor.__init__", "subl_views.wait_until_loaded", "subl_editor.open_live", "subl_editor.Editor.start",
       "subl_editor.Editor.track", "subl_editor.Editor.hold", "subl_geometry.Geometry.editor_geometry",
-      "subl_geometry.Geometry.text_left", "subl_reader.Reader.editor_header_clicked"]),
+      "subl_geometry.Geometry.text_left"]),
     ("Closing the editor",
      "Esc: Sublime asks about changes, the reader reads back the moved ranges and marks.",
      ["subl_commands.SightWalkCloseEditorCommand.run", "subl_reader.Reader.close_editor",

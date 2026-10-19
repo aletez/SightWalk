@@ -1,17 +1,17 @@
 {
  "name": "Talking on the bench",
  "kind": "run",
- "commit": "1887d7b19e5eb2933432594867be0da1a7c7743f",
+ "commit": "c8b0a704b662e83d2fee1be49fc660c81459a708",
  "sights": [
-  "sw/subl_commands.py:137-147",
-  "sw/subl_reader.py:723-726",
-  "sw/subl_commands.py:52-56"
+  "sw/subl_commands.py:166-176",
+  "sw/subl_reader.py:748-753",
+  "sw/subl_commands.py:68-72"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 147],
-   "to": [1, 723]
+   "from": [0, 176],
+   "to": [1, 748]
   }
  ]
 }

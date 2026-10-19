@@ -15,6 +15,7 @@ from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkCloseEditorCommand,
     SightWalkCompareFontsCommand,
     SightWalkCycleSightsCommand,
+    SightWalkSelectColourSchemeCommand,
     SightWalkCloseTripCommand,
     SightWalkEditCommand,
     SightWalkHeaderListener,
@@ -51,6 +52,7 @@ def settings_changed():
     """A changed setting shows at once, the language included."""
     words.set_language(sublime.load_settings("SightWalk.sublime-settings").get("language"))
     state.render_all()
+    state.refresh_schemes_all()
 
 
 def plugin_unloaded():

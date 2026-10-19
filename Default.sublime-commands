@@ -5,6 +5,7 @@
     {"caption": "SightWalk: Reset Sights", "command": "sight_walk_reset_sights"},
     {"caption": "SightWalk: Switch Language (English / Polski)", "command": "sight_walk_switch_language"},
     {"caption": "SightWalk: Compare Bench Fonts", "command": "sight_walk_compare_fonts"},
+    {"caption": "SightWalk: Select Colour Scheme", "command": "sight_walk_select_colour_scheme"},
     {"caption": "SightWalk: Restart (technical)", "command": "sight_walk_restart"},
     {"caption": "Preferences: SightWalk Settings", "command": "edit_settings",
      "args": {"base_file": "${packages}/SightWalk/SightWalk.sublime-settings", "default": "{\n\t$0\n}\n"}},

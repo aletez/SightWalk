@@ -53,6 +53,52 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
             send(owner, tagged, owner.links.ask(label))
 
 
+class SightWalkSelectColourSchemeCommand(sublime_plugin.WindowCommand):
+    """One colour scheme for every view of every trip (Jakub): general, light or dark, the
+    list for light or dark holding only such schemes, previewed live in all trips; Enter
+    saves it to the SightWalk settings, Esc gives the old one back."""
+
+    def run(self):
+        kinds = [word("scheme_general"), word("scheme_light"), word("scheme_dark")]
+        self.window.show_quick_panel(kinds, self.pick_kind)
+
+    def pick_kind(self, kind):
+        if kind < 0:
+            return
+        self.key = subl_tint.SCHEME_KEYS[kind]
+        wanted = {1: False, 2: True}.get(kind)
+        self.schemes = [p for p in all_schemes()
+                        if wanted is None or subl_tint.is_dark(p) in (wanted, None)]
+        current = sublime.load_settings(SETTINGS_FILE).get(self.key)
+        selected = next((i for i, p in enumerate(self.schemes) if p == current), -1)
+        sublime.set_timeout(lambda: self.window.show_quick_panel(
+            [scheme_item(p) for p in self.schemes], self.done, selected_index=selected,
+            on_highlight=self.preview), 0)
+
+    def preview(self, index):
+        subl_tint.PREVIEW = self.schemes[index]
+        state.refresh_schemes_all()
+
+    def done(self, index):
+        subl_tint.PREVIEW = None
+        if index >= 0:
+            settings = sublime.load_settings(SETTINGS_FILE)
+            settings.set(self.key, self.schemes[index])
+            sublime.save_settings(SETTINGS_FILE)
+        state.refresh_schemes_all()
+
+
+def all_schemes():
+    found = sublime.find_resources("*.sublime-color-scheme") + sublime.find_resources("*.tmTheme")
+    return sorted({p for p in found if "/User/SightWalk/" not in p},  # not the tinted ones
+                  key=lambda path: os.path.basename(path).lower())
+
+
+def scheme_item(path):
+    name = os.path.splitext(os.path.basename(path))[0]
+    return [name, path.split("/")[1] if path.count("/") > 1 else ""]
+
+
 class SightWalkCycleSightsCommand(sublime_plugin.WindowCommand):
     """ctrl+tab and ctrl+shift+tab in a trip: the focus round the sights on screen (Jakub)."""
 

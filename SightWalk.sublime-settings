@@ -34,5 +34,10 @@
     // "dot_path": "/opt/homebrew/bin/dot",
 
     // Where Claude Code is, if SightWalk cannot find it to start the guide.
-    // "claude_path": "~/.local/bin/claude"
+    // "claude_path": "~/.local/bin/claude",
+    // One colour scheme for every view of a trip (SightWalk: Select Colour Scheme): light_ or
+    // dark_color_scheme by the system's style, else color_scheme; none keeps Sublime's own.
+    // "color_scheme": "Mariana.sublime-color-scheme",
+    // "light_color_scheme": "Breakers.sublime-color-scheme",
+    // "dark_color_scheme": "Mariana.sublime-color-scheme",
 }

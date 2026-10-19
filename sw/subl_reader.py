@@ -27,7 +27,7 @@ from .header import BENCH, SIGHTS, STRIP
 from .words import lines_of, word
 from .spec import (ancestors, block_name, body_indent, breathing, display_path, elided,
                    parse_spec, repo_root, sight_name, sight_title)
-from .subl_tint import apply_grey, apply_tint, hue_for, tint_color
+from .subl_tint import apply_grey, apply_plain, apply_tint, hue_for, tint_color
 from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
                     draw_icons,
                     draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
@@ -231,6 +231,7 @@ class Reader(Geometry):
             sight.header.assign_syntax(HEADER_SYNTAX)
             self.surround(sight, copy)
         self.tint(copies)
+        apply_plain(self.plain_views())  # the chosen scheme, if any (see refresh_schemes)
         self.draw_gaps()
         subl_asked.draw(self.sights)
         self.make_items()
@@ -293,6 +294,23 @@ class Reader(Geometry):
             slack = sight.code_item.content - lines
             if slack > 0.5:
                 self.draw_ellipsis(sight, "below", sight.ellipses["below"][0], slack)
+
+    def refresh_schemes(self):
+        """The chosen scheme everywhere at once (Jakub): every file's hues derived from it again,
+        the grey headers too, and the views without a hue take it as it is."""
+        self.tint(list(dict.fromkeys(sight.path for sight in self.sights)))
+        for header in (self.chat_header, self.sights_header, self.strip_header, self.below_header):
+            apply_grey(header)
+        apply_plain(self.plain_views())
+
+    def plain_views(self):
+        """The trip's views no file's hue tints: the bench, the Tools, blank and status views."""
+        tinted = {v.id() for s in self.sights for v in s.all_views()}
+        tinted |= {h.id() for h in (self.chat_header, self.sights_header, self.strip_header,
+                                    self.below_header)}
+        if self.editor is not None:
+            tinted |= {self.editor.view.id(), self.editor.header.id()}
+        return [v for v in self.window.views() if v.id() not in tinted]
 
     def tint(self, paths):
         """Every file in its own hue (see tint)."""

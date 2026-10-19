@@ -93,9 +93,27 @@ def scheme_stem(base, hue, amount):
     return "%s-%s-%03d" % (name, hue_part, int(round(amount * 1000)))
 
 
+SCHEME_KEYS = ("color_scheme", "light_color_scheme", "dark_color_scheme")
+PREVIEW = None  # a scheme shown while the user browses the list (see the command)
+
+
+def chosen_scheme():
+    """The scheme the SightWalk settings give every view of a trip (Jakub): light_ or
+    dark_color_scheme by the system's style, else color_scheme; None keeps Sublime's own."""
+    if PREVIEW:
+        return PREVIEW
+    settings = sublime.load_settings(SETTINGS_FILE)
+    try:
+        style = sublime.ui_info()["system"]["style"]
+    except Exception:
+        style = ""
+    return settings.get(style + "_color_scheme") or settings.get("color_scheme") or None
+
+
 def resolved_scheme(view):
-    """The view's scheme file; "auto" (light or dark by the system) as Sublime resolved it."""
-    base = view.settings().get("color_scheme") or "auto"
+    """The view's scheme file: the one chosen for SightWalk, else the view's; "auto" (light or
+    dark by the system) as Sublime resolved it."""
+    base = chosen_scheme() or view.settings().get("color_scheme") or "auto"
     if base == "auto":
         try:
             base = sublime.ui_info()["color_scheme"]["resolved_value"]
@@ -111,15 +129,15 @@ def tinted_schemes(view, hue, amount):
     scheme = load_base_scheme(base)
     if scheme is None:
         return None
-    background = view.style().get("background", "#000000")
+    # From the scheme itself: the view may still show another while a new one is chosen.
+    background, foreground = scheme_colours(scheme, view)
     # Without a hue, the band is the scheme's text colour mixed in, which always contrasts.
-    band = tint_color(background, hue, amount, view.style().get("foreground", "#808080"))
+    band = tint_color(background, hue, amount, foreground)
     stem = scheme_stem(base, hue, amount)
     globals_ = scheme.setdefault("globals", {})
     globals_["gutter"] = band
     # Line numbers in the text colour: a faint gutter_foreground vanishes on a coloured band.
-    globals_["gutter_foreground"] = globals_["gutter_foreground_highlight"] = \
-        view.style().get("foreground", "#808080")
+    globals_["gutter_foreground"] = globals_["gutter_foreground_highlight"] = foreground
     scheme.setdefault("rules", []).extend([
         {"scope": "sight_walk.icon", "foreground": "#ffffff"},
         {"scope": "sight_walk.outline", "foreground": tint_color(background, hue, OUTLINE_TINT)}]
@@ -130,8 +148,50 @@ def tinted_schemes(view, hue, amount):
     globals_["background"] = globals_["line_highlight"] = band
     # A sight's name greyed (Jakub): the text mixed half with the band, grey in any scheme.
     scheme["rules"].append({"scope": "meta.sight-name.sight-walk", "foreground": tint_color(
-        band, None, 0.5, view.style().get("foreground", "#808080"))})
+        band, None, 0.5, foreground)})
     return [code, write_scheme(scheme, stem + "-header.sublime-color-scheme")]
+
+
+def scheme_colours(scheme, view=None):
+    """(background, foreground) of a scheme dict, its variables resolved; the view's own for
+    what cannot be read (a color() function, say)."""
+    found = []
+    for key, fallback in (("background", "#000000"), ("foreground", "#808080")):
+        value = resolve_colour(scheme, (scheme.get("globals") or {}).get(key, ""))
+        if value is None and view is not None:
+            value = view.style().get(key)
+        found.append(value or fallback)
+    return tuple(found)
+
+
+def resolve_colour(scheme, value, depth=5):
+    """A "#rrggbb" from a scheme's value, through var(name); None if it is no plain colour."""
+    found = re.match(r"^var\((\w[\w-]*)\)$", str(value).strip())
+    if found and depth:
+        return resolve_colour(scheme, (scheme.get("variables") or {}).get(found.group(1), ""),
+                              depth - 1)
+    return value if re.match(r"^#[0-9a-fA-F]{6}", str(value)) else None
+
+
+def is_dark(path):
+    """Whether a scheme's background is dark, by its luminance; None if it cannot be read."""
+    scheme = load_base_scheme(path)
+    background = scheme and scheme_colours(scheme)[0]
+    if not scheme or not resolve_colour(scheme, (scheme.get("globals") or {}).get("background", "")):
+        return None
+    r, g, b = hex_rgb(background)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.5
+
+
+def apply_plain(views):
+    """The views no file's hue tints (the bench, the Tools, blank views) take the chosen
+    scheme as it is, or their own back when none is chosen."""
+    chosen = chosen_scheme()
+    for view in views:
+        if chosen:
+            view.settings().set("color_scheme", chosen)
+        else:
+            view.settings().erase("color_scheme")
 
 
 def when_indexed(resources, callback, tries=200):
@@ -149,10 +209,10 @@ def when_indexed(resources, callback, tries=200):
 def schemes_for(key, view, hue):
     """The code and header schemes for a file (key: path) or the conversation (key: None),
     written once per key and band amount, so a file keeps its colours across show calls."""
-    amount = band_amount()
-    if (key, amount) not in SCHEMES:
-        SCHEMES[(key, amount)] = tinted_schemes(view, hue, amount)
-    return SCHEMES[(key, amount)]
+    amount, base = band_amount(), resolved_scheme(view)
+    if (key, amount, base) not in SCHEMES:
+        SCHEMES[(key, amount, base)] = tinted_schemes(view, hue, amount)
+    return SCHEMES[(key, amount, base)]
 
 
 def set_schemes(pairs):

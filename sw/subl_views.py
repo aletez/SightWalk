@@ -105,7 +105,8 @@ def reader_layout(code_rects, total, top, split, bench, front=(), editor=None, s
         (x0, split, x1, below + OVERLAP), (x0, split - status, x1, split)]
     if editor:
         header, left, right, dy = editor
-        rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, total)] + rects
+        bottom = total if dy < total else dy + 2 * header  # off screen, below it, when closed
+        rects = [(left, dy, right, dy + header + OVERLAP), (left, dy + header, right, bottom)] + rects
     return to_layout(rects, total)
 
 

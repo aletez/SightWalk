@@ -69,8 +69,8 @@ class Geometry:
     def editor_geometry(self):
         """The editor sits to the lower right of the sights, its top left corner set back past their
         header and gutter, so no colour of the frame touches the same colour in the editor."""
-        if self.editor is None:
-            return None
+        if self.editor is None:  # its cells off screen, below it (see Reader.editor_slot)
+            return self.lh, 0.0, 1.0, (self.height or 0.0) + 100.0
         header = self.editor.header.line_height() + self.overhead
         _, gutter, right, _ = self.column()
         top = self.head() + self.lh + self.overhead + INSET

@@ -107,6 +107,10 @@ class Reader(Geometry):
         self.filler = make_blank_view(self.window, "")
         self.filler.assign_syntax(subl_chat.SYNTAX)  # the bench's colours below the sights (Jakub)
         self.top_filler = make_blank_view(self.window, "")  # above a short trip (see plan.lead)
+        # The editor's two cells stand ready in front, off screen, holding these until an editor
+        # opens (Jakub): opening one then moves cells, never the order of the groups, which
+        # left the bench showing the Map or the Tour.
+        self.editor_slot = (make_blank_view(self.window, ""), make_blank_view(self.window, ""))
         self.top_filler.assign_syntax(subl_chat.SYNTAX)
         # Between the bench and the Sights, an empty strip whose wheel moves the whole trip; the
         # wheel over a sight scrolls only that sight, until the trip next moves (Jakub).
@@ -426,7 +430,10 @@ class Reader(Geometry):
     def assign_groups(self, views, full, front=0):
         """views: the front ones (see strip_in_front), then the Sights' and the strip's."""
         # Until calibrated, the headers and the Tools pane wait behind the conversation.
-        first = [] if self.editor is None else [self.editor.header, self.editor.view]
+        # The editor's cells, ready in front: only once laid out in full (see reader_layout).
+        editor = list(self.editor_slot) if self.editor is None else [self.editor.header,
+                                                                     self.editor.view]
+        first = editor if full else []
         tools = [self.tool_view()] if full else []
         ordered = first + views[:front] + tools + views[front:] + [self.chat]
         for group, view in enumerate(ordered):

@@ -269,7 +269,7 @@ Open:
 Entities:
 - **Collection**: members one level down, without order. A line is no entity, a number; the hierarchy ends there.
 - **Sequence** (a collection): its members in order, so one can walk it. A **sight** is a sequence of a file's lines; a **tour** a sequence of trips.
-- **Network** (a collection): a bag of transitions between its places; an id from its name and the commit hash its lines are counted in. Self-contained: it knows only itself and its members. The **informator** is a network of trips, without order.
+- **Network** (a collection): a bag of transitions between its places; an id from its name and the commit hash its lines are counted in. Self-contained: it knows only itself and its members. The **informator** is a network of trips, without order, covering the whole program's code: every function in one trip at least (Jakub, 2026-10-19; a definition, not a feature of SightWalk's own informator only). The ontology does not check it; tools/trips.py does for SightWalk's informator, naming every function no trip covers.
 - **Trip**: a sequence and a network of sights at once; kind run, comparison or survey (see the manual).
 - **Tour**: an entity, a sequence of one informator's trips, linearized by chosen transition types (by default leads_to); it keeps which informator and which types. A trip nothing leads to may start one, unless its purpose says otherwise (a comparison).
 - **Place**: a path into a network, of any length from 0: in a trip ⟨⟩, ⟨sight⟩, ⟨sight, line⟩; in an informator ⟨⟩, ⟨trip⟩, ⟨trip, sight⟩, ⟨trip, sight, line⟩. A trip by its id, a sight by its index in the trip, a line as in the network's commit.

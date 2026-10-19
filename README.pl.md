@@ -56,9 +56,10 @@ Wycieczka bywa jednego z trzech rodzajów:
 - **porównanie**: fragmenty obok siebie, np. dwie implementacje albo kod przed zmianą i po niej;
 - **przegląd**: wszystkie miejsca dotyczące jednej rzeczy, np. każda obsługa jednego błędu.
 
-Wycieczki można zapisać, połączyć w **informator** (sieć wycieczek z przejściami między nimi)
-i przejść w zaplanowanej kolejności jako **turnus**. Tak opisany jest kod samej wtyczki:
-[docs/trips.md](docs/trips.md) dzieli go na 43 wycieczki, każdą funkcję w co najmniej jednej.
+Wycieczki można zapisać, połączyć w **informator** (sieć wycieczek obejmujących cały kod
+programu, z przejściami między nimi) i przejść wybrane z nich w ustalonej kolejności jako
+**turnus**. Tak opisany jest kod samej wtyczki: [docs/trips.md](docs/trips.md) dzieli go na pełen
+turnus 43 wycieczek, a każdą funkcję umieszcza w co najmniej jednej.
 
 ## Spacer po interfejsie
 

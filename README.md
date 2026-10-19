@@ -54,9 +54,10 @@ A trip is one of three kinds:
 - **a comparison**: fragments side by side, e.g. two implementations, or code before and after a change;
 - **a survey**: all the places about one thing, e.g. every handler of one error.
 
-Trips can be saved, joined into an **informator** (a network of trips with transitions between
-them) and walked in a planned order as a **tour**. The plugin's own code is documented this way:
-[docs/trips.md](docs/trips.md) splits all of it into 43 trips, every function in one at least.
+Trips can be saved, joined into an **informator** (a network of trips covering the whole
+program's code, with transitions between them), and chosen ones walked in a set order as a
+**tour**. The plugin's own code is documented this way: [docs/trips.md](docs/trips.md) splits it
+into a full tour of 43 trips, and puts every function in one at least.
 
 ## A walk through the interface
 

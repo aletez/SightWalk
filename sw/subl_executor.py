@@ -61,7 +61,7 @@ def named(specs):
 
 
 UNANSWERED = ("This message is still unanswered (a guide before you may have taken it): answer "
-              "it with say, point first if the answer names code, then wait.")
+              "it with say, its marks as tags in the text if the answer names code, then wait.")
 
 
 def op_say(args, facts):

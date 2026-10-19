@@ -154,7 +154,7 @@ TOOLS = [
          "few words, shown in the header over the Sights.",
          {"sights": {"type": "array", "items": {"type": "string"}},
           "transitions": {"type": "array", "items": TRANSITION}, "root": {"type": "string"},
-          "trip": {"type": "string"}}, ["sights", "transitions"]),
+          "trip": {"type": "string"}}, ["sights", "transitions", "trip"]),
     tool("open_trip", "Open a trip from its file (JSON, as an informator keeps it: name, kind, "
          "sights, transitions), instead of composing it with show. root: base folder for its "
          "relative paths, by default the file's repository.",
@@ -174,7 +174,9 @@ TOOLS = [
          "window: close, then show); default_conversation_height, 0 to 1 (bottom of the Vetting "
          'Bench as a share of the window; applies at once); bench_side, "left" or "right".',
          {"values": {"type": "object"}}),
-    tool("wait_for_user", "Wait up to 50 s for the user's next message. Returns text, visible, "
-         "focus and here, or timeout: then call it again at once and say nothing.",
+    tool("wait_for_user", "Wait up to 50 s for the user's next message. Returns text and "
+         "visible; once the user has touched a sight, focus and here; selected, the text selected "
+         "there; edited, after the user's edits; unanswered, when this message still waits for "
+         "your answer. Or timeout (with next): then call it again at once and say nothing.",
          {"timeout_s": {"type": "integer"}}),
 ]

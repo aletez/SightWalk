@@ -922,6 +922,7 @@ class Reader(Geometry):
             # Before load: the trip may be laid out within it, and start takes them then.
             self.pending_marks = self.informator.transcripts.get(key + MARKS_KEY)
             self.load(self.informator.member(key), self.informator_root)
+            self.trip_start = 0  # a tour trip's conversation is its own, all of it
         elif what == "tick":
             self.walked ^= {key}
             subl_vetting.save_walked(self.informator.id, self.walked)

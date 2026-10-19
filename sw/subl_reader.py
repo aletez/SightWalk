@@ -766,7 +766,8 @@ class Reader(Geometry):
     def cycle(self, step):
         """ctrl+tab (step 1) and ctrl+shift+tab (-1): the focus to the next sight on screen
         (Jakub). The caret stays, unless it is off screen: then it goes to the first line shown,
-        so Sublime does not scroll the sight to it."""
+        so Sublime does not scroll the sight to it: to the middle of the part on screen, as the
+        first line may be cut in half or under the frozen lines (Jakub)."""
         active = self.window.active_view()
         index = plan.cycled(plan.visible_indices(self.sights, self.offset, self.room()),
                             self.sight_of(active) if active else None, step)
@@ -776,8 +777,8 @@ class Reader(Geometry):
         shown = view.visible_region()
         if not len(view.sel()) or not shown.contains(view.sel()[0].b):
             view.sel().clear()
-            line = view.line(shown.a)  # the first line wholly shown
-            view.sel().add(sublime.Region(line.a if line.a >= shown.a else line.b + 1))
+            first, last = (view.rowcol(p)[0] for p in (shown.a, shown.b))
+            view.sel().add(sublime.Region(view.text_point((first + last) // 2, 0)))
         self.window.focus_view(view)
 
     def show_place(self, index, line):

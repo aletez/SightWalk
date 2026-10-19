@@ -32,19 +32,20 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 | Command | Pass |
 |---|---|
-| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two sights with a plain background and a gutter in the header's hue, the conversation on the left under a two-line grey header "Vetting Guide" with a faded `?` at its right; hovering the `?` lists the shortcuts. |
+| `python3 tools/poke.py show` | `{"ok": true}`. A window without tabs or sidebar: headers in two different hues above two sights with a plain background and a gutter in the header's hue, the conversation on the left under a one-line grey header "Bench" with a faded `[?]` at its right; hovering it lists the shortcuts. |
 | `python3 tools/poke.py say` | `A: Hello from the bridge.` appears above the prompt. |
-| `python3 tools/poke.py point` | Gutter icons, each line outlined: ⤵ on line 5 and ↳ on line 40, a 1 on line 8, an A on line 12. A mark off screen shows an eye on the first or last visible line instead. |
+| `python3 tools/poke.py marks` | An answer placing its own marks (send a message on the bench first): `1` framed in the text and as an icon on line 8 of (a), `A` on line 12, "the jump" framed, with its ends on (a):5 and (b):40. A mark off screen shows an eye on the first or last visible line instead. |
+| `python3 tools/poke.py double` | Two marks on line 8: the first in the gutter, the second on the strip between the bench and the Sights. |
 | `python3 tools/poke.py state` | JSON with `sights`, `focus` and `visible`. |
 | `python3 tools/poke.py badtoken` | `Unauthorized…` |
 
 ## 4. Geometry and editing, by hand
 
-- Wheel over a sight or a header: all sights scroll together and the sight snaps back. Alt+↓/↑ scroll 3 lines, PageDown/PageUp about a screen.
+- The wheel moves the whole trip only over the scroll strip, the empty fillers and ▼'s cell, and over the bench and the Tools pane while ⌘S lets them take it ([⇕] in the Tools header). Over a sight's code it scrolls that sight alone; over a header or a frozen line it does nothing. ▲▼ on the strip, Alt+↓/↑ (3 lines) and PageDown/PageUp (about a screen) move the trip too.
 - Each sight is exactly as tall as its range. The last sight, when it fits with its header, scrolls up until its header is at the top, with the empty filler below. A taller last sight stops when the end of its range reaches the bottom.
 - Marks sit in the gutter on their lines. Compare with the file opened normally.
 - Opening or closing a panel, or resizing the window, keeps everything aligned.
-- Enter in a sight, or the header's Edit button, opens the editor over the sights; it saves to the real file, Esc closes it. Undo afterwards.
+- Enter in a sight, or the header's Edit button, opens the editor over the sights; it saves to the real file, Esc or End editing closes it and the panes return to where they were. Undo afterwards.
 
 ## 5. Vetting Bench
 
@@ -57,4 +58,4 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 
 1. Paste the clipboard line from step 2, start a fresh `claude` session, check `/mcp` lists `sight-walk` with 8 tools.
 3. Prompt: "Use the sight-walk tools to walk me through what happens when the plugin receives a show request, from subl_mcp_http's do_POST to Reader.column_rects, in execution order, then wait for my questions with wait_for_user. Use absolute paths."
-4. Check: panes in run order, one whole function each; "what does this return?" answered about the centred pane; "point at the call and its callee" gives ⤵ and ↳; "what if the file doesn't exist?" rebuilds the sequence.
+4. Check: sights in run order, one function at most each; "what does this return?" answered about what is selected; "mark the call and its callee" gives a framed jump with its arrow icons; "what if the file doesn't exist?" rebuilds the trip.

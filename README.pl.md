@@ -67,9 +67,9 @@ i przejść w zaplanowanej kolejności jako **turnus**. Tak opisany jest kod sam
 Po prawej **panorama**: jedna kolumna widoków, przewijana jak jeden dokument. Każdy widok ma
 nagłówek z nazwą, (a), (b), (c)…, i plikiem, zabarwiony kolorem swojego pliku. Linie `def`
 i `class`, do których należy fragment, stoją zamrożone pod nagłówkiem, a „⋮ 10 linii Handler”
-mówi, co zostało pominięte. Widoki przewijają się razem, jak jeden dokument, a każdy nagłówek
-zostaje przy swoim kodzie. Wycieczkę przesuwa kółko nad paskiem przewijania, a nad ławką i panelem
-Narzędzi wtedy, gdy `⌘S` tak ustawi.
+mówi, co zostało pominięte. Cała wycieczka przesuwa się jak jeden dokument, każdy nagłówek
+przy swoim kodzie: przesuwa ją kółko nad paskiem przewijania, a nad ławką i panelem Narzędzi
+wtedy, gdy `⌘S` tak ustawi. Nad kodem widoku kółko przewija tylko ten widok.
 
 Po lewej **ławka**. Na górze strony użytkownik pyta, czemu klient dostaje 202 **here**, a nie
 200, z „here” połączonym z linią 105. Przewodnik odpowiada znacznikami: ikony **1** i **2** na

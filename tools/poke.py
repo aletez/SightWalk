@@ -11,7 +11,7 @@ import urllib.request
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_FILES = [os.path.join(HERE, "..", "sw", "reader.py"), os.path.join(HERE, "..", "sw", "tint.py")]
+DEFAULT_FILES = [os.path.join(HERE, "..", "sw", "subl_reader.py"), os.path.join(HERE, "..", "sw", "subl_tint.py")]
 CONFIG = os.path.expanduser("~/.sight_walk/config.json")
 
 

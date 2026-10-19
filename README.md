@@ -65,9 +65,9 @@ them) and walked in a planned order as a **tour**. The plugin's own code is docu
 On the right, the **Sights**: one column of panes, scrolled as one document. Each sight has a
 header with its name, (a), (b), (c)…, and its file, tinted in a hue per file. The `def` and
 `class` lines a fragment belongs to stay frozen under its header, and "⋮ 10 lines of Handler"
-says what was left out. The sights scroll together, as one document, and every header
-stays with its code. The wheel moves the trip over the scroll strip, and over the bench and the
-Tools pane when `⌘S` sets it so.
+says what was left out. The whole trip moves as one document, every header with its code:
+the wheel moves it over the scroll strip, and over the bench and the Tools pane when `⌘S` sets
+it so. Over a sight's code the wheel scrolls that sight alone.
 
 On the left, the **Vetting Bench**. At the top of this page the user asks *why does the client
 get 202 **here** and not 200?*, with "here" linked to line 105. The guide answers with marks:

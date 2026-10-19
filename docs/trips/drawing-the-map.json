@@ -1,7 +1,7 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "6ae6bcefd77f2aca9aa9aa3b48e55adfa24d34ce",
+ "commit": "87c0a990ec9d487a970fc77a84fdc4d9b25c63cd",
  "sights": [
   "sw/subl_vetting.py:111-119",
   "sw/subl_vetting.py:104-108",

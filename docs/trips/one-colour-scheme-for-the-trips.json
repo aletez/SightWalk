@@ -1,21 +1,23 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "3597079c6f16544d4a4a148176a07ddb261fb1e7",
+ "commit": "ce2a42345f6df3d47cdebc7edcc17ae036570475",
  "sights": [
   "sw/subl_commands.py:61-63",
   "sw/subl_commands.py:65-76",
   "sw/subl_commands.py:91-94",
-  "sw/subl_tint.py:179-186",
+  "sw/subl_tint.py:203-207",
   "sw/subl_commands.py:97-99",
   "sw/subl_commands.py:78-80",
   "sw/state.py:54-58",
   "sw/subl_reader.py:298-304",
   "sw/subl_tint.py:100-110",
-  "sw/subl_tint.py:158-167",
-  "sw/subl_tint.py:170-176",
+  "sw/subl_tint.py:158-168",
+  "sw/subl_tint.py:176-185",
+  "sw/subl_tint.py:188-200",
+  "sw/subl_tint.py:171-173",
   "sw/subl_reader.py:306-313",
-  "sw/subl_tint.py:189-197",
+  "sw/subl_tint.py:210-218",
   "sw/subl_commands.py:82-88"
  ],
  "transitions": [
@@ -32,12 +34,12 @@
   {
    "type": "calls",
    "from": [1, 71],
-   "to": [3, 179]
+   "to": [3, 203]
   },
   {
    "type": "calls",
    "from": [1, 75],
-   "to": [13, 82]
+   "to": [15, 82]
   },
   {
    "type": "calls",
@@ -51,13 +53,13 @@
   },
   {
    "type": "calls",
-   "from": [3, 182],
-   "to": [9, 158]
+   "from": [3, 206],
+   "to": [10, 176]
   },
   {
    "type": "calls",
-   "from": [3, 183],
-   "to": [10, 170]
+   "from": [3, 207],
+   "to": [12, 171]
   },
   {
    "type": "calls",
@@ -72,26 +74,41 @@
   {
    "type": "calls",
    "from": [7, 304],
-   "to": [11, 306]
+   "to": [13, 306]
   },
   {
    "type": "calls",
    "from": [7, 304],
-   "to": [12, 189]
+   "to": [14, 210]
   },
   {
    "type": "calls",
-   "from": [9, 163],
-   "to": [10, 170]
+   "from": [9, 162],
+   "to": [10, 176]
   },
   {
    "type": "calls",
-   "from": [12, 192],
+   "from": [9, 165],
+   "to": [12, 171]
+  },
+  {
+   "type": "calls",
+   "from": [9, 167],
+   "to": [12, 171]
+  },
+  {
+   "type": "calls",
+   "from": [10, 185],
+   "to": [11, 188]
+  },
+  {
+   "type": "calls",
+   "from": [14, 213],
    "to": [8, 100]
   },
   {
    "type": "calls",
-   "from": [13, 88],
+   "from": [15, 88],
    "to": [6, 54]
   }
  ]

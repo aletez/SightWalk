@@ -6,7 +6,7 @@ import textwrap
 BENCH = "Bench"  # the bench's header names whom you talk to, as in chat clients (Jakub)
 SIGHTS = "Sights"
 STRIP = "Scroll strip"
-MARK_ROOM = 6  # columns kept free at the right of the first line for the help mark
+MARK_ROOM = 4  # columns kept at the right for the help mark, close to the edge (Jakub)
 
 
 def title_lines(title, status, columns):

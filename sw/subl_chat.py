@@ -95,7 +95,7 @@ def show_header(view, title, status, help_mark=True, button=None):
     """button: (label, on_click), drawn at the right end of the first line instead of the help
     mark, like a sight's Edit button."""
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
-    room = len(button[0]) + 4 - MARK_ROOM if button is not None else 0
+    room = len(button[0]) + 2 - MARK_ROOM if button is not None else 0
     text = title_lines(title, status, columns - room)  # the first line ends where the mark goes
     mark = kept(view)["mark"]
     if text == mark[1]:

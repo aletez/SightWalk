@@ -249,7 +249,7 @@ class HeaderTest(unittest.TestCase):
     def test_one_line(self):
         text = header.title_lines("Vetting Bench", "a status " * 20, 40)
         self.assertNotIn("\n", text)
-        self.assertEqual(len(text), 34)
+        self.assertEqual(len(text), 36)
         self.assertTrue(text.endswith("…"))
 
 

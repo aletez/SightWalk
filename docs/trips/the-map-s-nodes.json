@@ -1,7 +1,7 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
+ "commit": "de04049ce13e6f84763d8e50a7200fa3c3b6aea9",
  "sights": [
   "sw/subl_reader.py:978-989",
   "sw/subl_reader.py:1149-1156",
@@ -14,7 +14,7 @@
   "sw/callmap.py:28-30",
   "sw/callmap.py:52-59",
   "sw/callmap.py:42-49",
-  "sw/subl_vetting.py:104-112"
+  "sw/subl_vetting.py:109-117"
  ],
  "transitions": [
   {
@@ -45,7 +45,7 @@
   {
    "type": "calls",
    "from": [0, 989],
-   "to": [11, 104]
+   "to": [11, 109]
   },
   {
    "type": "calls",

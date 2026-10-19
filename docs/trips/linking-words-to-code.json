@@ -1,7 +1,7 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "09b3831120e24401fddd54951d9b8ded0bef855d",
+ "commit": "de04049ce13e6f84763d8e50a7200fa3c3b6aea9",
  "sights": [
   "sw/subl_commands.py:115-122",
   "sw/subl_links.py:19-30",

@@ -211,12 +211,12 @@ The marks an answer places with its own tags, resolved to sights and lines, fram
 - `sw/spec.py:58-64` sight_index
 - `sw/spec.py:50-55` sight_name
 - `sw/marks.py:246-258` trip_place
-- `sw/subl_reader.py:1106-1132` Reader.follow_frame
+- `sw/subl_reader.py:1107-1133` Reader.follow_frame
 - `sw/subl_chat.py:223-226` blanks
-- `sw/subl_reader.py:1134-1145` Reader.show_places
-- `sw/subl_reader.py:1209-1224` Reader.add_to_answer
-- `sw/subl_reader.py:1050-1059` Reader.follow_label
-- `sw/subl_reader.py:974-983` Reader.show_answer
+- `sw/subl_reader.py:1135-1146` Reader.show_places
+- `sw/subl_reader.py:1210-1225` Reader.add_to_answer
+- `sw/subl_reader.py:1051-1060` Reader.follow_label
+- `sw/subl_reader.py:975-984` Reader.show_answer
 
 ## 12. Drawing the marks (10 views)
 
@@ -243,7 +243,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/validator.py:14-17` MARK_FIRST
 - `sw/marks.py:160-162` speaks_of_code
 - `sw/marks.py:157-157` CODE_TALK
-- `sw/subl_reader.py:1194-1207` Reader.say
+- `sw/subl_reader.py:1195-1208` Reader.say
 - `sw/subl_reader.py:776-788` Reader.show_headers
 - `sw/subl_chat.py:95-114` show_header
 - `sw/header.py:12-20` title_lines
@@ -262,8 +262,8 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
 - `sw/subl_commands.py:289-292` SightWalkStopAnswerCommand.run
-- `sw/subl_reader.py:1173-1180` Reader.stop_answer
-- `sw/subl_reader.py:1182-1185` Reader.withdraw_unread_messages
+- `sw/subl_reader.py:1174-1181` Reader.stop_answer
+- `sw/subl_reader.py:1183-1186` Reader.withdraw_unread_messages
 
 ## 15. The Tools pane's tabs (12 views, survey)
 
@@ -280,17 +280,17 @@ Map and Scroll: the tab links, and the tab shown in the pane.
 - `sw/subl_reader.py:865-867` Reader.tools
 - `sw/subl_reader.py:869-870` Reader.tool_view
 - `sw/subl_reader.py:872-873` Reader.hidden_tools
-- `sw/subl_reader.py:1093-1104` Reader.draw_map
+- `sw/subl_reader.py:1094-1105` Reader.draw_map
 
 ## 16. The Map's nodes (12 views)
 
 The trip's definitions and the calls its author named, as nodes for the graph.
 
-- `sw/subl_reader.py:1093-1104` Reader.draw_map
-- `sw/subl_reader.py:1265-1272` map_style
-- `sw/subl_reader.py:1147-1161` Reader.map_nodes
+- `sw/subl_reader.py:1094-1105` Reader.draw_map
+- `sw/subl_reader.py:1266-1273` map_style
+- `sw/subl_reader.py:1148-1162` Reader.map_nodes
 - `sw/subl_reader.py:48-52` fragment_of
-- `sw/subl_reader.py:1163-1167` Reader.owner
+- `sw/subl_reader.py:1164-1168` Reader.owner
 - `sw/subl_reader.py:59-64` defined_name
 - `sw/callmap.py:33-39` first_definition
 - `sw/callmap.py:42-49` node_at
@@ -329,7 +329,7 @@ The draft becomes a message, with the focus, the visible sights and the edits, a
 - `sw/subl_chat.py:164-178` take_draft
 - `sw/subl_commands.py:32-40` send
 - `sw/state.py:36-37` reader_for
-- `sw/subl_reader.py:1226-1240` Reader.context
+- `sw/subl_reader.py:1227-1241` Reader.context
 - `sw/subl_views.py:324-328` selected_text
 - `sw/plan.py:121-124` visible_specs
 - `sw/subl_reader.py:769-772` Reader.take_edits
@@ -592,8 +592,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/subl_geometry.py:65-67` Geometry.room
 - `sw/subl_views.py:204-209` smaller
 - `sw/subl_executor.py:78-80` op_state
-- `sw/subl_reader.py:1187-1192` Reader.folder
-- `sw/subl_reader.py:1169-1171` Reader.note_waiting
+- `sw/subl_reader.py:1188-1193` Reader.folder
+- `sw/subl_reader.py:1170-1172` Reader.note_waiting
 
 ## 34. Building blocks (11 views, survey)
 
@@ -677,7 +677,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_commands.py:314-318` SightWalkOpenTourCommand.open
 - `sw/words.py:141-148` trips_count
 - `sw/subl_reader.py:898-912` Reader.open_tour
-- `sw/subl_reader.py:1256-1258` read_json
+- `sw/subl_reader.py:1257-1259` read_json
 - `sw/ontology.py:294-300` tour_from
 - `sw/ontology.py:273-277` informator_from
 - `sw/ontology.py:257-260` trip_from
@@ -685,17 +685,17 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/ontology.py:212-225` tour
 - `sw/ontology.py:228-236` visit
 - `sw/subl_vetting.py:218-224` read_walked
-- `sw/subl_reader.py:914-928` Reader.tour_link
-- `sw/subl_reader.py:930-945` Reader.keep_transcript
-- `sw/subl_reader.py:947-955` Reader.kept_marks
-- `sw/subl_reader.py:957-959` Reader.line_text
-- `sw/subl_reader.py:961-972` Reader.restore_marks
-- `sw/subl_reader.py:1243-1245` transcripts_path
-- `sw/subl_reader.py:1248-1253` read_transcripts
+- `sw/subl_reader.py:914-929` Reader.tour_link
+- `sw/subl_reader.py:931-946` Reader.keep_transcript
+- `sw/subl_reader.py:948-956` Reader.kept_marks
+- `sw/subl_reader.py:958-960` Reader.line_text
+- `sw/subl_reader.py:962-973` Reader.restore_marks
+- `sw/subl_reader.py:1244-1246` transcripts_path
+- `sw/subl_reader.py:1249-1254` read_transcripts
 - `sw/subl_chat.py:206-209` set_transcript
 - `sw/ontology.py:280-284` dumps
 - `sw/subl_vetting.py:227-236` save_walked
-- `sw/subl_reader.py:1061-1063` Reader.draw_tour
+- `sw/subl_reader.py:1062-1064` Reader.draw_tour
 - `sw/subl_vetting.py:199-215` show_tour
 
 ## 39. Trip files (6 views)
@@ -742,9 +742,9 @@ The underline and the popup that says where the code asks the question.
 
 The Permissions tab: a field ticked, remembered or not, and the guide SightWalk started restarted while it waits with the tools allowed now.
 
-- `sw/subl_reader.py:1065-1068` Reader.draw_permissions
+- `sw/subl_reader.py:1066-1069` Reader.draw_permissions
 - `sw/subl_vetting.py:244-264` show_permissions
-- `sw/subl_reader.py:1070-1085` Reader.permission_link
+- `sw/subl_reader.py:1071-1086` Reader.permission_link
 - `sw/subl_vetting.py:267-269` show_tip
 - `sw/subl_guide.py:126-132` toggle
 - `sw/permissions.py:37-39` remembered
@@ -754,19 +754,19 @@ The Permissions tab: a field ticked, remembered or not, and the guide SightWalk 
 - `sw/permissions.py:23-34` allowed_tools
 - `sw/permissions.py:42-44` reminders
 - `sw/subl_guide.py:149-151` ours
-- `sw/subl_reader.py:1087-1091` Reader.add_folder
+- `sw/subl_reader.py:1088-1092` Reader.add_folder
 - `sw/subl_guide.py:119-123` set_folders
 
 ## 43. The bench's answers listed (9 views)
 
 The Answers tab: the bench's questions and answers by their first words; a click shows one's icons or places and brings it into the bench, a second click hides them.
 
-- `sw/subl_reader.py:1021-1023` Reader.draw_answers
-- `sw/subl_reader.py:1004-1019` Reader.bench_rows
+- `sw/subl_reader.py:1022-1024` Reader.draw_answers
+- `sw/subl_reader.py:1005-1020` Reader.bench_rows
 - `sw/answers.py:9-19` entries
-- `sw/subl_reader.py:985-995` Reader.answer_marks
+- `sw/subl_reader.py:986-996` Reader.answer_marks
 - `sw/subl_vetting.py:274-289` show_answers
 - `sw/subl_vetting.py:292-293` html_escape
-- `sw/subl_reader.py:1025-1041` Reader.answer_link
-- `sw/subl_reader.py:997-1000` Reader.hide_answer
-- `sw/subl_reader.py:1043-1048` Reader.scroll_bench
+- `sw/subl_reader.py:1026-1042` Reader.answer_link
+- `sw/subl_reader.py:998-1001` Reader.hide_answer
+- `sw/subl_reader.py:1044-1049` Reader.scroll_bench

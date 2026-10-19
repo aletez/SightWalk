@@ -708,6 +708,18 @@ class Reader(Geometry):
             draw_edit_button(self.editor.header, display_path(self.editor.path),
                              lambda _: self.close_editor(), word("exit"))
 
+    def editor_header_clicked(self, view):
+        """A click on the editor's header at its button closes the editor: the button's own link
+        gets no click there, the header lying over a sight's (see Editor)."""
+        if self.editor is None or view != self.editor.header or not len(view.sel()):
+            return False
+        point = view.sel()[0].b
+        line = view.line(point)
+        if line.b - point <= len(word("exit")) + 2:
+            self.close_editor()
+            return True
+        return False
+
     def open_editor(self, index, line):
         if self.editor is None:
             path = self.sights[index].path

@@ -72,9 +72,17 @@ class Geometry:
         if self.editor is None:  # its cells off screen, below it (see Reader.editor_slot)
             return self.lh, 0.0, 1.0, (self.height or 0.0) + 100.0
         header = self.editor.header.line_height() + self.overhead
-        _, gutter, right, _ = self.column()
+        left, _, right, _ = self.column()
         top = self.head() + self.lh + self.overhead + INSET
-        return header, gutter + self.share(INSET), right, top
+        return header, left + self.share(self.gutter_px() + INSET), right, top
+
+    def gutter_px(self):
+        """A sight's gutter as drawn, measured where its text starts (line numbers, icons and the
+        gap widen it past GUTTER_PX, and the editor then lay over it, Jakub)."""
+        if not self.sights:
+            return GUTTER_PX
+        view = self.sights[0].view
+        return max(view.text_to_window(view.text_point(self.sights[0].begin - 1, 0))[0], GUTTER_PX)
 
     def column_rects(self):
         """The Sights' header, every sight's cells below it, then the filler below the last sight:

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "cd692a54fd6f4ae4ffd52a58cb26c2760c6b5189",
+ "commit": "3597079c6f16544d4a4a148176a07ddb261fb1e7",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1330,7 +1330,7 @@
    "to": [
     "settings-and-the-rest-of-the-colours",
     6,
-    235
+    238
    ]
   },
   {
@@ -1356,7 +1356,7 @@
    "to": [
     "settings-and-the-rest-of-the-colours",
     6,
-    235
+    238
    ]
   },
   {
@@ -1785,7 +1785,7 @@
    "to": [
     "one-colour-scheme-for-the-trips",
     12,
-    186
+    189
    ]
   },
   {
@@ -2210,7 +2210,7 @@
    "from": [
     "colours",
     1,
-    229
+    232
    ],
    "to": [
     "colours"
@@ -2221,7 +2221,7 @@
    "from": [
     "colours",
     2,
-    209
+    212
    ],
    "to": [
     "colours"
@@ -2232,7 +2232,7 @@
    "from": [
     "colours",
     2,
-    212
+    215
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -2245,7 +2245,7 @@
    "from": [
     "colours",
     2,
-    212
+    215
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -2269,7 +2269,7 @@
    "from": [
     "colours",
     4,
-    125
+    128
    ],
    "to": [
     "colours"
@@ -2280,7 +2280,7 @@
    "from": [
     "colours",
     4,
-    128
+    131
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -2293,12 +2293,12 @@
    "from": [
     "colours",
     4,
-    133
+    136
    ],
    "to": [
     "one-colour-scheme-for-the-trips",
     9,
-    155
+    158
    ]
   },
   {
@@ -2306,7 +2306,7 @@
    "from": [
     "colours",
     4,
-    136
+    139
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -2404,7 +2404,7 @@
    "from": [
     "colours",
     8,
-    218
+    221
    ],
    "to": [
     "colours"
@@ -2415,7 +2415,7 @@
    "from": [
     "colours",
     9,
-    197
+    200
    ],
    "to": [
     "colours"
@@ -8075,7 +8075,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     3,
-    176
+    179
    ],
    "to": [
     "one-colour-scheme-for-the-trips"
@@ -8086,7 +8086,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     3,
-    178
+    181
    ],
    "to": [
     "colours",
@@ -8099,7 +8099,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     3,
-    182
+    185
    ],
    "to": [
     "settings-and-the-rest-of-the-colours",
@@ -8174,7 +8174,7 @@
    "to": [
     "settings-and-the-rest-of-the-colours",
     6,
-    235
+    238
    ]
   },
   {
@@ -8193,7 +8193,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     9,
-    155
+    158
    ],
    "to": [
     "one-colour-scheme-for-the-trips"
@@ -8204,7 +8204,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     10,
-    167
+    170
    ],
    "to": [
     "one-colour-scheme-for-the-trips"
@@ -8226,7 +8226,7 @@
    "from": [
     "one-colour-scheme-for-the-trips",
     12,
-    186
+    189
    ],
    "to": [
     "one-colour-scheme-for-the-trips"
@@ -9841,7 +9841,7 @@
    "from": [
     "endings",
     6,
-    243
+    246
    ],
    "to": [
     "endings"
@@ -10419,7 +10419,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     3,
-    116
+    119
    ],
    "to": [
     "one-colour-scheme-for-the-trips",
@@ -10454,7 +10454,7 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     6,
-    235
+    238
    ],
    "to": [
     "settings-and-the-rest-of-the-colours"
@@ -10465,12 +10465,12 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     6,
-    238
+    241
    ],
    "to": [
     "colours",
     2,
-    209
+    212
    ]
   },
   {
@@ -10478,12 +10478,12 @@
    "from": [
     "settings-and-the-rest-of-the-colours",
     6,
-    240
+    243
    ],
    "to": [
     "colours",
     8,
-    218
+    221
    ]
   },
   {
@@ -11883,7 +11883,7 @@
    "to": [
     "one-colour-scheme-for-the-trips",
     12,
-    186
+    189
    ]
   },
   {

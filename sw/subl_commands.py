@@ -29,9 +29,11 @@ class SightWalkInsertCommand(sublime_plugin.TextCommand):
         self.view.insert(edit, point, text)
 
 
-def send(owner, text):
-    """A message from the trip to the agent, with what the user sees and any edited ranges."""
-    state.INBOX.put(dict(owner.context(), text=text, **owner.take_edits()))
+def send(owner, text, here=None):
+    """A message from the trip to the agent, with what the user sees and any edited ranges, and
+    here: the places selected when it was sent, if the user linked no words (see subl_links)."""
+    extra = {"here": here} if here else {}
+    state.INBOX.put(dict(owner.context(), text=text, **extra, **owner.take_edits()))
     owner.keep_transcript()
     subl_guide.await_answer(owner)
 
@@ -44,8 +46,9 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
         if owner is None:
             return
         tagged = owner.links.tagged(self.view)  # the guide gets the links as <here> tags
+        label = len(subl_chat.TRANSCRIPT)  # where the message's "U:" will stand
         if subl_chat.take_draft(self.view, edit):
-            send(owner, tagged)
+            send(owner, tagged, owner.links.ask(label))
 
 
 class SightWalkLinkCommand(sublime_plugin.TextCommand):
@@ -145,7 +148,7 @@ class SightWalkChatListener(sublime_plugin.ViewEventListener):
             sublime.set_clipboard(marks.clean(sublime.get_clipboard()))
         reader = state.reader_for(self.view.window())
         if command_name == "drag_select" and reader is not None:
-            reader.links.follow(self.view) or reader.follow_frame(self.view) or reader.follow_label(self.view)
+            reader.links.follow(self.view) or reader.links.follow_question(self.view) or reader.follow_frame(self.view) or reader.follow_label(self.view)
 
 
 class SightWalkWindowListener(sublime_plugin.EventListener):

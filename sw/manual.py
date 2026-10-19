@@ -64,6 +64,8 @@ Conversation
 - The user links words of a message to code: <here at="(c):34-36 (d):12">this check</here>
   means those words are about exactly those lines (one place or several, in one or more
   sights). Answer about them; the user sees the words framed, not the tag.
+- A message with here ("(c):34-36 (d):12") was sent while those lines were selected (carets
+  count as their lines) and links no words: "this", "here", "it" in it mean those places.
 - When a message comes with selected, the user selected that text: "this", "what is this"
   mean exactly it (an expression, a name, a line), not the whole function around it.
 - Otherwise resolve indexicals such as "here", "this", "it" or "this line" against here and

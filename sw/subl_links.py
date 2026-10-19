@@ -9,7 +9,7 @@ import sublime
 
 from .marks import here_tags, span_relation
 from .spec import sight_name
-from .subl_chat import PROTECTED
+from .subl_chat import PROTECTED, blanks
 
 SCOPE = "sight_walk.link"  # no scheme names it: frames in the text's colour
 FLAGS = sublime.DRAW_NO_FILL
@@ -26,6 +26,8 @@ class Links:
         self.count = 0  # for the next key
         self.shown = None  # the link a click showed, so a second click hides it (Jakub)
         self.ours = None  # the bench selection this module set itself, no phrase to link
+        self.had_links = False  # whether the message last sent held links of the user's
+        self.questions = []  # [{"label": transcript offset of "U:", "places": [...]}]
 
     def note_bench(self, view):
         """A selection in the draft is the phrase to link; the code's selections count anew."""
@@ -134,7 +136,62 @@ class Links:
                  for key, r in ((k, self.bench_region(k)) for k in self.draft_keys())
                  if r.a >= start and not r.empty()]
         self.sent.update(self.links)
+        self.had_links = bool(spans)
         return here_tags(text, spans).strip()
+
+    def ask(self, label):
+        """A message sent without links of the user's: the selections of the sight touched last
+        at that moment, carets as their lines, kept with its "U:", framed (Jakub: what is
+        selected is the context of "this" and "here"; no guessing at words). Returns the
+        places for the guide, or None."""
+        if self.had_links or not self.last:
+            return None
+        self.questions.append({"label": label, "places": list(self.last)})
+        self.frame_question(len(self.questions) - 1)
+        return self.places(self.last)
+
+    def frame_question(self, k):
+        start = blanks(self.reader.chat) + self.questions[k]["label"]
+        self.reader.chat.add_regions("sight_walk_asked_%d" % k,
+                                     [sublime.Region(start, start + 2)], SCOPE, "", FLAGS)
+
+    def kept_questions(self):
+        """The questions' places as data, for a tour trip's kept marks."""
+        return [{"label": q["label"], "places": [[i, r.a, r.b] for i, r in q["places"]]}
+                for q in self.questions]
+
+    def restore_questions(self, kept):
+        self.questions = [{"label": q["label"], "places": [(i, sublime.Region(a, b))
+                                                           for i, a, b in q["places"]]}
+                          for q in kept if all(i < len(self.reader.sights) for i, _, _ in q["places"])]
+        for k in range(len(self.questions)):
+            self.frame_question(k)
+
+    def follow_question(self, view):
+        """A click on a framed "U:" selects the places selected when that message was sent,
+        and brings them into view; a second click takes the selection off."""
+        sel = view.sel()
+        if len(sel) != 1 or not sel[0].empty():
+            return False
+        for k, question in enumerate(self.questions):
+            start = blanks(view) + question["label"]
+            if start <= sel[0].b <= start + 2:
+                self.select(("question", k), question["places"])
+                return True
+        return False
+
+    def select(self, shown, places):
+        """places selected in the code and brought into view, or, clicked again, unselected."""
+        again = shown == self.shown
+        for index, mine in self.by_sight(places).items():
+            code = self.reader.sights[index].view
+            code.sel().clear()
+            code.sel().add_all([sublime.Region(r.b) for r in mine] if again else mine)
+            repaint(code)
+        self.shown = None if again else shown
+        if not again:
+            self.reader.show_places([(i, self.reader.sights[i].view.rowcol(r.a)[0] + 1)
+                                     for i, r in places])
 
     def places(self, places):
         """'(c):34-36 (d):12' for the guide."""
@@ -211,6 +268,8 @@ class Links:
         """Another trip: the links were to other sights."""
         for key in list(self.links):
             self.remove(key)
+        for k in range(len(self.questions)):
+            self.reader.chat.erase_regions("sight_walk_asked_%d" % k)
 
 
 def carets(view, regions):

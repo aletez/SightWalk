@@ -871,7 +871,8 @@ class Reader(Geometry):
         for answer in self.answers:
             for m in marks.resolve_marks(self.sights, answer["marks"]):
                 texts["%d:%d" % (m["sight"], m["line"])] = self.line_text(m["sight"], m["line"])
-        return {"answers": self.answers, "shown": self.shown_answer, "lines": texts}
+        return {"answers": self.answers, "shown": self.shown_answer, "lines": texts,
+                "questions": self.links.kept_questions()}
 
     def line_text(self, index, line):
         view = self.sights[index].view
@@ -886,6 +887,7 @@ class Reader(Geometry):
         self.answers = [dict(a, frames=[tuple(f) for f in a["frames"]])
                         for a in kept.get("answers") or []]
         self.kept_lines = kept.get("lines") or {}
+        self.links.restore_questions(kept.get("questions") or [])
         if kept.get("shown") is not None and kept["shown"] < len(self.answers):
             self.show_answer(kept["shown"])
 

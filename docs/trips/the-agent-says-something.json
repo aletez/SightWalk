@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:199-214",
@@ -11,17 +11,17 @@
   "sw/marks.py:167-167",
   "sw/subl_reader.py:1252-1265",
   "sw/subl_reader.py:797-811",
-  "sw/subl_chat.py:101-123",
+  "sw/subl_chat.py:98-120",
   "sw/header.py:12-20",
-  "sw/subl_chat.py:161-170",
-  "sw/subl_chat.py:180-190",
+  "sw/subl_chat.py:158-167",
+  "sw/subl_chat.py:177-187",
   "sw/subl_commands.py:28-29",
-  "sw/subl_chat.py:55-72",
-  "sw/subl_chat.py:37-45",
-  "sw/subl_commands.py:270-277",
-  "sw/subl_commands.py:285-295",
+  "sw/subl_chat.py:52-69",
+  "sw/subl_chat.py:34-42",
+  "sw/subl_commands.py:249-256",
+  "sw/subl_commands.py:264-274",
   "sw/marks.py:415-417",
-  "sw/subl_chat.py:277-282"
+  "sw/subl_chat.py:274-279"
  ],
  "transitions": [
   {
@@ -42,56 +42,56 @@
   {
    "type": "calls",
    "from": [6, 1260],
-   "to": [11, 180]
+   "to": [11, 177]
   },
   {
    "type": "calls",
    "from": [7, 799],
-   "to": [8, 101]
+   "to": [8, 98]
   },
   {
    "type": "calls",
    "from": [7, 803],
-   "to": [10, 161]
+   "to": [10, 158]
   },
   {
    "type": "calls",
    "from": [7, 807],
-   "to": [8, 101]
+   "to": [8, 98]
   },
   {
    "type": "calls",
    "from": [7, 811],
-   "to": [8, 101]
+   "to": [8, 98]
   },
   {
    "type": "calls",
-   "from": [8, 107],
+   "from": [8, 104],
    "to": [9, 12]
   },
   {
    "type": "calls",
-   "from": [11, 189],
+   "from": [11, 186],
    "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [13, 65],
-   "to": [14, 37]
+   "from": [13, 62],
+   "to": [14, 34]
   },
   {
    "type": "calls",
-   "from": [13, 70],
+   "from": [13, 67],
    "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [15, 273],
-   "to": [18, 277]
+   "from": [15, 252],
+   "to": [18, 274]
   },
   {
    "type": "calls",
-   "from": [16, 289],
+   "from": [16, 268],
    "to": [17, 415]
   }
  ]

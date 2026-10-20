@@ -1,15 +1,15 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
-  "sw/subl_commands.py:401-407",
-  "sw/subl_commands.py:416-429",
-  "sw/subl_commands.py:432-442",
-  "sw/subl_commands.py:445-446",
-  "sw/subl_commands.py:449-454",
-  "sw/subl_commands.py:409-413",
-  "sw/words.py:143-150",
+  "sw/subl_commands.py:380-386",
+  "sw/subl_commands.py:395-408",
+  "sw/subl_commands.py:411-421",
+  "sw/subl_commands.py:424-425",
+  "sw/subl_commands.py:428-433",
+  "sw/subl_commands.py:388-392",
+  "sw/words.py:141-148",
   "sw/subl_reader.py:921-935",
   "sw/subl_reader.py:1344-1346",
   "sw/ontology.py:303-309",
@@ -27,7 +27,7 @@
   "sw/subl_reader.py:1324-1328",
   "sw/subl_reader.py:1331-1333",
   "sw/subl_reader.py:1336-1341",
-  "sw/subl_chat.py:235-238",
+  "sw/subl_chat.py:232-235",
   "sw/ontology.py:289-293",
   "sw/subl_vetting.py:231-240",
   "sw/subl_reader.py:1107-1109",
@@ -36,62 +36,62 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 402],
-   "to": [1, 416]
+   "from": [0, 381],
+   "to": [1, 395]
   },
   {
    "type": "calls",
-   "from": [0, 406],
-   "to": [6, 143]
+   "from": [0, 385],
+   "to": [6, 141]
   },
   {
    "type": "calls",
-   "from": [0, 407],
-   "to": [5, 409]
+   "from": [0, 386],
+   "to": [5, 388]
   },
   {
    "type": "calls",
-   "from": [1, 420],
-   "to": [2, 432]
+   "from": [1, 399],
+   "to": [2, 411]
   },
   {
    "type": "calls",
-   "from": [1, 421],
-   "to": [4, 449]
+   "from": [1, 400],
+   "to": [4, 428]
   },
   {
    "type": "calls",
-   "from": [1, 421],
-   "to": [3, 445]
+   "from": [1, 400],
+   "to": [3, 424]
   },
   {
    "type": "calls",
-   "from": [1, 423],
-   "to": [2, 432]
+   "from": [1, 402],
+   "to": [2, 411]
   },
   {
    "type": "calls",
-   "from": [1, 425],
-   "to": [4, 449]
+   "from": [1, 404],
+   "to": [4, 428]
   },
   {
    "type": "calls",
-   "from": [1, 427],
-   "to": [3, 445]
+   "from": [1, 406],
+   "to": [3, 424]
   },
   {
    "type": "calls",
-   "from": [1, 428],
-   "to": [4, 449]
+   "from": [1, 407],
+   "to": [4, 428]
   },
   {
    "type": "calls",
-   "from": [3, 446],
-   "to": [4, 449]
+   "from": [3, 425],
+   "to": [4, 428]
   },
   {
    "type": "calls",
-   "from": [5, 411],
+   "from": [5, 390],
    "to": [7, 921]
   },
   {

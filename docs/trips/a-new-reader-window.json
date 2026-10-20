@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
   "sw/subl_executor.py:36-46",
   "sw/subl_reader.py:75-104",
@@ -10,9 +10,9 @@
   "sw/subl_views.py:191-195",
   "sw/subl_views.py:139-146",
   "sw/subl_views.py:115-122",
-  "sw/subl_chat.py:75-81",
-  "sw/subl_chat.py:84-94",
-  "sw/subl_chat.py:149-158",
+  "sw/subl_chat.py:72-78",
+  "sw/subl_chat.py:81-91",
+  "sw/subl_chat.py:146-155",
   "sw/subl_vetting.py:29-36",
   "sw/state.py:23-26"
  ],
@@ -65,22 +65,22 @@
   {
    "type": "calls",
    "from": [2, 129],
-   "to": [7, 75]
+   "to": [7, 72]
   },
   {
    "type": "calls",
    "from": [2, 131],
-   "to": [8, 84]
+   "to": [8, 81]
   },
   {
    "type": "calls",
    "from": [2, 132],
-   "to": [8, 84]
+   "to": [8, 81]
   },
   {
    "type": "calls",
    "from": [2, 133],
-   "to": [8, 84]
+   "to": [8, 81]
   },
   {
    "type": "calls",
@@ -110,7 +110,7 @@
   {
    "type": "calls",
    "from": [2, 153],
-   "to": [8, 84]
+   "to": [8, 81]
   },
   {
    "type": "calls",
@@ -120,7 +120,7 @@
   {
    "type": "calls",
    "from": [2, 155],
-   "to": [9, 149]
+   "to": [9, 146]
   },
   {
    "type": "calls",
@@ -134,17 +134,17 @@
   },
   {
    "type": "calls",
-   "from": [8, 87],
+   "from": [8, 84],
    "to": [6, 115]
   },
   {
    "type": "calls",
-   "from": [8, 90],
+   "from": [8, 87],
    "to": [4, 191]
   },
   {
    "type": "calls",
-   "from": [9, 153],
+   "from": [9, 150],
    "to": [6, 115]
   },
   {

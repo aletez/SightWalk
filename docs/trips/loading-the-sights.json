@@ -1,10 +1,10 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
   "sw/subl_reader.py:161-178",
-  "sw/subl_chat.py:241-249",
+  "sw/subl_chat.py:238-246",
   "sw/subl_reader.py:224-234",
   "sw/subl_reader.py:236-251",
   "sw/subl_views.py:157-161",
@@ -13,7 +13,7 @@
   "sw/spec.py:162-177",
   "sw/spec.py:190-194",
   "sw/spec.py:180-187",
-  "sw/words.py:135-140",
+  "sw/words.py:133-138",
   "sw/subl_reader.py:275-282",
   "sw/subl_reader.py:284-295",
   "sw/subl_views.py:303-311",
@@ -30,7 +30,7 @@
   {
    "type": "calls",
    "from": [0, 166],
-   "to": [1, 241]
+   "to": [1, 238]
   },
   {
    "type": "calls",
@@ -90,7 +90,7 @@
   {
    "type": "calls",
    "from": [6, 271],
-   "to": [10, 135]
+   "to": [10, 133]
   },
   {
    "type": "calls",

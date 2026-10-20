@@ -1,10 +1,10 @@
 {
  "name": "ctrl+tab",
  "kind": "run",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
   "sw/subl_commands.py:105-108",
-  "sw/subl_commands.py:306-318",
+  "sw/subl_commands.py:285-297",
   "sw/subl_reader.py:832-849",
   "sw/plan.py:104-108",
   "sw/plan.py:111-118"

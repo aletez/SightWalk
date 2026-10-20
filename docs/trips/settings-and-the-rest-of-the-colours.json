@@ -1,9 +1,8 @@
 {
  "name": "Settings and the rest of the colours",
  "kind": "survey",
- "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
  "sights": [
-  "sw/subl_commands.py:261-262",
   "sw/subl_tint.py:84-86",
   "sw/subl_tint.py:59-69",
   "sw/subl_tint.py:113-125",

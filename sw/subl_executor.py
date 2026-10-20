@@ -52,6 +52,9 @@ def op_show(args, facts):
     reader = state.current_reader()
     if args.get("aside") and reader is not None:
         open_adventure(*reader.go_on_adventure(made, args.get("root")))
+        # Its story, the reason on its bench, answers the message: not given again to a guide
+        # that wakes (Jakub, 2026-10-20: one asked adventure became two).
+        state.ANSWERED = True
     else:
         (reader or new_reader()).visit(made, args.get("root"))
     state.ADDRESSED = True  # the guide may say what the trip is about

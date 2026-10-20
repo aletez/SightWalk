@@ -1,0 +1,19 @@
+{
+ "name": "The tools over the window",
+ "kind": "run",
+ "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "sights": [
+  "sw/subl_reader.py:919-929",
+  "sw/subl_commands.py:356-359",
+  "sw/subl_reader.py:931-950",
+  "sw/subl_vetting.py:97-100",
+  "sw/subl_chat.py:179-188"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [1, 359],
+   "to": [0, 919]
+  }
+ ]
+}

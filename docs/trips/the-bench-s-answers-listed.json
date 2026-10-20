@@ -1,68 +1,68 @@
 {
  "name": "The bench's answers listed",
  "kind": "run",
- "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
+ "commit": "842a97271571e6ae7159d1564764b7c809324884",
  "sights": [
-  "sw/subl_reader.py:1070-1072",
-  "sw/subl_reader.py:1053-1068",
+  "sw/subl_reader.py:1112-1114",
+  "sw/subl_reader.py:1095-1110",
   "sw/answers.py:9-19",
-  "sw/subl_reader.py:1034-1044",
-  "sw/subl_vetting.py:264-279",
-  "sw/subl_vetting.py:282-283",
-  "sw/subl_reader.py:1074-1090",
-  "sw/subl_reader.py:1046-1049",
-  "sw/subl_reader.py:1092-1097"
+  "sw/subl_reader.py:1076-1086",
+  "sw/subl_vetting.py:275-290",
+  "sw/subl_vetting.py:293-294",
+  "sw/subl_reader.py:1116-1132",
+  "sw/subl_reader.py:1088-1091",
+  "sw/subl_reader.py:1134-1139"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1071],
-   "to": [1, 1053]
+   "from": [0, 1113],
+   "to": [1, 1095]
   },
   {
    "type": "calls",
-   "from": [0, 1071],
-   "to": [4, 264]
+   "from": [0, 1113],
+   "to": [4, 275]
   },
   {
    "type": "calls",
-   "from": [0, 1072],
-   "to": [6, 1074]
+   "from": [0, 1114],
+   "to": [6, 1116]
   },
   {
    "type": "calls",
-   "from": [1, 1057],
+   "from": [1, 1099],
    "to": [2, 9]
   },
   {
    "type": "calls",
-   "from": [1, 1060],
-   "to": [3, 1034]
+   "from": [1, 1102],
+   "to": [3, 1076]
   },
   {
    "type": "calls",
-   "from": [4, 273],
-   "to": [5, 282]
+   "from": [4, 284],
+   "to": [5, 293]
   },
   {
    "type": "calls",
-   "from": [6, 1077],
-   "to": [1, 1053]
+   "from": [6, 1119],
+   "to": [1, 1095]
   },
   {
    "type": "calls",
-   "from": [6, 1083],
-   "to": [7, 1046]
+   "from": [6, 1125],
+   "to": [7, 1088]
   },
   {
    "type": "calls",
-   "from": [6, 1089],
-   "to": [8, 1092]
+   "from": [6, 1131],
+   "to": [8, 1134]
   },
   {
    "type": "calls",
-   "from": [6, 1090],
-   "to": [0, 1070]
+   "from": [6, 1132],
+   "to": [0, 1112]
   }
  ]
 }

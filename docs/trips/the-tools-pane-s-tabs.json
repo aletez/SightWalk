@@ -1,74 +1,74 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
+ "commit": "842a97271571e6ae7159d1564764b7c809324884",
  "sights": [
-  "sw/subl_reader.py:901-908",
+  "sw/subl_reader.py:910-917",
   "sw/subl_vetting.py:70-86",
   "sw/subl_vetting.py:63-67",
   "sw/subl_vetting.py:89-91",
-  "sw/subl_vetting.py:94-106",
-  "sw/subl_commands.py:243-250",
+  "sw/subl_vetting.py:103-117",
+  "sw/subl_commands.py:249-256",
   "sw/subl_geometry.py:18-20",
-  "sw/subl_commands.py:464-467",
-  "sw/subl_reader.py:910-920",
+  "sw/subl_commands.py:479-482",
+  "sw/subl_reader.py:952-962",
   "sw/subl_vetting.py:39-47",
   "sw/subl_vetting.py:50-52",
-  "sw/subl_reader.py:891-893",
-  "sw/subl_reader.py:895-896",
-  "sw/subl_reader.py:898-899",
-  "sw/subl_reader.py:1142-1154"
+  "sw/subl_reader.py:900-902",
+  "sw/subl_reader.py:904-905",
+  "sw/subl_reader.py:907-908",
+  "sw/subl_reader.py:1184-1196"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 905],
-   "to": [14, 1142]
+   "from": [0, 914],
+   "to": [14, 1184]
   },
   {
    "type": "calls",
-   "from": [4, 106],
+   "from": [4, 116],
    "to": [2, 63]
   },
   {
    "type": "calls",
-   "from": [5, 248],
+   "from": [5, 254],
    "to": [3, 89]
   },
   {
    "type": "calls",
-   "from": [5, 250],
-   "to": [0, 901]
+   "from": [5, 256],
+   "to": [0, 910]
   },
   {
    "type": "calls",
-   "from": [7, 467],
-   "to": [8, 910]
+   "from": [7, 482],
+   "to": [8, 952]
   },
   {
    "type": "calls",
-   "from": [8, 913],
-   "to": [11, 891]
+   "from": [8, 955],
+   "to": [11, 900]
   },
   {
    "type": "calls",
-   "from": [8, 917],
+   "from": [8, 959],
    "to": [9, 39]
   },
   {
    "type": "calls",
-   "from": [8, 920],
-   "to": [0, 901]
+   "from": [8, 962],
+   "to": [0, 910]
   },
   {
    "type": "calls",
-   "from": [12, 896],
-   "to": [11, 891]
+   "from": [12, 905],
+   "to": [11, 900]
   },
   {
    "type": "calls",
-   "from": [13, 899],
-   "to": [11, 891]
+   "from": [13, 908],
+   "to": [11, 900]
   }
  ]
 }

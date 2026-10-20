@@ -1,15 +1,15 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
  "story": "The trip's definitions and the calls its author named, as nodes for the graph.",
  "sights": [
-  "sw/subl_reader.py:1305-1317",
-  "sw/subl_reader.py:1319-1327",
-  "sw/subl_reader.py:1521-1528",
-  "sw/subl_reader.py:1371-1385",
+  "sw/subl_reader.py:1309-1321",
+  "sw/subl_reader.py:1323-1331",
+  "sw/subl_reader.py:1525-1532",
+  "sw/subl_reader.py:1375-1389",
   "sw/subl_reader.py:49-53",
-  "sw/subl_reader.py:1387-1391",
+  "sw/subl_reader.py:1391-1395",
   "sw/subl_reader.py:60-65",
   "sw/callmap.py:33-39",
   "sw/callmap.py:42-49",
@@ -21,67 +21,67 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1308],
-   "to": [3, 1371]
-  },
-  {
-   "type": "calls",
    "from": [0, 1312],
-   "to": [10, 52]
-  },
-  {
-   "type": "calls",
-   "from": [0, 1314],
-   "to": [1, 1319]
-  },
-  {
-   "type": "calls",
-   "from": [0, 1315],
-   "to": [11, 42]
+   "to": [3, 1375]
   },
   {
    "type": "calls",
    "from": [0, 1316],
+   "to": [10, 52]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1318],
+   "to": [1, 1323]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1319],
    "to": [11, 42]
   },
   {
    "type": "calls",
-   "from": [0, 1317],
-   "to": [2, 1521]
+   "from": [0, 1320],
+   "to": [11, 42]
   },
   {
    "type": "calls",
-   "from": [0, 1317],
+   "from": [0, 1321],
+   "to": [2, 1525]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1321],
    "to": [12, 131]
   },
   {
    "type": "calls",
-   "from": [3, 1377],
+   "from": [3, 1381],
    "to": [7, 33]
   },
   {
    "type": "calls",
-   "from": [3, 1378],
+   "from": [3, 1382],
    "to": [4, 49]
   },
   {
    "type": "calls",
-   "from": [3, 1382],
-   "to": [2, 1521]
+   "from": [3, 1386],
+   "to": [2, 1525]
   },
   {
    "type": "calls",
-   "from": [3, 1383],
+   "from": [3, 1387],
    "to": [9, 28]
   },
   {
    "type": "calls",
-   "from": [3, 1383],
-   "to": [5, 1387]
+   "from": [3, 1387],
+   "to": [5, 1391]
   },
   {
    "type": "calls",
-   "from": [3, 1383],
+   "from": [3, 1387],
    "to": [6, 60]
   },
   {

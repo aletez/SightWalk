@@ -1,7 +1,7 @@
 {
  "name": "The tools' schemas",
  "kind": "survey",
- "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
  "story": "<calls at=\"(b):184 (a):173\">Each tool is described</calls> in <here at=\"(b):184\">one list</here>, with its parameters; <here at=\"(c):179\">a transition</here> has a schema of its own, and <here at=\"(d):11\">its form</here> is quoted back when a guide gets one wrong. <here at=\"(e):8\">The permission fields</here> name what else a guide started from Sublime may do.",
  "sights": [
   "sw/manual.py:173-176",

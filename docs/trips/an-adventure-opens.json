@@ -1,24 +1,24 @@
 {
  "name": "An adventure opens",
  "kind": "run",
- "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
  "story": "show with aside: the trip recorded with its mother and opened in a window of its own, starting from the question that called it and the guide's reason.",
  "sights": [
-  "sw/subl_reader.py:1069-1077",
+  "sw/subl_reader.py:1072-1080",
   "sw/subl_executor.py:70-76",
-  "sw/subl_reader.py:1079-1089",
+  "sw/subl_reader.py:1082-1092",
   "sw/subl_chat.py:75-76"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1074],
+   "from": [0, 1077],
    "to": [3, 75]
   },
   {
    "type": "calls",
    "from": [1, 75],
-   "to": [2, 1079]
+   "to": [2, 1082]
   }
  ]
 }

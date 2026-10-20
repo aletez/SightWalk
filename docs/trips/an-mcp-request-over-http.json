@@ -1,7 +1,7 @@
 {
  "name": "An MCP request over HTTP",
  "kind": "run",
- "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
  "story": "Every word between guide and plugin is <here at=\"(a):94\">a POST</here>. <calls at=\"(a):94 (b):78\">The token is checked</calls> first; then <calls at=\"(a):94 (c):65\">the message is replied to</calls>: <calls at=\"(c):65 (d):50\">initialize, tools/list or a tool call</calls>, and <calls at=\"(a):94 (e):83\">the reply sent</calls> back as JSON.",
  "sights": [
   "sw/subl_mcp_http.py:94-105",

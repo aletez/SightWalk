@@ -1,7 +1,7 @@
 {
  "name": "The manual",
  "kind": "survey",
- "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
  "story": "A guide knows SightWalk only from this text. <here at=\"(a):6\">It opens</here> with what a trip is, <here at=\"(b):26\">says how to show code</here> one function a sight, <here at=\"(c):56\">asks for code that fits the reader</here>, <here at=\"(d):61\">sets the manners of the conversation</here>, and <here at=\"(e):123\">teaches the marks</here> that tie words to lines.",
  "sights": [
   "sw/manual.py:6-24",

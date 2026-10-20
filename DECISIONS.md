@@ -185,6 +185,13 @@ Open:
 
 ## Plans (Jakub)
 
+- One markup for both sides of the bench (Jakub, 2026-10-20), to be written into docs/protocol.md as a proposal for v1 and accepted before it is built:
+  1. `<here at="…">words</here>` for the guide too, not only for the user: a frame without an icon, on lines or characters ("(c):34:12-16").
+  2. `icon` as an attribute of `here`, not a tag of its own (the icon has no place in the text): a short sign (digit, letter, emoji) or a path to an image, drawn in the gutter by the implementations that can. With n places in `at`, `icon` has one value for all or n values in order, space-separated; never with `at` naming a sight alone ("(c)"): the place starts in a known line, where the icon lands. The bench shows the icon's sign beside the framed words, so bench and gutter stay matched.
+  3. `jump="calls"` (not a generic `type`) only with exactly two places in `at`, source then target; its values are the trip's transition types. `<calls at="A B">words</calls>` is sugar for `<here at="A B" jump="calls">words</here>`, and so for the other types; 101s needs an alias, a tag name cannot start with a digit (e.g. `<needs>`). Empty content, `<calls at="A B"></calls>`, adds only the arrow on the Map: the one markup with no place in the text, kept in the same language.
+  4. `<icon>` and `<jump>` then go; the user may write relations too.
+- Test commands from a terminal (2026-10-20): sight_walk_fill (the draft and its links exactly as the markup gives them), sight_walk_select (places, (>) the draft), sight_walk_send_draft. sight_walk_select is kept though linking no longer needs it: it tests what a plain selection does (a message without links carrying what is selected, clicks on linked places, the eye, ctrl+tab).
+
 - Next, in this order (Jakub, 2026-10-19):
   1. Done 2026-10-19: the edited sight's header over the editor (see the status above).
   2. Done 2026-10-19: the wheel toggle (see the status above).

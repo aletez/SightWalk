@@ -143,7 +143,7 @@ class TourOrderTest(unittest.TestCase):
     def test_what_is_needed_comes_first(self):
         a, b, c = trips("A", "B", "C")
         informator = Informator("I", [a, b, c], [
-            Transition("leads_to", ("a",), ("b",)), Transition("101s", ("b",), ("c",))])
+            Transition("leads_to", ("a",), ("b",)), Transition("underlies", ("c",), ("b",))])
         self.assertEqual([t.id for t in tour(informator)], ["a", "c", "b"])
         self.assertEqual([t.id for t in tour(informator, ("leads_to",))], ["a", "b", "c"])
 
@@ -215,3 +215,10 @@ class WordsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OldFiles(unittest.TestCase):
+    def test_101s_reads_as_underlies_swapped(self):
+        from sw.ontology import transition_from
+        t = transition_from({"type": "101s", "from": [1, 5], "to": [0, 3]})
+        self.assertEqual(t.parts(), ("underlies", (0, 3), (1, 5)))

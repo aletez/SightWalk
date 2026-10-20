@@ -1,25 +1,25 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "bd311fb77b0b181d75800ff250ffffe565fe9d86",
+ "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
  "sights": [
   "sw/subl_executor.py:109-116",
+  "sw/ontology.py:263-266",
   "sw/ontology.py:257-260",
-  "sw/ontology.py:251-254",
-  "sw/ontology.py:242-244",
-  "sw/ontology.py:263-270",
-  "sw/ontology.py:287-291"
+  "sw/ontology.py:244-246",
+  "sw/ontology.py:269-276",
+  "sw/ontology.py:293-297"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [2, 254],
-   "to": [3, 242]
+   "from": [2, 260],
+   "to": [3, 244]
   },
   {
    "type": "calls",
-   "from": [4, 267],
-   "to": [3, 242]
+   "from": [4, 273],
+   "to": [3, 244]
   }
  ]
 }

@@ -683,12 +683,12 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/words.py:141-148` trips_count
 - `sw/subl_reader.py:899-913` Reader.open_tour
 - `sw/subl_reader.py:1261-1263` read_json
-- `sw/ontology.py:294-300` tour_from
-- `sw/ontology.py:273-277` informator_from
-- `sw/ontology.py:257-260` trip_from
-- `sw/ontology.py:247-248` transition_from
-- `sw/ontology.py:212-225` tour
-- `sw/ontology.py:228-236` visit
+- `sw/ontology.py:300-306` tour_from
+- `sw/ontology.py:279-283` informator_from
+- `sw/ontology.py:263-266` trip_from
+- `sw/ontology.py:249-254` transition_from
+- `sw/ontology.py:212-227` tour
+- `sw/ontology.py:230-238` visit
 - `sw/subl_vetting.py:218-224` read_walked
 - `sw/subl_reader.py:915-930` Reader.tour_link
 - `sw/subl_reader.py:932-947` Reader.keep_transcript
@@ -698,7 +698,7 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/subl_reader.py:1248-1250` transcripts_path
 - `sw/subl_reader.py:1253-1258` read_transcripts
 - `sw/subl_chat.py:216-219` set_transcript
-- `sw/ontology.py:280-284` dumps
+- `sw/ontology.py:286-290` dumps
 - `sw/subl_vetting.py:227-236` save_walked
 - `sw/subl_reader.py:1063-1065` Reader.draw_tour
 - `sw/subl_vetting.py:199-215` show_tour
@@ -708,11 +708,11 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 A trip opened from its file by the guide, and the files written for an informator.
 
 - `sw/subl_executor.py:109-116` op_open_trip
-- `sw/ontology.py:257-260` trip_from
-- `sw/ontology.py:251-254` trip_data
-- `sw/ontology.py:242-244` transition_data
-- `sw/ontology.py:263-270` informator_data
-- `sw/ontology.py:287-291` tour_data
+- `sw/ontology.py:263-266` trip_from
+- `sw/ontology.py:257-260` trip_data
+- `sw/ontology.py:244-246` transition_data
+- `sw/ontology.py:269-276` informator_data
+- `sw/ontology.py:293-297` tour_data
 
 ## 40. Questions the code already asks (10 views)
 

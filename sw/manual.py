@@ -40,7 +40,7 @@ Showing code
   calls        the calling line → the line of the definition it reaches. Name every one.
   returns      a line giving control back → the line of the call it returns to.
   leads_to     where the story goes on, though no code calls it (an event handled later).
-  101s         the target must be understood to understand the source.
+  underlies    the source must be understood to understand the target, so it comes first.
   passes_data  a value made at the source is used at the target.
   comparable   source and target are worth comparing (direction means nothing).
   The Map tab draws exactly these arrows, each type its own way, and never guesses.

@@ -337,7 +337,7 @@ OWN_TRIPS = {
     "subl_reader.Reader.tool_view": "The Tools pane's tabs",
 }
 
-# The informator's reading paths (Jakub's leads_to and 101s), written by hand: (from, to).
+# The informator's reading paths (Jakub's leads_to and underlies), written by hand: (from, to).
 LEADS = [
     ("Plugin start and stop", "Setting up the agent bridge"),
     ("Setting up the agent bridge", "What the agent is told"),
@@ -641,7 +641,7 @@ def between_trips(found, imported):
     ids = [Trip(title, []).id for title, _, _ in TRIPS]
     slug = lambda title: Trip(title, []).id  # noqa: E731
     out = [Transition("leads_to", (slug(a),), (slug(b),)) for a, b in LEADS]
-    out += [Transition("101s", (slug(a),), (slug(b),)) for a, b in NEEDS]
+    out += [Transition("underlies", (slug(b),), (slug(a),)) for a, b in NEEDS]
     for (title, _, names), trip in zip(TRIPS, ids):
         for i, name in enumerate(names):
             out.append(Transition("own_trip", (trip, i, found[name][2].lineno), (own_trip(name),)))

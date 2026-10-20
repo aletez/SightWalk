@@ -7,7 +7,7 @@ import re
 
 # The transition types, each with the networks it may stand in (Jakub: the feature in the type,
 # not a second list): a trip's types stand in informators too.
-TYPES = {"calls": "trip", "returns": "trip", "leads_to": "trip", "101s": "trip",
+TYPES = {"calls": "trip", "returns": "trip", "leads_to": "trip", "underlies": "trip",
          "passes_data": "trip", "comparable": "trip", "own_trip": "informator"}
 TRIP_TYPES = tuple(name for name, network in TYPES.items() if network == "trip")
 KINDS = ("run", "comparison", "survey")
@@ -209,15 +209,17 @@ class Tour(Sequence):
         self.name = name or "%s: All trips" % informator.name
 
 
-def tour(informator, types=("leads_to", "101s")):
+def tour(informator, types=("leads_to", "underlies")):
     """The informator's trips in one order (Jakub): from each trip nothing leads to, on along
-    leads_to, depth first; a trip a 101s transition names comes before the trip that needs it.
-    Trips left over follow in the informator's order."""
+    leads_to, depth first; a trip that underlies another comes before it. Trips left over follow
+    in the informator's order."""
     nexts, needs = {}, {}
     for t in informator.transitions:
         if t.type in types and t.source and t.target and t.source[0] != t.target[0]:
-            table = needs if t.type == "101s" else nexts
-            table.setdefault(t.source[0], []).append(t.target[0])
+            if t.type == "underlies":  # the target needs the source understood first
+                needs.setdefault(t.target[0], []).append(t.source[0])
+            else:
+                nexts.setdefault(t.source[0], []).append(t.target[0])
     reached = {target for targets in nexts.values() for target in targets}
     order = []
     for trip in sorted(informator.members, key=lambda trip: trip.id in reached):
@@ -245,6 +247,10 @@ def transition_data(transition):
 
 
 def transition_from(data):
+    """A transition from a file; the old "101s" (target needed first) reads as underlies, its
+    ends swapped (Jakub, 2026-10-20: the arrow runs as the trip is read)."""
+    if data.get("type") == "101s":
+        data = dict(data, type="underlies", **{"from": data.get("to"), "to": data.get("from")})
     return Transition(data.get("type"), data.get("from") or (), data.get("to") or ())
 
 

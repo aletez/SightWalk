@@ -4,6 +4,9 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 
 ## Status
 
+Changed, unverified:
+- `101s` became `underlies`, its direction turned (Jakub, 2026-10-20): "A underlies B", A must be understood to understand B, so A comes first, as the arrow runs and the trip is read. A tour puts a trip before the trips it underlies. Old files' `101s` read as `underlies` with their ends swapped. Needs a new guide session.
+
 Verified in Sublime:
 - A wheel toggle in the Tools header beside [?] (Jakub, 2026-10-19): [⇕] while the wheel over the bench, Map and Tour moves the whole trip, [↕] while it scrolls them alone; a click switches it, as primary+s does. (Changed, unverified.)
 - Late schemes are dropped by their base, not by a counter: a counter of changes, bumped by any change of a setting (one comes as the plugin loads), dropped a new trip's own tints, which then showed untinted. (Changed, unverified.)

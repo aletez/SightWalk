@@ -100,6 +100,7 @@ class Reader(Geometry):
         self.strip_marks = None  # the icons last drawn on the strip
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
         self.root = self.browser = None  # a trip with no sights yet: its folder and file browser
+        self.maximized, self.pan_before = False, True  # the Tools pane over the window ([⤢])
         self.history = History()  # the normal trips shown here, ◀ ▶ (Jakub, 2026-10-20)
         self.make_side_views()
 
@@ -497,6 +498,8 @@ class Reader(Geometry):
     def render(self, settle=True):
         """A wheel step only shifts the layout's rows (see column_rects); anything else lays every
         view out again."""
+        if self.maximized:
+            return self.arrange_maximized()
         rects, views = self.column_rects()
         if settle or [v.id() for v in views] != self.last_ids:
             self.arrange(rects, views)
@@ -664,7 +667,10 @@ class Reader(Geometry):
 
     def follow_resize(self):
         """A panel or a window resize changes the room. The conversation and the Tools pane
-        together span the column under the fixed header, so their heights change one to one."""
+        together span the column under the fixed header, so their heights change one to one.
+        Not while the Tools pane is maximised: the bench is hidden then; followed once back."""
+        if self.maximized:
+            return
         size = self.chat.viewport_extent()[1] + self.tool_view().viewport_extent()[1]
         if self.resize_base is None:
             self.resize_base = (size, self.height)
@@ -806,9 +812,12 @@ class Reader(Geometry):
         subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
         subl_vetting.show_tabs(self.below_header, self.tool)
-        subl_vetting.show_buttons(self.tool_buttons, self.pan, self.toggle_panning)
+        subl_vetting.show_buttons(self.tool_buttons, self.pan, self.toggle_panning,
+                                  self.toggle_maximized)
+        button = (word("restore_size"), self.toggle_maximized) if self.maximized \
+            else (word("reset"), self.reset_sights)
         subl_chat.show_header(self.sights_header, word("trip_title"), self.trip.name if self.trip else "",
-                         button=(word("reset"), self.reset_sights),
+                         button=button,
                          nav=(self.history.can(-1), self.history.can(1), self.step))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
         subl_chat.show_header(self.strip_header, "", "", help_mark=False)
@@ -906,6 +915,39 @@ class Reader(Geometry):
         self.draw_tour()
         self.draw_answers()
         sublime.set_timeout(self.draw_permissions, SETTLE_MS)  # its intro wraps to the width
+
+    def toggle_maximized(self):
+        """[⤢]: the Tools pane over almost the whole window, under the top headers, and back
+        (Jakub). Meanwhile it scrolls itself: the column of sights it covers would not show."""
+        self.maximized = not self.maximized
+        if self.maximized:
+            self.pan_before = self.pan
+        if self.pan != (self.pan_before and not self.maximized):
+            self.toggle_panning()  # lays out again
+        else:
+            self.select_tool(self.tool)
+        self.show_headers()
+
+    def arrange_maximized(self):
+        """The top headers, apart (Jakub: they must not run into each other), then the Tools
+        header and pane over the rest; every other view waits behind the pane."""
+        top, h = self.head(), self.below_header.line_height() + self.overhead
+        (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
+        right = max(b1, c1)
+        cells = [((b0, 0.0, b1, top), self.chat_header), ((s0, 0.0, s1, top), self.filler),
+                 ((c0, 0.0, c1, top), self.sights_header),
+                 ((0.0, top, right - self.buttons_share(), top + h), self.below_header),
+                 ((right - self.buttons_share(), top, right, top + h), self.tool_buttons),
+                 ((0.0, top + h, right, self.height), self.tool_view())]
+        self.window.set_layout(to_layout([rect for rect, _ in cells], self.height))
+        for group, (_, view) in enumerate(cells):
+            self.window.set_view_index(view, group, 0)
+        shown = {view.id() for _, view in cells}
+        for k, view in enumerate(v for v in self.window.views() if v.id() not in shown):
+            self.window.set_view_index(view, len(cells) - 1, k + 1)
+        self.window.focus_view(self.tool_view())
+        self.show_headers()
+        hide_chrome(self.window)
 
     def toggle_panning(self):
         """primary+s: the wheel over the bench and the tools moves the column of sights, or them."""

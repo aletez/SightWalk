@@ -235,10 +235,16 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
         return settings.get("sight_walk_header", False)
 
     def on_hover(self, point, hover_zone):
-        # The bench's keys over the bench's [?] only: the other headers' buttons are others (Jakub).
+        """Over a header's buttons, what they do (Jakub)."""
         reader = state.reader_for(self.view.window())
-        if hover_zone == sublime.HOVER_TEXT and reader is not None and self.view == reader.chat_header:
+        if hover_zone != sublime.HOVER_TEXT or reader is None:
+            return
+        if self.view == reader.chat_header:
             subl_chat.show_help(self.view, point)
+        elif self.view == reader.tool_buttons:
+            self.view.show_popup(subl_vetting.buttons_help(), sublime.HIDE_ON_MOUSE_MOVE_AWAY, 0)
+        elif self.view == reader.sights_header:
+            subl_chat.show_trip_help(self.view, point, reader.maximized)
 
     def on_selection_modified(self):
         """A click on a tab's word in the Tools header shows that tab."""
@@ -342,6 +348,15 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
 def clear_schemes_if_unused():
     """The written colour schemes no trip uses go (Jakub); a trip writes them anew."""
     subl_tint.clear_schemes()
+
+
+class SightWalkToggleMaximizedCommand(sublime_plugin.WindowCommand):
+    """As [⤢]: the Tools pane over almost the whole window, and back."""
+
+    def run(self):
+        reader = state.reader_for(self.window)
+        if reader is not None and reader.ready:
+            reader.toggle_maximized()
 
 
 class SightWalkStepCommand(sublime_plugin.WindowCommand):

@@ -301,6 +301,13 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("The tools over the window",
+     "[⤢] in the Tools header lays the tools over almost the whole window under the top headers, "
+     "kept apart; [Restore size] in the trip's header brings them back. Hovering a button says "
+     "what it does.",
+     ["subl_reader.Reader.toggle_maximized", "subl_commands.SightWalkToggleMaximizedCommand.run",
+      "subl_reader.Reader.arrange_maximized", "subl_vetting.buttons_help",
+      "subl_chat.show_trip_help"]),
     ("Back and forward through trips",
      "◀ ▶ in the Sights' header, primary+[ and primary+]: each trip the guide shows goes into the "
      "window's history with its own conversation, starting from the question that called it; a "

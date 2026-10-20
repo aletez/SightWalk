@@ -10,6 +10,13 @@ WORDS = {
     "bench_view": ("Vetting Bench", "Ławka"),
     "sights": ("Sights", "Panorama"),
     "or": ("or", "lub"),
+    "max_help": ("the tools over almost the whole window, or back",
+                 "narzędzia na prawie całe okno albo z powrotem"),
+    "restore_size": ("Restore size", "Pomniejsz"),
+    "nav_help": ("back and forward through this window's trips",
+                 "wstecz i naprzód po wycieczkach tego okna"),
+    "reset_help": ("the sights back where the guide showed them",
+                   "widoki z powrotem tam, gdzie pokazał je przewodnik"),
     "trip_title": ("Trip", "Wycieczka"),  # the Sights' header: Sights stays for the manual (Jakub)
     "link_help": ("link the selected words to the selected code",
                   "połącz zaznaczone słowa z zaznaczonym kodem"),

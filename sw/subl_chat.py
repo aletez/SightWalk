@@ -22,6 +22,8 @@ TRANSCRIPT = ""
 MAC = sublime.platform() == "osx"
 LINK_KEY = "⌘P" if MAC else "Ctrl+P"
 NEW_LINE_KEY = "⇧Enter" if MAC else "Shift+Enter"
+NAV_KEYS = "⌘[ ⌘]" if MAC else "Ctrl+[ Ctrl+]"
+RESET_KEY = "⌥R" if MAC else "Alt+R"
 # The help mark: faded and outlined at all times, so it reads as read-only.
 MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1px solid %s; '
              'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))
@@ -172,6 +174,18 @@ def show_help(view, point):
     end = view.line(0).b
     if end - MARK_ROOM <= point <= end:
         view.show_popup(help_html(), sublime.HIDE_ON_MOUSE_MOVE_AWAY, end)
+
+
+def show_trip_help(view, point, maximized):
+    """Over the trip header's ◀ ▶ or its button at the right end, what they do."""
+    end = view.line(0).b
+    if point <= 1:
+        text = "<b>◀ ▶ %s</b>: %s" % (NAV_KEYS, word("nav_help"))
+    elif point >= end - 1:
+        text = word("max_help") if maximized else "<b>%s</b>: %s" % (RESET_KEY, word("reset_help"))
+    else:
+        return
+    view.show_popup("<div>%s</div>" % text, sublime.HIDE_ON_MOUSE_MOVE_AWAY, point)
 
 
 def say(view, text, prefix="A: "):

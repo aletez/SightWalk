@@ -91,19 +91,30 @@ def tab_at(header, point):
     return next((t for t, r in kept(header).get("tab_spans", []) if r.a <= point < r.b), None)
 
 
-def show_buttons(view, panning, on_toggle):
-    """The Tools header's buttons, in a narrow pane of their own at its right (Jakub): the
-    wheel toggle and the help mark, what primary+s does."""
+MAX_HTML = MARK_HTML.replace('href="help"', 'href="max"').replace(">?<", ">⤢<") + "&nbsp;"
+
+
+def buttons_help():
+    """What the Tools header's buttons do, shown by [?] and on hovering them (Jakub)."""
+    return "<div><b>⤢</b>: %s<br>%s</div>" % (word("max_help"), PAN_HELP % (
+        word("or"), word("or"), word("pan")))
+
+
+def show_buttons(view, panning, on_toggle, on_maximize):
+    """The Tools header's buttons, in a narrow pane of their own at its right (Jakub): [⤢]
+    maximises the pane, then the wheel toggle and the help mark, what primary+s does."""
     if kept(view).get("buttons") == panning:
         return
     kept(view)["buttons"] = panning
+    actions = {"pan": on_toggle, "max": on_maximize}
     def clicked(href):
-        if href == "pan":
-            on_toggle()
+        if href in actions:
+            actions[href]()
         else:
-            view.show_popup(PAN_HELP % (word("or"), word("or"), word("pan")), location=0)
+            view.show_popup(buttons_help(), location=0)
     phantoms(view, "sight_walk_buttons").update([sublime.Phantom(
-        sublime.Region(0), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])
+        sublime.Region(0), MAX_HTML + toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE,
+        clicked)])
 
 
 # The map

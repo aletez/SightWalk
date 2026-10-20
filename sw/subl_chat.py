@@ -108,7 +108,9 @@ def show_header(view, title, status, help_mark=True, button=None, on_link=None, 
     mark, like a sight's Edit button. on_link: a [⛓] before the help mark calls it, as primary+p
     does (Jakub). nav: (can back, can forward, on_step), ◀ ▶ before the title."""
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
-    room = len(button[0]) + 3 - MARK_ROOM if button is not None else LINK_ROOM if on_link else 0
+    # No [?] (Jakub, 2026-10-20): hovering the buttons says what they do.
+    room = len(button[0]) + 3 - MARK_ROOM if button is not None else LINK_ROOM - MARK_ROOM \
+        if on_link else 0
     text = title_lines(title, status, columns - room - (NAV_ROOM if nav else 0))
     mark = kept(view)["mark"]
     if (text, nav and nav[:2]) == mark[1]:
@@ -121,9 +123,8 @@ def show_header(view, title, status, help_mark=True, button=None, on_link=None, 
         html = button_html(button[0], "b")
         phantoms.append(sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
                                         lambda _: button[1]()))
-    elif help_mark:
-        phantoms.append(sublime.Phantom(sublime.Region(point), (LINK_HTML if on_link else "")
-                                        + MARK_HTML, sublime.LAYOUT_INLINE,
+    elif help_mark and on_link:
+        phantoms.append(sublime.Phantom(sublime.Region(point), LINK_HTML, sublime.LAYOUT_INLINE,
                                         lambda href: help_or_link(view, href, point, on_link)))
     mark[0].update(phantoms)
 
@@ -176,19 +177,19 @@ def show_status(view, text, on_stop=None):
 
 
 def show_help(view, point):
-    """On hovering the right end of the first line, where the mark sits."""
+    """On hovering the right end of the first line, where [⛓] sits."""
     end = view.line(0).b
-    if end - MARK_ROOM <= point <= end:
+    if end - LINK_ROOM <= point <= end:
         view.show_popup(help_html(), sublime.HIDE_ON_MOUSE_MOVE_AWAY, end)
 
 
-def show_trip_help(view, point, maximized):
+def show_trip_help(view, point):
     """Over the trip header's ◀ ▶ or its button at the right end, what they do."""
     end = view.line(0).b
     if point <= 1:
         text = "<b>◀ ▶ %s</b>: %s" % (NAV_KEYS, word("nav_help"))
     elif point >= end - 1:
-        text = word("max_help") if maximized else "<b>%s</b>: %s" % (RESET_KEY, word("reset_help"))
+        text = "<b>%s</b>: %s" % (RESET_KEY, word("reset_help"))
     else:
         return
     view.show_popup("<div>%s</div>" % text, sublime.HIDE_ON_MOUSE_MOVE_AWAY, point)

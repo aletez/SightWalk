@@ -18,7 +18,7 @@ from . import answers, permissions, subl_guide, subl_links
 from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting, tourmap
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
-                     MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
+                     MAX_GAP_PX, MAX_MARGIN_PX, MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
 from .subl_editor import Editor
 from .history import History, last_exchange
@@ -158,6 +158,7 @@ class Reader(Geometry):
         self.tool = "Map"  # the Tools pane's tab shown
         self.below_header = subl_chat.make_header(self.window, self.chat, "Tools")
         match_font(self.below_header, self.chat_header)  # the headers' font, not the bench's
+        self.below_header.settings().set("gutter", False)  # the tabs from the pane's left edge
         self.status_view = subl_chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
         apply_grey(self.below_header)
@@ -822,8 +823,7 @@ class Reader(Geometry):
         subl_vetting.show_tabs(self.below_header, self.tool)
         subl_vetting.show_buttons(self.tool_buttons, self.pan, self.toggle_panning,
                                   self.toggle_maximized)
-        button = (word("restore_size"), self.toggle_maximized) if self.maximized \
-            else (word("reset"), self.reset_sights)
+        button = (word("reset"), self.reset_sights)
         subl_chat.show_header(self.sights_header, self.trip_title(), self.trip.name if self.trip else "",
                          button=button,
                          nav=(self.history.can(-1), self.history.can(1), self.step))
@@ -898,6 +898,9 @@ class Reader(Geometry):
         if self.editor is not None:
             self.close_editor()
         elif self.sights:
+            # The answers' marks and the user's links come back once laid out (Jakub: they were
+            # lost).
+            self.pending_marks = self.kept_marks() if self.ready else None
             self.load(*self.shown)
 
     def draw_strip_buttons(self):
@@ -939,6 +942,8 @@ class Reader(Geometry):
         """[⤢]: the Tools pane over almost the whole window, under the top headers, and back
         (Jakub). Meanwhile it scrolls itself: the column of sights it covers would not show."""
         self.maximized = not self.maximized
+        for view in self.tools().values():  # Esc there makes it small again (see the keymap)
+            view.settings().set("sight_walk_maximized", self.maximized)
         if self.maximized:
             self.pan_before = self.pan
         if self.pan != (self.pan_before and not self.maximized):
@@ -946,18 +951,27 @@ class Reader(Geometry):
         else:
             self.select_tool(self.tool)
         self.show_headers()
+        if not self.maximized:  # the views it hid find their groups only on a second pass
+            sublime.set_timeout(self.render, SETTLE_MS)
 
     def arrange_maximized(self):
         """The top headers, apart (Jakub: they must not run into each other), then the Tools
         header and pane over the rest; every other view waits behind the pane."""
         top, h = self.head(), self.below_header.line_height() + self.overhead
-        (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
-        right = max(b1, c1)
-        cells = [((b0, 0.0, b1, top), self.chat_header), ((s0, 0.0, s1, top), self.filler),
-                 ((c0, 0.0, c1, top), self.sights_header),
-                 ((0.0, top, right - self.buttons_share(), top + h), self.below_header),
-                 ((right - self.buttons_share(), top, right, top + h), self.tool_buttons),
-                 ((0.0, top + h, right, self.height), self.tool_view())]
+        (b0, b1), (c0, c1) = self.spans()[0], self.spans()[1]
+        gap, margin = self.share(MAX_GAP_PX), self.share(MAX_MARGIN_PX)
+        # The left header and the right one, a wider blank between them (Jakub).
+        (l0, l1, left_view), (r0, r1, right_view) = sorted(
+            [(b0, b1, self.chat_header), (c0, c1, self.sights_header)], key=lambda c: c[0])
+        middle = (l1 + r0) / 2
+        edge = r1 - margin  # the pane keeps off the window's right edge (Jakub)
+        cells = [((l0, 0.0, middle - gap / 2, top), left_view),
+                 ((middle - gap / 2, 0.0, middle + gap / 2, top), self.filler),
+                 ((middle + gap / 2, 0.0, r1, top), right_view),
+                 ((0.0, top, edge - self.buttons_share(), top + h), self.below_header),
+                 ((edge - self.buttons_share(), top, edge, top + h), self.tool_buttons),
+                 ((edge, top, r1, self.height), self.top_filler),
+                 ((0.0, top + h, edge, self.height), self.tool_view())]
         self.window.set_layout(to_layout([rect for rect, _ in cells], self.height))
         for group, (_, view) in enumerate(cells):
             self.window.set_view_index(view, group, 0)
@@ -1002,6 +1016,10 @@ class Reader(Geometry):
         """open:<trip> shows a trip of the tour; tick:<trip> ticks or unticks it as walked,
         only by hand (Jakub)."""
         what, _, key = href.partition(":")
+        if self.mother is not None and self.mother.window.is_valid():
+            self.mother.tour_link(href)
+            self.mother.window.bring_to_front()
+            return
         if what == "open":
             self.leave()
             transcripts = self.informator.transcripts
@@ -1051,15 +1069,19 @@ class Reader(Geometry):
     def go_on_adventure(self, trip, root):
         """show with aside: the trip in a window of its own over this one, which keeps its trip
         and conversation; recorded here so the Adventures tab can open it again."""
-        record = {"n": len(self.adventures) + 1, "trip": trip, "root": root, "transcript": None,
+        home = self.mother or self  # an adventure's adventure is its mother's too (Jakub)
+        record = {"n": len(home.adventures) + 1, "trip": trip, "root": root, "transcript": None,
                   "marks": None, "exchange": last_exchange(subl_chat.transcript(self.chat))}
-        self.adventures.append(record)
-        self.draw_adventures()
-        return record
+        home.adventures.append(record)
+        home.draw_adventures()
+        return home, record
 
-    def adventure(self, record):
-        """This new window as the adventure of record, as it was when last closed."""
-        self.record = record
+    def adventure(self, mother, record):
+        """This new window as the adventure of record, as it was when last closed, with its
+        mother's tour in its Tour tab (a click there goes on in the mother's window)."""
+        self.mother, self.record = mother, record
+        self.informator, self.tour, self.walked = mother.informator, mother.tour, mother.walked
+        self.informator_root, self.informator_path = mother.informator_root, mother.informator_path
         entry = self.history.visit(record["trip"], record["root"], record["transcript"] or "")
         entry["marks"] = record["marks"]
         if record["transcript"] is None:
@@ -1238,7 +1260,8 @@ class Reader(Geometry):
             subl_vetting.draw_tour_map(self.tour_view, source, ids, self.tour_link)
 
     def tour_sight(self, sight):
-        """A sight on the tour map: (file:function, its lines), read from its file."""
+        """A sight on the tour map: (file:function, its lines, its file's hue as on the Map),
+        read from its file."""
         path = os.path.join(self.informator_root, sight.file)
         try:
             with open(path, encoding="utf-8") as f:
@@ -1247,7 +1270,9 @@ class Reader(Geometry):
             lines = []
         found = callmap.first_definition(lines, sight.begin, sight.end)
         name = found[1] if found else "%d–%d" % (sight.begin, sight.end)
-        return "%s:%s" % (os.path.basename(sight.file), name), sight.end - sight.begin + 1
+        colour = tint_color(map_style()[3], hue_for(path), map_style()[4])
+        return ("%s:%s" % (os.path.basename(sight.file), name), sight.end - sight.begin + 1,
+                colour)
 
     def draw_permissions(self):
         subl_vetting.show_permissions(self.perm_view, subl_guide.chosen(),

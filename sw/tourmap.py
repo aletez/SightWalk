@@ -1,26 +1,15 @@
 """The tour map (Jakub, 2026-10-20): what the Map is to a trip, the Tour tab shows for a tour, a
 signpost of the main and secret passages between its trips, as in IKEA. Each trip a column of its
 sights in a frame with its number and title, the columns side by side at whatever height their
-passages give them (Jakub); a sight named file:function, its height hinting at its lines, in a hue
-drawn once for all the tour's sights, neighbours apart; arrows only between trips. A click on a
+passages give them (Jakub); a sight named file:function, its height hinting at its lines, in its
+file's hue, as in the sights' headers; arrows only between trips, with a legend. A click on a
 trip's frame opens it, so the picture is cut into tiles, each a link (see tiles). Pure."""
 
-import colorsys
-
-from .callmap import STYLES, quote
+from .callmap import STYLES, legend, quote
 
 # A signpost shows the passages between departments, not every call (Jakub: leads_to and unblocks
 # first); calls would bury them.
 PASSAGES = ("leads_to", "unblocks", "comparable")
-GOLDEN = 0.6180339887  # hues this far apart round the circle: neighbours never alike
-
-
-def colour(k, saturation=0.35, value=0.97):
-    """The k-th sight's fill, as #rrggbb."""
-    rgb = colorsys.hsv_to_rgb((k * GOLDEN) % 1.0, saturation, value)
-    return "#%02x%02x%02x" % tuple(round(c * 255) for c in rgb)
-
-
 def node(trip, sight):
     return quote("t%d_s%d" % (trip, sight))
 
@@ -30,19 +19,19 @@ def height(lines):
     return round(0.3 + min(lines, 60) / 60.0, 2)
 
 
-def column(k, title, sights, first):
-    """Trip k's frame: its sights one under another, numbered from first for their hues."""
+def column(k, title, sights):
+    """Trip k's frame: its sights, (label, lines, colour), one under another."""
     body = ['  subgraph cluster_%d {' % k, '    label=%s; style=rounded;' % quote(title)]
-    for s, (label, lines) in enumerate(sights):
+    for s, (label, lines, colour) in enumerate(sights):
         body.append('    %s [label=%s, height=%s, fillcolor="%s"];'
-                    % (node(k, s), quote(label), height(lines), colour(first + s)))
+                    % (node(k, s), quote(label), height(lines), colour))
     body += ["    %s -> %s [style=invis, weight=10];" % (node(k, s), node(k, s + 1))
              for s in range(len(sights) - 1)]
     return body + ["  }"]
 
 
 def tour_dot(trips, arrows, style):
-    """trips: [(title, [(label, lines)])] in the tour's order; arrows: [((trip, sight), (trip,
+    """trips: [(title, [(label, lines, colour)])] in the tour's order; arrows: [((trip, sight), (trip,
     sight), type)] between trips; style: (font, text colour, line colour, background)."""
     font, text, line, background = style
     lines = ["digraph tour {", "  rankdir=TB; newrank=true; pad=0; nodesep=0.3; ranksep=0.3;",
@@ -50,15 +39,14 @@ def tour_dot(trips, arrows, style):
              % (quote(font), text, line, background),
              '  node [shape=box, style="rounded,filled", fontname=%s, fontcolor="%s", '
              'color="%s"];' % (quote(font), text, line), '  edge [color="%s"];' % line]
-    first = 0
     for k, (title, sights) in enumerate(trips):
-        lines += column(k, "%d. %s" % (k + 1, title), sights, first)
-        first += len(sights)
+        lines += column(k, "%d. %s" % (k + 1, title), sights)
     for (a, b, kind) in arrows:  # a passage lays its target out below its source; comparable not
         flow = "" if kind != "comparable" else "constraint=false"
         attributes = ", ".join(x for x in (STYLES.get(kind, ""), flow) if x)
         lines.append("  %s -> %s%s;" % (node(*a), node(*b), " [%s]" % attributes if attributes
                                           else ""))
+    lines += legend([kind for kind in PASSAGES if any(k == kind for _, _, k in arrows)])
     return "\n".join(lines + ["}"])
 
 

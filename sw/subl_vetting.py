@@ -103,7 +103,8 @@ def buttons_help():
 
 def show_buttons(view, panning, on_toggle, on_maximize):
     """The Tools header's buttons, in a narrow pane of their own at its right (Jakub): [⤢]
-    maximises the pane, then the wheel toggle and the help mark, what primary+s does."""
+    maximises the pane (Esc makes it small again), then the wheel toggle, what primary+s does.
+    Hovering them says what they do (see buttons_help)."""
     if kept(view).get("buttons") == panning:
         return
     kept(view)["buttons"] = panning
@@ -114,7 +115,7 @@ def show_buttons(view, panning, on_toggle, on_maximize):
         else:
             view.show_popup(buttons_help(), location=0)
     phantoms(view, "sight_walk_buttons").update([sublime.Phantom(
-        sublime.Region(0), MAX_HTML + toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE,
+        sublime.Region(0), MAX_HTML + toggle_html(panning), sublime.LAYOUT_INLINE,
         clicked)])
 
 
@@ -218,13 +219,25 @@ def tour_rows(tour, walked, current):
     rows = []
     for number, trip in enumerate(tour, 1):
         box = "☑" if trip.id in walked else "☐"
-        name = "<b>%s</b>" % trip.name if trip.id == current else trip.name
+        name = code_words(trip.name)
+        name = "<b>%s</b>" % name if trip.id == current else name
         kind = ' <span style="color: %s">(%s)</span>' % (FADED, word(trip.kind)) if trip.kind != "run" \
             else ""
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'
                     % (trip.id, box, number, trip.id, name, kind))
     return "<div>%s</div><br>%s" % (tour.name, "<br>".join(rows))
+
+
+def code_words(text):
+    """`say` in a title as code (Jakub: else "say: on the bench" reads as an order to the user):
+    in a colour of its own, without the backticks."""
+    parts = html_escape(text).split("`")
+    return "".join('<span style="color: %s">%s</span>' % (CODE_COLOUR, p) if k % 2 else p
+                   for k, p in enumerate(parts))
+
+
+CODE_COLOUR = "color(var(--purplish) blend(var(--foreground) 70%))"
 
 
 def draw_tour_map(view, source, ids, on_select):
@@ -260,7 +273,8 @@ def cut_tiles(dot, source, stem, ids):
     layout = json.loads(run_dot(dot, source, ["-Tjson"]))
     bb = [float(x) for x in layout["bb"].split(",")]
     frames = {int(o["name"].split("_")[1]): [float(x) for x in o["bb"].split(",")]
-              for o in layout.get("objects", []) if o.get("name", "").startswith("cluster_")}
+              for o in layout.get("objects", [])
+              if o.get("name", "").startswith("cluster_") and o["name"][8:].isdigit()}
     # Sharp, yet small enough to cut in pure Python in a few seconds, once per tour.
     dpi = max(min(TILES_DPI, TILES_PX * 72.0 / max(bb[2] - bb[0], bb[3] - bb[1], 1)), 36)
     run_dot(dot, source, ["-Tpng", "-Gdpi=%d" % dpi, "-o", stem + ".png"])

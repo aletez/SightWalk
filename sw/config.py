@@ -24,7 +24,9 @@ STRIP_ICON_SHIFT = 6  # a strip icon's push right: it mirrors the gutter's icon 
 GUTTER_PX = 26  # about a sight's gutter, for the editor's setback (see Reader.editor_geometry)
 MIN_ELIDED = 6  # fewer lines of a function left out are shown instead of a "⋮" (Jakub)
 GAP_PX = 16  # room between the gutter and the code, a phantom at each line's start (Jakub)
-BUTTONS_EM = 13  # the Tools header's buttons' pane, in the headers' em
+MAX_GAP_PX = 120  # between the top headers while the Tools pane is maximised
+MAX_MARGIN_PX = 64  # the maximised pane off the window's right edge
+BUTTONS_EM = 8  # the Tools header's buttons' pane, in the headers' em
 OVERLAP = 2  # border between sights, half taken by each neighbour (Jakub)
 INSET = 10  # between the sights' header and gutter and the editor laid over them
 

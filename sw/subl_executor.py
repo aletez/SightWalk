@@ -51,7 +51,7 @@ def op_show(args, facts):
     made.story = args["story"]
     reader = state.current_reader()
     if args.get("aside") and reader is not None:
-        open_adventure(reader, reader.go_on_adventure(made, args.get("root")))
+        open_adventure(*reader.go_on_adventure(made, args.get("root")))
     else:
         (reader or new_reader()).visit(made, args.get("root"))
     state.ADDRESSED = True  # the guide may say what the trip is about
@@ -71,8 +71,8 @@ def open_adventure(mother, record):
     """An adventure's window over its mother's (Jakub, 2026-10-20): macOS sets it off a little
     by itself. The guide talks to it until it closes."""
     reader = new_reader()
-    reader.mother, record["reader"] = mother, reader
-    reader.adventure(record)
+    record["reader"] = reader
+    reader.adventure(mother, record)
     subl_scrollbars.reader_focused(True)
 
 

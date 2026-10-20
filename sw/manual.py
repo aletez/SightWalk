@@ -75,7 +75,8 @@ Conversation
   deserves it; keep the trip itself short and leave such steps for adventures. Its story is
   your explanation, said on its bench after the question that called it: why you turned off
   the trail, and where it leads. Messages from it carry adventure (its number); answer them
-  there. When the user closes it, messages come from the trip again.
+  there. When the user closes it, messages come from the trip again. Asked for an adventure
+  again, open it again with show: only the user reopens past ones, from the Adventures tab.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.

@@ -245,7 +245,7 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
         elif self.view == reader.tool_buttons:
             self.view.show_popup(subl_vetting.buttons_help(), sublime.HIDE_ON_MOUSE_MOVE_AWAY, 0)
         elif self.view == reader.sights_header:
-            subl_chat.show_trip_help(self.view, point, reader.maximized)
+            subl_chat.show_trip_help(self.view, point)
 
     def on_selection_modified(self):
         """A click on a tab's word in the Tools header shows that tab."""
@@ -357,9 +357,9 @@ def clear_schemes_if_unused():
 class SightWalkToggleMaximizedCommand(sublime_plugin.WindowCommand):
     """As [⤢]: the Tools pane over almost the whole window, and back."""
 
-    def run(self):
+    def run(self, restore=False):
         reader = state.reader_for(self.window)
-        if reader is not None and reader.ready:
+        if reader is not None and reader.ready and not (restore and not reader.maximized):
             reader.toggle_maximized()
 
 

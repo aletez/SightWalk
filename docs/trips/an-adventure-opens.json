@@ -1,7 +1,7 @@
 {
  "name": "An adventure opens",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "show with aside: the trip recorded with its mother and opened in a window of its own, starting from the question that called it and the guide's reason.",
  "sights": [
   "sw/subl_reader.py:1072-1080",

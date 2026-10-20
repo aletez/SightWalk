@@ -1,7 +1,7 @@
 {
  "name": "Each sight's box",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "A box's hue, drawn once for the whole tour so neighbours differ, its height hinting at its lines, and the list of trips the map stands under.",
  "sights": [
   "sw/tourmap.py:17-19",

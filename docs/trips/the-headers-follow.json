@@ -1,7 +1,7 @@
 {
  "name": "The headers follow",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "<here at=\"(a):106\">A header</here> shows <calls at=\"(a):106 (b):12\">its title and status</calls>, cut with \"…\" to its width. On the bench, <here at=\"(c):415\">names are cleaned</here> and <here at=\"(d):292\">variables shaded</here> as in the code.",
  "sights": [
   "sw/subl_chat.py:106-129",

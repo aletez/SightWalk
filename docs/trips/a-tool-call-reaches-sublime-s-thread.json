@@ -1,7 +1,7 @@
 {
  "name": "A tool call reaches Sublime's thread",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "<here at=\"(a):23\">A tool call</here> arrives on the server's thread, but only Sublime's main thread may touch views. Say and state <calls at=\"(a):23 (c):234\">wait for the reader to be ready</calls>; then <calls at=\"(a):23 (d):205\">the call is executed</calls>: <calls at=\"(d):205 (e):215\">its facts gathered and its work done on the main thread</calls>, the answer <here at=\"(b):38\">wrapped as MCP content</here>.",
  "sights": [
   "sw/subl_mcp_http.py:23-35",

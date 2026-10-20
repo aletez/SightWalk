@@ -1,7 +1,7 @@
 {
  "name": "A frame clicked",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "<here at=\"(a):1333\">Clicking framed words</here> <calls at=\"(a):1333 (b):1362\">shows their places</calls>; clicking <here at=\"(c):1244\">an answer's label</here> <calls at=\"(c):1244 (d):1168\">shows that answer's marks</calls> again.",
  "sights": [
   "sw/subl_reader.py:1333-1360",

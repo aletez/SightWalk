@@ -1,7 +1,7 @@
 {
  "name": "ctrl+tab",
  "kind": "run",
- "commit": "0e521fa18b30c56f930bc5d944d2530f4d6a471c",
+ "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
  "story": "The focus round the sights on screen, top to bottom, ctrl+shift+tab the other way.",
  "sights": [
   "sw/subl_commands.py:106-109",

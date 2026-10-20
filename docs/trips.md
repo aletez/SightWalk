@@ -19,16 +19,16 @@ What every guide reads at its start: how to compose trips, show code, talk and m
 - `sw/manual.py:6-24` MANUAL: opening
 - `sw/manual.py:26-54` MANUAL: Showing code
 - `sw/manual.py:56-59` MANUAL: Writing code that fits the reader
-- `sw/manual.py:61-121` MANUAL: Conversation
-- `sw/manual.py:123-170` MANUAL: Indicators
+- `sw/manual.py:61-124` MANUAL: Conversation
+- `sw/manual.py:126-173` MANUAL: Indicators
 
 ## 3. The tools' schemas (5 views, survey)
 
 The tools a guide may call, their parameters, and the fields that permit its other work.
 
-- `sw/manual.py:173-176` tool
-- `sw/manual.py:184-223` TOOLS
-- `sw/manual.py:179-182` TRANSITION
+- `sw/manual.py:176-179` tool
+- `sw/manual.py:187-226` TOOLS
+- `sw/manual.py:182-185` TRANSITION
 - `sw/validator.py:11-13` TRANSITION_FORM
 - `sw/permissions.py:8-19` FIELDS
 

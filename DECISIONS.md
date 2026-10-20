@@ -286,6 +286,16 @@ Open:
   - Tools tabs: the inactive ones in the header's text colour, the active one bold white (contrast in dark schemes); changed, unverified.
   - Later: the header's buttons ([?], ⇕) move to a pane of their own next to the tabs' pane, so they stop drifting right.
 
+- Queue (Jakub, 2026-10-20), in this order:
+  1. No shortcuts that scroll (Alt+↓/↑, PageDown/Up: the bench's own scrolling already moves the column) or send fixed questions (⌃⌘↓/↑); the help says Enter and ⇧Enter in sentences of their own. Done, unverified. No recommended phrasings in the README until Jakub knows which work.
+  2. The Tools header's buttons in a pane of their own beside the tabs; the tabs plain header text, clicked by the word under the pointer, highlighted by regions; sideways scrolling back.
+  3. [⤢] left of [⇕] maximises the Tools pane over almost the whole window, pinned to its corner; the bench's header keeps a gap from the trip's; [Restore] takes the place of [Reset positions] meanwhile. Hovering a button says what it does.
+  4. A story in GVP: show takes `story`, a narrative tying the trip together, with GVP markup, said first on a new trip's bench by the Pioneer (P:), whoever wrote the trip, maybe not the code. U: the user, A: the AI agent, your guide; the README explains the three. Trip files carry their story.
+  5. Titles: "Trip 3 · <title>" for a tour's trip (its number in the tour), "Adventure 1 · <title>"; a bare trip keeps its title alone. Later: a bare trip as a one-trip tour.
+  6. A tour map in the Tour tab under the list, what the Map is to a trip: a signpost, as in IKEA, of main and secret passages between departments. Nodes are the tour's sights (file:function or file:class, heights hinting their lines), in a row per trip, framed with the trip's title; arrows only between trips. Hues drawn once for all the tour's sights, neighbours different. A click on a sight opens its trip. Trips stay short so the map stays readable: the manual asks for about five steps of similar length, each one an adventure could open up, and trips.py warns about longer ones.
+  7. The tour "How the program talks to the agent" written again: a trip for every use of a tool or the protocol, short, each with its story, with unblocks and leads_to between trips.
+  8. Adventures (see above): a new window, which macOS sets off diagonally by itself (a Windows beta may move it by its handle); the first words are the question that called it, or the guide's explanation in the story's place when it opens one itself.
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

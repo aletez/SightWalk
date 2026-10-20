@@ -1,0 +1,25 @@
+{
+ "name": "show: the trip made",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(b):129\">A sight</here> is parsed from \"file:begin-end\", and <here at=\"(a):10\">its path resolved</here> for opening. <here at=\"(c):160\">A trip</here> is <calls at=\"(c):160 (d):93\">a network</calls> whose transitions <here at=\"(e):109\">must fit</here> its sights.",
+ "sights": [
+  "sw/spec.py:10-23",
+  "sw/ontology.py:129-137",
+  "sw/ontology.py:160-164",
+  "sw/ontology.py:93-100",
+  "sw/ontology.py:109-119"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [2, 164],
+   "to": [3, 93]
+  },
+  {
+   "type": "calls",
+   "from": [3, 97],
+   "to": [4, 109]
+  }
+ ]
+}

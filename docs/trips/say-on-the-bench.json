@@ -1,0 +1,35 @@
+{
+ "name": "say: on the bench",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):1342\">The reader says it</here>: <calls at=\"(a):1342 (b):191\">the text goes on the bench</calls> <calls at=\"(b):191 (c):28\">by an insert</calls> the guard lets through, and <calls at=\"(a):1342 (d):810\">the headers</calls> and <here at=\"(e):160\">the status line</here> follow the topic.",
+ "sights": [
+  "sw/subl_reader.py:1342-1355",
+  "sw/subl_chat.py:191-201",
+  "sw/subl_commands.py:28-29",
+  "sw/subl_reader.py:810-827",
+  "sw/subl_chat.py:160-169"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 1349],
+   "to": [3, 810]
+  },
+  {
+   "type": "calls",
+   "from": [0, 1350],
+   "to": [1, 191]
+  },
+  {
+   "type": "calls",
+   "from": [1, 200],
+   "to": [2, 28]
+  },
+  {
+   "type": "calls",
+   "from": [3, 816],
+   "to": [4, 160]
+  }
+ ]
+}

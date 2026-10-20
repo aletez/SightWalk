@@ -1,0 +1,11 @@
+{
+ "name": "state",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):178\">state</here> needs an open trip; <here at=\"(b):87\">it returns</here> what a message would carry, and the sights by name.",
+ "sights": [
+  "sw/validator.py:178-179",
+  "sw/subl_executor.py:87-89"
+ ],
+ "transitions": []
+}

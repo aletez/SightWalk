@@ -1,0 +1,55 @@
+{
+ "name": "say: marks resolved",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):91\">Every mark</here> must land on a line of a sight: <calls at=\"(a):91 (c):18\">its target is resolved</calls> <calls at=\"(c):18 (d):46\">within the sight</calls>, <here at=\"(b):80\">a jump</here> at both ends, and <here at=\"(e):56\">an icon</here> chosen for its sign.",
+ "sights": [
+  "sw/marks.py:91-117",
+  "sw/marks.py:80-88",
+  "sw/marks.py:18-37",
+  "sw/marks.py:46-53",
+  "sw/marks.py:56-62"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 99],
+   "to": [2, 18]
+  },
+  {
+   "type": "calls",
+   "from": [0, 103],
+   "to": [2, 18]
+  },
+  {
+   "type": "calls",
+   "from": [0, 109],
+   "to": [1, 80]
+  },
+  {
+   "type": "calls",
+   "from": [0, 114],
+   "to": [2, 18]
+  },
+  {
+   "type": "calls",
+   "from": [0, 115],
+   "to": [4, 56]
+  },
+  {
+   "type": "calls",
+   "from": [1, 83],
+   "to": [2, 18]
+  },
+  {
+   "type": "calls",
+   "from": [1, 84],
+   "to": [2, 18]
+  },
+  {
+   "type": "calls",
+   "from": [2, 29],
+   "to": [3, 46]
+  }
+ ]
+}

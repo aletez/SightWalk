@@ -1,0 +1,24 @@
+{
+ "name": "A frame clicked",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):1253\">Clicking framed words</here> <calls at=\"(a):1253 (b):1282\">shows their places</calls>; clicking <here at=\"(c):1167\">an answer's label</here> <calls at=\"(c):1167 (d):1091\">shows that answer's marks</calls> again.",
+ "sights": [
+  "sw/subl_reader.py:1253-1280",
+  "sw/subl_reader.py:1282-1293",
+  "sw/subl_reader.py:1167-1176",
+  "sw/subl_reader.py:1091-1100"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 1276],
+   "to": [1, 1282]
+  },
+  {
+   "type": "calls",
+   "from": [2, 1174],
+   "to": [3, 1091]
+  }
+ ]
+}

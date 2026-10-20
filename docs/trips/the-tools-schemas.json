@@ -1,0 +1,55 @@
+{
+ "name": "The tools' schemas",
+ "kind": "survey",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<calls at=\"(b):176 (a):165\">Each tool is described</calls> in <here at=\"(b):176\">one list</here>, with its parameters; <here at=\"(c):171\">a transition</here> has a schema of its own, and <here at=\"(d):11\">its form</here> is quoted back when a guide gets one wrong. <here at=\"(e):8\">The permission fields</here> name what else a guide started from Sublime may do.",
+ "sights": [
+  "sw/manual.py:165-168",
+  "sw/manual.py:176-213",
+  "sw/manual.py:171-174",
+  "sw/validator.py:11-13",
+  "sw/permissions.py:8-19"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [1, 177],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 189],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 193],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 196],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 198],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 199],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 203],
+   "to": [0, 165]
+  },
+  {
+   "type": "calls",
+   "from": [1, 208],
+   "to": [0, 165]
+  }
+ ]
+}

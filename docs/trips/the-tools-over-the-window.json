@@ -1,7 +1,7 @@
 {
  "name": "The tools over the window",
  "kind": "run",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "[⤢] in the Tools header lays the tools over almost the whole window under the top headers, kept apart; [Restore size] in the trip's header brings them back. Hovering a button says what it does.",
  "sights": [
   "sw/subl_reader.py:931-941",

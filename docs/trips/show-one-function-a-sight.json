@@ -1,0 +1,30 @@
+{
+ "name": "show: one function a sight",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "A sight holds one function at most. <here at=\"(a):118\">Functions</here> and <here at=\"(b):126\">the outermost functions and classes</here> are both <calls at=\"(a):118 (c):136\">blocks found by their keywords</calls>, including <here at=\"(d):152\">one opened above the range</here>. <here at=\"(e):89\">The rule</here> refuses a sight with two.",
+ "sights": [
+  "sw/spec.py:118-123",
+  "sw/spec.py:126-130",
+  "sw/spec.py:136-149",
+  "sw/spec.py:152-159",
+  "sw/validator.py:89-101"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 123],
+   "to": [2, 136]
+  },
+  {
+   "type": "calls",
+   "from": [1, 130],
+   "to": [2, 136]
+  },
+  {
+   "type": "calls",
+   "from": [2, 139],
+   "to": [3, 152]
+  }
+ ]
+}

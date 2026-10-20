@@ -1,15 +1,15 @@
 {
  "name": "The bench's answers listed",
  "kind": "run",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "The Answers tab: the bench's questions and answers by their first words; a click shows one's icons or places and brings it into the bench, a second click hides them.",
  "sights": [
   "sw/subl_reader.py:1138-1140",
   "sw/subl_reader.py:1121-1136",
   "sw/answers.py:9-19",
   "sw/subl_reader.py:1102-1112",
-  "sw/subl_vetting.py:353-368",
-  "sw/subl_vetting.py:371-372",
+  "sw/subl_vetting.py:366-381",
+  "sw/subl_vetting.py:384-385",
   "sw/subl_reader.py:1142-1158",
   "sw/subl_reader.py:1114-1117",
   "sw/subl_reader.py:1160-1165"
@@ -23,7 +23,7 @@
   {
    "type": "calls",
    "from": [0, 1139],
-   "to": [4, 353]
+   "to": [4, 366]
   },
   {
    "type": "calls",
@@ -42,8 +42,8 @@
   },
   {
    "type": "calls",
-   "from": [4, 362],
-   "to": [5, 371]
+   "from": [4, 375],
+   "to": [5, 384]
   },
   {
    "type": "calls",

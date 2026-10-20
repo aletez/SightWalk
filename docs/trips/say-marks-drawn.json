@@ -1,0 +1,30 @@
+{
+ "name": "say: marks drawn",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):689\">The marks are pointed</here> in the code and <here at=\"(b):269\">framed on the bench</here>, <calls at=\"(b):269 (c):263\">past the blank lines</calls> above the transcript. <here at=\"(d):1373\">The answer keeps them</here>, with <here at=\"(e):1357\">the regions</here> each frame stands for.",
+ "sights": [
+  "sw/subl_reader.py:689-698",
+  "sw/subl_chat.py:269-285",
+  "sw/subl_chat.py:263-266",
+  "sw/subl_reader.py:1373-1390",
+  "sw/subl_reader.py:1357-1371"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [1, 274],
+   "to": [2, 263]
+  },
+  {
+   "type": "calls",
+   "from": [1, 277],
+   "to": [2, 263]
+  },
+  {
+   "type": "calls",
+   "from": [3, 1388],
+   "to": [0, 689]
+  }
+ ]
+}

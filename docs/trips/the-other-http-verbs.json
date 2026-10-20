@@ -1,0 +1,12 @@
+{
+ "name": "The other HTTP verbs",
+ "kind": "survey",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "The protocol allows <here at=\"(a):107\">a stream</here> and <here at=\"(b):110\">ending a session</here>; SightWalk needs neither and says so. <here at=\"(c):114\">The log</here> stays quiet, so Sublime's console does not fill with requests.",
+ "sights": [
+  "sw/subl_mcp_http.py:107-108",
+  "sw/subl_mcp_http.py:110-112",
+  "sw/subl_mcp_http.py:114-115"
+ ],
+ "transitions": []
+}

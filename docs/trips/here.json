@@ -1,7 +1,7 @@
 {
  "name": "Here",
  "kind": "run",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "The caret or a selection in a sight becomes here.",
  "sights": [
   "sw/subl_commands.py:314-324",

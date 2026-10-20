@@ -1,0 +1,19 @@
+{
+ "name": "open_trip",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(b):173\">The file is read</here> and <here at=\"(a):130\">judged</here> like show; <calls at=\"(c):118 (d):266\">the trip is made from it</calls>, its story included, and <here at=\"(c):118\">visited</here> in the window.",
+ "sights": [
+  "sw/validator.py:130-135",
+  "sw/subl_executor.py:173-182",
+  "sw/subl_executor.py:118-125",
+  "sw/ontology.py:266-269"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [1, 177],
+   "to": [3, 266]
+  }
+ ]
+}

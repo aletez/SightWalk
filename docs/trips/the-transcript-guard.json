@@ -1,0 +1,19 @@
+{
+ "name": "The transcript guard",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):54\">Every edit</here> on the bench is checked against <here at=\"(b):36\">the protected end</here> of the transcript and undone if it reaches it. <here at=\"(c):264\">A change</here> keeps the prompt at the bottom; <here at=\"(d):279\">after a command</here> the caret is put back in the draft.",
+ "sights": [
+  "sw/subl_chat.py:54-71",
+  "sw/subl_chat.py:36-44",
+  "sw/subl_commands.py:264-271",
+  "sw/subl_commands.py:279-289"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 64],
+   "to": [1, 36]
+  }
+ ]
+}

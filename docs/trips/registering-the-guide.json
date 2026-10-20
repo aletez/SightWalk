@@ -1,0 +1,35 @@
+{
+ "name": "Registering the guide",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "Before any guide can talk to Sublime, <here at=\"(a):32\">the setup command</here> <calls at=\"(a):32 (b):41\">keeps a secret token</calls>, <calls at=\"(a):32 (c):51\">writes it down</calls> for the terminal tools, and <calls at=\"(a):32 (d):60\">hands the user the one line</calls> that registers SightWalk with Claude Code. <here at=\"(e):17\">Replacing a view's text</here> is the small helper every pane uses to show it.",
+ "sights": [
+  "sw/subl_setup.py:32-38",
+  "sw/subl_setup.py:41-48",
+  "sw/subl_setup.py:51-57",
+  "sw/subl_setup.py:60-63",
+  "sw/subl_commands.py:17-24"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 33],
+   "to": [1, 41]
+  },
+  {
+   "type": "calls",
+   "from": [0, 34],
+   "to": [2, 51]
+  },
+  {
+   "type": "calls",
+   "from": [0, 38],
+   "to": [3, 60]
+  },
+  {
+   "type": "calls",
+   "from": [3, 62],
+   "to": [4, 17]
+  }
+ ]
+}

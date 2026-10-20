@@ -1,12 +1,12 @@
 {
  "name": "Each sight's box",
  "kind": "run",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "A box's hue, drawn once for the whole tour so neighbours differ, its height hinting at its lines, and the list of trips the map stands under.",
  "sights": [
-  "sw/tourmap.py:15-18",
-  "sw/tourmap.py:25-27",
-  "sw/tourmap.py:21-22",
+  "sw/tourmap.py:18-21",
+  "sw/tourmap.py:28-30",
+  "sw/tourmap.py:24-25",
   "sw/subl_vetting.py:211-214",
   "sw/subl_vetting.py:217-227"
  ],

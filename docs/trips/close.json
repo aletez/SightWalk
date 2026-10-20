@@ -1,0 +1,11 @@
+{
+ "name": "close",
+ "kind": "run",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "story": "<here at=\"(a):182\">close</here> needs a trip to close; <here at=\"(b):92\">the window goes</here>, as if the user closed it.",
+ "sights": [
+  "sw/validator.py:182-184",
+  "sw/subl_executor.py:92-94"
+ ],
+ "transitions": []
+}

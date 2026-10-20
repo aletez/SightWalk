@@ -1,7 +1,7 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "Map and Scroll: the tab links, and the tab shown in the pane.",
  "sights": [
   "sw/subl_reader.py:922-929",
@@ -18,13 +18,13 @@
   "sw/subl_reader.py:912-914",
   "sw/subl_reader.py:916-917",
   "sw/subl_reader.py:919-920",
-  "sw/subl_reader.py:1228-1240"
+  "sw/subl_reader.py:1229-1241"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 926],
-   "to": [14, 1228]
+   "to": [14, 1229]
   },
   {
    "type": "calls",

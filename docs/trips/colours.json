@@ -1,7 +1,7 @@
 {
  "name": "Colours",
  "kind": "run",
- "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
  "story": "Every file in its own hue, schemes written and set once Sublime has indexed them.",
  "sights": [
   "sw/subl_reader.py:334-339",

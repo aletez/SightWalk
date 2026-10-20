@@ -301,6 +301,21 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("The tour map's source",
+     "The Tour tab asks for the tour map: each trip a row of its sights named file:function, "
+     "the arrows between trips taken from the informator.",
+     ["subl_reader.Reader.draw_tour", "subl_reader.Reader.tour_sight", "tourmap.cross_arrows",
+      "tourmap.tour_dot", "tourmap.row"]),
+    ("Each sight's box",
+     "A box's hue, drawn once for the whole tour so neighbours differ, its height hinting at its "
+     "lines, and the list of trips the map stands under.",
+     ["tourmap.colour", "tourmap.height", "tourmap.node", "subl_vetting.show_tour_page",
+      "subl_vetting.tour_rows"]),
+    ("The tour map in bands",
+     "dot lays the map out once to find each trip's frame; each band is drawn through a viewport "
+     "and shown as a link that opens its trip.",
+     ["subl_vetting.draw_tour_map", "subl_vetting.render_bands", "tourmap.bands",
+      "subl_vetting.band_png", "subl_vetting.run_dot", "subl_vetting.tour_map_html"]),
     ("The tools over the window",
      "[⤢] in the Tools header lays the tools over almost the whole window under the top headers, "
      "kept apart; [Restore size] in the trip's header brings them back. Hovering a button says "

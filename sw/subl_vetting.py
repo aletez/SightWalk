@@ -11,6 +11,7 @@ import textwrap
 
 import sublime
 
+from . import tourmap
 from .callmap import dot_source
 from .subl_chat import MARK_HTML, SYNTAX
 from .config import BLANK_LINES, SETTINGS_FILE, SETTLE_MS
@@ -199,9 +200,21 @@ def show_note(view, html, key="sight_walk_map"):
 
 def show_tour(view, tour, walked, current, on_select):
     """The tour's trips in order, each a link, and a box the user ticks for a trip walked
-    (Jakub: never ticked by itself); the shown one in bold."""
+    (Jakub: never ticked by itself); the shown one in bold. Under them the tour map, once drawn
+    (see draw_tour_map)."""
     if tour is None:
         return show_note(view, word("no_tour"), "sight_walk_tour")
+    kept(view)["tour_rows"] = tour_rows(tour, walked, current)
+    show_tour_page(view, on_select)
+
+
+def show_tour_page(view, on_select):
+    html = kept(view).get("tour_rows", "") + tour_map_html(view)
+    phantoms(view, "sight_walk_tour").update([sublime.Phantom(
+        sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_select)])
+
+
+def tour_rows(tour, walked, current):
     rows = []
     for number, trip in enumerate(tour, 1):
         box = "☑" if trip.id in walked else "☐"
@@ -211,9 +224,74 @@ def show_tour(view, tour, walked, current, on_select):
         rows.append('<a href="tick:%s" style="text-decoration: none">%s</a> %d. '
                     '<a href="open:%s" style="text-decoration: none">%s</a>%s'
                     % (trip.id, box, number, trip.id, name, kind))
-    html = "<div>%s</div><br>%s" % (tour.name, "<br>".join(rows))
-    phantoms(view, "sight_walk_tour").update([sublime.Phantom(
-        sublime.Region(content_point(view)), html, sublime.LAYOUT_BLOCK, on_select)])
+    return "<div>%s</div><br>%s" % (tour.name, "<br>".join(rows))
+
+
+def draw_tour_map(view, source, ids, on_select):
+    """The tour map under the list, drawn off the main thread like the Map, in one band per
+    trip, each a link that opens it (minihtml has no image maps)."""
+    dot = find_dot()
+    if dot is None or kept(view).get("tour_source") == source:
+        return
+    kept(view)["tour_source"] = source
+    sublime.set_timeout_async(lambda: render_bands(view, dot, source, ids, on_select), 0)
+
+
+def render_bands(view, dot, source, ids, on_select):
+    """dot's layout once, as JSON, to find each trip's frame; then each band drawn from the same
+    layout through a viewport (dot lays the same source out the same way)."""
+    stem = os.path.join(MAPS, "tour-" + hashlib.sha1(source.encode("utf-8")).hexdigest()[:16])
+    os.makedirs(MAPS, exist_ok=True)
+    try:
+        layout = json.loads(run_dot(dot, source, ["-Tjson"]))
+        bb = [float(x) for x in layout["bb"].split(",")]
+        frames = {int(o["name"].split("_")[1]): [float(x) for x in o["bb"].split(",")]
+                  for o in layout.get("objects", []) if o.get("name", "").startswith("cluster_")}
+        drawn = [(ids[k], band_png(dot, source, "%s-%d.png" % (stem, k), bb, top, bottom))
+                 for k, top, bottom in tourmap.bands(bb, frames)]
+    except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+        return
+    def show():
+        kept(view)["tour_bands"] = drawn
+        show_tour_page(view, on_select)
+    sublime.set_timeout(show, 0)
+
+
+def run_dot(dot, source, options):
+    done = subprocess.run([dot] + options, input=source.encode(), stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE, timeout=20)
+    if done.returncode:
+        raise ValueError(done.stderr.decode("utf-8", "replace")[:300])
+    return done.stdout
+
+
+BAND_PX = 3000  # a band's width at most, in pixels
+
+
+def band_png(dot, source, path, bb, top, bottom):
+    if not os.path.exists(path):
+        width = bb[2] - bb[0]
+        viewport = "%.1f,%.1f,1,%.1f,%.1f" % (width, top - bottom, (bb[0] + bb[2]) / 2,
+                                              (top + bottom) / 2)
+        # Sharp, yet within what Sublime shows: a wide tour drawn at fewer dots per inch.
+        dpi = max(min(288, BAND_PX * 72.0 / max(width, 1)), 36)
+        run_dot(dot, source, ["-Tpng", "-Gdpi=%d" % dpi, "-Gviewport=" + viewport, "-o", path])
+    return path
+
+
+def tour_map_html(view):
+    """The bands one under another, as wide as the pane at most, each opening its trip."""
+    drawn = kept(view).get("tour_bands") or []
+    if not drawn:
+        return ""
+    widest = max(png_size(path)[0] for _, path in drawn)
+    scale = min(1.0, max(view.viewport_extent()[0] - 16, 50) / widest)
+    images = []
+    for trip, path in drawn:
+        width, height = png_size(path)
+        images.append('<div><a href="open:%s"><img src="file://%s" width="%d" height="%d"></a>'
+                      '</div>' % (trip, path, width * scale, height * scale))
+    return "<br>" + "".join(images)
 
 
 def read_walked(informator):

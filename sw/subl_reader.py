@@ -16,7 +16,7 @@ import sublime
 
 from . import answers, permissions, subl_guide, subl_links
 from .subl_links import Links
-from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting
+from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting, tourmap
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
                      MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
@@ -1178,6 +1178,24 @@ class Reader(Geometry):
     def draw_tour(self):
         subl_vetting.show_tour(self.tour_view, self.tour, self.walked,
                              self.trip.id if self.trip else None, self.tour_link)
+        if self.tour is not None:
+            ids = [trip.id for trip in self.tour]
+            source = tourmap.tour_dot(
+                [(trip.name, [self.tour_sight(s) for s in trip]) for trip in self.tour],
+                tourmap.cross_arrows(self.informator.transitions, ids), map_style()[:4])
+            subl_vetting.draw_tour_map(self.tour_view, source, ids, self.tour_link)
+
+    def tour_sight(self, sight):
+        """A sight on the tour map: (file:function, its lines), read from its file."""
+        path = os.path.join(self.informator_root, sight.file)
+        try:
+            with open(path, encoding="utf-8") as f:
+                lines = f.read().split("\n")
+        except OSError:
+            lines = []
+        found = callmap.first_definition(lines, sight.begin, sight.end)
+        name = found[1] if found else "%d–%d" % (sight.begin, sight.end)
+        return "%s:%s" % (os.path.basename(sight.file), name), sight.end - sight.begin + 1
 
     def draw_permissions(self):
         subl_vetting.show_permissions(self.perm_view, subl_guide.chosen(),

@@ -165,7 +165,7 @@ i nazywa pole. Uzasadnienie zestawów jest w
 
 ### Odpowiedzi
 
-<img src="docs/images/answers.jpg" alt="Zakładka Odpowiedzi: każde pytanie i odpowiedź rozmowy po pierwszych słowach; kliknięcie przeniosło jedno pytanie na górę ławki" width="420">
+<img src="docs/images/answers.jpg" alt="Zakładka Odpowiedzi pod ławką: każda opowieść, pytanie i odpowiedź rozmowy po pierwszych słowach, odpowiedzi z liczbą ikon; kliknięte pytanie pogrubione" width="420">
 
 Zakładka Odpowiedzi wylicza wszystkie pytania i odpowiedzi z ławki po pierwszych słowach.
 Kliknięcie przenosi jedno z nich na górę ławki razem ze znacznikami (przy pytaniu: z tym, co było

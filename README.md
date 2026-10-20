@@ -162,7 +162,7 @@ bench and names the field. The reasoning behind the sets is in
 
 ### Answers
 
-<img src="docs/images/answers.jpg" alt="The Answers tab: every question and answer of the conversation by its first words; a click brought one question back to the top of the bench" width="420">
+<img src="docs/images/answers.jpg" alt="The Answers tab under the bench: every story, question and answer of the conversation by its first words, the answers with their icons counted; the question clicked in bold" width="420">
 
 The Answers tab lists every question and answer on the bench by its first words. A click brings
 one to the top of the bench with its marks (a question: what you had selected when you sent

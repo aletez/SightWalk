@@ -1,7 +1,7 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "Esc: Sublime asks about changes, the reader reads back the moved ranges and marks.",
  "sights": [
   "sw/subl_commands.py:226-229",

@@ -1,14 +1,14 @@
 {
  "name": "The user sends a message",
  "kind": "run",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "The draft becomes a message, with here, the visible sights and the edits, and the agent receives it.",
  "sights": [
   "sw/subl_commands.py:46-53",
   "sw/subl_chat.py:204-218",
   "sw/subl_commands.py:32-40",
   "sw/state.py:37-38",
-  "sw/subl_reader.py:1365-1384",
+  "sw/subl_reader.py:1373-1392",
   "sw/subl_views.py:327-331",
   "sw/plan.py:121-124",
   "sw/subl_reader.py:803-806",
@@ -33,7 +33,7 @@
   {
    "type": "calls",
    "from": [2, 35],
-   "to": [4, 1365]
+   "to": [4, 1373]
   },
   {
    "type": "calls",
@@ -42,17 +42,17 @@
   },
   {
    "type": "calls",
-   "from": [4, 1371],
+   "from": [4, 1379],
    "to": [6, 121]
   },
   {
    "type": "calls",
-   "from": [4, 1382],
+   "from": [4, 1390],
    "to": [5, 327]
   },
   {
    "type": "calls",
-   "from": [4, 1383],
+   "from": [4, 1391],
    "to": [5, 327]
   }
  ]

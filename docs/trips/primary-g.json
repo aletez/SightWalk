@@ -1,12 +1,12 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.",
  "sights": [
-  "sw/subl_commands.py:500-511",
-  "sw/subl_reader.py:829-839",
-  "sw/subl_commands.py:513-518",
+  "sw/subl_commands.py:503-514",
+  "sw/subl_reader.py:837-847",
+  "sw/subl_commands.py:516-521",
   "sw/subl_reader.py:187-191",
   "sw/subl_reader.py:193-213",
   "sw/subl_reader.py:215-220",
@@ -19,17 +19,17 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 503],
-   "to": [1, 829]
+   "from": [0, 506],
+   "to": [1, 837]
   },
   {
    "type": "calls",
-   "from": [0, 510],
-   "to": [2, 513]
+   "from": [0, 513],
+   "to": [2, 516]
   },
   {
    "type": "calls",
-   "from": [0, 510],
+   "from": [0, 513],
    "to": [3, 187]
   },
   {

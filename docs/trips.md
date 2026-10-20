@@ -168,8 +168,8 @@ After a new layout: every view into its group, then back at its place.
 - `sw/subl_reader.py:551-559` Reader.places
 - `sw/subl_reader.py:634-638` Reader.strip_place
 - `sw/subl_views.py:152-154` anchor
-- `sw/subl_reader.py:889-896` Reader.draw_strip_buttons
-- `sw/subl_reader.py:898-900` Reader.strip_button
+- `sw/subl_reader.py:897-904` Reader.draw_strip_buttons
+- `sw/subl_reader.py:906-908` Reader.strip_button
 - `sw/subl_reader.py:742-751` Reader.draw_edit_buttons
 - `sw/subl_reader.py:737-740` Reader.title
 - `sw/subl_views.py:242-254` draw_edit_button
@@ -213,13 +213,13 @@ The marks an answer places with its own tags, resolved to sights and lines, fram
 - `sw/spec.py:58-64` sight_index
 - `sw/spec.py:50-55` sight_name
 - `sw/marks.py:386-398` trip_place
-- `sw/subl_reader.py:1226-1253` Reader.follow_frame
-- `sw/subl_reader.py:1330-1344` Reader.frame_regions
+- `sw/subl_reader.py:1234-1261` Reader.follow_frame
+- `sw/subl_reader.py:1338-1352` Reader.frame_regions
 - `sw/subl_chat.py:263-266` blanks
-- `sw/subl_reader.py:1255-1266` Reader.show_places
-- `sw/subl_reader.py:1346-1363` Reader.add_to_answer
-- `sw/subl_reader.py:1159-1168` Reader.follow_label
-- `sw/subl_reader.py:1083-1092` Reader.show_answer
+- `sw/subl_reader.py:1263-1274` Reader.show_places
+- `sw/subl_reader.py:1354-1371` Reader.add_to_answer
+- `sw/subl_reader.py:1167-1176` Reader.follow_label
+- `sw/subl_reader.py:1091-1100` Reader.show_answer
 
 ## 12. Drawing the marks (10 views)
 
@@ -246,7 +246,7 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 - `sw/validator.py:14-17` MARK_FIRST
 - `sw/marks.py:170-172` speaks_of_code
 - `sw/marks.py:167-167` CODE_TALK
-- `sw/subl_reader.py:1315-1328` Reader.say
+- `sw/subl_reader.py:1323-1336` Reader.say
 - `sw/subl_reader.py:810-827` Reader.show_headers
 - `sw/subl_chat.py:100-122` show_header
 - `sw/header.py:12-20` title_lines
@@ -265,39 +265,39 @@ A reply reaches the Vetting Bench past the transcript guard; the status line fol
 Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.
 
 - `sw/subl_commands.py:387-390` SightWalkStopAnswerCommand.run
-- `sw/subl_reader.py:1294-1301` Reader.stop_answer
-- `sw/subl_reader.py:1303-1306` Reader.withdraw_unread_messages
+- `sw/subl_reader.py:1302-1309` Reader.stop_answer
+- `sw/subl_reader.py:1311-1314` Reader.withdraw_unread_messages
 
 ## 15. The Tools pane's tabs (15 views, survey)
 
 Map and Scroll: the tab links, and the tab shown in the pane.
 
-- `sw/subl_reader.py:914-921` Reader.select_tool
+- `sw/subl_reader.py:922-929` Reader.select_tool
 - `sw/subl_vetting.py:70-86` show_tabs
 - `sw/subl_vetting.py:63-67` toggle_html
 - `sw/subl_vetting.py:89-91` tab_at
 - `sw/subl_vetting.py:103-117` show_buttons
 - `sw/subl_commands.py:249-256` SightWalkHeaderListener.on_selection_modified
 - `sw/subl_geometry.py:18-20` Geometry.buttons_share
-- `sw/subl_commands.py:479-482` SightWalkTogglePanningCommand.run
-- `sw/subl_reader.py:956-966` Reader.toggle_panning
+- `sw/subl_commands.py:482-485` SightWalkTogglePanningCommand.run
+- `sw/subl_reader.py:964-974` Reader.toggle_panning
 - `sw/subl_vetting.py:39-47` set_panning
 - `sw/subl_vetting.py:50-52` content_point
-- `sw/subl_reader.py:904-906` Reader.tools
-- `sw/subl_reader.py:908-909` Reader.tool_view
-- `sw/subl_reader.py:911-912` Reader.hidden_tools
-- `sw/subl_reader.py:1202-1214` Reader.draw_map
+- `sw/subl_reader.py:912-914` Reader.tools
+- `sw/subl_reader.py:916-917` Reader.tool_view
+- `sw/subl_reader.py:919-920` Reader.hidden_tools
+- `sw/subl_reader.py:1210-1222` Reader.draw_map
 
 ## 16. The Map's nodes (13 views)
 
 The trip's definitions and the calls its author named, as nodes for the graph.
 
-- `sw/subl_reader.py:1202-1214` Reader.draw_map
-- `sw/subl_reader.py:1216-1224` Reader.answer_transitions
-- `sw/subl_reader.py:1416-1423` map_style
-- `sw/subl_reader.py:1268-1282` Reader.map_nodes
+- `sw/subl_reader.py:1210-1222` Reader.draw_map
+- `sw/subl_reader.py:1224-1232` Reader.answer_transitions
+- `sw/subl_reader.py:1424-1431` map_style
+- `sw/subl_reader.py:1276-1290` Reader.map_nodes
 - `sw/subl_reader.py:49-53` fragment_of
-- `sw/subl_reader.py:1284-1288` Reader.owner
+- `sw/subl_reader.py:1292-1296` Reader.owner
 - `sw/subl_reader.py:60-65` defined_name
 - `sw/callmap.py:33-39` first_definition
 - `sw/callmap.py:42-49` node_at
@@ -325,7 +325,7 @@ The graph in dot's language, drawn by Graphviz off the main thread, shown as an 
 - `sw/subl_vetting.py:155-157` png_size
 - `sw/subl_vetting.py:166-181` show_image
 - `sw/subl_vetting.py:184-189` zoom
-- `sw/subl_commands.py:472-473` SightWalkZoomMapCommand.run
+- `sw/subl_commands.py:475-476` SightWalkZoomMapCommand.run
 - `sw/subl_vetting.py:192-195` show_note
 
 ## 18. The user sends a message (9 views)
@@ -336,7 +336,7 @@ The draft becomes a message, with here, the visible sights and the edits, and th
 - `sw/subl_chat.py:204-218` take_draft
 - `sw/subl_commands.py:32-40` send
 - `sw/state.py:37-38` reader_for
-- `sw/subl_reader.py:1365-1384` Reader.context
+- `sw/subl_reader.py:1373-1392` Reader.context
 - `sw/subl_views.py:327-331` selected_text
 - `sw/plan.py:121-124` visible_specs
 - `sw/subl_reader.py:803-806` Reader.take_edits
@@ -364,7 +364,7 @@ primary+p joins words of the draft to selections in the sights, from either side
 - `sw/subl_links.py:278-280` Links.draft_start
 - `sw/subl_links.py:219-244` Links.follow
 - `sw/subl_links.py:310-316` repaint
-- `sw/subl_reader.py:867-878` Reader.show_place
+- `sw/subl_reader.py:875-886` Reader.show_place
 - `sw/subl_links.py:282-287` Links.clear
 - `sw/subl_links.py:105-110` Links.show_made
 - `sw/subl_links.py:112-117` Links.remove
@@ -458,7 +458,7 @@ The focus round the sights on screen, top to bottom, ctrl+shift+tab the other wa
 
 - `sw/subl_commands.py:105-108` SightWalkCycleSightsCommand.run
 - `sw/subl_commands.py:300-312` SightWalkWindowListener.on_window_command
-- `sw/subl_reader.py:848-865` Reader.cycle
+- `sw/subl_reader.py:856-873` Reader.cycle
 - `sw/plan.py:104-108` visible_indices
 - `sw/plan.py:111-118` cycled
 
@@ -466,9 +466,9 @@ The focus round the sights on screen, top to bottom, ctrl+shift+tab the other wa
 
 In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.
 
-- `sw/subl_commands.py:500-511` SightWalkToggleGuideCommand.run
-- `sw/subl_reader.py:829-839` Reader.toggle_focus
-- `sw/subl_commands.py:513-518` SightWalkToggleGuideCommand.folder
+- `sw/subl_commands.py:503-514` SightWalkToggleGuideCommand.run
+- `sw/subl_reader.py:837-847` Reader.toggle_focus
+- `sw/subl_commands.py:516-521` SightWalkToggleGuideCommand.folder
 - `sw/subl_reader.py:187-191` Reader.open_empty
 - `sw/subl_reader.py:193-213` Reader.empty_layout
 - `sw/subl_reader.py:215-220` Reader.close_hijacker
@@ -550,28 +550,28 @@ When no agent listens, asking the guide starts one; it calls wait_for_user throu
 The caret or a selection in a sight becomes here.
 
 - `sw/subl_commands.py:314-324` SightWalkWindowListener.on_selection_modified
-- `sw/subl_reader.py:841-846` Reader.note_selection
+- `sw/subl_reader.py:849-854` Reader.note_selection
 
 ## 31. Words in two languages (9 views)
 
 Switch Language: the setting changes, the words follow at once, in every open trip.
 
-- `sw/subl_commands.py:463-466` SightWalkSwitchLanguageCommand.run
+- `sw/subl_commands.py:466-469` SightWalkSwitchLanguageCommand.run
 - `sight_walk.py:55-59` settings_changed
 - `sw/words.py:135-137` set_language
 - `sw/state.py:55-60` render_all
 - `sw/words.py:131-132` word
 - `sw/subl_chat.py:30-33` help_html
 - `sw/subl_views.py:33-35` button_html
-- `sw/subl_commands.py:548-560` SightWalkCompareFontsCommand.run
-- `sw/subl_commands.py:563-571` kept_conversation
+- `sw/subl_commands.py:551-563` SightWalkCompareFontsCommand.run
+- `sw/subl_commands.py:566-574` kept_conversation
 
 ## 32. Endings (17 views, survey)
 
 The guide is stopped, windows close.
 
-- `sw/subl_commands.py:488-489` SightWalkStopGuideCommand.run
-- `sw/subl_commands.py:491-492` SightWalkStopGuideCommand.is_enabled
+- `sw/subl_commands.py:491-492` SightWalkStopGuideCommand.run
+- `sw/subl_commands.py:494-495` SightWalkStopGuideCommand.is_enabled
 - `sw/subl_guide.py:90-94` stop
 - `sw/subl_guide.py:78-87` stop_when_idle
 - `sw/subl_commands.py:341-345` SightWalkWindowListener.on_pre_close_window
@@ -582,7 +582,7 @@ The guide is stopped, windows close.
 - `sw/subl_commands.py:300-312` SightWalkWindowListener.on_window_command
 - `sw/subl_commands.py:394-396` SightWalkCloseTripCommand.run
 - `sw/subl_commands.py:374-377` SightWalkResetSightsCommand.run
-- `sw/subl_reader.py:880-887` Reader.reset_sights
+- `sw/subl_reader.py:888-895` Reader.reset_sights
 - `sw/subl_commands.py:379-381` SightWalkResetSightsCommand.is_enabled
 - `sw/state.py:29-34` forget
 - `sw/subl_executor.py:92-94` op_close
@@ -602,8 +602,8 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/subl_geometry.py:69-71` Geometry.room
 - `sw/subl_views.py:207-212` smaller
 - `sw/subl_executor.py:87-89` op_state
-- `sw/subl_reader.py:1308-1313` Reader.folder
-- `sw/subl_reader.py:1290-1292` Reader.note_waiting
+- `sw/subl_reader.py:1316-1321` Reader.folder
+- `sw/subl_reader.py:1298-1300` Reader.note_waiting
 
 ## 34. Building blocks (11 views, survey)
 
@@ -678,15 +678,15 @@ Transitions between places, checked; the trip, the informator and the tour.
 
 Open Tour: an informator's tours to choose from, the informator read from its files, its trips in the tour's order in the Tour tab, a trip opened from it, its conversation kept, a box ticked by hand.
 
-- `sw/subl_commands.py:404-410` SightWalkOpenTourCommand.run
-- `sw/subl_commands.py:419-432` tour_choices
-- `sw/subl_commands.py:435-445` found_files
-- `sw/subl_commands.py:448-449` read_name
-- `sw/subl_commands.py:452-457` read_field
-- `sw/subl_commands.py:412-416` SightWalkOpenTourCommand.open
+- `sw/subl_commands.py:404-413` SightWalkOpenTourCommand.run
+- `sw/subl_commands.py:422-435` tour_choices
+- `sw/subl_commands.py:438-448` found_files
+- `sw/subl_commands.py:451-452` read_name
+- `sw/subl_commands.py:455-460` read_field
+- `sw/subl_commands.py:415-419` SightWalkOpenTourCommand.open
 - `sw/words.py:148-155` trips_count
-- `sw/subl_reader.py:970-984` Reader.open_tour
-- `sw/subl_reader.py:1407-1409` read_json
+- `sw/subl_reader.py:978-992` Reader.open_tour
+- `sw/subl_reader.py:1415-1417` read_json
 - `sw/ontology.py:303-309` tour_from
 - `sw/ontology.py:282-286` informator_from
 - `sw/ontology.py:266-269` trip_from
@@ -694,18 +694,18 @@ Open Tour: an informator's tours to choose from, the informator read from its fi
 - `sw/ontology.py:212-227` tour
 - `sw/ontology.py:230-238` visit
 - `sw/subl_vetting.py:219-225` read_walked
-- `sw/subl_reader.py:986-1002` Reader.tour_link
-- `sw/subl_reader.py:1044-1054` Reader.keep_transcript
-- `sw/subl_reader.py:1056-1064` Reader.kept_marks
-- `sw/subl_reader.py:1066-1068` Reader.line_text
-- `sw/subl_reader.py:1070-1081` Reader.restore_marks
-- `sw/subl_reader.py:1387-1391` kept_frame
-- `sw/subl_reader.py:1394-1396` transcripts_path
-- `sw/subl_reader.py:1399-1404` read_transcripts
+- `sw/subl_reader.py:994-1010` Reader.tour_link
+- `sw/subl_reader.py:1052-1062` Reader.keep_transcript
+- `sw/subl_reader.py:1064-1072` Reader.kept_marks
+- `sw/subl_reader.py:1074-1076` Reader.line_text
+- `sw/subl_reader.py:1078-1089` Reader.restore_marks
+- `sw/subl_reader.py:1395-1399` kept_frame
+- `sw/subl_reader.py:1402-1404` transcripts_path
+- `sw/subl_reader.py:1407-1412` read_transcripts
 - `sw/subl_chat.py:246-249` set_transcript
 - `sw/ontology.py:289-293` dumps
 - `sw/subl_vetting.py:228-237` save_walked
-- `sw/subl_reader.py:1170-1172` Reader.draw_tour
+- `sw/subl_reader.py:1178-1180` Reader.draw_tour
 - `sw/subl_vetting.py:200-216` show_tour
 
 ## 39. Trip files (6 views)
@@ -741,20 +741,20 @@ The underline and the popup that says where the code asks the question.
 - `sw/subl_asked.py:47-57` mark
 - `sw/subl_asked.py:73-80` popup_html
 - `sw/subl_asked.py:83-84` escape
-- `sw/subl_commands.py:524-526` SightWalkSightListener.is_applicable
-- `sw/subl_commands.py:528-530` SightWalkSightListener.on_hover
+- `sw/subl_commands.py:527-529` SightWalkSightListener.is_applicable
+- `sw/subl_commands.py:531-533` SightWalkSightListener.on_hover
 - `sw/subl_asked.py:87-92` show_popup
 - `sw/subl_asked.py:60-62` paint
 - `sw/subl_asked.py:65-70` toggle
-- `sw/subl_commands.py:536-537` SightWalkToggleSentinelsCommand.run
+- `sw/subl_commands.py:539-540` SightWalkToggleSentinelsCommand.run
 
 ## 42. The guide's permissions (14 views)
 
 The Permissions tab: a field ticked, remembered or not, and the guide SightWalk started restarted while it waits with the tools allowed now.
 
-- `sw/subl_reader.py:1174-1177` Reader.draw_permissions
+- `sw/subl_reader.py:1182-1185` Reader.draw_permissions
 - `sw/subl_vetting.py:245-265` show_permissions
-- `sw/subl_reader.py:1179-1194` Reader.permission_link
+- `sw/subl_reader.py:1187-1202` Reader.permission_link
 - `sw/subl_vetting.py:268-270` show_tip
 - `sw/subl_guide.py:126-132` toggle
 - `sw/permissions.py:37-39` remembered
@@ -764,36 +764,37 @@ The Permissions tab: a field ticked, remembered or not, and the guide SightWalk 
 - `sw/permissions.py:23-34` allowed_tools
 - `sw/permissions.py:42-44` reminders
 - `sw/subl_guide.py:149-151` ours
-- `sw/subl_reader.py:1196-1200` Reader.add_folder
+- `sw/subl_reader.py:1204-1208` Reader.add_folder
 - `sw/subl_guide.py:119-123` set_folders
 
 ## 43. The tools over the window (5 views)
 
 [⤢] in the Tools header lays the tools over almost the whole window under the top headers, kept apart; [Restore size] in the trip's header brings them back. Hovering a button says what it does.
 
-- `sw/subl_reader.py:923-933` Reader.toggle_maximized
+- `sw/subl_reader.py:931-941` Reader.toggle_maximized
 - `sw/subl_commands.py:356-359` SightWalkToggleMaximizedCommand.run
-- `sw/subl_reader.py:935-954` Reader.arrange_maximized
+- `sw/subl_reader.py:943-962` Reader.arrange_maximized
 - `sw/subl_vetting.py:97-100` buttons_help
 - `sw/subl_chat.py:179-188` show_trip_help
 
-## 44. Back and forward through trips (16 views)
+## 44. Back and forward through trips (17 views)
 
 ◀ ▶ in the Sights' header, primary+[ and primary+]: each trip the guide shows goes into the window's history with its own conversation, starting from the question that called it; a step keeps the conversation shown and brings the other trip's back.
 
-- `sw/subl_reader.py:1006-1012` Reader.visit
+- `sw/subl_reader.py:1014-1020` Reader.visit
 - `sw/history.py:38-44` last_exchange
-- `sw/subl_reader.py:1020-1028` Reader.tell_story
+- `sw/subl_reader.py:1028-1036` Reader.tell_story
 - `sw/validator.py:104-116` check_story
+- `sw/subl_reader.py:829-835` Reader.trip_title
 - `sw/history.py:7-9` History.__init__
 - `sw/history.py:20-25` History.visit
-- `sw/subl_reader.py:1030-1033` Reader.leave
+- `sw/subl_reader.py:1038-1041` Reader.leave
 - `sw/history.py:14-18` History.keep
 - `sw/history.py:11-12` History.current
-- `sw/subl_reader.py:1035-1042` Reader.enter
+- `sw/subl_reader.py:1043-1050` Reader.enter
 - `sw/subl_chat.py:137-142` nav_phantom
 - `sw/subl_commands.py:365-368` SightWalkStepCommand.run
-- `sw/subl_reader.py:1014-1018` Reader.step
+- `sw/subl_reader.py:1022-1026` Reader.step
 - `sw/history.py:27-28` History.can
 - `sw/history.py:30-35` History.go
 - `sw/subl_chat.py:125-129` help_or_link
@@ -814,12 +815,12 @@ Tests without mouse or keys, in the guide's notation: sight_walk_fill sets the d
 
 The Answers tab: the bench's questions and answers by their first words; a click shows one's icons or places and brings it into the bench, a second click hides them.
 
-- `sw/subl_reader.py:1130-1132` Reader.draw_answers
-- `sw/subl_reader.py:1113-1128` Reader.bench_rows
+- `sw/subl_reader.py:1138-1140` Reader.draw_answers
+- `sw/subl_reader.py:1121-1136` Reader.bench_rows
 - `sw/answers.py:9-19` entries
-- `sw/subl_reader.py:1094-1104` Reader.answer_marks
+- `sw/subl_reader.py:1102-1112` Reader.answer_marks
 - `sw/subl_vetting.py:275-290` show_answers
 - `sw/subl_vetting.py:293-294` html_escape
-- `sw/subl_reader.py:1134-1150` Reader.answer_link
-- `sw/subl_reader.py:1106-1109` Reader.hide_answer
-- `sw/subl_reader.py:1152-1157` Reader.scroll_bench
+- `sw/subl_reader.py:1142-1158` Reader.answer_link
+- `sw/subl_reader.py:1114-1117` Reader.hide_answer
+- `sw/subl_reader.py:1160-1165` Reader.scroll_bench

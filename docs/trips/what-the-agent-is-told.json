@@ -1,7 +1,7 @@
 {
  "name": "What the agent is told",
  "kind": "survey",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "The guide's manual, the tools' descriptions and schemas it gets at its start, and the prompt a guide started from Sublime is given.",
  "sights": [
   "sw/manual.py:6-24",

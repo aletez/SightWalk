@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "A reply reaches the Vetting Bench past the transcript guard; the status line follows the topic.",
  "sights": [
   "sw/subl_executor.py:76-84",
@@ -10,7 +10,7 @@
   "sw/validator.py:14-17",
   "sw/marks.py:170-172",
   "sw/marks.py:167-167",
-  "sw/subl_reader.py:1315-1328",
+  "sw/subl_reader.py:1323-1336",
   "sw/subl_reader.py:810-827",
   "sw/subl_chat.py:100-122",
   "sw/header.py:12-20",
@@ -33,16 +33,16 @@
   {
    "type": "calls",
    "from": [0, 80],
-   "to": [6, 1315]
+   "to": [6, 1323]
   },
   {
    "type": "calls",
-   "from": [6, 1322],
+   "from": [6, 1330],
    "to": [7, 810]
   },
   {
    "type": "calls",
-   "from": [6, 1323],
+   "from": [6, 1331],
    "to": [11, 191]
   },
   {

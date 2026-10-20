@@ -1,7 +1,7 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
  "story": "A trip opened from its file by the guide, and the files written for an informator.",
  "sights": [
   "sw/subl_executor.py:118-125",

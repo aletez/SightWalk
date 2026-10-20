@@ -21,6 +21,7 @@ from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATIO
                      MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
 from .subl_editor import Editor
+from .history import History, last_exchange
 from .subl_geometry import Geometry
 from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
@@ -99,6 +100,7 @@ class Reader(Geometry):
         self.strip_marks = None  # the icons last drawn on the strip
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
         self.root = self.browser = None  # a trip with no sights yet: its folder and file browser
+        self.history = History()  # the normal trips shown here, ◀ ▶ (Jakub, 2026-10-20)
         self.make_side_views()
 
     def make_side_views(self):
@@ -112,7 +114,7 @@ class Reader(Geometry):
         # left the bench showing the Map or the Tour.
         self.editor_slot = (make_blank_view(self.window, ""), make_blank_view(self.window, ""))
         self.top_filler.assign_syntax(subl_chat.SYNTAX)
-        # Between the bench and the Sights, an empty strip whose wheel moves the whole trip; the
+        # Between the bench and the Sights, an empty strip whose wheel moves the column of sights; the
         # wheel over a sight scrolls only that sight, until the trip next moves (Jakub).
         self.strip = make_blank_view(self.window, "")
         self.strip.assign_syntax(subl_chat.SYNTAX)  # the bench's colours (Jakub)
@@ -543,7 +545,7 @@ class Reader(Geometry):
         return places
 
     def wheel_places(self):
-        """The views whose wheel moves the whole trip: the strip, the fillers, ▼'s cell, and the
+        """The views whose wheel moves the column of sights (the views themselves stay put): the strip, the fillers, ▼'s cell, and the
         bench and the tool shown while they take the wheel. A sight's code scrolls on its own
         (Jakub)."""
         places = [(view, anchor(view)) for view in (self.filler, self.strip_floor, self.top_filler)]
@@ -576,7 +578,7 @@ class Reader(Geometry):
             self.editor.header.set_viewport_position((0, header_top(self.editor.header)), False)
 
     def read_wheel(self):
-        """The wheel moves a view of wheel_places off its place: the trip takes the movement over,
+        """The wheel moves a view of wheel_places off its place: the column of sights takes the movement over,
         and scroll_views puts every view at its new place; the strip is already there, as its
         place follows the offset (see strip_place). A jump larger than a screen is a view being
         laid out, not the wheel; while a new layout settles, movements are only undone."""
@@ -587,6 +589,8 @@ class Reader(Geometry):
             x, y = view.viewport_position()
             if abs(y - place) > 0.5:
                 view.set_viewport_position((x, place), False)
+        if not self.pan:
+            self.clamp_bench()
         # The tabs never scroll sideways: their phantom's links stayed behind (Jakub, 2026-10-20).
         x, y = self.below_header.viewport_position()
         if x != 0:
@@ -601,6 +605,16 @@ class Reader(Geometry):
                 continue
             self.scroll_to(self.offset + y - place, wheel=True)
             return
+
+    def clamp_bench(self):
+        """Over the transcript the bench scrolls to three blank lines at most (Jakub): the blank
+        lines above them are there only so a short one can sit at the bottom."""
+        view = self.chat
+        top = view.text_to_layout(subl_chat.blanks(view))[1] - 3 * view.line_height()
+        floor = min(subl_chat.bottom_place(view), top)
+        x, y = view.viewport_position()
+        if y < floor - 0.5:
+            view.set_viewport_position((x, floor), False)
 
     def bench_edited(self):
         """The bench's text changed: Sublime may move it a line (a Backspace into the transcript,
@@ -790,8 +804,9 @@ class Reader(Geometry):
                          self.stop_answer if self.note else None)
         subl_vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan,
                                self.toggle_panning)
-        subl_chat.show_header(self.sights_header, word("sights"), self.trip.name if self.trip else "",
-                         button=(word("reset"), self.reset_sights))
+        subl_chat.show_header(self.sights_header, word("trip_title"), self.trip.name if self.trip else "",
+                         button=(word("reset"), self.reset_sights),
+                         nav=(self.history.can(-1), self.history.can(1), self.step))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
         subl_chat.show_header(self.strip_header, "", "", help_mark=False)
 
@@ -890,14 +905,14 @@ class Reader(Geometry):
         sublime.set_timeout(self.draw_permissions, SETTLE_MS)  # its intro wraps to the width
 
     def toggle_panning(self):
-        """primary+s: the wheel over the bench, Map and Tour moves the whole trip, or them."""
+        """primary+s: the wheel over the bench and the tools moves the column of sights, or them."""
         self.pan = not self.pan
         for view in self.tools().values():
             # How far down its content the tool is scrolled stays across the switch (Jakub).
             y = view.viewport_position()[1]
             self.tool_offsets[view.id()] = max(y - anchor(view) if not self.pan else y, 0.0)
             subl_vetting.set_panning(view, self.pan, self.tool_offsets[view.id()])
-        self.chat.settings().set("scroll_past_end", self.pan)  # so the wheel moves it down too
+        self.chat.settings().set("scroll_past_end", self.pan)  # so the wheel can move it down too
         self.show_headers()
         self.select_tool(self.tool)  # lays out again, draws the tools at their new place
 
@@ -924,17 +939,44 @@ class Reader(Geometry):
         only by hand (Jakub)."""
         what, _, key = href.partition(":")
         if what == "open":
-            self.keep_transcript()
-            subl_chat.set_transcript(self.informator.transcripts.get(key, ""))
-            self.tour_trip = key
-            # Before load: the trip may be laid out within it, and start takes them then.
-            self.pending_marks = self.informator.transcripts.get(key + MARKS_KEY)
-            self.load(self.informator.member(key), self.informator_root)
-            self.trip_start = 0  # a tour trip's conversation is its own, all of it
+            self.leave()
+            transcripts = self.informator.transcripts
+            entry = self.history.visit(self.informator.member(key), self.informator_root,
+                                       transcripts.get(key, ""))
+            entry["tour_trip"], entry["marks"] = key, transcripts.get(key + MARKS_KEY)
+            self.enter(entry)
         elif what == "tick":
             self.walked ^= {key}
             subl_vetting.save_walked(self.informator.id, self.walked)
         self.draw_tour()
+
+    # History: each normal trip its own conversation (Jakub, 2026-10-20)
+
+    def visit(self, trip, root):
+        """A trip the guide shows: after the one shown, its conversation starting from the
+        question that called it."""
+        self.leave()
+        self.enter(self.history.visit(trip, root, last_exchange(subl_chat.TRANSCRIPT)))
+
+    def step(self, step):
+        """◀ (-1) or ▶ (1): the trip there, with its conversation as the user left it."""
+        if self.history.can(step):
+            self.leave()
+            self.enter(self.history.go(step))
+
+    def leave(self):
+        """The shown trip's conversation kept, in its entry and, for a tour's trip, its file."""
+        self.keep_transcript()
+        self.history.keep(subl_chat.TRANSCRIPT, self.kept_marks() if self.ready else None)
+
+    def enter(self, entry):
+        self.tour_trip = entry.get("tour_trip")
+        subl_chat.set_transcript(entry["transcript"])
+        subl_chat.outline_refs(self.chat, [])  # the frames left behind would slide over its text
+        # Before load: the trip may be laid out within it, and start takes them then.
+        self.pending_marks = entry["marks"]
+        self.load(entry["trip"], entry["root"])
+        self.trip_start = 0  # the conversation is the trip's own, all of it
 
     def keep_transcript(self):
         """The bench's conversation kept under the tour's trip shown (Jakub), so after Sublime
@@ -942,14 +984,9 @@ class Reader(Geometry):
         git ignores (Jakub: conversations stay out of git)."""
         if self.informator is None or self.tour_trip is None:
             return
-        # The conversation goes on when the guide shows another trip (Jakub): it stays kept
-        # under the tour's trip it began in; marks only while that trip is shown, as only its
-        # sights come back.
         self.informator.transcripts[self.tour_trip] = subl_chat.TRANSCRIPT
-        if self.trip is not None and self.trip.id == self.tour_trip:
+        if self.ready:
             self.informator.transcripts[self.tour_trip + MARKS_KEY] = self.kept_marks()
-        else:
-            self.informator.transcripts.pop(self.tour_trip + MARKS_KEY, None)
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
             json.dump(self.informator.transcripts, f, indent=1, ensure_ascii=False)
 
@@ -1270,6 +1307,8 @@ class Reader(Geometry):
             return {"visible": []}
         context = {"visible": plan.visible_specs(
             self.sights, self.offset - self.lead, self.room())}
+        if self.trip is not None:  # it tells the guide the user went back or forward (Jakub)
+            context["trip"] = self.trip.name
         view = self.touched
         index = self.sight_of(view) if view is not None and view.is_valid() else None
         if index is None or not len(view.sel()):

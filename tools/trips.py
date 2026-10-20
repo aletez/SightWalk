@@ -83,7 +83,7 @@ TRIPS = [
      "The two loops: the gutter measured once, the reader opening at the top; the wheel read "
      "and taken over.",
      ["subl_reader.Reader.poll", "subl_chat.keep_at_bottom", "subl_chat.bottom_place", "subl_chat.kept_place", "subl_reader.Reader.poll_wheel", "subl_reader.Reader.alive",
-      "subl_reader.Reader.read_wheel", "subl_reader.Reader.bench_edited", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
+      "subl_reader.Reader.read_wheel", "subl_reader.Reader.clamp_bench", "subl_reader.Reader.bench_edited", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
       "subl_reader.item_top"]),
     ("Pointing",
      "The marks an answer places with its own tags, resolved to sights and lines, framed in its "
@@ -304,6 +304,15 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("Back and forward through trips",
+     "◀ ▶ in the Sights' header, primary+[ and primary+]: each trip the guide shows goes into the "
+     "window's history with its own conversation, starting from the question that called it; a "
+     "step keeps the conversation shown and brings the other trip's back.",
+     ["subl_reader.Reader.visit", "history.last_exchange", "history.History.__init__",
+      "history.History.visit", "subl_reader.Reader.leave", "history.History.keep",
+      "history.History.current", "subl_reader.Reader.enter", "subl_chat.nav_phantom",
+      "subl_commands.SightWalkStepCommand.run", "subl_reader.Reader.step", "history.History.can",
+      "history.History.go", "subl_chat.help_or_link"]),
     ("Driving a trip from the terminal",
      "Tests without mouse or keys, in the guide's notation: sight_walk_fill sets the draft, whose "
      "<here> tags become links, sight_walk_select selects places, (>) the draft, and "

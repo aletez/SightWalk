@@ -66,8 +66,8 @@ into a full tour of 43 trips, and puts every function in one at least.
 On the right, the **Sights**: one column of panes, scrolled as one document. Each sight has a
 header with its name, (a), (b), (c)…, and its file, tinted in a hue per file. The `def` and
 `class` lines a fragment belongs to stay frozen under its header, and "⋮ 10 lines of Handler"
-says what was left out. The whole trip moves as one document, every header with its code:
-the wheel moves it over the scroll strip, and over the bench and the Tools pane when `⌘S` sets
+says what was left out. The column moves as one document, every header with its code, while the bench
+stays put: the wheel moves it over the scroll strip, and over the bench and the Tools pane when `⌘S` sets
 it so. Over a sight's code the wheel scrolls that sight alone.
 
 On the left, the **Vetting Bench**. At the top of this page the user asks *why does the client

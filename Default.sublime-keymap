@@ -1,5 +1,4 @@
 [
-    {"keys": ["primary+enter"], "command": "sight_walk_send", "context": [{"key": "setting.sight_walk_chat"}]},
     {"keys": ["enter"], "command": "sight_walk_send", "context": [{"key": "setting.sight_walk_chat"}, {"key": "auto_complete_visible", "operand": false}]},
     {"keys": ["escape"], "command": "sight_walk_stop_answer", "context": [{"key": "setting.sight_walk_chat"}, {"key": "auto_complete_visible", "operand": false}, {"key": "popup_visible", "operand": false}]},
     {"keys": ["shift+enter"], "command": "insert", "args": {"characters": "\n"}, "context": [{"key": "setting.sight_walk_chat"}]},
@@ -24,6 +23,9 @@
     {"keys": ["primary+p"], "command": "sight_walk_link", "context": [{"key": "setting.sight_walk_code"}]},
     // alt+r: Reset positions, as the button in the Sights' header (Jakub); on macOS in place of typing ®.
     {"keys": ["alt+r"], "command": "sight_walk_reset_sights", "context": [{"key": "setting.sight_walk"}]},
+    // primary+[ and primary+]: back and forward through the window's trips, as in a browser (Jakub).
+    {"keys": ["primary+["], "command": "sight_walk_step", "args": {"step": -1}, "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]},
+    {"keys": ["primary+]"], "command": "sight_walk_step", "args": {"step": 1}, "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]},
     {"keys": ["primary+s"], "command": "sight_walk_toggle_panning", "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]}
     // A proposal: primary+g moves the focus between a trip's bench and its sights. It would take the place of Find Next
     // (macOS) and Go to Line (Windows, Linux), so it is left for the user to turn on.

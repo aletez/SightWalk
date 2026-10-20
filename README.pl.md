@@ -68,8 +68,8 @@ turnus 43 wycieczek, a każdą funkcję umieszcza w co najmniej jednej.
 Po prawej **panorama**: jedna kolumna widoków, przewijana jak jeden dokument. Każdy widok ma
 nagłówek z nazwą, (a), (b), (c)…, i plikiem, zabarwiony kolorem swojego pliku. Linie `def`
 i `class`, do których należy fragment, stoją zamrożone pod nagłówkiem, a „⋮ 10 linii Handler”
-mówi, co zostało pominięte. Cała wycieczka przesuwa się jak jeden dokument, każdy nagłówek
-przy swoim kodzie: przesuwa ją kółko nad paskiem przewijania, a nad ławką i panelem Narzędzi
+mówi, co zostało pominięte. Panorama przesuwa się jak jeden dokument, każdy nagłówek
+przy swoim kodzie, a ławka stoi: przesuwa ją kółko nad paskiem przewijania, a nad ławką i panelem Narzędzi
 wtedy, gdy `⌘S` tak ustawi. Nad kodem widoku kółko przewija tylko ten widok.
 
 Po lewej **ławka**. Na górze strony użytkownik pyta, czemu klient dostaje 202 **here**, a nie

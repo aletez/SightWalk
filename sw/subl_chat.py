@@ -20,6 +20,7 @@ GUARDS = {}
 # The one conversation, carried from trip to trip (Jakub).
 TRANSCRIPT = ""
 MAC = sublime.platform() == "osx"
+LINK_KEY = "⌘P" if MAC else "Ctrl+P"
 KEYS = (("Enter (⇧+Enter: %s)", "⌃⌘↓", "⌃⌘↑") if MAC
         else ("Enter (Shift+Enter: %s)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
 # The help mark: faded and outlined at all times, so it reads as read-only.
@@ -28,8 +29,9 @@ MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1p
 def help_html():
     """The bench's keys, in the user's language."""
     send, nxt, previous = KEYS
-    return "<div><b>%s</b> %s<br><b>%s</b> %s<br><b>%s</b> %s</div>" % (
-        send % word("new_line"), word("send"), nxt, word("next"), previous, word("previous"))
+    return "<div><b>⛓</b> %s <b>%s</b>: %s<br><b>%s</b> %s<br><b>%s</b> %s<br><b>%s</b> %s</div>" % (
+        word("or"), LINK_KEY, word("link_help"), send % word("new_line"), word("send"), nxt, word("next"),
+        previous, word("previous"))
 
 
 def protected_end(end, changes):
@@ -96,32 +98,49 @@ LINK_HTML = MARK_HTML.replace('href="help"', 'href="link"').replace(">?<", ">⛓
 LINK_ROOM = 3  # columns the link button takes before the help mark
 
 
-def show_header(view, title, status, help_mark=True, button=None, on_link=None):
+def show_header(view, title, status, help_mark=True, button=None, on_link=None, nav=None):
     """button: (label, on_click), drawn at the right end of the first line instead of the help
     mark, like a sight's Edit button. on_link: a [⛓] before the help mark calls it, as primary+p
-    does (Jakub)."""
+    does (Jakub). nav: (can back, can forward, on_step), ◀ ▶ before the title."""
     columns = int(view.viewport_extent()[0] / max(view.em_width(), 1))
     room = len(button[0]) + 3 - MARK_ROOM if button is not None else LINK_ROOM if on_link else 0
-    text = title_lines(title, status, columns - room)  # the first line ends where the mark goes
+    text = title_lines(title, status, columns - room - (NAV_ROOM if nav else 0))
     mark = kept(view)["mark"]
-    if text == mark[1]:
+    if (text, nav and nav[:2]) == mark[1]:
         return
-    mark[1] = text
+    mark[1] = (text, nav and nav[:2])
     view.run_command("sight_walk_replace", {"text": text})
     point = view.line(0).b
+    phantoms = [nav_phantom(*nav)] if nav else []
     if button is not None:
         html = button_html(button[0], "b")
-        mark[0].update([sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
-                                        lambda _: button[1]())])
-        return
-    def clicked(href):
-        if href == "link":
-            on_link()
-        else:
-            view.show_popup(help_html(), location=point)
-    html = (LINK_HTML if on_link else "") + MARK_HTML
-    phantom = sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE, clicked)
-    mark[0].update([phantom] if help_mark else [])
+        phantoms.append(sublime.Phantom(sublime.Region(point), html, sublime.LAYOUT_INLINE,
+                                        lambda _: button[1]()))
+    elif help_mark:
+        phantoms.append(sublime.Phantom(sublime.Region(point), (LINK_HTML if on_link else "")
+                                        + MARK_HTML, sublime.LAYOUT_INLINE,
+                                        lambda href: help_or_link(view, href, point, on_link)))
+    mark[0].update(phantoms)
+
+
+def help_or_link(view, href, point, on_link):
+    if href == "link":
+        on_link()
+    else:
+        view.show_popup(help_html(), location=point)
+
+
+NAV_ROOM = 6  # columns ◀ ▶ take before the title
+NAV_LINK = '<a href="%d" style="text-decoration: none; color: var(--foreground)">%s</a>'
+NAV_OFF = '<span style="color: %s">%%s</span>' % FADED
+
+
+def nav_phantom(back, forward, on_step):
+    """◀ ▶ as in a browser (Jakub, 2026-10-20), faded where there is nowhere to go."""
+    arrows = [NAV_LINK % (step, sign) if can else NAV_OFF % sign
+              for step, sign, can in ((-1, "◀", back), (1, "▶", forward))]
+    return sublime.Phantom(sublime.Region(0), "&nbsp;".join(arrows) + "&nbsp;&nbsp;",
+                           sublime.LAYOUT_INLINE, lambda href: on_step(int(href)))
 
 
 STATUS_HTML = '<span style="color: %s">%%s</span>' % FADED
@@ -203,7 +222,7 @@ def keep_at_bottom(view):
 
 def kept_place(view):
     """Where keep_at_bottom last put the view: the wheel's reference, so text arriving (a sent
-    message, an answer) is not read as a wheel step that moves the trip."""
+    message, an answer) is not read as a wheel step that moves the column of sights."""
     return kept(view).get("place", bottom_place(view))
 
 

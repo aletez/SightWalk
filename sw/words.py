@@ -9,6 +9,10 @@ WORDS = {
     "bench": ("Bench", "Ławka"),
     "bench_view": ("Vetting Bench", "Ławka"),
     "sights": ("Sights", "Panorama"),
+    "or": ("or", "lub"),
+    "trip_title": ("Trip", "Wycieczka"),  # the Sights' header: Sights stays for the manual (Jakub)
+    "link_help": ("link the selected words to the selected code",
+                  "połącz zaznaczone słowa z zaznaczonym kodem"),
     "tools": ("Tools", "Narzędzia"),
     "Map": ("Map", "Mapa"),
     "Tour": ("Tour", "Turnus"),
@@ -88,10 +92,8 @@ WORDS = {
     "new_line": ("new line", "nowa linia"),
     "next": ("explain next", "wyjaśnij następny krok"),
     "previous": ("explain previous", "wyjaśnij poprzedni krok"),
-    "pan": ("the wheel over the bench, Map and Tour: %s (press to change)",
-            "kółko nad ławką, Mapą i Turnusem: %s (naciśnij, by zmienić)"),
-    "pan_on": ("moves the whole trip", "przesuwa całą wycieczkę"),
-    "pan_off": ("scrolls the tool itself", "przewija samo narzędzie"),
+    "pan": ("the wheel over the bench and the tools moves the pane under it or the column of sights",
+            "kółko nad ławką i narzędziami przesuwa panel pod spodem lub panoramę widoków"),
     "no_tour": ("No tour is open: <i>SightWalk: Open Tour</i> in the command palette.",
                 "Żaden turnus nie jest otwarty: <i>SightWalk: Open Tour</i> w palecie poleceń."),
     "no_dot": ("The map needs Graphviz: <code>brew install graphviz</code>, or set "

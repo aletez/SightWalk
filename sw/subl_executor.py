@@ -49,7 +49,7 @@ def new_reader():
 def op_show(args, facts):
     made = trip_of(args)
     reader = state.current_reader() or new_reader()
-    reader.load(made, args.get("root"))
+    reader.visit(made, args.get("root"))
     state.ADDRESSED = True  # the guide may say what the trip is about
     subl_scrollbars.reader_focused(True)  # a new window is not reported as activated
     return {"ok": True, "sights": named([sight.spec for sight in made])}
@@ -110,7 +110,7 @@ def op_open_trip(args, facts):
     """A trip from its file (written by an informator's author), its paths relative to root, by
     default the file's repository."""
     trip = facts["trip"]
-    (state.current_reader() or new_reader()).load(trip, facts["root"])
+    (state.current_reader() or new_reader()).visit(trip, facts["root"])
     state.ADDRESSED = True
     subl_scrollbars.reader_focused(True)
     return {"ok": True, "trip": trip.name, "sights": named([sight.spec for sight in trip])}

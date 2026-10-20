@@ -59,6 +59,10 @@ Conversation
   visible sights and, once the user has put the caret or a selection in a sight, the caret's
   place there (here, "(c):105:9": sight, line, column). On timeout, call it again
   at once and say nothing: never announce that you are waiting.
+- Each trip has its own conversation on the bench: a new show starts it from the user's question
+  that called it. The user can go back and forward through the window's trips (◀ ▶); every
+  message names the trip it was sent from (trip). When that is not the trip you showed last,
+  the user went back to it: answer about its sights, and its conversation as it was.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.
@@ -193,7 +197,7 @@ TOOLS = [
          'Bench as a share of the window; applies at once); bench_side, "left" or "right".',
          {"values": {"type": "object"}}),
     tool("wait_for_user", "Wait up to 50 s for the user's next message. Returns text and "
-         "visible; once the user has touched a sight, here, the caret's place; selected, the text selected "
+         "visible, and trip, the name of the trip shown; once the user has touched a sight, here, the caret's place; selected, the text selected "
          "there; edited, after the user's edits; unanswered, when this message still waits for "
          "your answer. Or timeout (with next): then call it again at once and say nothing.",
          {"timeout_s": {"type": "integer"}}),

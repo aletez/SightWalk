@@ -53,7 +53,7 @@ subl --command 'sight_walk_send_draft'
 
 ## 4. Geometry and editing, by hand
 
-- The wheel moves the whole trip only over the scroll strip, the empty fillers and ▼'s cell, and over the bench and the Tools pane while ⌘S lets them take it ([⇕] in the Tools header). Over a sight's code it scrolls that sight alone; over a header or a frozen line it does nothing. ▲▼ on the strip, Alt+↓/↑ (3 lines) and PageDown/PageUp (about a screen) move the trip too.
+- The wheel moves the column of sights (the bench and the tools stay put) only over the scroll strip, the empty fillers and ▼'s cell, and over the bench and the Tools pane while ⌘S lets them take it ([⇕] in the Tools header). Over a sight's code it scrolls that sight alone; over a header or a frozen line it does nothing. ▲▼ on the strip, Alt+↓/↑ (3 lines) and PageDown/PageUp (about a screen) move the column too.
 - Each sight is exactly as tall as its range. The last sight, when it fits with its header, scrolls up until its header is at the top, with the empty filler below. A taller last sight stops when the end of its range reaches the bottom.
 - Marks sit in the gutter on their lines. Compare with the file opened normally.
 - Opening or closing a panel, or resizing the window, keeps everything aligned.

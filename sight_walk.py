@@ -29,6 +29,7 @@ from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkResetSightsCommand,
     SightWalkScrollCommand,
     SightWalkSendCommand,
+    SightWalkStepCommand,
     SightWalkSightListener,
     SightWalkSwitchLanguageCommand,
     SightWalkStopAnswerCommand,

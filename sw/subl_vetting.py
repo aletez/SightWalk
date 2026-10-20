@@ -57,14 +57,14 @@ PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
 TAB_STYLE = "text-decoration: none; color: #b35c00; background-color: color(#ff9a1f alpha(0.15))"
 ACTIVE_TAB = '<b style="color: #5c4400; background-color: #ffd23f">&nbsp;%s&nbsp;</b>'
 TABS_ROOM = 40  # in the header's columns, wider than the tabs' font
-PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
+PAN_HELP = "<div><b>⇕</b> %%s <b>↕</b> %%s <b>%s</b>: %%s</div>" % PAN_KEY
 
 
 TOGGLE_ROOM = 3  # columns the wheel toggle takes before the help mark
 
 
 def toggle_html(panning):
-    """[⇕]: the wheel moves the whole trip; [↕]: it scrolls the tool or the bench itself (Jakub),
+    """[⇕]: the wheel moves the column of sights, the bench and the tool staying put; [↕]: it scrolls the tool or the bench itself (Jakub),
     drawn as the help mark is."""
     return MARK_HTML.replace('href="help"', 'href="pan"').replace(">?<", ">%s<" % (
         "⇕" if panning else "↕")) + "&nbsp;"
@@ -82,13 +82,12 @@ def show_tabs(header, active, on_select, panning, on_toggle=None):
     extra = kept(header).get("extra", 0)  # learned by align_mark
     header.run_command("sight_walk_replace",
                        {"text": " " * max(columns - 6 - TABS_ROOM + extra, 1)})
-    state = word("pan_on" if panning else "pan_off")
     point = header.line(0).b
     def clicked(href):
         if href == "pan" and on_toggle is not None:
             on_toggle()
         else:
-            header.show_popup(PAN_HELP % (word("pan") % state), location=point)
+            header.show_popup(PAN_HELP % (word("or"), word("or"), word("pan")), location=point)
 
     phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
         sublime.Region(point), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])

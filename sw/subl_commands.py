@@ -245,7 +245,9 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
         return settings.get("sight_walk_header", False)
 
     def on_hover(self, point, hover_zone):
-        if hover_zone == sublime.HOVER_TEXT:
+        # The bench's keys over the bench's [?] only: the other headers' buttons are others (Jakub).
+        reader = state.reader_for(self.view.window())
+        if hover_zone == sublime.HOVER_TEXT and reader is not None and self.view == reader.chat_header:
             subl_chat.show_help(self.view, point)
 
 
@@ -354,6 +356,15 @@ def clear_schemes_if_unused():
     subl_tint.clear_schemes()
 
 
+class SightWalkStepCommand(sublime_plugin.WindowCommand):
+    """Back (-1) or forward (1) through the window's trips, as ◀ ▶ (Jakub)."""
+
+    def run(self, step):
+        reader = state.reader_for(self.window)
+        if reader is not None:
+            reader.step(step)
+
+
 class SightWalkResetSightsCommand(sublime_plugin.WindowCommand):
     """Shows the trip's sights again as the agent gave them (alpha: after an edit went wrong)."""
 
@@ -460,7 +471,7 @@ class SightWalkZoomMapCommand(sublime_plugin.TextCommand):
 
 
 class SightWalkTogglePanningCommand(sublime_plugin.WindowCommand):
-    """primary+s in a trip: the wheel over the bench, Map and Tour moves the whole trip, or them."""
+    """primary+s in a trip: the wheel over the bench and the tools moves the column of sights, or them."""
 
     def run(self):
         reader = state.reader_for(self.window)

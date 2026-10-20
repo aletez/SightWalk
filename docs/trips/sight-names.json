@@ -1,7 +1,7 @@
 {
  "name": "Sight names",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Sights are named as the user reads them. <here at=\"(d):50\">An index becomes a name</here> and <here at=\"(c):58\">a name an index</here>; <here at=\"(b):40\">a name or a number</here> both resolve. <here at=\"(a):186\">Names in the text</here> are found to frame them, and <here at=\"(e):14\">a line's height</here> places an icon.",
  "sights": [
   "sw/marks.py:186-189",

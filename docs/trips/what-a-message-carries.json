@@ -1,10 +1,10 @@
 {
  "name": "What a message carries",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
- "story": "A message is more than words: <here at=\"(a):1472\">the context</here> adds <calls at=\"(a):1472 (c):121\">the sights on screen</calls>, where the caret is, <calls at=\"(a):1472 (b):327\">the selected text</calls>, and <here at=\"(d):808\">the ranges the user's edits moved</here>.",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "story": "A message is more than words: <here at=\"(a):1474\">the context</here> adds <calls at=\"(a):1474 (c):121\">the sights on screen</calls>, where the caret is, <calls at=\"(a):1474 (b):327\">the selected text</calls>, and <here at=\"(d):808\">the ranges the user's edits moved</here>.",
  "sights": [
-  "sw/subl_reader.py:1472-1493",
+  "sw/subl_reader.py:1474-1495",
   "sw/subl_views.py:327-331",
   "sw/plan.py:121-124",
   "sw/subl_reader.py:808-811"
@@ -12,17 +12,17 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1478],
+   "from": [0, 1480],
    "to": [2, 121]
   },
   {
    "type": "calls",
-   "from": [0, 1491],
+   "from": [0, 1493],
    "to": [1, 327]
   },
   {
    "type": "calls",
-   "from": [0, 1492],
+   "from": [0, 1494],
    "to": [1, 327]
   }
  ]

@@ -1,7 +1,7 @@
 {
  "name": "Drawing the marks",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Icons on screen, eyes for marks off it, outlines on marked lines.",
  "sights": [
   "sw/subl_reader.py:705-721",

@@ -1,7 +1,7 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Guards found in the code itself, carried to the sights that use the same objects without them.",
  "sights": [
   "sw/subl_reader.py:249-264",

@@ -1,7 +1,7 @@
 {
  "name": "Cutting a PNG",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Graphviz's PNG read, unfiltered, cropped and written again, in pure Python.",
  "sights": [
   "sw/pngcut.py:10-27",

@@ -1,7 +1,7 @@
 {
  "name": "The guide's first words",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "<here at=\"(a):63\">The guide is started</here> in the background with <here at=\"(b):20\">a short prompt</here>: listen to the bench. Its first call, <here at=\"(c):245\">wait_for_user</here>, takes the message that woke it from the shared inbox.",
  "sights": [
   "sw/subl_guide.py:63-75",

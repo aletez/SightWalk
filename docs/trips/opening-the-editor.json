@@ -1,7 +1,7 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Enter or the header's button: the editor laid over the sights, ranges and marks held.",
  "sights": [
   "sw/subl_commands.py:211-221",

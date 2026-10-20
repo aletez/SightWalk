@@ -1,23 +1,23 @@
 {
  "name": "Back from an adventure",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "Its window closing keeps its conversation in its record; the Adventures tab opens it again.",
  "sights": [
-  "sw/subl_reader.py:1094-1100",
-  "sw/subl_reader.py:1102-1103",
+  "sw/subl_reader.py:1096-1102",
+  "sw/subl_reader.py:1104-1105",
   "sw/subl_vetting.py:349-357",
-  "sw/subl_reader.py:1105-1112"
+  "sw/subl_reader.py:1107-1114"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [1, 1103],
-   "to": [3, 1105]
+   "from": [1, 1105],
+   "to": [3, 1107]
   },
   {
    "type": "calls",
-   "from": [1, 1103],
+   "from": [1, 1105],
    "to": [2, 349]
   }
  ]

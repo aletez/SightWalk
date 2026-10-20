@@ -1,10 +1,10 @@
 {
  "name": "`say`: on the bench",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
- "story": "<here at=\"(a):1422\">The reader says it</here>: <calls at=\"(a):1422 (b):198\">the text goes on the bench</calls> <calls at=\"(b):198 (c):28\">by an insert</calls> the guard lets through, and <calls at=\"(a):1422 (d):815\">the headers</calls> and <here at=\"(e):167\">the status line</here> follow the topic.",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "story": "<here at=\"(a):1424\">The reader says it</here>: <calls at=\"(a):1424 (b):198\">the text goes on the bench</calls> <calls at=\"(b):198 (c):28\">by an insert</calls> the guard lets through, and <calls at=\"(a):1424 (d):815\">the headers</calls> and <here at=\"(e):167\">the status line</here> follow the topic.",
  "sights": [
-  "sw/subl_reader.py:1422-1435",
+  "sw/subl_reader.py:1424-1437",
   "sw/subl_chat.py:198-207",
   "sw/subl_commands.py:28-29",
   "sw/subl_reader.py:815-831",
@@ -13,12 +13,12 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1429],
+   "from": [0, 1431],
    "to": [3, 815]
   },
   {
    "type": "calls",
-   "from": [0, 1430],
+   "from": [0, 1432],
    "to": [1, 198]
   },
   {

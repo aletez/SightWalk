@@ -1,44 +1,44 @@
 {
  "name": "The bench's answers listed",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "The Answers tab: the bench's questions and answers by their first words; a click shows one's icons or places and brings it into the bench, a second click hides them.",
  "sights": [
-  "sw/subl_reader.py:1215-1217",
-  "sw/subl_reader.py:1198-1213",
+  "sw/subl_reader.py:1217-1219",
+  "sw/subl_reader.py:1200-1215",
   "sw/answers.py:9-19",
-  "sw/subl_reader.py:1179-1189",
+  "sw/subl_reader.py:1181-1191",
   "sw/subl_vetting.py:395-410",
   "sw/subl_vetting.py:413-414",
-  "sw/subl_reader.py:1219-1235",
-  "sw/subl_reader.py:1191-1194",
-  "sw/subl_reader.py:1237-1242"
+  "sw/subl_reader.py:1221-1237",
+  "sw/subl_reader.py:1193-1196",
+  "sw/subl_reader.py:1239-1244"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1216],
-   "to": [1, 1198]
+   "from": [0, 1218],
+   "to": [1, 1200]
   },
   {
    "type": "calls",
-   "from": [0, 1216],
+   "from": [0, 1218],
    "to": [4, 395]
   },
   {
    "type": "calls",
-   "from": [0, 1217],
-   "to": [6, 1219]
+   "from": [0, 1219],
+   "to": [6, 1221]
   },
   {
    "type": "calls",
-   "from": [1, 1202],
+   "from": [1, 1204],
    "to": [2, 9]
   },
   {
    "type": "calls",
-   "from": [1, 1205],
-   "to": [3, 1179]
+   "from": [1, 1207],
+   "to": [3, 1181]
   },
   {
    "type": "calls",
@@ -47,23 +47,23 @@
   },
   {
    "type": "calls",
-   "from": [6, 1222],
-   "to": [1, 1198]
+   "from": [6, 1224],
+   "to": [1, 1200]
   },
   {
    "type": "calls",
-   "from": [6, 1228],
-   "to": [7, 1191]
+   "from": [6, 1230],
+   "to": [7, 1193]
   },
   {
    "type": "calls",
-   "from": [6, 1234],
-   "to": [8, 1237]
+   "from": [6, 1236],
+   "to": [8, 1239]
   },
   {
    "type": "calls",
-   "from": [6, 1235],
-   "to": [0, 1215]
+   "from": [6, 1237],
+   "to": [0, 1217]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "Names and room",
  "kind": "survey",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "How files and sights are named, and how much room the Sights and the bench get.",
  "sights": [
   "sw/spec.py:67-73",
@@ -14,8 +14,8 @@
   "sw/subl_geometry.py:69-71",
   "sw/subl_views.py:207-212",
   "sw/subl_executor.py:99-101",
-  "sw/subl_reader.py:1415-1420",
-  "sw/subl_reader.py:1397-1399"
+  "sw/subl_reader.py:1417-1422",
+  "sw/subl_reader.py:1399-1401"
  ],
  "transitions": [
   {
@@ -40,7 +40,7 @@
   },
   {
    "type": "calls",
-   "from": [10, 1420],
+   "from": [10, 1422],
    "to": [2, 26]
   }
  ]

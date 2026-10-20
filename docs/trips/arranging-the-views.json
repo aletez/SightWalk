@@ -1,7 +1,7 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "After a new layout: every view into its group, then back at its place.",
  "sights": [
   "sw/subl_reader.py:521-539",
@@ -15,8 +15,8 @@
   "sw/subl_reader.py:556-564",
   "sw/subl_reader.py:639-643",
   "sw/subl_views.py:152-154",
-  "sw/subl_reader.py:906-913",
-  "sw/subl_reader.py:915-917",
+  "sw/subl_reader.py:908-915",
+  "sw/subl_reader.py:917-919",
   "sw/subl_reader.py:747-756",
   "sw/subl_reader.py:742-745",
   "sw/subl_views.py:242-254"
@@ -35,12 +35,12 @@
   {
    "type": "calls",
    "from": [0, 536],
-   "to": [11, 906]
+   "to": [11, 908]
   },
   {
    "type": "calls",
    "from": [0, 537],
-   "to": [11, 906]
+   "to": [11, 908]
   },
   {
    "type": "calls",
@@ -74,8 +74,8 @@
   },
   {
    "type": "calls",
-   "from": [11, 913],
-   "to": [12, 915]
+   "from": [11, 915],
+   "to": [12, 917]
   },
   {
    "type": "calls",

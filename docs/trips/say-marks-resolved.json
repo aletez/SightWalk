@@ -1,7 +1,7 @@
 {
  "name": "`say`: marks resolved",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "<here at=\"(a):91\">Every mark</here> must land on a line of a sight: <calls at=\"(a):91 (c):18\">its target is resolved</calls> <calls at=\"(c):18 (d):46\">within the sight</calls>, <here at=\"(b):80\">a jump</here> at both ends, and <here at=\"(e):56\">an icon</here> chosen for its sign.",
  "sights": [
   "sw/marks.py:91-117",

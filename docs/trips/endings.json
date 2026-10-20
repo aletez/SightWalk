@@ -1,7 +1,7 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "The guide is stopped, windows close.",
  "sights": [
   "sw/subl_commands.py:495-496",
@@ -16,7 +16,7 @@
   "sw/subl_commands.py:301-313",
   "sw/subl_commands.py:398-400",
   "sw/subl_commands.py:378-381",
-  "sw/subl_reader.py:894-904",
+  "sw/subl_reader.py:894-906",
   "sw/subl_commands.py:383-385",
   "sw/state.py:29-34",
   "sw/subl_executor.py:104-106",

@@ -1,7 +1,7 @@
 {
  "name": "`open_trip`",
  "kind": "run",
- "commit": "d15d0cadef96b42717bf6572e3baa313e9812657",
+ "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
  "story": "<here at=\"(b):189\">The file is read</here> and <here at=\"(a):130\">judged</here> like show; <calls at=\"(c):134 (d):266\">the trip is made from it</calls>, its story included, and <here at=\"(c):134\">visited</here> in the window.",
  "sights": [
   "sw/validator.py:130-135",

@@ -79,9 +79,11 @@ separate?*. Names of functions on the bench are coloured as in the code.
 
 ### Every reference is a link
 
-The guide places its marks in its own words: it tags a digit, `<icon at="(c):34">1</icon>`, or
-the words telling a jump, `<jump from="(a):33" to="(b):41">calls</jump>`. You see the digit or
-the words framed in the mark's colour, and the line gets the same icon in the gutter (a second
+Guide and user share one markup. The guide ties its words to places with
+`<here at="(c):34" icon="1">this check</here>` (the line gets icon 1), `<here at="(c):34:12-16">this
+name</here>` (characters, no icon) or `<calls at="(a):33 (b):41">calls</calls>` (a jump; the same
+for every transition type). You see the words framed in the mark's colour, an icon's sign after
+them, and the line gets the same icon in the gutter (a second
 mark on the same line stands on the narrow strip left of the sights). A mark scrolled off screen
 leaves an eye on the nearest visible line, so it is never lost. Clicking a framed word selects
 what it refers to (both ends of a jump) and lights the same arrow on the Map; clicking again

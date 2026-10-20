@@ -116,21 +116,38 @@ class LineRefsTest(unittest.TestCase):
 class AnswerMarksTest(unittest.TestCase):
     def test_read(self):
         text, found, frames = marks.read_marks(
-            'At <icon at="(a):3">1</icon> it <jump from="(a):3" to="(b):10">calls</jump>.')
-        self.assertEqual(text, "At 1 it calls.")
+            'At <here at="(a):3" icon="1">this</here> it <calls at="(a):3 (b):10">calls</calls>.')
+        self.assertEqual(text, "At this 1 it calls.")
         self.assertEqual(found, [{"at": {"sight": "(a)", "line": 3}, "mark": "1"},
                                  {"from": {"sight": "(a)", "line": 3},
-                                  "to": {"sight": "(b)", "line": 10}}])
-        self.assertEqual(frames, [(3, 4, "icon", 0), (8, 13, 0, 1)])
+                                  "to": {"sight": "(b)", "line": 10}, "type": "calls"}])
+        self.assertEqual(frames, [(3, 9, "icon", [0]), (13, 18, 0, [1])])
         self.assertEqual(marks.frame_scopes(frames, text), ["region.orangish", "region.greenish"])
 
     def test_same_tag_again(self):
-        jump = '<jump from="(a):3" to="(b):10">%s</jump>'
+        jump = '<calls at="(a):3 (b):10">%s</calls>'
         text, found, frames = marks.read_marks(
-            (jump % "calls") + ', <jump from="(a):2" to="(b):11">x</jump>, then ' + (jump % "it"))
+            (jump % "calls") + ', <returns at="(b):11 (a):2">x</returns>, then ' + (jump % "it"))
         self.assertEqual(len(found), 2)  # one mark per jump
         self.assertEqual([kind for _, _, kind, _ in frames], [0, 1, 0])  # the first jump's colour
-        self.assertEqual([mark for *_, mark in frames], [0, 1, 0])  # one mark for both
+        self.assertEqual([mark for *_, mark in frames], [[0], [1], [0]])  # one mark for both
+
+    def test_here_icons_and_sugar(self):
+        text, found, frames = marks.read_marks(
+            '<here at="(a):3:5-9">name</here>, <here at="(a):3 (b):10" icon="A B">both</here>'
+            '<here at="(a):4 (b):11" jump="leads_to"></here>')
+        self.assertEqual(text, "name, both A B")
+        self.assertEqual([f[2] for f in frames], ["here", "icon", "map"])
+        self.assertEqual(found[0], {"places": "(a):3:5-9"})
+        self.assertTrue(found[3]["map"])
+
+    def test_refused(self):
+        for text in ('<here at="(a):3 (b):4" icon="1 2 3">x</here>',  # three signs, two places
+                     '<here at="(a):3" jump="calls">x</here>',  # a jump needs two places
+                     '<calls at="(a):3 (b):4" icon="1">x</calls>',  # no icon on a jump
+                     '<here at="(a):3" kind="x">x</here>'):  # no such attribute
+            with self.assertRaises(ValueError, msg=text):
+                marks.read_marks(text)
 
 
 class HereTest(unittest.TestCase):

@@ -118,7 +118,7 @@ def check_open_trip(args, facts):
 
 def check_say(args, facts):
     """An answer only to a message, its names tagged, no line numbers, its lines marked by its
-    own <icon> and <jump> tags (Jakub), each at a line of a sight."""
+    own <here> tags and their sugar (Jakub), each at a line of a sight."""
     not_stopped(facts)
     trip_open(facts)
     if not facts.get("addressed"):
@@ -132,7 +132,7 @@ def check_say(args, facts):
     if crowded:
         raise Refusal("A line holds two marks at most (the gutter and the strip beside it): %s. "
                       "Drop a mark, or name the line's third role in words." % ", ".join(crowded))
-    # An icon's digit is no line number: "the line <icon …>1</icon>" reads "the line 1".
+    # An icon's sign is no line number: "the line <here … icon=\"1\">1</here>" reads "the line 1".
     numbers = line_refs(mask(text, frames))
     if numbers:
         raise Refusal(NO_LINE_NUMBERS % ", ".join(numbers))

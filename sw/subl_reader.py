@@ -26,7 +26,7 @@ from .ontology import Sight, Trip
 from .header import BENCH, SIGHTS, STRIP
 from .words import lines_of, word
 from .spec import (ancestors, block_name, body_indent, breathing, display_path, elided,
-                   parse_spec, repo_root, sight_name, sight_title)
+                   parse_spec, repo_root, sight_index, sight_name, sight_title)
 from .subl_tint import apply_grey, apply_plain, apply_tint, hue_for, tint_color
 from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
                     draw_icons,
@@ -966,7 +966,7 @@ class Reader(Geometry):
             kept = {"answers": [{"labels": [], "marks": kept.get("marks") or [],
                                  "frames": kept.get("frames") or []}], "shown": 0,
                     "lines": kept.get("lines")}
-        self.answers = [dict(a, frames=[tuple(f) for f in a["frames"]])
+        self.answers = [dict(a, frames=[kept_frame(f) for f in a["frames"]])
                         for a in kept.get("answers") or []]
         self.kept_lines = kept.get("lines") or {}
         self.links.restore_questions(kept.get("questions") or [])
@@ -1100,10 +1100,21 @@ class Reader(Geometry):
             for node in nodes:
                 definitions.setdefault(node.key[0], []).append(node.key[1])
             arrows = callmap.edges(definitions, [(t.type, t.source, t.target)
-                                                 for t in self.trip.transitions])
+                                                 for t in self.trip.transitions]
+                                   + self.answer_transitions())
             lit = jump and (callmap.node_at(definitions, jump[0]),
                             callmap.node_at(definitions, jump[1]), jump[2])
             subl_vetting.draw_map(self.map_view, nodes, arrows, map_style()[:4], lit)
+
+    def answer_transitions(self):
+        """The shown answer's jumps as the Map's arrows (Jakub, 2026-10-20: a jump in words is a
+        transition said aloud; <calls at="A B"></calls>, with no words, draws only the arrow)."""
+        found = []
+        for mark in (m for m in self.last_marks if "type" in m):
+            ends = [(sight_index(mark[e]["sight"]), mark[e]["line"]) for e in ("from", "to")]
+            if None not in (i for i, _ in ends):
+                found.append((mark["type"], ends[0], ends[1]))
+        return found
 
     def follow_frame(self, view):
         """A click into a frame of the guide's answer (Jakub): its line, or a jump's two ends,
@@ -1115,17 +1126,18 @@ class Reader(Geometry):
                       and blanks + f[0] <= point <= blanks + f[1] and len(f) > 3), None)
         if frame is None:
             return False
-        resolved = marks.resolve_marks(self.sights, [frame[3]])
-        places = [(m["sight"], m["line"]) for m in resolved]
+        resolved = marks.resolve_marks(self.sights, frame[3])
+        regions = self.frame_regions(frame[3], resolved)
+        places = [(i, self.sights[i].view.rowcol(r.a)[0] + 1) for i, r in regions]
         again = frame[:2] == self.shown_frame
-        for index in set(i for i, _ in places):
+        for index in set(i for i, _ in regions):
             code = self.sights[index].view
-            lines = [code.line(code.text_point(line - 1, 0)) for i, line in places if i == index]
+            mine = [r for i, r in regions if i == index]
             code.sel().clear()
-            code.sel().add_all([sublime.Region(r.b) for r in lines] if again else lines)
+            code.sel().add_all([sublime.Region(r.b) for r in mine] if again else mine)
             subl_links.repaint(code)
         self.shown_frame = None if again else frame[:2]
-        jump = "from" in frame[3]
+        jump = any("from" in mark for mark in frame[3])
         if not again:
             self.show_places(places)
         if jump:
@@ -1208,10 +1220,26 @@ class Reader(Geometry):
         self.keep_transcript()
         self.draw_answers()
 
+    def frame_regions(self, frame_marks, resolved):
+        """[(sight, Region)] a frame stands for: the lines its icons and jumps mark, and the
+        places of a <here> without an icon, lines or characters."""
+        found = []
+        for i, line in ((m["sight"], m["line"]) for m in resolved):
+            view = self.sights[i].view
+            found.append((i, view.line(view.text_point(line - 1, 0))))
+        for mark in (m for m in frame_marks if "places" in m):
+            for text in mark["places"].split():
+                index, (l1, c1), (l2, c2) = marks.parse_place(text)
+                view = self.sights[index].view
+                begin = view.text_point(l1 - 1, (c1 or 1) - 1)
+                end = view.text_point(l2 - 1, c2) if c2 else view.line(view.text_point(l2 - 1, 0)).b
+                found.append((index, sublime.Region(begin, end)))
+        return found
+
     def add_to_answer(self, start, text, placed, frames, clear):
         """The answer's marks placed, its words framed, and kept with its "A:" labels, so a click
         on a label shows that answer's frames and icons again (Jakub). clear: a new answer."""
-        framed = [(start + a, start + b, scope, placed[m]) for (a, b, _, m), scope
+        framed = [(start + a, start + b, scope, [placed[i] for i in m]) for (a, b, _, m), scope
                   in zip(frames, marks.frame_scopes(frames, text.strip()))]
         label = start - len("A: ")
         if clear or not self.answers:  # a new trip since the last marks starts a new answer
@@ -1224,6 +1252,8 @@ class Reader(Geometry):
         self.frames, self.last_marks = answer["frames"], answer["marks"]
         if placed:
             self.point(placed, clear=clear)
+        if any("type" in mark for mark in placed):
+            self.draw_map()  # the answer's jumps are arrows too
 
     def context(self):
         """What the user sees, and here: the caret in the sight touched last, "(c):105:9", in
@@ -1243,6 +1273,13 @@ class Reader(Geometry):
         if selected_text(view):
             context["selected"] = selected_text(view)
         return context
+
+
+def kept_frame(frame):
+    """A kept frame as a tuple, its marks a list (kept before 2026-10-20: one mark, a dict)."""
+    frame = tuple(frame)
+    return frame[:3] + ([frame[3]] if isinstance(frame[3], dict) else frame[3],) \
+        if len(frame) > 3 else frame
 
 
 def transcripts_path(informator_path):

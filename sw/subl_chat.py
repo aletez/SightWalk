@@ -245,7 +245,7 @@ def outline_refs(view, frames, sights=0):
     by_scope = {}
     for begin, end, scope, *_ in frames:
         by_scope.setdefault(scope, []).append(sublime.Region(blanks + begin, blanks + end))
-    for scope in tuple(marks.REF_SCOPES.values()) + marks.JUMP_SCOPES:
+    for scope in tuple(marks.REF_SCOPES.values()) + marks.JUMP_SCOPES + (marks.HERE_SCOPE,):
         view.add_regions("sight_walk_ref_" + scope, by_scope.get(scope, []), scope, "",
                          sublime.DRAW_NO_FILL)
     start = protected.rfind("\nU: ") + 1

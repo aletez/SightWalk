@@ -81,9 +81,11 @@ kolory takie jak w kodzie.
 
 ### Każde odniesienie to link
 
-Przewodnik umieszcza znaczniki we własnych słowach: oznacza cyfrę, `<icon at="(c):34">1</icon>`,
-albo słowa opisujące skok, `<jump from="(a):33" to="(b):41">wywołuje</jump>`. Widzisz cyfrę
-lub słowa w ramce koloru znacznika, a linia dostaje tę samą ikonę na marginesie (drugi znacznik
+Przewodnik i użytkownik mają jeden język znaczników. Przewodnik wiąże słowa z miejscami tak:
+`<here at="(c):34" icon="1">ten warunek</here>` (linia dostaje ikonę 1), `<here at="(c):34:12-16">ta
+nazwa</here>` (znaki, bez ikony) albo `<calls at="(a):33 (b):41">wywołuje</calls>` (skok; tak samo
+dla każdego typu przejścia). Widzisz słowa w ramce koloru znacznika, ze znakiem ikony po nich, a
+linia dostaje tę samą ikonę na marginesie (drugi znacznik
 tej samej linii stoi na wąskim pasku na lewo od panoramy). Znacznik przewinięty poza ekran
 zostawia oko na najbliższej widocznej linii, więc nie da się go przeoczyć. Kliknięcie obramowanego
 słowa zaznacza to, do czego się odnosi (oba końce skoku), i zapala tę samą strzałkę na mapie;

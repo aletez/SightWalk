@@ -44,10 +44,11 @@ def function_range(path):
 
 def mark_texts(a, b):
     """The say texts of marks and double, their lines counted from each function's def."""
-    marks = ('<icon at="(a):%d">1</icon> and <icon at="(a):%d">A</icon>, then '
-             '<jump from="(a):%d" to="(b):%d">the jump</jump>.' % (a + 3, a + 7, a + 1, b + 2))
-    double = ('<icon at="(a):%d">1</icon>, <icon at="(a):%d">A</icon>, <icon at="(a):%d">2</icon>, '
-              '<jump from="(a):%d" to="(b):%d">the jump</jump>.' % (a + 3, a + 3, a + 7, a + 7, b + 2))
+    marks = ('<here at="(a):%d" icon="1">this</here> and <here at="(a):%d" icon="A">that</here>, '
+             'then <calls at="(a):%d (b):%d">the jump</calls>.' % (a + 3, a + 7, a + 1, b + 2))
+    double = ('<here at="(a):%d" icon="1">one</here>, <here at="(a):%d" icon="A">two</here>, '
+              '<here at="(a):%d" icon="2">three</here>, <calls at="(a):%d (b):%d">the jump</calls>.'
+              % (a + 3, a + 3, a + 7, a + 7, b + 2))
     return marks, double
 
 

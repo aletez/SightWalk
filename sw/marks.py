@@ -92,6 +92,16 @@ def resolve_marks(sights, marks):
     """marks: {"from": target, "to": target} for a jump, or {"at": target, "mark": "1"}."""
     resolved = []
     for mark in marks:
+        if "places" in mark:  # a frame without an icon: its places checked, nothing drawn
+            for text in mark["places"].split():
+                index, first, last = parse_place(text)
+                for line in {first[0], last[0]}:
+                    resolve_target(sights, {"sight": sight_name(index), "line": line})
+            continue
+        if mark.get("map"):  # a jump's arrow on the Map only: checked, nothing in the gutter
+            for end in ("from", "to"):
+                resolve_target(sights, mark[end])
+            continue
         if "from" in mark or "to" in mark:
             if not ("from" in mark and "to" in mark):
                 raise ValueError('A jump needs both ends: {"from": line, "to": line}.')
@@ -163,6 +173,7 @@ def speaks_of_code(text):
 
 
 REF_SCOPES = {"digit": "region.orangish", "letter": "region.bluish"}
+HERE_SCOPE = "sight_walk.link"  # a place without an icon: framed in the text's colour
 # The jumps' frames, as their arrows: green, red, yellow, purple, brown (no scheme names a brown
 # region, so it takes the text's colour).
 JUMP_SCOPES = ("region.greenish", "region.redish", "region.yellowish", "region.purplish",
@@ -180,15 +191,14 @@ def sight_refs(text, count):
 
 # The guide's names: tags it writes, invisible operators the bench shows (Jakub, 2026-10-15).
 TAGS = {"func": "\u2061", "class": "\u2062", "var": "\u2063", "str": "\u2064"}
-MARK_TAGS = ("icon", "jump")  # the marks, placed by the answer itself (Jakub, 2026-10-17)
 INVISIBLE = re.compile("[\u2061-\u2064]")
-TAG = re.compile(r"<(/?)([a-z]+)(?:\s[^<>\n]*)?>")
+TAG = re.compile(r"<(/?)([a-z_]+)(?:\s[^<>\n]*)?>")
 OLD_MARKUP = re.compile(r"`|\*\*")
 
 
 def untag(text):
     """The guide's text with <func>name</func> and the like turned into invisible operators
-    around the name; <icon> and <jump> stay for read_marks. ValueError says what is wrong."""
+    around the name; <here> and its sugar stay for read_marks. ValueError says what is wrong."""
     if OLD_MARKUP.search(text):
         raise ValueError("Mark names with tags, not backticks or asterisks: <func>run</func>, "
                          "<class>Reader</class>, <var>token</var>, <str>sight_walk_setup</str>.")
@@ -204,12 +214,86 @@ def untag(text):
     return out
 
 
-ICON_TAG = r'<icon at="([^"<>]+)">([^<>\n]+)</icon>'
-JUMP_TAG = r'<jump from="([^"<>]+)" to="([^"<>]+)">([^<>\n]+)</jump>'
-MARK_TAG = re.compile(ICON_TAG + "|" + JUMP_TAG)
-MARK_FORM = ('<icon at="(c):34">1</icon> for a line (a sight\'s name and a file line; a digit '
-             '1-9 or a capital A-Z), <jump from="(a):33" to="(b):41">the call</jump> for a jump '
-             'of control (the words framed in its colour)')
+# One markup for both sides of the bench (Jakub, 2026-10-20): <here at="places"> frames words
+# about places; icon="1" (one sign, or one per place) gives each place's first line an icon;
+# jump="calls" (two places, source then target) makes them a jump of that transition type.
+# <calls at="A B">…</calls> is sugar for <here at="A B" jump="calls">…</here>, and so for every
+# type; empty, it only draws the arrow on the Map.
+from .ontology import TRIP_TYPES  # noqa: E402
+
+MARK_TAGS = ("here",) + TRIP_TYPES
+MARK_TAG = re.compile(r'<(%s)((?:\s+[a-z]+="[^"<>]*")*)\s*>([^<>\n]*)</\1>' % "|".join(MARK_TAGS))
+ATTRIBUTE = re.compile(r'([a-z]+)="([^"<>]*)"')
+MARK_FORM = ('<here at="(c):34" icon="1">this check</here> for a line with its icon (a sight\'s '
+             'name and a file line; a digit 1-9 or a capital A-Z), <here at="(c):34:12-16">this '
+             'name</here> for a place without an icon, <calls at="(a):33 (b):41">calls</calls> '
+             'for a jump (or returns, leads_to, underlies, passes_data, comparable)')
+
+
+def mark_attributes(tag, attributes):
+    """{at, icon, jump} of a mark tag; the sugar's name becomes its jump."""
+    found = dict(ATTRIBUTE.findall(attributes))
+    unknown = set(found) - {"at", "icon"} - ({"jump"} if tag == "here" else set())
+    if unknown or "at" not in found:
+        raise ValueError("A mark is %s; not <%s%s>." % (MARK_FORM, tag, attributes))
+    if tag != "here":
+        found["jump"] = tag
+    return found
+
+
+def tag_marks(found):
+    """The marks one tag gives: a jump, icons on its places' first lines, or a frame alone."""
+    places = found["at"].split()
+    starts = [parse_place(p) for p in places]
+    if any(index == BENCH for index, _, _ in starts):
+        raise ValueError("%s is the user's draft; mark places in the sights." % BENCH)
+    line = lambda i: {"sight": sight_name(starts[i][0]), "line": starts[i][1][0]}  # noqa: E731
+    if "jump" in found:
+        if len(places) != 2 or found["jump"] not in TRIP_TYPES or "icon" in found:
+            raise ValueError("jump takes two places, source then target, a type of %s, and no "
+                             "icon." % ", ".join(TRIP_TYPES))
+        return [{"from": line(0), "to": line(1), "type": found["jump"]}]
+    if "icon" not in found:
+        return [{"places": found["at"]}]
+    icons = found["icon"].split()
+    if len(icons) not in (1, len(places)):
+        raise ValueError("icon takes one sign for all places or one per place, %r." % found["at"])
+    return [{"at": line(k), "mark": icons[k if len(icons) > 1 else 0]} for k in range(len(places))]
+
+
+def read_marks(text):
+    """(text without the mark tags, marks for resolve_marks, frames): frames are (start, end,
+    kind, [mark indices]) in the text returned, kind "icon", "here", "map" (a jump with no
+    words, its arrow only) or the jump's index among the jumps (Jakub: the answer places its
+    own marks, so where they stand is kept with it). The same mark again makes no second one:
+    it frames its words in the same colour, so the answer can come back to a jump or a line."""
+    out, found, frames, jumps, last = [], [], [], {}, 0
+    for match in MARK_TAG.finditer(text):
+        out.append(text[last:match.start()])
+        start, last = sum(len(part) for part in out), match.end()
+        marks = tag_marks(mark_attributes(match.group(1), match.group(2)))
+        words = match.group(3)
+        if "from" in marks[0]:
+            if not words:
+                marks[0]["map"] = True
+            kind = "map" if not words else jumps.setdefault(repr(marks[0]), len(jumps))
+        else:
+            kind = "icon" if "at" in marks[0] else "here"
+        signs = " ".join(m["mark"] for m in marks if "mark" in m)
+        if signs and words.strip() != signs:  # the bench shows the gutter's signs (Jakub)
+            words = (words + " " + signs) if words else signs
+        indices = []
+        for mark in marks:
+            if mark not in found:
+                found.append(mark)
+            indices.append(found.index(mark))
+        out.append(words)
+        frames.append((start, start + len(words), kind, indices))
+    out = "".join(out) + text[last:]
+    left = [m.group(0) for m in TAG.finditer(out) if m.group(2) in MARK_TAGS + ("icon", "jump")]
+    if left:
+        raise ValueError("Write marks as %s; not %s." % (MARK_FORM, left[0]))
+    return out, found, frames
 
 
 def span_relation(one, other):
@@ -314,52 +398,15 @@ def trip_place(value):
     return (index, int(line)) if line else (index,)
 
 
-def place(text):
-    """{"sight": "(c)", "line": 34} from "(c):34"."""
-    sight, _, line = text.rpartition(":")
-    if not sight or not line.strip().isdigit():
-        raise ValueError("%r is no place: write a sight's name and a file line, \"(c):34\"."
-                         % text)
-    return {"sight": sight.strip(), "line": int(line)}
-
-
-def read_marks(text):
-    """(text without <icon> and <jump>, marks for resolve_marks, frames): frames are
-    (start, end, kind, mark) in the text returned, kind "icon" or the jump's index among the
-    jumps, mark the index of its mark in marks
-    (Jakub: the answer places its own marks, so where they stand is kept with it). The same tag
-    again (same place and character, or same ends) makes no second mark: it frames its words in
-    the same colour, so the answer can come back to a jump or a line (Jakub)."""
-    out, found, frames, jumps, last = [], [], [], {}, 0
-    for match in MARK_TAG.finditer(text):
-        out.append(text[last:match.start()])
-        start = sum(len(part) for part in out)
-        if match.group(1) is not None:
-            mark = {"at": place(match.group(1)), "mark": match.group(2).strip()}
-            words, kind = match.group(2), "icon"
-        else:
-            mark = {"from": place(match.group(3)), "to": place(match.group(4))}
-            key = repr(mark)
-            words, kind = match.group(5), jumps.setdefault(key, len(jumps))
-        if mark not in found:
-            found.append(mark)
-        out.append(words)
-        frames.append((start, start + len(words), kind, found.index(mark)))
-        last = match.end()
-    out = "".join(out) + text[last:]
-    left = [m.group(0) for m in TAG.finditer(out) if m.group(2) in MARK_TAGS]
-    if left:
-        raise ValueError("Write marks as %s; not %s." % (MARK_FORM, left[0]))
-    return out, found, frames
-
-
 def frame_scopes(frames, text):
     """The scope each frame is drawn in: an icon's by its kind, digits orange, letters blue; a
     jump's by its colour, as its arrows (see JUMP_COLOURS)."""
     scopes = []
     for start, end, kind, *_ in frames:
-        if kind == "icon":
-            scopes.append(REF_SCOPES["digit" if text[start:end].strip().isdigit() else "letter"])
+        if kind in ("here", "map"):
+            scopes.append(HERE_SCOPE)
+        elif kind == "icon":  # by its sign, the frame's last character
+            scopes.append(REF_SCOPES["digit" if text[start:end].strip()[-1:].isdigit() else "letter"])
         else:
             scopes.append(JUMP_SCOPES[kind % len(JUMP_SCOPES)])
     return scopes

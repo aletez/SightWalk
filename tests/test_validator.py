@@ -65,21 +65,22 @@ class ShowTest(unittest.TestCase):
 class MarksAndSettingsTest(unittest.TestCase):
     def test_icon_after_the_word_line(self):
         sights, _ = stacked((1, 3), (10, 11))
-        check("say", {"text": 'Ta linia <icon at="(a):2">1</icon> czyta token.'},
+        check("say", {"text": 'Ta linia <here at="(a):2" icon="1">1</here> czyta token.'},
               dict(OPEN, sights=sights))
 
     def test_marks_in_the_answer(self):
         sights, _ = stacked((1, 3), (10, 11))
         facts = dict(OPEN, sights=sights)
-        check("say", {"text": '<func>run</func> starts at <icon at="(a):2">1</icon>, then '
-                              '<jump from="(a):3" to="(b):10">calls</jump>.'}, facts)
-        for text in ['<func>run</func> at <icon at="(a):9">1</icon>.',  # outside the sight
-                     '<func>run</func> at <icon at="a.py:2">1</icon>.',  # no sight's name
-                     '<func>run</func> at <icon at="(a):2">7a</icon>.',  # no icon
-                     '<func>run</func> <jump to="(b):10">calls</jump>.',
+        check("say", {"text": '<func>run</func> starts at <here at="(a):2" icon="1">1</here>, '
+                              'then <calls at="(a):3 (b):10">calls</calls>.'}, facts)
+        for text in ['<func>run</func> at <here at="(a):9" icon="1">1</here>.',  # outside
+                     '<func>run</func> at <here at="a.py:2" icon="1">1</here>.',  # no sight's name
+                     '<func>run</func> at <here at="(a):2" icon="7a">1</here>.',  # no icon
+                     '<func>run</func> <calls at="(b):10">calls</calls>.',
+                     '<func>run</func> at <icon at="(a):2">1</icon>.',  # the old markup
                      # three marks on line 3: an icon, a jump's start and another's end
-                     '<icon at="(a):3">1</icon> <jump from="(a):3" to="(b):10">calls</jump> '
-                     '<jump from="(b):11" to="(a):3">back</jump>']:
+                     '<here at="(a):3" icon="1">1</here> <calls at="(a):3 (b):10">calls</calls> '
+                     '<returns at="(b):11 (a):3">back</returns>']:
             with self.assertRaises(Refusal, msg=text):
                 check("say", {"text": text}, facts)
 

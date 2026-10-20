@@ -5,6 +5,7 @@ Newest first within each section. "J" = decided by Jakub, "C" = proposed by Clau
 ## Status
 
 Changed, unverified:
+- One markup for both sides of the bench (Jakub, 2026-10-20), as planned below: the guide writes `<here at>` too (a frame without an icon, lines or characters, a click selects the place); `icon` is an attribute of `here`, one sign or one per place, never with a sight alone, and the bench shows the sign after the framed words; `jump="type"` with exactly two places, and `<calls at="A B">` and the like as its sugar; an empty one draws only the arrow on the Map; the answer's jumps are the Map's arrows. `<icon>` and `<jump>` are gone (say refuses them). Old kept answers read on. Seen in Sublime by Claude (frames, icons, a here frame's click selecting characters, both arrows on the Map). Open: the user cannot write relations yet (no UI for it); answer jumps are redrawn on the Map when an answer comes, not when an earlier answer is shown again. Needs a new guide session.
 - `101s` became `underlies`, its direction turned (Jakub, 2026-10-20): "A underlies B", A must be understood to understand B, so A comes first, as the arrow runs and the trip is read. A tour puts a trip before the trips it underlies. Old files' `101s` read as `underlies` with their ends swapped. Needs a new guide session.
 
 Verified in Sublime:
@@ -188,7 +189,7 @@ Open:
 
 ## Plans (Jakub)
 
-- One markup for both sides of the bench (Jakub, 2026-10-20), to be written into docs/protocol.md as a proposal for v1 and accepted before it is built:
+- One markup for both sides of the bench (Jakub, 2026-10-20; built 2026-10-20, see the status):
   1. `<here at="…">words</here>` for the guide too, not only for the user: a frame without an icon, on lines or characters ("(c):34:12-16").
   2. `icon` as an attribute of `here`, not a tag of its own (the icon has no place in the text): a short sign (digit, letter, emoji) or a path to an image, drawn in the gutter by the implementations that can. With n places in `at`, `icon` has one value for all or n values in order, space-separated; never with `at` naming a sight alone ("(c)"): the place starts in a known line, where the icon lands. The bench shows the icon's sign beside the framed words, so bench and gutter stay matched.
   3. `jump="calls"` (not a generic `type`) only with exactly two places in `at`, source then target; its values are the trip's transition types. `<calls at="A B">words</calls>` is sugar for `<here at="A B" jump="calls">words</here>`, and so for the other types; 101s needs an alias, a tag name cannot start with a digit (e.g. `<needs>`). Empty content, `<calls at="A B"></calls>`, adds only the arrow on the Map: the one markup with no place in the text, kept in the same language.

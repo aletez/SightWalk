@@ -44,12 +44,12 @@ From the repository root. A Sublime command that runs `poke.py` must start the s
 Three commands act in the open trip as the user would, in the guide's own notation, so a test can be driven from a terminal:
 
 ```bash
-subl --command 'sight_walk_type {"text": "<here at=\"(a):27:55-63\">to</here> a nie <here at=\"(b):38:5-11\">to</here>"}'
+subl --command 'sight_walk_fill {"text": "<here at=\"(a):27:55-63\">to</here> a nie <here at=\"(b):38:5-11\">to</here>"}'
 subl --command 'sight_walk_select {"at": "(a):26 (>):1:10-11"}'
 subl --command 'sight_walk_send_draft'
 ```
 
-`sight_walk_type` appends the text to the draft and makes each `<here>` a link, as primary+p would; the guide then gets the text back as typed, with `code="…"` added. `sight_walk_select` selects places: a sight's lines (`"(a):26"`) or characters (`"(a):27:55-63"`), and `(>)`, the bench's draft (its lines from 1). `sight_walk_send_draft` sends the draft: only while an agent listens (`wait_for_user`), or SightWalk starts a guide of its own.
+`sight_walk_fill` sets the draft to the text and its links to exactly the `<here>` tags in it, as primary+p would make them (the draft's earlier links go; `""` empties it); the guide then gets the text back as typed, with `code="…"` added. `sight_walk_select` selects places: a sight's lines (`"(a):26"`) or characters (`"(a):27:55-63"`), and `(>)`, the bench's draft (its lines from 1). `sight_walk_send_draft` sends the draft: only while an agent listens (`wait_for_user`), or SightWalk starts a guide of its own.
 
 ## 4. Geometry and editing, by hand
 

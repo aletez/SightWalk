@@ -109,23 +109,29 @@ class SightWalkCycleSightsCommand(sublime_plugin.WindowCommand):
 
 
 # For tests from a terminal, without mouse or keys (Jakub), in the guide's own notation:
-#   subl --command 'sight_walk_type {"text": "<here at=\\"(a):27:55-63\\">to</here> a nie to"}'
+#   subl --command 'sight_walk_fill {"text": "<here at=\\"(a):27:55-63\\">to</here> a nie to"}'
 #   subl --command 'sight_walk_select {"at": "(a):27:55-63 (>):1:10-11"}'
 #   subl --command 'sight_walk_send_draft'
 
-class SightWalkTypeCommand(sublime_plugin.WindowCommand):
-    """Text appended to the bench's draft, each <here at="..."> in it a link made as by
-    primary+p, so the guide gets the text back as it was typed."""
+class SightWalkFillCommand(sublime_plugin.WindowCommand):
+    """The bench's draft set to text, its links exactly the <here at="..."> in it (Jakub: only
+    the markup counts, the draft's earlier links go), each made as by primary+p; "" empties it.
+    The guide gets the text back as it was filled."""
 
     def run(self, text):
         reader = state.current_reader()
         if reader is None:
             return
         plain, spans = marks.read_here(text)
-        chat, offset = reader.chat, reader.chat.size()
+        chat, offset = reader.chat, reader.links.draft_start(reader.chat)
+        for key in reader.links.draft_keys():
+            reader.links.remove(key)
         chat.sel().clear()
-        chat.sel().add(sublime.Region(offset))
-        chat.run_command("insert", {"characters": plain})
+        chat.sel().add(sublime.Region(offset, chat.size()))
+        if plain:
+            chat.run_command("insert", {"characters": plain})
+        elif chat.size() > offset:
+            chat.run_command("left_delete")
         for start, end, at in spans:
             places = [place_region(reader, place) for place in at.split()]
             reader.links.add(sublime.Region(offset + start, offset + end),

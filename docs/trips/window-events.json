@@ -1,41 +1,41 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
+ "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
  "sights": [
-  "sw/subl_reader.py:662-672",
-  "sw/subl_reader.py:443-450",
-  "sw/subl_geometry.py:18-25",
-  "sw/subl_geometry.py:27-31",
-  "sw/subl_geometry.py:33-35",
-  "sw/subl_geometry.py:37-38",
+  "sw/subl_reader.py:665-675",
+  "sw/subl_reader.py:450-457",
+  "sw/subl_geometry.py:22-29",
+  "sw/subl_geometry.py:31-35",
+  "sw/subl_geometry.py:37-39",
+  "sw/subl_geometry.py:41-42",
   "sw/state.py:55-60",
   "sw/subl_executor.py:99-106",
   "sw/validator.py:174-182",
-  "sw/subl_commands.py:278-280",
+  "sw/subl_commands.py:287-289",
   "sw/subl_commands.py:237-241",
   "sw/subl_chat.py:170-174"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [2, 22],
-   "to": [4, 33]
+   "from": [2, 26],
+   "to": [4, 37]
   },
   {
    "type": "calls",
-   "from": [2, 23],
-   "to": [5, 37]
+   "from": [2, 27],
+   "to": [5, 41]
   },
   {
    "type": "calls",
-   "from": [3, 28],
-   "to": [4, 33]
+   "from": [3, 32],
+   "to": [4, 37]
   },
   {
    "type": "calls",
-   "from": [3, 29],
-   "to": [5, 37]
+   "from": [3, 33],
+   "to": [5, 41]
   },
   {
    "type": "calls",

@@ -1,34 +1,34 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
+ "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
  "sights": [
   "sw/subl_commands.py:210-220",
-  "sw/subl_reader.py:757-762",
-  "sw/subl_reader.py:740-755",
+  "sw/subl_reader.py:760-765",
+  "sw/subl_reader.py:743-758",
   "sw/subl_editor.py:24-32",
   "sw/subl_views.py:69-73",
   "sw/subl_editor.py:16-20",
   "sw/subl_editor.py:34-44",
   "sw/subl_editor.py:46-58",
   "sw/subl_editor.py:60-65",
-  "sw/subl_geometry.py:69-78",
-  "sw/subl_geometry.py:80-89"
+  "sw/subl_geometry.py:73-82",
+  "sw/subl_geometry.py:84-93"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 212],
-   "to": [1, 757]
+   "to": [1, 760]
   },
   {
    "type": "calls",
    "from": [0, 220],
-   "to": [2, 740]
+   "to": [2, 743]
   },
   {
    "type": "calls",
-   "from": [2, 749],
+   "from": [2, 752],
    "to": [3, 24]
   },
   {
@@ -63,8 +63,8 @@
   },
   {
    "type": "calls",
-   "from": [9, 77],
-   "to": [10, 80]
+   "from": [9, 81],
+   "to": [10, 84]
   }
  ]
 }

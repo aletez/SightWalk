@@ -1,24 +1,24 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
+ "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
  "sights": [
   "sw/subl_commands.py:61-63",
   "sw/subl_commands.py:65-76",
   "sw/subl_commands.py:91-94",
-  "sw/subl_tint.py:203-207",
+  "sw/subl_tint.py:212-216",
   "sw/subl_commands.py:97-99",
   "sw/subl_commands.py:78-80",
-  "sw/subl_tint.py:242-247",
-  "sw/subl_reader.py:308-314",
+  "sw/subl_tint.py:251-256",
+  "sw/subl_reader.py:314-321",
   "sw/subl_tint.py:100-110",
-  "sw/subl_tint.py:158-168",
-  "sw/subl_tint.py:176-185",
-  "sw/subl_tint.py:268-270",
-  "sw/subl_tint.py:188-200",
-  "sw/subl_tint.py:171-173",
-  "sw/subl_reader.py:316-323",
-  "sw/subl_tint.py:210-218",
+  "sw/subl_tint.py:167-177",
+  "sw/subl_tint.py:185-194",
+  "sw/subl_tint.py:277-279",
+  "sw/subl_tint.py:197-209",
+  "sw/subl_tint.py:180-182",
+  "sw/subl_reader.py:323-330",
+  "sw/subl_tint.py:219-227",
   "sw/subl_commands.py:82-88"
  ],
  "transitions": [
@@ -35,7 +35,7 @@
   {
    "type": "calls",
    "from": [1, 71],
-   "to": [3, 203]
+   "to": [3, 212]
   },
   {
    "type": "calls",
@@ -54,63 +54,63 @@
   },
   {
    "type": "calls",
-   "from": [3, 206],
-   "to": [10, 176]
+   "from": [3, 215],
+   "to": [10, 185]
   },
   {
    "type": "calls",
-   "from": [3, 207],
-   "to": [13, 171]
+   "from": [3, 216],
+   "to": [13, 180]
   },
   {
    "type": "calls",
    "from": [5, 80],
-   "to": [6, 242]
+   "to": [6, 251]
   },
   {
    "type": "calls",
-   "from": [6, 247],
-   "to": [7, 308]
+   "from": [6, 256],
+   "to": [7, 314]
   },
   {
    "type": "calls",
-   "from": [7, 314],
-   "to": [14, 316]
+   "from": [7, 321],
+   "to": [14, 323]
   },
   {
    "type": "calls",
-   "from": [7, 314],
-   "to": [15, 210]
+   "from": [7, 321],
+   "to": [15, 219]
   },
   {
    "type": "calls",
-   "from": [9, 162],
-   "to": [10, 176]
+   "from": [9, 171],
+   "to": [10, 185]
   },
   {
    "type": "calls",
-   "from": [9, 165],
-   "to": [13, 171]
+   "from": [9, 174],
+   "to": [13, 180]
   },
   {
    "type": "calls",
-   "from": [9, 167],
-   "to": [13, 171]
+   "from": [9, 176],
+   "to": [13, 180]
   },
   {
    "type": "calls",
-   "from": [10, 185],
-   "to": [12, 188]
+   "from": [10, 194],
+   "to": [12, 197]
   },
   {
    "type": "calls",
-   "from": [15, 213],
+   "from": [15, 222],
    "to": [8, 100]
   },
   {
    "type": "calls",
    "from": [16, 88],
-   "to": [6, 242]
+   "to": [6, 251]
   }
  ]
 }

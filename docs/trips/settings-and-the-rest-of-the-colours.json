@@ -1,14 +1,14 @@
 {
  "name": "Settings and the rest of the colours",
  "kind": "survey",
- "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
+ "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
  "sights": [
   "sw/subl_tint.py:84-86",
   "sw/subl_tint.py:59-69",
   "sw/subl_tint.py:113-125",
   "sw/subl_tint.py:89-93",
   "sw/subl_tint.py:29-30",
-  "sw/subl_tint.py:279-284"
+  "sw/subl_tint.py:288-293"
  ],
  "transitions": []
 }

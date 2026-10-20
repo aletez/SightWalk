@@ -1,10 +1,10 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "15d6030638d5d8064a285c8c51e84ac9aafafe0c",
+ "commit": "bb7194cd9660acdc3c18a9182ee68cc29d5093d8",
  "sights": [
-  "sw/subl_vetting.py:132-140",
-  "sw/subl_vetting.py:125-129",
+  "sw/subl_vetting.py:118-126",
+  "sw/subl_vetting.py:111-115",
   "sw/callmap.py:120-141",
   "sw/callmap.py:93-99",
   "sw/callmap.py:70-73",
@@ -14,33 +14,33 @@
   "sw/callmap.py:66-67",
   "sw/callmap.py:102-106",
   "sw/callmap.py:109-117",
-  "sw/subl_vetting.py:143-155",
-  "sw/subl_vetting.py:158-160",
-  "sw/subl_vetting.py:169-184",
-  "sw/subl_vetting.py:187-192",
-  "sw/subl_commands.py:448-449",
-  "sw/subl_vetting.py:195-198"
+  "sw/subl_vetting.py:129-141",
+  "sw/subl_vetting.py:144-146",
+  "sw/subl_vetting.py:155-170",
+  "sw/subl_vetting.py:173-178",
+  "sw/subl_commands.py:457-458",
+  "sw/subl_vetting.py:181-184"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 135],
-   "to": [1, 125]
+   "from": [0, 121],
+   "to": [1, 111]
   },
   {
    "type": "calls",
-   "from": [0, 137],
-   "to": [16, 195]
+   "from": [0, 123],
+   "to": [16, 181]
   },
   {
    "type": "calls",
-   "from": [0, 139],
+   "from": [0, 125],
    "to": [2, 120]
   },
   {
    "type": "calls",
-   "from": [0, 140],
-   "to": [11, 143]
+   "from": [0, 126],
+   "to": [11, 129]
   },
   {
    "type": "calls",
@@ -154,33 +154,33 @@
   },
   {
    "type": "calls",
-   "from": [11, 153],
-   "to": [16, 195]
+   "from": [11, 139],
+   "to": [16, 181]
   },
   {
    "type": "calls",
-   "from": [11, 155],
-   "to": [13, 169]
+   "from": [11, 141],
+   "to": [13, 155]
   },
   {
    "type": "calls",
-   "from": [13, 177],
-   "to": [12, 158]
+   "from": [13, 163],
+   "to": [12, 144]
   },
   {
    "type": "calls",
-   "from": [13, 184],
-   "to": [14, 187]
+   "from": [13, 170],
+   "to": [14, 173]
   },
   {
    "type": "calls",
-   "from": [14, 192],
-   "to": [13, 169]
+   "from": [14, 178],
+   "to": [13, 155]
   },
   {
    "type": "calls",
-   "from": [15, 449],
-   "to": [14, 187]
+   "from": [15, 458],
+   "to": [14, 173]
   }
  ]
 }

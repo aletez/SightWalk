@@ -222,8 +222,8 @@ Reply: `{"ok": true}`. (SightWalk also accepts `message` for `text`.)
 | `unanswered` | no   | the previous message is returned again because no `say` answered it |
 
 On timeout: `{"timeout": true, "next": "…"}`; the guide calls again at once and says nothing.
-Fixed user messages sent by shortcuts: `Explain next.`, `Explain previous.`,
-`Change the metaphor.` (their meaning is in the manual).
+User messages with a fixed meaning, typed on the bench: `Explain next.`,
+`Explain previous.`, `Change the metaphor.` (their meaning is in the manual).
 
 ### state
 No arguments. Returns `visible`, `here`, `selected` as above, and `sights`

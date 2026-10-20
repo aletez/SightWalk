@@ -21,17 +21,14 @@ GUARDS = {}
 TRANSCRIPT = ""
 MAC = sublime.platform() == "osx"
 LINK_KEY = "⌘P" if MAC else "Ctrl+P"
-KEYS = (("Enter (⇧+Enter: %s)", "⌃⌘↓", "⌃⌘↑") if MAC
-        else ("Enter (Shift+Enter: %s)", "Ctrl+Shift+↓", "Ctrl+Shift+↑"))
+NEW_LINE_KEY = "⇧Enter" if MAC else "Shift+Enter"
 # The help mark: faded and outlined at all times, so it reads as read-only.
 MARK_HTML = ('<a href="help" style="color: %s; text-decoration: none; border: 1px solid %s; '
              'border-radius: 3px; padding: 0 4px">?</a>' % (FADED, FADED))
 def help_html():
     """The bench's keys, in the user's language."""
-    send, nxt, previous = KEYS
-    return "<div><b>⛓</b> %s <b>%s</b>: %s<br><b>%s</b> %s<br><b>%s</b> %s<br><b>%s</b> %s</div>" % (
-        word("or"), LINK_KEY, word("link_help"), send % word("new_line"), word("send"), nxt, word("next"),
-        previous, word("previous"))
+    return "<div><b>⛓</b> %s <b>%s</b>: %s<br><b>Enter</b>: %s<br><b>%s</b>: %s</div>" % (
+        word("or"), LINK_KEY, word("link_help"), word("send"), NEW_LINE_KEY, word("new_line"))
 
 
 def protected_end(end, changes):

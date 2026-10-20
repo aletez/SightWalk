@@ -90,8 +90,6 @@ WORDS = {
     "thinking": ("the guide is thinking…", "przewodnik myśli…"),
     "send": ("send", "wyślij"),
     "new_line": ("new line", "nowa linia"),
-    "next": ("explain next", "wyjaśnij następny krok"),
-    "previous": ("explain previous", "wyjaśnij poprzedni krok"),
     "pan": ("the wheel over the bench and the tools moves the pane under it or the column of sights",
             "kółko nad ławką i narzędziami przesuwa panel pod spodem lub panoramę widoków"),
     "no_tour": ("No tour is open: <i>SightWalk: Open Tour</i> in the command palette.",

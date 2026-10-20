@@ -10,7 +10,6 @@ for _name in [m for m in sys.modules if m.startswith(__package__ + ".sw")]:
 
 from .sw import subl_commands, subl_guide, subl_mcp_http, subl_scrollbars, subl_tint, state, words  # noqa: E402
 from .sw.subl_commands import (  # noqa: E402,F401
-    SightWalkAskCommand,
     SightWalkChatListener,
     SightWalkCloseEditorCommand,
     SightWalkCompareFontsCommand,
@@ -27,7 +26,6 @@ from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkOpenTourCommand,
     SightWalkReplaceCommand,
     SightWalkResetSightsCommand,
-    SightWalkScrollCommand,
     SightWalkSendCommand,
     SightWalkStepCommand,
     SightWalkSightListener,

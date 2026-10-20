@@ -204,16 +204,6 @@ class SightWalkLinkCommand(sublime_plugin.TextCommand):
             reader.links.link_from_code()
 
 
-class SightWalkAskCommand(sublime_plugin.TextCommand):
-    """Sends a fixed message, such as "Explain next.", without touching the draft."""
-
-    def run(self, edit, text):
-        owner = state.reader_for(self.view.window())
-        if owner is not None:
-            owner.say(text, prefix="U: ")
-            send(owner, text)
-
-
 class SightWalkEditCommand(sublime_plugin.TextCommand):
     """Enter in a sight: opens the editor at the caret's line."""
 
@@ -249,17 +239,6 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
         reader = state.reader_for(self.view.window())
         if hover_zone == sublime.HOVER_TEXT and reader is not None and self.view == reader.chat_header:
             subl_chat.show_help(self.view, point)
-
-
-class SightWalkScrollCommand(sublime_plugin.WindowCommand):
-    def run(self, lines=0, pages=0.0):
-        reader = state.reader_for(self.window)
-        if reader is None or not reader.ready:
-            return
-        reader.scroll_to(reader.offset + lines * reader.lh + pages * reader.room())
-
-    def is_enabled(self):
-        return state.reader_for(self.window) is not None
 
 
 class SightWalkChatListener(sublime_plugin.ViewEventListener):

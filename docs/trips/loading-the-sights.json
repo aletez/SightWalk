@@ -1,24 +1,24 @@
 {
  "name": "Loading the sights",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_reader.py:156-173",
+  "sw/subl_reader.py:159-176",
   "sw/subl_chat.py:222-230",
-  "sw/subl_reader.py:219-229",
-  "sw/subl_reader.py:231-246",
+  "sw/subl_reader.py:222-232",
+  "sw/subl_reader.py:234-249",
   "sw/subl_views.py:157-161",
   "sw/subl_views.py:164-176",
-  "sw/subl_reader.py:248-268",
+  "sw/subl_reader.py:251-271",
   "sw/spec.py:162-177",
   "sw/spec.py:190-194",
   "sw/spec.py:180-187",
   "sw/words.py:133-138",
-  "sw/subl_reader.py:270-277",
-  "sw/subl_reader.py:279-290",
+  "sw/subl_reader.py:273-280",
+  "sw/subl_reader.py:282-293",
   "sw/subl_views.py:303-311",
-  "sw/subl_reader.py:364-372",
-  "sw/subl_reader.py:292-301",
+  "sw/subl_reader.py:367-375",
+  "sw/subl_reader.py:295-304",
   "sw/spec.py:97-112",
   "sw/spec.py:84-85",
   "sw/spec.py:88-94",
@@ -29,78 +29,78 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 161],
+   "from": [0, 164],
    "to": [1, 222]
   },
   {
    "type": "calls",
-   "from": [0, 165],
-   "to": [2, 219]
+   "from": [0, 168],
+   "to": [2, 222]
   },
   {
    "type": "calls",
-   "from": [0, 173],
-   "to": [3, 231]
+   "from": [0, 176],
+   "to": [3, 234]
   },
   {
    "type": "calls",
-   "from": [0, 173],
+   "from": [0, 176],
    "to": [4, 157]
   },
   {
    "type": "calls",
-   "from": [3, 234],
+   "from": [3, 237],
    "to": [5, 164]
   },
   {
    "type": "calls",
-   "from": [3, 235],
+   "from": [3, 238],
    "to": [20, 213]
   },
   {
    "type": "calls",
-   "from": [3, 237],
-   "to": [6, 248]
+   "from": [3, 240],
+   "to": [6, 251]
   },
   {
    "type": "calls",
-   "from": [6, 253],
+   "from": [6, 256],
    "to": [16, 97]
   },
   {
    "type": "calls",
-   "from": [6, 254],
+   "from": [6, 257],
    "to": [5, 164]
   },
   {
    "type": "calls",
-   "from": [6, 258],
+   "from": [6, 261],
    "to": [7, 162]
   },
   {
    "type": "calls",
-   "from": [6, 263],
+   "from": [6, 266],
    "to": [19, 197]
   },
   {
    "type": "calls",
-   "from": [6, 266],
+   "from": [6, 269],
    "to": [8, 190]
   },
   {
    "type": "calls",
-   "from": [6, 266],
+   "from": [6, 269],
    "to": [10, 133]
   },
   {
    "type": "calls",
-   "from": [6, 268],
+   "from": [6, 271],
    "to": [9, 180]
   },
   {
    "type": "calls",
-   "from": [6, 268],
-   "to": [11, 270]
+   "from": [6, 271],
+   "to": [11, 273]
   },
   {
    "type": "calls",
@@ -114,13 +114,8 @@
   },
   {
    "type": "calls",
-   "from": [11, 277],
-   "to": [12, 279]
-  },
-  {
-   "type": "calls",
-   "from": [12, 286],
-   "to": [13, 303]
+   "from": [11, 280],
+   "to": [12, 282]
   },
   {
    "type": "calls",
@@ -129,13 +124,18 @@
   },
   {
    "type": "calls",
-   "from": [15, 298],
-   "to": [14, 364]
+   "from": [12, 292],
+   "to": [13, 303]
   },
   {
    "type": "calls",
    "from": [15, 301],
-   "to": [12, 279]
+   "to": [14, 367]
+  },
+  {
+   "type": "calls",
+   "from": [15, 304],
+   "to": [12, 282]
   },
   {
    "type": "calls",

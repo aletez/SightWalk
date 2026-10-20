@@ -1,86 +1,86 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_reader.py:1095-1107",
-  "sw/subl_reader.py:1109-1117",
-  "sw/subl_reader.py:1307-1314",
-  "sw/subl_reader.py:1161-1175",
+  "sw/subl_reader.py:1102-1114",
+  "sw/subl_reader.py:1116-1124",
+  "sw/subl_reader.py:1314-1321",
+  "sw/subl_reader.py:1168-1182",
   "sw/subl_reader.py:48-52",
-  "sw/subl_reader.py:1177-1181",
+  "sw/subl_reader.py:1184-1188",
   "sw/subl_reader.py:59-64",
   "sw/callmap.py:33-39",
   "sw/callmap.py:42-49",
   "sw/callmap.py:28-30",
   "sw/callmap.py:52-59",
   "sw/callmap.py:42-49",
-  "sw/subl_vetting.py:128-136"
+  "sw/subl_vetting.py:133-141"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1098],
-   "to": [3, 1161]
+   "from": [0, 1105],
+   "to": [3, 1168]
   },
   {
    "type": "calls",
-   "from": [0, 1102],
+   "from": [0, 1109],
    "to": [10, 52]
   },
   {
    "type": "calls",
-   "from": [0, 1104],
-   "to": [1, 1109]
+   "from": [0, 1111],
+   "to": [1, 1116]
   },
   {
    "type": "calls",
-   "from": [0, 1105],
+   "from": [0, 1112],
    "to": [11, 42]
   },
   {
    "type": "calls",
-   "from": [0, 1106],
+   "from": [0, 1113],
    "to": [11, 42]
   },
   {
    "type": "calls",
-   "from": [0, 1107],
-   "to": [2, 1307]
+   "from": [0, 1114],
+   "to": [2, 1314]
   },
   {
    "type": "calls",
-   "from": [0, 1107],
-   "to": [12, 128]
+   "from": [0, 1114],
+   "to": [12, 133]
   },
   {
    "type": "calls",
-   "from": [3, 1167],
+   "from": [3, 1174],
    "to": [7, 33]
   },
   {
    "type": "calls",
-   "from": [3, 1168],
+   "from": [3, 1175],
    "to": [4, 48]
   },
   {
    "type": "calls",
-   "from": [3, 1172],
-   "to": [2, 1307]
+   "from": [3, 1179],
+   "to": [2, 1314]
   },
   {
    "type": "calls",
-   "from": [3, 1173],
+   "from": [3, 1180],
    "to": [9, 28]
   },
   {
    "type": "calls",
-   "from": [3, 1173],
-   "to": [5, 1177]
+   "from": [3, 1180],
+   "to": [5, 1184]
   },
   {
    "type": "calls",
-   "from": [3, 1173],
+   "from": [3, 1180],
    "to": [6, 59]
   },
   {

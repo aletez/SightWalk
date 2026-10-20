@@ -1,9 +1,9 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_reader.py:231-246",
+  "sw/subl_reader.py:234-249",
   "sw/subl_asked.py:33-44",
   "sw/subl_asked.py:20-30",
   "sw/questions.py:62-77",
@@ -17,7 +17,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 241],
+   "from": [0, 244],
    "to": [1, 33]
   },
   {

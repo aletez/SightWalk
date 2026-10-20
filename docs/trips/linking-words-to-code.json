@@ -1,7 +1,7 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
   "sw/subl_commands.py:197-204",
   "sw/subl_links.py:19-30",
@@ -21,7 +21,7 @@
   "sw/subl_links.py:278-280",
   "sw/subl_links.py:219-244",
   "sw/subl_links.py:310-316",
-  "sw/subl_reader.py:829-840",
+  "sw/subl_reader.py:836-847",
   "sw/subl_links.py:282-287",
   "sw/subl_links.py:105-110",
   "sw/subl_links.py:112-117",
@@ -176,7 +176,7 @@
   {
    "type": "calls",
    "from": [16, 243],
-   "to": [18, 829]
+   "to": [18, 836]
   },
   {
    "type": "calls",

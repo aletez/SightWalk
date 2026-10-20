@@ -1,99 +1,99 @@
 {
  "name": "Arranging the views",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_reader.py:497-515",
-  "sw/subl_reader.py:447-452",
-  "sw/subl_reader.py:421-436",
+  "sw/subl_reader.py:500-518",
+  "sw/subl_reader.py:450-455",
+  "sw/subl_reader.py:424-439",
   "sw/subl_geometry.py:124-133",
-  "sw/subl_reader.py:333-344",
-  "sw/subl_reader.py:454-483",
+  "sw/subl_reader.py:336-347",
+  "sw/subl_reader.py:457-486",
   "sw/subl_views.py:63-66",
-  "sw/subl_reader.py:562-573",
-  "sw/subl_reader.py:532-540",
-  "sw/subl_reader.py:603-607",
+  "sw/subl_reader.py:565-576",
+  "sw/subl_reader.py:535-543",
+  "sw/subl_reader.py:610-614",
   "sw/subl_views.py:149-151",
-  "sw/subl_reader.py:851-858",
-  "sw/subl_reader.py:860-862",
-  "sw/subl_reader.py:708-717",
-  "sw/subl_reader.py:703-706",
+  "sw/subl_reader.py:858-865",
+  "sw/subl_reader.py:867-869",
+  "sw/subl_reader.py:715-724",
+  "sw/subl_reader.py:710-713",
   "sw/subl_views.py:239-251"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 502],
-   "to": [1, 447]
-  },
-  {
-   "type": "calls",
-   "from": [0, 511],
-   "to": [13, 708]
-  },
-  {
-   "type": "calls",
-   "from": [0, 512],
-   "to": [11, 851]
-  },
-  {
-   "type": "calls",
-   "from": [0, 513],
-   "to": [11, 851]
+   "from": [0, 505],
+   "to": [1, 450]
   },
   {
    "type": "calls",
    "from": [0, 514],
-   "to": [7, 562]
+   "to": [13, 715]
   },
   {
    "type": "calls",
    "from": [0, 515],
-   "to": [7, 562]
+   "to": [11, 858]
   },
   {
    "type": "calls",
-   "from": [1, 449],
-   "to": [2, 421]
+   "from": [0, 516],
+   "to": [11, 858]
   },
   {
    "type": "calls",
-   "from": [1, 451],
-   "to": [5, 454]
+   "from": [0, 517],
+   "to": [7, 565]
+  },
+  {
+   "type": "calls",
+   "from": [0, 518],
+   "to": [7, 565]
   },
   {
    "type": "calls",
    "from": [1, 452],
+   "to": [2, 424]
+  },
+  {
+   "type": "calls",
+   "from": [1, 454],
+   "to": [5, 457]
+  },
+  {
+   "type": "calls",
+   "from": [1, 455],
    "to": [6, 63]
   },
   {
    "type": "calls",
-   "from": [7, 567],
-   "to": [8, 532]
+   "from": [7, 570],
+   "to": [8, 535]
   },
   {
    "type": "calls",
-   "from": [11, 858],
-   "to": [12, 860]
+   "from": [11, 865],
+   "to": [12, 867]
   },
   {
    "type": "calls",
-   "from": [13, 713],
-   "to": [14, 703]
+   "from": [13, 720],
+   "to": [14, 710]
   },
   {
    "type": "calls",
-   "from": [13, 713],
+   "from": [13, 720],
    "to": [15, 239]
   },
   {
    "type": "calls",
-   "from": [13, 716],
-   "to": [14, 703]
+   "from": [13, 723],
+   "to": [14, 710]
   },
   {
    "type": "calls",
-   "from": [13, 716],
+   "from": [13, 723],
    "to": [15, 239]
   }
  ]

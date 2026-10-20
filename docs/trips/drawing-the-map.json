@@ -1,10 +1,10 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_vetting.py:128-136",
-  "sw/subl_vetting.py:121-125",
+  "sw/subl_vetting.py:133-141",
+  "sw/subl_vetting.py:126-130",
   "sw/callmap.py:120-141",
   "sw/callmap.py:93-99",
   "sw/callmap.py:70-73",
@@ -14,33 +14,33 @@
   "sw/callmap.py:66-67",
   "sw/callmap.py:102-106",
   "sw/callmap.py:109-117",
-  "sw/subl_vetting.py:139-151",
-  "sw/subl_vetting.py:154-156",
-  "sw/subl_vetting.py:165-180",
-  "sw/subl_vetting.py:183-188",
+  "sw/subl_vetting.py:144-156",
+  "sw/subl_vetting.py:159-161",
+  "sw/subl_vetting.py:170-185",
+  "sw/subl_vetting.py:188-193",
   "sw/subl_commands.py:458-459",
-  "sw/subl_vetting.py:191-194"
+  "sw/subl_vetting.py:196-199"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 131],
-   "to": [1, 121]
+   "from": [0, 136],
+   "to": [1, 126]
   },
   {
    "type": "calls",
-   "from": [0, 133],
-   "to": [16, 191]
+   "from": [0, 138],
+   "to": [16, 196]
   },
   {
    "type": "calls",
-   "from": [0, 135],
+   "from": [0, 140],
    "to": [2, 120]
   },
   {
    "type": "calls",
-   "from": [0, 136],
-   "to": [11, 139]
+   "from": [0, 141],
+   "to": [11, 144]
   },
   {
    "type": "calls",
@@ -154,33 +154,33 @@
   },
   {
    "type": "calls",
-   "from": [11, 149],
-   "to": [16, 191]
+   "from": [11, 154],
+   "to": [16, 196]
   },
   {
    "type": "calls",
-   "from": [11, 151],
-   "to": [13, 165]
+   "from": [11, 156],
+   "to": [13, 170]
   },
   {
    "type": "calls",
-   "from": [13, 173],
-   "to": [12, 154]
+   "from": [13, 178],
+   "to": [12, 159]
   },
   {
    "type": "calls",
-   "from": [13, 180],
-   "to": [14, 183]
+   "from": [13, 185],
+   "to": [14, 188]
   },
   {
    "type": "calls",
-   "from": [14, 188],
-   "to": [13, 165]
+   "from": [14, 193],
+   "to": [13, 170]
   },
   {
    "type": "calls",
    "from": [15, 459],
-   "to": [14, 183]
+   "to": [14, 188]
   }
  ]
 }

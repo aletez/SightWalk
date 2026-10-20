@@ -1,71 +1,71 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "3b000487a2137566517764a3993974d8b20697e0",
+ "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
  "sights": [
-  "sw/subl_reader.py:876-883",
-  "sw/subl_vetting.py:69-97",
-  "sw/subl_vetting.py:62-66",
-  "sw/subl_vetting.py:100-116",
+  "sw/subl_reader.py:883-890",
+  "sw/subl_vetting.py:73-102",
+  "sw/subl_vetting.py:66-70",
+  "sw/subl_vetting.py:105-121",
   "sw/subl_commands.py:465-468",
-  "sw/subl_reader.py:885-895",
+  "sw/subl_reader.py:892-902",
   "sw/subl_vetting.py:39-47",
   "sw/subl_vetting.py:50-52",
-  "sw/subl_reader.py:866-868",
-  "sw/subl_reader.py:870-871",
-  "sw/subl_reader.py:873-874",
-  "sw/subl_reader.py:1095-1107"
+  "sw/subl_reader.py:873-875",
+  "sw/subl_reader.py:877-878",
+  "sw/subl_reader.py:880-881",
+  "sw/subl_reader.py:1102-1114"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 880],
-   "to": [11, 1095]
+   "from": [0, 887],
+   "to": [11, 1102]
   },
   {
    "type": "calls",
-   "from": [1, 74],
-   "to": [3, 100]
+   "from": [1, 78],
+   "to": [3, 105]
   },
   {
    "type": "calls",
-   "from": [1, 90],
-   "to": [2, 62]
+   "from": [1, 94],
+   "to": [2, 66]
   },
   {
    "type": "calls",
-   "from": [1, 97],
-   "to": [3, 100]
+   "from": [1, 102],
+   "to": [3, 105]
   },
   {
    "type": "calls",
    "from": [4, 468],
-   "to": [5, 885]
-  },
-  {
-   "type": "calls",
-   "from": [5, 888],
-   "to": [8, 866]
-  },
-  {
-   "type": "calls",
-   "from": [5, 892],
-   "to": [6, 39]
+   "to": [5, 892]
   },
   {
    "type": "calls",
    "from": [5, 895],
-   "to": [0, 876]
+   "to": [8, 873]
   },
   {
    "type": "calls",
-   "from": [9, 871],
-   "to": [8, 866]
+   "from": [5, 899],
+   "to": [6, 39]
   },
   {
    "type": "calls",
-   "from": [10, 874],
-   "to": [8, 866]
+   "from": [5, 902],
+   "to": [0, 883]
+  },
+  {
+   "type": "calls",
+   "from": [9, 878],
+   "to": [8, 873]
+  },
+  {
+   "type": "calls",
+   "from": [10, 881],
+   "to": [8, 873]
   }
  ]
 }

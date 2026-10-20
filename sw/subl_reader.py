@@ -18,7 +18,7 @@ from . import answers, permissions, subl_guide, subl_links
 from .subl_links import Links
 from . import subl_asked, callmap, subl_chat, marks, ontology, plan, state, subl_vetting, tourmap
 from .config import (BENCH_MARGIN, BENCH_WIDTH, BLANK_LINES, DEFAULT_CONVERSATION_HEIGHT, FROZEN_PARENTS,
-                     MAX_GAP_PX, MAX_MARGIN_PX, MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
+                     MAX_GAP_PX, MAX_GAP_TOP_PX, MAX_MARGIN_PX, MIN_ELIDED, OVERLAP, POLL_MS, ROOM_LINES, SETTINGS_FILE, SETTLE_MS, SETTLE_S, STRIP_STEP,
                      WHEEL_MS)
 from .subl_editor import Editor
 from .history import History, last_exchange
@@ -957,7 +957,8 @@ class Reader(Geometry):
     def arrange_maximized(self):
         """The top headers, apart (Jakub: they must not run into each other), then the Tools
         header and pane over the rest; every other view waits behind the pane."""
-        top, h = self.head(), self.below_header.line_height() + self.overhead
+        head, h = self.head(), self.below_header.line_height() + self.overhead
+        top = head + MAX_GAP_TOP_PX  # a blank band under the top headers (Jakub)
         (b0, b1), (c0, c1) = self.spans()[0], self.spans()[1]
         gap, margin = self.share(MAX_GAP_PX), self.share(MAX_MARGIN_PX)
         # The left header and the right one, a wider blank between them (Jakub).
@@ -965,9 +966,11 @@ class Reader(Geometry):
             [(b0, b1, self.chat_header), (c0, c1, self.sights_header)], key=lambda c: c[0])
         middle = (l1 + r0) / 2
         edge = r1 - margin  # the pane keeps off the window's right edge (Jakub)
-        cells = [((l0, 0.0, middle - gap / 2, top), left_view),
+        cells = [((l0, 0.0, middle - gap / 2, head), left_view),
                  ((middle - gap / 2, 0.0, middle + gap / 2, top), self.filler),
-                 ((middle + gap / 2, 0.0, r1, top), right_view),
+                 ((middle + gap / 2, 0.0, r1, head), right_view),
+                 ((l0, head, middle - gap / 2, top), self.strip_floor),
+                 ((middle + gap / 2, head, r1, top), self.editor_slot[0]),
                  ((0.0, top, edge - self.buttons_share(), top + h), self.below_header),
                  ((edge - self.buttons_share(), top, edge, top + h), self.tool_buttons),
                  ((edge, top, r1, self.height), self.top_filler),
@@ -1142,7 +1145,7 @@ class Reader(Geometry):
             for m in marks.resolve_marks(self.sights, answer["marks"]):
                 texts["%d:%d" % (m["sight"], m["line"])] = self.line_text(m["sight"], m["line"])
         return {"answers": self.answers, "shown": self.shown_answer, "lines": texts,
-                "questions": self.links.kept_questions()}
+                "questions": self.links.kept_questions(), "links": self.links.kept_links()}
 
     def line_text(self, index, line):
         view = self.sights[index].view
@@ -1158,6 +1161,7 @@ class Reader(Geometry):
                         for a in kept.get("answers") or []]
         self.kept_lines = kept.get("lines") or {}
         self.links.restore_questions(kept.get("questions") or [])
+        self.links.restore_links(kept.get("links") or [])
         if kept.get("shown") is not None and kept["shown"] < len(self.answers):
             self.show_answer(kept["shown"])
 

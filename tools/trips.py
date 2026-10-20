@@ -198,7 +198,7 @@ TRIPS = [
       "subl_links.Links.follow", "subl_links.repaint", "subl_reader.Reader.show_place", "subl_links.Links.clear",
       "subl_links.Links.show_made", "subl_links.Links.remove", "subl_links.Links.prune",
       "subl_links.Links.draft_keys", "subl_links.Links.bench_region", "subl_links.Links.by_sight",
-      "marks.span_relation", "marks.here_tags", "subl_links.Links.follow_code", "subl_links.Links.repaint_bench", "subl_links.Links.ask", "subl_links.Links.frame_question", "subl_links.Links.follow_question", "subl_links.Links.select", "subl_links.Links.kept_questions", "subl_links.Links.restore_questions", "subl_links.Links.forget_shown",
+      "marks.span_relation", "marks.here_tags", "subl_links.Links.follow_code", "subl_links.Links.repaint_bench", "subl_links.Links.ask", "subl_links.Links.frame_question", "subl_links.Links.follow_question", "subl_links.Links.select", "subl_links.Links.kept_questions", "subl_links.Links.restore_questions", "subl_links.Links.kept_links", "subl_links.Links.restore_links", "subl_links.Links.forget_shown",
       "subl_commands.SightWalkWindowListener.on_post_text_command"]),
     ("Opening the editor",
      "Enter or the header's button: the editor laid over the sights, ranges and marks held.",

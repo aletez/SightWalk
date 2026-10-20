@@ -23,7 +23,7 @@
     {"keys": ["primary+["], "command": "sight_walk_step", "args": {"step": -1}, "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]},
     {"keys": ["primary+]"], "command": "sight_walk_step", "args": {"step": 1}, "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]},
     // Esc in a maximised Tools pane makes it small again, as [⤢] does (Jakub).
-    {"keys": ["escape"], "command": "sight_walk_toggle_maximized", "args": {"restore": true}, "context": [{"key": "setting.sight_walk_maximized"}, {"key": "popup_visible", "operand": false}]},
+    {"keys": ["escape"], "command": "sight_walk_toggle_maximized", "args": {"restore": true}, "context": [{"key": "setting.sight_walk_maximized"}, {"key": "popup_visible", "operand": false}, {"key": "num_selections", "operator": "not_equal", "operand": 0}]},
     {"keys": ["primary+s"], "command": "sight_walk_toggle_panning", "context": [{"key": "setting.sight_walk"}, {"key": "setting.sight_walk_editor", "operand": false}]}
     // A proposal: primary+g moves the focus between a trip's bench and its sights. It would take the place of Find Next
     // (macOS) and Go to Line (Windows, Linux), so it is left for the user to turn on.

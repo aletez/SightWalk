@@ -169,6 +169,28 @@ class Links:
         return [{"label": q["label"], "places": [[i, r.a, r.b] for i, r in q["places"]]}
                 for q in self.questions]
 
+    def kept_links(self):
+        """The user's links as data: key, the words' span on the bench, the places, whether sent;
+        so they come back when the sights are laid out again (Jakub: Reset positions lost them)."""
+        found = []
+        for key, places in self.links.items():
+            words = self.bench_region(key)
+            found.append([key, [words.a, words.b], [[i, r.a, r.b] for i, r in places],
+                          key in self.sent])
+        return found
+
+    def restore_links(self, kept):
+        for key, (a, b), places, sent in kept:
+            if any(i >= len(self.reader.sights) for i, _, _ in places):
+                continue
+            self.links[key] = [(i, sublime.Region(x, y)) for i, x, y in places]
+            self.reader.chat.add_regions(key, [sublime.Region(a, b)], SCOPE, "", FLAGS)
+            for index, mine in self.by_sight(self.links[key]).items():
+                self.reader.sights[index].view.add_regions(key, mine, SCOPE, "", FLAGS)
+            if sent:
+                self.sent.add(key)
+            self.count = max(self.count, int(key.rsplit("_", 1)[1]) + 1)
+
     def restore_questions(self, kept):
         self.questions = [{"label": q["label"], "places": [(i, sublime.Region(a, b))
                                                            for i, a, b in q["places"]]}

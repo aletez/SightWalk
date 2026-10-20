@@ -1,24 +1,24 @@
 {
  "name": "A frame clicked",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):1253\">Clicking framed words</here> <calls at=\"(a):1253 (b):1282\">shows their places</calls>; clicking <here at=\"(c):1167\">an answer's label</here> <calls at=\"(c):1167 (d):1091\">shows that answer's marks</calls> again.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):1304\">Clicking framed words</here> <calls at=\"(a):1304 (b):1333\">shows their places</calls>; clicking <here at=\"(c):1218\">an answer's label</here> <calls at=\"(c):1218 (d):1142\">shows that answer's marks</calls> again.",
  "sights": [
-  "sw/subl_reader.py:1253-1280",
-  "sw/subl_reader.py:1282-1293",
-  "sw/subl_reader.py:1167-1176",
-  "sw/subl_reader.py:1091-1100"
+  "sw/subl_reader.py:1304-1331",
+  "sw/subl_reader.py:1333-1344",
+  "sw/subl_reader.py:1218-1227",
+  "sw/subl_reader.py:1142-1151"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1276],
-   "to": [1, 1282]
+   "from": [0, 1327],
+   "to": [1, 1333]
   },
   {
    "type": "calls",
-   "from": [2, 1174],
-   "to": [3, 1091]
+   "from": [2, 1225],
+   "to": [3, 1142]
   }
  ]
 }

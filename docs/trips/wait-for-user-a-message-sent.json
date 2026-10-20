@@ -1,29 +1,29 @@
 {
  "name": "wait_for_user: a message sent",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):46\">Enter</here> <calls at=\"(a):46 (b):204\">turns the draft into a message</calls> on the bench and <calls at=\"(a):46 (c):32\">sends it</calls> with what the user sees, to <here at=\"(d):37\">the trip's reader</here>'s inbox, where <here at=\"(e):229\">wait_for_user</here> picks it up.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):47\">Enter</here> <calls at=\"(a):47 (b):209\">turns the draft into a message</calls> on the bench and <calls at=\"(a):47 (c):32\">sends it</calls> with what the user sees, to <here at=\"(d):37\">the trip's reader</here>'s inbox, where <here at=\"(e):245\">wait_for_user</here> picks it up.",
  "sights": [
-  "sw/subl_commands.py:46-53",
-  "sw/subl_chat.py:204-218",
-  "sw/subl_commands.py:32-40",
+  "sw/subl_commands.py:47-54",
+  "sw/subl_chat.py:209-222",
+  "sw/subl_commands.py:32-41",
   "sw/state.py:37-38",
-  "sw/subl_executor.py:229-243"
+  "sw/subl_executor.py:245-259"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 47],
+   "from": [0, 48],
    "to": [3, 37]
   },
   {
    "type": "calls",
-   "from": [0, 52],
-   "to": [1, 204]
+   "from": [0, 53],
+   "to": [1, 209]
   },
   {
    "type": "calls",
-   "from": [0, 53],
+   "from": [0, 54],
    "to": [2, 32]
   }
  ]

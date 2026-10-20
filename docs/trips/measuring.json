@@ -1,46 +1,41 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The gap phantoms, the cells of the virtual document, and the window's height measured with two layouts.",
  "sights": [
-  "sw/subl_reader.py:341-345",
+  "sw/subl_reader.py:345-349",
   "sw/subl_reader.py:56-57",
   "sw/subl_views.py:317-324",
-  "sw/subl_reader.py:360-376",
+  "sw/subl_reader.py:364-380",
   "sw/subl_views.py:234-235",
   "sw/subl_views.py:238-239",
-  "sw/subl_reader.py:388-393",
-  "sw/subl_reader.py:395-400",
-  "sw/subl_reader.py:402-406",
-  "sw/subl_reader.py:408-425",
-  "sw/subl_reader.py:538-541",
+  "sw/subl_reader.py:392-397",
+  "sw/subl_reader.py:399-404",
+  "sw/subl_reader.py:406-410",
+  "sw/subl_reader.py:412-429",
+  "sw/subl_reader.py:542-545",
   "sw/plan.py:85-90",
   "sw/plan.py:79-82",
   "sw/plan.py:50-66",
   "sw/plan.py:69-76",
-  "sw/subl_reader.py:640-646"
+  "sw/subl_reader.py:644-650"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 345],
+   "from": [0, 349],
    "to": [1, 56]
   },
   {
    "type": "calls",
-   "from": [0, 345],
+   "from": [0, 349],
    "to": [2, 317]
   },
   {
    "type": "calls",
-   "from": [3, 367],
+   "from": [3, 371],
    "to": [5, 238]
-  },
-  {
-   "type": "calls",
-   "from": [3, 369],
-   "to": [4, 234]
   },
   {
    "type": "calls",
@@ -49,37 +44,42 @@
   },
   {
    "type": "calls",
-   "from": [6, 393],
-   "to": [7, 395]
+   "from": [3, 377],
+   "to": [4, 234]
   },
   {
    "type": "calls",
-   "from": [7, 400],
-   "to": [8, 402]
+   "from": [6, 397],
+   "to": [7, 399]
   },
   {
    "type": "calls",
-   "from": [8, 406],
-   "to": [9, 408]
+   "from": [7, 404],
+   "to": [8, 406]
   },
   {
    "type": "calls",
-   "from": [9, 409],
+   "from": [8, 410],
+   "to": [9, 412]
+  },
+  {
+   "type": "calls",
+   "from": [9, 413],
    "to": [13, 50]
   },
   {
    "type": "calls",
-   "from": [9, 411],
-   "to": [10, 538]
+   "from": [9, 415],
+   "to": [10, 542]
   },
   {
    "type": "calls",
-   "from": [9, 412],
-   "to": [15, 640]
+   "from": [9, 416],
+   "to": [15, 644]
   },
   {
    "type": "calls",
-   "from": [10, 541],
+   "from": [10, 545],
    "to": [11, 85]
   },
   {

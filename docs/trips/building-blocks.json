@@ -1,7 +1,7 @@
 {
  "name": "Building blocks",
  "kind": "survey",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The small classes and hooks the trips above stand on.",
  "sights": [
   "sw/plan.py:8-15",
@@ -12,9 +12,9 @@
   "sw/subl_views.py:45-46",
   "sw/subl_views.py:49-54",
   "sw/subl_views.py:57-58",
-  "sw/subl_chat.py:50-52",
-  "sw/subl_commands.py:233-235",
-  "sw/subl_commands.py:260-262"
+  "sw/subl_chat.py:51-53",
+  "sw/subl_commands.py:234-236",
+  "sw/subl_commands.py:261-263"
  ],
  "transitions": [
   {

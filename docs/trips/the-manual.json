@@ -1,14 +1,14 @@
 {
  "name": "The manual",
  "kind": "survey",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "A guide knows SightWalk only from this text. <here at=\"(a):6\">It opens</here> with what a trip is, <here at=\"(b):26\">says how to show code</here> one function a sight, <here at=\"(c):56\">asks for code that fits the reader</here>, <here at=\"(d):61\">sets the manners of the conversation</here>, and <here at=\"(e):115\">teaches the marks</here> that tie words to lines.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "A guide knows SightWalk only from this text. <here at=\"(a):6\">It opens</here> with what a trip is, <here at=\"(b):26\">says how to show code</here> one function a sight, <here at=\"(c):56\">asks for code that fits the reader</here>, <here at=\"(d):61\">sets the manners of the conversation</here>, and <here at=\"(e):122\">teaches the marks</here> that tie words to lines.",
  "sights": [
   "sw/manual.py:6-24",
   "sw/manual.py:26-54",
   "sw/manual.py:56-59",
-  "sw/manual.py:61-113",
-  "sw/manual.py:115-162"
+  "sw/manual.py:61-120",
+  "sw/manual.py:122-169"
  ],
  "transitions": []
 }

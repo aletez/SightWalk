@@ -1,24 +1,19 @@
 {
  "name": "browse",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):187\">The folder must exist</here>; <here at=\"(b):97\">browse</here> <calls at=\"(b):97 (c):187\">opens a trip without sights</calls>, <here at=\"(d):193\">the folder's files</here> in their place.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):187\">The folder must exist</here>; <here at=\"(b):109\">browse</here> <calls at=\"(b):109 (c):191\">opens a trip without sights</calls>, <here at=\"(d):197\">the folder's files</here> in their place.",
  "sights": [
   "sw/validator.py:187-190",
-  "sw/subl_executor.py:97-105",
-  "sw/subl_reader.py:187-191",
-  "sw/subl_reader.py:193-213"
+  "sw/subl_executor.py:109-121",
+  "sw/subl_reader.py:191-195",
+  "sw/subl_reader.py:197-217"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [1, 103],
-   "to": [2, 187]
-  },
-  {
-   "type": "calls",
-   "from": [2, 191],
-   "to": [3, 193]
+   "from": [2, 195],
+   "to": [3, 197]
   }
  ]
 }

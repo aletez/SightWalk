@@ -1,30 +1,30 @@
 {
  "name": "say: marks drawn",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):689\">The marks are pointed</here> in the code and <here at=\"(b):269\">framed on the bench</here>, <calls at=\"(b):269 (c):263\">past the blank lines</calls> above the transcript. <here at=\"(d):1373\">The answer keeps them</here>, with <here at=\"(e):1357\">the regions</here> each frame stands for.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):693\">The marks are pointed</here> in the code and <here at=\"(b):272\">framed on the bench</here>, <calls at=\"(b):272 (c):266\">past the blank lines</calls> above the transcript. <here at=\"(d):1424\">The answer keeps them</here>, with <here at=\"(e):1408\">the regions</here> each frame stands for.",
  "sights": [
-  "sw/subl_reader.py:689-698",
-  "sw/subl_chat.py:269-285",
-  "sw/subl_chat.py:263-266",
-  "sw/subl_reader.py:1373-1390",
-  "sw/subl_reader.py:1357-1371"
+  "sw/subl_reader.py:693-702",
+  "sw/subl_chat.py:272-288",
+  "sw/subl_chat.py:266-269",
+  "sw/subl_reader.py:1424-1441",
+  "sw/subl_reader.py:1408-1422"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [1, 274],
-   "to": [2, 263]
-  },
-  {
-   "type": "calls",
    "from": [1, 277],
-   "to": [2, 263]
+   "to": [2, 266]
   },
   {
    "type": "calls",
-   "from": [3, 1388],
-   "to": [0, 689]
+   "from": [1, 280],
+   "to": [2, 266]
+  },
+  {
+   "type": "calls",
+   "from": [3, 1439],
+   "to": [0, 693]
   }
  ]
 }

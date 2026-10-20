@@ -1,7 +1,7 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.",
  "sights": [
   "sw/subl_vetting.py:130-138",
@@ -19,7 +19,7 @@
   "sw/subl_vetting.py:156-158",
   "sw/subl_vetting.py:167-182",
   "sw/subl_vetting.py:185-190",
-  "sw/subl_commands.py:475-476",
+  "sw/subl_commands.py:479-480",
   "sw/subl_vetting.py:193-196"
  ],
  "transitions": [
@@ -180,7 +180,7 @@
   },
   {
    "type": "calls",
-   "from": [15, 476],
+   "from": [15, 480],
    "to": [14, 185]
   }
  ]

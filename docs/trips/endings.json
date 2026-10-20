@@ -1,31 +1,31 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The guide is stopped, windows close.",
  "sights": [
-  "sw/subl_commands.py:491-492",
-  "sw/subl_commands.py:494-495",
+  "sw/subl_commands.py:495-496",
+  "sw/subl_commands.py:498-499",
   "sw/subl_guide.py:90-94",
   "sw/subl_guide.py:78-87",
-  "sw/subl_commands.py:341-345",
-  "sw/subl_commands.py:348-350",
+  "sw/subl_commands.py:342-349",
+  "sw/subl_commands.py:352-354",
   "sw/subl_tint.py:300-304",
   "sw/subl_tint.py:307-336",
   "sw/subl_tint.py:72-73",
-  "sw/subl_commands.py:300-312",
-  "sw/subl_commands.py:394-396",
-  "sw/subl_commands.py:374-377",
-  "sw/subl_reader.py:888-895",
-  "sw/subl_commands.py:379-381",
+  "sw/subl_commands.py:301-313",
+  "sw/subl_commands.py:398-400",
+  "sw/subl_commands.py:378-381",
+  "sw/subl_reader.py:894-901",
+  "sw/subl_commands.py:383-385",
   "sw/state.py:29-34",
-  "sw/subl_executor.py:92-94",
+  "sw/subl_executor.py:104-106",
   "sw/state.py:41-42"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 492],
+   "from": [0, 496],
    "to": [2, 90]
   },
   {
@@ -35,17 +35,17 @@
   },
   {
    "type": "calls",
-   "from": [4, 344],
+   "from": [4, 345],
    "to": [14, 29]
   },
   {
    "type": "calls",
-   "from": [4, 345],
-   "to": [5, 348]
+   "from": [4, 349],
+   "to": [5, 352]
   },
   {
    "type": "calls",
-   "from": [5, 350],
+   "from": [5, 354],
    "to": [7, 307]
   },
   {
@@ -55,22 +55,22 @@
   },
   {
    "type": "calls",
-   "from": [11, 375],
+   "from": [11, 379],
    "to": [16, 41]
   },
   {
    "type": "calls",
-   "from": [11, 377],
-   "to": [12, 888]
+   "from": [11, 381],
+   "to": [12, 894]
   },
   {
    "type": "calls",
-   "from": [13, 380],
+   "from": [13, 384],
    "to": [16, 41]
   },
   {
    "type": "calls",
-   "from": [15, 93],
+   "from": [15, 105],
    "to": [16, 41]
   }
  ]

@@ -1,42 +1,42 @@
 {
  "name": "Driving a trip from the terminal",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "Tests without mouse or keys, in the guide's notation: sight_walk_fill sets the draft, whose <here> tags become links, sight_walk_select selects places, (>) the draft, and sight_walk_send_draft sends it.",
  "sights": [
-  "sw/subl_commands.py:121-138",
+  "sw/subl_commands.py:122-139",
   "sw/marks.py:348-366",
-  "sw/subl_commands.py:168-180",
+  "sw/subl_commands.py:169-181",
   "sw/marks.py:332-345",
-  "sw/subl_commands.py:145-156",
-  "sw/subl_commands.py:183-190",
-  "sw/subl_commands.py:162-165"
+  "sw/subl_commands.py:146-157",
+  "sw/subl_commands.py:184-191",
+  "sw/subl_commands.py:163-166"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 125],
+   "from": [0, 126],
    "to": [1, 348]
   },
   {
    "type": "calls",
-   "from": [0, 136],
-   "to": [2, 168]
+   "from": [0, 137],
+   "to": [2, 169]
   },
   {
    "type": "calls",
-   "from": [2, 170],
+   "from": [2, 171],
    "to": [3, 332]
   },
   {
    "type": "calls",
-   "from": [4, 151],
-   "to": [2, 168]
+   "from": [4, 152],
+   "to": [2, 169]
   },
   {
    "type": "calls",
-   "from": [4, 156],
-   "to": [5, 183]
+   "from": [4, 157],
+   "to": [5, 184]
   }
  ]
 }

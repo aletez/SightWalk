@@ -1,46 +1,46 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "From an offset to Sublime's layout: every sight's cells at its place, shifted.",
  "sights": [
-  "sw/subl_reader.py:543-549",
+  "sw/subl_reader.py:547-553",
   "sw/plan.py:93-101",
   "sw/subl_geometry.py:64-67",
-  "sw/subl_reader.py:502-514",
+  "sw/subl_reader.py:506-518",
   "sw/subl_geometry.py:95-126",
   "sw/subl_geometry.py:44-48",
   "sw/subl_geometry.py:143-154",
   "sw/subl_geometry.py:139-141",
-  "sw/subl_reader.py:429-436",
+  "sw/subl_reader.py:433-440",
   "sw/subl_views.py:86-113",
   "sw/subl_views.py:76-83"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 546],
+   "from": [0, 550],
    "to": [1, 93]
   },
   {
    "type": "calls",
-   "from": [0, 547],
+   "from": [0, 551],
    "to": [2, 64]
   },
   {
    "type": "calls",
-   "from": [0, 549],
-   "to": [3, 502]
+   "from": [0, 553],
+   "to": [3, 506]
   },
   {
    "type": "calls",
-   "from": [3, 507],
+   "from": [3, 511],
    "to": [4, 95]
   },
   {
    "type": "calls",
-   "from": [3, 512],
-   "to": [8, 429]
+   "from": [3, 516],
+   "to": [8, 433]
   },
   {
    "type": "calls",
@@ -59,7 +59,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 434],
+   "from": [8, 438],
    "to": [9, 86]
   },
   {

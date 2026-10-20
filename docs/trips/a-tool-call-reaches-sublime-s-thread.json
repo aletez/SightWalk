@@ -1,25 +1,25 @@
 {
  "name": "A tool call reaches Sublime's thread",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):23\">A tool call</here> arrives on the server's thread, but only Sublime's main thread may touch views. Say and state <calls at=\"(a):23 (c):218\">wait for the reader to be ready</calls>; then <calls at=\"(a):23 (d):189\">the call is executed</calls>: <calls at=\"(d):189 (e):199\">its facts gathered and its work done on the main thread</calls>, the answer <here at=\"(b):38\">wrapped as MCP content</here>.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):23\">A tool call</here> arrives on the server's thread, but only Sublime's main thread may touch views. Say and state <calls at=\"(a):23 (c):234\">wait for the reader to be ready</calls>; then <calls at=\"(a):23 (d):205\">the call is executed</calls>: <calls at=\"(d):205 (e):215\">its facts gathered and its work done on the main thread</calls>, the answer <here at=\"(b):38\">wrapped as MCP content</here>.",
  "sights": [
   "sw/subl_mcp_http.py:23-35",
   "sw/subl_mcp_http.py:38-47",
-  "sw/subl_executor.py:218-226",
-  "sw/subl_executor.py:189-196",
-  "sw/subl_executor.py:199-215"
+  "sw/subl_executor.py:234-242",
+  "sw/subl_executor.py:205-212",
+  "sw/subl_executor.py:215-231"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 31],
-   "to": [2, 218]
+   "to": [2, 234]
   },
   {
    "type": "calls",
    "from": [0, 35],
-   "to": [3, 189]
+   "to": [3, 205]
   },
   {
    "type": "calls",
@@ -28,18 +28,18 @@
   },
   {
    "type": "calls",
-   "from": [2, 223],
-   "to": [4, 199]
+   "from": [2, 239],
+   "to": [4, 215]
   },
   {
    "type": "calls",
-   "from": [3, 192],
-   "to": [4, 199]
+   "from": [3, 208],
+   "to": [4, 215]
   },
   {
    "type": "calls",
-   "from": [3, 196],
-   "to": [4, 199]
+   "from": [3, 212],
+   "to": [4, 215]
   }
  ]
 }

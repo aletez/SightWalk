@@ -1,11 +1,11 @@
 {
  "name": "The tour map's source",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The Tour tab asks for the tour map: each trip a row of its sights named file:function, the arrows between trips taken from the informator.",
  "sights": [
-  "sw/subl_reader.py:1178-1187",
-  "sw/subl_reader.py:1189-1199",
+  "sw/subl_reader.py:1229-1238",
+  "sw/subl_reader.py:1240-1250",
   "sw/tourmap.py:65-78",
   "sw/tourmap.py:44-62",
   "sw/tourmap.py:33-41"
@@ -13,17 +13,17 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1183],
+   "from": [0, 1234],
    "to": [3, 44]
   },
   {
    "type": "calls",
-   "from": [0, 1184],
-   "to": [1, 1189]
+   "from": [0, 1235],
+   "to": [1, 1240]
   },
   {
    "type": "calls",
-   "from": [0, 1185],
+   "from": [0, 1236],
    "to": [2, 65]
   },
   {

@@ -1,21 +1,21 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "Everything that reacts to the user's window: resizing, settings, focus, keys, closing.",
  "sights": [
-  "sw/subl_reader.py:672-685",
-  "sw/subl_reader.py:455-462",
+  "sw/subl_reader.py:676-689",
+  "sw/subl_reader.py:459-466",
   "sw/subl_geometry.py:22-29",
   "sw/subl_geometry.py:31-35",
   "sw/subl_geometry.py:37-39",
   "sw/subl_geometry.py:41-42",
   "sw/state.py:55-60",
-  "sw/subl_executor.py:108-115",
+  "sw/subl_executor.py:124-131",
   "sw/validator.py:193-201",
-  "sw/subl_commands.py:293-295",
-  "sw/subl_commands.py:237-247",
-  "sw/subl_chat.py:172-176"
+  "sw/subl_commands.py:294-296",
+  "sw/subl_commands.py:238-248",
+  "sw/subl_chat.py:178-182"
  ],
  "transitions": [
   {
@@ -40,8 +40,8 @@
   },
   {
    "type": "calls",
-   "from": [10, 243],
-   "to": [11, 172]
+   "from": [10, 244],
+   "to": [11, 178]
   }
  ]
 }

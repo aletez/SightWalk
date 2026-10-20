@@ -1,12 +1,12 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "primary+p joins words of the draft to selections in the sights, from either side; the words go out as a <here> tag, and a click on them shows their place.",
  "sights": [
-  "sw/subl_commands.py:197-204",
+  "sw/subl_commands.py:198-205",
   "sw/subl_links.py:19-30",
-  "sw/subl_commands.py:273-277",
+  "sw/subl_commands.py:274-278",
   "sw/subl_links.py:32-37",
   "sw/subl_links.py:39-53",
   "sw/subl_links.py:55-61",
@@ -22,7 +22,7 @@
   "sw/subl_links.py:278-280",
   "sw/subl_links.py:219-244",
   "sw/subl_links.py:310-316",
-  "sw/subl_reader.py:875-886",
+  "sw/subl_reader.py:881-892",
   "sw/subl_links.py:282-287",
   "sw/subl_links.py:105-110",
   "sw/subl_links.py:112-117",
@@ -41,7 +41,7 @@
   "sw/subl_links.py:167-170",
   "sw/subl_links.py:172-177",
   "sw/subl_links.py:274-276",
-  "sw/subl_commands.py:326-332"
+  "sw/subl_commands.py:327-333"
  ],
  "transitions": [
   {
@@ -177,7 +177,7 @@
   {
    "type": "calls",
    "from": [16, 243],
-   "to": [18, 875]
+   "to": [18, 881]
   },
   {
    "type": "calls",

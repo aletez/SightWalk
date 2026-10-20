@@ -1,29 +1,29 @@
 {
  "name": "ctrl+tab",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The focus round the sights on screen, top to bottom, ctrl+shift+tab the other way.",
  "sights": [
-  "sw/subl_commands.py:105-108",
-  "sw/subl_commands.py:300-312",
-  "sw/subl_reader.py:856-873",
+  "sw/subl_commands.py:106-109",
+  "sw/subl_commands.py:301-313",
+  "sw/subl_reader.py:862-879",
   "sw/plan.py:104-108",
   "sw/plan.py:111-118"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 108],
-   "to": [2, 856]
+   "from": [0, 109],
+   "to": [2, 862]
   },
   {
    "type": "calls",
-   "from": [2, 862],
+   "from": [2, 868],
    "to": [4, 111]
   },
   {
    "type": "calls",
-   "from": [2, 862],
+   "from": [2, 868],
    "to": [3, 104]
   }
  ]

@@ -1,57 +1,57 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "SightWalk: Select Colour Scheme: general, light or dark, only schemes of that kind, previewed live in every trip; the files' hues derived from it again, the other views take it as it is.",
  "sights": [
-  "sw/subl_commands.py:61-63",
-  "sw/subl_commands.py:65-76",
-  "sw/subl_commands.py:91-94",
+  "sw/subl_commands.py:62-64",
+  "sw/subl_commands.py:66-77",
+  "sw/subl_commands.py:92-95",
   "sw/subl_tint.py:212-216",
-  "sw/subl_commands.py:97-99",
-  "sw/subl_commands.py:78-80",
+  "sw/subl_commands.py:98-100",
+  "sw/subl_commands.py:79-81",
   "sw/subl_tint.py:251-256",
-  "sw/subl_reader.py:316-323",
+  "sw/subl_reader.py:320-327",
   "sw/subl_tint.py:100-110",
   "sw/subl_tint.py:167-177",
   "sw/subl_tint.py:185-194",
   "sw/subl_tint.py:277-279",
   "sw/subl_tint.py:197-209",
   "sw/subl_tint.py:180-182",
-  "sw/subl_reader.py:325-332",
+  "sw/subl_reader.py:329-336",
   "sw/subl_tint.py:219-227",
-  "sw/subl_commands.py:82-88"
+  "sw/subl_commands.py:83-89"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 63],
-   "to": [1, 65]
-  },
-  {
-   "type": "calls",
-   "from": [1, 70],
-   "to": [2, 91]
+   "from": [0, 64],
+   "to": [1, 66]
   },
   {
    "type": "calls",
    "from": [1, 71],
+   "to": [2, 92]
+  },
+  {
+   "type": "calls",
+   "from": [1, 72],
    "to": [3, 212]
   },
   {
    "type": "calls",
-   "from": [1, 75],
-   "to": [16, 82]
-  },
-  {
-   "type": "calls",
-   "from": [1, 75],
-   "to": [4, 97]
+   "from": [1, 76],
+   "to": [16, 83]
   },
   {
    "type": "calls",
    "from": [1, 76],
-   "to": [5, 78]
+   "to": [4, 98]
+  },
+  {
+   "type": "calls",
+   "from": [1, 77],
+   "to": [5, 79]
   },
   {
    "type": "calls",
@@ -65,22 +65,22 @@
   },
   {
    "type": "calls",
-   "from": [5, 80],
+   "from": [5, 81],
    "to": [6, 251]
   },
   {
    "type": "calls",
    "from": [6, 256],
-   "to": [7, 316]
+   "to": [7, 320]
   },
   {
    "type": "calls",
-   "from": [7, 323],
-   "to": [14, 325]
+   "from": [7, 327],
+   "to": [14, 329]
   },
   {
    "type": "calls",
-   "from": [7, 323],
+   "from": [7, 327],
    "to": [15, 219]
   },
   {
@@ -110,7 +110,7 @@
   },
   {
    "type": "calls",
-   "from": [16, 88],
+   "from": [16, 89],
    "to": [6, 251]
   }
  ]

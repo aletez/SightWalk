@@ -1,18 +1,18 @@
 {
  "name": "The headers follow",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
- "story": "<here at=\"(a):100\">A header</here> shows <calls at=\"(a):100 (b):12\">its title and status</calls>, cut with \"…\" to its width. On the bench, <here at=\"(c):415\">names are cleaned</here> and <here at=\"(d):288\">variables shaded</here> as in the code.",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "story": "<here at=\"(a):106\">A header</here> shows <calls at=\"(a):106 (b):12\">its title and status</calls>, cut with \"…\" to its width. On the bench, <here at=\"(c):415\">names are cleaned</here> and <here at=\"(d):291\">variables shaded</here> as in the code.",
  "sights": [
-  "sw/subl_chat.py:100-122",
+  "sw/subl_chat.py:106-128",
   "sw/header.py:12-20",
   "sw/marks.py:415-417",
-  "sw/subl_chat.py:288-293"
+  "sw/subl_chat.py:291-296"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 106],
+   "from": [0, 112],
    "to": [1, 12]
   }
  ]

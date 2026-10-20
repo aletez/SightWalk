@@ -1,18 +1,18 @@
 {
  "name": "Seeing where the code asks",
  "kind": "run",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "The underline and the popup that says where the code asks the question.",
  "sights": [
   "sw/subl_asked.py:47-57",
   "sw/subl_asked.py:73-80",
   "sw/subl_asked.py:83-84",
-  "sw/subl_commands.py:527-529",
   "sw/subl_commands.py:531-533",
+  "sw/subl_commands.py:535-537",
   "sw/subl_asked.py:87-92",
   "sw/subl_asked.py:60-62",
   "sw/subl_asked.py:65-70",
-  "sw/subl_commands.py:539-540"
+  "sw/subl_commands.py:543-544"
  ],
  "transitions": [
   {
@@ -32,7 +32,7 @@
   },
   {
    "type": "calls",
-   "from": [4, 533],
+   "from": [4, 537],
    "to": [5, 87]
   },
   {
@@ -42,7 +42,7 @@
   },
   {
    "type": "calls",
-   "from": [8, 540],
+   "from": [8, 544],
    "to": [7, 65]
   }
  ]

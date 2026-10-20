@@ -1,30 +1,30 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "9aaa61b7d2b14887529dd5e8a0990711ecb8f48d",
+ "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
  "story": "Map and Scroll: the tab links, and the tab shown in the pane.",
  "sights": [
-  "sw/subl_reader.py:922-929",
+  "sw/subl_reader.py:928-936",
   "sw/subl_vetting.py:71-87",
   "sw/subl_vetting.py:64-68",
   "sw/subl_vetting.py:90-92",
   "sw/subl_vetting.py:104-118",
-  "sw/subl_commands.py:249-256",
+  "sw/subl_commands.py:250-257",
   "sw/subl_geometry.py:18-20",
-  "sw/subl_commands.py:482-485",
-  "sw/subl_reader.py:964-974",
+  "sw/subl_commands.py:486-489",
+  "sw/subl_reader.py:971-981",
   "sw/subl_vetting.py:40-48",
   "sw/subl_vetting.py:51-53",
-  "sw/subl_reader.py:912-914",
-  "sw/subl_reader.py:916-917",
-  "sw/subl_reader.py:919-920",
-  "sw/subl_reader.py:1229-1241"
+  "sw/subl_reader.py:918-920",
+  "sw/subl_reader.py:922-923",
+  "sw/subl_reader.py:925-926",
+  "sw/subl_reader.py:1280-1292"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 926],
-   "to": [14, 1229]
+   "from": [0, 932],
+   "to": [14, 1280]
   },
   {
    "type": "calls",
@@ -33,43 +33,43 @@
   },
   {
    "type": "calls",
-   "from": [5, 254],
+   "from": [5, 255],
    "to": [3, 90]
   },
   {
    "type": "calls",
-   "from": [5, 256],
-   "to": [0, 922]
+   "from": [5, 257],
+   "to": [0, 928]
   },
   {
    "type": "calls",
-   "from": [7, 485],
-   "to": [8, 964]
-  },
-  {
-   "type": "calls",
-   "from": [8, 967],
-   "to": [11, 912]
-  },
-  {
-   "type": "calls",
-   "from": [8, 971],
-   "to": [9, 40]
+   "from": [7, 489],
+   "to": [8, 971]
   },
   {
    "type": "calls",
    "from": [8, 974],
-   "to": [0, 922]
+   "to": [11, 918]
   },
   {
    "type": "calls",
-   "from": [12, 917],
-   "to": [11, 912]
+   "from": [8, 978],
+   "to": [9, 40]
   },
   {
    "type": "calls",
-   "from": [13, 920],
-   "to": [11, 912]
+   "from": [8, 981],
+   "to": [0, 928]
+  },
+  {
+   "type": "calls",
+   "from": [12, 923],
+   "to": [11, 918]
+  },
+  {
+   "type": "calls",
+   "from": [13, 926],
+   "to": [11, 918]
   }
  ]
 }

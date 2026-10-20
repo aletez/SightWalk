@@ -1,7 +1,7 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "SightWalk: Select Colour Scheme: general, light or dark, only schemes of that kind, previewed live in every trip; the files' hues derived from it again, the other views take it as it is.",
  "sights": [
   "sw/subl_commands.py:61-63",

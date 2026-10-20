@@ -1,7 +1,7 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "The marks an answer places with its own tags, resolved to sights and lines, framed in its words, the reader scrolled to show them.",
  "sights": [
   "sw/subl_executor.py:76-84",
@@ -22,11 +22,11 @@
   "sw/spec.py:58-64",
   "sw/spec.py:50-55",
   "sw/marks.py:386-398",
-  "sw/subl_reader.py:1234-1261",
-  "sw/subl_reader.py:1338-1352",
+  "sw/subl_reader.py:1252-1279",
+  "sw/subl_reader.py:1356-1370",
   "sw/subl_chat.py:263-266",
-  "sw/subl_reader.py:1263-1274",
-  "sw/subl_reader.py:1354-1371",
+  "sw/subl_reader.py:1281-1292",
+  "sw/subl_reader.py:1372-1389",
   "sw/subl_reader.py:1167-1176",
   "sw/subl_reader.py:1091-1100"
  ],
@@ -148,37 +148,37 @@
   },
   {
    "type": "calls",
-   "from": [18, 1239],
+   "from": [18, 1257],
    "to": [20, 263]
   },
   {
    "type": "calls",
-   "from": [18, 1244],
+   "from": [18, 1262],
    "to": [6, 91]
   },
   {
    "type": "calls",
-   "from": [18, 1245],
-   "to": [19, 1338]
+   "from": [18, 1263],
+   "to": [19, 1356]
   },
   {
    "type": "calls",
-   "from": [18, 1257],
-   "to": [21, 1263]
+   "from": [18, 1275],
+   "to": [21, 1281]
   },
   {
    "type": "calls",
-   "from": [21, 1266],
+   "from": [21, 1284],
    "to": [11, 14]
   },
   {
    "type": "calls",
-   "from": [22, 1358],
+   "from": [22, 1376],
    "to": [4, 401]
   },
   {
    "type": "calls",
-   "from": [22, 1369],
+   "from": [22, 1387],
    "to": [5, 689]
   },
   {

@@ -1,7 +1,7 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "primary+p joins words of the draft to selections in the sights, from either side; the words go out as a <here> tag, and a click on them shows their place.",
  "sights": [
   "sw/subl_commands.py:197-204",

@@ -1,7 +1,7 @@
 {
  "name": "The layout",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "From an offset to Sublime's layout: every sight's cells at its place, shifted.",
  "sights": [
   "sw/subl_reader.py:543-549",

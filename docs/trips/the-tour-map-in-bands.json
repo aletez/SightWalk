@@ -1,0 +1,41 @@
+{
+ "name": "The tour map in bands",
+ "kind": "run",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
+ "story": "dot lays the map out once to find each trip's frame; each band is drawn through a viewport and shown as a link that opens its trip.",
+ "sights": [
+  "sw/subl_vetting.py:230-237",
+  "sw/subl_vetting.py:240-257",
+  "sw/tourmap.py:76-82",
+  "sw/subl_vetting.py:271-279",
+  "sw/subl_vetting.py:260-265",
+  "sw/subl_vetting.py:282-294"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 237],
+   "to": [1, 240]
+  },
+  {
+   "type": "calls",
+   "from": [1, 246],
+   "to": [4, 260]
+  },
+  {
+   "type": "calls",
+   "from": [1, 250],
+   "to": [3, 271]
+  },
+  {
+   "type": "calls",
+   "from": [1, 251],
+   "to": [2, 76]
+  },
+  {
+   "type": "calls",
+   "from": [3, 278],
+   "to": [4, 260]
+  }
+ ]
+}

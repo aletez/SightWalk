@@ -1,11 +1,11 @@
 {
  "name": "Drawing the Map",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "The graph in dot's language, drawn by Graphviz off the main thread, shown as an image.",
  "sights": [
-  "sw/subl_vetting.py:129-137",
-  "sw/subl_vetting.py:122-126",
+  "sw/subl_vetting.py:130-138",
+  "sw/subl_vetting.py:123-127",
   "sw/callmap.py:120-141",
   "sw/callmap.py:93-99",
   "sw/callmap.py:70-73",
@@ -15,33 +15,33 @@
   "sw/callmap.py:66-67",
   "sw/callmap.py:102-106",
   "sw/callmap.py:109-117",
-  "sw/subl_vetting.py:140-152",
-  "sw/subl_vetting.py:155-157",
-  "sw/subl_vetting.py:166-181",
-  "sw/subl_vetting.py:184-189",
+  "sw/subl_vetting.py:141-153",
+  "sw/subl_vetting.py:156-158",
+  "sw/subl_vetting.py:167-182",
+  "sw/subl_vetting.py:185-190",
   "sw/subl_commands.py:475-476",
-  "sw/subl_vetting.py:192-195"
+  "sw/subl_vetting.py:193-196"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 132],
-   "to": [1, 122]
+   "from": [0, 133],
+   "to": [1, 123]
   },
   {
    "type": "calls",
-   "from": [0, 134],
-   "to": [16, 192]
-  },
-  {
-   "type": "calls",
-   "from": [0, 136],
-   "to": [2, 120]
+   "from": [0, 135],
+   "to": [16, 193]
   },
   {
    "type": "calls",
    "from": [0, 137],
-   "to": [11, 140]
+   "to": [2, 120]
+  },
+  {
+   "type": "calls",
+   "from": [0, 138],
+   "to": [11, 141]
   },
   {
    "type": "calls",
@@ -155,33 +155,33 @@
   },
   {
    "type": "calls",
-   "from": [11, 150],
-   "to": [16, 192]
+   "from": [11, 151],
+   "to": [16, 193]
   },
   {
    "type": "calls",
-   "from": [11, 152],
-   "to": [13, 166]
+   "from": [11, 153],
+   "to": [13, 167]
   },
   {
    "type": "calls",
-   "from": [13, 174],
-   "to": [12, 155]
+   "from": [13, 175],
+   "to": [12, 156]
   },
   {
    "type": "calls",
-   "from": [13, 181],
-   "to": [14, 184]
+   "from": [13, 182],
+   "to": [14, 185]
   },
   {
    "type": "calls",
-   "from": [14, 189],
-   "to": [13, 166]
+   "from": [14, 190],
+   "to": [13, 167]
   },
   {
    "type": "calls",
    "from": [15, 476],
-   "to": [14, 184]
+   "to": [14, 185]
   }
  ]
 }

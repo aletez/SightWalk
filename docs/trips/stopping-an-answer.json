@@ -1,23 +1,23 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "8e44c85318a146a3b099b3a07dd19f42743360af",
+ "commit": "18745731cb5f53d746cc17db13293d4cd1c24c00",
  "story": "Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.",
  "sights": [
   "sw/subl_commands.py:387-390",
-  "sw/subl_reader.py:1302-1309",
-  "sw/subl_reader.py:1311-1314"
+  "sw/subl_reader.py:1320-1327",
+  "sw/subl_reader.py:1329-1332"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 390],
-   "to": [1, 1302]
+   "to": [1, 1320]
   },
   {
    "type": "calls",
-   "from": [1, 1308],
-   "to": [2, 1311]
+   "from": [1, 1326],
+   "to": [2, 1329]
   }
  ]
 }

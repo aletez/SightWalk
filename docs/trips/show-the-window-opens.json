@@ -1,29 +1,29 @@
 {
  "name": "`show`: the window opens",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "<calls at=\"(a):215 (b):49\">On the main thread</calls>, show takes the trip with its story and <calls at=\"(b):49 (c):36\">opens a window</calls> when none is open. The reply <calls at=\"(b):49 (d):79\">names the sights</calls> as the user reads them, (a), (b), (c).",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "<calls at=\"(a):218 (b):49\">On the main thread</calls>, show takes the trip with its story and <calls at=\"(b):49 (c):36\">opens a window</calls> when none is open. The reply <calls at=\"(b):49 (d):82\">names the sights</calls> as the user reads them, (a), (b), (c).",
  "sights": [
-  "sw/subl_executor.py:215-231",
-  "sw/subl_executor.py:49-62",
+  "sw/subl_executor.py:218-234",
+  "sw/subl_executor.py:49-65",
   "sw/subl_executor.py:36-46",
-  "sw/subl_executor.py:79-81"
+  "sw/subl_executor.py:82-84"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 220],
+   "from": [0, 223],
    "to": [1, 49]
   },
   {
    "type": "calls",
-   "from": [1, 56],
+   "from": [1, 59],
    "to": [2, 36]
   },
   {
    "type": "calls",
-   "from": [1, 59],
-   "to": [3, 79]
+   "from": [1, 62],
+   "to": [3, 82]
   }
  ]
 }

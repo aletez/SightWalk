@@ -1,29 +1,29 @@
 {
  "name": "`show`: the files and functions",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "Before judging show, the executor <here at=\"(a):146\">gathers facts</here>: <calls at=\"(a):146 (b):163\">every sight's file</calls>, <calls at=\"(b):163 (c):31\">its lines</calls>, and <calls at=\"(a):146 (d):175\">the functions inside each range</calls>. <here at=\"(e):73\">Missing files and short ones</here> are refused together, so the guide fixes them at once.",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "Before judging show, the executor <here at=\"(a):149\">gathers facts</here>: <calls at=\"(a):149 (b):166\">every sight's file</calls>, <calls at=\"(b):166 (c):31\">its lines</calls>, and <calls at=\"(a):149 (d):178\">the functions inside each range</calls>. <here at=\"(e):73\">Missing files and short ones</here> are refused together, so the guide fixes them at once.",
  "sights": [
-  "sw/subl_executor.py:146-160",
-  "sw/subl_executor.py:163-172",
+  "sw/subl_executor.py:149-163",
+  "sw/subl_executor.py:166-175",
   "sw/subl_executor.py:31-33",
-  "sw/subl_executor.py:175-186",
+  "sw/subl_executor.py:178-189",
   "sw/validator.py:73-86"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 154],
-   "to": [1, 163]
+   "from": [0, 157],
+   "to": [1, 166]
   },
   {
    "type": "calls",
-   "from": [0, 155],
-   "to": [3, 175]
+   "from": [0, 158],
+   "to": [3, 178]
   },
   {
    "type": "calls",
-   "from": [1, 171],
+   "from": [1, 174],
    "to": [2, 31]
   }
  ]

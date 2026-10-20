@@ -1,7 +1,7 @@
 {
  "name": "`say`: on the bench",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "story": "<here at=\"(a):1424\">The reader says it</here>: <calls at=\"(a):1424 (b):198\">the text goes on the bench</calls> <calls at=\"(b):198 (c):28\">by an insert</calls> the guard lets through, and <calls at=\"(a):1424 (d):815\">the headers</calls> and <here at=\"(e):167\">the status line</here> follow the topic.",
  "sights": [
   "sw/subl_reader.py:1424-1437",

@@ -1,7 +1,7 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "story": "In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.",
  "sights": [
   "sw/subl_commands.py:507-518",
@@ -13,7 +13,7 @@
   "sw/subl_commands.py:336-340",
   "sw/subl_commands.py:298-299",
   "sw/subl_reader.py:227-235",
-  "sw/subl_executor.py:109-121",
+  "sw/subl_executor.py:112-124",
   "sw/subl_views.py:128-139"
  ],
  "transitions": [

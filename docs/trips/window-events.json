@@ -1,7 +1,7 @@
 {
  "name": "Window events",
  "kind": "survey",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "story": "Everything that reacts to the user's window: resizing, settings, focus, keys, closing.",
  "sights": [
   "sw/subl_reader.py:677-690",
@@ -11,7 +11,7 @@
   "sw/subl_geometry.py:37-39",
   "sw/subl_geometry.py:41-42",
   "sw/state.py:55-60",
-  "sw/subl_executor.py:124-131",
+  "sw/subl_executor.py:127-134",
   "sw/validator.py:193-201",
   "sw/subl_commands.py:294-296",
   "sw/subl_commands.py:238-248",

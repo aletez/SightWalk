@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "trips": [
   "../trips/registering-the-guide.json",
   "../trips/the-manual.json",
@@ -1125,7 +1125,7 @@
    "from": [
     "the-guide-s-first-words",
     2,
-    245
+    248
    ],
    "to": [
     "wait-for-user-a-message-sent"
@@ -1285,7 +1285,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     2,
-    234
+    237
    ],
    "to": [
     "a-tool-call-reaches-sublime-s-thread"
@@ -1296,7 +1296,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     2,
-    239
+    242
    ],
    "to": [
     "endings",
@@ -1309,7 +1309,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    205
+    208
    ],
    "to": [
     "a-tool-call-reaches-sublime-s-thread"
@@ -1320,12 +1320,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    208
+    211
    ],
    "to": [
     "show-the-files-and-functions",
     0,
-    146
+    149
    ]
   },
   {
@@ -1333,7 +1333,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    209
+    212
    ],
    "to": [
     "show-the-trip-judged",
@@ -1346,12 +1346,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    211
+    214
    ],
    "to": [
     "wait-for-user-a-message-sent",
     4,
-    245
+    248
    ]
   },
   {
@@ -1359,12 +1359,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "browse",
     1,
-    109
+    112
    ]
   },
   {
@@ -1372,12 +1372,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "close",
     1,
-    104
+    107
    ]
   },
   {
@@ -1385,12 +1385,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "open-trip",
     2,
-    134
+    137
    ]
   },
   {
@@ -1398,12 +1398,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "say-the-words-checked",
     0,
-    88
+    91
    ]
   },
   {
@@ -1411,12 +1411,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "settings",
     1,
-    124
+    127
    ]
   },
   {
@@ -1424,7 +1424,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "show-the-window-opens",
@@ -1437,12 +1437,12 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     3,
-    212
+    215
    ],
    "to": [
     "state",
     1,
-    99
+    102
    ]
   },
   {
@@ -1450,7 +1450,7 @@
    "from": [
     "a-tool-call-reaches-sublime-s-thread",
     4,
-    215
+    218
    ],
    "to": [
     "a-tool-call-reaches-sublime-s-thread"
@@ -1461,7 +1461,7 @@
    "from": [
     "show-the-files-and-functions",
     0,
-    146
+    149
    ],
    "to": [
     "show-the-files-and-functions"
@@ -1472,7 +1472,7 @@
    "from": [
     "show-the-files-and-functions",
     0,
-    148
+    151
    ],
    "to": [
     "endings",
@@ -1485,12 +1485,12 @@
    "from": [
     "show-the-files-and-functions",
     0,
-    157
+    160
    ],
    "to": [
     "open-trip",
     1,
-    189
+    192
    ]
   },
   {
@@ -1498,7 +1498,7 @@
    "from": [
     "show-the-files-and-functions",
     1,
-    163
+    166
    ],
    "to": [
     "show-the-files-and-functions"
@@ -1509,7 +1509,7 @@
    "from": [
     "show-the-files-and-functions",
     1,
-    168
+    171
    ],
    "to": [
     "show-the-trip-made",
@@ -1533,7 +1533,7 @@
    "from": [
     "show-the-files-and-functions",
     3,
-    175
+    178
    ],
    "to": [
     "show-the-files-and-functions"
@@ -1544,7 +1544,7 @@
    "from": [
     "show-the-files-and-functions",
     3,
-    184
+    187
    ],
    "to": [
     "show-the-trip-made",
@@ -1557,7 +1557,7 @@
    "from": [
     "show-the-files-and-functions",
     3,
-    185
+    188
    ],
    "to": [
     "show-one-function-a-sight",
@@ -1570,7 +1570,7 @@
    "from": [
     "show-the-files-and-functions",
     3,
-    185
+    188
    ],
    "to": [
     "show-one-function-a-sight",
@@ -1941,7 +1941,7 @@
    "from": [
     "show-the-window-opens",
     0,
-    215
+    218
    ],
    "to": [
     "a-tool-call-reaches-sublime-s-thread"
@@ -1994,7 +1994,7 @@
    "to": [
     "an-adventure-opens",
     1,
-    70
+    73
    ]
   },
   {
@@ -2015,7 +2015,7 @@
    "from": [
     "show-the-window-opens",
     1,
-    56
+    59
    ],
    "to": [
     "back-and-forward-through-trips",
@@ -2028,7 +2028,7 @@
    "from": [
     "show-the-window-opens",
     1,
-    58
+    61
    ],
    "to": [
     "plugin-start-and-stop",
@@ -2041,7 +2041,7 @@
    "from": [
     "show-the-window-opens",
     1,
-    59
+    62
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -2143,7 +2143,7 @@
    "from": [
     "show-the-window-opens",
     3,
-    79
+    82
    ],
    "to": [
     "show-the-window-opens"
@@ -2154,7 +2154,7 @@
    "from": [
     "show-the-window-opens",
     3,
-    81
+    84
    ],
    "to": [
     "sight-names",
@@ -2289,7 +2289,7 @@
    "from": [
     "wait-for-user-a-message-sent",
     4,
-    245
+    248
    ],
    "to": [
     "wait-for-user-a-message-sent"
@@ -2409,7 +2409,7 @@
    "from": [
     "say-the-words-checked",
     0,
-    88
+    91
    ],
    "to": [
     "say-the-words-checked"
@@ -2420,7 +2420,7 @@
    "from": [
     "say-the-words-checked",
     0,
-    91
+    94
    ],
    "to": [
     "say-marks-read",
@@ -2433,7 +2433,7 @@
    "from": [
     "say-the-words-checked",
     0,
-    92
+    95
    ],
    "to": [
     "endings",
@@ -2446,7 +2446,7 @@
    "from": [
     "say-the-words-checked",
     0,
-    92
+    95
    ],
    "to": [
     "say-on-the-bench",
@@ -4174,7 +4174,7 @@
    "from": [
     "state",
     1,
-    99
+    102
    ],
    "to": [
     "state"
@@ -4185,7 +4185,7 @@
    "from": [
     "state",
     1,
-    100
+    103
    ],
    "to": [
     "endings",
@@ -4198,7 +4198,7 @@
    "from": [
     "state",
     1,
-    101
+    104
    ],
    "to": [
     "building-blocks",
@@ -4211,12 +4211,12 @@
    "from": [
     "state",
     1,
-    101
+    104
    ],
    "to": [
     "show-the-window-opens",
     3,
-    79
+    82
    ]
   },
   {
@@ -4224,7 +4224,7 @@
    "from": [
     "state",
     1,
-    101
+    104
    ],
    "to": [
     "what-a-message-carries",
@@ -4248,7 +4248,7 @@
    "from": [
     "close",
     1,
-    104
+    107
    ],
    "to": [
     "close"
@@ -4259,7 +4259,7 @@
    "from": [
     "close",
     1,
-    105
+    108
    ],
    "to": [
     "endings",
@@ -4283,7 +4283,7 @@
    "from": [
     "settings",
     1,
-    124
+    127
    ],
    "to": [
     "settings"
@@ -4305,7 +4305,7 @@
    "from": [
     "browse",
     1,
-    109
+    112
    ],
    "to": [
     "browse"
@@ -4316,7 +4316,7 @@
    "from": [
     "browse",
     1,
-    112
+    115
    ],
    "to": [
     "endings",
@@ -4329,7 +4329,7 @@
    "from": [
     "browse",
     1,
-    113
+    116
    ],
    "to": [
     "an-adventure-opens",
@@ -4342,7 +4342,7 @@
    "from": [
     "browse",
     1,
-    116
+    119
    ],
    "to": [
     "show-the-window-opens",
@@ -4355,7 +4355,7 @@
    "from": [
     "browse",
     1,
-    117
+    120
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -4368,7 +4368,7 @@
    "from": [
     "browse",
     1,
-    118
+    121
    ],
    "to": [
     "loading-the-sights",
@@ -4381,7 +4381,7 @@
    "from": [
     "browse",
     1,
-    120
+    123
    ],
    "to": [
     "plugin-start-and-stop",
@@ -4570,7 +4570,7 @@
    "from": [
     "open-trip",
     1,
-    189
+    192
    ],
    "to": [
     "open-trip"
@@ -4581,7 +4581,7 @@
    "from": [
     "open-trip",
     1,
-    196
+    199
    ],
    "to": [
     "names-and-room",
@@ -4594,7 +4594,7 @@
    "from": [
     "open-trip",
     1,
-    197
+    200
    ],
    "to": [
     "building-blocks",
@@ -4607,12 +4607,12 @@
    "from": [
     "open-trip",
     1,
-    197
+    200
    ],
    "to": [
     "show-the-files-and-functions",
     1,
-    163
+    166
    ]
   },
   {
@@ -4620,12 +4620,12 @@
    "from": [
     "open-trip",
     1,
-    198
+    201
    ],
    "to": [
     "show-the-files-and-functions",
     3,
-    175
+    178
    ]
   },
   {
@@ -4633,7 +4633,7 @@
    "from": [
     "open-trip",
     2,
-    134
+    137
    ],
    "to": [
     "open-trip"
@@ -4644,12 +4644,12 @@
    "from": [
     "open-trip",
     2,
-    137
+    140
    ],
    "to": [
     "show-the-files-and-functions",
     0,
-    146
+    149
    ]
   },
   {
@@ -4657,7 +4657,7 @@
    "from": [
     "open-trip",
     2,
-    138
+    141
    ],
    "to": [
     "endings",
@@ -4670,12 +4670,12 @@
    "from": [
     "open-trip",
     2,
-    138
+    141
    ],
    "to": [
     "show-the-files-and-functions",
     0,
-    146
+    149
    ]
   },
   {
@@ -4683,7 +4683,7 @@
    "from": [
     "open-trip",
     2,
-    138
+    141
    ],
    "to": [
     "show-the-window-opens",
@@ -4696,7 +4696,7 @@
    "from": [
     "open-trip",
     2,
-    138
+    141
    ],
    "to": [
     "back-and-forward-through-trips",
@@ -4709,7 +4709,7 @@
    "from": [
     "open-trip",
     2,
-    140
+    143
    ],
    "to": [
     "plugin-start-and-stop",
@@ -4722,7 +4722,7 @@
    "from": [
     "open-trip",
     2,
-    141
+    144
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -4735,12 +4735,12 @@
    "from": [
     "open-trip",
     2,
-    141
+    144
    ],
    "to": [
     "show-the-window-opens",
     3,
-    79
+    82
    ]
   },
   {
@@ -4955,7 +4955,7 @@
    "from": [
     "plugin-start-and-stop",
     2,
-    264
+    267
    ],
    "to": [
     "plugin-start-and-stop"
@@ -10778,7 +10778,7 @@
    "from": [
     "window-events",
     7,
-    124
+    127
    ],
    "to": [
     "settings"
@@ -11616,7 +11616,7 @@
    "from": [
     "primary-g",
     9,
-    109
+    112
    ],
    "to": [
     "browse"
@@ -11627,7 +11627,7 @@
    "from": [
     "primary-g",
     9,
-    112
+    115
    ],
    "to": [
     "endings",
@@ -11640,7 +11640,7 @@
    "from": [
     "primary-g",
     9,
-    113
+    116
    ],
    "to": [
     "an-adventure-opens",
@@ -11653,7 +11653,7 @@
    "from": [
     "primary-g",
     9,
-    116
+    119
    ],
    "to": [
     "show-the-window-opens",
@@ -11666,7 +11666,7 @@
    "from": [
     "primary-g",
     9,
-    117
+    120
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -11679,7 +11679,7 @@
    "from": [
     "primary-g",
     9,
-    118
+    121
    ],
    "to": [
     "loading-the-sights",
@@ -11692,7 +11692,7 @@
    "from": [
     "primary-g",
     9,
-    120
+    123
    ],
    "to": [
     "plugin-start-and-stop",
@@ -11845,7 +11845,7 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    189
+    192
    ],
    "to": [
     "open-trip"
@@ -11856,7 +11856,7 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    193
+    196
    ],
    "to": [
     "open-trip",
@@ -11869,7 +11869,7 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    196
+    199
    ],
    "to": [
     "names-and-room",
@@ -11882,7 +11882,7 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    197
+    200
    ],
    "to": [
     "building-blocks",
@@ -11895,12 +11895,12 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    197
+    200
    ],
    "to": [
     "show-the-files-and-functions",
     1,
-    163
+    166
    ]
   },
   {
@@ -11908,12 +11908,12 @@
    "from": [
     "what-the-validator-refuses",
     7,
-    198
+    201
    ],
    "to": [
     "show-the-files-and-functions",
     3,
-    175
+    178
    ]
   },
   {
@@ -12607,7 +12607,7 @@
    "from": [
     "endings",
     15,
-    104
+    107
    ],
    "to": [
     "close"
@@ -12754,7 +12754,7 @@
    "from": [
     "names-and-room",
     9,
-    99
+    102
    ],
    "to": [
     "state"
@@ -12765,7 +12765,7 @@
    "from": [
     "names-and-room",
     9,
-    100
+    103
    ],
    "to": [
     "endings",
@@ -12778,7 +12778,7 @@
    "from": [
     "names-and-room",
     9,
-    101
+    104
    ],
    "to": [
     "building-blocks",
@@ -12791,12 +12791,12 @@
    "from": [
     "names-and-room",
     9,
-    101
+    104
    ],
    "to": [
     "show-the-window-opens",
     3,
-    79
+    82
    ]
   },
   {
@@ -12804,7 +12804,7 @@
    "from": [
     "names-and-room",
     9,
-    101
+    104
    ],
    "to": [
     "what-a-message-carries",
@@ -15849,7 +15849,7 @@
    "from": [
     "an-adventure-opens",
     1,
-    70
+    73
    ],
    "to": [
     "an-adventure-opens"
@@ -15860,7 +15860,7 @@
    "from": [
     "an-adventure-opens",
     1,
-    73
+    76
    ],
    "to": [
     "show-the-window-opens",
@@ -15873,7 +15873,7 @@
    "from": [
     "an-adventure-opens",
     1,
-    76
+    79
    ],
    "to": [
     "plugin-start-and-stop",

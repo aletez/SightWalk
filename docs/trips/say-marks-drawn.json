@@ -1,7 +1,7 @@
 {
  "name": "`say`: marks drawn",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "story": "<here at=\"(a):694\">The marks are pointed</here> in the code and <here at=\"(b):273\">framed on the bench</here>, <calls at=\"(b):273 (c):267\">past the blank lines</calls> above the transcript. <here at=\"(d):1455\">The answer keeps them</here>, with <here at=\"(e):1439\">the regions</here> each frame stands for.",
  "sights": [
   "sw/subl_reader.py:694-703",

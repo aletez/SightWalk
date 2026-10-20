@@ -1,11 +1,11 @@
 {
  "name": "`settings`",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "<here at=\"(a):193\">Only known settings</here> may change; <here at=\"(b):124\">the values</here> are saved and the rest returned.",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "<here at=\"(a):193\">Only known settings</here> may change; <here at=\"(b):127\">the values</here> are saved and the rest returned.",
  "sights": [
   "sw/validator.py:193-201",
-  "sw/subl_executor.py:124-131"
+  "sw/subl_executor.py:127-134"
  ],
  "transitions": []
 }

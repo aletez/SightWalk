@@ -1,11 +1,11 @@
 {
  "name": "`browse`",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "<here at=\"(a):187\">The folder must exist</here>; <here at=\"(b):109\">browse</here> <calls at=\"(b):109 (c):192\">opens a trip without sights</calls>, <here at=\"(d):198\">the folder's files</here> in their place.",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "<here at=\"(a):187\">The folder must exist</here>; <here at=\"(b):112\">browse</here> <calls at=\"(b):112 (c):192\">opens a trip without sights</calls>, <here at=\"(d):198\">the folder's files</here> in their place.",
  "sights": [
   "sw/validator.py:187-190",
-  "sw/subl_executor.py:109-121",
+  "sw/subl_executor.py:112-124",
   "sw/subl_reader.py:192-196",
   "sw/subl_reader.py:198-218"
  ],

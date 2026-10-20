@@ -48,7 +48,7 @@ The guide starts with a prompt and calls wait_for_user, which takes the message 
 
 - `sw/subl_guide.py:63-75` start
 - `sw/subl_guide.py:20-25` PROMPT
-- `sw/subl_executor.py:245-259` wait_for_user
+- `sw/subl_executor.py:248-262` wait_for_user
 
 ## 6. An MCP request over HTTP (5 views)
 
@@ -74,18 +74,18 @@ From the HTTP thread to Sublime's main thread and back with the result.
 
 - `sw/subl_mcp_http.py:23-35` call_tool
 - `sw/subl_mcp_http.py:38-47` tool_result
-- `sw/subl_executor.py:234-242` wait_until_ready
-- `sw/subl_executor.py:205-212` execute
-- `sw/subl_executor.py:215-231` run_on_main
+- `sw/subl_executor.py:237-245` wait_until_ready
+- `sw/subl_executor.py:208-215` execute
+- `sw/subl_executor.py:218-234` run_on_main
 
 ## 9. `show`: the files and functions (5 views)
 
 The facts show is judged by: each sight's file and the functions in its lines.
 
-- `sw/subl_executor.py:146-160` facts
-- `sw/subl_executor.py:163-172` sight_files
+- `sw/subl_executor.py:149-163` facts
+- `sw/subl_executor.py:166-175` sight_files
 - `sw/subl_executor.py:31-33` file_lines
-- `sw/subl_executor.py:175-186` sight_functions
+- `sw/subl_executor.py:178-189` sight_functions
 - `sw/validator.py:73-86` files
 
 ## 10. `show`: one function a sight (5 views)
@@ -122,10 +122,10 @@ The sights parsed and the trip built as a network whose transitions fit it.
 
 show runs on the main thread: the trip visited in its window, its sights named.
 
-- `sw/subl_executor.py:215-231` run_on_main
-- `sw/subl_executor.py:49-62` op_show
+- `sw/subl_executor.py:218-234` run_on_main
+- `sw/subl_executor.py:49-65` op_show
 - `sw/subl_executor.py:36-46` new_reader
-- `sw/subl_executor.py:79-81` named
+- `sw/subl_executor.py:82-84` named
 
 ## 14. `wait_for_user`: a message sent (5 views)
 
@@ -135,7 +135,7 @@ The draft becomes a message in the shared inbox, and the guide's wait returns it
 - `sw/subl_chat.py:210-223` take_draft
 - `sw/subl_commands.py:32-41` send
 - `sw/state.py:37-38` reader_for
-- `sw/subl_executor.py:245-259` wait_for_user
+- `sw/subl_executor.py:248-262` wait_for_user
 
 ## 15. What a message carries (4 views)
 
@@ -150,7 +150,7 @@ Here, the selection, the visible sights and the edits that go with every message
 
 An answer's words before they reach the bench: tags removed, no line numbers, names marked.
 
-- `sw/subl_executor.py:88-96` op_say
+- `sw/subl_executor.py:91-99` op_say
 - `sw/marks.py:199-214` untag
 - `sw/marks.py:426-428` line_refs
 - `sw/marks.py:170-172` speaks_of_code
@@ -247,28 +247,28 @@ A click on framed words shows their places; on an answer's label, its marks.
 What the guide may ask at any time: the sights, the visible ones, here.
 
 - `sw/validator.py:178-179` check_state
-- `sw/subl_executor.py:99-101` op_state
+- `sw/subl_executor.py:102-104` op_state
 
 ## 27. `close` (2 views)
 
 The guide closes the trip's window.
 
 - `sw/validator.py:182-184` check_close
-- `sw/subl_executor.py:104-106` op_close
+- `sw/subl_executor.py:107-109` op_close
 
 ## 28. `settings` (2 views)
 
 The settings the guide may read and change.
 
 - `sw/validator.py:193-201` check_settings
-- `sw/subl_executor.py:124-131` op_settings
+- `sw/subl_executor.py:127-134` op_settings
 
 ## 29. `browse` (4 views)
 
 A trip with no sights: the folder's files in their place.
 
 - `sw/validator.py:187-190` check_browse
-- `sw/subl_executor.py:109-121` op_browse
+- `sw/subl_executor.py:112-124` op_browse
 - `sw/subl_reader.py:192-196` Reader.open_empty
 - `sw/subl_reader.py:198-218` Reader.empty_layout
 
@@ -277,8 +277,8 @@ A trip with no sights: the folder's files in their place.
 A trip opened from its file instead of composed with show.
 
 - `sw/validator.py:130-135` check_open_trip
-- `sw/subl_executor.py:189-198` trip_file
-- `sw/subl_executor.py:134-141` op_open_trip
+- `sw/subl_executor.py:192-201` trip_file
+- `sw/subl_executor.py:137-144` op_open_trip
 - `sw/ontology.py:266-269` trip_from
 
 ## 31. Writing an informator (4 views)
@@ -296,7 +296,7 @@ Sublime loads the plugin, which starts its MCP server; a new port restarts it; o
 
 - `sight_walk.py:45-52` plugin_loaded
 - `sw/subl_mcp_http.py:142-145` start
-- `sw/subl_executor.py:264-268` load_config
+- `sw/subl_executor.py:267-271` load_config
 - `sw/subl_mcp_http.py:118-122` start_server
 - `sw/subl_mcp_http.py:133-139` settings_changed
 - `sw/subl_mcp_http.py:125-130` stop_server
@@ -599,7 +599,7 @@ Everything that reacts to the user's window: resizing, settings, focus, keys, cl
 - `sw/subl_geometry.py:37-39` Geometry.strip_share
 - `sw/subl_geometry.py:41-42` Geometry.bench_side
 - `sw/state.py:55-60` render_all
-- `sw/subl_executor.py:124-131` op_settings
+- `sw/subl_executor.py:127-134` op_settings
 - `sw/validator.py:193-201` check_settings
 - `sw/subl_commands.py:294-296` SightWalkWindowListener.on_activated
 - `sw/subl_commands.py:238-248` SightWalkHeaderListener.on_hover
@@ -650,7 +650,7 @@ In a trip: from the sights to the bench and back. Elsewhere: to the open trip, o
 - `sw/subl_commands.py:336-340` SightWalkWindowListener.offer_to_browser
 - `sw/subl_commands.py:298-299` SightWalkWindowListener.on_load
 - `sw/subl_reader.py:227-235` Reader.take_file
-- `sw/subl_executor.py:109-121` op_browse
+- `sw/subl_executor.py:112-124` op_browse
 - `sw/subl_views.py:128-139` make_browser
 
 ## 51. What the validator refuses (16 views, survey)
@@ -664,7 +664,7 @@ Every refusal of the guide's calls, judged before the executor acts, with the fa
 - `sw/validator.py:73-86` files
 - `sw/validator.py:123-127` check_show
 - `sw/validator.py:130-135` check_open_trip
-- `sw/subl_executor.py:189-198` trip_file
+- `sw/subl_executor.py:192-201` trip_file
 - `sw/validator.py:138-159` check_say
 - `sw/validator.py:162-166` mask
 - `sw/validator.py:169-175` crowded_lines
@@ -714,7 +714,7 @@ The guide is stopped, windows close.
 - `sw/subl_reader.py:894-906` Reader.reset_sights
 - `sw/subl_commands.py:383-385` SightWalkResetSightsCommand.is_enabled
 - `sw/state.py:29-34` forget
-- `sw/subl_executor.py:104-106` op_close
+- `sw/subl_executor.py:107-109` op_close
 - `sw/state.py:41-42` current_reader
 
 ## 55. Names and room (12 views, survey)
@@ -730,7 +730,7 @@ How files and sights are named, and how much room the Sights and the bench get.
 - `sw/subl_geometry.py:60-62` Geometry.head
 - `sw/subl_geometry.py:69-71` Geometry.room
 - `sw/subl_views.py:207-212` smaller
-- `sw/subl_executor.py:99-101` op_state
+- `sw/subl_executor.py:102-104` op_state
 - `sw/subl_reader.py:1417-1422` Reader.folder
 - `sw/subl_reader.py:1399-1401` Reader.note_waiting
 
@@ -931,7 +931,7 @@ dot lays the map out once to find each trip's frame; the picture is cut into til
 show with aside: the trip recorded with its mother and opened in a window of its own, starting from the question that called it and the guide's reason.
 
 - `sw/subl_reader.py:1074-1082` Reader.go_on_adventure
-- `sw/subl_executor.py:70-76` open_adventure
+- `sw/subl_executor.py:73-79` open_adventure
 - `sw/subl_reader.py:1084-1094` Reader.adventure
 - `sw/subl_chat.py:75-76` transcript
 

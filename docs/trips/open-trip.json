@@ -1,18 +1,18 @@
 {
  "name": "`open_trip`",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "<here at=\"(b):189\">The file is read</here> and <here at=\"(a):130\">judged</here> like show; <calls at=\"(c):134 (d):266\">the trip is made from it</calls>, its story included, and <here at=\"(c):134\">visited</here> in the window.",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "<here at=\"(b):192\">The file is read</here> and <here at=\"(a):130\">judged</here> like show; <calls at=\"(c):137 (d):266\">the trip is made from it</calls>, its story included, and <here at=\"(c):137\">visited</here> in the window.",
  "sights": [
   "sw/validator.py:130-135",
-  "sw/subl_executor.py:189-198",
-  "sw/subl_executor.py:134-141",
+  "sw/subl_executor.py:192-201",
+  "sw/subl_executor.py:137-144",
   "sw/ontology.py:266-269"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [1, 193],
+   "from": [1, 196],
    "to": [3, 266]
   }
  ]

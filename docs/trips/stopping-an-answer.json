@@ -1,7 +1,7 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
  "story": "<here at=\"(a):391\">Esc</here> <calls at=\"(a):391 (b):1403\">stops the answer</calls>: the guide's next call is refused until it waits again, and <calls at=\"(b):1403 (c):1412\">the messages it has not read</calls> are taken back.",
  "sights": [
   "sw/subl_commands.py:391-394",

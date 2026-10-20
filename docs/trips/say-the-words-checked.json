@@ -1,10 +1,10 @@
 {
  "name": "`say`: the words checked",
  "kind": "run",
- "commit": "b42ed5eec7fec88f0fcd63afbc8519b02eaa1562",
- "story": "<here at=\"(a):88\">say</here> <calls at=\"(a):88 (b):199\">reads the tags</calls> out of the text. The validator refuses <here at=\"(c):426\">line numbers</here>, and an answer that <here at=\"(d):170\">speaks of code</here>, by <here at=\"(e):167\">its words</here>, without marking it: <here at=\"(f):14\">mark first</here>.",
+ "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "story": "<here at=\"(a):91\">say</here> <calls at=\"(a):91 (b):199\">reads the tags</calls> out of the text. The validator refuses <here at=\"(c):426\">line numbers</here>, and an answer that <here at=\"(d):170\">speaks of code</here>, by <here at=\"(e):167\">its words</here>, without marking it: <here at=\"(f):14\">mark first</here>.",
  "sights": [
-  "sw/subl_executor.py:88-96",
+  "sw/subl_executor.py:91-99",
   "sw/marks.py:199-214",
   "sw/marks.py:426-428",
   "sw/marks.py:170-172",
@@ -14,7 +14,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 91],
+   "from": [0, 94],
    "to": [1, 199]
   }
  ]

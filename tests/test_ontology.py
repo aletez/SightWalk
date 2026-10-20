@@ -143,7 +143,7 @@ class TourOrderTest(unittest.TestCase):
     def test_what_is_needed_comes_first(self):
         a, b, c = trips("A", "B", "C")
         informator = Informator("I", [a, b, c], [
-            Transition("leads_to", ("a",), ("b",)), Transition("underlies", ("c",), ("b",))])
+            Transition("leads_to", ("a",), ("b",)), Transition("unblocks", ("c",), ("b",))])
         self.assertEqual([t.id for t in tour(informator)], ["a", "c", "b"])
         self.assertEqual([t.id for t in tour(informator, ("leads_to",))], ["a", "b", "c"])
 
@@ -218,7 +218,12 @@ if __name__ == "__main__":
 
 
 class OldFiles(unittest.TestCase):
-    def test_101s_reads_as_underlies_swapped(self):
+    def test_101s_reads_as_unblocks_swapped(self):
         from sw.ontology import transition_from
         t = transition_from({"type": "101s", "from": [1, 5], "to": [0, 3]})
-        self.assertEqual(t.parts(), ("underlies", (0, 3), (1, 5)))
+        self.assertEqual(t.parts(), ("unblocks", (0, 3), (1, 5)))
+
+    def test_underlies_reads_as_unblocks(self):
+        from sw.ontology import transition_from
+        t = transition_from({"type": "underlies", "from": [0, 3], "to": [1, 5]})
+        self.assertEqual(t.parts(), ("unblocks", (0, 3), (1, 5)))

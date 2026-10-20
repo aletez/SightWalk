@@ -40,7 +40,8 @@ Showing code
   calls        the calling line → the line of the definition it reaches. Name every one.
   returns      a line giving control back → the line of the call it returns to.
   leads_to     where the story goes on, though no code calls it (an event handled later).
-  underlies    the source must be understood to understand the target, so it comes first.
+  unblocks     the source must be understood to understand the target, so it comes first
+               (about understanding, not about threads or locks).
   passes_data  a value made at the source is used at the target.
   comparable   source and target are worth comparing (direction means nothing).
   The Map tab draws exactly these arrows, each type its own way, and never guesses.
@@ -113,7 +114,7 @@ Indicators
   <here at="(a):33 (b):41" icon="A B">both lines</here>  several places, one sign each, in
      order, or one sign for all.
   <calls at="(a):33 (b):41">calls</calls>  a jump of control from the first place to the
-     second; the same for returns, leads_to, underlies, passes_data, comparable (sugar for
+     second; the same for returns, leads_to, unblocks, passes_data, comparable (sugar for
      <here at="(a):33 (b):41" jump="calls">). The words are framed in the jump's colour, its
      ends get arrows, and the Map draws it as a transition. <calls at="(a):33 (b):41"></calls>
      with no words draws only the arrow on the Map.

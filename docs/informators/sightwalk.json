@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
+ "commit": "3b000487a2137566517764a3993974d8b20697e0",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -382,7 +382,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "the-ontology-networks"
    ],
@@ -391,7 +391,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "the-ontology-collections-and-sights"
    ],
@@ -400,7 +400,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "building-blocks"
    ],
@@ -409,7 +409,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "names-and-room"
    ],
@@ -418,7 +418,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "settings-and-the-rest-of-the-colours"
    ],
@@ -427,7 +427,7 @@
    ]
   },
   {
-   "type": "underlies",
+   "type": "unblocks",
    "from": [
     "window-events"
    ],
@@ -9256,7 +9256,7 @@
    "from": [
     "what-the-agent-is-told",
     2,
-    51
+    52
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9267,7 +9267,7 @@
    "from": [
     "what-the-agent-is-told",
     3,
-    56
+    57
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9278,7 +9278,7 @@
    "from": [
     "what-the-agent-is-told",
     4,
-    104
+    105
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9289,7 +9289,7 @@
    "from": [
     "what-the-agent-is-told",
     5,
-    154
+    155
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9300,7 +9300,7 @@
    "from": [
     "what-the-agent-is-told",
     6,
-    160
+    161
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9311,7 +9311,7 @@
    "from": [
     "what-the-agent-is-told",
     7,
-    165
+    166
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9487,7 +9487,7 @@
    "to": [
     "trip-files",
     1,
-    263
+    266
    ]
   },
   {
@@ -9757,7 +9757,7 @@
    "from": [
     "one-tool-call-over-http",
     4,
-    154
+    155
    ],
    "to": [
     "what-the-agent-is-told"
@@ -11683,7 +11683,7 @@
    "from": [
     "an-informator-and-its-tour",
     9,
-    300
+    303
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11694,7 +11694,7 @@
    "from": [
     "an-informator-and-its-tour",
     9,
-    301
+    304
    ],
    "to": [
     "the-ontology-networks",
@@ -11707,7 +11707,7 @@
    "from": [
     "an-informator-and-its-tour",
     9,
-    305
+    308
    ],
    "to": [
     "the-ontology-networks",
@@ -11720,7 +11720,7 @@
    "from": [
     "an-informator-and-its-tour",
     9,
-    305
+    308
    ],
    "to": [
     "the-ontology-networks",
@@ -11733,7 +11733,7 @@
    "from": [
     "an-informator-and-its-tour",
     10,
-    279
+    282
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11744,7 +11744,7 @@
    "from": [
     "an-informator-and-its-tour",
     10,
-    282
+    285
    ],
    "to": [
     "the-ontology-networks",
@@ -11757,7 +11757,7 @@
    "from": [
     "an-informator-and-its-tour",
     11,
-    263
+    266
    ],
    "to": [
     "trip-files"
@@ -11768,7 +11768,7 @@
    "from": [
     "an-informator-and-its-tour",
     11,
-    264
+    267
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -11781,7 +11781,7 @@
    "from": [
     "an-informator-and-its-tour",
     11,
-    264
+    267
    ],
    "to": [
     "the-ontology-networks",
@@ -11805,7 +11805,7 @@
    "from": [
     "an-informator-and-its-tour",
     12,
-    254
+    257
    ],
    "to": [
     "the-ontology-networks",
@@ -12028,7 +12028,7 @@
    "from": [
     "an-informator-and-its-tour",
     25,
-    286
+    289
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -12252,7 +12252,7 @@
    "from": [
     "trip-files",
     1,
-    263
+    266
    ],
    "to": [
     "trip-files"
@@ -12263,7 +12263,7 @@
    "from": [
     "trip-files",
     1,
-    264
+    267
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -12276,7 +12276,7 @@
    "from": [
     "trip-files",
     1,
-    264
+    267
    ],
    "to": [
     "the-ontology-networks",
@@ -12289,7 +12289,7 @@
    "from": [
     "trip-files",
     1,
-    265
+    268
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -12302,7 +12302,7 @@
    "from": [
     "trip-files",
     2,
-    257
+    260
    ],
    "to": [
     "trip-files"
@@ -12313,7 +12313,7 @@
    "from": [
     "trip-files",
     2,
-    259
+    262
    ],
    "to": [
     "the-ontology-collections-and-sights",
@@ -12337,7 +12337,7 @@
    "from": [
     "trip-files",
     4,
-    269
+    272
    ],
    "to": [
     "trip-files"
@@ -12348,7 +12348,7 @@
    "from": [
     "trip-files",
     5,
-    293
+    296
    ],
    "to": [
     "trip-files"
@@ -12359,7 +12359,7 @@
    "from": [
     "trip-files",
     5,
-    296
+    299
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -12372,7 +12372,7 @@
    "from": [
     "trip-files",
     5,
-    297
+    300
    ],
    "to": [
     "an-informator-and-its-tour",

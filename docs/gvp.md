@@ -82,7 +82,7 @@ From `sw/ontology.py` and DECISIONS.md, "Ontology".
   | `calls`       | the calling line → the line of the definition it reaches (every one must be named) |
   | `returns`     | a line giving control back → the line of the call it returns to |
   | `leads_to`    | where the story goes on, though no code calls it |
-  | `underlies`   | the source must be understood to understand the target, so it comes first (old files' `101s`, its ends swapped) |
+  | `unblocks`    | the source must be understood to understand the target, so it comes first, as one task unblocks another (old files' `101s`, its ends swapped; `underlies` as is) |
   | `passes_data` | a value made at the source is used at the target |
   | `comparable`  | worth comparing; direction means nothing |
 
@@ -94,8 +94,8 @@ From `sw/ontology.py` and DECISIONS.md, "Ontology".
   trip by its id. It may keep each trip's conversation (transcripts). The ontology does not
   check coverage; SightWalk's `tools/trips.py` does for its own informator.
 - **Tour**: one informator's trips in one order. Either laid out from the informator by
-  transition types (default `leads_to` and `underlies`: from each trip nothing leads to, along
-  `leads_to` depth first, a trip that underlies another before it), or chosen and ordered
+  transition types (default `leads_to` and `unblocks`: from each trip nothing leads to, along
+  `leads_to` depth first, a trip that unblocks another before it), or chosen and ordered
   by an author under a name.
 - **Commit**: a trip and an informator may name the commit their line numbers are counted in.
   Nothing in the live protocol uses it yet (see 9.1).
@@ -136,7 +136,7 @@ Schema of a transition in `show` (`sw/manual.py`, `TRANSITION`):
 
 ```json
 {"type": "object", "required": ["type", "from", "to"], "properties": {
-  "type": {"type": "string", "enum": ["calls", "returns", "leads_to", "underlies", "passes_data", "comparable"]},
+  "type": {"type": "string", "enum": ["calls", "returns", "leads_to", "unblocks", "passes_data", "comparable"]},
   "from": {"type": "string"}, "to": {"type": "string"}}}
 ```
 
@@ -252,7 +252,7 @@ Guide and user write one markup (2026-10-20). Tags live in `say`'s text and in t
 |-----|-------|
 | `<here at="(c):34-36 (d):12">this check</here>` | the enclosed words are about exactly those places, whole lines or characters (`(c):34:12-16`). From the user, a link to characters of one line carries them too, `code="token"`, so the guide can check the place by the code. User's tags nest where phrases nest; they never cross. |
 | `icon="1"` on `here` | each place's first line gets an icon: one sign for all places, or one per place in order (`icon="A B"`). A sign is a short mark, a digit or letter, an emoji, or a path to an image; a tool draws what it can and may skip the rest. Never with a place naming a sight alone. In SightWalk: a digit `1`–`9` (an ordered relation) or a capital `A`–`Z` (unordered lines). |
-| `jump="calls"` on `here` | exactly two places, source then target, joined by a transition of that type (`calls`, `returns`, `leads_to`, `underlies`, `passes_data`, `comparable`). No `icon`. |
+| `jump="calls"` on `here` | exactly two places, source then target, joined by a transition of that type (`calls`, `returns`, `leads_to`, `unblocks`, `passes_data`, `comparable`). No `icon`. |
 | `<calls at="A B">words</calls>` | sugar for `<here at="A B" jump="calls">words</here>`, one tag per transition type. Empty, `<calls at="A B"></calls>`, it adds only the arrow on the Map: the one markup with no place in the text. |
 | `<func>`, `<class>`, `<var>`, `<str>` | the enclosed text is a name of code: function or method; class or type; variable, parameter or attribute; a short string of code. |
 

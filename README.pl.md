@@ -103,8 +103,8 @@ przez przewodnika jako strzałki](docs/images/map.jpg)
 
 Panel Narzędzi pod ławką rysuje wycieczkę jako graf wywołań (przez Graphviz). Każdy widok to
 prostokąt w swojej klasie i pliku, a każde przejście nazwane przez przewodnika to strzałka.
-Każdy typ ma własny wygląd: `calls`, `returns`, `leads_to`, `passes_data`, `underlies` (leży u
-podstaw: trzeba zrozumieć najpierw), `comparable`. Mapa pokazuje dokładnie to, co zadeklarował przewodnik, i
+Każdy typ ma własny wygląd: `calls`, `returns`, `leads_to`, `passes_data`, `unblocks` (odblokowuje:
+trzeba zrozumieć najpierw), `comparable`. Mapa pokazuje dokładnie to, co zadeklarował przewodnik, i
 niczego nie zgaduje. Gdy rysunek jest zły, zła jest relacja przewodnika, a to już samo w sobie
 jest znaleziskiem.
 

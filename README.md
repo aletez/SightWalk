@@ -101,7 +101,7 @@ transitions as arrows](docs/images/map.jpg)
 
 The Tools pane under the bench draws the trip as a call graph (with Graphviz): every sight a box
 in its class and file, every transition the guide named an arrow, each type drawn its own way:
-`calls`, `returns`, `leads_to`, `passes_data`, `underlies` (understood first), `comparable`.
+`calls`, `returns`, `leads_to`, `passes_data`, `unblocks` (understood first), `comparable`.
 The Map shows exactly what the guide declared and never guesses: when the drawing is wrong,
 the guide's account is wrong, which is itself a finding.
 

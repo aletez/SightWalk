@@ -227,7 +227,7 @@ ATTRIBUTE = re.compile(r'([a-z]+)="([^"<>]*)"')
 MARK_FORM = ('<here at="(c):34" icon="1">this check</here> for a line with its icon (a sight\'s '
              'name and a file line; a digit 1-9 or a capital A-Z), <here at="(c):34:12-16">this '
              'name</here> for a place without an icon, <calls at="(a):33 (b):41">calls</calls> '
-             'for a jump (or returns, leads_to, underlies, passes_data, comparable)')
+             'for a jump (or returns, leads_to, unblocks, passes_data, comparable)')
 
 
 def mark_attributes(tag, attributes):

@@ -14,7 +14,7 @@ STYLES = {
     "calls": "",
     "returns": "style=dashed, arrowhead=vee",
     "leads_to": "penwidth=2.5",
-    "underlies": "style=dotted, arrowhead=diamond",
+    "unblocks": "style=dotted, arrowhead=diamond",
     "passes_data": 'color="#2C6ED5", arrowhead=dot',
     "comparable": "style=dotted, dir=none",
 }

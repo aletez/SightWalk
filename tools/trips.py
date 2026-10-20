@@ -16,10 +16,104 @@ import sys
 sys.path.insert(0, ".")
 from sw.ontology import (Tour, Informator, Transition, Trip, Sight, dumps,  # noqa: E402
                          tour_data, informator_data, trip_data)
+from sw.spec import sight_index  # noqa: E402
 
 FILES = sorted(glob.glob("sw/*.py")) + ["sight_walk.py"]
 
 TRIPS = [
+    ("Registering the guide",
+     "The setup command keeps a token, writes it for poke, and puts Claude Code's registration line on the clipboard.",
+     ["subl_setup.SightWalkSetupCommand.run", "subl_setup.ensure_token", "subl_setup.write_config", "subl_setup.show_instructions", "subl_commands.SightWalkReplaceCommand.run"]),
+    ("The manual",
+     "What every guide reads at its start: how to compose trips, show code, talk and mark.",
+     ["manual.MANUAL: opening", "manual.MANUAL: Showing code", "manual.MANUAL: Writing code that fits the reader", "manual.MANUAL: Conversation", "manual.MANUAL: Indicators"]),
+    ("The tools' schemas",
+     "The tools a guide may call, their parameters, and the fields that permit its other work.",
+     ["manual.tool", "manual.TOOLS", "manual.TRANSITION", "validator.TRANSITION_FORM", "permissions.FIELDS"]),
+    ("A guide started from Sublime",
+     "When no agent listens, asking the guide starts one.",
+     ["subl_guide.await_answer", "subl_guide.ensure", "subl_guide.listening", "subl_guide.running", "subl_guide.find_claude"]),
+    ("The guide's first words",
+     "The guide starts with a prompt and calls wait_for_user, which takes the message waiting.",
+     ["subl_guide.start", "subl_guide.PROMPT", "subl_executor.wait_for_user"]),
+    ("An MCP request over HTTP",
+     "A JSON-RPC message posted to the plugin, its token checked, answered.",
+     ["subl_mcp_http.Handler.do_POST", "subl_mcp_http.Handler.authorized", "subl_mcp_http.reply", "subl_mcp_http.answer", "subl_mcp_http.Handler.send"]),
+    ("The other HTTP verbs",
+     "What the server says to GET and DELETE, and the log it keeps quiet.",
+     ["subl_mcp_http.Handler.do_GET", "subl_mcp_http.Handler.do_DELETE", "subl_mcp_http.Handler.log_message"]),
+    ("A tool call reaches Sublime's thread",
+     "From the HTTP thread to Sublime's main thread and back with the result.",
+     ["subl_mcp_http.call_tool", "subl_mcp_http.tool_result", "subl_executor.wait_until_ready", "subl_executor.execute", "subl_executor.run_on_main"]),
+    ("show: the files and functions",
+     "The facts show is judged by: each sight's file and the functions in its lines.",
+     ["subl_executor.facts", "subl_executor.sight_files", "subl_executor.file_lines", "subl_executor.sight_functions", "validator.files"]),
+    ("show: one function a sight",
+     "How the functions and classes in a sight are found, and the rule that a sight holds one.",
+     ["spec.functions_in", "spec.units_in", "spec.blocks_in", "spec.open_above", "validator.one_function"]),
+    ("show: the trip judged",
+     "The validator's entry, show's checks, and the trip's places read.",
+     ["validator.check", "validator.check_show", "validator.not_stopped", "validator.trip_of", "marks.trip_place"]),
+    ("show: the trip made",
+     "The sights parsed and the trip built as a network whose transitions fit it.",
+     ["spec.parse_spec", "ontology.Sight.parse", "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem"]),
+    ("show: the window opens",
+     "show runs on the main thread: the trip visited in its window, its sights named.",
+     ["subl_executor.run_on_main", "subl_executor.op_show", "subl_executor.new_reader", "subl_executor.named"]),
+    ("wait_for_user: a message sent",
+     "The draft becomes a message in the shared inbox, and the guide's wait returns it.",
+     ["subl_commands.SightWalkSendCommand.run", "subl_chat.take_draft", "subl_commands.send", "state.reader_for", "subl_executor.wait_for_user"]),
+    ("What a message carries",
+     "Here, the selection, the visible sights and the edits that go with every message.",
+     ["subl_reader.Reader.context", "subl_views.selected_text", "plan.visible_specs", "subl_reader.Reader.take_edits"]),
+    ("say: the words checked",
+     "An answer's words before they reach the bench: tags removed, no line numbers, names marked.",
+     ["subl_executor.op_say", "marks.untag", "marks.line_refs", "marks.speaks_of_code", "marks.CODE_TALK", "validator.MARK_FIRST"]),
+    ("say: on the bench",
+     "The answer appended to the bench, the headers and status line updated.",
+     ["subl_reader.Reader.say", "subl_chat.say", "subl_commands.SightWalkInsertCommand.run", "subl_reader.Reader.show_headers", "subl_chat.show_status"]),
+    ("The headers follow",
+     "A header's title and status cut to its width, and the bench's names shaded.",
+     ["subl_chat.show_header", "header.title_lines", "marks.clean", "subl_chat.shade_variables"]),
+    ("The transcript guard",
+     "What was said cannot be edited: only the draft after the prompt may change.",
+     ["subl_chat.Guard.on_text_changed", "subl_chat.protected_end", "subl_commands.SightWalkChatListener.on_modified", "subl_commands.SightWalkChatListener.on_post_text_command"]),
+    ("Stopping an answer",
+     "Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.",
+     ["subl_commands.SightWalkStopAnswerCommand.run", "subl_reader.Reader.stop_answer", "subl_reader.Reader.withdraw_unread_messages"]),
+    ("say: marks read",
+     "The answer's tags read into marks and the frames around their words.",
+     ["marks.read_marks", "marks.mark_attributes", "marks.tag_marks", "marks.frame_scopes", "marks.trip_place"]),
+    ("say: marks resolved",
+     "Each mark resolved to a sight and a line, a jump to its two ends, an icon chosen.",
+     ["marks.resolve_marks", "marks.jump", "marks.resolve_target", "marks.sight_target", "marks.icon_for"]),
+    ("Sight names",
+     "(a), (b), (c): the names the user reads, and the guide writes.",
+     ["marks.sight_refs", "marks.sight_number", "spec.sight_index", "spec.sight_name", "marks.line_y"]),
+    ("say: marks drawn",
+     "The marks drawn in the gutter and as frames on the bench, kept with their answer.",
+     ["subl_reader.Reader.point", "subl_chat.outline_refs", "subl_chat.blanks", "subl_reader.Reader.add_to_answer", "subl_reader.Reader.frame_regions"]),
+    ("A frame clicked",
+     "A click on framed words shows their places; on an answer's label, its marks.",
+     ["subl_reader.Reader.follow_frame", "subl_reader.Reader.show_places", "subl_reader.Reader.follow_label", "subl_reader.Reader.show_answer"]),
+    ("state",
+     "What the guide may ask at any time: the sights, the visible ones, here.",
+     ["validator.check_state", "subl_executor.op_state"]),
+    ("close",
+     "The guide closes the trip's window.",
+     ["validator.check_close", "subl_executor.op_close"]),
+    ("settings",
+     "The settings the guide may read and change.",
+     ["validator.check_settings", "subl_executor.op_settings"]),
+    ("browse",
+     "A trip with no sights: the folder's files in their place.",
+     ["validator.check_browse", "subl_executor.op_browse", "subl_reader.Reader.open_empty", "subl_reader.Reader.empty_layout"]),
+    ("open_trip",
+     "A trip opened from its file instead of composed with show.",
+     ["validator.check_open_trip", "subl_executor.trip_file", "subl_executor.op_open_trip", "ontology.trip_from"]),
+    ("Writing an informator",
+     "Trips, transitions, the informator and its tours written to files.",
+     ["ontology.trip_data", "ontology.transition_data", "ontology.informator_data", "ontology.tour_data"]),
     ("Plugin start and stop",
      "Sublime loads the plugin, which starts its MCP server; a new port restarts it; on unload, "
      "trips close and the server stops. The Restart command makes Sublime reload the plugin.",
@@ -27,20 +121,6 @@ TRIPS = [
       "subl_mcp_http.settings_changed", "subl_mcp_http.stop_server", "sight_walk.plugin_unloaded",
       "subl_scrollbars.reader_focused", "state.close_all", "subl_mcp_http.stop",
       "subl_setup.SightWalkRestartCommand.run"]),
-    ("Setting up the agent bridge",
-     "The setup command keeps a token, writes it for poke, and puts Claude Code's registration "
-     "line on the clipboard.",
-     ["subl_setup.SightWalkSetupCommand.run", "subl_setup.ensure_token", "subl_setup.write_config",
-      "subl_setup.show_instructions", "subl_commands.SightWalkReplaceCommand.run"]),
-    ("A request arrives",
-     "From the HTTP server's thread to the show operation on Sublime's, with every check on the "
-     "way.",
-     ["subl_executor.execute", "subl_executor.run_on_main", "subl_executor.facts",
-      "subl_executor.sight_files", "subl_executor.sight_functions", "spec.functions_in", "spec.units_in", "spec.blocks_in", "spec.open_above",
-      "validator.check", "validator.check_show", "validator.one_function",
-      "subl_executor.op_show", "subl_executor.named", "validator.not_stopped", "validator.trip_of", "marks.trip_place", "ontology.Sight.parse",
-      "ontology.Trip.__init__", "ontology.Network.__init__", "ontology.Network.problem",
-      "validator.files", "spec.parse_spec", "subl_executor.file_lines"]),
     ("A new reader window",
      "The window and every view but the sights.",
      ["subl_executor.new_reader", "subl_reader.Reader.__init__", "subl_reader.Reader.make_side_views", "subl_views.bench_font", "subl_views.match_font",
@@ -85,34 +165,9 @@ TRIPS = [
      ["subl_reader.Reader.poll", "subl_chat.keep_at_bottom", "subl_chat.bottom_place", "subl_chat.kept_place", "subl_reader.Reader.poll_wheel", "subl_reader.Reader.alive",
       "subl_reader.Reader.read_wheel", "subl_reader.Reader.clamp_bench", "subl_reader.Reader.bench_edited", "subl_reader.Reader.wheel_places", "subl_reader.Reader.pinned_places",
       "subl_reader.item_top"]),
-    ("Pointing",
-     "The marks an answer places with its own tags, resolved to sights and lines, framed in its "
-     "words, the reader scrolled to show them.",
-     ["subl_executor.op_say", "marks.read_marks", "marks.mark_attributes", "marks.tag_marks", "marks.frame_scopes",
-      "subl_reader.Reader.point",
-      "marks.resolve_marks", "marks.jump", "marks.resolve_target", "marks.sight_target",
-      "marks.icon_for", "marks.line_y", "subl_chat.outline_refs", "marks.sight_refs",
-      "marks.sight_number", "spec.sight_index", "spec.sight_name", "marks.trip_place",
-      "subl_reader.Reader.follow_frame", "subl_reader.Reader.frame_regions", "subl_chat.blanks", "subl_reader.Reader.show_places",
-      "subl_reader.Reader.add_to_answer", "subl_reader.Reader.follow_label",
-      "subl_reader.Reader.show_answer"]),
     ("Drawing the marks",
      "Icons on screen, eyes for marks off it, outlines on marked lines.",
      ["subl_reader.Reader.draw_gutter", "subl_reader.Reader.draw_strip_marks", "marks.strip_icons", "subl_views.draw_strip_icons", "marks.visible_lines", "marks.gutter_icons", "subl_views.draw_icons", "subl_reader.Reader.draw_outlines", "marks.icon_colour", "subl_views.draw_outlines"]),
-    ("The agent says something",
-     "A reply reaches the Vetting Bench past the transcript guard; the status line follows the "
-     "topic.",
-     ["subl_executor.op_say", "marks.untag", "marks.line_refs", "validator.MARK_FIRST", "marks.speaks_of_code", "marks.CODE_TALK",
-      "subl_reader.Reader.say", "subl_reader.Reader.show_headers", "subl_chat.show_header",
-      "header.title_lines", "subl_chat.show_status", "subl_chat.say", "subl_commands.SightWalkInsertCommand.run",
-      "subl_chat.Guard.on_text_changed", "subl_chat.protected_end",
-      "subl_commands.SightWalkChatListener.on_modified",
-      "subl_commands.SightWalkChatListener.on_post_text_command", "marks.clean",
-      "subl_chat.shade_variables"]),
-    ("Stopping an answer",
-     "Esc or [Stop (Esc)]: the agent's next tool call is refused, the unread messages withdrawn.",
-     ["subl_commands.SightWalkStopAnswerCommand.run", "subl_reader.Reader.stop_answer",
-      "subl_reader.Reader.withdraw_unread_messages"]),
     ("The Tools pane's tabs",
      "Map and Scroll: the tab links, and the tab shown in the pane.",
      ["subl_reader.Reader.select_tool", "subl_vetting.show_tabs", "subl_vetting.toggle_html", "subl_vetting.tab_at", "subl_vetting.show_buttons", "subl_commands.SightWalkHeaderListener.on_selection_modified", "subl_geometry.Geometry.buttons_share",
@@ -131,12 +186,6 @@ TRIPS = [
       "callmap.arrow", "callmap.legend",
       "subl_vetting.render", "subl_vetting.png_size", "subl_vetting.show_image", "subl_vetting.zoom",
       "subl_commands.SightWalkZoomMapCommand.run", "subl_vetting.show_note"]),
-    ("The user sends a message",
-     "The draft becomes a message, with here, the visible sights and the edits, and the "
-     "agent receives it.",
-     ["subl_commands.SightWalkSendCommand.run", "subl_chat.take_draft", "subl_commands.send", "state.reader_for",
-      "subl_reader.Reader.context", "subl_views.selected_text", "plan.visible_specs", "subl_reader.Reader.take_edits",
-      "subl_executor.wait_for_user"]),
     ("Linking words to code",
      "primary+p joins words of the draft to selections in the sights, from either side; the "
      "words go out as a <here> tag, and a click on them shows their place.",
@@ -191,13 +240,6 @@ TRIPS = [
       "subl_commands.SightWalkWindowListener.offer_to_browser", "subl_commands.SightWalkWindowListener.on_load",
       "subl_reader.Reader.take_file", "subl_executor.op_browse",
       "subl_views.make_browser"]),
-    ("What the agent is told",
-     "The guide's manual, the tools' descriptions and schemas it gets at its start, and the "
-     "prompt a guide started from Sublime is given.",
-     ["manual.MANUAL: opening", "manual.MANUAL: Showing code",
-      "manual.MANUAL: Writing code that fits the reader", "manual.MANUAL: Conversation",
-      "manual.MANUAL: Indicators", "manual.tool", "manual.TRANSITION", "manual.TOOLS",
-      "validator.TRANSITION_FORM", "subl_guide.PROMPT", "permissions.FIELDS"]),
     ("What the validator refuses",
      "Every refusal of the guide's calls, judged before the executor acts, with the facts it is "
      "given; each message says what to do instead.",
@@ -206,18 +248,6 @@ TRIPS = [
       "subl_executor.trip_file", "validator.check_say", "validator.mask", "validator.crowded_lines",
       "validator.check_state", "validator.check_close", "validator.check_browse",
       "validator.check_settings", "validator.check_wait"]),
-    ("One tool call over HTTP",
-     "From the request to the reply: the token checked, the JSON-RPC message answered, the tool "
-     "run on Sublime's thread.",
-     ["subl_mcp_http.Handler.do_POST", "subl_mcp_http.Handler.authorized", "subl_mcp_http.reply",
-      "subl_mcp_http.answer", "manual.tool", "subl_mcp_http.tool_result", "subl_mcp_http.call_tool",
-      "subl_executor.wait_until_ready", "subl_executor.run_on_main", "subl_mcp_http.Handler.send",
-      "subl_mcp_http.Handler.do_GET", "subl_mcp_http.Handler.do_DELETE", "subl_mcp_http.Handler.log_message"]),
-    ("How Claude comes to listen to Sublime",
-     "When no agent listens, asking the guide starts one; it calls wait_for_user through the "
-     "bridge and waits on the shared inbox.",
-     ["subl_guide.await_answer", "subl_guide.ensure", "subl_guide.listening", "subl_guide.running", "subl_guide.find_claude", "subl_guide.start",
-      "subl_executor.wait_for_user"]),
     ("Here",
      "The caret or a selection in a sight becomes here.",
      ["subl_commands.SightWalkWindowListener.on_selection_modified", "subl_reader.Reader.note_selection"]),
@@ -277,10 +307,6 @@ TRIPS = [
       "subl_reader.read_transcripts", "subl_chat.set_transcript",
       "ontology.dumps", "subl_vetting.save_walked", "subl_reader.Reader.draw_tour",
       "subl_vetting.show_tour"]),
-    ("Trip files",
-     "A trip opened from its file by the guide, and the files written for an informator.",
-     ["subl_executor.op_open_trip", "ontology.trip_from", "ontology.trip_data",
-      "ontology.transition_data", "ontology.informator_data", "ontology.tour_data"]),
     ("Questions the code already asks",
      "Guards found in the code itself, carried to the sights that use the same objects without "
      "them.",
@@ -301,21 +327,24 @@ TRIPS = [
       "permissions.remembered", "subl_guide.restart", "subl_guide.chosen", "subl_guide.folders",
       "permissions.allowed_tools", "permissions.reminders", "subl_guide.ours",
       "subl_reader.Reader.add_folder", "subl_guide.set_folders"]),
+    ("Cutting a PNG",
+     "Graphviz's PNG read, unfiltered, cropped and written again, in pure Python.",
+     ["pngcut.read", "pngcut.unfilter", "pngcut.predict", "pngcut.crop", "pngcut.write"]),
     ("The tour map's source",
      "The Tour tab asks for the tour map: each trip a row of its sights named file:function, "
      "the arrows between trips taken from the informator.",
      ["subl_reader.Reader.draw_tour", "subl_reader.Reader.tour_sight", "tourmap.cross_arrows",
-      "tourmap.tour_dot", "tourmap.row"]),
+      "tourmap.tour_dot", "tourmap.column"]),
     ("Each sight's box",
      "A box's hue, drawn once for the whole tour so neighbours differ, its height hinting at its "
      "lines, and the list of trips the map stands under.",
      ["tourmap.colour", "tourmap.height", "tourmap.node", "subl_vetting.show_tour_page",
       "subl_vetting.tour_rows"]),
-    ("The tour map in bands",
-     "dot lays the map out once to find each trip's frame; each band is drawn through a viewport "
-     "and shown as a link that opens its trip.",
-     ["subl_vetting.draw_tour_map", "subl_vetting.render_bands", "tourmap.bands",
-      "subl_vetting.band_png", "subl_vetting.run_dot", "subl_vetting.tour_map_html"]),
+    ("The tour map in tiles",
+     "dot lays the map out once to find each trip's frame; the picture is cut into tiles, each a "
+     "link that opens the trip it lies in.",
+     ["subl_vetting.draw_tour_map", "subl_vetting.render_tiles", "subl_vetting.cut_tiles",
+      "tourmap.tiles", "subl_vetting.run_dot", "subl_vetting.tour_map_html"]),
     ("The tools over the window",
      "[⤢] in the Tools header lays the tools over almost the whole window under the top headers, "
      "kept apart; [Restore size] in the trip's header brings them back. Hovering a button says "
@@ -352,7 +381,7 @@ TRIPS = [
 
 # A function in several trips is discussed in its own trip (Jakub); the others show it on the way.
 OWN_TRIPS = {
-    "subl_executor.run_on_main": "One tool call over HTTP",
+    "subl_executor.run_on_main": "A tool call reaches Sublime's thread",
     "ontology.Sight.parse": "The ontology: collections and sights",
     "ontology.Trip.__init__": "The ontology: networks",
     "ontology.Network.__init__": "The ontology: networks",
@@ -360,21 +389,46 @@ OWN_TRIPS = {
     "subl_reader.Reader.build": "Loading the sights",
     "subl_reader.Reader.draw_map": "The Map's nodes",
     "subl_vetting.draw_map": "Drawing the Map",
-    "subl_executor.wait_for_user": "The user sends a message",
-    "manual.tool": "What the agent is told",
-    "ontology.trip_from": "Trip files",
+    "subl_executor.wait_for_user": "wait_for_user: a message sent",
+    "manual.tool": "The tools' schemas",
+    "ontology.trip_from": "open_trip",
     "subl_reader.Reader.tool_view": "The Tools pane's tabs",
 }
 
 # The informator's reading paths (Jakub's leads_to and unblocks), written by hand: (from, to).
 LEADS = [
-    ("Plugin start and stop", "Setting up the agent bridge"),
-    ("Setting up the agent bridge", "What the agent is told"),
-    ("What the agent is told", "One tool call over HTTP"),
-    ("Setting up the agent bridge", "How Claude comes to listen to Sublime"),
-    ("One tool call over HTTP", "A request arrives"),
-    ("A request arrives", "What the validator refuses"),
-    ("A request arrives", "A new reader window"),
+    ("Registering the guide", "The manual"),
+    ("The manual", "The tools' schemas"),
+    ("Registering the guide", "A guide started from Sublime"),
+    ("A guide started from Sublime", "The guide's first words"),
+    ("The guide's first words", "An MCP request over HTTP"),
+    ("An MCP request over HTTP", "The other HTTP verbs"),
+    ("An MCP request over HTTP", "A tool call reaches Sublime's thread"),
+    ("A tool call reaches Sublime's thread", "show: the files and functions"),
+    ("show: the files and functions", "show: one function a sight"),
+    ("show: one function a sight", "show: the trip judged"),
+    ("show: the trip judged", "show: the trip made"),
+    ("show: the trip made", "show: the window opens"),
+    ("show: the window opens", "wait_for_user: a message sent"),
+    ("wait_for_user: a message sent", "What a message carries"),
+    ("What a message carries", "say: the words checked"),
+    ("say: the words checked", "say: on the bench"),
+    ("say: on the bench", "The headers follow"),
+    ("say: on the bench", "The transcript guard"),
+    ("say: on the bench", "Stopping an answer"),
+    ("say: the words checked", "say: marks read"),
+    ("say: marks read", "say: marks resolved"),
+    ("say: marks resolved", "say: marks drawn"),
+    ("say: marks drawn", "A frame clicked"),
+    ("A tool call reaches Sublime's thread", "state"),
+    ("A tool call reaches Sublime's thread", "close"),
+    ("A tool call reaches Sublime's thread", "settings"),
+    ("A tool call reaches Sublime's thread", "browse"),
+    ("A tool call reaches Sublime's thread", "open_trip"),
+    ("open_trip", "Writing an informator"),
+    ("Plugin start and stop", "Registering the guide"),
+    ("show: the trip judged", "What the validator refuses"),
+    ("show: the window opens", "A new reader window"),
     ("A new reader window", "Loading the sights"),
     ("Loading the sights", "Colours"),
     ("Loading the sights", "Questions the code already asks"),
@@ -383,18 +437,15 @@ LEADS = [
     ("Measuring", "The layout"),
     ("The layout", "Arranging the views"),
     ("Arranging the views", "Polling and the wheel"),
-    ("Polling and the wheel", "Pointing"),
-    ("Pointing", "Drawing the marks"),
-    ("Drawing the marks", "The agent says something"),
-    ("The agent says something", "Stopping an answer"),
-    ("The agent says something", "The Tools pane's tabs"),
+    ("Polling and the wheel", "say: marks drawn"),
+    ("say: marks drawn", "Drawing the marks"),
+    ("say: on the bench", "The Tools pane's tabs"),
     ("The Tools pane's tabs", "The Map's nodes"),
     ("The Tools pane's tabs", "The guide's permissions"),
     ("The Tools pane's tabs", "The bench's answers listed"),
     ("Linking words to code", "Driving a trip from the terminal"),
     ("The Map's nodes", "Drawing the Map"),
-    ("How Claude comes to listen to Sublime", "The user sends a message"),
-    ("The user sends a message", "Here"),
+    ("What a message carries", "Here"),
     ("Here", "Linking words to code"),
     ("Here", "Opening the editor"),
     ("Opening the editor", "Closing the editor"),
@@ -403,11 +454,20 @@ LEADS = [
     ("ctrl+tab", "One colour scheme for the trips"),
     ("One colour scheme for the trips", "Words in two languages"),
     ("Words in two languages", "Endings"),
-    ("Drawing the Map", "Trip files"),
-    ("Trip files", "An informator and its tour"),
+    ("Drawing the Map", "open_trip"),
+    ("Writing an informator", "An informator and its tour"),
 ]
 NEEDS = [  # (trip, the trip it needs understood first)
-    ("A request arrives", "The ontology: networks"),
+    ("show: the trip made", "The ontology: networks"),
+    ("show: the trip judged", "The tools' schemas"),
+    ("say: marks read", "The manual"),
+    ("say: marks resolved", "Sight names"),
+    ("say: marks read", "Sight names"),
+    ("A tool call reaches Sublime's thread", "An MCP request over HTTP"),
+    ("wait_for_user: a message sent", "The guide's first words"),
+    ("open_trip", "show: the trip judged"),
+    ("browse", "show: the window opens"),
+    ("What a message carries", "Sight names"),
     ("The ontology: networks", "The ontology: collections and sights"),
     ("Loading the sights", "Building blocks"),
     ("Measuring", "Names and room"),
@@ -418,13 +478,42 @@ NEEDS = [  # (trip, the trip it needs understood first)
 # Tours written by hand (Jakub): a name and the trips in their order.
 TOURS = [
     ("How the program talks to the agent", [
-        "Setting up the agent bridge", "What the agent is told", "One tool call over HTTP",
-        "A request arrives", "How Claude comes to listen to Sublime", "The user sends a message",
-        "The agent says something", "Stopping an answer", "Pointing", "Trip files"]),
+        "Registering the guide",
+        "The manual",
+        "The tools' schemas",
+        "A guide started from Sublime",
+        "The guide's first words",
+        "An MCP request over HTTP",
+        "The other HTTP verbs",
+        "A tool call reaches Sublime's thread",
+        "show: the files and functions",
+        "show: one function a sight",
+        "show: the trip judged",
+        "show: the trip made",
+        "show: the window opens",
+        "wait_for_user: a message sent",
+        "What a message carries",
+        "say: the words checked",
+        "say: on the bench",
+        "The headers follow",
+        "The transcript guard",
+        "Stopping an answer",
+        "say: marks read",
+        "say: marks resolved",
+        "Sight names",
+        "say: marks drawn",
+        "A frame clicked",
+        "state",
+        "close",
+        "settings",
+        "browse",
+        "open_trip",
+        "Writing an informator",
+    ]),
 ]
 
 # Not runs but surveys: all the places about one thing (see the manual on trips).
-SURVEYS = {"What the agent is told", "What the validator refuses", "The Tools pane's tabs", "The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
+SURVEYS = {"The manual", "The tools' schemas", "The other HTTP verbs", "What the validator refuses", "The Tools pane's tabs", "The ontology: collections and sights", "The ontology: networks", "Window events", "Endings", "Names and room", "Building blocks",
            "Settings and the rest of the colours"}
 
 # Whose method a call on another object reaches, by the object's name: the code's own
@@ -450,7 +539,7 @@ FIXES = [(caller, text, "plan.Pane.spec", "ontology.Sight.spec") for caller, tex
     ("subl_executor.op_show", "for sight in made"), ("subl_executor.op_open_trip", "for sight in trip"),
     ("ontology.trip_data", "for sight in trip"), ("subl_reader.Reader.load", "for sight in trip")]]
 TRIP_JUMPS = {
-    "A request arrives": [("subl_executor.run_on_main", "fn()", "subl_executor.op_show")],
+    "show: the window opens": [("subl_executor.run_on_main", "fn()", "subl_executor.op_show")],
 }
 CLASSES = {}  # "module.Class": ["module.Base", ...], filled by definitions
 
@@ -655,14 +744,88 @@ def make_trip(title, about, names, specs, found, imported, commit):
     """The trip's story: its own in STORIES (with <here> tags), else what the list says of it."""
     data = trip_sights(title, names, specs, found, imported)
     kind = "survey" if title in SURVEYS else "run"
-    return Trip(title, [Sight.parse(spec) for spec in data["sights"]],
+    sights = [Sight.parse(spec) for spec in data["sights"]]
+    return Trip(title, sights,
                 [Transition(t["type"], t["from"], t["to"]) for t in data["transitions"]],
-                commit, kind, STORIES.get(title, about))
+                commit, kind, anchored(STORIES.get(title, about), sights))
+
+
+def anchored(story, sights):
+    """A story's places written as a sight alone, "(b)", given the sight's first line, so they
+    follow the code as it moves: the places a guide reads need a line."""
+    def line(found):
+        index = sight_index(found.group(1))
+        return "(%s):%d" % (found.group(1), sights[index].begin)
+    return re.sub(r'at="([^"]*)"', lambda m: 'at="%s"' % re.sub(
+        r"\((\w+)\)(?!:)", line, m.group(1)), story)
 
 
 # Trips' stories, told by their Pioneer (P:) first on their bench (Jakub, 2026-10-20), with <here>
 # tags at their own sights; a trip without one tells what the list above says of it.
-STORIES = {}
+STORIES = {
+    "Registering the guide":
+        "Before any guide can talk to Sublime, <here at=\"(a)\">the setup command</here> <calls at=\"(a) (b)\">keeps a secret token</calls>, <calls at=\"(a) (c)\">writes it down</calls> for the terminal tools, and <calls at=\"(a) (d)\">hands the user the one line</calls> that registers SightWalk with Claude Code. <here at=\"(e)\">Replacing a view's text</here> is the small helper every pane uses to show it.",
+    "The manual":
+        "A guide knows SightWalk only from this text. <here at=\"(a)\">It opens</here> with what a trip is, <here at=\"(b)\">says how to show code</here> one function a sight, <here at=\"(c)\">asks for code that fits the reader</here>, <here at=\"(d)\">sets the manners of the conversation</here>, and <here at=\"(e)\">teaches the marks</here> that tie words to lines.",
+    "The tools' schemas":
+        "<calls at=\"(b) (a)\">Each tool is described</calls> in <here at=\"(b)\">one list</here>, with its parameters; <here at=\"(c)\">a transition</here> has a schema of its own, and <here at=\"(d)\">its form</here> is quoted back when a guide gets one wrong. <here at=\"(e)\">The permission fields</here> name what else a guide started from Sublime may do.",
+    "A guide started from Sublime":
+        "A message sent with nobody listening <here at=\"(a)\">waits for an answer</here>: <calls at=\"(a) (b)\">a guide is ensured</calls>, unless <calls at=\"(b) (c)\">someone is listening</calls> or <calls at=\"(b) (d)\">one is running</calls> already; otherwise <calls at=\"(b) (e)\">Claude Code is found</calls> on the machine.",
+    "The guide's first words":
+        "<here at=\"(a)\">The guide is started</here> in the background with <here at=\"(b)\">a short prompt</here>: listen to the bench. Its first call, <here at=\"(c)\">wait_for_user</here>, takes the message that woke it from the shared inbox.",
+    "An MCP request over HTTP":
+        "Every word between guide and plugin is <here at=\"(a)\">a POST</here>. <calls at=\"(a) (b)\">The token is checked</calls> first; then <calls at=\"(a) (c)\">the message is replied to</calls>: <calls at=\"(c) (d)\">initialize, tools/list or a tool call</calls>, and <calls at=\"(a) (e)\">the reply sent</calls> back as JSON.",
+    "The other HTTP verbs":
+        "The protocol allows <here at=\"(a)\">a stream</here> and <here at=\"(b)\">ending a session</here>; SightWalk needs neither and says so. <here at=\"(c)\">The log</here> stays quiet, so Sublime's console does not fill with requests.",
+    "A tool call reaches Sublime's thread":
+        "<here at=\"(a)\">A tool call</here> arrives on the server's thread, but only Sublime's main thread may touch views. Say and state <calls at=\"(a) (c)\">wait for the reader to be ready</calls>; then <calls at=\"(a) (d)\">the call is executed</calls>: <calls at=\"(d) (e)\">its facts gathered and its work done on the main thread</calls>, the answer <here at=\"(b)\">wrapped as MCP content</here>.",
+    "show: the files and functions":
+        "Before judging show, the executor <here at=\"(a)\">gathers facts</here>: <calls at=\"(a) (b)\">every sight's file</calls>, <calls at=\"(b) (c)\">its lines</calls>, and <calls at=\"(a) (d)\">the functions inside each range</calls>. <here at=\"(e)\">Missing files and short ones</here> are refused together, so the guide fixes them at once.",
+    "show: one function a sight":
+        "A sight holds one function at most. <here at=\"(a)\">Functions</here> and <here at=\"(b)\">the outermost functions and classes</here> are both <calls at=\"(a) (c)\">blocks found by their keywords</calls>, including <here at=\"(d)\">one opened above the range</here>. <here at=\"(e)\">The rule</here> refuses a sight with two.",
+    "show: the trip judged":
+        "<here at=\"(a)\">Every call is judged</here> before anything happens. For show, <calls at=\"(b) (c)\">a stopped answer</calls> refuses it, <calls at=\"(b) (d)\">the trip must be well formed</calls> with its transitions named, and <here at=\"(e)\">each place</here> must read like \"(c):34\".",
+    "show: the trip made":
+        "<here at=\"(b)\">A sight</here> is parsed from \"file:begin-end\", and <here at=\"(a)\">its path resolved</here> for opening. <here at=\"(c)\">A trip</here> is <calls at=\"(c) (d)\">a network</calls> whose transitions <here at=\"(e)\">must fit</here> its sights.",
+    "show: the window opens":
+        "<calls at=\"(a) (b)\">On the main thread</calls>, show takes the trip with its story and <calls at=\"(b) (c)\">opens a window</calls> when none is open. The reply <calls at=\"(b) (d)\">names the sights</calls> as the user reads them, (a), (b), (c).",
+    "wait_for_user: a message sent":
+        "<here at=\"(a)\">Enter</here> <calls at=\"(a) (b)\">turns the draft into a message</calls> on the bench and <calls at=\"(a) (c)\">sends it</calls> with what the user sees, to <here at=\"(d)\">the trip's reader</here>'s inbox, where <here at=\"(e)\">wait_for_user</here> picks it up.",
+    "What a message carries":
+        "A message is more than words: <here at=\"(a)\">the context</here> adds <calls at=\"(a) (c)\">the sights on screen</calls>, where the caret is, <calls at=\"(a) (b)\">the selected text</calls>, and <here at=\"(d)\">the ranges the user's edits moved</here>.",
+    "say: the words checked":
+        "<here at=\"(a)\">say</here> <calls at=\"(a) (b)\">reads the tags</calls> out of the text. The validator refuses <here at=\"(c)\">line numbers</here>, and an answer that <here at=\"(d)\">speaks of code</here>, by <here at=\"(e)\">its words</here>, without marking it: <here at=\"(f)\">mark first</here>.",
+    "say: on the bench":
+        "<here at=\"(a)\">The reader says it</here>: <calls at=\"(a) (b)\">the text goes on the bench</calls> <calls at=\"(b) (c)\">by an insert</calls> the guard lets through, and <calls at=\"(a) (d)\">the headers</calls> and <here at=\"(e)\">the status line</here> follow the topic.",
+    "The headers follow":
+        "<here at=\"(a)\">A header</here> shows <calls at=\"(a) (b)\">its title and status</calls>, cut with \"…\" to its width. On the bench, <here at=\"(c)\">names are cleaned</here> and <here at=\"(d)\">variables shaded</here> as in the code.",
+    "The transcript guard":
+        "<here at=\"(a)\">Every edit</here> on the bench is checked against <here at=\"(b)\">the protected end</here> of the transcript and undone if it reaches it. <here at=\"(c)\">A change</here> keeps the prompt at the bottom; <here at=\"(d)\">after a command</here> the caret is put back in the draft.",
+    "Stopping an answer":
+        "<here at=\"(a)\">Esc</here> <calls at=\"(a) (b)\">stops the answer</calls>: the guide's next call is refused until it waits again, and <calls at=\"(b) (c)\">the messages it has not read</calls> are taken back.",
+    "say: marks read":
+        "<here at=\"(a)\">The tags are read</here>: <calls at=\"(a) (b)\">their attributes</calls>, <calls at=\"(a) (c)\">the marks each stands for</calls>, and <here at=\"(d)\">the colours of the frames</here> around their words. <here at=\"(e)\">A place</here> reads as in show.",
+    "say: marks resolved":
+        "<here at=\"(a)\">Every mark</here> must land on a line of a sight: <calls at=\"(a) (c)\">its target is resolved</calls> <calls at=\"(c) (d)\">within the sight</calls>, <here at=\"(b)\">a jump</here> at both ends, and <here at=\"(e)\">an icon</here> chosen for its sign.",
+    "Sight names":
+        "Sights are named as the user reads them. <here at=\"(d)\">An index becomes a name</here> and <here at=\"(c)\">a name an index</here>; <here at=\"(b)\">a name or a number</here> both resolve. <here at=\"(a)\">Names in the text</here> are found to frame them, and <here at=\"(e)\">a line's height</here> places an icon.",
+    "say: marks drawn":
+        "<here at=\"(a)\">The marks are pointed</here> in the code and <here at=\"(b)\">framed on the bench</here>, <calls at=\"(b) (c)\">past the blank lines</calls> above the transcript. <here at=\"(d)\">The answer keeps them</here>, with <here at=\"(e)\">the regions</here> each frame stands for.",
+    "A frame clicked":
+        "<here at=\"(a)\">Clicking framed words</here> <calls at=\"(a) (b)\">shows their places</calls>; clicking <here at=\"(c)\">an answer's label</here> <calls at=\"(c) (d)\">shows that answer's marks</calls> again.",
+    "state":
+        "<here at=\"(a)\">state</here> needs an open trip; <here at=\"(b)\">it returns</here> what a message would carry, and the sights by name.",
+    "close":
+        "<here at=\"(a)\">close</here> needs a trip to close; <here at=\"(b)\">the window goes</here>, as if the user closed it.",
+    "settings":
+        "<here at=\"(a)\">Only known settings</here> may change; <here at=\"(b)\">the values</here> are saved and the rest returned.",
+    "browse":
+        "<here at=\"(a)\">The folder must exist</here>; <here at=\"(b)\">browse</here> <calls at=\"(b) (c)\">opens a trip without sights</calls>, <here at=\"(d)\">the folder's files</here> in their place.",
+    "open_trip":
+        "<here at=\"(b)\">The file is read</here> and <here at=\"(a)\">judged</here> like show; <calls at=\"(c) (d)\">the trip is made from it</calls>, its story included, and <here at=\"(c)\">visited</here> in the window.",
+    "Writing an informator":
+        "<here at=\"(a)\">A trip</here> is written with <calls at=\"(a) (b)\">its transitions</calls> and story; <here at=\"(c)\">the informator</here> names its trips' files and <here at=\"(d)\">a tour</here> its order.",
+}
 LONG_TRIP = 5
 
 

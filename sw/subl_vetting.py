@@ -11,7 +11,7 @@ import textwrap
 
 import sublime
 
-from . import tourmap
+from . import pngcut, tourmap
 from .callmap import dot_source
 from .subl_chat import MARK_HTML, SYNTAX
 from .config import BLANK_LINES, SETTINGS_FILE, SETTLE_MS
@@ -228,33 +228,58 @@ def tour_rows(tour, walked, current):
 
 
 def draw_tour_map(view, source, ids, on_select):
-    """The tour map under the list, drawn off the main thread like the Map, in one band per
-    trip, each a link that opens it (minihtml has no image maps)."""
+    """The tour map under the list, drawn off the main thread like the Map, cut into tiles, each
+    a link that opens the trip whose frame it lies in (minihtml has no image maps)."""
     dot = find_dot()
     if dot is None or kept(view).get("tour_source") == source:
         return
     kept(view)["tour_source"] = source
-    sublime.set_timeout_async(lambda: render_bands(view, dot, source, ids, on_select), 0)
+    sublime.set_timeout_async(lambda: render_tiles(view, dot, source, ids, on_select), 0)
 
 
-def render_bands(view, dot, source, ids, on_select):
-    """dot's layout once, as JSON, to find each trip's frame; then each band drawn from the same
-    layout through a viewport (dot lays the same source out the same way)."""
+def render_tiles(view, dot, source, ids, on_select):
+    """dot's layout as JSON gives each trip's frame; the picture drawn once and cut (see
+    pngcut), the tiles kept beside the maps with an index, so a tour drawn before is not cut
+    again."""
     stem = os.path.join(MAPS, "tour-" + hashlib.sha1(source.encode("utf-8")).hexdigest()[:16])
     os.makedirs(MAPS, exist_ok=True)
     try:
-        layout = json.loads(run_dot(dot, source, ["-Tjson"]))
-        bb = [float(x) for x in layout["bb"].split(",")]
-        frames = {int(o["name"].split("_")[1]): [float(x) for x in o["bb"].split(",")]
-                  for o in layout.get("objects", []) if o.get("name", "").startswith("cluster_")}
-        drawn = [(ids[k], band_png(dot, source, "%s-%d.png" % (stem, k), bb, top, bottom))
-                 for k, top, bottom in tourmap.bands(bb, frames)]
+        if not os.path.exists(stem + ".json"):
+            cut_tiles(dot, source, stem, ids)
+        with open(stem + ".json", encoding="utf-8") as f:
+            drawn = json.load(f)
     except (OSError, ValueError, KeyError, subprocess.SubprocessError):
         return
     def show():
-        kept(view)["tour_bands"] = drawn
+        kept(view)["tour_tiles"] = drawn
         show_tour_page(view, on_select)
     sublime.set_timeout(show, 0)
+
+
+def cut_tiles(dot, source, stem, ids):
+    layout = json.loads(run_dot(dot, source, ["-Tjson"]))
+    bb = [float(x) for x in layout["bb"].split(",")]
+    frames = {int(o["name"].split("_")[1]): [float(x) for x in o["bb"].split(",")]
+              for o in layout.get("objects", []) if o.get("name", "").startswith("cluster_")}
+    # Sharp, yet small enough to cut in pure Python in a few seconds, once per tour.
+    dpi = max(min(TILES_DPI, TILES_PX * 72.0 / max(bb[2] - bb[0], bb[3] - bb[1], 1)), 36)
+    run_dot(dot, source, ["-Tpng", "-Gdpi=%d" % dpi, "-o", stem + ".png"])
+    width, height, colour, pixels = pngcut.read(stem + ".png")
+    rows = []
+    for r, (y0, y1, cells) in enumerate(tourmap.tiles(bb, frames, width, height, TILE_PX)):
+        row = []
+        for c, (x0, x1, trip) in enumerate(cells):
+            path = "%s-%d-%d.png" % (stem, r, c)
+            pngcut.write(path, x1 - x0, y1 - y0, colour, pngcut.crop(pixels, colour, x0, y0, x1, y1))
+            row.append([path, None if trip is None else ids[trip]])
+        rows.append(row)
+    with open(stem + ".json", "w", encoding="utf-8") as f:
+        json.dump({"width": width, "dpi": dpi, "rows": rows}, f)
+
+
+TILES_PX = 8000  # the picture's longer side at most, in pixels
+TILES_DPI = 100  # shown at 72 dpi, its text as large as the Map's
+TILE_PX = 60  # a tile's side: a click finds its trip within this
 
 
 def run_dot(dot, source, options):
@@ -265,33 +290,23 @@ def run_dot(dot, source, options):
     return done.stdout
 
 
-BAND_PX = 3000  # a band's width at most, in pixels
-
-
-def band_png(dot, source, path, bb, top, bottom):
-    if not os.path.exists(path):
-        width = bb[2] - bb[0]
-        viewport = "%.1f,%.1f,1,%.1f,%.1f" % (width, top - bottom, (bb[0] + bb[2]) / 2,
-                                              (top + bottom) / 2)
-        # Sharp, yet within what Sublime shows: a wide tour drawn at fewer dots per inch.
-        dpi = max(min(288, BAND_PX * 72.0 / max(width, 1)), 36)
-        run_dot(dot, source, ["-Tpng", "-Gdpi=%d" % dpi, "-Gviewport=" + viewport, "-o", path])
-    return path
-
-
 def tour_map_html(view):
-    """The bands one under another, as wide as the pane at most, each opening its trip."""
-    drawn = kept(view).get("tour_bands") or []
+    """The tiles row by row, as wide as the pane at most; a tile in a trip's frame opens it."""
+    drawn = kept(view).get("tour_tiles")
     if not drawn:
         return ""
-    widest = max(png_size(path)[0] for _, path in drawn)
-    scale = min(1.0, max(view.viewport_extent()[0] - 16, 50) / widest)
-    images = []
-    for trip, path in drawn:
-        width, height = png_size(path)
-        images.append('<div><a href="open:%s"><img src="file://%s" width="%d" height="%d"></a>'
-                      '</div>' % (trip, path, width * scale, height * scale))
-    return "<br>" + "".join(images)
+    scale = min(72.0 / drawn.get("dpi", 72), max(view.viewport_extent()[0] - 16, 50)
+                / max(drawn["width"], 1))
+    rows = []
+    for row in drawn["rows"]:
+        cells = []
+        for path, trip in row:
+            width, height = png_size(path)
+            image = '<img src="file://%s" width="%d" height="%d">' % (
+                path, round(width * scale), round(height * scale))
+            cells.append('<a href="open:%s">%s</a>' % (trip, image) if trip else image)
+        rows.append("<div>%s</div>" % "".join(cells))
+    return "<br>" + "".join(rows)
 
 
 def read_walked(informator):

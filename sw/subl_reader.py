@@ -1182,7 +1182,8 @@ class Reader(Geometry):
             ids = [trip.id for trip in self.tour]
             source = tourmap.tour_dot(
                 [(trip.name, [self.tour_sight(s) for s in trip]) for trip in self.tour],
-                tourmap.cross_arrows(self.informator.transitions, ids), map_style()[:4])
+                tourmap.cross_arrows(self.informator.transitions, ids, [len(t) for t in self.tour]),
+                map_style()[:4])
             subl_vetting.draw_tour_map(self.tour_view, source, ids, self.tour_link)
 
     def tour_sight(self, sight):

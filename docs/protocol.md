@@ -1,4 +1,7 @@
-# The SightWalk protocol, version 0 (draft)
+# Grounded Vetting Protocol, version 0 (draft)
+
+*The protocol SightWalk speaks between a guide agent and a vetting tool. Name chosen by Jakub,
+2026-10-20; in Polish, protokół ugruntowanego sprawdzania kodu.*
 
 Status: draft for review. It describes the protocol as the code implements it at commit
 `1cbd3ce` (2026-10-20) (`sw/manual.py`, `sw/validator.py`, `sw/marks.py`, `sw/ontology.py`,
@@ -159,6 +162,21 @@ Lines are always **file** lines, not lines within the sight. A place in a mark m
 sight's range.
 
 ## 6 Messages (tools)
+
+Eight tools, all called by the guide; the user acts only through the tool's interface. Every
+call is judged by the validator first (section 8) and refused with a message that says how to
+correct it.
+
+| tool | parameters | what it does | why it exists |
+|------|------------|--------------|---------------|
+| `show` | `sights` [spec] (required); `transitions` [{type, from, to}] (required, `[]` when none); `trip` string (required); `root` string | Opens a reader, or replaces the trip in it, with the sights in the given order, scrolled to the top; draws the transitions on the Map. Replies with the sights' names, `{"(a)": spec, …}`. | The guide, not the user, chooses which code answers the question and in what order: the trip is the guide's first claim about the code, and naming its transitions makes that claim checkable (the Map draws exactly them, never guesses). |
+| `open_trip` | `file` path (required); `root` string | Opens a trip saved as a file (name, kind, sights, transitions), as an informator keeps it. | Trips prepared once, for documentation or a tour, can be walked again without the guide recomposing them, and stay comparable across sessions. |
+| `say` | `text` (required): the answer, with name tags and mark tags (section 7); `status` string | Appends the answer to the bench, frames its marked words, puts icons and arrows on the marked lines, draws its jumps on the Map. Replies `{"ok": true}`. | Answers must be grounded: every claim about code is tied to the exact places it is about, so the user can check it with one click instead of trusting prose. The validator refuses line numbers in prose and an answer about code with no marks. |
+| `wait_for_user` | `timeout_s` integer (≤ 50) | Blocks until the user sends a message, then returns it: `text` (with the user's `<here>` links), `visible`, `here`, `selected`, `edited`, `unanswered`; or `{"timeout": true, "next": …}`. | The conversation happens in the tool, not in the agent's terminal; the guide must keep listening, and must not fill silence (it is told to call again at once and say nothing). The reply carries what "this" means, so the guide never guesses. |
+| `state` | none | Returns the sights, the visible ones and `here`. | Lets the guide check what the user sees before answering, without waiting for a message. |
+| `close` | none | Closes the reader window. | Ends a walk cleanly; the guide can close what it opened. |
+| `browse` | `folder` absolute path (required) | Opens a trip with no sights, a file browser of the folder in their place; a file the user opens there becomes the trip's one sight. | When the user does not yet know what to ask about, they can start from the files; the conversation goes on. |
+| `settings` | `values` object: `tint` 0–1, `default_conversation_height` 0–1, `bench_side` `left`/`right` | Reads the user's settings, or changes the editable ones. | The user may ask the guide to change the layout in words, without opening settings files. |
 
 The `show` example is the first three sights of `docs/trips/one-tool-call-over-http.json`, with its transitions in the guide's place form; the `say` example is written for it. Schemas as `tools/list` returns them (`sw/manual.py`, `TOOLS`).
 
@@ -323,7 +341,15 @@ Rule 22 is detected heuristically (`marks.speaks_of_code`: a name tag, a backtic
 10. **Machine-readable refusals.** Errors are prose; a code per rule (section 8's numbers) would
    let a guide or a test suite tell them apart.
 
-## Candidate names
+## Name
+
+**Grounded Vetting Protocol** (Jakub, 2026-10-20): "grounded" for words tied to places, the
+point of the protocol; "vetting" for its purpose. The acronym GVP is free of the collisions of
+GWP (Global Warming Potential) and GCC (the compiler). Polish: **ugruntowanie** for grounding,
+the established term (as in *ugruntowanie symboli*, symbol grounding), with **zakotwiczyć** for
+the act of tying one word to one place.
+
+Earlier candidates:
 
 - Sightline Protocol: keeps the Sights metaphor and says what it does, a line
   of sight from words to lines.

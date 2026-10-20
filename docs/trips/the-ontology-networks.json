@@ -1,7 +1,8 @@
 {
  "name": "The ontology: networks",
  "kind": "survey",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Transitions between places, checked; the trip, the informator and the tour.",
  "sights": [
   "sw/ontology.py:93-100",
   "sw/ontology.py:16-18",

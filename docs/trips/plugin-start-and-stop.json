@@ -1,11 +1,12 @@
 {
  "name": "Plugin start and stop",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Sublime loads the plugin, which starts its MCP server; a new port restarts it; on unload, trips close and the server stops. The Restart command makes Sublime reload the plugin.",
  "sights": [
   "sight_walk.py:45-52",
   "sw/subl_mcp_http.py:142-145",
-  "sw/subl_executor.py:239-243",
+  "sw/subl_executor.py:248-252",
   "sw/subl_mcp_http.py:118-122",
   "sw/subl_mcp_http.py:133-139",
   "sw/subl_mcp_http.py:125-130",
@@ -29,7 +30,7 @@
   {
    "type": "calls",
    "from": [1, 144],
-   "to": [2, 239]
+   "to": [2, 248]
   },
   {
    "type": "calls",
@@ -39,7 +40,7 @@
   {
    "type": "calls",
    "from": [4, 136],
-   "to": [2, 239]
+   "to": [2, 248]
   },
   {
    "type": "calls",

@@ -1,7 +1,8 @@
 {
  "name": "Seeing where the code asks",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The underline and the popup that says where the code asks the question.",
  "sights": [
   "sw/subl_asked.py:47-57",
   "sw/subl_asked.py:73-80",

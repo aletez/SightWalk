@@ -1,7 +1,8 @@
 {
  "name": "One colour scheme for the trips",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "SightWalk: Select Colour Scheme: general, light or dark, only schemes of that kind, previewed live in every trip; the files' hues derived from it again, the other views take it as it is.",
  "sights": [
   "sw/subl_commands.py:61-63",
   "sw/subl_commands.py:65-76",
@@ -10,14 +11,14 @@
   "sw/subl_commands.py:97-99",
   "sw/subl_commands.py:78-80",
   "sw/subl_tint.py:251-256",
-  "sw/subl_reader.py:315-322",
+  "sw/subl_reader.py:316-323",
   "sw/subl_tint.py:100-110",
   "sw/subl_tint.py:167-177",
   "sw/subl_tint.py:185-194",
   "sw/subl_tint.py:277-279",
   "sw/subl_tint.py:197-209",
   "sw/subl_tint.py:180-182",
-  "sw/subl_reader.py:324-331",
+  "sw/subl_reader.py:325-332",
   "sw/subl_tint.py:219-227",
   "sw/subl_commands.py:82-88"
  ],
@@ -70,16 +71,16 @@
   {
    "type": "calls",
    "from": [6, 256],
-   "to": [7, 315]
+   "to": [7, 316]
   },
   {
    "type": "calls",
-   "from": [7, 322],
-   "to": [14, 324]
+   "from": [7, 323],
+   "to": [14, 325]
   },
   {
    "type": "calls",
-   "from": [7, 322],
+   "from": [7, 323],
    "to": [15, 219]
   },
   {

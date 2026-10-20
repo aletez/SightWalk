@@ -1,9 +1,10 @@
 {
  "name": "Colours",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Every file in its own hue, schemes written and set once Sublime has indexed them.",
  "sights": [
-  "sw/subl_reader.py:333-338",
+  "sw/subl_reader.py:334-339",
   "sw/subl_tint.py:282-285",
   "sw/subl_tint.py:242-248",
   "sw/subl_tint.py:22-26",
@@ -17,7 +18,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 338],
+   "from": [0, 339],
    "to": [1, 282]
   },
   {

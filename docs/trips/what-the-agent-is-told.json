@@ -1,16 +1,17 @@
 {
  "name": "What the agent is told",
  "kind": "survey",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The guide's manual, the tools' descriptions and schemas it gets at its start, and the prompt a guide started from Sublime is given.",
  "sights": [
-  "sw/manual.py:6-20",
-  "sw/manual.py:22-50",
-  "sw/manual.py:52-55",
-  "sw/manual.py:57-107",
-  "sw/manual.py:109-156",
-  "sw/manual.py:159-162",
+  "sw/manual.py:6-24",
+  "sw/manual.py:26-54",
+  "sw/manual.py:56-59",
+  "sw/manual.py:61-113",
+  "sw/manual.py:115-162",
   "sw/manual.py:165-168",
-  "sw/manual.py:170-204",
+  "sw/manual.py:171-174",
+  "sw/manual.py:176-213",
   "sw/validator.py:11-13",
   "sw/subl_guide.py:20-25",
   "sw/permissions.py:8-19"
@@ -18,43 +19,43 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [7, 171],
-   "to": [5, 159]
-  },
-  {
-   "type": "calls",
-   "from": [7, 180],
-   "to": [5, 159]
-  },
-  {
-   "type": "calls",
-   "from": [7, 184],
-   "to": [5, 159]
-  },
-  {
-   "type": "calls",
-   "from": [7, 187],
-   "to": [5, 159]
+   "from": [7, 177],
+   "to": [5, 165]
   },
   {
    "type": "calls",
    "from": [7, 189],
-   "to": [5, 159]
+   "to": [5, 165]
   },
   {
    "type": "calls",
-   "from": [7, 190],
-   "to": [5, 159]
+   "from": [7, 193],
+   "to": [5, 165]
   },
   {
    "type": "calls",
-   "from": [7, 194],
-   "to": [5, 159]
+   "from": [7, 196],
+   "to": [5, 165]
+  },
+  {
+   "type": "calls",
+   "from": [7, 198],
+   "to": [5, 165]
   },
   {
    "type": "calls",
    "from": [7, 199],
-   "to": [5, 159]
+   "to": [5, 165]
+  },
+  {
+   "type": "calls",
+   "from": [7, 203],
+   "to": [5, 165]
+  },
+  {
+   "type": "calls",
+   "from": [7, 208],
+   "to": [5, 165]
   }
  ]
 }

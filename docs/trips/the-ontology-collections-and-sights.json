@@ -1,7 +1,8 @@
 {
  "name": "The ontology: collections and sights",
  "kind": "survey",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Members without order, sequences one can walk, places as paths into them, and the sight.",
  "sights": [
   "sw/ontology.py:25-26",
   "sw/ontology.py:28-30",

@@ -1,7 +1,8 @@
 {
  "name": "Driving a trip from the terminal",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Tests without mouse or keys, in the guide's notation: sight_walk_fill sets the draft, whose <here> tags become links, sight_walk_select selects places, (>) the draft, and sight_walk_send_draft sends it.",
  "sights": [
   "sw/subl_commands.py:121-138",
   "sw/marks.py:348-366",

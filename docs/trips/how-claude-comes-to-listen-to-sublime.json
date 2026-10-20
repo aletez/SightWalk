@@ -1,7 +1,8 @@
 {
  "name": "How Claude comes to listen to Sublime",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "When no agent listens, asking the guide starts one; it calls wait_for_user through the bridge and waits on the shared inbox.",
  "sights": [
   "sw/subl_guide.py:97-102",
   "sw/subl_guide.py:51-60",
@@ -9,7 +10,7 @@
   "sw/subl_guide.py:39-40",
   "sw/subl_guide.py:43-48",
   "sw/subl_guide.py:63-75",
-  "sw/subl_executor.py:220-234"
+  "sw/subl_executor.py:229-243"
  ],
  "transitions": [
   {

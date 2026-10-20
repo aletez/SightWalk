@@ -1,9 +1,10 @@
 {
  "name": "Trip files",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "A trip opened from its file by the guide, and the files written for an informator.",
  "sights": [
-  "sw/subl_executor.py:109-116",
+  "sw/subl_executor.py:118-125",
   "sw/ontology.py:266-269",
   "sw/ontology.py:260-263",
   "sw/ontology.py:244-246",

@@ -1,11 +1,12 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The window and every view but the sights.",
  "sights": [
   "sw/subl_executor.py:36-46",
-  "sw/subl_reader.py:75-105",
-  "sw/subl_reader.py:107-163",
+  "sw/subl_reader.py:75-106",
+  "sw/subl_reader.py:108-164",
   "sw/subl_views.py:182-191",
   "sw/subl_views.py:194-198",
   "sw/subl_views.py:142-149",
@@ -29,48 +30,43 @@
   },
   {
    "type": "calls",
-   "from": [1, 105],
-   "to": [2, 107]
+   "from": [1, 106],
+   "to": [2, 108]
   },
   {
    "type": "calls",
-   "from": [2, 110],
+   "from": [2, 111],
    "to": [5, 142]
   },
   {
    "type": "calls",
-   "from": [2, 112],
+   "from": [2, 113],
    "to": [5, 142]
   },
   {
    "type": "calls",
-   "from": [2, 116],
+   "from": [2, 117],
    "to": [5, 142]
   },
   {
    "type": "calls",
-   "from": [2, 120],
+   "from": [2, 121],
    "to": [5, 142]
   },
   {
    "type": "calls",
-   "from": [2, 124],
+   "from": [2, 125],
    "to": [5, 142]
   },
   {
    "type": "calls",
-   "from": [2, 127],
+   "from": [2, 128],
    "to": [6, 118]
   },
   {
    "type": "calls",
-   "from": [2, 130],
+   "from": [2, 131],
    "to": [7, 74]
-  },
-  {
-   "type": "calls",
-   "from": [2, 132],
-   "to": [8, 83]
   },
   {
    "type": "calls",
@@ -84,13 +80,13 @@
   },
   {
    "type": "calls",
-   "from": [2, 142],
-   "to": [3, 182]
+   "from": [2, 135],
+   "to": [8, 83]
   },
   {
    "type": "calls",
    "from": [2, 143],
-   "to": [10, 29]
+   "to": [3, 182]
   },
   {
    "type": "calls",
@@ -109,32 +105,37 @@
   },
   {
    "type": "calls",
-   "from": [2, 154],
-   "to": [8, 83]
+   "from": [2, 147],
+   "to": [10, 29]
   },
   {
    "type": "calls",
    "from": [2, 155],
-   "to": [4, 194]
-  },
-  {
-   "type": "calls",
-   "from": [2, 156],
-   "to": [9, 148]
-  },
-  {
-   "type": "calls",
-   "from": [2, 157],
-   "to": [3, 182]
-  },
-  {
-   "type": "calls",
-   "from": [2, 160],
    "to": [8, 83]
   },
   {
    "type": "calls",
+   "from": [2, 156],
+   "to": [4, 194]
+  },
+  {
+   "type": "calls",
+   "from": [2, 157],
+   "to": [9, 148]
+  },
+  {
+   "type": "calls",
+   "from": [2, 158],
+   "to": [3, 182]
+  },
+  {
+   "type": "calls",
    "from": [2, 161],
+   "to": [8, 83]
+  },
+  {
+   "type": "calls",
+   "from": [2, 162],
    "to": [4, 194]
   },
   {

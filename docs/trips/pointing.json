@@ -1,14 +1,15 @@
 {
  "name": "Pointing",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The marks an answer places with its own tags, resolved to sights and lines, framed in its words, the reader scrolled to show them.",
  "sights": [
-  "sw/subl_executor.py:67-75",
+  "sw/subl_executor.py:76-84",
   "sw/marks.py:264-296",
   "sw/marks.py:233-241",
   "sw/marks.py:244-261",
   "sw/marks.py:401-412",
-  "sw/subl_reader.py:685-694",
+  "sw/subl_reader.py:689-698",
   "sw/marks.py:91-117",
   "sw/marks.py:80-88",
   "sw/marks.py:18-37",
@@ -21,18 +22,18 @@
   "sw/spec.py:58-64",
   "sw/spec.py:50-55",
   "sw/marks.py:386-398",
-  "sw/subl_reader.py:1208-1235",
-  "sw/subl_reader.py:1312-1326",
+  "sw/subl_reader.py:1226-1253",
+  "sw/subl_reader.py:1330-1344",
   "sw/subl_chat.py:263-266",
-  "sw/subl_reader.py:1237-1248",
-  "sw/subl_reader.py:1328-1345",
-  "sw/subl_reader.py:1141-1150",
-  "sw/subl_reader.py:1065-1074"
+  "sw/subl_reader.py:1255-1266",
+  "sw/subl_reader.py:1346-1363",
+  "sw/subl_reader.py:1159-1168",
+  "sw/subl_reader.py:1083-1092"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 70],
+   "from": [0, 79],
    "to": [1, 264]
   },
   {
@@ -52,12 +53,12 @@
   },
   {
    "type": "calls",
-   "from": [5, 686],
+   "from": [5, 690],
    "to": [6, 91]
   },
   {
    "type": "calls",
-   "from": [5, 688],
+   "from": [5, 692],
    "to": [11, 14]
   },
   {
@@ -147,52 +148,52 @@
   },
   {
    "type": "calls",
-   "from": [18, 1213],
+   "from": [18, 1231],
    "to": [20, 263]
   },
   {
    "type": "calls",
-   "from": [18, 1218],
+   "from": [18, 1236],
    "to": [6, 91]
   },
   {
    "type": "calls",
-   "from": [18, 1219],
-   "to": [19, 1312]
+   "from": [18, 1237],
+   "to": [19, 1330]
   },
   {
    "type": "calls",
-   "from": [18, 1231],
-   "to": [21, 1237]
+   "from": [18, 1249],
+   "to": [21, 1255]
   },
   {
    "type": "calls",
-   "from": [21, 1240],
+   "from": [21, 1258],
    "to": [11, 14]
   },
   {
    "type": "calls",
-   "from": [22, 1332],
+   "from": [22, 1350],
    "to": [4, 401]
   },
   {
    "type": "calls",
-   "from": [22, 1343],
-   "to": [5, 685]
+   "from": [22, 1361],
+   "to": [5, 689]
   },
   {
    "type": "calls",
-   "from": [23, 1144],
+   "from": [23, 1162],
    "to": [20, 263]
   },
   {
    "type": "calls",
-   "from": [23, 1148],
-   "to": [24, 1065]
+   "from": [23, 1166],
+   "to": [24, 1083]
   },
   {
    "type": "calls",
-   "from": [24, 1073],
+   "from": [24, 1091],
    "to": [12, 269]
   }
  ]

@@ -1,30 +1,31 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.",
  "sights": [
-  "sw/subl_reader.py:649-657",
+  "sw/subl_reader.py:653-661",
   "sw/subl_chat.py:221-231",
   "sw/subl_chat.py:240-243",
   "sw/subl_chat.py:234-237",
-  "sw/subl_reader.py:659-666",
-  "sw/subl_reader.py:646-647",
-  "sw/subl_reader.py:590-613",
-  "sw/subl_reader.py:615-623",
-  "sw/subl_reader.py:625-628",
-  "sw/subl_reader.py:557-569",
-  "sw/subl_reader.py:571-575",
+  "sw/subl_reader.py:663-670",
+  "sw/subl_reader.py:650-651",
+  "sw/subl_reader.py:594-617",
+  "sw/subl_reader.py:619-627",
+  "sw/subl_reader.py:629-632",
+  "sw/subl_reader.py:561-573",
+  "sw/subl_reader.py:575-579",
   "sw/subl_reader.py:68-71"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 651],
-   "to": [5, 646]
+   "from": [0, 655],
+   "to": [5, 650]
   },
   {
    "type": "calls",
-   "from": [0, 653],
+   "from": [0, 657],
    "to": [1, 221]
   },
   {
@@ -39,47 +40,47 @@
   },
   {
    "type": "calls",
-   "from": [4, 662],
-   "to": [5, 646]
+   "from": [4, 666],
+   "to": [5, 650]
   },
   {
    "type": "calls",
-   "from": [4, 665],
-   "to": [6, 590]
+   "from": [4, 669],
+   "to": [6, 594]
   },
   {
    "type": "calls",
-   "from": [6, 597],
+   "from": [6, 601],
    "to": [1, 221]
   },
   {
    "type": "calls",
-   "from": [6, 598],
-   "to": [10, 571]
+   "from": [6, 602],
+   "to": [10, 575]
   },
   {
    "type": "calls",
-   "from": [6, 603],
-   "to": [7, 615]
+   "from": [6, 607],
+   "to": [7, 619]
   },
   {
    "type": "calls",
-   "from": [6, 604],
-   "to": [9, 557]
+   "from": [6, 608],
+   "to": [9, 561]
   },
   {
    "type": "calls",
-   "from": [7, 620],
+   "from": [7, 624],
    "to": [2, 240]
   },
   {
    "type": "calls",
-   "from": [9, 568],
+   "from": [9, 572],
    "to": [3, 234]
   },
   {
    "type": "calls",
-   "from": [10, 575],
+   "from": [10, 579],
    "to": [11, 68]
   }
  ]

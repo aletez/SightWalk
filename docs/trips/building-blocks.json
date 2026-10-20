@@ -1,7 +1,8 @@
 {
  "name": "Building blocks",
  "kind": "survey",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The small classes and hooks the trips above stand on.",
  "sights": [
   "sw/plan.py:8-15",
   "sw/plan.py:22-35",

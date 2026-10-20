@@ -1,7 +1,8 @@
 {
  "name": "Settings and the rest of the colours",
  "kind": "survey",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The agent's view of the settings, and colour helpers.",
  "sights": [
   "sw/subl_tint.py:84-86",
   "sw/subl_tint.py:59-69",

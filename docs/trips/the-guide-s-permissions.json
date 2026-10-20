@@ -1,11 +1,12 @@
 {
  "name": "The guide's permissions",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The Permissions tab: a field ticked, remembered or not, and the guide SightWalk started restarted while it waits with the tools allowed now.",
  "sights": [
-  "sw/subl_reader.py:1156-1159",
+  "sw/subl_reader.py:1174-1177",
   "sw/subl_vetting.py:245-265",
-  "sw/subl_reader.py:1161-1176",
+  "sw/subl_reader.py:1179-1194",
   "sw/subl_vetting.py:268-270",
   "sw/subl_guide.py:126-132",
   "sw/permissions.py:37-39",
@@ -15,64 +16,64 @@
   "sw/permissions.py:23-34",
   "sw/permissions.py:42-44",
   "sw/subl_guide.py:149-151",
-  "sw/subl_reader.py:1178-1182",
+  "sw/subl_reader.py:1196-1200",
   "sw/subl_guide.py:119-123"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1157],
+   "from": [0, 1175],
    "to": [7, 107]
   },
   {
    "type": "calls",
-   "from": [0, 1157],
+   "from": [0, 1175],
    "to": [1, 245]
   },
   {
    "type": "calls",
-   "from": [0, 1158],
+   "from": [0, 1176],
    "to": [8, 114]
   },
   {
    "type": "calls",
-   "from": [0, 1158],
+   "from": [0, 1176],
    "to": [11, 149]
   },
   {
    "type": "calls",
-   "from": [0, 1159],
-   "to": [2, 1161]
+   "from": [0, 1177],
+   "to": [2, 1179]
   },
   {
    "type": "calls",
-   "from": [2, 1165],
+   "from": [2, 1183],
    "to": [8, 114]
   },
   {
    "type": "calls",
-   "from": [2, 1167],
+   "from": [2, 1185],
    "to": [3, 268]
   },
   {
    "type": "calls",
-   "from": [2, 1169],
+   "from": [2, 1187],
    "to": [4, 126]
   },
   {
    "type": "calls",
-   "from": [2, 1171],
+   "from": [2, 1189],
    "to": [13, 119]
   },
   {
    "type": "calls",
-   "from": [2, 1174],
-   "to": [12, 1178]
+   "from": [2, 1192],
+   "to": [12, 1196]
   },
   {
    "type": "calls",
-   "from": [2, 1175],
-   "to": [0, 1156]
+   "from": [2, 1193],
+   "to": [0, 1174]
   },
   {
    "type": "calls",
@@ -96,13 +97,13 @@
   },
   {
    "type": "calls",
-   "from": [12, 1181],
+   "from": [12, 1199],
    "to": [13, 119]
   },
   {
    "type": "calls",
-   "from": [12, 1182],
-   "to": [0, 1156]
+   "from": [12, 1200],
+   "to": [0, 1174]
   },
   {
    "type": "calls",

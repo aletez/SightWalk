@@ -1,22 +1,23 @@
 {
  "name": "A request arrives",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "From the HTTP server's thread to the show operation on Sublime's, with every check on the way.",
  "sights": [
-  "sw/subl_executor.py:180-187",
-  "sw/subl_executor.py:190-206",
-  "sw/subl_executor.py:121-135",
-  "sw/subl_executor.py:138-147",
-  "sw/subl_executor.py:150-161",
+  "sw/subl_executor.py:189-196",
+  "sw/subl_executor.py:199-215",
+  "sw/subl_executor.py:130-144",
+  "sw/subl_executor.py:147-156",
+  "sw/subl_executor.py:159-170",
   "sw/spec.py:118-123",
   "sw/spec.py:126-130",
   "sw/spec.py:136-149",
   "sw/spec.py:152-159",
   "sw/validator.py:26-31",
-  "sw/validator.py:104-108",
+  "sw/validator.py:123-127",
   "sw/validator.py:89-101",
-  "sw/subl_executor.py:49-55",
-  "sw/subl_executor.py:58-60",
+  "sw/subl_executor.py:49-59",
+  "sw/subl_executor.py:67-69",
   "sw/validator.py:56-59",
   "sw/validator.py:34-53",
   "sw/marks.py:386-398",
@@ -31,67 +32,67 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 183],
-   "to": [2, 121]
+   "from": [0, 192],
+   "to": [2, 130]
   },
   {
    "type": "calls",
-   "from": [0, 183],
-   "to": [1, 190]
+   "from": [0, 192],
+   "to": [1, 199]
   },
   {
    "type": "calls",
-   "from": [0, 184],
+   "from": [0, 193],
    "to": [9, 26]
   },
   {
    "type": "calls",
-   "from": [0, 187],
+   "from": [0, 196],
    "to": [12, 49]
   },
   {
    "type": "calls",
-   "from": [0, 187],
-   "to": [1, 190]
+   "from": [0, 196],
+   "to": [1, 199]
   },
   {
    "type": "calls",
-   "from": [1, 195],
+   "from": [1, 204],
    "to": [12, 49]
   },
   {
    "type": "calls",
-   "from": [2, 129],
-   "to": [3, 138]
+   "from": [2, 138],
+   "to": [3, 147]
   },
   {
    "type": "calls",
-   "from": [2, 130],
-   "to": [4, 150]
+   "from": [2, 139],
+   "to": [4, 159]
   },
   {
    "type": "calls",
-   "from": [3, 143],
+   "from": [3, 152],
    "to": [22, 10]
   },
   {
    "type": "calls",
-   "from": [3, 146],
+   "from": [3, 155],
    "to": [23, 31]
   },
   {
    "type": "calls",
-   "from": [4, 159],
+   "from": [4, 168],
    "to": [22, 10]
   },
   {
    "type": "calls",
-   "from": [4, 160],
+   "from": [4, 169],
    "to": [5, 118]
   },
   {
    "type": "calls",
-   "from": [4, 160],
+   "from": [4, 169],
    "to": [6, 126]
   },
   {
@@ -111,22 +112,22 @@
   },
   {
    "type": "calls",
-   "from": [10, 105],
+   "from": [10, 124],
    "to": [14, 56]
   },
   {
    "type": "calls",
-   "from": [10, 106],
+   "from": [10, 125],
    "to": [15, 34]
   },
   {
    "type": "calls",
-   "from": [10, 107],
+   "from": [10, 126],
    "to": [21, 73]
   },
   {
    "type": "calls",
-   "from": [10, 108],
+   "from": [10, 127],
    "to": [11, 89]
   },
   {
@@ -136,8 +137,8 @@
   },
   {
    "type": "calls",
-   "from": [12, 55],
-   "to": [13, 58]
+   "from": [12, 56],
+   "to": [13, 67]
   },
   {
    "type": "calls",

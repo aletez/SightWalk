@@ -1,11 +1,12 @@
 {
  "name": "Opening the editor",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Enter or the header's button: the editor laid over the sights, ranges and marks held.",
  "sights": [
   "sw/subl_commands.py:210-220",
-  "sw/subl_reader.py:766-771",
-  "sw/subl_reader.py:749-764",
+  "sw/subl_reader.py:770-775",
+  "sw/subl_reader.py:753-768",
   "sw/subl_editor.py:24-32",
   "sw/subl_views.py:69-73",
   "sw/subl_editor.py:16-20",
@@ -19,16 +20,16 @@
   {
    "type": "calls",
    "from": [0, 212],
-   "to": [1, 766]
+   "to": [1, 770]
   },
   {
    "type": "calls",
    "from": [0, 220],
-   "to": [2, 749]
+   "to": [2, 753]
   },
   {
    "type": "calls",
-   "from": [2, 758],
+   "from": [2, 762],
    "to": [3, 24]
   },
   {

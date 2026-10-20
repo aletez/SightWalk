@@ -1,25 +1,26 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "In a trip: from the sights to the bench and back. Elsewhere: to the open trip, or a new trip with no sights, the repository's files in their place.",
  "sights": [
   "sw/subl_commands.py:500-511",
-  "sw/subl_reader.py:825-835",
+  "sw/subl_reader.py:829-839",
   "sw/subl_commands.py:513-518",
-  "sw/subl_reader.py:186-190",
-  "sw/subl_reader.py:192-212",
-  "sw/subl_reader.py:214-219",
+  "sw/subl_reader.py:187-191",
+  "sw/subl_reader.py:193-213",
+  "sw/subl_reader.py:215-220",
   "sw/subl_commands.py:335-339",
   "sw/subl_commands.py:297-298",
-  "sw/subl_reader.py:221-229",
-  "sw/subl_executor.py:88-96",
+  "sw/subl_reader.py:222-230",
+  "sw/subl_executor.py:97-105",
   "sw/subl_views.py:128-139"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 503],
-   "to": [1, 825]
+   "to": [1, 829]
   },
   {
    "type": "calls",
@@ -29,22 +30,22 @@
   {
    "type": "calls",
    "from": [0, 510],
-   "to": [3, 186]
-  },
-  {
-   "type": "calls",
-   "from": [3, 189],
-   "to": [10, 128]
+   "to": [3, 187]
   },
   {
    "type": "calls",
    "from": [3, 190],
-   "to": [4, 192]
+   "to": [10, 128]
+  },
+  {
+   "type": "calls",
+   "from": [3, 191],
+   "to": [4, 193]
   },
   {
    "type": "calls",
    "from": [6, 339],
-   "to": [8, 221]
+   "to": [8, 222]
   },
   {
    "type": "calls",
@@ -53,8 +54,8 @@
   },
   {
    "type": "calls",
-   "from": [9, 94],
-   "to": [3, 186]
+   "from": [9, 103],
+   "to": [3, 187]
   }
  ]
 }

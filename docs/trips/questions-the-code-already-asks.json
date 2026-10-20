@@ -1,9 +1,10 @@
 {
  "name": "Questions the code already asks",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "Guards found in the code itself, carried to the sights that use the same objects without them.",
  "sights": [
-  "sw/subl_reader.py:243-258",
+  "sw/subl_reader.py:244-259",
   "sw/subl_asked.py:33-44",
   "sw/subl_asked.py:20-30",
   "sw/questions.py:62-77",
@@ -17,7 +18,7 @@
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 253],
+   "from": [0, 254],
    "to": [1, 33]
   },
   {

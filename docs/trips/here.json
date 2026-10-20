@@ -1,16 +1,17 @@
 {
  "name": "Here",
  "kind": "run",
- "commit": "842a97271571e6ae7159d1564764b7c809324884",
+ "commit": "199fcfa972148cdb7b2adb4d3e40c60334f93c47",
+ "story": "The caret or a selection in a sight becomes here.",
  "sights": [
   "sw/subl_commands.py:314-324",
-  "sw/subl_reader.py:837-842"
+  "sw/subl_reader.py:841-846"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 324],
-   "to": [1, 837]
+   "to": [1, 841]
   }
  ]
 }

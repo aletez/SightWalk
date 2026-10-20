@@ -77,6 +77,12 @@ back** from `return None` to line 105, icon **3** on that line, and a jump **ask
 the other branch. In the Tour screenshot below, the user asks *why are reply and answer
 separate?*. Names of functions on the bench are coloured as in the code.
 
+Three voices speak on the bench. **P:** is the trip's **Pioneer**, who laid the trip out,
+cleared the way through the code or explored it as found, and not always the code's author:
+the bench of every new trip opens with the Pioneer's story of it. **U:** is you, the
+**user**. **A:** is the **AI agent**, your **guide**, who may be another than the Pioneer and,
+when the job is stern vetting, no friend of the Pioneer's.
+
 ### Every reference is a link
 
 Guide and user share one markup. The guide ties its words to places with

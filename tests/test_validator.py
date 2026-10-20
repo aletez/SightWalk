@@ -5,6 +5,7 @@ from sw.validator import Refusal, check
 from tests.test_pure import stacked
 
 OPEN = {"trip_open": True, "ready": True, "addressed": True}
+STORY = "A request comes in and is answered."
 
 
 class SayTest(unittest.TestCase):
@@ -23,7 +24,7 @@ class SayTest(unittest.TestCase):
 
 class ShowTest(unittest.TestCase):
     def test_files(self):
-        args = {"sights": ["a.py:1-5"], "transitions": [], "trip": "T"}
+        args = {"sights": ["a.py:1-5"], "transitions": [], "trip": "T", "story": STORY}
         check("show", args, {"files": [("a.py:1-5", "/r/a.py", 10, 5)]})
         for files in ([("a.py:1-5", "/r/a.py", None, 5)], [("a.py:1-5", "/r/a.py", 3, 5)], []):
             with self.assertRaises(Refusal):
@@ -44,16 +45,24 @@ class ShowTest(unittest.TestCase):
         with self.assertRaises(Refusal):  # no name
             validator.trip_of({"sights": ["a.py:1-5"], "transitions": []})
         with self.assertRaises(Refusal) as caught:  # an absolute path: no hint about root
-            check("show", {"sights": ["/r/a.py:1-5"], "transitions": [], "trip": "T"},
+            check("show", {"sights": ["/r/a.py:1-5"], "transitions": [], "trip": "T", "story": STORY},
                   {"files": [("/r/a.py:1-5", "/r/a.py", None, 5)]})
         self.assertNotIn("root", str(caught.exception))
 
     def test_one_unit(self):
-        args = {"sights": ["a.py:1-9"], "transitions": [], "trip": "T"}
+        args = {"sights": ["a.py:1-9"], "transitions": [], "trip": "T", "story": STORY}
         files = [("a.py:1-9", "/r/a.py", 20, 9)]
         check("show", args, {"files": files, "functions": [("a.py:1-9", ["m"], ["A"])]})
         with self.assertRaises(Refusal):
             check("show", args, {"files": files, "functions": [("a.py:1-9", ["m"], ["A", "B"])]})
+
+    def test_story(self):
+        args = {"sights": ["a.py:1-5"], "transitions": [], "trip": "T"}
+        files = {"files": [("a.py:1-5", "/r/a.py", 10, 5)]}
+        check("show", dict(args, story='It starts <here at="(a):2">here</here>.'), files)
+        for story in (None, " ", 'It starts <here at="(a):9">here</here>.', "On line 33 it ends."):
+            with self.assertRaises(Refusal, msg=story):
+                check("show", dict(args, story=story), files)
 
     def test_shape(self):
         for args in ({"sights": "a.py:1-5", "transitions": []}, {"sights": ["a.py:1-5"]},

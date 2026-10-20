@@ -312,7 +312,8 @@ TRIPS = [
      "◀ ▶ in the Sights' header, primary+[ and primary+]: each trip the guide shows goes into the "
      "window's history with its own conversation, starting from the question that called it; a "
      "step keeps the conversation shown and brings the other trip's back.",
-     ["subl_reader.Reader.visit", "history.last_exchange", "history.History.__init__",
+     ["subl_reader.Reader.visit", "history.last_exchange", "subl_reader.Reader.tell_story",
+      "validator.check_story", "history.History.__init__",
       "history.History.visit", "subl_reader.Reader.leave", "history.History.keep",
       "history.History.current", "subl_reader.Reader.enter", "subl_chat.nav_phantom",
       "subl_commands.SightWalkStepCommand.run", "subl_reader.Reader.step", "history.History.can",
@@ -635,12 +636,19 @@ def markdown(specs):
     return "\n".join(out)
 
 
-def make_trip(title, names, specs, found, imported, commit):
+def make_trip(title, about, names, specs, found, imported, commit):
+    """The trip's story: its own in STORIES (with <here> tags), else what the list says of it."""
     data = trip_sights(title, names, specs, found, imported)
     kind = "survey" if title in SURVEYS else "run"
     return Trip(title, [Sight.parse(spec) for spec in data["sights"]],
                 [Transition(t["type"], t["from"], t["to"]) for t in data["transitions"]],
-                commit, kind)
+                commit, kind, STORIES.get(title, about))
+
+
+# Trips' stories, told by their Pioneer (P:) first on their bench (Jakub, 2026-10-20), with <here>
+# tags at their own sights; a trip without one tells what the list above says of it.
+STORIES = {}
+LONG_TRIP = 5
 
 
 def own_trip(name):
@@ -670,7 +678,7 @@ def between_trips(found, imported):
 def write_files(specs, commit):
     """docs/trips/<id>.json for every trip, docs/informators/sightwalk.json naming them."""
     found, imported = definitions()
-    made = [make_trip(t, ns, specs, found, imported, commit) for t, _, ns in TRIPS]
+    made = [make_trip(t, about, ns, specs, found, imported, commit) for t, about, ns in TRIPS]
     os.makedirs("docs/trips", exist_ok=True)
     os.makedirs("docs/informators", exist_ok=True)
     for trip in made:
@@ -705,6 +713,10 @@ def main():
     covered = set(name for _, _, names in TRIPS for name in names)
     for name in sorted(set(specs) - covered - set(TEXTS)):
         print("not in any trip:", name, specs[name], file=sys.stderr)
+    # Short trips keep the tour map readable and leave room for adventures (Jakub).
+    long = ["%s (%d)" % (title, len(names)) for title, _, names in TRIPS if len(names) > LONG_TRIP]
+    if long:
+        print("%d trips longer than %d sights" % (len(long), LONG_TRIP), file=sys.stderr)
 
 
 if __name__ == "__main__":

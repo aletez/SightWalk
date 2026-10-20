@@ -3,11 +3,11 @@ the bench, in order, by its first words. Pure."""
 
 import re
 
-LABEL = re.compile(r"(?m)^([UA]): ")
+LABEL = re.compile(r"(?m)^([UAP]): ")
 
 
 def entries(transcript, words=8):
-    """[(kind "U" or "A", the label's offset in the transcript, its first words)]."""
+    """[(kind "U", "A" or "P", the label's offset in the transcript, its first words)]."""
     found = []
     for match in LABEL.finditer(transcript):
         rest = transcript[match.end():]

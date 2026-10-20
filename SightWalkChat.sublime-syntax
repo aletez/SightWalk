@@ -12,6 +12,10 @@ contexts:
       captures:
         1: keyword.other.agent.sight-walk
       push: agent
+    - match: '^(P:) '
+      captures:
+        1: entity.name.pioneer.sight-walk
+      push: pioneer
     - match: '^(U:) '
       captures:
         1: string.unquoted.user.sight-walk
@@ -23,7 +27,14 @@ contexts:
   agent:
     - meta_scope: meta.message.agent.sight-walk
     - include: names
-    - match: '(?=^(A: |U: |>>> ))'
+    - match: '(?=^(A: |U: |P: |>>> ))'
+      pop: true
+
+  pioneer:
+    # The trip's story, told by whoever laid the trip out (Jakub, 2026-10-20).
+    - meta_scope: meta.message.pioneer.sight-walk
+    - include: names
+    - match: '(?=^(A: |U: |P: |>>> ))'
       pop: true
 
   user:
@@ -32,7 +43,7 @@ contexts:
     # (Jakub).
     - meta_scope: meta.message.user.sight-walk
     - include: names
-    - match: '(?=^(A: |U: |>>> ))'
+    - match: '(?=^(A: |U: |P: |>>> ))'
       pop: true
     - match: '[^\n]'
       scope: markup.quote.user.sight-walk

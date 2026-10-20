@@ -155,12 +155,12 @@ class Trip(Sequence, Network):
     informator. Of a kind (a run, the default; a comparison; a survey), each sight one function
     at most, whole or a fragment; and a network of transitions between them: a place is ⟨⟩,
     ⟨sight⟩ or ⟨sight, line⟩, a sight by its index (the user reads it by its name, (a), (b), see
-    spec.sight_name)."""
+    spec.sight_name). Its story, told by its Pioneer, ties it together (Jakub, 2026-10-20)."""
 
-    def __init__(self, name, sights, transitions=(), commit=None, kind="run"):
+    def __init__(self, name, sights, transitions=(), commit=None, kind="run", story=""):
         if kind not in KINDS:
             raise ValueError("%s: unknown kind %r (kinds: %s)" % (name, kind, ", ".join(KINDS)))
-        self.kind = kind
+        self.kind, self.story = kind, story
         Network.__init__(self, name, sights, transitions, commit)
 
     def label(self):
@@ -172,7 +172,7 @@ class Trip(Sequence, Network):
     def moved(self, sights):
         """The same trip over sights at new ranges (an edit moved them), keeping the transitions
         that still fit."""
-        trip = Trip(self.name, sights, commit=self.commit, kind=self.kind)
+        trip = Trip(self.name, sights, commit=self.commit, kind=self.kind, story=self.story)
         trip.transitions = [t for t in self.transitions if not trip.problem(t)]
         return trip
 
@@ -258,7 +258,7 @@ def transition_from(data):
 
 
 def trip_data(trip):
-    return {"name": trip.name, "kind": trip.kind, "commit": trip.commit,
+    return {"name": trip.name, "kind": trip.kind, "commit": trip.commit, "story": trip.story,
             "sights": [sight.spec for sight in trip],
             "transitions": [transition_data(t) for t in trip.transitions]}
 
@@ -266,7 +266,7 @@ def trip_data(trip):
 def trip_from(data):
     return Trip(data["name"], [Sight.parse(spec) for spec in data["sights"]],
                 [transition_from(t) for t in data.get("transitions", [])],
-                data.get("commit"), data.get("kind", "run"))
+                data.get("commit"), data.get("kind", "run"), data.get("story", ""))
 
 
 def informator_data(informator, files):

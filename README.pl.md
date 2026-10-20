@@ -79,6 +79,12 @@ linii 105, ikona **3** na tej linii i skok **asks answer** dla drugiej gałęzi.
 Turnusu niżej użytkownik pyta *po co reply i answer są oddzielnie?*. Nazwy funkcji w ławce mają
 kolory takie jak w kodzie.
 
+W ławce mówią trzy głosy. **P:** to **Pionier** wycieczki: ten, kto ją wytyczył, przekarczował
+drogę przez kod albo przedarł się przez zastany, i nie zawsze autor kodu. Ławka każdej nowej
+wycieczki zaczyna się od jego opowieści. **U:** to ty, **użytkownik**. **A:** to **agent AI**,
+twój **przewodnik**, który może być kimś innym niż Pionier, a przy surowym vettingu wcale nie
+jego przyjacielem.
+
 ### Każde odniesienie to link
 
 Przewodnik i użytkownik mają jeden język znaczników. Przewodnik wiąże słowa z miejscami tak:

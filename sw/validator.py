@@ -101,9 +101,28 @@ def one_function(facts):
                       "its own." % "; ".join(crowded))
 
 
+def check_story(story, sights):
+    """The trip's story (Jakub, 2026-10-20): told first on its bench, its marks at its own sights,
+    no line numbers, as in an answer."""
+    if not isinstance(story, str) or not story.strip():
+        raise Refusal(NO_STORY)
+    try:
+        text, marks, frames = read_marks(untag(story))
+        resolve_marks(sights, marks)
+    except ValueError as e:
+        raise Refusal("story: %s" % e) from None
+    numbers = line_refs(mask(text, frames))
+    if numbers:
+        raise Refusal("story: " + NO_LINE_NUMBERS % ", ".join(numbers))
+
+
+NO_STORY = ("story: tell the trip's story, a few sentences that tie its sights together, with "
+            "<here> tags where it names code; it is said first on the trip's bench.")
+
+
 def check_show(args, facts):
     not_stopped(facts)
-    trip_of(args)
+    check_story(args.get("story"), list(trip_of(args)))
     files(facts, args.get("root"))
     one_function(facts)
 

@@ -101,6 +101,7 @@ class Reader(Geometry):
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
         self.root = self.browser = None  # a trip with no sights yet: its folder and file browser
         self.maximized, self.pan_before = False, True  # the Tools pane over the window ([⤢])
+        self.pending_story = None  # (story, the exchange that called the trip), told once laid out
         self.history = History()  # the normal trips shown here, ◀ ▶ (Jakub, 2026-10-20)
         self.make_side_views()
 
@@ -414,6 +415,9 @@ class Reader(Geometry):
         kept, self.pending_marks = self.pending_marks, None
         if kept:
             self.restore_marks(kept)
+        story, self.pending_story = self.pending_story, None
+        if story:
+            self.tell_story(*story)
         self.draw_map()
         self.draw_tour()
         # Widths are shares measured from the bench (see share), which Sublime reports right only
@@ -986,8 +990,10 @@ class Reader(Geometry):
         if what == "open":
             self.leave()
             transcripts = self.informator.transcripts
-            entry = self.history.visit(self.informator.member(key), self.informator_root,
-                                       transcripts.get(key, ""))
+            trip = self.informator.member(key)
+            entry = self.history.visit(trip, self.informator_root, transcripts.get(key, ""))
+            if not transcripts.get(key):  # a first visit: its story begins the conversation
+                self.pending_story = (trip.story, "")
             entry["tour_trip"], entry["marks"] = key, transcripts.get(key + MARKS_KEY)
             self.enter(entry)
         elif what == "tick":
@@ -1000,14 +1006,26 @@ class Reader(Geometry):
     def visit(self, trip, root):
         """A trip the guide shows: after the one shown, its conversation starting from the
         question that called it."""
+        exchange = last_exchange(subl_chat.TRANSCRIPT)
         self.leave()
-        self.enter(self.history.visit(trip, root, last_exchange(subl_chat.TRANSCRIPT)))
+        self.pending_story = (trip.story, exchange)
+        self.enter(self.history.visit(trip, root, ""))
 
     def step(self, step):
         """◀ (-1) or ▶ (1): the trip there, with its conversation as the user left it."""
         if self.history.can(step):
             self.leave()
             self.enter(self.history.go(step))
+
+    def tell_story(self, story, exchange):
+        """The trip's story first on its bench, told by its Pioneer (P:) with its marks, then the
+        user's question that called the trip and what followed it (Jakub, 2026-10-20)."""
+        if story:
+            text, placed, frames = marks.read_marks(marks.untag(story))
+            self.say(text, prefix="P: ", placed=placed, frames=frames)
+        if exchange.strip():
+            subl_chat.say(self.chat, exchange, prefix="")
+            self.keep_transcript()
 
     def leave(self):
         """The shown trip's conversation kept, in its entry and, for a tour's trip, its file."""
@@ -1097,7 +1115,7 @@ class Reader(Geometry):
         an answer's index, a question's index, or None)."""
         rows = []
         for kind, offset, words in answers.entries(subl_chat.TRANSCRIPT):
-            if kind == "A":
+            if kind in ("A", "P"):  # the story too has marks
                 k = next((i for i, a in enumerate(self.answers) if offset in a["labels"]), None)
                 note = "" if k is None else word("stale") if self.answer_marks(k) is None \
                     else word("icons_n") % len(self.answers[k]["marks"])
@@ -1121,7 +1139,7 @@ class Reader(Geometry):
         if not again and self.listed is None:
             self.bench_before = subl_chat.kept_place(self.chat) if self.pan \
                 else self.chat.viewport_position()[1]
-        if kind == "A" and k is not None:
+        if kind in ("A", "P") and k is not None:
             self.hide_answer() if again else self.show_answer(k)
         elif kind == "U" and k is not None:
             self.links.select(("question", k), self.links.questions[k]["places"])

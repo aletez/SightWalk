@@ -181,9 +181,11 @@ correct it.
 The `show` example is the first three sights of `docs/trips/one-tool-call-over-http.json`, with its transitions in the guide's place form; the `say` example is written for it. Schemas as `tools/list` returns them (`sw/manual.py`, `TOOLS`).
 
 ### show
-`{sights: [spec], transitions: [transition], root?: string, trip: string}`; `sights`,
-`transitions` and `trip` required. Opens or replaces the reader,
-scrolled to the top. `root` is the base folder of relative paths. Reply:
+`{sights: [spec], transitions: [transition], root?: string, trip: string, story: string}`;
+`sights`, `transitions`, `trip` and `story` required. Opens or replaces the reader,
+scrolled to the top. `story`: the trip's story, a few sentences tying its sights together, with
+the inline tags of section 7 and no line numbers; the Pioneer (`P:`) tells it first on the new
+trip's bench, before the user's question that called the trip. `root` is the base folder of relative paths. Reply:
 `{"ok": true, "sights": {"(a)": spec, …}}`.
 
 ```json
@@ -191,6 +193,7 @@ scrolled to the top. `root` is the base folder of relative paths. Reply:
  "sights": ["sw/subl_mcp_http.py:94-105", "sw/subl_mcp_http.py:78-81", "sw/subl_mcp_http.py:65-74"],
  "transitions": [{"type": "calls", "from": "(a):95", "to": "(b):78"},
                  {"type": "calls", "from": "(a):104", "to": "(c):65"}],
+ "story": "A call comes in at <here at=\"(a):95\">the handler</here>, is <calls at=\"(a):95 (b):78\">read</calls> and <calls at=\"(a):104 (c):65\">answered</calls>.",
  "root": "/Users/user/Repositories/SightWalk"}
 ```
 

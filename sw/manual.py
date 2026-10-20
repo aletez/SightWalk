@@ -18,6 +18,10 @@ is one of:
 - a survey: all the places about one thing, such as the uses of a name, the handling of one
   error, or one change spread over several files.
 Give every trip a name (show's trip argument).
+Keep a trip short: about five sights of similar length, each a step the user can take in
+shallowly, on trust where you explain it. Better five such steps, any of which an adventure
+could open up into five of its own, than one long trip in which the user loses strength and
+heart. A longer story becomes several trips, joined by leads_to.
 
 Showing code
 - A sight is written <file>:<begin>-<end>, lines 1-based and inclusive.
@@ -59,8 +63,10 @@ Conversation
   visible sights and, once the user has put the caret or a selection in a sight, the caret's
   place there (here, "(c):105:9": sight, line, column). On timeout, call it again
   at once and say nothing: never announce that you are waiting.
-- Each trip has its own conversation on the bench: a new show starts it from the user's question
-  that called it. The user can go back and forward through the window's trips (◀ ▶); every
+- Each trip has its own conversation on the bench. It starts with the trip's story (show's story),
+  told by the Pioneer (P:), who laid the trip out: you or another guide before you. Write it as
+  the trip's map in words: what happens from the first sight to the last, and why, its marks at
+  the places it names. Then comes the user's question that called the trip. The user can go back and forward through the window's trips (◀ ▶); every
   message names the trip it was sent from (trip). When that is not the trip you showed last,
   the user went back to it: answer about its sights, and its conversation as it was.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
@@ -173,10 +179,13 @@ TOOLS = [
          'none): {"type": "calls", "from": "(a):15", "to": "(b):7"} says line 15 of sight (a) '
          "calls the definition at line 7 of sight (b) (file lines); see the manual "
          "for the other types. root: base folder for relative paths. trip: the trip's name, a "
-         "few words, shown in the header over the Sights.",
+         "few words, shown in the header over the Sights. story: the trip's story, a few "
+         "sentences tying its sights together, with <here> tags where it names code (no line "
+         "numbers); the Pioneer (P:) tells it first on the trip's bench.",
          {"sights": {"type": "array", "items": {"type": "string"}},
           "transitions": {"type": "array", "items": TRANSITION}, "root": {"type": "string"},
-          "trip": {"type": "string"}}, ["sights", "transitions", "trip"]),
+          "trip": {"type": "string"}, "story": {"type": "string"}},
+         ["sights", "transitions", "trip", "story"]),
     tool("open_trip", "Open a trip from its file (JSON, as an informator keeps it: name, kind, "
          "sights, transitions), instead of composing it with show. root: base folder for its "
          "relative paths, by default the file's repository.",

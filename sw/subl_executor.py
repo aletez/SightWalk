@@ -48,11 +48,20 @@ def new_reader():
 
 def op_show(args, facts):
     made = trip_of(args)
+    made.story = args["story"]
     reader = state.current_reader() or new_reader()
     reader.visit(made, args.get("root"))
     state.ADDRESSED = True  # the guide may say what the trip is about
     subl_scrollbars.reader_focused(True)  # a new window is not reported as activated
-    return {"ok": True, "sights": named([sight.spec for sight in made])}
+    done = {"ok": True, "sights": named([sight.spec for sight in made])}
+    if len(made) > LONG_TRIP:
+        done["note"] = LONG_NOTE % len(made)
+    return done
+
+
+LONG_TRIP = 5
+LONG_NOTE = ("A trip of %d sights is long: next time, about five steps of similar length, each one "
+             "an adventure could open up, or several trips joined by leads_to.")
 
 
 def named(specs):

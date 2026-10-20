@@ -124,8 +124,17 @@ jest znaleziskiem.
 rozmowę prowadzoną w tej wycieczce](docs/images/tour.jpg)
 
 **SightWalk: Open Tour** wylicza turnusy znalezione w otwartych folderach. Zakładka Turnus
-pokazuje wycieczki po kolei, a przebytą wycieczkę odhaczasz sam. Każda wycieczka pamięta swoją
-rozmowę i znaczniki przewodnika, więc spacer trwa dalej tam, gdzie się urwał.
+pokazuje wycieczki po kolei, w nagłówku „Wycieczka 4 · …”, a przebytą wycieczkę odhaczasz sam.
+Każda wycieczka pamięta swoją rozmowę i znaczniki przewodnika, więc spacer trwa dalej tam, gdzie
+się urwał.
+
+Pod listą stoi **mapa turnusu**, tym dla turnusu, czym Mapa dla wycieczki: drogowskaz głównych i
+tajnych przejść między wycieczkami. Każda wycieczka to kolumna jej widoków, nazwanych
+plik:funkcja w barwie swojego pliku, a strzałki między wycieczkami to `leads_to` i `unblocks`
+autora, więc da się wyczytać inną kolejność niż turnusu i zobaczyć z lotu ptaka, co umiesz,
+czego nie, a co chcesz teraz umieć. Kliknięcie widoku otwiera jego wycieczkę. Wycieczki są
+krótkie, około pięciu kroków, a każdy krok może rozwinąć przygoda. `[⤢]` w nagłówku Narzędzi
+rozkłada dowolną zakładkę na prawie całe okno; `[⤢]` jeszcze raz albo `Esc` ją przywraca.
 
 ### Edycja na miejscu
 
@@ -183,7 +192,7 @@ Przewodnik ──MCP przez HTTP──▶ subl_mcp_http ──▶ validator (czys
   Skrypt `tools/trips.py` zapisuje kod wtyczki jako wycieczki i wymienia każdą funkcję, której
   żadna wycieczka nie obejmuje, więc dokumentacja nie zostanie po cichu w tyle za kodem.
 
-Około 6200 linii Pythona w 31 modułach, 341 commitów od 4 października 2026.
+Około 7100 linii Pythona w 33 modułach, około 400 commitów od 4 października 2026.
 
 ## Jak powstała
 
@@ -222,13 +231,13 @@ Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.c
 
 | Klawisz | W wycieczce |
 |---|---|
-| `⌘Enter` / `Enter` | wyślij wiadomość z ławki |
+| `Enter`, `⇧Enter` | wyślij wiadomość z ławki; nowa linia |
 | `⌘P` | połącz zaznaczone słowa z zaznaczonym kodem |
 | `Enter`, `Esc` | otwórz edytor widoku, zamknij go |
 | `Alt+R` | przywróć położenia |
-| `⌘S` | przełącza, co robi kółko nad ławką i panelem Narzędzi: przewija wycieczkę albo ten panel |
+| `⌘[`, `⌘]` | wstecz i naprzód po wycieczkach okna (◀ ▶) |
+| `⌘S` | przełącza, co robi kółko nad ławką i panelem Narzędzi: przesuwa panoramę widoków albo przewija ten panel |
 | `Ctrl+Tab` | fokus na następny widok na ekranie |
-| `Alt+↑↓`, `PgUp`/`PgDn` | przewiń wycieczkę |
 
 `⌘` to `Ctrl` w Windows i Linuksie. Interfejs mówi po angielsku i po polsku
 (**SightWalk: Switch Language**).
@@ -240,8 +249,10 @@ Wymagania: macOS, Linux albo Windows; [Sublime Text 4](https://www.sublimetext.c
   inny agent MCP i dostaje ten sam podręcznik przez MCP; sprawdzony jest tylko Claude Code.
 - Granice funkcji są rozpoznawane w Pythonie. W innych językach widok nigdy nie jest odrzucany
   za dwie funkcje.
-- W planach: notatki linkowane do rozmowy, legenda znaczników na ekranie i lista sprawdzeń, które
-  kod robi gdzie indziej, a tu nie.
+- `Esc` jeszcze nie u każdego zmniejsza powiększony panel Narzędzi; `[⤢]` tak.
+- W planach: notatki linkowane do rozmowy, legenda znaczników na ekranie, lista sprawdzeń, które
+  kod robi gdzie indziej, a tu nie, i osobny przewodnik dla każdej przygody, znający tylko jej
+  wątek.
 
 ## Mapa repozytorium
 

@@ -121,8 +121,16 @@ the guide's account is wrong, which is itself a finding.
 held on this trip](docs/images/tour.jpg)
 
 **SightWalk: Open Tour** lists the tours found in the open folders. The Tour tab shows the trips
-in order; you tick a trip as walked yourself. Each trip keeps its own conversation and the
-guide's marks, so a walk goes on where it stopped.
+in order, "Trip 4 · …" in the header; you tick a trip as walked yourself. Each trip keeps its own
+conversation and the guide's marks, so a walk goes on where it stopped.
+
+Under the list stands the **tour map**, what the Map is to a trip: a signpost of the main and
+secret passages between trips. Each trip is a column of its sights, named file:function in
+their file's hue, and the arrows between trips are the author's `leads_to` and `unblocks`, so
+you can read another order than the tour's, and see from above what you know, what you do
+not, and what you want to know now. A click on a sight opens its trip. Trips are kept short,
+about five steps, each of which an adventure can open up. `[⤢]` in the Tools header lays any
+tab over almost the whole window; `[⤢]` again or `Esc` brings it back.
 
 ### Editing in place
 
@@ -180,7 +188,7 @@ Guide agent ──MCP over HTTP──▶ subl_mcp_http ──▶ validator (pure
   script `tools/trips.py` writes the plugin's own code as trips and names any function no trip
   covers, so the documentation cannot silently fall behind the code.
 
-About 6,200 lines of Python in 31 modules, 341 commits since 4 October 2026.
+About 7,100 lines of Python in 33 modules, about 400 commits since 4 October 2026.
 
 ## How it was made
 
@@ -218,13 +226,13 @@ Requirements: macOS, Linux or Windows; [Sublime Text 4](https://www.sublimetext.
 
 | Key | In a trip |
 |---|---|
-| `⌘Enter` / `Enter` | send your message from the bench |
+| `Enter`, `⇧Enter` | send your message from the bench; a new line |
 | `⌘P` | link selected words to selected code |
 | `Enter`, `Esc` | open the editor on a sight, close it |
 | `Alt+R` | reset positions |
-| `⌘S` | switch what the wheel over the bench and the Tools pane does: scroll the trip, or that pane |
+| `⌘[`, `⌘]` | back and forward through the window's trips (◀ ▶) |
+| `⌘S` | switch what the wheel over the bench and the Tools pane does: move the column of sights, or scroll that pane |
 | `Ctrl+Tab` | focus the next sight on screen |
-| `Alt+↑↓`, `PgUp`/`PgDn` | scroll the trip |
 
 `⌘` is `Ctrl` on Windows and Linux. The interface speaks English and Polish
 (**SightWalk: Switch Language**).
@@ -236,8 +244,10 @@ Requirements: macOS, Linux or Windows; [Sublime Text 4](https://www.sublimetext.
   and gets the same manual through MCP; only Claude Code has been tried.
 - Function boundaries are recognised for Python; in other languages a sight is never refused
   for holding two functions.
-- Planned: notes linkable to the conversation, a legend of the marks on screen, and a list of
-  the checks the code makes elsewhere but not here.
+- `Esc` does not yet make the maximised Tools pane small again for everyone; `[⤢]` does.
+- Planned: notes linkable to the conversation, a legend of the marks on screen, a list of the
+  checks the code makes elsewhere but not here, and a guide of its own for each adventure, given
+  only its thread.
 
 ## Repository map
 

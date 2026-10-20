@@ -401,7 +401,10 @@ class SightWalkOpenTourCommand(sublime_plugin.WindowCommand):
     (Jakub): every informator's trips in reading order, and the tours written by hand
     (tours/*.json) found in the open folders and repositories."""
 
-    def run(self):
+    def run(self, informator=None, tour=None):
+        if informator:  # from the terminal, for tests: subl --command 'sight_walk_open_tour {...}'
+            self.open(informator, tour)
+            return
         found = tour_choices()
         if not found:
             sublime.error_message(word("no_informators"))

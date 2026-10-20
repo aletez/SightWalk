@@ -820,11 +820,19 @@ class Reader(Geometry):
                                   self.toggle_maximized)
         button = (word("restore_size"), self.toggle_maximized) if self.maximized \
             else (word("reset"), self.reset_sights)
-        subl_chat.show_header(self.sights_header, word("trip_title"), self.trip.name if self.trip else "",
+        subl_chat.show_header(self.sights_header, self.trip_title(), self.trip.name if self.trip else "",
                          button=button,
                          nav=(self.history.can(-1), self.history.can(1), self.step))
         # The strip is a scroll bar's width now: its header keeps the band, without the name.
         subl_chat.show_header(self.strip_header, "", "", help_mark=False)
+
+    def trip_title(self):
+        """"Trip 3" for a tour's trip, by its place in the tour; a bare trip is only "Trip"
+        (Jakub, 2026-10-20)."""
+        ids = [trip.id for trip in self.tour] if self.tour is not None else []
+        if self.tour_trip in ids:
+            return "%s %d" % (word("trip_title"), ids.index(self.tour_trip) + 1)
+        return word("trip_title")
 
     def toggle_focus(self, view):
         """To the bench, or from it back to the view used last (Jakub)."""

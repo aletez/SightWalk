@@ -313,7 +313,7 @@ TRIPS = [
      "window's history with its own conversation, starting from the question that called it; a "
      "step keeps the conversation shown and brings the other trip's back.",
      ["subl_reader.Reader.visit", "history.last_exchange", "subl_reader.Reader.tell_story",
-      "validator.check_story", "history.History.__init__",
+      "validator.check_story", "subl_reader.Reader.trip_title", "history.History.__init__",
       "history.History.visit", "subl_reader.Reader.leave", "history.History.keep",
       "history.History.current", "subl_reader.Reader.enter", "subl_chat.nav_phantom",
       "subl_commands.SightWalkStepCommand.run", "subl_reader.Reader.step", "history.History.can",

@@ -52,72 +52,58 @@ def content_point(view):
     return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
 
 PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
-# Highlighted like tags in Foggy Morning or Chameleon (Jakub): the others orange and faint,
-# the active one bold yellow and strong. The headers' grey is the same in every scheme.
-TAB_STYLE = "text-decoration: none; color: #b35c00; background-color: color(#ff9a1f alpha(0.15))"
-ACTIVE_TAB = '<b style="color: #5c4400; background-color: #ffd23f">&nbsp;%s&nbsp;</b>'
-TABS_ROOM = 40  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>⇕</b> %%s <b>↕</b> %%s <b>%s</b>: %%s</div>" % PAN_KEY
-
-
-TOGGLE_ROOM = 3  # columns the wheel toggle takes before the help mark
+TAB_GAP = "   "  # between the tabs, plain text (Jakub, 2026-10-20: no phantom, which kept its
+# links in place while the header scrolled sideways)
+# Highlighted like tags in Foggy Morning or Chameleon (Jakub): the others orange and faint, the
+# active one yellow and strong. Their colours are rules of the headers' scheme (see subl_tint).
+TAB_SCOPE, ACTIVE_SCOPE = "sight_walk.tab", "sight_walk.tab.active"
 
 
 def toggle_html(panning):
-    """[⇕]: the wheel moves the column of sights, the bench and the tool staying put; [↕]: it scrolls the tool or the bench itself (Jakub),
-    drawn as the help mark is."""
+    """[⇕]: the wheel moves the column of sights, the bench and the tool staying put; [↕]: it
+    scrolls the tool or the bench itself (Jakub), drawn as the help mark is."""
     return MARK_HTML.replace('href="help"', 'href="pan"').replace(">?<", ">%s<" % (
         "⇕" if panning else "↕")) + "&nbsp;"
 
 
-def show_tabs(header, active, on_select, panning, on_toggle=None):
-    """The tabs as links in the Tools pane's header, the shown one in bold, and at the right the
-    wheel toggle and the help mark, as on the bench's header: what primary+s does (Jakub)."""
-    columns = int(header.viewport_extent()[0] / max(header.em_width(), 1))
-    if kept(header).get("tabs") == (active, panning, columns, word("Map")):
-        align_mark(header)  # cheap when in place; laid out late, it may need it now
+def show_tabs(header, active):
+    """The tabs as words of the Tools pane's header, the shown one highlighted; a click on one
+    shows it (see tab_at)."""
+    if kept(header).get("tabs") == (active, word("Map")):
         return
-    kept(header)["tabs"] = (active, panning, columns, word("Map"))
-    # The tabs, an inline phantom at the start, take about TABS_ROOM columns of the line.
-    extra = kept(header).get("extra", 0)  # learned by align_mark
-    header.run_command("sight_walk_replace",
-                       {"text": " " * max(columns - 6 - TABS_ROOM + extra, 1)})
-    point = header.line(0).b
+    kept(header)["tabs"] = (active, word("Map"))
+    words = [" %s " % word(t) for t in TABS]
+    header.run_command("sight_walk_replace", {"text": " " + TAB_GAP.join(words) + " "})
+    spans, start = [], 1
+    for tab, text in zip(TABS, words):
+        spans.append((tab, sublime.Region(start, start + len(text))))
+        start += len(text) + len(TAB_GAP)
+    kept(header)["tab_spans"] = spans
+    flags = sublime.DRAW_NO_OUTLINE
+    header.add_regions("sight_walk_tabs", [r for t, r in spans if t != active], TAB_SCOPE, "", flags)
+    header.add_regions("sight_walk_tab", [r for t, r in spans if t == active], ACTIVE_SCOPE, "",
+                       flags)
+
+
+def tab_at(header, point):
+    """The tab whose word is at point, or None."""
+    return next((t for t, r in kept(header).get("tab_spans", []) if r.a <= point < r.b), None)
+
+
+def show_buttons(view, panning, on_toggle):
+    """The Tools header's buttons, in a narrow pane of their own at its right (Jakub): the
+    wheel toggle and the help mark, what primary+s does."""
+    if kept(view).get("buttons") == panning:
+        return
+    kept(view)["buttons"] = panning
     def clicked(href):
-        if href == "pan" and on_toggle is not None:
+        if href == "pan":
             on_toggle()
         else:
-            header.show_popup(PAN_HELP % (word("or"), word("or"), word("pan")), location=point)
-
-    phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
-        sublime.Region(point), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])
-    links = [ACTIVE_TAB % word(t) if t == active else
-             '<a href="%s" style="%s">%s</a>' % (t, TAB_STYLE, word(t))
-             for t in TABS]
-    html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
-    html = html.join(links)
-    phantoms(header, "sight_walk_tabs").update(
-        [sublime.Phantom(sublime.Region(0), html, sublime.LAYOUT_INLINE, on_select)])
-    sublime.set_timeout(lambda: align_mark(header), SETTLE_MS)
-
-
-def align_mark(header):
-    """The help mark to the right edge, where the bench's stands (MARK_ROOM columns from it;
-    Jakub: it stood mid-way): the tabs' phantom is wider or narrower than guessed in the
-    header's font, so the spaces before the mark are measured again once drawn."""
-    if not header.is_valid():
-        return
-    em = max(header.em_width(), 1)
-    end = header.line(0).b
-    width = header.viewport_extent()[0]
-    if width <= 0 or end < 2:  # not laid out yet
-        return
-    # A space of the header's font, proportional, is no em wide: measured between two of them.
-    space = max(header.text_to_layout(end)[0] - header.text_to_layout(end - 1)[0], 1)
-    more = int((width - header.text_to_layout(end)[0] - (MARK_ROOM + TOGGLE_ROOM) * em) / space)
-    if more:  # drawn again with that many more spaces before the mark (see show_tabs)
-        kept(header)["extra"] = kept(header).get("extra", 0) + more
-        kept(header)["tabs"] = None
+            view.show_popup(PAN_HELP % (word("or"), word("or"), word("pan")), location=0)
+    phantoms(view, "sight_walk_buttons").update([sublime.Phantom(
+        sublime.Region(0), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])
 
 
 # The map

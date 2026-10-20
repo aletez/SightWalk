@@ -4,7 +4,7 @@ plan), in px from the top of the screen, x as shares of the width. Reader inheri
 
 import sublime
 
-from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, GUTTER_PX, INSET, OVERLAP,
+from .config import (BUTTONS_EM, DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, GUTTER_PX, INSET, OVERLAP,
                      SETTINGS_FILE, STRIP_PX)
 
 
@@ -14,6 +14,10 @@ class Geometry:
         about as wide as its column."""
         width = self.chat.viewport_extent()[0] / max(self.bench_width, 0.01)
         return px / max(width, 1)
+
+    def buttons_share(self):
+        """The Tools header's buttons' pane: room for [⇕] [?] and a margin."""
+        return self.share(BUTTONS_EM * self.chat_header.em_width())
 
     def spans(self):
         """(bench, sights): the x spans of the Vetting Bench and of the Sights, as shares of the

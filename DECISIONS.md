@@ -288,7 +288,7 @@ Open:
 
 - Queue (Jakub, 2026-10-20), in this order:
   1. No shortcuts that scroll (Alt+↓/↑, PageDown/Up: the bench's own scrolling already moves the column) or send fixed questions (⌃⌘↓/↑); the help says Enter and ⇧Enter in sentences of their own. Done, unverified. No recommended phrasings in the README until Jakub knows which work.
-  2. The Tools header's buttons in a pane of their own beside the tabs; the tabs plain header text, clicked by the word under the pointer, highlighted by regions; sideways scrolling back.
+  2. The Tools header's buttons in a pane of their own beside the tabs; the tabs plain header text, clicked by the word under the pointer, highlighted by regions (colours: rules of the headers' scheme); sideways scrolling back. Done, unverified: Claude saw the tabs highlighted, a click on Turnus showed the Tour, and [⇕] [?] in their own pane.
   3. [⤢] left of [⇕] maximises the Tools pane over almost the whole window, pinned to its corner; the bench's header keeps a gap from the trip's; [Restore] takes the place of [Reset positions] meanwhile. Hovering a button says what it does.
   4. A story in GVP: show takes `story`, a narrative tying the trip together, with GVP markup, said first on a new trip's bench by the Pioneer (P:), whoever wrote the trip, maybe not the code. U: the user, A: the AI agent, your guide; the README explains the three. Trip files carry their story.
   5. Titles: "Trip 3 · <title>" for a tour's trip (its number in the tour), "Adventure 1 · <title>"; a bare trip keeps its title alone. Later: a bare trip as a one-trip tour.

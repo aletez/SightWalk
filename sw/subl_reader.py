@@ -155,6 +155,11 @@ class Reader(Geometry):
         self.status_view = subl_chat.make_status(self.window, self.chat)
         bench_font(self.status_view)
         apply_grey(self.below_header)
+        # Its buttons in a narrow pane of their own (Jakub), so the tabs may scroll sideways.
+        self.tool_buttons = subl_chat.make_header(self.window, self.chat, "Tools buttons")
+        match_font(self.tool_buttons, self.chat_header)
+        self.tool_buttons.settings().set("gutter", False)
+        apply_grey(self.tool_buttons)
 
     # Loading
 
@@ -189,7 +194,8 @@ class Reader(Geometry):
         (b0, b1), (c0, c1), (s0, s1) = self.spans()[0], self.spans()[1], self.strip_span()
         cells = [((b0, 0.0, b1, h), self.chat_header), ((b0, h, b1, split - h / 2), self.chat),
                  ((b0, split - h / 2, b1, split), self.status_view),
-                 ((b0, split, b1, split + h), self.below_header),
+                 ((b0, split, b1 - self.buttons_share(), split + h), self.below_header),
+                 ((b1 - self.buttons_share(), split, b1, split + h), self.tool_buttons),
                  ((b0, split + h, b1, 1.0), self.tool_view()),
                  ((s0, 0.0, s1, h), self.strip_header),
                  ((s0, h, s1, 1.0), self.strip), ((c0, 0.0, c1, h), self.sights_header),
@@ -309,7 +315,8 @@ class Reader(Geometry):
         """The chosen scheme everywhere at once (Jakub): every file's hues derived from it again,
         the grey headers too, and the views without a hue take it as it is."""
         self.tint(list(dict.fromkeys(sight.path for sight in self.sights)))
-        for header in (self.chat_header, self.sights_header, self.strip_header, self.below_header):
+        for header in (self.chat_header, self.sights_header, self.strip_header, self.below_header,
+                       self.tool_buttons):
             apply_grey(header)
         apply_plain(self.plain_views())
 
@@ -317,7 +324,7 @@ class Reader(Geometry):
         """The trip's views no file's hue tints: the bench, the Tools, blank and status views."""
         tinted = {v.id() for s in self.sights for v in s.all_views()}
         tinted |= {h.id() for h in (self.chat_header, self.sights_header, self.strip_header,
-                                    self.below_header)}
+                                    self.below_header, self.tool_buttons)}
         if self.editor is not None:
             tinted |= {self.editor.view.id(), self.editor.header.id()}
         return [v for v in self.window.views() if v.id() not in tinted]
@@ -420,7 +427,7 @@ class Reader(Geometry):
             self.keep_bench_width()
         status = self.status_view.line_height() + self.overhead if top else 0.0
         self.window.set_layout(reader_layout(rects, total, top, split, self.spans()[0], front,
-                                             self.editor_geometry(), status))
+                                             self.editor_geometry(), status, self.buttons_share()))
         return top
 
     def strip_in_front(self, rects, views):
@@ -472,7 +479,7 @@ class Reader(Geometry):
                 self.window.set_view_index(view, group, 0)
                 self.window.focus_view(view)
         n = len(ordered)
-        rest = [self.chat_header, self.below_header, self.status_view]
+        rest = [self.chat_header, self.below_header, self.status_view, self.tool_buttons]
         if full:
             for k, view in enumerate(rest):
                 self.window.set_view_index(view, n + k, 0)
@@ -591,10 +598,6 @@ class Reader(Geometry):
                 view.set_viewport_position((x, place), False)
         if not self.pan:
             self.clamp_bench()
-        # The tabs never scroll sideways: their phantom's links stayed behind (Jakub, 2026-10-20).
-        x, y = self.below_header.viewport_position()
-        if x != 0:
-            self.below_header.set_viewport_position((0.0, y), False)
         for view, place in self.wheel_places():
             x, y = view.viewport_position()
             if abs(y - place) <= 0.5 and x == 0:
@@ -802,8 +805,8 @@ class Reader(Geometry):
         self.chat.set_name(word("bench_view"))
         subl_chat.show_status(self.status_view, " · ".join(t for t in (self.status, self.note) if t),
                          self.stop_answer if self.note else None)
-        subl_vetting.show_tabs(self.below_header, self.tool, self.select_tool, self.pan,
-                               self.toggle_panning)
+        subl_vetting.show_tabs(self.below_header, self.tool)
+        subl_vetting.show_buttons(self.tool_buttons, self.pan, self.toggle_panning)
         subl_chat.show_header(self.sights_header, word("trip_title"), self.trip.name if self.trip else "",
                          button=(word("reset"), self.reset_sights),
                          nav=(self.history.can(-1), self.history.can(1), self.step))

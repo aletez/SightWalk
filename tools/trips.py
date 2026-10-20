@@ -115,7 +115,7 @@ TRIPS = [
       "subl_reader.Reader.withdraw_unread_messages"]),
     ("The Tools pane's tabs",
      "Map and Scroll: the tab links, and the tab shown in the pane.",
-     ["subl_reader.Reader.select_tool", "subl_vetting.show_tabs", "subl_vetting.toggle_html", "subl_vetting.align_mark",
+     ["subl_reader.Reader.select_tool", "subl_vetting.show_tabs", "subl_vetting.toggle_html", "subl_vetting.tab_at", "subl_vetting.show_buttons", "subl_commands.SightWalkHeaderListener.on_selection_modified", "subl_geometry.Geometry.buttons_share",
       "subl_commands.SightWalkTogglePanningCommand.run", "subl_reader.Reader.toggle_panning",
       "subl_vetting.set_panning", "subl_vetting.content_point", "subl_reader.Reader.tools",
       "subl_reader.Reader.tool_view", "subl_reader.Reader.hidden_tools", "subl_reader.Reader.draw_map"]),

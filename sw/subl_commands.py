@@ -240,6 +240,15 @@ class SightWalkHeaderListener(sublime_plugin.ViewEventListener):
         if hover_zone == sublime.HOVER_TEXT and reader is not None and self.view == reader.chat_header:
             subl_chat.show_help(self.view, point)
 
+    def on_selection_modified(self):
+        """A click on a tab's word in the Tools header shows that tab."""
+        reader = state.reader_for(self.view.window())
+        if reader is None or self.view != reader.below_header or not len(self.view.sel()):
+            return
+        tab = subl_vetting.tab_at(self.view, self.view.sel()[0].b)
+        if tab is not None and tab != reader.tool:
+            reader.select_tool(tab)
+
 
 class SightWalkChatListener(sublime_plugin.ViewEventListener):
     @classmethod

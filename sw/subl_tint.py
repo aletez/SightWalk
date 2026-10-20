@@ -152,7 +152,16 @@ def tinted_schemes(view, hue, amount):
     # A sight's name greyed (Jakub): the text mixed half with the band, grey in any scheme.
     scheme["rules"].append({"scope": "meta.sight-name.sight-walk", "foreground": tint_color(
         band, None, 0.5, foreground)})
+    scheme["rules"].extend(TAB_RULES)
     return [code, write_scheme(scheme, stem + "-header.sublime-color-scheme")]
+
+
+# The Tools header's tabs, highlighted like tags in Foggy Morning or Chameleon (Jakub): the others
+# orange on a faint glow, the shown one dark on strong yellow. The headers' grey is the same in
+# every scheme, so the colours are fixed.
+TAB_RULES = [{"scope": "sight_walk.tab", "foreground": "#b35c00", "background": "#f2c99a"},
+             {"scope": "sight_walk.tab.active", "foreground": "#3d2d00",
+              "background": "#ffd23f", "font_style": "bold"}]
 
 
 def scheme_colours(scheme, view=None):

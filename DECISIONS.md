@@ -189,7 +189,7 @@ Open:
 
 ## Plans (Jakub)
 
-- The protocol's name for now: **Grounded Vetting Protocol** (Jakub, 2026-10-20), docs/protocol.md. Polish: ugruntowanie for grounding.
+- The protocol's name for now: **Grounded Vetting Protocol** (Jakub, 2026-10-20), docs/gvp.md. Polish: ugruntowanie for grounding.
 - One markup for both sides of the bench (Jakub, 2026-10-20; built 2026-10-20, see the status):
   1. `<here at="…">words</here>` for the guide too, not only for the user: a frame without an icon, on lines or characters ("(c):34:12-16").
   2. `icon` as an attribute of `here`, not a tag of its own (the icon has no place in the text): a short sign (digit, letter, emoji) or a path to an image, drawn in the gutter by the implementations that can. With n places in `at`, `icon` has one value for all or n values in order, space-separated; never with `at` naming a sight alone ("(c)"): the place starts in a known line, where the icon lands. The bench shows the icon's sign beside the framed words, so bench and gutter stay matched.

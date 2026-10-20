@@ -1,0 +1,73 @@
+{
+ "name": "Back and forward through trips",
+ "kind": "run",
+ "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
+ "sights": [
+  "sw/subl_reader.py:955-959",
+  "sw/history.py:38-44",
+  "sw/history.py:7-9",
+  "sw/history.py:20-25",
+  "sw/subl_reader.py:967-970",
+  "sw/history.py:14-18",
+  "sw/history.py:11-12",
+  "sw/subl_reader.py:972-979",
+  "sw/subl_chat.py:138-143",
+  "sw/subl_commands.py:362-365",
+  "sw/subl_reader.py:961-965",
+  "sw/history.py:27-28",
+  "sw/history.py:30-35",
+  "sw/subl_chat.py:126-130"
+ ],
+ "transitions": [
+  {
+   "type": "calls",
+   "from": [0, 958],
+   "to": [4, 967]
+  },
+  {
+   "type": "calls",
+   "from": [0, 959],
+   "to": [1, 38]
+  },
+  {
+   "type": "calls",
+   "from": [0, 959],
+   "to": [7, 972]
+  },
+  {
+   "type": "calls",
+   "from": [3, 25],
+   "to": [6, 11]
+  },
+  {
+   "type": "calls",
+   "from": [5, 16],
+   "to": [6, 11]
+  },
+  {
+   "type": "calls",
+   "from": [9, 365],
+   "to": [10, 961]
+  },
+  {
+   "type": "calls",
+   "from": [10, 964],
+   "to": [4, 967]
+  },
+  {
+   "type": "calls",
+   "from": [10, 965],
+   "to": [7, 972]
+  },
+  {
+   "type": "calls",
+   "from": [12, 32],
+   "to": [11, 27]
+  },
+  {
+   "type": "calls",
+   "from": [12, 35],
+   "to": [6, 11]
+  }
+ ]
+}

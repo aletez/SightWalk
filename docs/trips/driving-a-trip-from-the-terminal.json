@@ -1,7 +1,7 @@
 {
  "name": "Driving a trip from the terminal",
  "kind": "run",
- "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
+ "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
  "sights": [
   "sw/subl_commands.py:121-138",
   "sw/marks.py:348-366",

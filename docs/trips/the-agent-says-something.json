@@ -1,7 +1,7 @@
 {
  "name": "The agent says something",
  "kind": "run",
- "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
+ "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
  "sights": [
   "sw/subl_executor.py:67-75",
   "sw/marks.py:199-214",
@@ -9,19 +9,19 @@
   "sw/validator.py:14-17",
   "sw/marks.py:170-172",
   "sw/marks.py:167-167",
-  "sw/subl_reader.py:1215-1228",
-  "sw/subl_reader.py:783-796",
-  "sw/subl_chat.py:99-124",
+  "sw/subl_reader.py:1252-1265",
+  "sw/subl_reader.py:797-811",
+  "sw/subl_chat.py:101-123",
   "sw/header.py:12-20",
-  "sw/subl_chat.py:142-151",
-  "sw/subl_chat.py:161-171",
+  "sw/subl_chat.py:161-170",
+  "sw/subl_chat.py:180-190",
   "sw/subl_commands.py:28-29",
-  "sw/subl_chat.py:53-70",
-  "sw/subl_chat.py:35-43",
-  "sw/subl_commands.py:268-275",
-  "sw/subl_commands.py:283-293",
+  "sw/subl_chat.py:55-72",
+  "sw/subl_chat.py:37-45",
+  "sw/subl_commands.py:270-277",
+  "sw/subl_commands.py:285-295",
   "sw/marks.py:415-417",
-  "sw/subl_chat.py:258-263"
+  "sw/subl_chat.py:277-282"
  ],
  "transitions": [
   {
@@ -32,66 +32,66 @@
   {
    "type": "calls",
    "from": [0, 71],
-   "to": [6, 1215]
+   "to": [6, 1252]
   },
   {
    "type": "calls",
-   "from": [6, 1222],
-   "to": [7, 783]
+   "from": [6, 1259],
+   "to": [7, 797]
   },
   {
    "type": "calls",
-   "from": [6, 1223],
-   "to": [11, 161]
+   "from": [6, 1260],
+   "to": [11, 180]
   },
   {
    "type": "calls",
-   "from": [7, 785],
-   "to": [8, 99]
+   "from": [7, 799],
+   "to": [8, 101]
   },
   {
    "type": "calls",
-   "from": [7, 789],
-   "to": [10, 142]
+   "from": [7, 803],
+   "to": [10, 161]
   },
   {
    "type": "calls",
-   "from": [7, 793],
-   "to": [8, 99]
+   "from": [7, 807],
+   "to": [8, 101]
   },
   {
    "type": "calls",
-   "from": [7, 796],
-   "to": [8, 99]
+   "from": [7, 811],
+   "to": [8, 101]
   },
   {
    "type": "calls",
-   "from": [8, 105],
+   "from": [8, 107],
    "to": [9, 12]
   },
   {
    "type": "calls",
-   "from": [11, 170],
+   "from": [11, 189],
    "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [13, 63],
-   "to": [14, 35]
+   "from": [13, 65],
+   "to": [14, 37]
   },
   {
    "type": "calls",
-   "from": [13, 68],
+   "from": [13, 70],
    "to": [12, 28]
   },
   {
    "type": "calls",
-   "from": [15, 271],
-   "to": [18, 258]
+   "from": [15, 273],
+   "to": [18, 277]
   },
   {
    "type": "calls",
-   "from": [16, 287],
+   "from": [16, 289],
    "to": [17, 415]
   }
  ]

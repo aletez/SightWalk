@@ -1,60 +1,60 @@
 {
  "name": "primary+g",
  "kind": "run",
- "commit": "3647d2acfa87b2ad537f9b2a5bfdd9244762863d",
+ "commit": "fe5d7c127ce14f69eeddbdb27bac46d933d32dbd",
  "sights": [
-  "sw/subl_commands.py:486-497",
-  "sw/subl_reader.py:798-808",
-  "sw/subl_commands.py:499-504",
-  "sw/subl_reader.py:178-182",
-  "sw/subl_reader.py:184-203",
-  "sw/subl_reader.py:205-210",
-  "sw/subl_commands.py:339-343",
-  "sw/subl_commands.py:301-302",
-  "sw/subl_reader.py:212-220",
+  "sw/subl_commands.py:497-508",
+  "sw/subl_reader.py:813-823",
+  "sw/subl_commands.py:510-515",
+  "sw/subl_reader.py:180-184",
+  "sw/subl_reader.py:186-205",
+  "sw/subl_reader.py:207-212",
+  "sw/subl_commands.py:341-345",
+  "sw/subl_commands.py:303-304",
+  "sw/subl_reader.py:214-222",
   "sw/subl_executor.py:88-96",
   "sw/subl_views.py:125-136"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 489],
-   "to": [1, 798]
+   "from": [0, 500],
+   "to": [1, 813]
   },
   {
    "type": "calls",
-   "from": [0, 496],
-   "to": [2, 499]
+   "from": [0, 507],
+   "to": [2, 510]
   },
   {
    "type": "calls",
-   "from": [0, 496],
-   "to": [3, 178]
+   "from": [0, 507],
+   "to": [3, 180]
   },
   {
    "type": "calls",
-   "from": [3, 181],
+   "from": [3, 183],
    "to": [10, 125]
   },
   {
    "type": "calls",
-   "from": [3, 182],
-   "to": [4, 184]
+   "from": [3, 184],
+   "to": [4, 186]
   },
   {
    "type": "calls",
-   "from": [6, 343],
-   "to": [8, 212]
+   "from": [6, 345],
+   "to": [8, 214]
   },
   {
    "type": "calls",
-   "from": [7, 302],
-   "to": [6, 339]
+   "from": [7, 304],
+   "to": [6, 341]
   },
   {
    "type": "calls",
    "from": [9, 94],
-   "to": [3, 178]
+   "to": [3, 180]
   }
  ]
 }

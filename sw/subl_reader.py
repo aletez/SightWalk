@@ -901,7 +901,9 @@ class Reader(Geometry):
             # The answers' marks and the user's links come back once laid out (Jakub: they were
             # lost).
             self.pending_marks = self.kept_marks() if self.ready else None
+            start = self.trip_start  # the same trip: its conversation started where it did
             self.load(*self.shown)
+            self.trip_start = start
 
     def draw_strip_buttons(self):
         """▲ in the strip's header and ▼ in its own cell under the strip, which scrolls now

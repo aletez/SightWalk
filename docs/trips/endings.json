@@ -1,29 +1,30 @@
 {
  "name": "Endings",
  "kind": "survey",
- "commit": "2dc402a4afa9d6c046069bbf9b2da76dc854b496",
+ "commit": "bd311fb77b0b181d75800ff250ffffe565fe9d86",
  "sights": [
-  "sw/subl_commands.py:466-467",
-  "sw/subl_commands.py:469-470",
+  "sw/subl_commands.py:474-475",
+  "sw/subl_commands.py:477-478",
   "sw/subl_guide.py:90-94",
   "sw/subl_guide.py:78-87",
-  "sw/subl_commands.py:339-341",
-  "sw/subl_commands.py:344-346",
-  "sw/subl_tint.py:287-313",
+  "sw/subl_commands.py:345-349",
+  "sw/subl_commands.py:352-354",
+  "sw/subl_tint.py:291-295",
+  "sw/subl_tint.py:298-327",
   "sw/subl_tint.py:72-73",
-  "sw/subl_commands.py:298-310",
-  "sw/subl_commands.py:372-374",
-  "sw/subl_commands.py:352-355",
+  "sw/subl_commands.py:304-316",
+  "sw/subl_commands.py:380-382",
+  "sw/subl_commands.py:360-363",
   "sw/subl_reader.py:842-849",
-  "sw/subl_commands.py:357-359",
-  "sw/state.py:29-33",
+  "sw/subl_commands.py:365-367",
+  "sw/state.py:29-34",
   "sw/subl_executor.py:83-85",
-  "sw/state.py:40-41"
+  "sw/state.py:41-42"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 467],
+   "from": [0, 475],
    "to": [2, 90]
   },
   {
@@ -33,43 +34,43 @@
   },
   {
    "type": "calls",
-   "from": [4, 340],
-   "to": [13, 29]
+   "from": [4, 348],
+   "to": [14, 29]
   },
   {
    "type": "calls",
-   "from": [4, 341],
-   "to": [5, 344]
+   "from": [4, 349],
+   "to": [5, 352]
   },
   {
    "type": "calls",
-   "from": [5, 346],
-   "to": [6, 287]
+   "from": [5, 354],
+   "to": [7, 298]
   },
   {
    "type": "calls",
-   "from": [6, 303],
-   "to": [7, 72]
+   "from": [7, 317],
+   "to": [8, 72]
   },
   {
    "type": "calls",
-   "from": [10, 353],
-   "to": [15, 40]
+   "from": [11, 361],
+   "to": [16, 41]
   },
   {
    "type": "calls",
-   "from": [10, 355],
-   "to": [11, 842]
+   "from": [11, 363],
+   "to": [12, 842]
   },
   {
    "type": "calls",
-   "from": [12, 358],
-   "to": [15, 40]
+   "from": [13, 366],
+   "to": [16, 41]
   },
   {
    "type": "calls",
-   "from": [14, 84],
-   "to": [15, 40]
+   "from": [15, 84],
+   "to": [16, 41]
   }
  ]
 }

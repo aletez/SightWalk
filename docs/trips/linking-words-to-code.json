@@ -1,11 +1,11 @@
 {
  "name": "Linking words to code",
  "kind": "run",
- "commit": "2dc402a4afa9d6c046069bbf9b2da76dc854b496",
+ "commit": "bd311fb77b0b181d75800ff250ffffe565fe9d86",
  "sights": [
-  "sw/subl_commands.py:191-198",
+  "sw/subl_commands.py:197-204",
   "sw/subl_links.py:19-30",
-  "sw/subl_commands.py:271-275",
+  "sw/subl_commands.py:277-281",
   "sw/subl_links.py:32-37",
   "sw/subl_links.py:39-53",
   "sw/subl_links.py:55-61",
@@ -40,7 +40,7 @@
   "sw/subl_links.py:167-170",
   "sw/subl_links.py:172-177",
   "sw/subl_links.py:274-276",
-  "sw/subl_commands.py:324-330"
+  "sw/subl_commands.py:330-336"
  ],
  "transitions": [
   {

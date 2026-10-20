@@ -278,6 +278,14 @@ Open:
 - A trip scrolls up until its end is level with the bench's floor (Jakub, 2026-10-14: scrolling is there to bring the code level with the eyes reading the bench); this replaces "until the last header is at the top", for short and long trips alike. Down: a short trip to the floor of the screen, a long one to its top. `plan.offset_range(…, floor_px)`, `Geometry.bench_floor`. Seen by Claude: the end of the last sight level with the bench's prompt. (Changed, unverified by Jakub.)
 - Every answer about code comes with its marks (Jakub, 2026-10-14: in the last trips he had to ask for icons and outlines each time): the manual says so, and say refuses an answer that names code (a `name`, file:line, a line number) while the guide has not called point since the user last spoke (`marks.speaks_of_code`, `state.POINTED`). Seen by Claude: say refused, point, say accepted. Needs a new guide session. (Changed, unverified by Jakub.)
 
+- Trip history and adventures (Jakub, 2026-10-20), open:
+  - ◀▶ next to each other in a corner of the Sights header, primary+[ and primary+], step through the normal trips of the window; each normal trip has its own clean conversation, the guide learns of a return through a `trip` field.
+  - An adventure (`show` with `aside: true`, the guide may open one on its own) takes no place in ◀▶. It opens in a new trip window over the mother's, same place and size; its bench starts with the question that called it; one the guide opens on its own it explains in the adventure's bench (the manual says so); the mother's conversation goes on. Closing the window returns; no Back/Esc button.
+  - The mother's Tools get an Adventures / Przygody tab listing the conversation's adventures; a click reopens one with its sights, scroll and thread. Panorama title "Adventure 1, <title>" / "Przygoda 1, <tytuł>", numbered within the mother's conversation.
+  - Later: an adventure's guide gets only its thread (a separate guide session), to save tokens.
+  - Tools tabs: the inactive ones in the header's text colour, the active one bold white (contrast in dark schemes); changed, unverified.
+  - Later: the header's buttons ([?], ⇕) move to a pane of their own next to the tabs' pane, so they stop drifting right.
+
 ## Ontology (Jakub, 2026-10-14)
 
 Entities:

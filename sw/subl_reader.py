@@ -28,7 +28,7 @@ from .words import lines_of, word
 from .spec import (ancestors, block_name, body_indent, breathing, display_path, elided,
                    parse_spec, repo_root, sight_index, sight_name, sight_title)
 from .subl_tint import apply_grey, apply_plain, apply_tint, hue_for, tint_color
-from .subl_views import (FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
+from .subl_views import (HEADER_PAD_TOP, FileCopy, anchor, bench_font, draw_edit_button, draw_ellipsis, draw_gap,
                     draw_icons,
                     draw_outlines, draw_strip_icons, forget, header_top, hide_chrome, line_top,
                     make_blank_view, make_browser, make_copy, make_header, make_side_view,
@@ -129,6 +129,9 @@ class Reader(Geometry):
         self.chat_header = subl_chat.make_header(self.window, self.chat, BENCH)
         self.sights_header = subl_chat.make_header(self.window, self.chat, SIGHTS)
         self.strip_header = subl_chat.make_header(self.window, self.chat, STRIP)
+        for header in (self.chat_header, self.sights_header, self.strip_header):
+            # Their cells start OVERLAP px above the window: as much more room over the letters.
+            header.settings().set("line_padding_top", HEADER_PAD_TOP + OVERLAP)
         for header in (self.chat_header, self.sights_header, self.strip_header):
             apply_grey(header)
         self.strip_header.settings().set("gutter", False)  # ▲ in a scroll bar's width
@@ -584,6 +587,10 @@ class Reader(Geometry):
             x, y = view.viewport_position()
             if abs(y - place) > 0.5:
                 view.set_viewport_position((x, place), False)
+        # The tabs never scroll sideways: their phantom's links stayed behind (Jakub, 2026-10-20).
+        x, y = self.below_header.viewport_position()
+        if x != 0:
+            self.below_header.set_viewport_position((0.0, y), False)
         for view, place in self.wheel_places():
             x, y = view.viewport_position()
             if abs(y - place) <= 0.5 and x == 0:

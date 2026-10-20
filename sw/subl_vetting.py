@@ -52,6 +52,10 @@ def content_point(view):
     return view.text_point(BLANK_LINES, 0) if view.rowcol(view.size())[0] > BLANK_LINES else 0
 
 PAN_KEY = "⌘S" if sublime.platform() == "osx" else "Ctrl+S"
+# Highlighted like tags in Foggy Morning or Chameleon (Jakub): the others orange and faint,
+# the active one bold yellow and strong. The headers' grey is the same in every scheme.
+TAB_STYLE = "text-decoration: none; color: #b35c00; background-color: color(#ff9a1f alpha(0.15))"
+ACTIVE_TAB = '<b style="color: #5c4400; background-color: #ffd23f">&nbsp;%s&nbsp;</b>'
 TABS_ROOM = 40  # in the header's columns, wider than the tabs' font
 PAN_HELP = "<div><b>%s</b> %%s</div>" % PAN_KEY
 
@@ -88,8 +92,9 @@ def show_tabs(header, active, on_select, panning, on_toggle=None):
 
     phantoms(header, "sight_walk_pan_help").update([sublime.Phantom(
         sublime.Region(point), toggle_html(panning) + MARK_HTML, sublime.LAYOUT_INLINE, clicked)])
-    links = ["<b>%s</b>" % word(t) if t == active else
-             '<a href="%s" style="text-decoration: none">%s</a>' % (t, word(t)) for t in TABS]
+    links = [ACTIVE_TAB % word(t) if t == active else
+             '<a href="%s" style="%s">%s</a>' % (t, TAB_STYLE, word(t))
+             for t in TABS]
     html = '&nbsp;&nbsp;<span style="color: %s">|</span>&nbsp;&nbsp;' % FADED
     html = html.join(links)
     phantoms(header, "sight_walk_tabs").update(

@@ -951,8 +951,8 @@ class Reader(Geometry):
         else:
             self.select_tool(self.tool)
         self.show_headers()
-        if not self.maximized:  # the views it hid find their groups only on a second pass
-            sublime.set_timeout(self.render, SETTLE_MS)
+        if not self.maximized:  # the views it hid find their groups, the bench its width, only
+            sublime.set_timeout(self.reset_sights, SETTLE_MS)  # when laid out anew (Jakub)
 
     def arrange_maximized(self):
         """The top headers, apart (Jakub: they must not run into each other), then the Tools

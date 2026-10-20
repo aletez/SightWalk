@@ -1,19 +1,19 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "The window and every view but the sights.",
  "sights": [
   "sw/subl_executor.py:36-46",
   "sw/subl_reader.py:75-109",
-  "sw/subl_reader.py:111-168",
+  "sw/subl_reader.py:111-169",
   "sw/subl_views.py:182-191",
   "sw/subl_views.py:194-198",
   "sw/subl_views.py:142-149",
   "sw/subl_views.py:118-125",
   "sw/subl_chat.py:79-86",
   "sw/subl_chat.py:89-99",
-  "sw/subl_chat.py:154-163",
+  "sw/subl_chat.py:155-164",
   "sw/subl_vetting.py:30-37",
   "sw/state.py:23-26"
  ],
@@ -125,22 +125,22 @@
   },
   {
    "type": "calls",
-   "from": [2, 161],
-   "to": [9, 154]
+   "from": [2, 162],
+   "to": [9, 155]
   },
   {
    "type": "calls",
-   "from": [2, 162],
+   "from": [2, 163],
    "to": [3, 182]
   },
   {
    "type": "calls",
-   "from": [2, 165],
+   "from": [2, 166],
    "to": [8, 89]
   },
   {
    "type": "calls",
-   "from": [2, 166],
+   "from": [2, 167],
    "to": [4, 194]
   },
   {
@@ -160,7 +160,7 @@
   },
   {
    "type": "calls",
-   "from": [9, 158],
+   "from": [9, 159],
    "to": [6, 118]
   },
   {

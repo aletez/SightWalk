@@ -1,11 +1,11 @@
 {
- "name": "wait_for_user: a message sent",
+ "name": "`wait_for_user`: a message sent",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
- "story": "<here at=\"(a):47\">Enter</here> <calls at=\"(a):47 (b):209\">turns the draft into a message</calls> on the bench and <calls at=\"(a):47 (c):32\">sends it</calls> with what the user sees, to <here at=\"(d):37\">the trip's reader</here>'s inbox, where <here at=\"(e):245\">wait_for_user</here> picks it up.",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "story": "<here at=\"(a):47\">Enter</here> <calls at=\"(a):47 (b):210\">turns the draft into a message</calls> on the bench and <calls at=\"(a):47 (c):32\">sends it</calls> with what the user sees, to <here at=\"(d):37\">the trip's reader</here>'s inbox, where <here at=\"(e):245\">wait_for_user</here> picks it up.",
  "sights": [
   "sw/subl_commands.py:47-54",
-  "sw/subl_chat.py:209-222",
+  "sw/subl_chat.py:210-223",
   "sw/subl_commands.py:32-41",
   "sw/state.py:37-38",
   "sw/subl_executor.py:245-259"
@@ -19,7 +19,7 @@
   {
    "type": "calls",
    "from": [0, 53],
-   "to": [1, 209]
+   "to": [1, 210]
   },
   {
    "type": "calls",

@@ -1,23 +1,23 @@
 {
  "name": "Stopping an answer",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
- "story": "<here at=\"(a):391\">Esc</here> <calls at=\"(a):391 (b):1372\">stops the answer</calls>: the guide's next call is refused until it waits again, and <calls at=\"(b):1372 (c):1381\">the messages it has not read</calls> are taken back.",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "story": "<here at=\"(a):391\">Esc</here> <calls at=\"(a):391 (b):1397\">stops the answer</calls>: the guide's next call is refused until it waits again, and <calls at=\"(b):1397 (c):1406\">the messages it has not read</calls> are taken back.",
  "sights": [
   "sw/subl_commands.py:391-394",
-  "sw/subl_reader.py:1372-1379",
-  "sw/subl_reader.py:1381-1384"
+  "sw/subl_reader.py:1397-1404",
+  "sw/subl_reader.py:1406-1409"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 394],
-   "to": [1, 1372]
+   "to": [1, 1397]
   },
   {
    "type": "calls",
-   "from": [1, 1378],
-   "to": [2, 1381]
+   "from": [1, 1403],
+   "to": [2, 1406]
   }
  ]
 }

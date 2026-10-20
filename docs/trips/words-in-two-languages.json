@@ -1,14 +1,14 @@
 {
  "name": "Words in two languages",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "Switch Language: the setting changes, the words follow at once, in every open trip.",
  "sights": [
   "sw/subl_commands.py:470-473",
   "sight_walk.py:55-59",
-  "sw/words.py:141-143",
+  "sw/words.py:140-142",
   "sw/state.py:55-60",
-  "sw/words.py:137-138",
+  "sw/words.py:136-137",
   "sw/subl_chat.py:31-34",
   "sw/subl_views.py:33-35",
   "sw/subl_commands.py:555-568",
@@ -18,7 +18,7 @@
   {
    "type": "calls",
    "from": [1, 57],
-   "to": [2, 141]
+   "to": [2, 140]
   },
   {
    "type": "calls",
@@ -28,7 +28,7 @@
   {
    "type": "calls",
    "from": [5, 34],
-   "to": [4, 137]
+   "to": [4, 136]
   },
   {
    "type": "calls",

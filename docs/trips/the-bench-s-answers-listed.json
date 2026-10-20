@@ -1,69 +1,69 @@
 {
  "name": "The bench's answers listed",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "The Answers tab: the bench's questions and answers by their first words; a click shows one's icons or places and brings it into the bench, a second click hides them.",
  "sights": [
-  "sw/subl_reader.py:1189-1191",
-  "sw/subl_reader.py:1172-1187",
+  "sw/subl_reader.py:1211-1213",
+  "sw/subl_reader.py:1194-1209",
   "sw/answers.py:9-19",
-  "sw/subl_reader.py:1153-1163",
-  "sw/subl_vetting.py:381-396",
-  "sw/subl_vetting.py:399-400",
-  "sw/subl_reader.py:1193-1209",
-  "sw/subl_reader.py:1165-1168",
-  "sw/subl_reader.py:1211-1216"
+  "sw/subl_reader.py:1175-1185",
+  "sw/subl_vetting.py:395-410",
+  "sw/subl_vetting.py:413-414",
+  "sw/subl_reader.py:1215-1231",
+  "sw/subl_reader.py:1187-1190",
+  "sw/subl_reader.py:1233-1238"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1190],
-   "to": [1, 1172]
+   "from": [0, 1212],
+   "to": [1, 1194]
   },
   {
    "type": "calls",
-   "from": [0, 1190],
-   "to": [4, 381]
+   "from": [0, 1212],
+   "to": [4, 395]
   },
   {
    "type": "calls",
-   "from": [0, 1191],
-   "to": [6, 1193]
+   "from": [0, 1213],
+   "to": [6, 1215]
   },
   {
    "type": "calls",
-   "from": [1, 1176],
+   "from": [1, 1198],
    "to": [2, 9]
   },
   {
    "type": "calls",
-   "from": [1, 1179],
-   "to": [3, 1153]
+   "from": [1, 1201],
+   "to": [3, 1175]
   },
   {
    "type": "calls",
-   "from": [4, 390],
-   "to": [5, 399]
+   "from": [4, 404],
+   "to": [5, 413]
   },
   {
    "type": "calls",
-   "from": [6, 1196],
-   "to": [1, 1172]
+   "from": [6, 1218],
+   "to": [1, 1194]
   },
   {
    "type": "calls",
-   "from": [6, 1202],
-   "to": [7, 1165]
+   "from": [6, 1224],
+   "to": [7, 1187]
   },
   {
    "type": "calls",
-   "from": [6, 1208],
-   "to": [8, 1211]
+   "from": [6, 1230],
+   "to": [8, 1233]
   },
   {
    "type": "calls",
-   "from": [6, 1209],
-   "to": [0, 1189]
+   "from": [6, 1231],
+   "to": [0, 1211]
   }
  ]
 }

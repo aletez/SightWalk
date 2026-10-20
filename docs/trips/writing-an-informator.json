@@ -1,7 +1,7 @@
 {
  "name": "Writing an informator",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "<here at=\"(a):260\">A trip</here> is written with <calls at=\"(a):260 (b):244\">its transitions</calls> and story; <here at=\"(c):272\">the informator</here> names its trips' files and <here at=\"(d):296\">a tour</here> its order.",
  "sights": [
   "sw/ontology.py:260-263",

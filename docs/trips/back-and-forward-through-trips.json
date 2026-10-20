@@ -1,42 +1,42 @@
 {
  "name": "Back and forward through trips",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "◀ ▶ in the Sights' header, primary+[and primary+]: each trip the guide shows goes into the window's history with its own conversation, starting from the question that called it; a step keeps the conversation shown and brings the other trip's back.",
  "sights": [
-  "sw/subl_reader.py:1021-1027",
+  "sw/subl_reader.py:1039-1045",
   "sw/history.py:38-44",
-  "sw/subl_reader.py:1035-1047",
+  "sw/subl_reader.py:1053-1065",
   "sw/validator.py:104-116",
   "sw/subl_reader.py:833-841",
   "sw/history.py:7-9",
   "sw/history.py:20-25",
-  "sw/subl_reader.py:1089-1092",
+  "sw/subl_reader.py:1111-1114",
   "sw/history.py:14-18",
   "sw/history.py:11-12",
-  "sw/subl_reader.py:1094-1101",
-  "sw/subl_chat.py:143-148",
+  "sw/subl_reader.py:1116-1123",
+  "sw/subl_chat.py:144-149",
   "sw/subl_commands.py:369-372",
-  "sw/subl_reader.py:1029-1033",
+  "sw/subl_reader.py:1047-1051",
   "sw/history.py:27-28",
   "sw/history.py:30-35",
-  "sw/subl_chat.py:131-135"
+  "sw/subl_chat.py:132-136"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 1024],
+   "from": [0, 1042],
    "to": [1, 38]
   },
   {
    "type": "calls",
-   "from": [0, 1025],
-   "to": [7, 1089]
+   "from": [0, 1043],
+   "to": [7, 1111]
   },
   {
    "type": "calls",
-   "from": [0, 1027],
-   "to": [10, 1094]
+   "from": [0, 1045],
+   "to": [10, 1116]
   },
   {
    "type": "calls",
@@ -51,17 +51,17 @@
   {
    "type": "calls",
    "from": [12, 372],
-   "to": [13, 1029]
+   "to": [13, 1047]
   },
   {
    "type": "calls",
-   "from": [13, 1032],
-   "to": [7, 1089]
+   "from": [13, 1050],
+   "to": [7, 1111]
   },
   {
    "type": "calls",
-   "from": [13, 1033],
-   "to": [10, 1094]
+   "from": [13, 1051],
+   "to": [10, 1116]
   },
   {
    "type": "calls",

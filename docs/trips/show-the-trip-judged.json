@@ -1,7 +1,7 @@
 {
- "name": "show: the trip judged",
+ "name": "`show`: the trip judged",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "<here at=\"(a):26\">Every call is judged</here> before anything happens. For show, <calls at=\"(b):123 (c):56\">a stopped answer</calls> refuses it, <calls at=\"(b):123 (d):34\">the trip must be well formed</calls> with its transitions named, and <here at=\"(e):386\">each place</here> must read like \"(c):34\".",
  "sights": [
   "sw/validator.py:26-31",

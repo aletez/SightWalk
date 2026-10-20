@@ -1,7 +1,7 @@
 {
- "name": "state",
+ "name": "`state`",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "<here at=\"(a):178\">state</here> needs an open trip; <here at=\"(b):99\">it returns</here> what a message would carry, and the sights by name.",
  "sights": [
   "sw/validator.py:178-179",

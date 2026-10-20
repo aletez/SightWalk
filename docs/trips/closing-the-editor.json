@@ -1,32 +1,32 @@
 {
  "name": "Closing the editor",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "Esc: Sublime asks about changes, the reader reads back the moved ranges and marks.",
  "sights": [
   "sw/subl_commands.py:227-230",
-  "sw/subl_reader.py:781-782",
+  "sw/subl_reader.py:782-783",
   "sw/subl_editor.py:81-92",
   "sw/subl_editor.py:74-79",
   "sw/subl_editor.py:67-72",
-  "sw/subl_reader.py:784-798",
-  "sw/subl_reader.py:800-805"
+  "sw/subl_reader.py:785-799",
+  "sw/subl_reader.py:801-806"
  ],
  "transitions": [
   {
    "type": "calls",
    "from": [0, 230],
-   "to": [1, 781]
+   "to": [1, 782]
   },
   {
    "type": "calls",
-   "from": [1, 782],
+   "from": [1, 783],
    "to": [2, 81]
   },
   {
    "type": "calls",
-   "from": [1, 782],
-   "to": [5, 784]
+   "from": [1, 783],
+   "to": [5, 785]
   },
   {
    "type": "calls",
@@ -45,8 +45,8 @@
   },
   {
    "type": "calls",
-   "from": [5, 796],
-   "to": [6, 800]
+   "from": [5, 797],
+   "to": [6, 801]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "What the validator refuses",
  "kind": "survey",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "Every refusal of the guide's calls, judged before the executor acts, with the facts it is given; each message says what to do instead.",
  "sights": [
   "sw/validator.py:26-31",

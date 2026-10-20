@@ -1,41 +1,41 @@
 {
  "name": "The tour map in tiles",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "dot lays the map out once to find each trip's frame; the picture is cut into tiles, each a link that opens the trip it lies in.",
  "sights": [
-  "sw/subl_vetting.py:230-237",
-  "sw/subl_vetting.py:240-256",
-  "sw/subl_vetting.py:259-277",
-  "sw/tourmap.py:81-103",
-  "sw/subl_vetting.py:285-290",
-  "sw/subl_vetting.py:293-309"
+  "sw/subl_vetting.py:243-250",
+  "sw/subl_vetting.py:253-269",
+  "sw/subl_vetting.py:272-291",
+  "sw/tourmap.py:69-91",
+  "sw/subl_vetting.py:299-304",
+  "sw/subl_vetting.py:307-323"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 237],
-   "to": [1, 240]
+   "from": [0, 250],
+   "to": [1, 253]
   },
   {
    "type": "calls",
-   "from": [1, 248],
-   "to": [2, 259]
+   "from": [1, 261],
+   "to": [2, 272]
   },
   {
    "type": "calls",
-   "from": [2, 260],
-   "to": [4, 285]
+   "from": [2, 273],
+   "to": [4, 299]
   },
   {
    "type": "calls",
-   "from": [2, 266],
-   "to": [4, 285]
+   "from": [2, 280],
+   "to": [4, 299]
   },
   {
    "type": "calls",
-   "from": [2, 269],
-   "to": [3, 81]
+   "from": [2, 283],
+   "to": [3, 69]
   }
  ]
 }

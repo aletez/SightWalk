@@ -1,55 +1,55 @@
 {
  "name": "The tools' schemas",
  "kind": "survey",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
- "story": "<calls at=\"(b):183 (a):172\">Each tool is described</calls> in <here at=\"(b):183\">one list</here>, with its parameters; <here at=\"(c):178\">a transition</here> has a schema of its own, and <here at=\"(d):11\">its form</here> is quoted back when a guide gets one wrong. <here at=\"(e):8\">The permission fields</here> name what else a guide started from Sublime may do.",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
+ "story": "<calls at=\"(b):184 (a):173\">Each tool is described</calls> in <here at=\"(b):184\">one list</here>, with its parameters; <here at=\"(c):179\">a transition</here> has a schema of its own, and <here at=\"(d):11\">its form</here> is quoted back when a guide gets one wrong. <here at=\"(e):8\">The permission fields</here> name what else a guide started from Sublime may do.",
  "sights": [
-  "sw/manual.py:172-175",
-  "sw/manual.py:183-222",
-  "sw/manual.py:178-181",
+  "sw/manual.py:173-176",
+  "sw/manual.py:184-223",
+  "sw/manual.py:179-182",
   "sw/validator.py:11-13",
   "sw/permissions.py:8-19"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [1, 184],
-   "to": [0, 172]
+   "from": [1, 185],
+   "to": [0, 173]
   },
   {
    "type": "calls",
-   "from": [1, 198],
-   "to": [0, 172]
+   "from": [1, 199],
+   "to": [0, 173]
   },
   {
    "type": "calls",
-   "from": [1, 202],
-   "to": [0, 172]
+   "from": [1, 203],
+   "to": [0, 173]
   },
   {
    "type": "calls",
-   "from": [1, 205],
-   "to": [0, 172]
-  },
-  {
-   "type": "calls",
-   "from": [1, 207],
-   "to": [0, 172]
+   "from": [1, 206],
+   "to": [0, 173]
   },
   {
    "type": "calls",
    "from": [1, 208],
-   "to": [0, 172]
+   "to": [0, 173]
   },
   {
    "type": "calls",
-   "from": [1, 212],
-   "to": [0, 172]
+   "from": [1, 209],
+   "to": [0, 173]
   },
   {
    "type": "calls",
-   "from": [1, 217],
-   "to": [0, 172]
+   "from": [1, 213],
+   "to": [0, 173]
+  },
+  {
+   "type": "calls",
+   "from": [1, 218],
+   "to": [0, 173]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "Open Tour: an informator's tours to choose from, the informator read from its files, its trips in the tour's order in the Tour tab, a trip opened from it, its conversation kept, a box ticked by hand.",
  "sights": [
   "sw/subl_commands.py:408-417",
@@ -10,29 +10,29 @@
   "sw/subl_commands.py:455-456",
   "sw/subl_commands.py:459-464",
   "sw/subl_commands.py:419-423",
-  "sw/words.py:154-161",
-  "sw/subl_reader.py:985-999",
-  "sw/subl_reader.py:1487-1489",
+  "sw/words.py:153-160",
+  "sw/subl_reader.py:999-1013",
+  "sw/subl_reader.py:1512-1514",
   "sw/ontology.py:303-309",
   "sw/ontology.py:282-286",
   "sw/ontology.py:266-269",
   "sw/ontology.py:249-257",
   "sw/ontology.py:212-227",
   "sw/ontology.py:230-238",
-  "sw/subl_vetting.py:312-318",
-  "sw/subl_reader.py:1001-1017",
-  "sw/subl_reader.py:1103-1113",
-  "sw/subl_reader.py:1115-1123",
-  "sw/subl_reader.py:1125-1127",
-  "sw/subl_reader.py:1129-1140",
-  "sw/subl_reader.py:1467-1471",
-  "sw/subl_reader.py:1474-1476",
-  "sw/subl_reader.py:1479-1484",
-  "sw/subl_chat.py:250-252",
+  "sw/subl_vetting.py:326-332",
+  "sw/subl_reader.py:1015-1035",
+  "sw/subl_reader.py:1125-1135",
+  "sw/subl_reader.py:1137-1145",
+  "sw/subl_reader.py:1147-1149",
+  "sw/subl_reader.py:1151-1162",
+  "sw/subl_reader.py:1492-1496",
+  "sw/subl_reader.py:1499-1501",
+  "sw/subl_reader.py:1504-1509",
+  "sw/subl_chat.py:251-253",
   "sw/ontology.py:289-293",
-  "sw/subl_vetting.py:321-330",
-  "sw/subl_reader.py:1229-1238",
-  "sw/subl_vetting.py:201-208"
+  "sw/subl_vetting.py:335-344",
+  "sw/subl_reader.py:1251-1260",
+  "sw/subl_vetting.py:202-209"
  ],
  "transitions": [
   {
@@ -48,7 +48,7 @@
   {
    "type": "calls",
    "from": [0, 416],
-   "to": [6, 154]
+   "to": [6, 153]
   },
   {
    "type": "calls",
@@ -98,47 +98,47 @@
   {
    "type": "calls",
    "from": [5, 421],
-   "to": [7, 985]
+   "to": [7, 999]
   },
   {
    "type": "calls",
-   "from": [7, 988],
+   "from": [7, 1002],
    "to": [10, 282]
   },
   {
    "type": "calls",
-   "from": [7, 988],
-   "to": [8, 1487]
+   "from": [7, 1002],
+   "to": [8, 1512]
   },
   {
    "type": "calls",
-   "from": [7, 991],
-   "to": [23, 1479]
+   "from": [7, 1005],
+   "to": [23, 1504]
   },
   {
    "type": "calls",
-   "from": [7, 992],
+   "from": [7, 1006],
    "to": [9, 303]
   },
   {
    "type": "calls",
-   "from": [7, 992],
-   "to": [8, 1487]
+   "from": [7, 1006],
+   "to": [8, 1512]
   },
   {
    "type": "calls",
-   "from": [7, 993],
+   "from": [7, 1007],
    "to": [13, 212]
   },
   {
    "type": "calls",
-   "from": [7, 996],
-   "to": [15, 312]
+   "from": [7, 1010],
+   "to": [15, 326]
   },
   {
    "type": "calls",
-   "from": [7, 999],
-   "to": [16, 1001]
+   "from": [7, 1013],
+   "to": [16, 1015]
   },
   {
    "type": "calls",
@@ -162,53 +162,53 @@
   },
   {
    "type": "calls",
-   "from": [16, 1016],
-   "to": [26, 321]
+   "from": [16, 1034],
+   "to": [26, 335]
   },
   {
    "type": "calls",
-   "from": [16, 1017],
-   "to": [27, 1229]
+   "from": [16, 1035],
+   "to": [27, 1251]
   },
   {
    "type": "calls",
-   "from": [17, 1111],
-   "to": [18, 1115]
+   "from": [17, 1133],
+   "to": [18, 1137]
   },
   {
    "type": "calls",
-   "from": [17, 1112],
-   "to": [22, 1474]
+   "from": [17, 1134],
+   "to": [22, 1499]
   },
   {
    "type": "calls",
-   "from": [18, 1121],
-   "to": [19, 1125]
+   "from": [18, 1143],
+   "to": [19, 1147]
   },
   {
    "type": "calls",
-   "from": [20, 1135],
-   "to": [21, 1467]
+   "from": [20, 1157],
+   "to": [21, 1492]
   },
   {
    "type": "calls",
-   "from": [23, 1481],
-   "to": [22, 1474]
+   "from": [23, 1506],
+   "to": [22, 1499]
   },
   {
    "type": "calls",
-   "from": [27, 1230],
-   "to": [28, 201]
+   "from": [27, 1252],
+   "to": [28, 202]
   },
   {
    "type": "calls",
-   "from": [27, 1231],
-   "to": [16, 1001]
+   "from": [27, 1253],
+   "to": [16, 1015]
   },
   {
    "type": "calls",
-   "from": [27, 1238],
-   "to": [16, 1001]
+   "from": [27, 1260],
+   "to": [16, 1015]
   }
  ]
 }

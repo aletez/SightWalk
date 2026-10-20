@@ -1,86 +1,86 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "bcdd5c240d94f90405f5d58fd4b7b1875280a5cf",
+ "commit": "21991d95d7da042b3e7f419c9b6c6fbd97215889",
  "story": "The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.",
  "sights": [
-  "sw/subl_reader.py:657-665",
-  "sw/subl_chat.py:225-235",
-  "sw/subl_chat.py:244-247",
-  "sw/subl_chat.py:238-241",
-  "sw/subl_reader.py:667-674",
-  "sw/subl_reader.py:654-655",
-  "sw/subl_reader.py:598-621",
-  "sw/subl_reader.py:623-631",
-  "sw/subl_reader.py:633-636",
-  "sw/subl_reader.py:565-577",
-  "sw/subl_reader.py:579-583",
+  "sw/subl_reader.py:658-666",
+  "sw/subl_chat.py:226-236",
+  "sw/subl_chat.py:245-248",
+  "sw/subl_chat.py:239-242",
+  "sw/subl_reader.py:668-675",
+  "sw/subl_reader.py:655-656",
+  "sw/subl_reader.py:599-622",
+  "sw/subl_reader.py:624-632",
+  "sw/subl_reader.py:634-637",
+  "sw/subl_reader.py:566-578",
+  "sw/subl_reader.py:580-584",
   "sw/subl_reader.py:68-71"
  ],
  "transitions": [
   {
    "type": "calls",
-   "from": [0, 659],
-   "to": [5, 654]
+   "from": [0, 660],
+   "to": [5, 655]
   },
   {
    "type": "calls",
-   "from": [0, 661],
-   "to": [1, 225]
+   "from": [0, 662],
+   "to": [1, 226]
   },
   {
    "type": "calls",
-   "from": [1, 234],
-   "to": [2, 244]
+   "from": [1, 235],
+   "to": [2, 245]
   },
   {
    "type": "calls",
-   "from": [3, 241],
-   "to": [2, 244]
+   "from": [3, 242],
+   "to": [2, 245]
   },
   {
    "type": "calls",
-   "from": [4, 670],
-   "to": [5, 654]
+   "from": [4, 671],
+   "to": [5, 655]
   },
   {
    "type": "calls",
-   "from": [4, 673],
-   "to": [6, 598]
-  },
-  {
-   "type": "calls",
-   "from": [6, 605],
-   "to": [1, 225]
+   "from": [4, 674],
+   "to": [6, 599]
   },
   {
    "type": "calls",
    "from": [6, 606],
-   "to": [10, 579]
+   "to": [1, 226]
   },
   {
    "type": "calls",
-   "from": [6, 611],
-   "to": [7, 623]
+   "from": [6, 607],
+   "to": [10, 580]
   },
   {
    "type": "calls",
    "from": [6, 612],
-   "to": [9, 565]
+   "to": [7, 624]
   },
   {
    "type": "calls",
-   "from": [7, 628],
-   "to": [2, 244]
+   "from": [6, 613],
+   "to": [9, 566]
   },
   {
    "type": "calls",
-   "from": [9, 576],
-   "to": [3, 238]
+   "from": [7, 629],
+   "to": [2, 245]
   },
   {
    "type": "calls",
-   "from": [10, 583],
+   "from": [9, 577],
+   "to": [3, 239]
+  },
+  {
+   "type": "calls",
+   "from": [10, 584],
    "to": [11, 68]
   }
  ]

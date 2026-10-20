@@ -63,6 +63,10 @@ def main():
              transitions=[], trip="Poke",
              story='A tool call comes in at <here at="(a):%d">the server</here> and reaches '
                    '<here at="(b):%d">a new reader</here>.' % (a0, b0))
+    elif op == "aside":  # an adventure over the trip shown
+        call(config, "show", sights=["%s:%d-%d" % (files[1], b0, b1)], transitions=[],
+             trip="Poke aside", aside=True,
+             story='A closer look at <here at="(a):%d">the new reader</here>.' % b0)
     elif op == "say":
         call(config, "say", text="Hello from the bridge.")
     elif op == "marks":  # an answer placing its own marks (after a message from the user)

@@ -20,7 +20,7 @@ from .permissions import KEYS
 from .subl_views import FADED, kept, make_side_view, phantoms
 from .words import word
 
-TABS = ("Map", "Tour", "Answers", "Permissions")
+TABS = ("Map", "Tour", "Answers", "Adventures", "Permissions")
 WALKED = os.path.join(os.path.expanduser("~"), ".sight_walk", "walked.json")
 # Where Graphviz is usually installed; Sublime does not see the shell's PATH.
 PLACES = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
@@ -328,6 +328,19 @@ def save_walked(informator, walked):
     os.makedirs(os.path.dirname(WALKED), exist_ok=True)
     with open(WALKED, "w", encoding="utf-8") as f:
         json.dump(data, f)
+
+
+# Adventures (Jakub, 2026-10-20)
+
+def show_adventures(view, records, on_click):
+    """The adventures this trip's conversation went on, each a link that opens it again."""
+    if not records:
+        return show_note(view, word("no_adventures"), "sight_walk_adventures")
+    rows = ['<a href="%d" style="text-decoration: none">%s %d</a> · %s'
+            % (k, word("adventure_title"), r["n"], r["trip"].name) for k, r in enumerate(records)]
+    phantoms(view, "sight_walk_adventures").update([sublime.Phantom(
+        sublime.Region(content_point(view)), "<br>".join(rows), sublime.LAYOUT_BLOCK,
+        lambda href: on_click(int(href)))])
 
 
 # The guide's permissions (Jakub, see docs/guide-permissions.md)

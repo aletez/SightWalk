@@ -83,6 +83,10 @@ the bench of every new trip opens with the Pioneer's story of it. **U:** is you,
 **user**. **A:** is the **AI agent**, your **guide**, who may be another than the Pioneer and,
 when the job is stern vetting, no friend of the Pioneer's.
 
+◀ ▶ (⌘[ ⌘]) step through a window's trips, each with its own conversation. An **adventure**
+is a turn off the trail for a flower worth a closer look: the guide opens a short trip in a
+window over the one shown, and the **Adventures** tab opens past ones again, as they were left.
+
 ### Every reference is a link
 
 Guide and user share one markup. The guide ties its words to places with

@@ -17,8 +17,9 @@ SYNTAX = "Packages/%s/SightWalkChat.sublime-syntax" % __package__.split(".")[0]
 # changes it, and it records the new text before each of its own edits.
 PROTECTED = {}
 GUARDS = {}
-# The one conversation, carried from trip to trip (Jakub).
-TRANSCRIPT = ""
+# Each bench's conversation, by its buffer: a window's trips each have their own (see history),
+# and an adventure's window talks apart from its mother's (Jakub, 2026-10-20).
+TRANSCRIPTS = {}
 MAC = sublime.platform() == "osx"
 LINK_KEY = "⌘P" if MAC else "Ctrl+P"
 NEW_LINE_KEY = "⇧Enter" if MAC else "Shift+Enter"
@@ -71,10 +72,15 @@ class Guard(sublime_plugin.TextChangeListener):
             self.view.sel().add(sublime.Region(self.view.size()))
 
 
-def start(view):
+def transcript(view):
+    return TRANSCRIPTS.get(view.buffer_id(), "")
+
+
+def start(view, text=""):
     buffer_id = view.buffer_id()
     view.assign_syntax(SYNTAX)
-    PROTECTED[buffer_id] = "\n" * BLANK_LINES + TRANSCRIPT + PROMPT
+    TRANSCRIPTS[buffer_id] = text
+    PROTECTED[buffer_id] = "\n" * BLANK_LINES + text + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[buffer_id]})
     GUARDS[buffer_id] = Guard(view)
     GUARDS[buffer_id].attach(view.buffer())
@@ -190,12 +196,11 @@ def show_trip_help(view, point, maximized):
 
 def say(view, text, prefix="A: "):
     """A message on the bench; returns where its text starts in the transcript."""
-    global TRANSCRIPT
     protected = PROTECTED[view.buffer_id()]
     point = len(protected) - len(PROMPT)
     message = prefix + text.strip() + "\n\n"
-    start = len(TRANSCRIPT) + len(prefix)
-    TRANSCRIPT += message
+    start = len(transcript(view)) + len(prefix)
+    TRANSCRIPTS[view.buffer_id()] = transcript(view) + message
     PROTECTED[view.buffer_id()] = protected[:point] + message + PROMPT
     view.run_command("sight_walk_insert", {"point": point, "text": message})
     return start
@@ -203,13 +208,12 @@ def say(view, text, prefix="A: "):
 
 def take_draft(view, edit):
     """Turns the draft into a sent message and opens a new prompt."""
-    global TRANSCRIPT
     protected = PROTECTED[view.buffer_id()]
     start_of_draft = len(protected)
     draft = view.substr(sublime.Region(start_of_draft, view.size()))
     if not draft.strip():
         return None
-    TRANSCRIPT += "U: " + draft + "\n\n"
+    TRANSCRIPTS[view.buffer_id()] = transcript(view) + "U: " + draft + "\n\n"
     PROTECTED[view.buffer_id()] = protected[:-len(PROMPT)] + "U: " + draft + "\n\n" + PROMPT
     view.replace(edit, sublime.Region(start_of_draft - len(PROMPT), start_of_draft), "U: ")
     view.insert(edit, view.size(), "\n\n" + PROMPT)
@@ -243,19 +247,18 @@ def bottom_place(view):
     return max(end - view.viewport_extent()[1], 0.0)
 
 
-def set_transcript(text):
+def set_transcript(view, text):
     """Another conversation on the bench (a trip's kept one); catch_up shows it."""
-    global TRANSCRIPT
-    TRANSCRIPT = text
+    TRANSCRIPTS[view.buffer_id()] = text
 
 
 def catch_up(view):
     """Shows what was said on another bench meanwhile, keeping the draft."""
     protected = PROTECTED[view.buffer_id()]
     blanks = len(protected) - len(protected.lstrip("\n"))
-    if protected[blanks:] == TRANSCRIPT + PROMPT:
+    if protected[blanks:] == transcript(view) + PROMPT:
         return
-    PROTECTED[view.buffer_id()] = "\n" * blanks + TRANSCRIPT + PROMPT
+    PROTECTED[view.buffer_id()] = "\n" * blanks + transcript(view) + PROMPT
     view.run_command("sight_walk_replace", {"text": PROTECTED[view.buffer_id()],
                                             "end": len(protected)})
 

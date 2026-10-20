@@ -101,6 +101,9 @@ class Reader(Geometry):
         self.touched = None  # the code view whose selection the user changed last: "here" (Jakub)
         self.root = self.browser = None  # a trip with no sights yet: its folder and file browser
         self.maximized, self.pan_before = False, True  # the Tools pane over the window ([⤢])
+        # Adventures (Jakub, 2026-10-20): a mother's records of them; an adventure's window knows
+        # its mother and its record.
+        self.adventures, self.mother, self.record = [], None, None
         self.pending_story = None  # (story, the exchange that called the trip), told once laid out
         self.history = History()  # the normal trips shown here, ◀ ▶ (Jakub, 2026-10-20)
         self.make_side_views()
@@ -145,6 +148,7 @@ class Reader(Geometry):
         self.tour_view = subl_vetting.make_tool(self.window, "Tour")
         self.answers_view = subl_vetting.make_tool(self.window, "Answers")
         self.perm_view = subl_vetting.make_tool(self.window, "Permissions")
+        self.adventures_view = subl_vetting.make_tool(self.window, "Adventures")
         self.listed, self.bench_before, self.trip_start = None, 0.0, 0  # the Answers row clicked, the bench's y before
         self.pan = True  # bench, Map and Tour take the wheel for the panorama (primary+s, Jakub)
         self.tool_offsets = {}  # {view id: px down its content}, kept while a tool takes the wheel
@@ -180,7 +184,7 @@ class Reader(Geometry):
         if marks is None:  # another trip: the last answer's frames were about other sights
             self.frames, self.last_marks = [], []
             self.answers, self.shown_answer, self.kept_lines = [], None, {}
-            self.trip_start = len(subl_chat.TRANSCRIPT)  # what was said before was about others
+            self.trip_start = len(subl_chat.transcript(self.chat))  # what was said before was about others
         paths = list(dict.fromkeys(sight.path for sight in self.sights))
         self.build({path: FileCopy(path) for path in paths})
 
@@ -829,6 +833,8 @@ class Reader(Geometry):
     def trip_title(self):
         """"Trip 3" for a tour's trip, by its place in the tour; a bare trip is only "Trip"
         (Jakub, 2026-10-20)."""
+        if self.record is not None:
+            return "%s %d" % (word("adventure_title"), self.record["n"])
         ids = [trip.id for trip in self.tour] if self.tour is not None else []
         if self.tour_trip in ids:
             return "%s %d" % (word("trip_title"), ids.index(self.tour_trip) + 1)
@@ -911,7 +917,7 @@ class Reader(Geometry):
 
     def tools(self):
         return {"Map": self.map_view, "Tour": self.tour_view, "Answers": self.answers_view,
-                "Permissions": self.perm_view}
+                "Adventures": self.adventures_view, "Permissions": self.perm_view}
 
     def tool_view(self):
         return self.tools()[self.tool]
@@ -926,6 +932,7 @@ class Reader(Geometry):
             sublime.set_timeout(self.draw_map, SETTLE_MS)  # once the pane has its width
         self.draw_tour()
         self.draw_answers()
+        self.draw_adventures()
         sublime.set_timeout(self.draw_permissions, SETTLE_MS)  # its intro wraps to the width
 
     def toggle_maximized(self):
@@ -1014,7 +1021,7 @@ class Reader(Geometry):
     def visit(self, trip, root):
         """A trip the guide shows: after the one shown, its conversation starting from the
         question that called it."""
-        exchange = last_exchange(subl_chat.TRANSCRIPT)
+        exchange = last_exchange(subl_chat.transcript(self.chat))
         self.leave()
         self.pending_story = (trip.story, exchange)
         self.enter(self.history.visit(trip, root, ""))
@@ -1027,22 +1034,66 @@ class Reader(Geometry):
 
     def tell_story(self, story, exchange):
         """The trip's story first on its bench, told by its Pioneer (P:) with its marks, then the
-        user's question that called the trip and what followed it (Jakub, 2026-10-20)."""
+        user's question that called the trip and what followed it (Jakub, 2026-10-20). An
+        adventure starts from the question, then the guide says why it turned off the trail."""
+        if exchange.strip() and self.record is not None:
+            subl_chat.say(self.chat, exchange, prefix="")
         if story:
             text, placed, frames = marks.read_marks(marks.untag(story))
-            self.say(text, prefix="P: ", placed=placed, frames=frames)
-        if exchange.strip():
+            prefix = "A: " if self.record is not None else "P: "
+            self.say(text, prefix=prefix, placed=placed, frames=frames)
+        if exchange.strip() and self.record is None:
             subl_chat.say(self.chat, exchange, prefix="")
-            self.keep_transcript()
+        self.keep_transcript()
+
+    # Adventures (Jakub, 2026-10-20)
+
+    def go_on_adventure(self, trip, root):
+        """show with aside: the trip in a window of its own over this one, which keeps its trip
+        and conversation; recorded here so the Adventures tab can open it again."""
+        record = {"n": len(self.adventures) + 1, "trip": trip, "root": root, "transcript": None,
+                  "marks": None, "exchange": last_exchange(subl_chat.transcript(self.chat))}
+        self.adventures.append(record)
+        self.draw_adventures()
+        return record
+
+    def adventure(self, record):
+        """This new window as the adventure of record, as it was when last closed."""
+        self.record = record
+        entry = self.history.visit(record["trip"], record["root"], record["transcript"] or "")
+        entry["marks"] = record["marks"]
+        if record["transcript"] is None:
+            self.pending_story = (record["trip"].story, record["exchange"])
+        self.enter(entry)
+
+    def leave_adventure(self):
+        """The adventure's window closing: its conversation kept in its record, the mother the
+        guide's again."""
+        self.record["transcript"] = subl_chat.transcript(self.chat)
+        self.record["marks"] = self.kept_marks() if self.ready else None
+        if self.mother.window.is_valid():
+            state.ACTIVE = self.mother
+
+    def draw_adventures(self):
+        subl_vetting.show_adventures(self.adventures_view, self.adventures, self.adventure_link)
+
+    def adventure_link(self, k):
+        record = self.adventures[k]
+        opened = record.get("reader")
+        if opened is not None and opened.window.is_valid():
+            opened.window.bring_to_front()
+            return
+        from . import subl_executor  # it imports this module
+        subl_executor.open_adventure(self, record)
 
     def leave(self):
         """The shown trip's conversation kept, in its entry and, for a tour's trip, its file."""
         self.keep_transcript()
-        self.history.keep(subl_chat.TRANSCRIPT, self.kept_marks() if self.ready else None)
+        self.history.keep(subl_chat.transcript(self.chat), self.kept_marks() if self.ready else None)
 
     def enter(self, entry):
         self.tour_trip = entry.get("tour_trip")
-        subl_chat.set_transcript(entry["transcript"])
+        subl_chat.set_transcript(self.chat, entry["transcript"])
         subl_chat.outline_refs(self.chat, [])  # the frames left behind would slide over its text
         # Before load: the trip may be laid out within it, and start takes them then.
         self.pending_marks = entry["marks"]
@@ -1055,7 +1106,7 @@ class Reader(Geometry):
         git ignores (Jakub: conversations stay out of git)."""
         if self.informator is None or self.tour_trip is None:
             return
-        self.informator.transcripts[self.tour_trip] = subl_chat.TRANSCRIPT
+        self.informator.transcripts[self.tour_trip] = subl_chat.transcript(self.chat)
         if self.ready:
             self.informator.transcripts[self.tour_trip + MARKS_KEY] = self.kept_marks()
         with open(transcripts_path(self.informator_path), "w", encoding="utf-8") as f:
@@ -1122,7 +1173,7 @@ class Reader(Geometry):
         """The bench's questions and answers: (kind, offset, words, note, what a click shows:
         an answer's index, a question's index, or None)."""
         rows = []
-        for kind, offset, words in answers.entries(subl_chat.TRANSCRIPT):
+        for kind, offset, words in answers.entries(subl_chat.transcript(self.chat)):
             if kind in ("A", "P"):  # the story too has marks
                 k = next((i for i, a in enumerate(self.answers) if offset in a["labels"]), None)
                 note = "" if k is None else word("stale") if self.answer_marks(k) is None \
@@ -1399,6 +1450,8 @@ class Reader(Geometry):
             self.sights, self.offset - self.lead, self.room())}
         if self.trip is not None:  # it tells the guide the user went back or forward (Jakub)
             context["trip"] = self.trip.name
+        if self.record is not None:
+            context["adventure"] = self.record["n"]
         view = self.touched
         index = self.sight_of(view) if view is not None and view.is_valid() else None
         if index is None or not len(view.sel()):

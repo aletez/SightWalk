@@ -185,7 +185,10 @@ The `show` example is the first three sights of `docs/trips/one-tool-call-over-h
 `sights`, `transitions`, `trip` and `story` required. Opens or replaces the reader,
 scrolled to the top. `story`: the trip's story, a few sentences tying its sights together, with
 the inline tags of section 7 and no line numbers; the Pioneer (`P:`) tells it first on the new
-trip's bench, before the user's question that called the trip. `root` is the base folder of relative paths. Reply:
+trip's bench, before the user's question that called the trip. `aside: true` opens the trip
+as an adventure, in a window of its own over the trip shown, which keeps its trip and
+conversation; there the question comes first and `story` is the guide's reason for turning
+off the trail. Messages sent from an adventure carry `adventure`, its number. `root` is the base folder of relative paths. Reply:
 `{"ok": true, "sights": {"(a)": spec, …}}`.
 
 ```json

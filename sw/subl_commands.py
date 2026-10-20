@@ -36,6 +36,7 @@ def send(owner, text, here=None):
     if here:  # the selection is what "this" means: the sight in focus would only blur it
         context = {"here": here, "visible": context.get("visible", [])}
     state.INBOX.put(dict(context, text=text, **owner.take_edits()))
+    state.ACTIVE = owner  # the guide answers in the window the user spoke in (an adventure's)
     owner.keep_transcript()
     subl_guide.await_answer(owner)
 
@@ -48,7 +49,7 @@ class SightWalkSendCommand(sublime_plugin.TextCommand):
         if owner is None:
             return
         tagged = owner.links.tagged(self.view)  # the guide gets the links as <here> tags
-        label = len(subl_chat.TRANSCRIPT)  # where the message's "U:" will stand
+        label = len(subl_chat.transcript(owner.chat))  # where the message's "U:" will stand
         if subl_chat.take_draft(self.view, edit):
             send(owner, tagged, owner.links.ask(label))
 
@@ -341,7 +342,10 @@ class SightWalkWindowListener(sublime_plugin.EventListener):
     def on_pre_close_window(self, window):
         # A trip window this module never knew is one a reload closes: its schemes stay (see
         # subl_tint.clear_schemes).
-        if state.forget(window) is not None:
+        reader = state.forget(window)
+        if reader is not None:
+            if reader.record is not None:
+                reader.leave_adventure()
             sublime.set_timeout(clear_schemes_if_unused, 2000)  # once the window's views are gone
 
 
@@ -549,7 +553,8 @@ class SightWalkCompareFontsCommand(sublime_plugin.ApplicationCommand):
     choose bench_font_face."""
 
     def run(self):
-        sample = (subl_chat.TRANSCRIPT or kept_conversation())[-2500:]
+        reader = state.current_reader()
+        sample = ((subl_chat.transcript(reader.chat) if reader else "") or kept_conversation())[-2500:]
         sublime.run_command("new_window")
         window = sublime.active_window()
         window.set_layout({"cols": [0, 1 / 3, 2 / 3, 1], "rows": [0, 0.5, 1],

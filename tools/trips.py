@@ -345,6 +345,15 @@ TRIPS = [
      "link that opens the trip it lies in.",
      ["subl_vetting.draw_tour_map", "subl_vetting.render_tiles", "subl_vetting.cut_tiles",
       "tourmap.tiles", "subl_vetting.run_dot", "subl_vetting.tour_map_html"]),
+    ("An adventure opens",
+     "show with aside: the trip recorded with its mother and opened in a window of its own, "
+     "starting from the question that called it and the guide's reason.",
+     ["subl_reader.Reader.go_on_adventure", "subl_executor.open_adventure",
+      "subl_reader.Reader.adventure", "subl_chat.transcript"]),
+    ("Back from an adventure",
+     "Its window closing keeps its conversation in its record; the Adventures tab opens it again.",
+     ["subl_reader.Reader.leave_adventure", "subl_reader.Reader.draw_adventures",
+      "subl_vetting.show_adventures", "subl_reader.Reader.adventure_link"]),
     ("The tools over the window",
      "[⤢] in the Tools header lays the tools over almost the whole window under the top headers, "
      "kept apart; [Restore size] in the trip's header brings them back. Hovering a button says "
@@ -410,6 +419,8 @@ LEADS = [
     ("show: the trip judged", "show: the trip made"),
     ("show: the trip made", "show: the window opens"),
     ("show: the window opens", "wait_for_user: a message sent"),
+    ("show: the window opens", "An adventure opens"),
+    ("An adventure opens", "Back from an adventure"),
     ("wait_for_user: a message sent", "What a message carries"),
     ("What a message carries", "say: the words checked"),
     ("say: the words checked", "say: on the bench"),

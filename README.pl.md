@@ -85,6 +85,10 @@ wycieczki zaczyna się od jego opowieści. **U:** to ty, **użytkownik**. **A:**
 twój **przewodnik**, który może być kimś innym niż Pionier, a przy surowym vettingu wcale nie
 jego przyjacielem.
 
+◀ ▶ (⌘[ ⌘]) przechodzą po wycieczkach okna, każda z własną rozmową. **Przygoda** to zboczenie
+ze szlaku, bo jest ciekawy kwiatek: przewodnik otwiera krótką wycieczkę w oknie nad bieżącym, a
+zakładka **Przygody** otwiera dawne z powrotem, takie, jakie je zostawiono.
+
 ### Każde odniesienie to link
 
 Przewodnik i użytkownik mają jeden język znaczników. Przewodnik wiąże słowa z miejscami tak:

@@ -25,6 +25,12 @@ WORDS = {
     "Tour": ("Tour", "Turnus"),
     "Permissions": ("Permissions", "Uprawnienia"),
     "Answers": ("Answers", "Odpowiedzi"),
+    "Adventures": ("Adventures", "Przygody"),
+    "adventure_title": ("Adventure", "Przygoda"),
+    "no_adventures": ("No adventures yet: a guide opens one off the trail when something along it "
+                      "is worth a closer look.",
+                      "Nie było jeszcze przygód: przewodnik otwiera przygodę z dala od szlaku, gdy "
+                      "coś po drodze jest warte bliższego spojrzenia."),
     "no_answers": ("No questions or answers on the bench yet.",
                    "Na ławce nie ma jeszcze pytań ani odpowiedzi."),
     "icons_n": ("(icons: %d)", "(ikony: %d)"),

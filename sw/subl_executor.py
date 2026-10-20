@@ -11,7 +11,7 @@ import time
 
 import sublime
 
-from . import subl_scrollbars, state
+from . import subl_chat, subl_scrollbars, state
 from .config import (DEFAULT_BENCH_SIDE, DEFAULT_CONVERSATION_HEIGHT, DEFAULT_PORT, SETTINGS_FILE,
                      TINT)
 from .marks import read_marks, untag
@@ -49,8 +49,11 @@ def new_reader():
 def op_show(args, facts):
     made = trip_of(args)
     made.story = args["story"]
-    reader = state.current_reader() or new_reader()
-    reader.visit(made, args.get("root"))
+    reader = state.current_reader()
+    if args.get("aside") and reader is not None:
+        open_adventure(reader, reader.go_on_adventure(made, args.get("root")))
+    else:
+        (reader or new_reader()).visit(made, args.get("root"))
     state.ADDRESSED = True  # the guide may say what the trip is about
     subl_scrollbars.reader_focused(True)  # a new window is not reported as activated
     done = {"ok": True, "sights": named([sight.spec for sight in made])}
@@ -62,6 +65,15 @@ def op_show(args, facts):
 LONG_TRIP = 5
 LONG_NOTE = ("A trip of %d sights is long: next time, about five steps of similar length, each one "
              "an adventure could open up, or several trips joined by leads_to.")
+
+
+def open_adventure(mother, record):
+    """An adventure's window over its mother's (Jakub, 2026-10-20): macOS sets it off a little
+    by itself. The guide talks to it until it closes."""
+    reader = new_reader()
+    reader.mother, record["reader"] = mother, reader
+    reader.adventure(record)
+    subl_scrollbars.reader_focused(True)
 
 
 def named(specs):
@@ -98,9 +110,13 @@ def op_browse(args, facts):
     """A trip with no sights, the folder's files in their place (Jakub); it replaces the open
     trip, the conversation goes on. A file the user opens there becomes the trip's sight."""
     reader = state.current_reader()
+    said = subl_chat.transcript(reader.chat) if reader is not None else ""
     if reader is not None:
         reader.window.run_command("close_window")
-    new_reader().open_empty(os.path.expanduser(args["folder"]))
+    browser = new_reader()
+    subl_chat.set_transcript(browser.chat, said)  # the conversation goes on
+    subl_chat.catch_up(browser.chat)
+    browser.open_empty(os.path.expanduser(args["folder"]))
     subl_scrollbars.reader_focused(True)
     return {"ok": True}
 

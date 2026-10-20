@@ -69,6 +69,13 @@ Conversation
   the places it names. Then comes the user's question that called the trip. The user can go back and forward through the window's trips (◀ ▶); every
   message names the trip it was sent from (trip). When that is not the trip you showed last,
   the user went back to it: answer about its sights, and its conversation as it was.
+- An adventure is a turn off the trail, for a flower worth a closer look: show with aside: true
+  opens its trip in a window over the trip shown, which keeps its trip and conversation. Open
+  one when the user asks about something the trip only passes by, or when you see that a step
+  deserves it; keep the trip itself short and leave such steps for adventures. Its story is
+  your explanation, said on its bench after the question that called it: why you turned off
+  the trail, and where it leads. Messages from it carry adventure (its number); answer them
+  there. When the user closes it, messages come from the trip again.
 - The user can edit a shown file in the reader. Then wait_for_user also returns edited: the
   sights whose ranges changed, with their new ranges ("sw/a.py:10-20, now 10-23"). Use the new
   line numbers, and call show again if the run you are showing has changed.
@@ -181,10 +188,12 @@ TOOLS = [
          "for the other types. root: base folder for relative paths. trip: the trip's name, a "
          "few words, shown in the header over the Sights. story: the trip's story, a few "
          "sentences tying its sights together, with <here> tags where it names code (no line "
-         "numbers); the Pioneer (P:) tells it first on the trip's bench.",
+         "numbers); the Pioneer (P:) tells it first on the trip's bench. aside: true opens the "
+         "trip as an adventure, in a window over this one (see the manual).",
          {"sights": {"type": "array", "items": {"type": "string"}},
           "transitions": {"type": "array", "items": TRANSITION}, "root": {"type": "string"},
-          "trip": {"type": "string"}, "story": {"type": "string"}},
+          "trip": {"type": "string"}, "story": {"type": "string"},
+          "aside": {"type": "boolean"}},
          ["sights", "transitions", "trip", "story"]),
     tool("open_trip", "Open a trip from its file (JSON, as an informator keeps it: name, kind, "
          "sights, transitions), instead of composing it with show. root: base folder for its "

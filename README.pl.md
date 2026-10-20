@@ -13,10 +13,10 @@ a Ty rozmawiasz z nim w ławce obok kodu.
 Przewodnikiem może być każdy agent, który mówi przez MCP: Claude Code, którego SightWalk umie
 uruchomić sam, albo inny agent, także lokalny model. Nie musi to być agent, który napisał kod.
 
-![Wycieczka przez jedno żądanie MCP w kodzie samej wtyczki. Użytkownik pyta, czemu klient
-dostaje 202 „here”, a to słowo jest połączone z linią 105; przewodnik odpowiada numerowanymi
-ikonami i dwoma skokami, w ramkach w swoich słowach i na marginesie; mapa wywołań
-poniżej](docs/images/trip.jpg)
+![Wycieczka z turnusu samej wtyczki, „Registering the guide”. Ławka zaczyna się od opowieści
+Pioniera; użytkownik pyta „kto to woła?”, ze słowem połączonym z kodem, i jak run woła
+ensure_token i write_config; przewodnik odpowiada numerowanymi ikonami i dwoma skokami
+wywołań, w ramkach w swoich słowach i na marginesie; mapa turnusu poniżej](docs/images/trip.jpg)
 
 *Wszystkie zrzuty pochodzą z prawdziwych sesji: wtyczka sprawdza własny kod. Ta rozmowa jest po
 angielsku, pozostałe po polsku, tak jak się odbyły; interfejs na zrzutach jest angielski.*
@@ -89,6 +89,9 @@ jego przyjacielem.
 ze szlaku, bo jest ciekawy kwiatek: przewodnik otwiera krótką wycieczkę w oknie nad bieżącym, a
 zakładka **Przygody** otwiera dawne z powrotem, takie, jakie je zostawiono.
 
+![Przygoda nad swoją wycieczką: użytkownik zapytał, gdzie sprawdzany jest token, a przewodnik
+zboczył ze szlaku w osobnym oknie, z powodem na początku ławki przygody](docs/images/adventure.jpg)
+
 ### Każde odniesienie to link
 
 Przewodnik i użytkownik mają jeden język znaczników. Przewodnik wiąże słowa z miejscami tak:
@@ -108,8 +111,8 @@ zaznaczone w kodzie, więc „czemu *to* tu jest?” zawsze znaczy to, na co pat
 
 ### Mapa
 
-![Mapa: trzynaście funkcji jako prostokąty w swojej klasie i dwóch plikach, przejścia nazwane
-przez przewodnika jako strzałki](docs/images/map.jpg)
+![Mapa w panelu Narzędzi rozłożonym na okno: pięć funkcji jako prostokąty w swojej klasie i
+dwóch plikach, wywołania nazwane przez przewodnika jako strzałki](docs/images/map.jpg)
 
 Panel Narzędzi pod ławką rysuje wycieczkę jako graf wywołań (przez Graphviz). Każdy widok to
 prostokąt w swojej klasie i pliku, a każde przejście nazwane przez przewodnika to strzałka.
@@ -120,8 +123,8 @@ jest znaleziskiem.
 
 ### Turnusy
 
-![Turnus dziesięciu wycieczek w zakładce Turnus, trzy odhaczone jako przebyte; ławka trzyma
-rozmowę prowadzoną w tej wycieczce](docs/images/tour.jpg)
+![Mapa turnusu rozłożona na okno: wycieczki jako kolumny widoków w barwach ich plików, przejścia
+między wycieczkami jako strzałki, legenda w prawym górnym rogu](docs/images/tour-map.jpg)
 
 **SightWalk: Open Tour** wylicza turnusy znalezione w otwartych folderach. Zakładka Turnus
 pokazuje wycieczki po kolei, w nagłówku „Wycieczka 4 · …”, a przebytą wycieczkę odhaczasz sam.
@@ -138,8 +141,8 @@ rozkłada dowolną zakładkę na prawie całe okno; `[⤢]` jeszcze raz albo `Es
 
 ### Edycja na miejscu
 
-![Edytor otwarty nad panoramą: cały plik w liniach widoku, „End editing (Esc)” w nagłówku
-widoku](docs/images/editor.jpg)
+![Edytor otwarty nad panoramą: cały plik w liniach widoku, znaczniki przewodnika na jego
+marginesie, „Zakończ edycję (Esc)” w nagłówku widoku](docs/images/editor.jpg)
 
 `Enter` w widoku otwiera prawdziwy plik wprost nad wycieczką, w tych samych
 liniach. Zapisz, a wycieczka się przeładuje: każdy widok w nowym zakresie, każdy znacznik w

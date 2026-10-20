@@ -13,9 +13,10 @@ while you talk with it in a conversation pane next to the code.
 The guide is any agent that speaks MCP: Claude Code, which SightWalk can start by itself, or
 another agent, a local model included. It need not be the agent that wrote the code.
 
-![A trip through one MCP request in SightWalk's own code. The user asks why the client gets
-202 "here", the word linked to line 105; the guide answers with numbered icons and two jumps,
-framed in its words and drawn in the gutter; the trip's call graph below](docs/images/trip.jpg)
+![A trip of SightWalk's own tour, "Registering the guide". The bench opens with the Pioneer's
+story; the user asks "who calls this?", the word linked to the code, and how run calls
+ensure_token and write_config; the guide answers with numbered icons and two call jumps,
+framed in its words and drawn in the gutter; the tour map below](docs/images/trip.jpg)
 
 *Every screenshot here comes from a real session: the plugin vetting its own code. The other
 conversations are as they happened, in Polish.*
@@ -87,6 +88,9 @@ when the job is stern vetting, no friend of the Pioneer's.
 is a turn off the trail for a flower worth a closer look: the guide opens a short trip in a
 window over the one shown, and the **Adventures** tab opens past ones again, as they were left.
 
+![An adventure over its trip: the user asked where the token is checked, and the guide turned
+off the trail in a window of its own, its reason first on the adventure's bench](docs/images/adventure.jpg)
+
 ### Every reference is a link
 
 Guide and user share one markup. The guide ties its words to places with
@@ -106,8 +110,8 @@ here?" always means what you are looking at, never a guess.
 
 ### The Map
 
-![The Map: thirteen functions as boxes inside their class and two files, the guide's
-transitions as arrows](docs/images/map.jpg)
+![The Map, the Tools pane laid over the window: five functions as boxes inside their class and
+two files, the guide's calls as arrows](docs/images/map.jpg)
 
 The Tools pane under the bench draws the trip as a call graph (with Graphviz): every sight a box
 in its class and file, every transition the guide named an arrow, each type drawn its own way:
@@ -117,8 +121,8 @@ the guide's account is wrong, which is itself a finding.
 
 ### Tours
 
-![A tour of ten trips in the Tour tab, three ticked as walked; the bench keeps the conversation
-held on this trip](docs/images/tour.jpg)
+![The tour map laid over the window: trips as columns of their sights in their files' hues,
+the passages between trips as arrows, a legend top right](docs/images/tour-map.jpg)
 
 **SightWalk: Open Tour** lists the tours found in the open folders. The Tour tab shows the trips
 in order, "Trip 4 · …" in the header; you tick a trip as walked yourself. Each trip keeps its own
@@ -134,8 +138,8 @@ tab over almost the whole window; `[⤢]` again or `Esc` brings it back.
 
 ### Editing in place
 
-![The editor open over the sights: the whole file, at the sight's lines, with End editing (Esc)
-on the sight's header](docs/images/editor.jpg)
+![The editor open over the sights: the whole file, at the sight's lines, the guide's marks in
+its gutter, with End editing (Esc) on the sight's header](docs/images/editor.jpg)
 
 `Enter` in a sight opens the real file right over the trip, at the same lines.
 Save, and the trip reloads: every sight at its new range, every mark on its new line, and the

@@ -1,7 +1,7 @@
 {
  "name": "An informator and its tour",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_commands.py:390-396",
   "sw/subl_commands.py:405-418",
@@ -11,7 +11,7 @@
   "sw/subl_commands.py:398-402",
   "sw/words.py:141-148",
   "sw/subl_reader.py:899-913",
-  "sw/subl_reader.py:1261-1263",
+  "sw/subl_reader.py:1298-1300",
   "sw/ontology.py:300-306",
   "sw/ontology.py:279-283",
   "sw/ontology.py:263-266",
@@ -24,8 +24,9 @@
   "sw/subl_reader.py:949-957",
   "sw/subl_reader.py:959-961",
   "sw/subl_reader.py:963-974",
-  "sw/subl_reader.py:1248-1250",
-  "sw/subl_reader.py:1253-1258",
+  "sw/subl_reader.py:1278-1282",
+  "sw/subl_reader.py:1285-1287",
+  "sw/subl_reader.py:1290-1295",
   "sw/subl_chat.py:216-219",
   "sw/ontology.py:286-290",
   "sw/subl_vetting.py:227-236",
@@ -101,12 +102,12 @@
   {
    "type": "calls",
    "from": [7, 902],
-   "to": [8, 1261]
+   "to": [8, 1298]
   },
   {
    "type": "calls",
    "from": [7, 905],
-   "to": [22, 1253]
+   "to": [23, 1290]
   },
   {
    "type": "calls",
@@ -116,7 +117,7 @@
   {
    "type": "calls",
    "from": [7, 906],
-   "to": [8, 1261]
+   "to": [8, 1298]
   },
   {
    "type": "calls",
@@ -161,17 +162,17 @@
   {
    "type": "calls",
    "from": [16, 921],
-   "to": [23, 216]
+   "to": [24, 216]
   },
   {
    "type": "calls",
    "from": [16, 929],
-   "to": [25, 227]
+   "to": [26, 227]
   },
   {
    "type": "calls",
    "from": [16, 930],
-   "to": [26, 1063]
+   "to": [27, 1063]
   },
   {
    "type": "calls",
@@ -181,7 +182,7 @@
   {
    "type": "calls",
    "from": [17, 946],
-   "to": [21, 1248]
+   "to": [22, 1285]
   },
   {
    "type": "calls",
@@ -190,17 +191,22 @@
   },
   {
    "type": "calls",
-   "from": [22, 1255],
-   "to": [21, 1248]
+   "from": [20, 969],
+   "to": [21, 1278]
   },
   {
    "type": "calls",
-   "from": [26, 1064],
-   "to": [27, 199]
+   "from": [23, 1292],
+   "to": [22, 1285]
   },
   {
    "type": "calls",
-   "from": [26, 1065],
+   "from": [27, 1064],
+   "to": [28, 199]
+  },
+  {
+   "type": "calls",
+   "from": [27, 1065],
    "to": [16, 915]
   }
  ]

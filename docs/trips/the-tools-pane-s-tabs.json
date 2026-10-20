@@ -1,7 +1,7 @@
 {
  "name": "The Tools pane's tabs",
  "kind": "survey",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_reader.py:876-883",
   "sw/subl_vetting.py:69-97",
@@ -14,7 +14,7 @@
   "sw/subl_reader.py:866-868",
   "sw/subl_reader.py:870-871",
   "sw/subl_reader.py:873-874",
-  "sw/subl_reader.py:1095-1106"
+  "sw/subl_reader.py:1095-1107"
  ],
  "transitions": [
   {

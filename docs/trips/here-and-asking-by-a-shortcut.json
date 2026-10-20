@@ -1,7 +1,7 @@
 {
  "name": "Here, and asking by a shortcut",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_commands.py:318-328",
   "sw/subl_reader.py:803-808",

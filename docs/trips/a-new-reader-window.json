@@ -1,7 +1,7 @@
 {
  "name": "A new reader window",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_executor.py:36-46",
   "sw/subl_reader.py:74-102",

@@ -1,13 +1,14 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
-  "sw/subl_reader.py:1095-1106",
-  "sw/subl_reader.py:1270-1277",
-  "sw/subl_reader.py:1149-1163",
+  "sw/subl_reader.py:1095-1107",
+  "sw/subl_reader.py:1109-1117",
+  "sw/subl_reader.py:1307-1314",
+  "sw/subl_reader.py:1161-1175",
   "sw/subl_reader.py:48-52",
-  "sw/subl_reader.py:1165-1169",
+  "sw/subl_reader.py:1177-1181",
   "sw/subl_reader.py:59-64",
   "sw/callmap.py:33-39",
   "sw/callmap.py:42-49",
@@ -20,67 +21,72 @@
   {
    "type": "calls",
    "from": [0, 1098],
-   "to": [2, 1149]
+   "to": [3, 1161]
   },
   {
    "type": "calls",
    "from": [0, 1102],
-   "to": [9, 52]
+   "to": [10, 52]
   },
   {
    "type": "calls",
    "from": [0, 1104],
-   "to": [10, 42]
+   "to": [1, 1109]
   },
   {
    "type": "calls",
    "from": [0, 1105],
-   "to": [10, 42]
+   "to": [11, 42]
   },
   {
    "type": "calls",
    "from": [0, 1106],
-   "to": [1, 1270]
+   "to": [11, 42]
   },
   {
    "type": "calls",
-   "from": [0, 1106],
-   "to": [11, 128]
+   "from": [0, 1107],
+   "to": [2, 1307]
   },
   {
    "type": "calls",
-   "from": [2, 1155],
-   "to": [6, 33]
+   "from": [0, 1107],
+   "to": [12, 128]
   },
   {
    "type": "calls",
-   "from": [2, 1156],
-   "to": [3, 48]
+   "from": [3, 1167],
+   "to": [7, 33]
   },
   {
    "type": "calls",
-   "from": [2, 1160],
-   "to": [1, 1270]
+   "from": [3, 1168],
+   "to": [4, 48]
   },
   {
    "type": "calls",
-   "from": [2, 1161],
-   "to": [8, 28]
+   "from": [3, 1172],
+   "to": [2, 1307]
   },
   {
    "type": "calls",
-   "from": [2, 1161],
-   "to": [4, 1165]
+   "from": [3, 1173],
+   "to": [9, 28]
   },
   {
    "type": "calls",
-   "from": [2, 1161],
-   "to": [5, 59]
+   "from": [3, 1173],
+   "to": [5, 1177]
   },
   {
    "type": "calls",
-   "from": [9, 56],
-   "to": [10, 42]
+   "from": [3, 1173],
+   "to": [6, 59]
+  },
+  {
+   "type": "calls",
+   "from": [10, 56],
+   "to": [11, 42]
   }
  ]
 }

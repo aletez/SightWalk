@@ -1,7 +1,7 @@
 {
  "name": "The guide's permissions",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_reader.py:1067-1070",
   "sw/subl_vetting.py:244-264",

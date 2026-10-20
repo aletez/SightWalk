@@ -1,14 +1,14 @@
 {
  "name": "Drawing the marks",
  "kind": "run",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "sights": [
   "sw/subl_reader.py:666-682",
   "sw/subl_reader.py:684-689",
-  "sw/marks.py:143-154",
+  "sw/marks.py:153-164",
   "sw/subl_views.py:268-277",
-  "sw/marks.py:110-122",
-  "sw/marks.py:125-140",
+  "sw/marks.py:120-132",
+  "sw/marks.py:135-150",
   "sw/subl_views.py:256-265",
   "sw/subl_reader.py:691-699",
   "sw/marks.py:71-77",
@@ -23,12 +23,12 @@
   {
    "type": "calls",
    "from": [0, 672],
-   "to": [4, 110]
+   "to": [4, 120]
   },
   {
    "type": "calls",
    "from": [0, 674],
-   "to": [5, 125]
+   "to": [5, 135]
   },
   {
    "type": "calls",
@@ -43,7 +43,7 @@
   {
    "type": "calls",
    "from": [1, 686],
-   "to": [2, 143]
+   "to": [2, 153]
   },
   {
    "type": "calls",

@@ -1,6 +1,6 @@
 {
  "name": "SightWalk",
- "commit": "445834f63784d1da5cac2e2fa825baf03aa1ccd0",
+ "commit": "fa5417d37626ee8e534bf13fac00869fc11f4a47",
  "trips": [
   "../trips/plugin-start-and-stop.json",
   "../trips/setting-up-the-agent-bridge.json",
@@ -1073,7 +1073,7 @@
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -1117,7 +1117,7 @@
    "from": [
     "a-request-arrives",
     16,
-    302
+    386
    ],
    "to": [
     "a-request-arrives"
@@ -1128,11 +1128,11 @@
    "from": [
     "a-request-arrives",
     16,
-    310
+    394
    ],
    "to": [
     "pointing",
-    14,
+    15,
     58
    ]
   },
@@ -1701,7 +1701,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -1714,7 +1714,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -1727,7 +1727,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -2843,7 +2843,7 @@
    ],
    "to": [
     "an-informator-and-its-tour",
-    26,
+    27,
     1063
    ]
   },
@@ -3858,7 +3858,7 @@
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -4301,7 +4301,7 @@
    "to": [
     "the-agent-says-something",
     1,
-    189
+    199
    ]
   },
   {
@@ -4327,7 +4327,7 @@
    "to": [
     "the-agent-says-something",
     6,
-    1196
+    1208
    ]
   },
   {
@@ -4335,7 +4335,7 @@
    "from": [
     "pointing",
     1,
-    326
+    264
    ],
    "to": [
     "pointing"
@@ -4346,7 +4346,7 @@
    "from": [
     "pointing",
     2,
-    317
+    233
    ],
    "to": [
     "pointing"
@@ -4357,7 +4357,31 @@
    "from": [
     "pointing",
     3,
-    356
+    244
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    3,
+    247
+   ],
+   "to": [
+    "driving-a-trip-from-the-terminal",
+    3,
+    332
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    4,
+    401
    ],
    "to": [
     "pointing"
@@ -4367,7 +4391,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    4,
+    5,
     655
    ],
    "to": [
@@ -4378,7 +4402,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    4,
+    5,
     660
    ],
    "to": [
@@ -4391,7 +4415,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    4,
+    5,
     662
    ],
    "to": [
@@ -4404,7 +4428,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    4,
+    5,
     662
    ],
    "to": [
@@ -4417,7 +4441,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    4,
+    5,
     664
    ],
    "to": [
@@ -4430,7 +4454,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    5,
+    6,
     91
    ],
    "to": [
@@ -4438,10 +4462,23 @@
    ]
   },
   {
-   "type": "own_trip",
+   "type": "calls",
    "from": [
     "pointing",
     6,
+    97
+   ],
+   "to": [
+    "driving-a-trip-from-the-terminal",
+    3,
+    332
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    7,
     80
    ],
    "to": [
@@ -4452,7 +4489,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    7,
+    8,
     18
    ],
    "to": [
@@ -4463,7 +4500,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    7,
+    8,
     31
    ],
    "to": [
@@ -4476,7 +4513,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    8,
+    9,
     46
    ],
    "to": [
@@ -4487,7 +4524,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    8,
+    9,
     52
    ],
    "to": [
@@ -4500,7 +4537,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    9,
+    10,
     56
    ],
    "to": [
@@ -4511,7 +4548,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    10,
+    11,
     14
    ],
    "to": [
@@ -4522,7 +4559,7 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    11,
+    12,
     239
    ],
    "to": [
@@ -4533,7 +4570,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    11,
+    12,
     251
    ],
    "to": [
@@ -4546,7 +4583,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    11,
+    12,
     252
    ],
    "to": [
@@ -4559,7 +4596,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    11,
+    12,
     253
    ],
    "to": [
@@ -4572,19 +4609,8 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    12,
-    175
-   ],
-   "to": [
-    "pointing"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "pointing",
     13,
-    40
+    186
    ],
    "to": [
     "pointing"
@@ -4595,7 +4621,7 @@
    "from": [
     "pointing",
     14,
-    58
+    40
    ],
    "to": [
     "pointing"
@@ -4606,7 +4632,7 @@
    "from": [
     "pointing",
     15,
-    50
+    58
    ],
    "to": [
     "pointing"
@@ -4617,7 +4643,18 @@
    "from": [
     "pointing",
     16,
-    302
+    50
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    17,
+    386
    ],
    "to": [
     "a-request-arrives"
@@ -4627,8 +4664,8 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    17,
-    1108
+    18,
+    1119
    ],
    "to": [
     "pointing"
@@ -4638,8 +4675,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    17,
-    1126
+    18,
+    1138
    ],
    "to": [
     "linking-words-to-code",
@@ -4651,8 +4688,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    17,
-    1132
+    18,
+    1144
    ],
    "to": [
     "drawing-the-marks",
@@ -4664,8 +4701,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    17,
-    1133
+    18,
+    1145
    ],
    "to": [
     "the-map-s-nodes",
@@ -4677,7 +4714,31 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    18,
+    19,
+    1223
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    19,
+    1232
+   ],
+   "to": [
+    "driving-a-trip-from-the-terminal",
+    3,
+    332
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    20,
     233
    ],
    "to": [
@@ -4688,8 +4749,8 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    19,
-    1136
+    21,
+    1148
    ],
    "to": [
     "pointing"
@@ -4699,8 +4760,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    19,
-    1141
+    21,
+    1153
    ],
    "to": [
     "names-and-room",
@@ -4712,8 +4773,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    19,
-    1143
+    21,
+    1155
    ],
    "to": [
     "names-and-room",
@@ -4725,8 +4786,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    19,
-    1144
+    21,
+    1156
    ],
    "to": [
     "names-and-room",
@@ -4738,8 +4799,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    19,
-    1145
+    21,
+    1157
    ],
    "to": [
     "the-layout",
@@ -4751,8 +4812,8 @@
    "type": "calls",
    "from": [
     "pointing",
-    19,
-    1147
+    21,
+    1159
    ],
    "to": [
     "linking-words-to-code",
@@ -4764,30 +4825,8 @@
    "type": "own_trip",
    "from": [
     "pointing",
-    20,
-    1211
-   ],
-   "to": [
-    "pointing"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "pointing",
-    21,
-    1052
-   ],
-   "to": [
-    "pointing"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "pointing",
     22,
-    976
+    1239
    ],
    "to": [
     "pointing"
@@ -4798,6 +4837,41 @@
    "from": [
     "pointing",
     22,
+    1256
+   ],
+   "to": [
+    "the-map-s-nodes",
+    0,
+    1095
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    23,
+    1052
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "pointing",
+    24,
+    976
+   ],
+   "to": [
+    "pointing"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "pointing",
+    24,
     979
    ],
    "to": [
@@ -4810,7 +4884,7 @@
    "type": "calls",
    "from": [
     "pointing",
-    22,
+    24,
     985
    ],
    "to": [
@@ -4859,7 +4933,7 @@
    "from": [
     "drawing-the-marks",
     2,
-    143
+    153
    ],
    "to": [
     "drawing-the-marks"
@@ -4870,11 +4944,11 @@
    "from": [
     "drawing-the-marks",
     2,
-    151
+    161
    ],
    "to": [
     "pointing",
-    10,
+    11,
     14
    ]
   },
@@ -4907,7 +4981,7 @@
    "from": [
     "drawing-the-marks",
     4,
-    110
+    120
    ],
    "to": [
     "drawing-the-marks"
@@ -4918,7 +4992,7 @@
    "from": [
     "drawing-the-marks",
     5,
-    125
+    135
    ],
    "to": [
     "drawing-the-marks"
@@ -4989,7 +5063,7 @@
    "to": [
     "pointing",
     1,
-    326
+    264
    ]
   },
   {
@@ -5010,7 +5084,7 @@
    "from": [
     "the-agent-says-something",
     1,
-    189
+    199
    ],
    "to": [
     "the-agent-says-something"
@@ -5021,7 +5095,7 @@
    "from": [
     "the-agent-says-something",
     2,
-    379
+    426
    ],
    "to": [
     "the-agent-says-something"
@@ -5043,7 +5117,7 @@
    "from": [
     "the-agent-says-something",
     4,
-    160
+    170
    ],
    "to": [
     "the-agent-says-something"
@@ -5054,7 +5128,7 @@
    "from": [
     "the-agent-says-something",
     5,
-    157
+    167
    ],
    "to": [
     "the-agent-says-something"
@@ -5065,7 +5139,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    1196
+    1208
    ],
    "to": [
     "the-agent-says-something"
@@ -5076,12 +5150,12 @@
    "from": [
     "the-agent-says-something",
     6,
-    1206
+    1218
    ],
    "to": [
     "pointing",
-    20,
-    1211
+    22,
+    1239
    ]
   },
   {
@@ -5089,11 +5163,11 @@
    "from": [
     "the-agent-says-something",
     6,
-    1207
+    1219
    ],
    "to": [
     "pointing",
-    11,
+    12,
     239
    ]
   },
@@ -5102,7 +5176,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    1208
+    1220
    ],
    "to": [
     "an-informator-and-its-tour",
@@ -5115,7 +5189,7 @@
    "from": [
     "the-agent-says-something",
     6,
-    1209
+    1221
    ],
    "to": [
     "the-bench-s-answers-listed",
@@ -5222,7 +5296,7 @@
    "to": [
     "stopping-an-answer",
     1,
-    1175
+    1187
    ]
   },
   {
@@ -5632,8 +5706,8 @@
    ],
    "to": [
     "pointing",
-    17,
-    1108
+    18,
+    1119
    ]
   },
   {
@@ -5645,7 +5719,7 @@
    ],
    "to": [
     "pointing",
-    21,
+    23,
     1052
    ]
   },
@@ -5654,7 +5728,7 @@
    "from": [
     "the-agent-says-something",
     17,
-    368
+    415
    ],
    "to": [
     "the-agent-says-something"
@@ -5700,7 +5774,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    1175
+    1187
    ],
    "to": [
     "stopping-an-answer"
@@ -5711,12 +5785,12 @@
    "from": [
     "stopping-an-answer",
     1,
-    1182
+    1194
    ],
    "to": [
     "the-agent-says-something",
     6,
-    1196
+    1208
    ]
   },
   {
@@ -5724,7 +5798,7 @@
    "from": [
     "stopping-an-answer",
     1,
-    1182
+    1194
    ],
    "to": [
     "words-in-two-languages",
@@ -5737,7 +5811,7 @@
    "from": [
     "stopping-an-answer",
     2,
-    1184
+    1196
    ],
    "to": [
     "stopping-an-answer"
@@ -5776,7 +5850,7 @@
    ],
    "to": [
     "an-informator-and-its-tour",
-    26,
+    27,
     1063
    ]
   },
@@ -6170,8 +6244,8 @@
    ],
    "to": [
     "the-map-s-nodes",
-    2,
-    1149
+    3,
+    1161
    ]
   },
   {
@@ -6183,7 +6257,7 @@
    ],
    "to": [
     "the-map-s-nodes",
-    9,
+    10,
     52
    ]
   },
@@ -6196,8 +6270,8 @@
    ],
    "to": [
     "the-map-s-nodes",
-    7,
-    42
+    1,
+    1109
    ]
   },
   {
@@ -6209,7 +6283,7 @@
    ],
    "to": [
     "the-map-s-nodes",
-    7,
+    8,
     42
    ]
   },
@@ -6222,8 +6296,8 @@
    ],
    "to": [
     "the-map-s-nodes",
-    1,
-    1270
+    8,
+    42
    ]
   },
   {
@@ -6231,7 +6305,20 @@
    "from": [
     "the-tools-pane-s-tabs",
     11,
-    1106
+    1107
+   ],
+   "to": [
+    "the-map-s-nodes",
+    2,
+    1307
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-tools-pane-s-tabs",
+    11,
+    1107
    ],
    "to": [
     "drawing-the-map",
@@ -6255,18 +6342,7 @@
    "from": [
     "the-map-s-nodes",
     1,
-    1270
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
-    2,
-    1149
+    1109
    ],
    "to": [
     "the-map-s-nodes"
@@ -6276,8 +6352,43 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
+    1,
+    1114
+   ],
+   "to": [
+    "pointing",
+    15,
+    58
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
     2,
-    1157
+    1307
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    3,
+    1161
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "calls",
+   "from": [
+    "the-map-s-nodes",
+    3,
+    1169
    ],
    "to": [
     "names-and-room",
@@ -6289,8 +6400,8 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    2,
-    1160
+    3,
+    1172
    ],
    "to": [
     "colours",
@@ -6302,8 +6413,8 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    2,
-    1160
+    3,
+    1172
    ],
    "to": [
     "colours",
@@ -6315,8 +6426,8 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    2,
-    1162
+    3,
+    1174
    ],
    "to": [
     "names-and-room",
@@ -6328,12 +6439,12 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    2,
-    1162
+    3,
+    1174
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -6341,7 +6452,7 @@
    "type": "own_trip",
    "from": [
     "the-map-s-nodes",
-    3,
+    4,
     48
    ],
    "to": [
@@ -6352,19 +6463,8 @@
    "type": "own_trip",
    "from": [
     "the-map-s-nodes",
-    4,
-    1165
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
     5,
-    59
+    1177
    ],
    "to": [
     "the-map-s-nodes"
@@ -6375,7 +6475,7 @@
    "from": [
     "the-map-s-nodes",
     6,
-    33
+    59
    ],
    "to": [
     "the-map-s-nodes"
@@ -6386,7 +6486,7 @@
    "from": [
     "the-map-s-nodes",
     7,
-    42
+    33
    ],
    "to": [
     "the-map-s-nodes"
@@ -6397,28 +6497,6 @@
    "from": [
     "the-map-s-nodes",
     8,
-    28
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
-    9,
-    52
-   ],
-   "to": [
-    "the-map-s-nodes"
-   ]
-  },
-  {
-   "type": "own_trip",
-   "from": [
-    "the-map-s-nodes",
-    10,
     42
    ],
    "to": [
@@ -6429,7 +6507,40 @@
    "type": "own_trip",
    "from": [
     "the-map-s-nodes",
+    9,
+    28
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    10,
+    52
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
     11,
+    42
+   ],
+   "to": [
+    "the-map-s-nodes"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "the-map-s-nodes",
+    12,
     128
    ],
    "to": [
@@ -6440,7 +6551,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    11,
+    12,
     131
    ],
    "to": [
@@ -6453,7 +6564,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    11,
+    12,
     133
    ],
    "to": [
@@ -6466,7 +6577,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    11,
+    12,
     133
    ],
    "to": [
@@ -6479,7 +6590,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    11,
+    12,
     135
    ],
    "to": [
@@ -6492,7 +6603,7 @@
    "type": "calls",
    "from": [
     "the-map-s-nodes",
-    11,
+    12,
     136
    ],
    "to": [
@@ -6880,7 +6991,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1228
+    1258
    ],
    "to": [
     "the-user-sends-a-message"
@@ -6891,7 +7002,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1235
+    1265
    ],
    "to": [
     "names-and-room",
@@ -6904,7 +7015,7 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1237
+    1267
    ],
    "to": [
     "opening-the-editor",
@@ -6917,12 +7028,12 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1241
+    1271
    ],
    "to": [
     "linking-words-to-code",
     13,
-    231
+    315
    ]
   },
   {
@@ -6930,11 +7041,11 @@
    "from": [
     "the-user-sends-a-message",
     4,
-    1241
+    1271
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -7175,7 +7286,7 @@
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -7195,7 +7306,7 @@
    "from": [
     "linking-words-to-code",
     13,
-    231
+    315
    ],
    "to": [
     "linking-words-to-code"
@@ -7278,7 +7389,7 @@
    ],
    "to": [
     "pointing",
-    10,
+    11,
     14
    ]
   },
@@ -7416,7 +7527,7 @@
    "from": [
     "linking-words-to-code",
     26,
-    215
+    299
    ],
    "to": [
     "linking-words-to-code"
@@ -7427,7 +7538,7 @@
    "from": [
     "linking-words-to-code",
     27,
-    285
+    369
    ],
    "to": [
     "linking-words-to-code"
@@ -7499,7 +7610,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -7523,7 +7634,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -7547,8 +7658,8 @@
    ],
    "to": [
     "pointing",
-    19,
-    1136
+    21,
+    1148
    ]
   },
   {
@@ -8230,7 +8341,7 @@
    ],
    "to": [
     "an-informator-and-its-tour",
-    26,
+    27,
     1063
    ]
   },
@@ -9167,7 +9278,7 @@
    "from": [
     "what-the-agent-is-told",
     4,
-    103
+    104
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9178,7 +9289,7 @@
    "from": [
     "what-the-agent-is-told",
     5,
-    141
+    154
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9189,7 +9300,7 @@
    "from": [
     "what-the-agent-is-told",
     6,
-    147
+    160
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9200,7 +9311,7 @@
    "from": [
     "what-the-agent-is-told",
     7,
-    152
+    165
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9452,7 +9563,7 @@
    "to": [
     "pointing",
     1,
-    326
+    264
    ]
   },
   {
@@ -9465,7 +9576,7 @@
    "to": [
     "the-agent-says-something",
     1,
-    189
+    199
    ]
   },
   {
@@ -9477,7 +9588,7 @@
    ],
    "to": [
     "pointing",
-    5,
+    6,
     91
    ]
   },
@@ -9491,7 +9602,7 @@
    "to": [
     "the-agent-says-something",
     2,
-    379
+    426
    ]
   },
   {
@@ -9504,7 +9615,7 @@
    "to": [
     "the-agent-says-something",
     4,
-    160
+    170
    ]
   },
   {
@@ -9538,7 +9649,7 @@
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -9646,7 +9757,7 @@
    "from": [
     "one-tool-call-over-http",
     4,
-    141
+    154
    ],
    "to": [
     "what-the-agent-is-told"
@@ -9787,7 +9898,7 @@
    "to": [
     "names-and-room",
     10,
-    1189
+    1201
    ]
   },
   {
@@ -9800,7 +9911,7 @@
    "to": [
     "names-and-room",
     11,
-    1171
+    1183
    ]
   },
   {
@@ -10029,7 +10140,7 @@
    "to": [
     "the-agent-says-something",
     6,
-    1196
+    1208
    ]
   },
   {
@@ -10124,7 +10235,7 @@
    ],
    "to": [
     "an-informator-and-its-tour",
-    26,
+    27,
     1063
    ]
   },
@@ -10507,7 +10618,7 @@
    ],
    "to": [
     "pointing",
-    15,
+    16,
     50
    ]
   },
@@ -10672,7 +10783,7 @@
    "to": [
     "the-user-sends-a-message",
     4,
-    1228
+    1258
    ]
   },
   {
@@ -10680,7 +10791,7 @@
    "from": [
     "names-and-room",
     10,
-    1189
+    1201
    ],
    "to": [
     "names-and-room"
@@ -10691,7 +10802,7 @@
    "from": [
     "names-and-room",
     11,
-    1171
+    1183
    ],
    "to": [
     "names-and-room"
@@ -10702,7 +10813,7 @@
    "from": [
     "names-and-room",
     11,
-    1173
+    1185
    ],
    "to": [
     "the-agent-says-something",
@@ -11561,7 +11672,7 @@
    "from": [
     "an-informator-and-its-tour",
     8,
-    1261
+    1298
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11829,7 +11940,7 @@
    ],
    "to": [
     "pointing",
-    5,
+    6,
     91
    ]
   },
@@ -11864,7 +11975,7 @@
    ],
    "to": [
     "pointing",
-    22,
+    24,
     976
    ]
   },
@@ -11873,7 +11984,7 @@
    "from": [
     "an-informator-and-its-tour",
     21,
-    1248
+    1278
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11884,7 +11995,7 @@
    "from": [
     "an-informator-and-its-tour",
     22,
-    1253
+    1285
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11895,7 +12006,7 @@
    "from": [
     "an-informator-and-its-tour",
     23,
-    216
+    1290
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11906,7 +12017,7 @@
    "from": [
     "an-informator-and-its-tour",
     24,
-    286
+    216
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11917,7 +12028,7 @@
    "from": [
     "an-informator-and-its-tour",
     25,
-    227
+    286
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11928,7 +12039,7 @@
    "from": [
     "an-informator-and-its-tour",
     26,
-    1063
+    227
    ],
    "to": [
     "an-informator-and-its-tour"
@@ -11939,6 +12050,17 @@
    "from": [
     "an-informator-and-its-tour",
     27,
+    1063
+   ],
+   "to": [
+    "an-informator-and-its-tour"
+   ]
+  },
+  {
+   "type": "own_trip",
+   "from": [
+    "an-informator-and-its-tour",
+    28,
     199
    ],
    "to": [
@@ -11949,7 +12071,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-tour",
-    27,
+    28,
     203
    ],
    "to": [
@@ -11962,7 +12084,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-tour",
-    27,
+    28,
     203
    ],
    "to": [
@@ -11975,7 +12097,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-tour",
-    27,
+    28,
     208
    ],
    "to": [
@@ -11988,7 +12110,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-tour",
-    27,
+    28,
     214
    ],
    "to": [
@@ -12001,7 +12123,7 @@
    "type": "calls",
    "from": [
     "an-informator-and-its-tour",
-    27,
+    28,
     215
    ],
    "to": [
@@ -12735,7 +12857,7 @@
    "to": [
     "names-and-room",
     10,
-    1189
+    1201
    ]
   },
   {
@@ -12874,7 +12996,7 @@
    "to": [
     "names-and-room",
     10,
-    1189
+    1201
    ]
   },
   {
@@ -12887,7 +13009,7 @@
    "to": [
     "names-and-room",
     10,
-    1189
+    1201
    ]
   },
   {
@@ -13183,7 +13305,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     1,
-    264
+    348
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13205,7 +13327,7 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     3,
-    248
+    332
    ],
    "to": [
     "driving-a-trip-from-the-terminal"
@@ -13216,11 +13338,11 @@
    "from": [
     "driving-a-trip-from-the-terminal",
     3,
-    253
+    337
    ],
    "to": [
     "pointing",
-    14,
+    15,
     58
    ]
   },
@@ -13401,7 +13523,7 @@
    ],
    "to": [
     "pointing",
-    5,
+    6,
     91
    ]
   },
@@ -13538,7 +13660,7 @@
    ],
    "to": [
     "pointing",
-    22,
+    24,
     976
    ]
   },
@@ -13551,7 +13673,7 @@
    ],
    "to": [
     "pointing",
-    18,
+    20,
     233
    ]
   },
@@ -13575,7 +13697,7 @@
    ],
    "to": [
     "pointing",
-    11,
+    12,
     239
    ]
   },

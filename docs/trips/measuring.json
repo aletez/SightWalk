@@ -1,7 +1,7 @@
 {
  "name": "Measuring",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "The gap phantoms, the cells of the virtual document, and the window's height measured with two layouts.",
  "sights": [
   "sw/subl_reader.py:346-350",

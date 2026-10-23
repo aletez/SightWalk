@@ -1,7 +1,7 @@
 {
  "name": "`wait_for_user`: a message sent",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "<here at=\"(a):47\">Enter</here> <calls at=\"(a):47 (b):210\">turns the draft into a message</calls> on the bench and <calls at=\"(a):47 (c):32\">sends it</calls> with what the user sees, to <here at=\"(d):37\">the trip's reader</here>'s inbox, where <here at=\"(e):248\">wait_for_user</here> picks it up.",
  "sights": [
   "sw/subl_commands.py:47-54",

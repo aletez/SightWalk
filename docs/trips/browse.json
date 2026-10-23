@@ -1,7 +1,7 @@
 {
  "name": "`browse`",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "<here at=\"(a):187\">The folder must exist</here>; <here at=\"(b):112\">browse</here> <calls at=\"(b):112 (c):192\">opens a trip without sights</calls>, <here at=\"(d):198\">the folder's files</here> in their place.",
  "sights": [
   "sw/validator.py:187-190",

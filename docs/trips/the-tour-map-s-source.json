@@ -1,7 +1,7 @@
 {
  "name": "The tour map's source",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "The Tour tab asks for the tour map: each trip a row of its sights named file:function, the arrows between trips taken from the informator.",
  "sights": [
   "sw/subl_reader.py:1257-1266",

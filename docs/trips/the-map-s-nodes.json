@@ -1,7 +1,7 @@
 {
  "name": "The Map's nodes",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "The trip's definitions and the calls its author named, as nodes for the graph.",
  "sights": [
   "sw/subl_reader.py:1311-1323",

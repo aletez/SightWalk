@@ -1,7 +1,7 @@
 {
  "name": "Polling and the wheel",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "The two loops: the gutter measured once, the reader opening at the top; the wheel read and taken over.",
  "sights": [
   "sw/subl_reader.py:658-666",

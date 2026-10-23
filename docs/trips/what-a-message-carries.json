@@ -1,7 +1,7 @@
 {
  "name": "What a message carries",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "A message is more than words: <here at=\"(a):1474\">the context</here> adds <calls at=\"(a):1474 (c):121\">the sights on screen</calls>, where the caret is, <calls at=\"(a):1474 (b):327\">the selected text</calls>, and <here at=\"(d):808\">the ranges the user's edits moved</here>.",
  "sights": [
   "sw/subl_reader.py:1474-1495",

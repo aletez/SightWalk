@@ -1,7 +1,7 @@
 {
  "name": "`say`: marks read",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "<here at=\"(a):264\">The tags are read</here>: <calls at=\"(a):264 (b):233\">their attributes</calls>, <calls at=\"(a):264 (c):244\">the marks each stands for</calls>, and <here at=\"(d):401\">the colours of the frames</here> around their words. <here at=\"(e):386\">A place</here> reads as in show.",
  "sights": [
   "sw/marks.py:264-296",

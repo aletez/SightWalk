@@ -1,7 +1,7 @@
 {
  "name": "A guide started from Sublime",
  "kind": "run",
- "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
+ "commit": "d035c0cfe2ebe15164e577941cd2ce49f33fd280",
  "story": "A message sent with nobody listening <here at=\"(a):97\">waits for an answer</here>: <calls at=\"(a):97 (b):51\">a guide is ensured</calls>, unless <calls at=\"(b):51 (c):34\">someone is listening</calls> or <calls at=\"(b):51 (d):39\">one is running</calls> already; otherwise <calls at=\"(b):51 (e):43\">Claude Code is found</calls> on the machine.",
  "sights": [
   "sw/subl_guide.py:97-102",

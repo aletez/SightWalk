@@ -22,7 +22,7 @@ GUARDS = {}
 TRANSCRIPTS = {}
 MAC = sublime.platform() == "osx"
 LINK_KEY = "⌘P" if MAC else "Ctrl+P"
-NEW_LINE_KEY = "⇧Enter" if MAC else "Shift+Enter"
+NEW_LINE_KEY = "⌘Enter" if MAC else "Ctrl+Enter"
 NAV_KEYS = "⌘[ ⌘]" if MAC else "Ctrl+[ Ctrl+]"
 RESET_KEY = "⌥R" if MAC else "Alt+R"
 # The help mark: faded and outlined at all times, so it reads as read-only.

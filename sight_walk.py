@@ -12,7 +12,6 @@ from .sw import subl_commands, subl_guide, subl_mcp_http, subl_scrollbars, subl_
 from .sw.subl_commands import (  # noqa: E402,F401
     SightWalkChatListener,
     SightWalkCloseEditorCommand,
-    SightWalkCompareFontsCommand,
     SightWalkCycleSightsCommand,
     SightWalkSelectColourSchemeCommand,
     SightWalkCloseTripCommand,

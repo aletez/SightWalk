@@ -1,7 +1,7 @@
 {
  "name": "`show`: the files and functions",
  "kind": "run",
- "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
  "story": "Before judging show, the executor <here at=\"(a):149\">gathers facts</here>: <calls at=\"(a):149 (b):166\">every sight's file</calls>, <calls at=\"(b):166 (c):31\">its lines</calls>, and <calls at=\"(a):149 (d):178\">the functions inside each range</calls>. <here at=\"(e):73\">Missing files and short ones</here> are refused together, so the guide fixes them at once.",
  "sights": [
   "sw/subl_executor.py:149-163",

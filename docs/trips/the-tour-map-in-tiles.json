@@ -1,7 +1,7 @@
 {
  "name": "The tour map in tiles",
  "kind": "run",
- "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
  "story": "dot lays the map out once to find each trip's frame; the picture is cut into tiles, each a link that opens the trip it lies in.",
  "sights": [
   "sw/subl_vetting.py:243-250",

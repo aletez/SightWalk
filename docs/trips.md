@@ -294,13 +294,13 @@ Trips, transitions, the informator and its tours written to files.
 
 Sublime loads the plugin, which starts its MCP server; a new port restarts it; on unload, trips close and the server stops. The Restart command makes Sublime reload the plugin.
 
-- `sight_walk.py:45-52` plugin_loaded
+- `sight_walk.py:44-51` plugin_loaded
 - `sw/subl_mcp_http.py:142-145` start
 - `sw/subl_executor.py:267-271` load_config
 - `sw/subl_mcp_http.py:118-122` start_server
 - `sw/subl_mcp_http.py:133-139` settings_changed
 - `sw/subl_mcp_http.py:125-130` stop_server
-- `sight_walk.py:62-68` plugin_unloaded
+- `sight_walk.py:61-67` plugin_unloaded
 - `sw/subl_scrollbars.py:13-25` reader_focused
 - `sw/state.py:45-52` close_all
 - `sw/subl_mcp_http.py:148-150` stop
@@ -681,19 +681,17 @@ The caret or a selection in a sight becomes here.
 - `sw/subl_commands.py:315-325` SightWalkWindowListener.on_selection_modified
 - `sw/subl_reader.py:855-860` Reader.note_selection
 
-## 53. Words in two languages (9 views)
+## 53. Words in two languages (7 views)
 
 Switch Language: the setting changes, the words follow at once, in every open trip.
 
 - `sw/subl_commands.py:470-473` SightWalkSwitchLanguageCommand.run
-- `sight_walk.py:55-59` settings_changed
+- `sight_walk.py:54-58` settings_changed
 - `sw/words.py:140-142` set_language
 - `sw/state.py:55-60` render_all
 - `sw/words.py:136-137` word
 - `sw/subl_chat.py:31-34` help_html
 - `sw/subl_views.py:33-35` button_html
-- `sw/subl_commands.py:555-568` SightWalkCompareFontsCommand.run
-- `sw/subl_commands.py:571-579` kept_conversation
 
 ## 54. Endings (17 views, survey)
 

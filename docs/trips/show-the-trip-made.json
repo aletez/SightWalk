@@ -1,7 +1,7 @@
 {
  "name": "`show`: the trip made",
  "kind": "run",
- "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
  "story": "<here at=\"(b):129\">A sight</here> is parsed from \"file:begin-end\", and <here at=\"(a):10\">its path resolved</here> for opening. <here at=\"(c):160\">A trip</here> is <calls at=\"(c):160 (d):93\">a network</calls> whose transitions <here at=\"(e):109\">must fit</here> its sights.",
  "sights": [
   "sw/spec.py:10-23",

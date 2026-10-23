@@ -1,7 +1,7 @@
 {
  "name": "`show`: the window opens",
  "kind": "run",
- "commit": "e2819be4817f04119da5b6a1546c756d281da572",
+ "commit": "d18097a8bb8452acecb1d5df0e817e7fe3db5fb6",
  "story": "<calls at=\"(a):218 (b):49\">On the main thread</calls>, show takes the trip with its story and <calls at=\"(b):49 (c):36\">opens a window</calls> when none is open. The reply <calls at=\"(b):49 (d):82\">names the sights</calls> as the user reads them, (a), (b), (c).",
  "sights": [
   "sw/subl_executor.py:218-234",

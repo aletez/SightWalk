@@ -1,8 +1,10 @@
 [
     {"keys": ["enter"], "command": "sight_walk_send", "context": [{"key": "setting.sight_walk_chat"}, {"key": "auto_complete_visible", "operand": false}]},
     {"keys": ["escape"], "command": "sight_walk_stop_answer", "context": [{"key": "setting.sight_walk_chat"}, {"key": "auto_complete_visible", "operand": false}, {"key": "popup_visible", "operand": false}]},
-    {"keys": ["shift+enter"], "command": "insert", "args": {"characters": "\n"}, "context": [{"key": "setting.sight_walk_chat"}]},
+    {"keys": ["primary+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line.sublime-macro"}, "context": [{"key": "setting.sight_walk_chat"}]},
+
     {"keys": ["enter"], "command": "sight_walk_edit", "context": [{"key": "setting.sight_walk_code"}]},
+
     {"keys": ["escape"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}, {"key": "auto_complete_visible", "operand": false}, {"key": "has_next_field", "operand": false}, {"key": "num_selections", "operand": 1}, {"key": "popup_visible", "operand": false}, {"key": "panel_visible", "operand": false}]},
     {"keys": ["primary+w"], "command": "sight_walk_close_editor", "context": [{"key": "setting.sight_walk_editor"}]},
     // In a trip, but not in the editor, saving means nothing: primary+s switches whether the wheel
